@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Experiments — Greene Studios",
@@ -57,9 +58,12 @@ export default function ExperimentsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {EXPERIMENTS.map((exp) => (
             <div key={exp.id} className="group relative overflow-hidden rounded-[24px] aspect-[4/3] bg-[#141414] border border-white/5 cursor-not-allowed">
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0"
-                style={{ backgroundImage: `url(${exp.image})` }}
+              <Image 
+                src={exp.image}
+                alt={exp.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute inset-0 p-8 flex flex-col justify-end">

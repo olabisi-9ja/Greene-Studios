@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SERVICES, PROJECTS, FAQS } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
@@ -121,7 +122,13 @@ export default async function ServicePage({ params }: Props) {
             {relatedProjects.map((project) => (
               <Link key={project.id} href={`/work/${project.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${project.image})` }} />
+                  <Image 
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6">
                     <span className="text-[#6B8F71] text-xs mb-1">{project.category}</span>

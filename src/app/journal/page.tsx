@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { JOURNAL_ARTICLES, JOURNAL_CATEGORIES } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -55,10 +56,14 @@ export default function JournalPage() {
         {/* Featured Article */}
         <Link href={`/journal/${featuredArticle.slug}`} className="group block mb-16">
           <div className="flex flex-col md:flex-row gap-8 lg:gap-16 items-center bg-[#FAFAFA] border border-[#E6E6E6] p-4 lg:p-8 rounded-[32px] transition-all duration-300 hover:shadow-md hover:border-[#D1D1D1]">
-            <div className="w-full md:w-1/2 overflow-hidden rounded-[24px]">
-              <div 
-                className="w-full aspect-[4/3] bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.03]"
-                style={{ backgroundImage: `url(${featuredArticle.image})` }}
+            <div className="w-full md:w-1/2 overflow-hidden rounded-[24px] relative aspect-[4/3]">
+              <Image 
+                src={featuredArticle.image}
+                alt={featuredArticle.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </div>
             <div className="w-full md:w-1/2 py-4 px-4 lg:px-0">
@@ -87,10 +92,13 @@ export default function JournalPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {restArticles.map((article) => (
             <Link key={article.id} href={`/journal/${article.slug}`} className="group flex flex-col h-full">
-              <div className="overflow-hidden rounded-[24px] mb-6 border border-[#E6E6E6]">
-                <div 
-                  className="w-full aspect-[4/3] bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.05]"
-                  style={{ backgroundImage: `url(${article.image})` }}
+              <div className="overflow-hidden rounded-[24px] mb-6 border border-[#E6E6E6] relative aspect-[4/3]">
+                <Image 
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                 />
               </div>
               <div className="flex flex-col flex-grow">

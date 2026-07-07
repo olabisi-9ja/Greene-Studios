@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { JOURNAL_ARTICLES } from "@/lib/data";
 import { notFound } from "next/navigation";
 
@@ -53,10 +54,14 @@ export default async function JournalArticlePage({ params }: Props) {
 
       {/* Hero Image */}
       <div className="max-w-6xl mx-auto px-6 lg:px-12 mb-20">
-        <div className="w-full aspect-[21/9] md:aspect-[21/9] rounded-[32px] overflow-hidden bg-[#FAFAFA] border border-[#E6E6E6]">
-          <div 
-            className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url(${article.image})` }}
+        <div className="w-full aspect-[21/9] md:aspect-[21/9] rounded-[32px] overflow-hidden bg-[#FAFAFA] border border-[#E6E6E6] relative">
+          <Image 
+            src={article.image}
+            alt={article.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
         </div>
       </div>
@@ -81,10 +86,13 @@ export default async function JournalArticlePage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {relatedArticles.map((rel) => (
               <Link key={rel.id} href={`/journal/${rel.slug}`} className="group flex flex-col h-full bg-white p-6 rounded-[24px] border border-[#E6E6E6] hover:shadow-md transition-shadow">
-                <div className="overflow-hidden rounded-[16px] mb-6">
-                  <div 
-                    className="w-full aspect-[16/9] bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.05]"
-                    style={{ backgroundImage: `url(${rel.image})` }}
+                <div className="overflow-hidden rounded-[16px] mb-6 relative aspect-[16/9]">
+                  <Image 
+                    src={rel.image}
+                    alt={rel.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                   />
                 </div>
                 <div className="flex flex-col flex-grow">

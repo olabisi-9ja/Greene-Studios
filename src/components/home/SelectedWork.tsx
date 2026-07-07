@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
 
 export default function SelectedWork() {
@@ -41,12 +42,15 @@ export default function SelectedWork() {
               <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
                 {/* Image Container */}
                 <div 
-                  className={`w-full lg:w-3/5 overflow-hidden rounded-[24px] bg-[#F2F2F2] order-1 ${i % 2 !== 0 ? 'lg:order-2' : ''}`}
+                  className={`w-full lg:w-3/5 overflow-hidden rounded-[24px] bg-[#F2F2F2] order-1 relative ${i % 2 !== 0 ? 'lg:order-2' : ''}`}
                   style={{ aspectRatio: "16/10" }}
                 >
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${project.image})` }}
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                 </div>
 

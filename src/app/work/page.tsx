@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
 
 const FILTERS = ["All", "Web Design", "Branding", "Product", "Development", "Motion"];
@@ -69,13 +70,16 @@ export default function WorkPage() {
               >
                 <div className="relative overflow-hidden rounded-[24px] shadow-sm hover:shadow-md transition-shadow">
                   <div
-                    className="relative"
+                    className="relative overflow-hidden rounded-[24px] bg-[#1A1A1A] group"
                     style={{ aspectRatio: i === 0 && activeFilter === "All" ? "16/7" : "4/3" }}
                   >
-                    {/* Image */}
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
-                      style={{ backgroundImage: `url(${project.image})` }}
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={i < 4}
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 

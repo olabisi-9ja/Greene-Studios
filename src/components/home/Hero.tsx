@@ -7,17 +7,28 @@ export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Disable heavy blob tracking on touch devices
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
+
     const container = containerRef.current;
     if (!container) return;
 
+    let ticking = false;
+
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      const blob = container.querySelector(".hero-blob") as HTMLElement;
-      if (blob) {
-        blob.style.left = `${x * 100}%`;
-        blob.style.top = `${y * 100}%`;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = container.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          const blob = container.querySelector(".hero-blob") as HTMLElement;
+          if (blob) {
+            blob.style.left = `${x * 100}%`;
+            blob.style.top = `${y * 100}%`;
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 

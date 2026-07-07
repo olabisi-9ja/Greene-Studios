@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
 import { notFound } from "next/navigation";
 
@@ -31,8 +32,15 @@ export default async function CaseStudyPage({ params }: Props) {
       {/* Hero */}
       <div
         className="relative min-h-[70vh] flex items-end pb-20"
-        style={{ backgroundImage: `url(${project.image})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
+        <Image 
+          src={project.image}
+          alt={project.title}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-black/60 to-black/20" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${project.color}50, transparent)` }} />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-40">
@@ -165,7 +173,13 @@ export default async function CaseStudyPage({ params }: Props) {
             {related.map((p) => (
               <Link key={p.id} href={`/work/${p.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-2xl" style={{ aspectRatio: "16/9" }}>
-                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${p.image})` }} />
+                  <Image 
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6">
                     <span className="text-[#6B8F71] text-xs mb-2">{p.category}</span>
