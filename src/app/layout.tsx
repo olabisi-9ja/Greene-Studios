@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
-import ClientWrapper from "@/components/ClientWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -60,16 +59,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ClientWrapper>
-          <CustomCursor />
-        </ClientWrapper>
-        <ClientWrapper>
-          <SmoothScroll>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScroll>
-        </ClientWrapper>
+        <CustomCursor />
+        <SmoothScroll>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
