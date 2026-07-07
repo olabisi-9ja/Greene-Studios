@@ -2,18 +2,22 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { NAV_LINKS } from "@/lib/data";
+import { usePathname } from "next/navigation";
+import { BRAND, NAV_LINKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -29,77 +33,73 @@ export default function Navbar() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "bg-[#0e0e0e]/90 backdrop-blur-xl border-b border-white/5"
-            : "bg-transparent"
+          isScrolled ? "py-4 bg-white/80 backdrop-blur-md border-b border-[#E6E6E6]" : "py-6"
         )}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-9">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                <circle cx="20" cy="20" r="20" fill="#12372A" />
-                <path
-                  d="M20 8C13.4 8 8 13.4 8 20C8 26.6 13.4 32 20 32C26.6 32 32 26.6 32 20H20V14C20 11 22.8 8.4 26 9C23.2 8.4 20 8 20 8Z"
-                  fill="#F7F5F2"
-                />
-                <path
-                  d="M20 14C20 14 24 16 26 20H20V14Z"
-                  fill="#6B8F71"
-                />
-              </svg>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[#F7F5F2] font-bold text-sm tracking-wide">Greene</span>
-              <span className="text-[#6B8F71] font-light text-xs tracking-widest">STUDIOS</span>
-            </div>
+          <Link 
+            href="/" 
+            className="flex flex-col items-start leading-[0.85] font-bold tracking-[-0.02em] text-[#1E342F] group"
+            style={{ fontSize: "1.75rem" }}
+          >
+            <span className="transition-transform duration-300 group-hover:-translate-y-0.5">Greene</span>
+            <span className="transition-transform duration-300 group-hover:translate-y-0.5 text-black/80">Studios</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[#F7F5F2]/70 hover:text-[#F7F5F2] text-sm font-medium tracking-wide transition-colors duration-200 link-underline"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center">
+            <nav className="flex items-center gap-1 bg-white/80 backdrop-blur-md border border-[#E6E6E6] rounded-full p-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+              {NAV_LINKS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                      isActive
+                        ? "bg-[#101010] text-white"
+                        : "text-[#757575] hover:text-[#101010] hover:bg-[#FAFAFA]"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
 
           {/* CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/pricing"
-              className="text-[#F7F5F2]/60 hover:text-[#F7F5F2] text-sm transition-colors"
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href={`mailto:${BRAND.email}`}
+              className="text-sm font-medium text-[#101010] hover:text-[#BFA36A] transition-colors"
             >
-              Pricing
-            </Link>
+              {BRAND.email}
+            </a>
             <Link
               href="/contact"
-              className="bg-[#12372A] hover:bg-[#6B8F71] text-[#F7F5F2] text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300"
+              className="bg-[#101010] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#BFA36A] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
               Start a Project
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="lg:hidden text-[#F7F5F2] p-2"
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden w-12 h-12 bg-white border border-[#E6E6E6] rounded-full flex items-center justify-center text-[#101010]"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-[#0e0e0e] flex flex-col pt-24 px-8 transition-all duration-500",
+          "fixed inset-0 z-40 bg-[#FAFAFA]/95 backdrop-blur-xl flex flex-col pt-24 px-8 transition-all duration-500",
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >
@@ -109,7 +109,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-[#F7F5F2] text-4xl font-bold tracking-tight hover:text-[#6B8F71] transition-colors"
+              className="text-[#101010] text-4xl font-semibold tracking-tight hover:text-[#BFA36A] transition-colors"
               style={{ transitionDelay: `${i * 50}ms` }}
             >
               {link.label}
@@ -118,24 +118,11 @@ export default function Navbar() {
           <Link
             href="/pricing"
             onClick={() => setMenuOpen(false)}
-            className="text-[#F7F5F2] text-4xl font-bold tracking-tight hover:text-[#6B8F71] transition-colors"
+            className="text-[#101010] text-4xl font-semibold tracking-tight hover:text-[#BFA36A] transition-colors"
           >
-            Pricing
-          </Link>
-          <Link
-            href="/contact"
-            onClick={() => setMenuOpen(false)}
-            className="text-[#F7F5F2] text-4xl font-bold tracking-tight hover:text-[#6B8F71] transition-colors"
-          >
-            Contact
+            Start a Project
           </Link>
         </nav>
-
-        <div className="mt-auto pb-12 flex gap-6">
-          <a href="https://instagram.com" className="text-[#F7F5F2]/40 hover:text-[#F7F5F2] text-sm transition-colors">Instagram</a>
-          <a href="https://twitter.com" className="text-[#F7F5F2]/40 hover:text-[#F7F5F2] text-sm transition-colors">Twitter</a>
-          <a href="https://linkedin.com" className="text-[#F7F5F2]/40 hover:text-[#F7F5F2] text-sm transition-colors">LinkedIn</a>
-        </div>
       </div>
     </>
   );

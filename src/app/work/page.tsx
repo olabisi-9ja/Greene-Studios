@@ -10,22 +10,22 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="min-h-screen bg-[#0e0e0e] pt-32">
+    <div className="min-h-screen bg-white pt-32">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-20">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-6 h-px bg-[#6B8F71]" />
-          <span className="text-[#6B8F71] text-xs tracking-[0.3em] uppercase font-semibold">
+          <div className="w-6 h-px bg-[#BFA36A]" />
+          <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
             Our Work
           </span>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <h1 className="text-6xl lg:text-8xl font-black text-[#F7F5F2] leading-[0.9] tracking-tight">
+          <h1 className="text-6xl lg:text-8xl font-semibold text-[#101010] leading-[1.1] tracking-tight">
             Projects that
             <br />
-            <span className="text-[#F7F5F2]/30">define the craft.</span>
+            <span className="text-[#101010]/30">define the craft.</span>
           </h1>
-          <p className="text-[#F7F5F2]/50 text-lg leading-relaxed max-w-sm">
+          <p className="text-[#757575] text-lg leading-relaxed max-w-sm">
             A curated selection of work across web design, branding, product,
             and development.
           </p>
@@ -41,8 +41,8 @@ export default function WorkPage() {
                 key={filter}
                 className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                   filter === "All"
-                    ? "bg-[#12372A] text-[#F7F5F2]"
-                    : "border border-white/10 text-[#F7F5F2]/50 hover:border-[#6B8F71]/50 hover:text-[#F7F5F2]"
+                    ? "bg-[#101010] text-white"
+                    : "border border-[#E6E6E6] text-[#757575] hover:border-[#101010] hover:text-[#101010]"
                 }`}
               >
                 {filter}
@@ -61,38 +61,38 @@ export default function WorkPage() {
               href={`/work/${project.slug}`}
               className={`group block ${i === 0 ? "md:col-span-2" : ""}`}
             >
-              <div className="relative overflow-hidden rounded-2xl card-hover">
+              <div className="relative overflow-hidden rounded-[24px] shadow-sm hover:shadow-md transition-shadow">
                 <div
                   className="relative"
                   style={{ aspectRatio: i === 0 ? "16/7" : "4/3" }}
                 >
                   {/* Image */}
                   <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
                     style={{ backgroundImage: `url(${project.image})` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
                   {/* Content */}
                   <div className="absolute inset-0 flex flex-col justify-between p-8">
                     <div className="flex items-start justify-between">
-                      <span className="bg-white/10 backdrop-blur border border-white/20 text-[#F7F5F2] text-xs px-4 py-2 rounded-full">
+                      <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-2 rounded-full font-medium">
                         {project.category}
                       </span>
-                      <span className="text-[#F7F5F2]/50 text-sm font-mono">{project.year}</span>
+                      <span className="text-white/80 text-sm font-mono bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full">{project.year}</span>
                     </div>
                     <div>
-                      <h2 className="text-3xl lg:text-4xl font-black text-[#F7F5F2] mb-2 tracking-tight">
+                      <h2 className="text-3xl lg:text-4xl font-semibold text-white mb-2 tracking-tight">
                         {project.title}
                       </h2>
-                      <p className="text-[#F7F5F2]/60 text-sm mb-4 max-w-lg leading-relaxed">
+                      <p className="text-white/80 text-sm mb-4 max-w-lg leading-relaxed">
                         {project.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-[#F7F5F2]/40 text-xs px-3 py-1 border border-white/10 rounded-full"
+                            className="text-white/70 text-xs px-3 py-1 border border-white/20 rounded-full backdrop-blur-sm"
                           >
                             {tag}
                           </span>
@@ -107,17 +107,17 @@ export default function WorkPage() {
         </div>
 
         {/* Experiments CTA */}
-        <div className="mt-16 p-10 bg-[#12372A]/20 border border-[#12372A]/40 rounded-2xl text-center">
-          <h3 className="text-[#F7F5F2] text-2xl font-bold mb-3">
+        <div className="mt-16 p-12 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px] text-center shadow-sm">
+          <h3 className="text-[#101010] text-3xl font-semibold mb-4 tracking-tight">
             Curious about how we experiment?
           </h3>
-          <p className="text-[#F7F5F2]/50 text-base mb-6">
+          <p className="text-[#757575] text-lg mb-8 max-w-xl mx-auto leading-relaxed">
             Explore our lab of creative coding, 3D experiments, and interactive
             playgrounds.
           </p>
           <Link
             href="/experiments"
-            className="inline-flex items-center gap-2 bg-[#12372A] hover:bg-[#6B8F71] text-[#F7F5F2] font-semibold px-8 py-4 rounded-full transition-all"
+            className="inline-flex items-center gap-3 bg-[#111111] hover:bg-[#BFA36A] text-white text-base font-medium px-8 py-4 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5"
           >
             View Experiments →
           </Link>

@@ -5,26 +5,25 @@ export default function SelectedWork() {
   const featured = PROJECTS.filter((p) => p.featured).slice(0, 3);
 
   return (
-    <section className="py-32 bg-[#0e0e0e]">
+    <section className="py-32 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-6 h-px bg-[#6B8F71]" />
-              <span className="text-[#6B8F71] text-xs tracking-[0.3em] uppercase font-semibold">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-6 h-px bg-[#BFA36A]" />
+              <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
                 Selected Work
               </span>
             </div>
-            <h2 className="text-[clamp(3rem,8vw,7rem)] font-black text-[#F7F5F2] leading-[0.9] tracking-tighter uppercase italic-none">
-              Projects that
-              <br />
-              <span className="text-outline">define us.</span>
+            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold text-[#101010] leading-[1.1] tracking-tight">
+              Projects that define us.
             </h2>
           </div>
           <Link
             href="/work"
-            className="group flex items-center gap-2 text-[#6B8F71] hover:text-[#F7F5F2] text-sm font-medium transition-colors self-start lg:self-auto"
+            className="group flex items-center gap-2 text-[#101010] hover:text-[#BFA36A] text-sm font-medium transition-colors"
           >
             View all projects
             <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -32,62 +31,56 @@ export default function SelectedWork() {
         </div>
 
         {/* Projects Grid */}
-        <div className="space-y-6">
+        <div className="flex flex-col gap-24">
           {featured.map((project, i) => (
             <Link
               key={project.id}
               href={`/work/${project.slug}`}
               className="group block"
             >
-              <div
-                className="relative overflow-hidden rounded-2xl card-hover"
-                style={{ aspectRatio: i === 0 ? "16/7" : "16/8" }}
-              >
-                {/* Background image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-                <div
-                  className="absolute inset-0 opacity-60"
-                  style={{
-                    background: `linear-gradient(135deg, ${project.color}60, transparent)`,
-                  }}
-                />
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+                {/* Image Container */}
+                <div 
+                  className={`w-full lg:w-3/5 overflow-hidden rounded-[24px] bg-[#F2F2F2] order-1 ${i % 2 !== 0 ? 'lg:order-2' : ''}`}
+                  style={{ aspectRatio: "16/10" }}
+                >
+                  <div
+                    className="w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${project.image})` }}
+                  />
+                </div>
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-between p-8 lg:p-12">
-                  <div className="flex items-start justify-between">
-                    <span className="glass-panel text-[#F7F5F2] text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-full">
+                {/* Content Container */}
+                <div className={`w-full lg:w-2/5 flex flex-col justify-center order-2 ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-[#101010] text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-full border border-[#E6E6E6] bg-[#FAFAFA]">
                       {project.category}
                     </span>
-                    <span className="text-[#F7F5F2]/50 text-sm">{project.year}</span>
+                    <span className="text-[#757575] text-sm font-medium">{project.year}</span>
                   </div>
 
-                  <div>
-                    <h3 className="text-[clamp(2.5rem,6vw,4rem)] font-black text-[#F7F5F2] mb-3 tracking-tighter uppercase leading-none">
-                      {project.title}
-                    </h3>
-                    <p className="text-[#F7F5F2]/60 text-base max-w-xl mb-6 leading-relaxed">
-                      {project.description}
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[#F7F5F2]/50 text-xs px-3 py-1 border border-white/10 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="ml-auto text-[#6B8F71] text-sm group-hover:translate-x-2 transition-transform">
-                        View Case Study →
+                  <h3 className="text-4xl md:text-5xl font-semibold text-[#101010] mb-6 tracking-tight">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-[#757575] text-lg mb-8 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-10">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[#757575] text-xs font-medium px-3 py-1.5 bg-[#FAFAFA] rounded-md"
+                      >
+                        {tag}
                       </span>
-                    </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-3 text-[#111111] font-medium group-hover:text-[#BFA36A] transition-colors">
+                    <span className="text-sm uppercase tracking-wide">View Case Study</span>
+                    <span className="group-hover:translate-x-2 transition-transform">→</span>
                   </div>
                 </div>
               </div>
@@ -95,18 +88,6 @@ export default function SelectedWork() {
           ))}
         </div>
 
-        {/* Results ticker */}
-        <div className="mt-16 flex flex-wrap gap-6 justify-center">
-          {featured.flatMap((p) => p.results).map((result, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 bg-white/3 border border-white/8 px-4 py-2 rounded-full"
-            >
-              <span className="text-[#6B8F71] text-xs">✦</span>
-              <span className="text-[#F7F5F2]/60 text-xs">{result}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

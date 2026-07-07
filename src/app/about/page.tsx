@@ -1,20 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CTASection from "@/components/home/CTASection";
+import TimelineSection from "@/components/about/TimelineSection";
 
 export const metadata: Metadata = {
   title: "About — Our Story",
   description:
     "Greene Studios is a premium digital design and development studio. Learn about our mission, values, and the people behind the work.",
 };
-
-const TIMELINE = [
-  { year: "2022", event: "Greene Studios founded. First client: a Lagos-based fintech startup." },
-  { year: "2022", event: "Shipped 8 projects in year one. Developed our signature process framework." },
-  { year: "2023", event: "Expanded into product design and AI integration services." },
-  { year: "2023", event: "First Awwwards nomination. Crossed $1M in client revenue generated." },
-  { year: "2024", event: "Launched Greene Journal. 40+ published case studies and articles." },
-  { year: "2025", event: "Opening 2–3 new project slots for ambitious brands worldwide." },
-];
 
 const VALUES = [
   {
@@ -47,19 +40,19 @@ const TECHNOLOGIES = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#0e0e0e] pt-32">
+    <div className="min-h-screen bg-white pt-32">
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-24">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-6 h-px bg-[#6B8F71]" />
-          <span className="text-[#6B8F71] text-xs tracking-[0.3em] uppercase font-semibold">About</span>
+          <div className="w-6 h-px bg-[#BFA36A]" />
+          <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">About</span>
         </div>
-        <h1 className="text-6xl lg:text-8xl font-black text-[#F7F5F2] leading-[0.9] tracking-tight mb-8 max-w-4xl">
+        <h1 className="text-[clamp(3.5rem,8vw,6.5rem)] font-semibold text-[#101010] leading-[1.05] tracking-tight mb-8 max-w-4xl text-balance">
           We believe design
-          <br />
-          <span className="text-[#F7F5F2]/30">is a business tool.</span>
+          <br className="hidden md:block" />
+          <span className="text-[#757575]"> is a business tool.</span>
         </h1>
-        <p className="text-[#F7F5F2]/50 text-xl leading-relaxed max-w-2xl">
+        <p className="text-[#757575] text-lg lg:text-xl leading-relaxed max-w-2xl text-balance">
           Not decoration. Not art for art&apos;s sake. Design — done well — changes
           how people feel about a company, how quickly they trust it, and how
           confidently they spend money with it.
@@ -67,9 +60,9 @@ export default function AboutPage() {
       </div>
 
       {/* Mission */}
-      <div className="bg-[#12372A]/10 border-y border-[#12372A]/20 py-16">
+      <div className="bg-[#FAFAFA] border-y border-[#E6E6E6] py-24">
         <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
-          <p className="text-[#F7F5F2] text-3xl lg:text-4xl font-light leading-relaxed">
+          <p className="text-[#101010] text-3xl lg:text-4xl font-medium leading-relaxed tracking-tight text-balance">
             &ldquo;Greene Studios exists to build digital experiences that give
             ambitious brands an unfair competitive advantage through design
             excellence.&rdquo;
@@ -78,41 +71,41 @@ export default function AboutPage() {
       </div>
 
       {/* Meet the Founder */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-32 border-b border-[#E6E6E6]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Image placeholder */}
           <div className="relative">
             <div
-              className="w-full rounded-2xl overflow-hidden"
-              style={{ aspectRatio: "3/4" }}
+              className="w-full rounded-[24px] overflow-hidden bg-[#FAFAFA] border border-[#E6E6E6]"
+              style={{ aspectRatio: "4/5" }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-[#12372A] to-[#0e0e0e] flex items-center justify-center">
+              <div className="w-full h-full flex flex-col items-center justify-center">
                 <div className="text-center">
-                  <div className="w-24 h-24 rounded-full bg-[#12372A] border-2 border-[#6B8F71]/40 mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-[#6B8F71] text-3xl font-black">G</span>
+                  <div className="w-24 h-24 rounded-full bg-white border border-[#E6E6E6] shadow-sm mx-auto mb-6 flex items-center justify-center">
+                    <span className="text-[#101010] text-3xl font-semibold">G</span>
                   </div>
-                  <p className="text-[#F7F5F2]/20 text-sm">Founder Photo</p>
+                  <p className="text-[#757575] text-sm font-medium tracking-wide uppercase">Founder Photo</p>
                 </div>
               </div>
             </div>
             {/* Badge */}
-            <div className="absolute bottom-6 left-6 bg-[#0e0e0e]/90 backdrop-blur border border-white/10 p-4 rounded-xl">
-              <p className="text-[#F7F5F2] font-bold text-sm">Founded 2022</p>
-              <p className="text-[#6B8F71] text-xs">Lagos, Nigeria</p>
+            <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md border border-[#E6E6E6] p-5 rounded-2xl shadow-sm">
+              <p className="text-[#101010] font-semibold text-sm mb-1">Founded 2022</p>
+              <p className="text-[#757575] text-xs font-medium">Lagos, Nigeria</p>
             </div>
           </div>
 
           {/* Story */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-6 h-px bg-[#6B8F71]" />
-              <span className="text-[#6B8F71] text-xs tracking-[0.3em] uppercase font-semibold">Founder</span>
+              <div className="w-6 h-px bg-[#BFA36A]" />
+              <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">Founder</span>
             </div>
-            <h2 className="text-4xl font-black text-[#F7F5F2] mb-6 tracking-tight leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-[#101010] mb-8 tracking-tight leading-tight">
               Meet the mind
               <br />behind Greene.
             </h2>
-            <div className="space-y-4 text-[#F7F5F2]/50 text-base leading-relaxed">
+            <div className="space-y-6 text-[#757575] text-lg leading-relaxed">
               <p>
                 Greene Studios was born from a simple belief: that the gap between
                 how most companies present themselves online and how good their
@@ -131,16 +124,16 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-4">
+            <div className="mt-12 grid grid-cols-2 gap-6">
               {[
                 { value: "40+", label: "Projects" },
                 { value: "$50M+", label: "Revenue Generated" },
                 { value: "98%", label: "Client Satisfaction" },
                 { value: "3+", label: "Years of Craft" },
               ].map((stat) => (
-                <div key={stat.label} className="p-4 bg-white/[0.02] border border-white/5 rounded-xl">
-                  <div className="text-2xl font-black text-[#F7F5F2]">{stat.value}</div>
-                  <div className="text-[#F7F5F2]/40 text-xs mt-1">{stat.label}</div>
+                <div key={stat.label} className="p-6 bg-[#FAFAFA] border border-[#E6E6E6] rounded-2xl">
+                  <div className="text-3xl font-semibold text-[#101010] tracking-tight">{stat.value}</div>
+                  <div className="text-[#757575] text-sm font-medium mt-2">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -149,61 +142,40 @@ export default function AboutPage() {
       </div>
 
       {/* Values */}
-      <div className="bg-[#141414] py-24">
+      <div className="bg-white py-32 border-b border-[#E6E6E6]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-6 h-px bg-[#6B8F71]" />
-            <span className="text-[#6B8F71] text-xs tracking-[0.3em] uppercase font-semibold">Values</span>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-6 h-px bg-[#BFA36A]" />
+            <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">Values</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-black text-[#F7F5F2] mb-12 tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-semibold text-[#101010] mb-16 tracking-tight">
             Principles we
-            <br /><span className="text-[#F7F5F2]/30">refuse to compromise.</span>
+            <br /><span className="text-[#757575]">refuse to compromise.</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {VALUES.map((value) => (
-              <div key={value.title} className="p-8 bg-[#0e0e0e] border border-white/5 rounded-2xl hover:border-[#12372A]/40 transition-all">
-                <div className="text-2xl mb-4 text-[#6B8F71]">{value.icon}</div>
-                <h3 className="text-[#F7F5F2] font-bold text-xl mb-3 tracking-tight">{value.title}</h3>
-                <p className="text-[#F7F5F2]/40 text-sm leading-relaxed">{value.desc}</p>
+              <div key={value.title} className="p-10 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300">
+                <div className="text-2xl mb-6 text-[#BFA36A]">{value.icon}</div>
+                <h3 className="text-[#101010] font-semibold text-2xl mb-4 tracking-tight">{value.title}</h3>
+                <p className="text-[#757575] text-base leading-relaxed">{value.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Timeline */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-6 h-px bg-[#6B8F71]" />
-          <span className="text-[#6B8F71] text-xs tracking-[0.3em] uppercase font-semibold">Timeline</span>
-        </div>
-        <h2 className="text-4xl lg:text-5xl font-black text-[#F7F5F2] mb-12 tracking-tight">
-          How we got here.
-        </h2>
-        <div className="max-w-3xl space-y-0">
-          {TIMELINE.map((item, i) => (
-            <div key={i} className="flex gap-8 pb-10 relative">
-              {i < TIMELINE.length - 1 && (
-                <div className="absolute left-[34px] top-12 bottom-0 w-px bg-gradient-to-b from-[#12372A] to-transparent" />
-              )}
-              <div className="w-16 h-8 flex-shrink-0 bg-[#12372A]/20 border border-[#12372A]/40 rounded-full flex items-center justify-center mt-2">
-                <span className="text-[#6B8F71] text-xs font-bold">{item.year}</span>
-              </div>
-              <p className="text-[#F7F5F2]/60 text-base leading-relaxed pt-1">{item.event}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Timeline Section */}
+      <TimelineSection />
 
       {/* Technologies */}
-      <div className="bg-[#141414] py-24">
+      <div className="bg-[#FAFAFA] py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <h2 className="text-3xl font-black text-[#F7F5F2] mb-10 tracking-tight text-center">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-[#101010] mb-12 tracking-tight text-center">
             Our Tech Stack
           </h2>
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center max-w-4xl mx-auto">
             {TECHNOLOGIES.map((tech) => (
-              <span key={tech} className="bg-[#0e0e0e] border border-white/10 text-[#F7F5F2]/60 text-sm px-5 py-2.5 rounded-full hover:border-[#6B8F71]/40 hover:text-[#F7F5F2] transition-all">
+              <span key={tech} className="bg-white border border-[#E6E6E6] text-[#101010] font-medium text-sm px-6 py-3 rounded-full hover:border-[#101010] transition-all duration-300 shadow-sm">
                 {tech}
               </span>
             ))}
@@ -211,22 +183,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="max-w-4xl mx-auto px-6 lg:px-12 py-24 text-center">
-        <h2 className="text-5xl font-black text-[#F7F5F2] mb-6 tracking-tight">
-          Let&apos;s build something<br /><span className="text-[#F7F5F2]/30">that matters.</span>
-        </h2>
-        <p className="text-[#F7F5F2]/50 text-lg mb-8 leading-relaxed">
-          We take on 2–3 new projects per quarter. If our approach resonates,
-          let&apos;s start a conversation.
-        </p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-3 bg-[#12372A] hover:bg-[#6B8F71] text-[#F7F5F2] font-semibold px-10 py-5 rounded-full transition-all"
-        >
-          Start a Conversation →
-        </Link>
-      </div>
+      <CTASection />
     </div>
   );
 }
