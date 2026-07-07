@@ -120,7 +120,7 @@ export default function Footer() {
               © {currentYear} Greene Studios. All rights reserved.
             </p>
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#BFA36A] animate-pulse" />
+
               <span className="text-[#101010] text-xs font-medium">Available for projects</span>
             </div>
           </div>

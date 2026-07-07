@@ -29,7 +29,7 @@ export default function ContactPage() {
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#BFA36A] animate-pulse" />
+
                 <span className="text-[#101010] text-sm font-medium">Currently accepting new projects</span>
               </div>
               <p className="text-[#757575] text-sm pl-5">{BRAND.email}</p>

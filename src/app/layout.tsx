@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 
@@ -61,7 +60,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
       <body className="antialiased">
         <Preloader />
-        <CustomCursor />
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>

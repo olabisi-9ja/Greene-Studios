@@ -57,7 +57,6 @@ export default function Hero() {
 
       {/* Floating label */}
       <div className="absolute top-28 left-6 lg:left-12 flex items-center gap-3">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#6B8F71] animate-pulse" />
         <span className="text-[#6B8F71] text-xs tracking-[0.2em] uppercase font-medium">
           Available for Projects · 2025
         </span>
