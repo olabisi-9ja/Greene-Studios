@@ -4,18 +4,18 @@ import { useState } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 
-type Currency = "USD" | "EUR" | "GBP";
+type Currency = "USD" | "EUR" | "NGN";
 
 const CURRENCY_SYMBOLS: Record<Currency, string> = {
   USD: "$",
   EUR: "€",
-  GBP: "£",
+  NGN: "₦",
 };
 
 const EXCHANGE_RATES: Record<Currency, number> = {
   USD: 1,
   EUR: 0.92,
-  GBP: 0.79,
+  NGN: 1500, // Approximate NGN rate
 };
 
 const TIERS = [
@@ -84,7 +84,7 @@ export default function PricingTiers() {
 
         {/* Currency Toggle */}
         <div className="flex items-center p-1 bg-[#FAFAFA] border border-[#E6E6E6] rounded-full self-start md:self-auto">
-          {(["USD", "EUR", "GBP"] as Currency[]).map((c) => (
+          {(["USD", "EUR", "NGN"] as Currency[]).map((c) => (
             <button
               key={c}
               onClick={() => setCurrency(c)}

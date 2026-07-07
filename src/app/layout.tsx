@@ -12,6 +12,12 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: import("next").Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://greenestudios.co"),
   title: {
