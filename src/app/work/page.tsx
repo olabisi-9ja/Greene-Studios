@@ -1,14 +1,20 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { PROJECTS } from "@/lib/data";
 
-export const metadata: Metadata = {
-  title: "Work — Our Projects",
-  description:
-    "Explore Greene Studios' portfolio of websites, brands, and digital products.",
-};
+const FILTERS = ["All", "Web Design", "Branding", "Product", "Development", "Motion"];
 
 export default function WorkPage() {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredProjects = PROJECTS.filter(project => {
+    if (activeFilter === "All") return true;
+    return project.category.toLowerCase().includes(activeFilter.toLowerCase()) || 
+           project.tags.some(tag => tag.toLowerCase().includes(activeFilter.toLowerCase()));
+  });
+
   return (
     <div className="min-h-screen bg-white pt-32">
       {/* Header */}
@@ -35,76 +41,88 @@ export default function WorkPage() {
       {/* Filter Tabs */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-16">
         <div className="flex flex-wrap gap-3">
-          {["All", "Web Design", "Branding", "Product", "Development", "Motion"].map(
-            (filter) => (
-              <button
-                key={filter}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-                  filter === "All"
-                    ? "bg-[#101010] text-white"
-                    : "border border-[#E6E6E6] text-[#757575] hover:border-[#101010] hover:text-[#101010]"
-                }`}
-              >
-                {filter}
-              </button>
-            )
-          )}
+          {FILTERS.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                activeFilter === filter
+                  ? "bg-[#101010] text-white"
+                  : "border border-[#E6E6E6] text-[#757575] hover:border-[#101010] hover:text-[#101010]"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PROJECTS.map((project, i) => (
-            <Link
-              key={project.id}
-              href={`/work/${project.slug}`}
-              className={`group block ${i === 0 ? "md:col-span-2" : ""}`}
-            >
-              <div className="relative overflow-hidden rounded-[24px] shadow-sm hover:shadow-md transition-shadow">
-                <div
-                  className="relative"
-                  style={{ aspectRatio: i === 0 ? "16/7" : "4/3" }}
-                >
-                  {/* Image */}
+        {filteredProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredProjects.map((project, i) => (
+              <Link
+                key={project.id}
+                href={`/work/${project.slug}`}
+                className={`group block ${i === 0 && activeFilter === "All" ? "md:col-span-2" : ""}`}
+              >
+                <div className="relative overflow-hidden rounded-[24px] shadow-sm hover:shadow-md transition-shadow">
                   <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
-                    style={{ backgroundImage: `url(${project.image})` }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                    className="relative"
+                    style={{ aspectRatio: i === 0 && activeFilter === "All" ? "16/7" : "4/3" }}
+                  >
+                    {/* Image */}
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
+                      style={{ backgroundImage: `url(${project.image})` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Content */}
-                  <div className="absolute inset-0 flex flex-col justify-between p-8">
-                    <div className="flex items-start justify-between">
-                      <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-2 rounded-full font-medium">
-                        {project.category}
-                      </span>
-                      <span className="text-white/80 text-sm font-mono bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full">{project.year}</span>
-                    </div>
-                    <div>
-                      <h2 className="text-3xl lg:text-4xl font-semibold text-white mb-2 tracking-tight">
-                        {project.title}
-                      </h2>
-                      <p className="text-white/80 text-sm mb-4 max-w-lg leading-relaxed">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-white/70 text-xs px-3 py-1 border border-white/20 rounded-full backdrop-blur-sm"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                    {/* Content */}
+                    <div className="absolute inset-0 flex flex-col justify-between p-8">
+                      <div className="flex items-start justify-between">
+                        <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-2 rounded-full font-medium">
+                          {project.category}
+                        </span>
+                        <span className="text-white/80 text-sm font-mono bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full">{project.year}</span>
+                      </div>
+                      <div>
+                        <h2 className="text-3xl lg:text-4xl font-semibold text-white mb-2 tracking-tight">
+                          {project.title}
+                        </h2>
+                        <p className="text-white/80 text-sm mb-4 max-w-lg leading-relaxed">
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-white/70 text-xs px-3 py-1 border border-white/20 rounded-full backdrop-blur-sm"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-24 bg-[#FAFAFA] rounded-[24px] border border-[#E6E6E6]">
+            <h3 className="text-2xl font-semibold text-[#101010] mb-2">No projects found</h3>
+            <p className="text-[#757575]">Try adjusting your filters or checking back later.</p>
+            <button 
+              onClick={() => setActiveFilter("All")}
+              className="mt-6 text-[#BFA36A] font-medium hover:text-[#101010] transition-colors"
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
 
         {/* Experiments CTA */}
         <div className="mt-16 p-12 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px] text-center shadow-sm">
@@ -112,8 +130,7 @@ export default function WorkPage() {
             Curious about how we experiment?
           </h3>
           <p className="text-[#757575] text-lg mb-8 max-w-xl mx-auto leading-relaxed">
-            Explore our lab of creative coding, 3D experiments, and interactive
-            playgrounds.
+            Explore our lab of creative coding, 3D experiments, and interactive playgrounds.
           </p>
           <Link
             href="/experiments"
