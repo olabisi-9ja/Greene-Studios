@@ -75,14 +75,7 @@ export default async function ServicePage({ params }: Props) {
                 What is {service.title}?
               </h2>
               <p className="text-[#F7F5F2]/50 text-lg leading-relaxed mb-6">
-                {service.description} It&apos;s not just about aesthetics — it&apos;s about
-                outcomes. Every decision we make in {service.title.toLowerCase()} is
-                anchored in your business goals and your users&apos; needs.
-              </p>
-              <p className="text-[#F7F5F2]/40 text-base leading-relaxed">
-                The best {service.title.toLowerCase()} is invisible to the user — they
-                just feel at home, move intuitively, and accomplish what they came to do
-                with minimal friction.
+                {service.whatIsIt || service.description}
               </p>
             </div>
             <div>
@@ -90,12 +83,7 @@ export default async function ServicePage({ params }: Props) {
                 Who it&apos;s for
               </h2>
               <div className="space-y-3">
-                {[
-                  "Startups building their first digital presence",
-                  "Scale-ups preparing for their next funding round",
-                  "Enterprises refreshing outdated experiences",
-                  "Founders who understand design = growth",
-                ].map((item, i) => (
+                {(service.whoItsFor || []).map((item: string, i: number) => (
                   <div key={i} className="flex items-start gap-3 p-4 bg-white/[0.02] border border-white/5 rounded-xl">
                     <span className="text-[#6B8F71] text-sm font-mono">{String(i + 1).padStart(2, "0")}</span>
                     <p className="text-[#F7F5F2]/60 text-sm leading-relaxed">{item}</p>
@@ -112,11 +100,7 @@ export default async function ServicePage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <h2 className="text-4xl font-black text-[#F7F5F2] mb-12 tracking-tight text-center">Our Approach</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: "Research First", desc: "We start by understanding your users, competitors, and market before opening any design tool." },
-              { title: "Iterative Design", desc: "Rapid prototyping and constant refinement. We ship things that work and improve them continuously." },
-              { title: "Measured Outcomes", desc: "Everything we build has success metrics. We track results and optimize until we hit them." },
-            ].map((item) => (
+            {(service.approach || []).map((item: any) => (
               <div key={item.title} className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
                 <div className="w-8 h-8 rounded-full bg-[#12372A] flex items-center justify-center mb-4">
                   <div className="w-2 h-2 rounded-full bg-[#6B8F71]" />

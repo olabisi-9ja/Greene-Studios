@@ -61,11 +61,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <section>
               <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Overview</h2>
               <p className="text-[#F7F5F2]/60 text-lg leading-relaxed">
-                {project.description} This project represented a unique challenge
-                in the intersection of design excellence and technical performance.
-                We approached it with our signature blend of strategic thinking and
-                meticulous craft, ensuring every decision served both the user and
-                the business.
+                {project.description}
               </p>
             </section>
 
@@ -74,11 +70,7 @@ export default async function CaseStudyPage({ params }: Props) {
               <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">The Challenge</h2>
               <div className="p-8 bg-[#12372A]/15 border border-[#12372A]/30 rounded-2xl">
                 <p className="text-[#F7F5F2]/70 text-base leading-relaxed">
-                  The client came to us with an existing digital presence that wasn&apos;t
-                  reflecting the quality of their product or the ambition of their team.
-                  The core challenge: how do you translate a complex value proposition
-                  into an interface that communicates instantly, builds trust immediately,
-                  and converts reliably?
+                  {project.challenge || "A unique challenge in the intersection of design and technology."}
                 </p>
               </div>
             </section>
@@ -87,12 +79,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <section>
               <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Goals</h2>
               <div className="space-y-4">
-                {[
-                  "Establish visual leadership in a competitive market",
-                  "Reduce time-to-value for new users by 60%",
-                  "Build a design system that scales with the product",
-                  "Achieve sub-1-second load times across all markets",
-                ].map((goal, i) => (
+                {(project.goals || []).map((goal: string, i: number) => (
                   <div key={i} className="flex items-start gap-4">
                     <span className="text-[#6B8F71] font-mono text-sm mt-1">{String(i + 1).padStart(2, "0")}</span>
                     <p className="text-[#F7F5F2]/70 text-base leading-relaxed">{goal}</p>
@@ -105,10 +92,11 @@ export default async function CaseStudyPage({ params }: Props) {
             <section>
               <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Design Approach</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {["Typography System", "Color Architecture", "Component Library", "Motion Language", "Responsive Grid", "Accessibility"].map((item) => (
-                  <div key={item} className="p-5 bg-white/[0.02] border border-white/5 rounded-xl">
+                {(project.approach || []).map((item: any, i: number) => (
+                  <div key={i} className="p-5 bg-white/[0.02] border border-white/5 rounded-xl">
                     <div className="w-2 h-2 rounded-full bg-[#6B8F71] mb-3" />
-                    <p className="text-[#F7F5F2]/70 text-sm font-medium">{item}</p>
+                    <p className="text-[#F7F5F2]/90 text-sm font-semibold mb-1">{item.title}</p>
+                    <p className="text-[#F7F5F2]/60 text-sm">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -130,10 +118,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <section>
               <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Lessons Learned</h2>
               <p className="text-[#F7F5F2]/60 text-lg leading-relaxed">
-                Every project teaches us something. With {project.title}, the most
-                valuable insight was around the relationship between visual restraint and
-                perceived quality. The temptation to add complexity is constant — the
-                discipline to remove it is the craft.
+                {project.lessons || "Every project teaches us something new. This was no exception."}
               </p>
             </section>
           </div>

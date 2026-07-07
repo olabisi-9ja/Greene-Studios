@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BRAND, NAV_LINKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram, Twitter, Linkedin, Github } from "lucide-react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -103,26 +103,42 @@ export default function Navbar() {
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >
-        <nav className="flex flex-col gap-6 mt-8">
+        <nav className="flex flex-col gap-6 mt-8 flex-grow">
           {NAV_LINKS.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-[#101010] text-4xl font-semibold tracking-tight hover:text-[#BFA36A] transition-colors"
+              className="text-[#101010] text-3xl sm:text-4xl font-semibold tracking-tight hover:text-[#BFA36A] transition-colors"
               style={{ transitionDelay: `${i * 50}ms` }}
             >
               {link.label}
             </Link>
           ))}
           <Link
-            href="/pricing"
+            href="/contact"
             onClick={() => setMenuOpen(false)}
-            className="text-[#101010] text-4xl font-semibold tracking-tight hover:text-[#BFA36A] transition-colors"
+            className="text-[#101010] text-3xl sm:text-4xl font-semibold tracking-tight hover:text-[#BFA36A] transition-colors mt-4"
           >
             Start a Project
           </Link>
         </nav>
+        
+        {/* Social Links */}
+        <div className="mt-auto pb-12 flex items-center gap-6">
+          <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="text-[#757575] hover:text-[#101010] transition-colors">
+            <Instagram size={24} />
+          </a>
+          <a href={BRAND.twitter} target="_blank" rel="noopener noreferrer" className="text-[#757575] hover:text-[#101010] transition-colors">
+            <Twitter size={24} />
+          </a>
+          <a href={BRAND.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#757575] hover:text-[#101010] transition-colors">
+            <Linkedin size={24} />
+          </a>
+          <a href={BRAND.github} target="_blank" rel="noopener noreferrer" className="text-[#757575] hover:text-[#101010] transition-colors">
+            <Github size={24} />
+          </a>
+        </div>
       </div>
     </>
   );

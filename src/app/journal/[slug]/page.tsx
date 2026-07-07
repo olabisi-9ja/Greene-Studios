@@ -61,28 +61,17 @@ export default async function JournalArticlePage({ params }: Props) {
         </div>
       </div>
 
-      {/* Content Body (Mocked since we only have excerpt in data.ts) */}
+      {/* Content Body */}
       <div className="max-w-3xl mx-auto px-6 lg:px-12 pb-24 prose prose-lg prose-neutral">
-        <p>
-          We often hear about the intersection of design and technology, but the real magic happens when we introduce human psychology into the mix. This article explores how our team approaches these challenges.
-        </p>
-        <h2>The Foundation</h2>
-        <p>
-          Before diving into pixels, we need to understand the people who will be interacting with our product. Research isn't just a checkbox; it's the compass that guides every subsequent decision. When we skip this step, we're essentially designing in the dark.
-        </p>
-        <blockquote>
-          "Good design is actually a lot harder to notice than poor design, in part because good design fits our needs so well that the design is invisible."
-        </blockquote>
-        <p>
-          As we moved through the strategy phase, it became clear that the standard patterns weren't going to cut it. We needed a fresh approach that felt both familiar and revolutionary. 
-        </p>
-        <h2>Executing the Vision</h2>
-        <p>
-          Implementation is where strategy meets reality. We focus heavily on performance, accessibility, and delightful micro-interactions. The difference between a good product and a great one often lies in the details that most people don't consciously notice, but unconsciously feel.
-        </p>
-        <p>
-          In conclusion, the work we do is never truly finished. It evolves as users interact with it, as business needs change, and as technology advances. Embracing this continuous evolution is key to long-term success.
-        </p>
+        {article.content?.map((block: any, i: number) => {
+          if (block.type === "h2") {
+            return <h2 key={i}>{block.text}</h2>;
+          }
+          if (block.type === "quote") {
+            return <blockquote key={i}>{block.text}</blockquote>;
+          }
+          return <p key={i}>{block.text}</p>;
+        })}
       </div>
 
       {/* Related Articles */}
