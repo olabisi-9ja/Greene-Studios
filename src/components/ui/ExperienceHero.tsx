@@ -118,37 +118,6 @@ export const ExperienceHero = () => {
               ))}
             </div>
 
-            {/* Accent Colors (Only visible in Studio mode) */}
-            <AnimatePresence>
-              {mode === "studio" && (
-                <motion.div 
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden"
-                >
-                  <span className="text-xs uppercase tracking-widest text-[var(--brand-text-secondary)] block mb-3">
-                    Studio Accent Colors:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {(Object.keys(accentHexMap) as AccentColor[]).map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => {
-                          setAccent(c);
-                          document.documentElement.style.setProperty('--studio-accent', accentHexMap[c]);
-                        }}
-                        className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
-                          accent === c ? "border-white scale-125" : "border-transparent"
-                        }`}
-                        style={{ backgroundColor: accentHexMap[c] }}
-                        title={c}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
 
         </div>

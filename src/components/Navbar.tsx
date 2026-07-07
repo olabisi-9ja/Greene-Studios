@@ -12,17 +12,29 @@ import { Logo } from "./ui/Logo";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const { mode } = useAtmosphere();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Hiding logic when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setIsScrolled(currentScrollY > 50);
+      setLastScrollY(currentScrollY);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const isDark = mode === "midnight" || mode === "studio";
 
@@ -30,8 +42,9 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-4 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 w-[95%] max-w-7xl",
-          menuOpen ? "pointer-events-none" : ""
+          "fixed left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 w-[95%] max-w-7xl",
+          menuOpen ? "pointer-events-none" : "",
+          isVisible ? "top-4" : "-top-[100px]"
         )}
       >
         <div className={cn(
@@ -40,17 +53,13 @@ export default function Navbar() {
             ? "bg-[var(--brand-surface)]/80 backdrop-blur-lg border border-[var(--brand-border)] shadow-lg" 
             : "bg-transparent"
         )}>
-          {/* Logo */}
+          {/* Logo (No words next to it, only the drawing monogram) */}
           <Link 
             href="/" 
             className="flex items-center gap-2 group pointer-events-auto"
             data-cursor="HOME"
           >
-            <Logo className="w-8 h-8" color="var(--brand-text)" animateOnMount={false} />
-            <div className="flex flex-col items-start leading-[0.85] font-bold tracking-[-0.02em] text-[var(--brand-text)] hidden sm:flex">
-              <span className="transition-transform duration-300 group-hover:-translate-y-0.5">Greene</span>
-              <span className="transition-transform duration-300 group-hover:translate-y-0.5 opacity-80">Studios</span>
-            </div>
+            <Logo className="w-8 h-8" color="var(--brand-text)" animateOnMount={true} />
           </Link>
 
           {/* Desktop Navigation */}

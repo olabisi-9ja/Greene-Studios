@@ -6,10 +6,17 @@ import * as THREE from "three";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { motion } from "framer-motion";
 
-function Particles({ accentHex }: { accentHex: string }) {
+const STUDIO_PALETTE = [
+  "#E65A1A", // Coral / Orange
+  "#D6245F", // Pink / Rose
+  "#BDE61A", // Lime / Yellow-Green
+  "#E6AE1A"  // Gold / Yellow
+];
+
+function Particles() {
   const mesh = useRef<THREE.InstancedMesh>(null);
   
-  const count = 300;
+  const count = 350;
   const dummy = useMemo(() => new THREE.Object3D(), []);
   
   const particles = useMemo(() => {
@@ -17,13 +24,25 @@ function Particles({ accentHex }: { accentHex: string }) {
     for (let i = 0; i < count; i++) {
       const t = Math.random() * 100;
       const factor = 20 + Math.random() * 100;
-      const speed = 0.01 + Math.random() / 200;
+      const speed = 0.005 + Math.random() / 300;
       const xFactor = -50 + Math.random() * 100;
       const yFactor = -50 + Math.random() * 100;
       const zFactor = -50 + Math.random() * 100;
       temp.push({ t, factor, speed, xFactor, yFactor, zFactor, mx: 0, my: 0 });
     }
     return temp;
+  }, [count]);
+
+  // Set colors once on mount
+  useEffect(() => {
+    if (!mesh.current) return;
+    const color = new THREE.Color();
+    for (let i = 0; i < count; i++) {
+      const randomColor = STUDIO_PALETTE[Math.floor(Math.random() * STUDIO_PALETTE.length)];
+      color.set(randomColor);
+      mesh.current.setColorAt(i, color);
+    }
+    mesh.current.instanceColor!.needsUpdate = true;
   }, [count]);
 
   useFrame((state) => {
@@ -33,7 +52,7 @@ function Particles({ accentHex }: { accentHex: string }) {
       t = particle.t += speed / 2;
       const a = Math.cos(t) + Math.sin(t * 1) / 10;
       const b = Math.sin(t) + Math.cos(t * 2) / 10;
-      const s = Math.cos(t);
+      const s = Math.cos(t) * 1.2;
       
       dummy.position.set(
         (particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
@@ -49,18 +68,16 @@ function Particles({ accentHex }: { accentHex: string }) {
     mesh.current!.instanceMatrix.needsUpdate = true;
   });
 
-  const color = new THREE.Color(accentHex);
-  
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-      <dodecahedronGeometry args={[0.2, 0]} />
-      <meshStandardMaterial color={color} roughness={0.1} />
+      <dodecahedronGeometry args={[0.25, 0]} />
+      <meshStandardMaterial roughness={0.05} metalness={0.1} />
     </instancedMesh>
   );
 }
 
 export default function StudioBackground() {
-  const { mode, accentHex } = useAtmosphere();
+  const { mode } = useAtmosphere();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -85,16 +102,23 @@ export default function StudioBackground() {
       {/* Fallback CSS gradient for mobile devices to save battery */}
       {isMobile ? (
         <div 
-          className="absolute inset-0 transition-colors duration-1000"
+          className="absolute inset-0"
           style={{
-            background: `radial-gradient(circle at 50% 50%, ${accentHex}33 0%, #0D0D0D 80%)`
+            background: `
+              radial-gradient(circle at 20% 20%, #E65A1A33 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, #D6245F33 0%, transparent 40%),
+              radial-gradient(circle at 80% 20%, #BDE61A22 0%, transparent 35%),
+              radial-gradient(circle at 20% 80%, #E6AE1A22 0%, transparent 35%),
+              #0D0D0D
+            `
           }}
         />
       ) : (
         <Canvas camera={{ position: [0, 0, 30], fov: 75 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} color={accentHex} />
-          <Particles accentHex={accentHex} />
+          <ambientLight intensity={0.7} />
+          <pointLight position={[15, 15, 15]} intensity={1.5} color="#E65A1A" />
+          <pointLight position={[-15, -15, -15]} intensity={1.5} color="#D6245F" />
+          <Particles />
         </Canvas>
       )}
     </motion.div>

@@ -39,15 +39,12 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-3 group">
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                 whileHover={{ scale: 1.1 }}
                 className="w-12 h-12"
               >
                 <Logo className="w-full h-full" color="var(--brand-text)" />
               </motion.div>
-              <span className="text-[var(--brand-text)] font-bold text-2xl tracking-tight">
-                Greene Studios
-              </span>
             </Link>
 
             <p className="text-[var(--brand-text-secondary)] text-sm leading-relaxed max-w-xs">
