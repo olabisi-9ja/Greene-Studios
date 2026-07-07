@@ -11,9 +11,13 @@ import ClientWrapper from "@/components/ClientWrapper";
 export default function HomePage() {
   const heroFallback = (
     <div className="min-h-screen w-full bg-[#0e0e0e] flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-2 h-2 bg-[#6B8F71] rounded-full animate-pulse" />
-        <span className="font-mono text-[11px] text-[#6B8F71] tracking-[0.3em] uppercase">Greene Studios</span>
+      <div className="flex items-center gap-3 animate-pulse opacity-80">
+        <div className="w-10 h-10 bg-[#F7F5F2] rounded-full flex items-center justify-center">
+          <span className="text-[#0e0e0e] font-black text-lg tracking-tighter italic-none">G</span>
+        </div>
+        <span className="text-[#F7F5F2] font-semibold text-2xl tracking-tight">
+          Greene.
+        </span>
       </div>
     </div>
   );
