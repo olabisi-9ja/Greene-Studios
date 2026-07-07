@@ -38,16 +38,27 @@ const Github = ({ size = 24 }: { size?: number }) => (
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setIsScrolled(currentScrollY > 50);
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => {
     if (menuOpen) {
@@ -61,67 +72,88 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "py-4 bg-white/80 backdrop-blur-md border-b border-[#E6E6E6]" : "py-6"
+          "fixed left-0 right-0 z-50 transition-all duration-500",
+          isScrolled ? "top-4 px-4 lg:px-8" : "top-0 px-0",
+          isVisible ? "translate-y-0" : "-translate-y-[150%]"
         )}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex flex-col items-start leading-[0.85] font-bold tracking-[-0.02em] text-[#1E342F] group"
-            style={{ fontSize: "1.75rem" }}
-          >
-            <span className="transition-transform duration-300 group-hover:-translate-y-0.5">Greene</span>
-            <span className="transition-transform duration-300 group-hover:translate-y-0.5 text-black/80">Studios</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center">
-            <nav className="flex items-center gap-1 bg-white/80 backdrop-blur-md border border-[#E6E6E6] rounded-full p-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-              {NAV_LINKS.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={cn(
-                      "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300",
-                      isActive
-                        ? "bg-[#101010] text-white"
-                        : "text-[#757575] hover:text-[#101010] hover:bg-[#FAFAFA]"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href={`mailto:${BRAND.email}`}
-              className="text-sm font-medium text-[#101010] hover:text-[#BFA36A] transition-colors"
+        <div className="max-w-7xl mx-auto">
+          <div className={cn(
+            "flex items-center justify-between transition-all duration-500",
+            isScrolled 
+              ? "bg-white/95 backdrop-blur-md border border-[#E6E6E6] rounded-full pl-6 pr-2 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)]" 
+              : "px-6 lg:px-12 py-6 bg-transparent"
+          )}>
+            {/* Logo */}
+            <Link 
+              href="/" 
+              className="flex flex-col items-start leading-[0.85] font-bold tracking-[-0.02em] text-[#1E342F] group"
+              style={{ fontSize: "1.75rem" }}
             >
-              {BRAND.email}
-            </a>
-            <Link
-              href="/contact"
-              className="bg-[#101010] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#BFA36A] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              Start a Project
+              <span className="transition-transform duration-300 group-hover:-translate-y-0.5">Greene</span>
+              <span className="transition-transform duration-300 group-hover:translate-y-0.5 text-black/80">Studios</span>
             </Link>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden w-12 h-12 bg-white border border-[#E6E6E6] rounded-full flex items-center justify-center text-[#101010]"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center">
+              <nav className={cn(
+                "flex items-center gap-1 transition-all duration-500",
+                isScrolled 
+                  ? "" 
+                  : "bg-white/80 backdrop-blur-md border border-[#E6E6E6] rounded-full p-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
+              )}>
+                {NAV_LINKS.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={cn(
+                        "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                        isActive
+                          ? "bg-[#101010] text-white"
+                          : "text-[#757575] hover:text-[#101010] hover:bg-[#101010]/5"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+
+            {/* CTA */}
+            <div className="hidden md:flex items-center gap-4">
+              <a
+                href={`mailto:${BRAND.email}`}
+                className={cn(
+                  "text-sm font-medium transition-colors hidden lg:block",
+                  isScrolled ? "text-[#757575] hover:text-[#101010]" : "text-[#101010] hover:text-[#BFA36A]"
+                )}
+              >
+                {BRAND.email}
+              </a>
+              <Link
+                href="/contact"
+                className="bg-[#101010] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#BFA36A] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              >
+                Start a Project
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className={cn(
+                "md:hidden flex items-center justify-center text-[#101010] transition-all duration-300",
+                isScrolled 
+                  ? "w-10 h-10 mr-2" 
+                  : "w-12 h-12 bg-white border border-[#E6E6E6] rounded-full"
+              )}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </header>
 
