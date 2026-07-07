@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className={cn(
           "flex items-center justify-between transition-all duration-500 rounded-full px-6 py-3",
           isScrolled || isDark
-            ? "bg-[var(--brand-surface)]/80 backdrop-blur-lg border border-[var(--brand-border)] shadow-lg" 
+            ? "bg-[var(--brand-surface)] border border-[var(--brand-border)] shadow-lg" 
             : "bg-transparent"
         )}>
           {/* Logo (No words next to it, only the drawing monogram) */}
