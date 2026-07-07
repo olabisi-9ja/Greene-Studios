@@ -78,25 +78,25 @@ export default function DynamicCursor() {
   // Variants for the outer ring/text container
   const ringVariants = {
     default: { 
-      width: 40, 
-      height: 40, 
-      borderWidth: 1, 
-      borderColor: isStudio ? accentHex : "var(--brand-border)",
+      width: 20, 
+      height: 20, 
+      borderWidth: 1.5, 
+      borderColor: isStudio ? accentHex : "var(--brand-text)",
       backgroundColor: "transparent" 
     },
     hover: { 
-      width: 60, 
-      height: 60, 
-      borderWidth: 1, 
+      width: 36, 
+      height: 36, 
+      borderWidth: 1.5, 
       borderColor: isStudio ? accentHex : "var(--brand-text)",
-      backgroundColor: isStudio ? `${accentHex}22` : "rgba(100, 100, 100, 0.1)" 
+      backgroundColor: isStudio ? `${accentHex}22` : "rgba(31, 61, 58, 0.08)" 
     },
     text: { 
-      width: 80, 
-      height: 80, 
+      width: 54, 
+      height: 54, 
       borderWidth: 0, 
-      backgroundColor: isStudio ? accentHex : "var(--brand-text)",
-      color: isStudio ? "#fff" : "var(--brand-bg)"
+      backgroundColor: isStudio ? `${accentHex}dd` : "rgba(31, 61, 58, 0.9)",
+      color: "#ffffff"
     },
     hide: { opacity: 0 }
   };
