@@ -1,3 +1,5 @@
+"use client";
+
 import { ExperienceHero } from "@/components/ui/ExperienceHero";
 import SocialProof from "@/components/home/SocialProof";
 import SelectedWork from "@/components/home/SelectedWork";
@@ -6,7 +8,10 @@ import ProcessSection from "@/components/home/ProcessSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
+import WhyWeExist from "@/components/home/WhyWeExist";
+import Philosophy from "@/components/home/Philosophy";
 import ClientWrapper from "@/components/ClientWrapper";
+import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 
 export default function HomePage() {
   const heroFallback = (
@@ -22,21 +27,59 @@ export default function HomePage() {
     </div>
   );
 
+  const marqueeWords = ["WEB DESIGN", "BRANDING", "UI UX", "NEXTJS", "REACT", "DEVELOPMENT"];
+
   return (
     <>
       <ClientWrapper fallback={heroFallback}>
         <ExperienceHero />
       </ClientWrapper>
+
+      <WhyWeExist />
+      
+      <Philosophy />
+
+      {/* Infinite Marquee between Philosophy & Portfolio */}
+      <div className="py-8 bg-[var(--brand-surface-secondary)] border-y border-[var(--brand-border)] overflow-hidden">
+        <Marquee>
+          <MarqueeContent speed={40}>
+            {marqueeWords.map((word, i) => (
+              <MarqueeItem key={i} className="text-xl font-bold tracking-widest text-[var(--brand-text-secondary)] mx-8 uppercase">
+                {word} ·
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
+      </div>
+
+      <SelectedWork />
+      
+      <ServicesSection />
+      
+      <ProcessSection />
+
+      {/* Reverse Marquee between Process & Stats */}
+      <div className="py-8 bg-[var(--brand-surface-secondary)] border-y border-[var(--brand-border)] overflow-hidden">
+        <Marquee>
+          <MarqueeContent speed={40} direction="right">
+            {marqueeWords.map((word, i) => (
+              <MarqueeItem key={i} className="text-xl font-bold tracking-widest text-[var(--brand-text-secondary)] mx-8 uppercase">
+                {word} ·
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
+      </div>
+
       <ClientWrapper>
         <SocialProof />
       </ClientWrapper>
-      <SelectedWork />
-      <ServicesSection />
-      <ProcessSection />
+
       <TestimonialsSection />
+      
       <FAQSection />
+      
       <CTASection />
     </>
   );
 }
-

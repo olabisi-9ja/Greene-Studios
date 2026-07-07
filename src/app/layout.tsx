@@ -57,6 +57,12 @@ export const metadata: Metadata = {
   },
 };
 
+import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
+import DynamicCursor from "@/components/ui/DynamicCursor";
+import StudioBackground from "@/components/canvas/StudioBackground";
+import NoiseTexture from "@/components/canvas/NoiseTexture";
+import ScrollProgress from "@/components/animations/ScrollProgress";
+
 export default function RootLayout({
   children,
 }: {
@@ -64,13 +70,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
-      <body className="antialiased">
-        <Preloader />
-        <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+      <body className="antialiased mode-clean">
+        <AtmosphereProvider>
+          <ScrollProgress />
+          <NoiseTexture />
+          <StudioBackground />
+          <DynamicCursor />
+          <Preloader />
+          <SmoothScroll>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </AtmosphereProvider>
       </body>
     </html>
   );

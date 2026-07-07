@@ -1,168 +1,191 @@
 "use client";
 
-import React, { useRef, useEffect, useMemo, useState } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
-import gsap from 'gsap';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-
-const ParticleSystem = () => {
-  const pointsRef = useRef<THREE.Points>(null);
-  const { viewport, mouse } = useThree();
-  
-  // Create particles
-  const count = 3000;
-  const [positions, originalPositions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const origPos = new Float32Array(count * 3);
-    const cols = new Float32Array(count * 3);
-    
-    for (let i = 0; i < count; i++) {
-      // Spread particles across the screen
-      const x = (Math.random() - 0.5) * viewport.width * 2;
-      const y = (Math.random() - 0.5) * viewport.height * 2;
-      const z = (Math.random() - 0.5) * 10;
-      
-      pos[i * 3] = x;
-      pos[i * 3 + 1] = y;
-      pos[i * 3 + 2] = z;
-      
-      origPos[i * 3] = x;
-      origPos[i * 3 + 1] = y;
-      origPos[i * 3 + 2] = z;
-      
-      // Monochromatic colors (light grays to match #FAFAFA background)
-      const shade = 0.5 + Math.random() * 0.3; // 0.5 to 0.8 (mid-to-light grays)
-      cols[i * 3] = shade;
-      cols[i * 3 + 1] = shade;
-      cols[i * 3 + 2] = shade;
-    }
-    
-    return [pos, origPos, cols];
-  }, [viewport]);
-
-  useFrame((state) => {
-    if (!pointsRef.current) return;
-    
-    const time = state.clock.getElapsedTime();
-    const positions = pointsRef.current.geometry.attributes.position.array as Float32Array;
-    
-    // Magnetic attraction to mouse
-    // Mouse coords are normalized (-1 to 1), convert to world coords
-    const mouseX = (mouse.x * viewport.width) / 2;
-    const mouseY = (mouse.y * viewport.height) / 2;
-    
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      const origX = originalPositions[i3];
-      const origY = originalPositions[i3 + 1];
-      const origZ = originalPositions[i3 + 2];
-      
-      // Calculate distance to mouse
-      const dx = mouseX - positions[i3];
-      const dy = mouseY - positions[i3 + 1];
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      
-      // Magnetic effect radius
-      const radius = 5;
-      
-      if (dist < radius) {
-        // Attract towards mouse but keep some distance
-        const force = (radius - dist) / radius;
-        positions[i3] += dx * force * 0.05;
-        positions[i3 + 1] += dy * force * 0.05;
-      } else {
-        // Return to original position with some noise
-        const noiseX = Math.sin(time * 0.5 + origY) * 0.5;
-        const noiseY = Math.cos(time * 0.5 + origX) * 0.5;
-        
-        positions[i3] += (origX + noiseX - positions[i3]) * 0.02;
-        positions[i3 + 1] += (origY + noiseY - positions[i3 + 1]) * 0.02;
-      }
-      
-      // Subtle Z movement
-      positions[i3 + 2] = origZ + Math.sin(time + origX * 0.1) * 2;
-    }
-    
-    pointsRef.current.geometry.attributes.position.needsUpdate = true;
-  });
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={count}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={count}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.15}
-        vertexColors
-        transparent
-        opacity={0.6}
-        sizeAttenuation={true}
-        depthWrite={false}
-      />
-    </points>
-  );
-};
+import { useAtmosphere, AccentColor, accentHexMap } from '@/lib/context/AtmosphereContext';
+import TextReveal from '@/components/animations/TextReveal';
 
 export const ExperienceHero = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const revealRef = useRef<HTMLDivElement>(null);
+  const { mode, setMode, accent, setAccent, accentHex } = useAtmosphere();
+  const [showreelIndex, setShowreelIndex] = useState(0);
+
+  // High quality abstract images/animations for showreel
+  const showreelItems = [
+    { type: "color", color: "#1F3D3A", text: "Crafting digital systems" },
+    { type: "color", color: "#0F1113", text: "Aesthetics meet performance" },
+    { type: "color", color: "#6324D6", text: "Award-winning layouts" }
+  ];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(revealRef.current, 
-        { filter: "blur(20px)", opacity: 0, y: 30 },
-        { filter: "blur(0px)", opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
-      );
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
+    const interval = setInterval(() => {
+      setShowreelIndex((prev) => (prev + 1) % showreelItems.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [showreelItems.length]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen w-full bg-[#FAFAFA] flex flex-col justify-center overflow-hidden pt-20">
-      <div className="absolute inset-0 z-0 pointer-events-auto">
-        <Canvas camera={{ position: [0, 0, 30], fov: 45 }}>
-          <ParticleSystem />
-        </Canvas>
+    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden pt-20 pb-12 bg-[var(--brand-bg)] transition-colors duration-1000">
+      
+      {/* Dynamic Grid Background (changes opacity based on mode) */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] transition-opacity duration-1000"
+        style={{
+          backgroundImage: `linear-gradient(var(--brand-text) 1px, transparent 1px), linear-gradient(90deg, var(--brand-text) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center flex-1">
+        
+        {/* Left Content (7 Cols) */}
+        <div className="lg:col-span-7 flex flex-col justify-center max-w-2xl">
+          {/* Eyebrow */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-3 mb-6"
+          >
+            <span className="text-[var(--brand-accent)] text-xs tracking-[0.25em] uppercase font-bold transition-colors duration-500">
+              Creative atmosphere engine active
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <h1 className="text-[clamp(2.5rem,5.5vw,5rem)] font-black leading-[1.05] tracking-tight text-[var(--brand-text)] mb-6 text-balance uppercase">
+            We build <br />
+            <TextReveal className="text-[var(--brand-accent)] transition-colors duration-500">digital products</TextReveal> <br />
+            people remember.
+          </h1>
+
+          {/* Subtext */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-base md:text-lg text-[var(--brand-text-secondary)] leading-relaxed max-w-lg mb-8"
+          >
+            Greene Studios is an award-winning creative agency designing custom branding, high-conversion marketing sites, and full-stack applications.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
+          >
+            <Link 
+              href="/contact"
+              data-cursor="HI"
+              className="bg-[var(--brand-text)] text-[var(--brand-bg)] px-8 py-4 rounded-full text-base font-medium hover:bg-[var(--brand-accent)] hover:text-white transition-all duration-300 shadow-md text-center"
+            >
+              Start a Project
+            </Link>
+            <Link 
+              href="/work"
+              data-cursor="VIEW"
+              className="border border-[var(--brand-border)] text-[var(--brand-text)] px-8 py-4 rounded-full text-base font-medium hover:border-[var(--brand-text)] transition-colors text-center"
+            >
+              Our Work
+            </Link>
+          </motion.div>
+
+          {/* Atmosphere Selector */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="border-t border-[var(--brand-border)] pt-8"
+          >
+            <span className="text-xs uppercase tracking-widest text-[var(--brand-text-secondary)] block mb-4">
+              Select atmosphere:
+            </span>
+            <div className="flex flex-wrap gap-3 mb-6">
+              {(["clean", "midnight", "studio"] as const).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setMode(m)}
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                    mode === m 
+                      ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
+                      : "bg-[var(--brand-surface-secondary)] text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]"
+                  }`}
+                >
+                  {m}
+                </button>
+              ))}
+            </div>
+
+            {/* Accent Colors (Only visible in Studio mode) */}
+            <AnimatePresence>
+              {mode === "studio" && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
+                >
+                  <span className="text-xs uppercase tracking-widest text-[var(--brand-text-secondary)] block mb-3">
+                    Studio Accent Colors:
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {(Object.keys(accentHexMap) as AccentColor[]).map((c) => (
+                      <button
+                        key={c}
+                        onClick={() => {
+                          setAccent(c);
+                          document.documentElement.style.setProperty('--studio-accent', accentHexMap[c]);
+                        }}
+                        className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
+                          accent === c ? "border-white scale-125" : "border-transparent"
+                        }`}
+                        style={{ backgroundColor: accentHexMap[c] }}
+                        title={c}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
+        </div>
+
+        {/* Right Content (5 Cols) - Large looping showreel */}
+        <div className="lg:col-span-5 h-[350px] md:h-[500px] w-full relative rounded-3xl overflow-hidden shadow-2xl border border-[var(--brand-border)]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={showreelIndex}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8 }}
+              className="absolute inset-0 flex flex-col justify-end p-8"
+              style={{ backgroundColor: showreelItems[showreelIndex].color }}
+            >
+              {/* Subtle glass overlay inside showcase */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-[1]" />
+              
+              <div className="relative z-10">
+                <span className="text-xs uppercase tracking-widest text-white/50 block mb-2">Showcase</span>
+                <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
+                  {showreelItems[showreelIndex].text}
+                </h3>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
       </div>
 
-      <div ref={revealRef} className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col justify-center pb-24 lg:pb-0">
-        
-        <div className="max-w-4xl pt-10 md:pt-0">
-          <h1 className="text-[clamp(2.5rem,7vw,6.5rem)] font-semibold leading-[1.05] tracking-tight text-[#101010] text-balance">
-            Designing Digital Products That People Remember.
-          </h1>
-          <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-[#757575] max-w-2xl leading-relaxed text-balance">
-            Greene Studios partners with startups and growing businesses to design, build and launch beautiful websites, SaaS products and digital experiences that drive measurable growth.
-          </p>
-        </div>
-        
-        <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
-          <Link 
-            href="/pricing"
-            className="w-full sm:w-auto text-center bg-[#111111] hover:bg-[#BFA36A] text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5"
-          >
-            Start a Project
-          </Link>
-          <Link 
-            href="/work"
-            className="w-full sm:w-auto text-center bg-white border border-[#E6E6E6] hover:border-[#101010] text-[#101010] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#FAFAFA]"
-          >
-            View Work
-          </Link>
-        </div>
+      {/* Scroll indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-[var(--brand-text-secondary)] text-[10px] tracking-widest uppercase">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-[var(--brand-text)] to-transparent" />
       </div>
+
     </section>
   );
 };

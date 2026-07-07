@@ -1,77 +1,72 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "./ui/Logo";
 
 export default function Preloader() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
   const [isComplete, setIsComplete] = useState(false);
+  const [hasShown, setHasShown] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     
     // Check if we've already shown the loader this session
     if (sessionStorage.getItem("loader_shown")) {
-      setIsComplete(true);
+      setHasShown(true);
       return;
     }
     
     // Prevent scrolling while loading
     document.body.style.overflow = "hidden";
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setIsComplete(true);
-        sessionStorage.setItem("loader_shown", "true");
-        document.body.style.overflow = "";
-      }
-    });
-
-    // Reveal logo
-    tl.fromTo(logoRef.current,
-      { opacity: 0, y: 20, filter: "blur(10px)" },
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }
-    )
-    // Hold
-    .to({}, { duration: 0.3 })
-    // Fade out logo
-    .to(logoRef.current, {
-      opacity: 0,
-      y: -10,
-      filter: "blur(5px)",
-      duration: 0.4,
-      ease: "power2.in"
-    })
-    // Slide up container
-    .to(containerRef.current, {
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power4.inOut"
-    }, "-=0.2");
+    // Timing to match the SVG drawing animation + a slight pause
+    const timer = setTimeout(() => {
+      setIsComplete(true);
+      sessionStorage.setItem("loader_shown", "true");
+      document.body.style.overflow = "";
+    }, 2800); // 1.5s for G, 1.5s for S + overlap
 
     return () => {
+      clearTimeout(timer);
       document.body.style.overflow = "";
     };
   }, []);
 
-  if (isComplete) return null;
+  if (hasShown) return null;
 
   return (
-    <div 
-      ref={containerRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-white"
-    >
-      <div 
-        ref={logoRef}
-        className="flex flex-col items-center justify-center opacity-0"
-      >
-        {/* Logo matching the provided image */}
-        <div className="flex flex-col items-center font-bold tracking-[-0.02em] leading-[0.9] text-[#1E342F]" style={{ fontSize: "clamp(3rem, 10vw, 5rem)" }}>
-          <span>Greene</span>
-          <span>Studios</span>
-        </div>
-      </div>
-    </div>
+    <AnimatePresence>
+      {!isComplete && (
+        <motion.div 
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
+          initial={{ opacity: 1, scale: 1 }}
+          exit={{ 
+            opacity: 0,
+            scale: 1.1,
+            filter: "blur(10px)",
+            transition: { duration: 0.8, ease: "easeInOut" }
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.5, filter: "blur(5px)" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* The Logo handles its own drawing animation on mount */}
+            <Logo className="w-32 h-32 md:w-48 md:h-48" color="#FFFFFF" animateOnMount={true} />
+          </motion.div>
+          
+          <motion.div
+            className="mt-8 text-white tracking-widest text-sm uppercase font-semibold opacity-0"
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+          >
+            Greene Studios
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

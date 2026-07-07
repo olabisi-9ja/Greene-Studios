@@ -1,70 +1,89 @@
-import { TESTIMONIALS } from "@/lib/data";
+"use client";
+
+import { motion } from "framer-motion";
+
+const STORIES = [
+  {
+    id: 1,
+    client: "Acme Corp",
+    author: "Jane Doe, CEO",
+    metrics: { revenue: "+140% YOY", traffic: "+3x Increase", conversion: "+45% growth" },
+    story: "Greene Studios helped redesign our corporate hub. The launch resulted in a complete rebranding that resonated perfectly with enterprise leads, significantly boosting our sales pipeline velocity.",
+    quote: "The team delivered beyond expectation, crafting a digital brand presence that has permanently leveled up our business.",
+    color: "rgba(31, 61, 58, 0.05)"
+  },
+  {
+    id: 2,
+    client: "Pulse Media",
+    author: "John Smith, Head of Product",
+    metrics: { revenue: "+85% sales", traffic: "+200k visits", conversion: "+30% engagement" },
+    story: "Redesigning our media platform was a huge task. The new bento grid layout and smooth transitions kept readers on site longer, decreasing bounce rates immediately.",
+    quote: "Antigravity UI design that completely transformed customer trust in our new content offerings.",
+    color: "rgba(99, 36, 214, 0.05)"
+  }
+];
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-[var(--brand-bg)] transition-colors duration-1000">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-6 h-px bg-[#BFA36A]" />
-          <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
-            Client Voices
+        <div className="mb-20">
+          <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold block mb-4">
+            Success Stories
           </span>
-        </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
-          <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold text-[#101010] leading-[1.1] tracking-tight">
-            Words from <br className="hidden md:block" /> the people we serve.
+          <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-[var(--brand-text)] leading-[1.1] tracking-tight uppercase">
+            Results that speak <br /> for themselves.
           </h2>
-          <div className="flex items-center gap-2 mb-2">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <span key={s} className="text-[#BFA36A] text-xl">★</span>
-            ))}
-            <span className="text-[#101010] font-semibold text-sm ml-2">5.0 average</span>
-          </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {TESTIMONIALS.map((t, i) => (
-            <div
-              key={t.id}
-              className={`p-10 rounded-[24px] border transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] ${
-                i === 0
-                  ? "bg-[#FAFAFA] border-[#E6E6E6] md:col-span-2 lg:p-16"
-                  : "bg-white border-[#E6E6E6]"
-              }`}
+        {/* Stories Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {STORIES.map((item) => (
+            <motion.div
+              key={item.id}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.3 }}
+              className="p-10 md:p-12 rounded-[32px] border border-[var(--brand-border)] bg-[var(--brand-surface)] flex flex-col justify-between shadow-sm relative overflow-hidden"
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-8">
-                {Array.from({ length: t.rating }).map((_, s) => (
-                  <span key={s} className="text-[#BFA36A] text-sm">★</span>
-                ))}
+              {/* Highlight Background Burst */}
+              <div 
+                className="absolute -right-16 -top-16 w-48 h-48 rounded-full blur-[80px] pointer-events-none"
+                style={{ backgroundColor: item.id === 1 ? "var(--brand-accent)" : "#6324D6", opacity: 0.1 }}
+              />
+
+              <div>
+                <div className="flex justify-between items-center mb-8 border-b border-[var(--brand-border)] pb-6">
+                  <span className="text-xl font-bold text-[var(--brand-text)]">{item.client}</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--brand-text-secondary)]">{item.author}</span>
+                </div>
+
+                {/* Metrics row */}
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  {Object.entries(item.metrics).map(([key, val]) => (
+                    <div key={key} className="bg-[var(--brand-surface-secondary)] p-4 rounded-2xl text-center border border-[var(--brand-border)]">
+                      <div className="text-lg md:text-xl font-black text-[var(--brand-text)]">{val}</div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--brand-text-secondary)] mt-1">{key}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-[var(--brand-text)] text-lg font-medium leading-relaxed mb-6 italic">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
               </div>
 
-              {/* Quote */}
-              <blockquote
-                className={`font-medium leading-relaxed mb-10 text-[#101010] ${
-                  i === 0
-                    ? "text-3xl lg:text-4xl tracking-tight"
-                    : "text-xl tracking-tight"
-                }`}
-              >
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-
-              {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#111111] flex items-center justify-center text-white text-sm font-semibold">
-                  {t.avatar}
-                </div>
-                <div>
-                  <div className="text-[#101010] font-semibold text-base">{t.author}</div>
-                  <div className="text-[#757575] text-sm">{t.title}</div>
-                </div>
+              <div className="mt-4 pt-6 border-t border-[var(--brand-border)]">
+                <span className="text-xs uppercase tracking-widest text-[var(--brand-text-secondary)] block mb-2">Launch Story</span>
+                <p className="text-[var(--brand-text-secondary)] text-sm leading-relaxed">
+                  {item.story}
+                </p>
               </div>
-            </div>
+
+            </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

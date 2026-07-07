@@ -1,95 +1,127 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 export default function SelectedWork() {
-  const featured = PROJECTS.filter((p) => p.featured).slice(0, 3);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const featured = PROJECTS.filter((p) => p.featured).slice(0, 4);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  // Calculate translation range for horizontal scroll
+  // We have 4 items. Let's make it scroll -75% to leave the last item fully visible
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+
+  if (isMobile) {
+    // Normal vertical layout on mobile devices
+    return (
+      <section className="py-20 bg-[var(--brand-bg)] transition-colors duration-1000">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold block mb-4">
+              Selected Work
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--brand-text)] tracking-tight">
+              Projects that define us.
+            </h2>
+          </div>
+          <div className="flex flex-col gap-12">
+            {featured.map((project) => (
+              <Link 
+                href={`/work/${project.slug}`} 
+                key={project.id} 
+                className="group block"
+                data-cursor="VIEW"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-[var(--brand-surface-secondary)] mb-6">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <span className="text-xs font-mono uppercase tracking-widest text-[var(--brand-text-secondary)]">{project.category}</span>
+                <h3 className="text-xl font-bold text-[var(--brand-text)] mt-2">{project.title}</h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="py-32 bg-white relative">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section ref={targetRef} className="relative h-[300vh] bg-[var(--brand-bg)] transition-colors duration-1000">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-6 h-px bg-[#BFA36A]" />
-              <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
-                Selected Work
-              </span>
-            </div>
-            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold text-[#101010] leading-[1.1] tracking-tight">
+        {/* Header inside sticky container */}
+        <div className="max-w-7xl mx-auto w-full px-12 mb-12 flex justify-between items-end">
+          <div>
+            <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-bold block mb-4">
+              Selected Work
+            </span>
+            <h2 className="text-5xl font-black text-[var(--brand-text)] leading-none uppercase tracking-tighter">
               Projects that define us.
             </h2>
           </div>
           <Link
             href="/work"
-            className="group flex items-center gap-2 text-[#101010] hover:text-[#BFA36A] text-sm font-medium transition-colors"
+            data-cursor="GO"
+            className="text-[var(--brand-text)] hover:text-[var(--brand-accent)] text-sm font-semibold tracking-wide uppercase transition-colors"
           >
-            View all projects
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
+            All projects →
           </Link>
         </div>
 
-        {/* Projects Grid */}
-        <div className="flex flex-col gap-24">
-          {featured.map((project, i) => (
-            <Link
-              key={project.id}
-              href={`/work/${project.slug}`}
-              className="group block"
-            >
-              <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-                {/* Image Container */}
-                <div 
-                  className={`w-full lg:w-3/5 overflow-hidden rounded-[24px] bg-[#F2F2F2] order-1 relative ${i % 2 !== 0 ? 'lg:order-2' : ''}`}
-                  style={{ aspectRatio: "16/10" }}
-                >
+        {/* Horizontal Moving Window */}
+        <div className="relative w-full flex items-center">
+          <motion.div style={{ x }} className="flex gap-8 px-12 w-max">
+            {featured.map((project) => (
+              <Link
+                key={project.id}
+                href={`/work/${project.slug}`}
+                className="group block w-[500px] flex-shrink-0"
+                data-cursor="VIEW"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-[var(--brand-surface-secondary)] mb-6 shadow-lg border border-[var(--brand-border)]">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-
-                {/* Content Container */}
-                <div className={`w-full lg:w-2/5 flex flex-col justify-center order-2 ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-[#101010] text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-full border border-[#E6E6E6] bg-[#FAFAFA]">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-widest text-[var(--brand-text-secondary)]">
                       {project.category}
                     </span>
-                    <span className="text-[#757575] text-sm font-medium">{project.year}</span>
+                    <h3 className="text-2xl font-bold text-[var(--brand-text)] mt-1 group-hover:text-[var(--brand-accent)] transition-colors">
+                      {project.title}
+                    </h3>
                   </div>
-
-                  <h3 className="text-4xl md:text-5xl font-semibold text-[#101010] mb-6 tracking-tight">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-[#757575] text-lg mb-8 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-10">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[#757575] text-xs font-medium px-3 py-1.5 bg-[#FAFAFA] rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-3 text-[#111111] font-medium group-hover:text-[#BFA36A] transition-colors">
-                    <span className="text-sm uppercase tracking-wide">View Case Study</span>
-                    <span className="group-hover:translate-x-2 transition-transform">→</span>
-                  </div>
+                  <span className="text-sm font-medium text-[var(--brand-text-secondary)]">{project.year}</span>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </motion.div>
         </div>
 
       </div>

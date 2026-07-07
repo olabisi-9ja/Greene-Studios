@@ -1,113 +1,79 @@
-import Link from "next/link";
+"use client";
 
-const SERVICES_LIST = [
-  {
-    title: "Product Design",
-    items: [
-      "UX Research",
-      "Wireframes",
-      "Prototypes",
-      "Design Systems",
-      "Dashboard Design",
-      "Mobile Apps",
-    ],
-  },
-  {
-    title: "Web Design",
-    items: [
-      "Landing Pages",
-      "Business Websites",
-      "Corporate Sites",
-      "CMS",
-      "SEO",
-      "Performance",
-    ],
-  },
-  {
-    title: "Brand Identity",
-    items: [
-      "Logo",
-      "Visual Identity",
-      "Typography",
-      "Brand Guidelines",
-      "Marketing Assets",
-    ],
-  },
-  {
-    title: "Development",
-    items: [
-      "Next.js",
-      "React",
-      "Supabase",
-      "Firebase",
-      "Node.js",
-      "Deployment",
-    ],
-  },
-];
+import Link from "next/link";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import { Code2, Paintbrush, Monitor, Cpu } from "lucide-react";
 
 export default function ServicesSection() {
+  const services = [
+    {
+      title: "Product Design",
+      description: "Crafting intuitive UX, wireframes, and scalable design systems for modern applications.",
+      icon: <Paintbrush className="w-8 h-8 text-[var(--brand-accent)]" />,
+      className: "md:col-span-2",
+    },
+    {
+      title: "Web Design",
+      description: "High-conversion marketing landing pages and optimized business platforms.",
+      icon: <Monitor className="w-8 h-8 text-[var(--brand-accent)]" />,
+      className: "md:col-span-1",
+    },
+    {
+      title: "Frontend Development",
+      description: "Stunning React and Next.js interfaces built for maximum performance and SEO.",
+      icon: <Code2 className="w-8 h-8 text-[var(--brand-accent)]" />,
+      className: "md:col-span-1",
+    },
+    {
+      title: "AI Integration",
+      description: "Embedding custom intelligence, LLM agents, and vector databases into your products.",
+      icon: <Cpu className="w-8 h-8 text-[var(--brand-accent)]" />,
+      className: "md:col-span-2",
+    }
+  ];
+
   return (
-    <section className="py-32 bg-[#FAFAFA] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+    <section className="py-32 bg-[var(--brand-bg)] transition-colors duration-1000">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Header */}
         <div className="max-w-3xl mb-24">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-6 h-px bg-[#BFA36A]" />
-            <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
-              Services
-            </span>
-          </div>
-          <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold text-[#101010] leading-[1.1] tracking-tight mb-8">
+          <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold block mb-4">
+            Services
+          </span>
+          <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-[var(--brand-text)] leading-[1.1] tracking-tight mb-6 uppercase">
             Capabilities built <br /> for ambition.
           </h2>
-          <p className="text-[#757575] text-lg lg:text-xl font-normal leading-relaxed max-w-2xl">
-            From brand strategy to full-stack development, we offer the complete range of capabilities an ambitious digital product needs.
+          <p className="text-[var(--brand-text-secondary)] text-lg leading-relaxed">
+            From brand identity design to full-stack frontend engineering, we offer the complete range of services to launch your product.
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {SERVICES_LIST.map((service, index) => (
-            <div key={index} className="flex flex-col">
-              <div className="mb-8 border-b border-[#E6E6E6] pb-6">
-                <span className="text-[#BFA36A] font-mono text-sm tracking-widest mb-4 block">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="text-[#101010] font-semibold text-2xl tracking-tight">
-                  {service.title}
-                </h3>
-              </div>
-              <ul className="space-y-4">
-                {service.items.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[#757575] group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E6E6E6] group-hover:bg-[#BFA36A] transition-colors" />
-                    <span className="text-base font-medium transition-colors group-hover:text-[#101010]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Bento Grid */}
+        <BentoGrid className="mb-16">
+          {services.map((item, i) => (
+            <BentoGridItem
+              key={i}
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+              className={item.className}
+            />
           ))}
-        </div>
+        </BentoGrid>
 
         {/* CTA */}
-        <div className="mt-24 pt-12 border-t border-[#E6E6E6] flex justify-between items-center flex-col sm:flex-row gap-6">
-          <p className="text-[#757575] text-lg font-medium">Looking for something specific?</p>
+        <div className="pt-12 border-t border-[var(--brand-border)] flex flex-col sm:flex-row justify-between items-center gap-6">
+          <p className="text-[var(--brand-text-secondary)] text-lg font-medium">Looking for custom digital features?</p>
           <Link
             href="/services"
-            className="group relative px-8 py-4 bg-[#111111] text-white text-sm font-medium rounded-full overflow-hidden transition-shadow hover:shadow-[0_8px_25px_rgba(17,17,17,0.2)]"
+            data-cursor="GO"
+            className="px-8 py-4 bg-[var(--brand-text)] text-[var(--brand-bg)] text-sm font-semibold rounded-full hover:bg-[var(--brand-accent)] hover:text-white transition-all duration-300"
           >
-            <span className="relative z-10 flex items-center gap-2">
-              View All Services
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </span>
-            <div className="absolute inset-0 bg-[#BFA36A] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+            All Services
           </Link>
         </div>
+
       </div>
     </section>
   );
