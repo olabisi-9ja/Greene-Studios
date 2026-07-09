@@ -86,7 +86,7 @@ export default function ExperimentsPage() {
             Have a crazy idea?
           </h2>
           <p className="text-[#F7F5F2]/50 text-lg mb-8 max-w-xl mx-auto">
-            We love pushing the boundaries of what's possible on the web. Let's build something that hasn't been done before.
+            We love pushing the boundaries of what&apos;s possible on the web. Let&apos;s build something that hasn&apos;t been done before.
           </p>
           <Link
             href="/contact"

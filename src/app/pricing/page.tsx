@@ -35,7 +35,7 @@ export default function PricingPage() {
               Ready to invest in your brand?
             </h2>
             <p className="text-[#A3A3A3] text-lg max-w-xl mx-auto mb-10">
-              Book a free discovery call. We'll discuss your goals and find the best package for your needs.
+              Book a free discovery call. We&apos;ll discuss your goals and find the best package for your needs.
             </p>
             <Link
               href="/contact"

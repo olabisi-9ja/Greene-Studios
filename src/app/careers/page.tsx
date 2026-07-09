@@ -28,7 +28,7 @@ export default function CareersPage() {
           Join the team
         </h1>
         <p className="text-[#F7F5F2]/50 text-xl leading-relaxed mb-16">
-          We're always looking for talented designers, developers, and strategists 
+          We&apos;re always looking for talented designers, developers, and strategists 
           who are passionate about building exceptional digital experiences.
         </p>
 
@@ -56,9 +56,9 @@ export default function CareersPage() {
         </div>
 
         <div className="mt-24 p-8 bg-[#12372A]/20 border border-[#12372A]/40 rounded-2xl text-center">
-          <h3 className="text-[#F7F5F2] font-bold text-xl mb-3">Don't see a fit?</h3>
+          <h3 className="text-[#F7F5F2] font-bold text-xl mb-3">Don&apos;t see a fit?</h3>
           <p className="text-[#F7F5F2]/50 mb-6">
-            We're always open to meeting interesting people. Send us your portfolio and a brief intro.
+            We&apos;re always open to meeting interesting people. Send us your portfolio and a brief intro.
           </p>
           <a href={`mailto:${BRAND.email}`} className="text-[#6B8F71] hover:text-white font-medium underline underline-offset-4">
             hello@greenestudios.co

@@ -1,134 +1,83 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useAtmosphere, AccentColor, accentHexMap } from '@/lib/context/AtmosphereContext';
-import TextReveal from '@/components/animations/TextReveal';
+import { BRAND } from '@/lib/data';
 
 export const ExperienceHero = () => {
-  const { mode, setMode, accent, setAccent, accentHex } = useAtmosphere();
-  const [showreelIndex, setShowreelIndex] = useState(0);
-
-  // High quality abstract images/animations for showreel
-  const showreelItems = [
-    { type: "color", color: "#1F3D3A", text: "Crafting digital systems" },
-    { type: "color", color: "#0F1113", text: "Aesthetics meet performance" },
-    { type: "color", color: "#6324D6", text: "Award-winning layouts" }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowreelIndex((prev) => (prev + 1) % showreelItems.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [showreelItems.length]);
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden pt-20 pb-12 bg-[var(--brand-bg)] transition-colors duration-1000">
+    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
       
-      {/* Dynamic Grid Background (changes opacity based on mode) */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] transition-opacity duration-1000"
-        style={{
-          backgroundImage: `linear-gradient(var(--brand-text) 1px, transparent 1px), linear-gradient(90deg, var(--brand-text) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center flex-1">
-        
-        {/* Left Content (7 Cols) */}
-        <div className="lg:col-span-7 flex flex-col justify-center max-w-2xl">
-          {/* Eyebrow */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-6"
-          >
-            <span className="text-[var(--brand-accent)] text-xs tracking-[0.25em] uppercase font-bold transition-colors duration-500">
-              Creative atmosphere engine active
-            </span>
-          </motion.div>
-
-          {/* Headline */}
-          <h1 className="text-[clamp(2.5rem,5.5vw,5rem)] font-black leading-[1.05] tracking-tight text-[var(--brand-text)] mb-6 text-balance uppercase">
-            We build <br />
-            <TextReveal className="text-[var(--brand-accent)] transition-colors duration-500">digital products</TextReveal> <br />
-            people remember.
-          </h1>
-
-          {/* Subtext */}
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-base md:text-lg text-[var(--brand-text-secondary)] leading-relaxed max-w-lg mb-8"
-          >
-            Greene Studios is an award-winning creative agency designing custom branding, high-conversion marketing sites, and full-stack applications.
-          </motion.p>
-
-          {/* CTAs */}
+      {/* Edge/Corner Content */}
+      <div className="absolute inset-0 p-6 md:p-12 pointer-events-none flex flex-col justify-between z-10 pt-28 md:pt-32">
+        {/* Top Row (Below Navbar) */}
+        <div className="flex justify-between items-start w-full">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-md pointer-events-auto"
           >
+            <p className="text-xl md:text-3xl font-semibold leading-tight mb-8 tracking-tight text-[var(--brand-text)]">
+              Not a style, a perspective.<br />
+              Because Greene is Everything.
+            </p>
             <Link 
               href="/contact"
-              data-cursor="HI"
-              className="bg-[var(--brand-text)] text-[var(--brand-bg)] px-8 py-4 rounded-full text-base font-medium hover:bg-[var(--brand-accent)] hover:text-white transition-all duration-300 shadow-md text-center"
+              data-cursor="CALL"
+              className="inline-flex items-center justify-center gap-3 bg-[var(--brand-text)] text-[var(--brand-bg)] px-8 py-4 rounded-[40px] text-sm font-semibold uppercase tracking-widest hover:scale-105 transition-transform duration-300"
             >
-              Start a Project
-            </Link>
-            <Link 
-              href="/work"
-              data-cursor="VIEW"
-              className="border border-[var(--brand-border)] text-[var(--brand-text)] px-8 py-4 rounded-full text-base font-medium hover:border-[var(--brand-text)] transition-colors text-center"
-            >
-              Our Work
+              Book a Call
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
             </Link>
           </motion.div>
-
-
-
         </div>
 
-        {/* Right Content (5 Cols) - Large looping showreel */}
-        <div className="lg:col-span-5 h-[350px] md:h-[500px] w-full relative rounded-3xl overflow-hidden shadow-2xl border border-[var(--brand-border)]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={showreelIndex}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.8 }}
-              className="absolute inset-0 flex flex-col justify-end p-8"
-              style={{ backgroundColor: showreelItems[showreelIndex].color }}
-            >
-              {/* Subtle glass overlay inside showcase */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-[1]" />
-              
-              <div className="relative z-10">
-                <span className="text-xs uppercase tracking-widest text-white/50 block mb-2">Showcase</span>
-                <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-                  {showreelItems[showreelIndex].text}
-                </h3>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+        {/* Bottom Row */}
+        <div className="flex justify-between items-end w-full font-bold pointer-events-auto pb-4 md:pb-0">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="text-sm md:text-base tracking-tight text-[var(--brand-text)]"
+          >
+            Creative studio in Lagos
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex items-center gap-4 text-xs md:text-sm tracking-widest uppercase text-[var(--brand-text)]"
+          >
+            <a href={BRAND.linkedin} target="_blank" rel="noreferrer" className="hover:opacity-70 transition-opacity" data-cursor="LINK">LINKEDIN</a>
+            <span>/</span>
+            <a href={BRAND.instagram} target="_blank" rel="noreferrer" className="hover:opacity-70 transition-opacity" data-cursor="LINK">INSTAGRAM</a>
+            <span className="bg-[var(--brand-text)] text-[var(--brand-bg)] px-2 py-1 rounded-md ml-2 font-black tracking-normal">EN</span>
+          </motion.div>
         </div>
-
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-[var(--brand-text-secondary)] text-[10px] tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-[var(--brand-text)] to-transparent" />
-      </div>
-
+      {/* Massive Center Text */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-0 flex items-center justify-center w-full pointer-events-none select-none px-4"
+      >
+        <h1 
+          className="font-black leading-none tracking-tighter text-[var(--brand-text)] text-center w-full"
+          style={{ fontSize: "clamp(6rem, 24vw, 35rem)" }}
+        >
+          GREENE
+        </h1>
+      </motion.div>
+      
     </section>
   );
 };
