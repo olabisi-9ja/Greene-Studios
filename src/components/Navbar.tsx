@@ -49,9 +49,9 @@ export default function Navbar() {
       >
         <div className={cn(
           "flex items-center justify-between transition-all duration-500 rounded-full px-6 py-3",
-          isScrolled || isDark
+          (isScrolled || isDark) && !menuOpen
             ? "bg-[var(--brand-surface)] border border-[var(--brand-border)] shadow-lg" 
-            : "bg-transparent"
+            : "bg-transparent border border-transparent"
         )}>
           {/* Logo (No words next to it, only the drawing monogram) */}
           <Link 
@@ -59,11 +59,14 @@ export default function Navbar() {
             className="flex items-center gap-2 group pointer-events-auto"
             data-cursor="HOME"
           >
-            <Logo className="w-8 h-8" color="var(--brand-text)" animateOnMount={true} />
+            <Logo className="w-12 h-12 transition-colors duration-300" color={menuOpen ? "white" : "var(--brand-text)"} animateOnMount={true} />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 pointer-events-auto">
+          <nav className={cn(
+            "hidden md:flex items-center gap-1 pointer-events-auto transition-opacity duration-300",
+            menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}>
             {NAV_LINKS.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -91,7 +94,8 @@ export default function Navbar() {
               data-cursor="HI"
               className={cn(
                 "hidden lg:flex px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
-                "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-white"
+                "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-white",
+                menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
               )}
             >
               Start a Project
@@ -103,7 +107,10 @@ export default function Navbar() {
                 else if (mode === "midnight") setMode("studio");
                 else setMode("clean");
               }}
-              className="flex items-center justify-center transition-all duration-300 text-[var(--brand-text)] pointer-events-auto rounded-full w-10 h-10 hover:bg-[var(--brand-text)]/10"
+              className={cn(
+                "flex items-center justify-center transition-all duration-300 pointer-events-auto rounded-full w-10 h-10",
+                menuOpen ? "opacity-0 pointer-events-none text-white" : "opacity-100 text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
+              )}
               title="Toggle Theme"
               data-cursor="THEME"
             >
@@ -114,13 +121,14 @@ export default function Navbar() {
 
             <button 
               className={cn(
-                "flex items-center justify-center transition-all duration-300 text-[var(--brand-text)] pointer-events-auto rounded-full w-10 h-10 hover:bg-[var(--brand-text)]/10"
+                "flex items-center justify-center transition-all duration-300 pointer-events-auto rounded-full w-10 h-10",
+                menuOpen ? "text-white hover:bg-white/10" : "text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
               )}
               onClick={() => setMenuOpen(!menuOpen)}
               data-cursor={menuOpen ? "CLOSE" : "MENU"}
               style={{ pointerEvents: "auto" }}
             >
-              {menuOpen ? <X size={24} className="text-[var(--brand-bg)] mix-blend-difference" /> : <Menu size={24} />}
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
