@@ -16,7 +16,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { mode } = useAtmosphere();
+  const { mode, setMode } = useAtmosphere();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,7 +85,7 @@ export default function Navbar() {
           </nav>
 
           {/* CTA & Menu Button */}
-          <div className="flex items-center gap-4 pointer-events-auto">
+          <div className="flex items-center gap-2 md:gap-4 pointer-events-auto">
             <Link
               href="/contact"
               data-cursor="HI"
@@ -96,6 +96,21 @@ export default function Navbar() {
             >
               Start a Project
             </Link>
+
+            <button
+              onClick={() => {
+                if (mode === "clean") setMode("midnight");
+                else if (mode === "midnight") setMode("studio");
+                else setMode("clean");
+              }}
+              className="flex items-center justify-center transition-all duration-300 text-[var(--brand-text)] pointer-events-auto rounded-full w-10 h-10 hover:bg-[var(--brand-text)]/10"
+              title="Toggle Theme"
+              data-cursor="THEME"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
 
             <button 
               className={cn(

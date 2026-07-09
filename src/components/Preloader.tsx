@@ -25,7 +25,7 @@ export default function Preloader() {
       setIsComplete(true);
       sessionStorage.setItem("loader_shown", "true");
       document.body.style.overflow = "";
-    }, 2800); // 1.5s for G, 1.5s for S + overlap
+    }, 1000); // reduced from 2800 since Logo is now static
 
     return () => {
       clearTimeout(timer);

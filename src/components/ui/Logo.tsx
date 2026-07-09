@@ -1,50 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 
 interface LogoProps {
   className?: string;
-  animateOnMount?: boolean;
   color?: string;
+  animateOnMount?: boolean;
   triggerRedrawOnHover?: boolean;
 }
 
 export function Logo({ 
   className = "w-12 h-12", 
-  animateOnMount = false, 
   color = "currentColor",
-  triggerRedrawOnHover = true
+  animateOnMount,
+  triggerRedrawOnHover
 }: LogoProps) {
-  const [shouldAnimate, setShouldAnimate] = useState(animateOnMount);
-  const [redrawKey, setRedrawKey] = useState(0);
-
-  useEffect(() => {
-    if (animateOnMount) {
-      setShouldAnimate(true);
-    }
-  }, [animateOnMount]);
-
-  // Framer motion variants for the path drawing
-  const pathVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: (custom: number) => ({
-      pathLength: 1,
-      opacity: 1,
-      transition: {
-        pathLength: { delay: custom, type: "spring" as const, duration: 1.2, bounce: 0 },
-        opacity: { delay: custom, duration: 0.1 }
-      }
-    })
-  };
-
-  const handleMouseEnter = () => {
-    if (triggerRedrawOnHover) {
-      setShouldAnimate(true);
-      setRedrawKey(prev => prev + 1);
-    }
-  };
-
   return (
     <svg 
       className={className} 
@@ -52,28 +22,21 @@ export function Logo({
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       stroke={color}
-      strokeWidth="7"
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      onMouseEnter={handleMouseEnter}
     >
-      {/* Outer loop of G */}
-      <motion.path
-        key={`g-${redrawKey}`}
-        d="M 55 25 C 40 10, 15 20, 15 50 C 15 80, 40 90, 55 75 C 65 65, 60 50, 45 50"
-        variants={pathVariants}
-        initial={shouldAnimate ? "hidden" : "visible"}
-        animate="visible"
-        custom={0}
+      {/* Letter G */}
+      <path
+        d="M 45 35 A 25 25 0 1 0 45 65 L 45 50 L 25 50 L 25 59 L 37 59 A 15 15 0 1 0 37 41 Z"
       />
-      {/* Center connector and S */}
-      <motion.path
-        key={`s-${redrawKey}`}
-        d="M 45 50 L 50 50 C 65 50, 85 45, 85 65 C 85 85, 65 90, 55 80 C 45 70, 50 50, 65 45 C 80 40, 80 20, 65 15 C 55 10, 45 15, 40 25"
-        variants={pathVariants}
-        initial={shouldAnimate ? "hidden" : "visible"}
-        animate="visible"
-        custom={0.9} // Starts drawing right after G finishes
+      {/* Hyphen - */}
+      <path
+        d="M 47 45 L 57 45 L 57 55 L 47 55 Z"
+      />
+      {/* Letter S */}
+      <path
+        d="M 94 30 C 90 22, 82 20, 74 20 C 66 20, 60 26, 60 36 L 60 42 L 88 52 C 90 54, 94 60, 94 70 C 94 78, 86 80, 78 80 C 70 80, 64 76, 60 70 L 66 64 C 70 72, 76 74, 82 74 C 88 74, 88 70, 88 58 L 66 48 L 66 36 C 66 28, 74 26, 80 26 C 86 26, 88 28, 88 34 Z"
       />
     </svg>
   );

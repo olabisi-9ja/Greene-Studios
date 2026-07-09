@@ -7,10 +7,10 @@ import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { motion } from "framer-motion";
 
 const STUDIO_PALETTE = [
-  "#E65A1A", // Coral / Orange
-  "#D6245F", // Pink / Rose
-  "#BDE61A", // Lime / Yellow-Green
-  "#E6AE1A"  // Gold / Yellow
+  "#000000", // Black
+  "#E6AE1A", // Yellow
+  "#1F3D3A", // Brand Greene
+  "#00FF9D"  // Another shade of opgreene
 ];
 
 function Particles() {
@@ -105,10 +105,10 @@ export default function StudioBackground() {
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(circle at 20% 20%, #E65A1A33 0%, transparent 40%),
-              radial-gradient(circle at 80% 80%, #D6245F33 0%, transparent 40%),
-              radial-gradient(circle at 80% 20%, #BDE61A22 0%, transparent 35%),
-              radial-gradient(circle at 20% 80%, #E6AE1A22 0%, transparent 35%),
+              radial-gradient(circle at 20% 20%, #E6AE1A33 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, #1F3D3A33 0%, transparent 40%),
+              radial-gradient(circle at 80% 20%, #00FF9D22 0%, transparent 35%),
+              radial-gradient(circle at 20% 80%, #00000022 0%, transparent 35%),
               #0D0D0D
             `
           }}
@@ -116,8 +116,8 @@ export default function StudioBackground() {
       ) : (
         <Canvas camera={{ position: [0, 0, 30], fov: 75 }}>
           <ambientLight intensity={0.7} />
-          <pointLight position={[15, 15, 15]} intensity={1.5} color="#E65A1A" />
-          <pointLight position={[-15, -15, -15]} intensity={1.5} color="#D6245F" />
+          <pointLight position={[15, 15, 15]} intensity={1.5} color="#E6AE1A" />
+          <pointLight position={[-15, -15, -15]} intensity={1.5} color="#00FF9D" />
           <Particles />
         </Canvas>
       )}

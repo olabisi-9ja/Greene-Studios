@@ -92,33 +92,7 @@ export const ExperienceHero = () => {
             </Link>
           </motion.div>
 
-          {/* Atmosphere Selector */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="border-t border-[var(--brand-border)] pt-8"
-          >
-            <span className="text-xs uppercase tracking-widest text-[var(--brand-text-secondary)] block mb-4">
-              Select atmosphere:
-            </span>
-            <div className="flex flex-wrap gap-3 mb-6">
-              {(["clean", "midnight", "studio"] as const).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setMode(m)}
-                  className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
-                    mode === m 
-                      ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
-                      : "bg-[var(--brand-surface-secondary)] text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]"
-                  }`}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
 
-          </motion.div>
 
         </div>
 
