@@ -44,7 +44,7 @@
 
   .mode-studio {
     --brand-primary: #111111;
-    --brand-bg: var(--studio-dynamic-bg, #F3B700);
+    --brand-bg: #F8F8F5;
     --brand-surface: rgba(0, 0, 0, 0.05);
     --brand-surface-secondary: rgba(0, 0, 0, 0.1);
     --brand-border: rgba(0, 0, 0, 0.15);
