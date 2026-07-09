@@ -59,9 +59,11 @@ export const metadata: Metadata = {
 
 import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
 import DynamicCursor from "@/components/ui/DynamicCursor";
-import StudioBackground from "@/components/canvas/StudioBackground";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
 import ScrollProgress from "@/components/animations/ScrollProgress";
+import StudioSideMenu from "@/components/StudioSideMenu";
+import FloatingButtons from "@/components/FloatingButtons";
+import PageTransition from "@/components/animations/PageTransition";
 
 export default function RootLayout({
   children,
@@ -74,13 +76,18 @@ export default function RootLayout({
         <AtmosphereProvider>
           <ScrollProgress />
           <NoiseTexture />
-          <StudioBackground />
           <DynamicCursor />
           <Preloader />
           <SmoothScroll>
             <Navbar />
-            <main>{children}</main>
+            <StudioSideMenu />
+            <main>
+              <PageTransition>
+                {children}
+              </PageTransition>
+            </main>
             <Footer />
+            <FloatingButtons />
           </SmoothScroll>
         </AtmosphereProvider>
       </body>

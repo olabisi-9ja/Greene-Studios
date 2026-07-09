@@ -38,6 +38,35 @@ export default function Navbar() {
 
   const isDark = mode === "midnight" || mode === "studio";
 
+  if (mode === "studio") {
+    // Return a minimal version that just allows switching modes or nothing
+    // To match the new design, the top menu is hidden, but the user might want a way back.
+    // The top-right menu "::" icon should probably stay. Let's just render the top right icon?
+    // Wait, let's look at the reference images: The D&L logo is in the top middle.
+    // For now, let's just return a very minimal navbar or completely hide the main background.
+    return (
+      <>
+        <header className="fixed top-4 left-1/2 -translate-x-1/2 z-[60] w-[95%] max-w-7xl flex items-center justify-between px-6 py-3 pointer-events-none">
+          <Link href="/" className="pointer-events-auto" data-cursor="HOME">
+            <div className="bg-[#111] text-white px-4 py-2 rounded-[30px] font-black text-xl tracking-tighter">G.</div>
+          </Link>
+          <div className="flex items-center gap-4 pointer-events-auto">
+            <button
+              onClick={() => setMode("clean")}
+              className="bg-[#111] text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-[#333] transition-colors"
+            >
+              EXIT STUDIO
+            </button>
+            <button onClick={() => setMenuOpen(!menuOpen)} className="bg-[#111] text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#333]">
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </header>
+        <FullscreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      </>
+    );
+  }
+
   return (
     <>
       <header
@@ -77,7 +106,7 @@ export default function Navbar() {
                     "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300",
                     isActive
                       ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
-                      : "text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)] hover:bg-[var(--brand-text)]/5"
+                      : "text-[var(--brand-text)]/70 hover:text-[var(--brand-text)] hover:bg-[var(--brand-text)]/5"
                   )}
                   data-cursor={item.label.toUpperCase()}
                 >

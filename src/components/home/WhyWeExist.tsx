@@ -10,7 +10,7 @@ export default function WhyWeExist() {
         <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold block mb-6">
           Why We Exist
         </span>
-        <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-[1.05] tracking-tight text-[var(--brand-text)] max-w-5xl mx-auto uppercase">
+        <h2 className="text-[clamp(1.75rem,5vw,5rem)] font-black leading-[1.05] tracking-tight text-[var(--brand-text)] max-w-5xl mx-auto uppercase break-words hyphens-auto">
           <TextReveal>We believe standard templates dilute your brand value. We build custom-crafted products that make you unforgettable.</TextReveal>
         </h2>
       </div>

@@ -43,18 +43,14 @@
   }
 
   .mode-studio {
-    --brand-primary: #1F3D3A;
-    --brand-bg: #0A1A16;
-    --brand-surface: #122B24;
-    --brand-surface-secondary: #1A3D33;
-    --brand-border: rgba(245, 197, 24, 0.2);
-    --brand-text: #F5C518;
-    --brand-text-secondary: #7ECBB4;
-    --brand-accent: #F5C518;
-    --studio-yellow: #F5C518;
-    --studio-greene: #1F3D3A;
-    --studio-light-greene: #2D8B6F;
-    --studio-glow: #39D98A;
+    --brand-primary: #111111;
+    --brand-bg: var(--studio-dynamic-bg, #F3B700);
+    --brand-surface: rgba(0, 0, 0, 0.05);
+    --brand-surface-secondary: rgba(0, 0, 0, 0.1);
+    --brand-border: rgba(0, 0, 0, 0.15);
+    --brand-text: #111111;
+    --brand-text-secondary: #333333;
+    --brand-accent: #000000;
   }
 
   * {

@@ -113,43 +113,46 @@ export default function DynamicCursor() {
       
       {/* Outer ring / Label container */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9999] flex items-center justify-center rounded-full overflow-hidden"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] flex flex-col items-center justify-center"
         style={{
           x: cursorX,
           y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%"
         }}
-        variants={ringVariants}
-        animate={cursorType}
-        transition={{ type: "spring", damping: 25, stiffness: 400 }}
       >
-        {cursorType === "text" && (
-          <motion.span 
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-[10px] font-bold uppercase tracking-widest text-center"
-          >
-            {cursorText}
-          </motion.span>
-        )}
+        <motion.div
+          className="flex items-center justify-center rounded-full overflow-hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          variants={ringVariants}
+          animate={cursorType}
+          transition={{ type: "spring", damping: 25, stiffness: 400 }}
+        >
+          {cursorType === "text" && (
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-[10px] font-bold uppercase tracking-widest text-center"
+            >
+              {cursorText}
+            </motion.span>
+          )}
+        </motion.div>
       </motion.div>
 
       {/* Inner dot */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[10000] rounded-full"
+        className="pointer-events-none fixed top-0 left-0 z-[10000]"
         style={{
-          width: 8,
-          height: 8,
           x: mouseX,
           y: mouseY,
-          translateX: "-50%",
-          translateY: "-50%"
         }}
-        variants={dotVariants}
-        animate={cursorType}
-        transition={{ type: "spring", damping: 30, stiffness: 600 }}
-      />
+      >
+        <motion.div
+          className="rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ width: 8, height: 8 }}
+          variants={dotVariants}
+          animate={cursorType}
+          transition={{ type: "spring", damping: 30, stiffness: 600 }}
+        />
+      </motion.div>
     </>
   );
 }
