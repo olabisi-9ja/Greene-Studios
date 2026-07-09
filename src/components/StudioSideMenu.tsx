@@ -7,11 +7,10 @@ import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { NAV_LINKS } from "@/lib/data";
 
 const pillColors = [
-  "#2D4BFF", // Bright Blue
-  "#FF7B54", // Coral
-  "#98B4A6", // Muted Green
-  "#111111", // Black
+  "#2D8B57", // Artistic Green
   "#F3B700", // Yellow
+  "#111111", // Black
+  "#E65A1A", // Orange
 ];
 
 export default function StudioSideMenu() {
@@ -37,7 +36,7 @@ export default function StudioSideMenu() {
               className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 transform group-hover:-translate-x-2 shadow-lg`}
               style={{
                 backgroundColor: color,
-                color: color === "#111111" || color === "#2D4BFF" ? "#FFFFFF" : "#111111",
+                color: (color === "#111111" || color === "#2D8B57" || color === "#E65A1A") ? "#FFFFFF" : "#111111",
                 opacity: isActive ? 1 : 0.85,
               }}
             >

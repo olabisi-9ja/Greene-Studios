@@ -14,72 +14,72 @@ import ClientWrapper from "@/components/ClientWrapper";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 
 export default function HomePage() {
-  const heroFallback = (
-    <div className="min-h-screen w-full bg-[#FAFAFA] flex items-center justify-center">
-      <div className="flex items-center gap-3 animate-pulse opacity-80">
-        <div className="w-10 h-10 bg-[#101010] rounded-full flex items-center justify-center">
-          <span className="text-white font-black text-lg tracking-tighter italic-none">G</span>
-        </div>
-        <span className="text-[#101010] font-semibold text-2xl tracking-tight">
-          Greene.
-        </span>
-      </div>
-    </div>
-  );
+ const heroFallback = (
+ <div className="min-h-screen w-full bg-[var(--brand-bg)] text-[var(--brand-text)] flex items-center justify-center transition-colors duration-1000">
+ <div className="flex items-center gap-3 animate-pulse opacity-80">
+ <div className="w-10 h-10 bg-[#101010] rounded-full flex items-center justify-center">
+ <span className="text-white font-black text-lg tracking-tighter italic-none">G</span>
+ </div>
+ <span className="text-[#101010] font-semibold text-2xl tracking-tight">
+ Greene.
+ </span>
+ </div>
+ </div>
+ );
 
-  const marqueeWords = ["WEB DESIGN", "BRANDING", "UI UX", "NEXTJS", "REACT", "DEVELOPMENT"];
+ const marqueeWords = ["WEB DESIGN", "BRANDING", "UI UX", "NEXTJS", "REACT", "DEVELOPMENT"];
 
-  return (
-    <>
-      <ClientWrapper fallback={heroFallback}>
-        <ExperienceHero />
-      </ClientWrapper>
+ return (
+ <>
+ <ClientWrapper fallback={heroFallback}>
+ <ExperienceHero />
+ </ClientWrapper>
 
-      <WhyWeExist />
-      
-      <Philosophy />
+ <WhyWeExist />
+ 
+ <Philosophy />
 
-      {/* Infinite Marquee between Philosophy & Portfolio */}
-      <div className="py-8 bg-[var(--brand-surface-secondary)] border-y border-[var(--brand-border)] overflow-hidden">
-        <Marquee>
-          <MarqueeContent speed={40}>
-            {marqueeWords.map((word, i) => (
-              <MarqueeItem key={i} className="text-xl font-bold tracking-widest text-[var(--brand-text-secondary)] mx-8 uppercase">
-                {word} ·
-              </MarqueeItem>
-            ))}
-          </MarqueeContent>
-        </Marquee>
-      </div>
+ {/* Infinite Marquee between Philosophy & Portfolio */}
+ <div className="py-8 bg-[var(--brand-surface-secondary)] border-y border-[var(--brand-border)] overflow-hidden">
+ <Marquee>
+ <MarqueeContent speed={40}>
+ {marqueeWords.map((word, i) => (
+ <MarqueeItem key={i} className="text-xl font-bold tracking-widest text-[var(--brand-text-secondary)] mx-8 uppercase">
+ {word} ·
+ </MarqueeItem>
+ ))}
+ </MarqueeContent>
+ </Marquee>
+ </div>
 
-      <SelectedWork />
-      
-      <ServicesSection />
-      
-      <ProcessSection />
+ <SelectedWork />
+ 
+ <ServicesSection />
+ 
+ <ProcessSection />
 
-      {/* Reverse Marquee between Process & Stats */}
-      <div className="py-8 bg-[var(--brand-surface-secondary)] border-y border-[var(--brand-border)] overflow-hidden">
-        <Marquee>
-          <MarqueeContent speed={40} direction="right">
-            {marqueeWords.map((word, i) => (
-              <MarqueeItem key={i} className="text-xl font-bold tracking-widest text-[var(--brand-text-secondary)] mx-8 uppercase">
-                {word} ·
-              </MarqueeItem>
-            ))}
-          </MarqueeContent>
-        </Marquee>
-      </div>
+ {/* Reverse Marquee between Process & Stats */}
+ <div className="py-8 bg-[var(--brand-surface-secondary)] border-y border-[var(--brand-border)] overflow-hidden">
+ <Marquee>
+ <MarqueeContent speed={40} direction="right">
+ {marqueeWords.map((word, i) => (
+ <MarqueeItem key={i} className="text-xl font-bold tracking-widest text-[var(--brand-text-secondary)] mx-8 uppercase">
+ {word} ·
+ </MarqueeItem>
+ ))}
+ </MarqueeContent>
+ </Marquee>
+ </div>
 
-      <ClientWrapper>
-        <SocialProof />
-      </ClientWrapper>
+ <ClientWrapper>
+ <SocialProof />
+ </ClientWrapper>
 
-      <TestimonialsSection />
-      
-      <FAQSection />
-      
-      <CTASection />
-    </>
-  );
+ <TestimonialsSection />
+ 
+ <FAQSection />
+ 
+ <CTASection />
+ </>
+ );
 }

@@ -65,7 +65,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <nav className={cn(
             "hidden md:flex items-center gap-1 pointer-events-auto transition-opacity duration-300",
-            (menuOpen || mode === "studio") ? "opacity-0 pointer-events-none" : "opacity-100"
+            menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
           )}>
             {NAV_LINKS.map((item) => {
               const isActive = pathname === item.href;
@@ -95,7 +95,7 @@ export default function Navbar() {
               className={cn(
                 "hidden lg:flex px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
                 "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-white",
-                (menuOpen || mode === "studio") ? "opacity-0 pointer-events-none" : "opacity-100"
+                menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
               )}
             >
               Start a Project
