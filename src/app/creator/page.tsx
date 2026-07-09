@@ -54,7 +54,7 @@ export default function CreatorPage() {
               </div>
               <div className="bg-[#E5F3F8] text-[#1E5F78] p-4 rounded-xl text-sm">
                 <div className="font-semibold mb-1">Color ✓</div>
-                The monochromatic red and coral palette flattens the character's facial structure.
+                The monochromatic red and coral palette flattens the character&apos;s facial structure.
               </div>
               <div className="bg-[#E5F3F8] text-[#1E5F78] p-4 rounded-xl text-sm">
                 <div className="font-semibold mb-1">Lore</div>
