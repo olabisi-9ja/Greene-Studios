@@ -8,14 +8,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#000000] text-white flex flex-col justify-between pt-24 pb-8 overflow-hidden relative min-h-screen">
+    <footer className="bg-[var(--brand-primary)] text-white flex flex-col justify-between pt-24 pb-8 overflow-hidden relative min-h-screen">
       <div className="max-w-[1400px] mx-auto px-6 w-full flex flex-col lg:flex-row justify-between items-start z-10 flex-1">
         
         {/* Left Section */}
         <div className="flex flex-col gap-12 w-full lg:w-auto">
           <h2 className="text-[clamp(3rem,8vw,6rem)] font-medium leading-[1.1] tracking-tighter">
             Let&apos;s start<br />
-            from nothin&apos;
+            from Greene
           </h2>
           
           <div className="flex flex-col sm:flex-row items-start gap-4">
@@ -54,7 +54,7 @@ export default function Footer() {
           className="font-black leading-none tracking-tighter text-white whitespace-nowrap lg:text-center w-full flex justify-start lg:justify-center cursor-default pl-[-2vw]"
           style={{ fontSize: "clamp(6rem, 24vw, 38rem)" }}
         >
-          {"NOTHIN'".split("").map((letter, i) => (
+          {"GREENE".split("").map((letter, i) => (
             <motion.span
               key={i}
               whileHover={{ 
