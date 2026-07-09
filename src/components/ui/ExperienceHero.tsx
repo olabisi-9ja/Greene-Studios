@@ -39,7 +39,7 @@ export const ExperienceHero = () => {
         </div>
 
       {/* Bottom Row */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end w-full font-bold gap-4 md:gap-0 pointer-events-auto">
+      <div className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-end w-full font-bold gap-6 md:gap-0 pointer-events-auto">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -79,20 +79,21 @@ export const ExperienceHero = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-0 flex flex-col items-center justify-center w-full pointer-events-none select-none px-4"
+        className="relative z-0 flex flex-col items-start justify-center w-full pointer-events-none select-none overflow-visible pt-48"
       >
         <h1 
-          className="font-black leading-none tracking-tighter text-[var(--brand-text)] text-center w-full"
+          className="font-black leading-none tracking-tighter text-[var(--brand-text)] whitespace-nowrap pl-[2vw]"
           style={{ fontSize: "clamp(5rem, 25vw, 40rem)" }}
         >
           GREENE
         </h1>
         <div 
-          className="font-bold tracking-widest text-[var(--brand-text)] uppercase opacity-80 mt-[-2vw] text-center"
+          className="font-bold tracking-widest text-[var(--brand-text)] uppercase opacity-80 mt-[-2vw] pl-[8vw]"
           style={{ fontSize: "clamp(1.5rem, 5vw, 6rem)" }}
         >
           Studios
         </div>
       </motion.div>
+    </section>
   );
 };

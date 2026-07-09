@@ -10,18 +10,9 @@ export default function FloatingButtons() {
   const [isVisible, setIsVisible] = useState(false);
   const { mode } = useAtmosphere();
 
+  // Always show floating buttons
   useEffect(() => {
-    const handleScroll = () => {
-      // Show back to top after scrolling down 300px
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    setIsVisible(true);
   }, []);
 
   const scrollToTop = () => {
@@ -31,7 +22,7 @@ export default function FloatingButtons() {
   const isDark = mode === "midnight" || mode === "studio";
 
   return (
-    <div className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 z-[70] flex items-center gap-3 pointer-events-none">
+    <div className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 z-[70] flex flex-col md:flex-row items-end md:items-center gap-3 pointer-events-none">
       
       {/* Contact Button */}
       <Link

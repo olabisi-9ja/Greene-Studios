@@ -40,7 +40,7 @@ export const BentoGridItem = ({
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "row-span-1 rounded-3xl group/bento transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.2] bg-[var(--brand-surface)] border border-[var(--brand-border)] justify-between flex flex-col space-y-4 overflow-hidden",
+        "row-span-1 rounded-3xl group/bento transition duration-200 shadow-input p-4 bg-[var(--brand-surface)] border border-[var(--brand-border)] justify-between flex flex-col space-y-4 overflow-hidden",
         className
       )}
     >

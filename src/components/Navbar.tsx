@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BRAND, NAV_LINKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon, PaintBucket } from "lucide-react";
 import FullscreenMenu from "./FullscreenMenu";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { Logo } from "./ui/Logo";
@@ -143,9 +143,9 @@ export default function Navbar() {
               title="Toggle Theme"
               data-cursor="THEME"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-              </svg>
+              {mode === "clean" && <Sun size={20} />}
+              {mode === "midnight" && <Moon size={20} />}
+              {mode === "studio" && <PaintBucket size={20} />}
             </button>
 
             <button 

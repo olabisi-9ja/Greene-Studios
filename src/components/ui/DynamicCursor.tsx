@@ -137,22 +137,6 @@ export default function DynamicCursor() {
         </motion.div>
       </motion.div>
 
-      {/* Inner dot */}
-      <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[10000]"
-        style={{
-          x: mouseX,
-          y: mouseY,
-        }}
-      >
-        <motion.div
-          className="rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{ width: 8, height: 8 }}
-          variants={dotVariants}
-          animate={cursorType}
-          transition={{ type: "spring", damping: 30, stiffness: 600 }}
-        />
-      </motion.div>
     </>
   );
 }
