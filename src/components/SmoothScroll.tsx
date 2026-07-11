@@ -10,8 +10,7 @@ export default function SmoothScroll({
 }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.1, // Snappy linear interpolation instead of long duration
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });

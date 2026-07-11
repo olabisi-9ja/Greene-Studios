@@ -9,26 +9,30 @@ export default function ServicesSection() {
     {
       title: "Product Design",
       description: "Crafting intuitive UX, wireframes, and scalable design systems for modern applications.",
-      icon: <Paintbrush className="w-8 h-8 text-[var(--brand-accent)]" />,
+      icon: <Paintbrush className="w-6 h-6 text-[var(--brand-text)]" />,
       className: "md:col-span-2",
+      header: <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-[24px] bg-[var(--brand-text)]/5 border border-[var(--brand-border)]" />
     },
     {
       title: "Web Design",
       description: "High-conversion marketing landing pages and optimized business platforms.",
-      icon: <Monitor className="w-8 h-8 text-[var(--brand-accent)]" />,
+      icon: <Monitor className="w-6 h-6 text-[var(--brand-text)]" />,
       className: "md:col-span-1",
+      header: <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-[24px] bg-[var(--brand-text)]/5 border border-[var(--brand-border)]" />
     },
     {
       title: "Frontend Development",
       description: "Stunning React and Next.js interfaces built for maximum performance and SEO.",
-      icon: <Code2 className="w-8 h-8 text-[var(--brand-accent)]" />,
+      icon: <Code2 className="w-6 h-6 text-[var(--brand-text)]" />,
       className: "md:col-span-1",
+      header: <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-[24px] bg-[var(--brand-text)]/5 border border-[var(--brand-border)]" />
     },
     {
       title: "AI Integration",
       description: "Embedding custom intelligence, LLM agents, and vector databases into your products.",
-      icon: <Cpu className="w-8 h-8 text-[var(--brand-accent)]" />,
+      icon: <Cpu className="w-6 h-6 text-[var(--brand-text)]" />,
       className: "md:col-span-2",
+      header: <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-[24px] bg-[var(--brand-text)]/5 border border-[var(--brand-border)]" />
     }
   ];
 

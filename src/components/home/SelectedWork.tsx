@@ -49,7 +49,7 @@ export default function SelectedWork() {
                 className="group block"
                 data-cursor="VIEW"
               >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-[var(--brand-surface-secondary)] mb-6">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[32px] bg-[var(--brand-surface-secondary)] mb-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -100,7 +100,7 @@ export default function SelectedWork() {
                 className="group block w-[500px] flex-shrink-0"
                 data-cursor="VIEW"
               >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-[var(--brand-surface-secondary)] mb-6 shadow-lg border border-[var(--brand-border)]">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[32px] bg-[var(--brand-surface-secondary)] mb-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                   <Image
                     src={project.image}
                     alt={project.title}

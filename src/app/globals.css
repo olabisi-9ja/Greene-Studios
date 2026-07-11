@@ -43,14 +43,22 @@
   }
 
   .mode-studio {
-    --brand-primary: #111111;
-    --brand-bg: #F8F8F5;
-    --brand-surface: rgba(0, 0, 0, 0.05);
-    --brand-surface-secondary: rgba(0, 0, 0, 0.1);
-    --brand-border: rgba(0, 0, 0, 0.15);
+    --brand-primary: #FF5E00;
+    --brand-bg: #F4EFE6; /* Warm cream */
+    --brand-surface: #FFFFFF;
+    --brand-surface-secondary: #EBE3D5;
+    --brand-border: #111111;
     --brand-text: #111111;
-    --brand-text-secondary: #333333;
-    --brand-accent: #000000;
+    --brand-text-secondary: #444444;
+    --brand-accent: #0022FF;
+    
+    /* Abstract Colors */
+    --color-abstract-orange: #FF5500;
+    --color-abstract-yellow: #FFD600;
+    --color-abstract-green: #00A650;
+    --color-abstract-lightgreen: #7DD856;
+    --color-abstract-black: #0F0F0F;
+    --color-abstract-blue: #0022FF;
   }
 
   * {
@@ -77,13 +85,16 @@
   }
   .mode-studio body {
     font-family: var(--font-neue);
-    /* Artistic mash of green, yellow, black and orange */
-    background: 
-      radial-gradient(at 0% 0%, rgba(31, 61, 58, 0.4) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(243, 183, 0, 0.4) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(230, 90, 26, 0.4) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(17, 17, 17, 0.6) 0px, transparent 50%),
-      #F8F8F5;
+    background-color: var(--brand-bg);
+    /* Vibrant abstract shapes */
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(125, 216, 86, 0.3) 0%, transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(255, 85, 0, 0.25) 0%, transparent 40%),
+      radial-gradient(circle at 30% 80%, rgba(255, 214, 0, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 70% 90%, rgba(0, 34, 255, 0.15) 0%, transparent 40%);
+    background-attachment: fixed;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   /* Custom scrollbar - Minimal */
