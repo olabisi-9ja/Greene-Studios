@@ -53,7 +53,7 @@ export default function StudioDemoPage() {
               <svg className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite]" viewBox="0 0 100 100">
                 <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
                 <text className="text-[10px] uppercase font-bold tracking-[0.2em]" fill="currentColor">
-                  <textPath href="#circlePath">Don't take our word for it • </textPath>
+                  <textPath href="#circlePath">Don&apos;t take our word for it • </textPath>
                 </text>
               </svg>
               <div className="w-12 h-12 bg-[var(--color-abstract-yellow)] text-black rounded-full flex items-center justify-center font-bold text-xl">
