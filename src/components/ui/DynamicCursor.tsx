@@ -100,7 +100,7 @@ export default function DynamicCursor() {
       `}} />
       
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9999] flex items-start justify-start"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] flex items-start justify-start mix-blend-difference"
         style={{
           x: cursorX,
           y: cursorY,
@@ -109,31 +109,16 @@ export default function DynamicCursor() {
         animate={cursorType}
         transition={{ type: "spring", damping: 30, stiffness: 400, mass: 0.2 }}
       >
-        {/* Apple-style Hand Cursor */}
+        {/* Small Contrasting Dot */}
         {cursorType !== "text" && (
-          <div className="relative" style={{ left: "-12px", top: "-4px" }}>
-            <svg 
-              width="48" 
-              height="48" 
-              viewBox="0 0 32 32" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-lg"
-            >
-              <defs>
-                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="3" stdDeviation="4" floodOpacity="0.4"/>
-                </filter>
-              </defs>
-              <path 
-                d="M12.5 13.1c-.5-.6-1.4-.7-2-.2-.5.5-.6 1.4-.2 1.9l2.7 3.3-6.2-2.3c-.7-.3-1.5.1-1.8.8-.3.7.1 1.5.8 1.8l10.3 3.8.3.1c.5 1.5 1.9 2.5 3.5 2.5 2.1 0 3.8-1.7 3.8-3.8v-7.6c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v2h-1v-8c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v8h-1v-9.5c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v9.5h-1v-7.1c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v7.1h-1l-1.3-1.6z"
-                fill="#ffffff" 
-                stroke="#000000" 
-                strokeWidth="1.2" 
-                strokeLinejoin="round" 
-                filter="url(#shadow)"
-              />
-            </svg>
-          </div>
+          <motion.div 
+            className="bg-white rounded-full"
+            style={{ width: "16px", height: "16px", marginLeft: "-8px", marginTop: "-8px" }}
+            animate={{
+              scale: cursorType === "hover" ? 2 : 1,
+            }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          />
         )}
 
         {/* Text Pill */}
@@ -145,9 +130,8 @@ export default function DynamicCursor() {
             exit="exit"
             className="flex items-center justify-center rounded-full overflow-hidden absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 px-6 py-3 shadow-xl"
             style={{
-              backgroundColor: isStudio ? `${accentHex}F0` : "rgba(31, 61, 58, 0.95)",
-              color: "#ffffff",
-              backdropFilter: "blur(4px)"
+              backgroundColor: "white",
+              color: "black",
             }}
           >
             <span className="text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap">
