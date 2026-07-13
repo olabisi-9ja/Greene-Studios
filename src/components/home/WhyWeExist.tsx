@@ -77,20 +77,23 @@ export default function WhyWeExist() {
                   style={{ backgroundColor: card.color }}
                 />
 
-                <div className="py-8 md:py-14 flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-12 relative z-10">
-                  <div className="flex items-start gap-6 md:gap-12 w-full lg:w-auto">
-                    <span className="text-lg md:text-2xl font-bold opacity-30 font-serif pt-2 md:pt-4">
+                <div className="py-8 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start relative z-10 w-full">
+                  <div className="col-span-1 lg:col-span-1 pt-1 md:pt-2">
+                    <span className="text-lg md:text-2xl font-bold opacity-30 font-serif block">
                       {card.id}
                     </span>
+                  </div>
+                  
+                  <div className="col-span-1 lg:col-span-7">
                     <h3 
-                      className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase transition-colors duration-500"
+                      className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter uppercase transition-colors duration-500 leading-[0.9]"
                       style={{ color: isHovered ? card.color : 'var(--brand-text)' }}
                     >
                       {card.title}
                     </h3>
                   </div>
                   
-                  <div className="w-full lg:w-[450px] flex-shrink-0 flex items-center justify-start lg:justify-end overflow-hidden h-[80px] lg:h-auto pl-14 lg:pl-0">
+                  <div className="col-span-1 lg:col-span-4 flex items-start justify-start lg:justify-end min-h-[80px]">
                     <AnimatePresence mode="wait">
                       {isHovered ? (
                         <motion.p 
@@ -99,7 +102,7 @@ export default function WhyWeExist() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           transition={{ duration: 0.3 }}
-                          className="text-sm md:text-base font-medium leading-relaxed"
+                          className="text-sm md:text-base font-medium leading-relaxed max-w-sm lg:text-right pt-2"
                           style={{ color: 'var(--brand-text)' }}
                         >
                           {card.description}
