@@ -19,10 +19,12 @@ export function Logo({
   return (
     <div className={`relative ${className}`}>
       {/* We use the next/image component for optimization, relying on the parent's width/height via className */}
-      <img 
+      <Image 
         src="/logo.png" 
         alt="Greene Studios Logo" 
-        className="w-full h-full object-contain"
+        fill
+        className="object-contain"
+        sizes="(max-width: 768px) 150px, 250px"
       />
     </div>
   );
