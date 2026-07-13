@@ -43,22 +43,23 @@
   }
 
   .mode-studio {
-    --brand-primary: #FF5E00;
-    --brand-bg: #F4EFE6; /* Warm cream */
-    --brand-surface: #FFFFFF;
-    --brand-surface-secondary: #EBE3D5;
-    --brand-border: #111111;
-    --brand-text: #111111;
-    --brand-text-secondary: #444444;
-    --brand-accent: #0022FF;
+    --brand-primary: #1A4331; /* Dark green */
+    --brand-bg: #FCF8F2; /* Light beige */
+    --brand-surface: #1A4331; /* Dark green cards */
+    --brand-surface-secondary: #CBE0FC; /* Light baby blue */
+    --brand-border: #1A4331;
+    --brand-text: #1A4331;
+    --brand-text-inverse: #FCF8F2;
+    --brand-text-secondary: #2B5742;
+    --brand-accent: #CBE0FC;
     
     /* Abstract Colors */
     --color-abstract-orange: #FF5500;
     --color-abstract-yellow: #FFD600;
-    --color-abstract-green: #00A650;
+    --color-abstract-green: #1A4331;
     --color-abstract-lightgreen: #7DD856;
     --color-abstract-black: #0F0F0F;
-    --color-abstract-blue: #0022FF;
+    --color-abstract-blue: #CBE0FC;
   }
 
   * {
@@ -86,12 +87,8 @@
   .mode-studio body {
     font-family: var(--font-neue);
     background-color: var(--brand-bg);
-    /* Vibrant abstract shapes */
-    background-image: 
-      radial-gradient(circle at 10% 20%, rgba(125, 216, 86, 0.3) 0%, transparent 40%),
-      radial-gradient(circle at 90% 10%, rgba(255, 85, 0, 0.25) 0%, transparent 40%),
-      radial-gradient(circle at 30% 80%, rgba(255, 214, 0, 0.25) 0%, transparent 50%),
-      radial-gradient(circle at 70% 90%, rgba(0, 34, 255, 0.15) 0%, transparent 40%);
+    /* Clean light beige background for Studio Modular pattern */
+    background-image: none;
     background-attachment: fixed;
     transform: translateZ(0);
     will-change: transform;
@@ -158,18 +155,18 @@
 
 /* Studio Mode Enhancements */
 .mode-studio ::selection {
-  background: #F5C518;
-  color: #0A1A16;
+  background: var(--brand-surface-secondary);
+  color: var(--brand-text);
 }
 
 .mode-studio ::-webkit-scrollbar-thumb {
-  background: #1F3D3A;
+  background: var(--brand-primary);
 }
 .mode-studio ::-webkit-scrollbar-thumb:hover {
-  background: #F5C518;
+  background: var(--brand-text-secondary);
 }
 
 /* Studio mode gradient glow on buttons */
 .mode-studio .studio-glow {
-  box-shadow: 0 0 30px rgba(245, 197, 24, 0.15), 0 0 60px rgba(45, 139, 111, 0.1);
+  box-shadow: 0 0 30px rgba(203, 224, 252, 0.3), 0 0 60px rgba(26, 67, 49, 0.1);
 }

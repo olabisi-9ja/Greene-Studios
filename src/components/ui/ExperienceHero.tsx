@@ -1,13 +1,23 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { BRAND } from '@/lib/data';
 
 export const ExperienceHero = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-32 md:pt-40 pb-6 md:pb-12 z-0">
+    <section ref={containerRef} className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-32 md:pt-40 pb-6 md:pb-12 z-0">
       
       {/* Top Row */}
       <div className="flex justify-between items-start w-full relative z-20 mt-4 md:mt-8">
@@ -39,19 +49,19 @@ export const ExperienceHero = () => {
         className="flex-1 flex flex-col items-center justify-center w-full pointer-events-none select-none my-8 relative z-10"
       >
         <div className="relative w-full flex flex-col items-center">
-          <h1 
+          <motion.h1 
             className="font-black leading-[0.8] tracking-tighter text-[var(--brand-text)] whitespace-nowrap"
-            style={{ fontSize: "clamp(10rem, 26vw, 40rem)", marginLeft: "-2vw" }}
+            style={{ fontSize: "clamp(10rem, 26vw, 40rem)", marginLeft: "-2vw", x: x1 }}
           >
             GREENE
-          </h1>
+          </motion.h1>
           <div className="w-full flex justify-start pl-[5vw] md:pl-[12vw]">
-            <div 
+            <motion.div 
               className="font-black tracking-widest text-[var(--brand-text)] uppercase opacity-90"
-              style={{ fontSize: "clamp(3rem, 7vw, 10rem)", marginTop: "-1vw" }}
+              style={{ fontSize: "clamp(3rem, 7vw, 10rem)", marginTop: "-1vw", x: x2 }}
             >
               STUDIOS
-            </div>
+            </motion.div>
           </div>
           
         </div>
