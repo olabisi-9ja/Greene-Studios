@@ -19,7 +19,7 @@ export const ExperienceHero = () => {
   const opacityEffect = useTransform(scrollYProgress, [0, 1], [1, 0.1]);
 
   return (
-    <section ref={containerRef} className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-40 md:pt-48 pb-8 z-0">
+    <section ref={containerRef} className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-32 md:pt-36 pb-8 z-0">
       
       {/* Top Row */}
       <div className="flex justify-between items-start w-full relative z-20 mt-4 md:mt-8">
