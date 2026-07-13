@@ -30,17 +30,12 @@ export default function DynamicCursor() {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       
-      // Look up the DOM tree for specific data attributes
+      // Look up the DOM tree for specific tags
       let currentElement: HTMLElement | null = target;
       let newCursorType: typeof cursorType = "default";
-      let newCursorText = "";
 
       while (currentElement && currentElement !== document.body) {
-        if (currentElement.dataset.cursor) {
-          newCursorType = "text";
-          newCursorText = currentElement.dataset.cursor;
-          break;
-        } else if (currentElement.tagName.toLowerCase() === 'a' || currentElement.tagName.toLowerCase() === 'button') {
+        if (currentElement.tagName.toLowerCase() === 'a' || currentElement.tagName.toLowerCase() === 'button') {
           newCursorType = "hover";
           break;
         }
@@ -48,7 +43,6 @@ export default function DynamicCursor() {
       }
 
       setCursorType(newCursorType);
-      setCursorText(newCursorText);
     };
 
     window.addEventListener("mousemove", moveCursor);
@@ -110,35 +104,16 @@ export default function DynamicCursor() {
         transition={{ type: "spring", damping: 30, stiffness: 400, mass: 0.2 }}
       >
         {/* Small Contrasting Dot */}
-        {cursorType !== "text" && (
-          <motion.div 
-            className="bg-white rounded-full"
-            style={{ width: "16px", height: "16px", marginLeft: "-8px", marginTop: "-8px" }}
-            animate={{
-              scale: cursorType === "hover" ? 2 : 1,
-            }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
-          />
-        )}
-
-        {/* Text Pill */}
-        {cursorType === "text" && (
-          <motion.div
-            variants={textVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="flex items-center justify-center rounded-full overflow-hidden absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 px-6 py-3 shadow-xl"
-            style={{
-              backgroundColor: "white",
-              color: "black",
-            }}
-          >
-            <span className="text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap">
-              {cursorText}
-            </span>
-          </motion.div>
-        )}
+        <motion.div 
+          className="rounded-full flex items-center justify-center"
+          style={{ width: "16px", height: "16px", marginLeft: "-8px", marginTop: "-8px" }}
+          animate={{
+            scale: cursorType === "hover" ? 2.5 : 1,
+            backgroundColor: cursorType === "hover" ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 1)",
+            border: cursorType === "hover" ? "2px solid rgba(255, 255, 255, 1)" : "0px solid rgba(255, 255, 255, 1)",
+          }}
+          transition={{ type: "spring", damping: 20, stiffness: 300 }}
+        />
       </motion.div>
     </>
   );

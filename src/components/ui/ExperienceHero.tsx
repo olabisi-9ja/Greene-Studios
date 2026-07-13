@@ -13,12 +13,13 @@ export const ExperienceHero = () => {
     offset: ["start start", "end start"]
   });
 
-  // A subtle parallax for the massive text
-  const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  // A subtle parallax and depth effect for the massive text
+  const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const scaleEffect = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
+  const opacityEffect = useTransform(scrollYProgress, [0, 1], [1, 0.1]);
 
   return (
-    <section ref={containerRef} className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-32 pb-8 z-0">
+    <section ref={containerRef} className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-40 md:pt-48 pb-8 z-0">
       
       {/* Top Row */}
       <div className="flex justify-between items-start w-full relative z-20 mt-4 md:mt-8">
@@ -50,11 +51,12 @@ export const ExperienceHero = () => {
         className="flex-1 flex flex-col items-center justify-center w-full pointer-events-none select-none relative z-10 overflow-hidden"
       >
         <motion.h1 
-          className="font-black leading-[0.8] tracking-tighter text-[var(--brand-text)] whitespace-nowrap uppercase w-full text-center transition-colors duration-1000"
+          className="font-black leading-[0.8] tracking-tighter text-[var(--brand-text)] whitespace-nowrap uppercase w-full text-center transition-colors duration-1000 origin-center"
           style={{ 
             fontSize: "clamp(6rem, 24vw, 35rem)", 
-            x: x1,
-            y: yParallax 
+            y: yParallax,
+            scale: scaleEffect,
+            opacity: opacityEffect
           }}
         >
           GREENE
