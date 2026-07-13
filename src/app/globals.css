@@ -43,24 +43,25 @@
   }
 
   .mode-studio {
-    --brand-primary: #1A4331; /* Dark green */
-    --brand-bg: #FCF8F2; /* Light beige */
-    --brand-surface: #1A4331; /* Dark green cards */
-    --brand-surface-secondary: #CBE0FC; /* Light baby blue */
-    --brand-border: #1A4331;
-    --brand-text: #1A4331;
-    --brand-text-inverse: #FCF8F2;
-    --brand-text-secondary: #2B5742;
-    --brand-accent: #CBE0FC;
+    --brand-primary: #121212; /* Black */
+    --brand-bg: #F4F0E6; /* Light warm beige */
+    --brand-surface: #FFFFFF; /* White */
+    --brand-surface-secondary: #477A44; /* Beautiful Green */
+    --brand-border: #121212;
+    --brand-text: #121212;
+    --brand-text-inverse: #F4F0E6;
+    --brand-text-secondary: #4A4A4A;
+    --brand-accent: #DBF72C; /* Lemon */
     
     /* Abstract Colors */
-    --color-abstract-orange: #FF5500;
-    --color-abstract-yellow: #FFD600;
-    --color-abstract-green: #1A4331;
-    --color-abstract-lightgreen: #7DD856;
-    --color-abstract-black: #0F0F0F;
+    --color-abstract-orange: #E44926;
+    --color-abstract-yellow: #F0C929;
+    --color-abstract-green: #477A44;
+    --color-abstract-lemon: #DBF72C;
+    --color-abstract-black: #121212;
     --color-abstract-blue: #CBE0FC;
   }
+
 
   * {
     box-sizing: border-box;

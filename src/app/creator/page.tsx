@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function CreatorPage() {
  return (
@@ -21,10 +22,11 @@ export default function CreatorPage() {
  </div>
  <div className="flex-1 relative bg-gray-100 min-h-[400px]">
  {/* Using a placeholder since we don't have the local image of Abel Adigun */}
- <img 
+ <Image 
  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
  alt="Abel Adigun"
- className="absolute inset-0 w-full h-full object-cover"
+ fill
+ className="absolute inset-0 object-cover"
  />
  </div>
  </motion.div>

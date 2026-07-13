@@ -9,6 +9,7 @@ import {
 } from "@radix-ui/react-tooltip";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function TestimonialsSection() {
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
@@ -66,11 +67,13 @@ export default function TestimonialsSection() {
                 <TooltipTrigger asChild>
                   <div className="inline-block mx-2 align-middle relative cursor-pointer">
                     <div className="relative overflow-hidden sm:w-16 w-12 h-12 origin-center transition-all duration-300 md:hover:w-36 hover:w-24 rounded-full border-2 border-[var(--brand-text)] bg-[var(--brand-surface-secondary)]">
-                      <img
+                      <Image
                         src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop"
                         alt="Jane Doe"
                         className="object-cover w-full h-full grayscale"
                         style={{ objectPosition: "center" }}
+                        width={300}
+                        height={300}
                       />
                     </div>
                   </div>
@@ -96,10 +99,12 @@ export default function TestimonialsSection() {
                 <TooltipTrigger asChild>
                   <div className="inline-block mx-2 align-middle cursor-pointer">
                     <div className="relative overflow-hidden sm:w-16 w-14 h-14 origin-center transition-all duration-300 lg:hover:w-36 md:hover:w-24 hover:w-20 rounded-full border-2 border-[var(--brand-text)] bg-[var(--brand-surface-secondary)]">
-                      <img
+                      <Image
                         src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop"
                         alt="John Smith"
                         className="object-cover w-full h-full grayscale"
+                        width={300}
+                        height={300}
                       />
                     </div>
                   </div>
