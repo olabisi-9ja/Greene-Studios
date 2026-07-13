@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
+import { ExperienceHero } from "@/components/ui/ExperienceHero";
 
 export default function StudioDemoPage() {
   const { setMode } = useAtmosphere();
@@ -24,49 +25,7 @@ export default function StudioDemoPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative px-6 md:px-12 pt-12 pb-32 max-w-[1600px] mx-auto">
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-10 left-[10%] w-[30vw] h-[30vw] bg-[var(--color-abstract-lemon)] rounded-full mix-blend-multiply opacity-60 blur-3xl -z-10 animate-pulse"></div>
-        <div className="absolute bottom-10 right-[20%] w-[25vw] h-[25vw] bg-[var(--color-abstract-yellow)] rounded-full mix-blend-multiply opacity-60 blur-3xl -z-10"></div>
-        <div className="absolute top-1/2 left-[50%] w-[20vw] h-[20vw] bg-[var(--color-abstract-green)] rounded-full mix-blend-multiply opacity-20 blur-3xl -z-10"></div>
-        
-        <div className="relative z-10 flex flex-col items-center justify-center text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-[12vw] md:text-[10vw] font-black leading-[0.85] tracking-tighter uppercase font-serif"
-          >
-            Joyful
-            <br />
-            <span className="ml-[10vw] text-[var(--color-abstract-green)]">Moments</span>
-          </motion.h1>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-16 flex flex-col md:flex-row items-center justify-between w-full max-w-4xl gap-8"
-          >
-            {/* Spinning Badge */}
-            <div className="relative w-32 h-32 flex items-center justify-center">
-              <svg className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite]" viewBox="0 0 100 100">
-                <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
-                <text className="text-[10px] uppercase font-bold tracking-[0.2em]" fill="currentColor">
-                  <textPath href="#circlePath">Don&apos;t take our word for it • </textPath>
-                </text>
-              </svg>
-              <div className="w-12 h-12 bg-[var(--color-abstract-yellow)] text-black rounded-full flex items-center justify-center font-bold text-xl">
-                ↓
-              </div>
-            </div>
-
-            <p className="text-xl md:text-2xl font-medium max-w-sm text-left">
-              Drinks and gummies as delicious as they are delightful.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <ExperienceHero />
 
       {/* CTA Section */}
       <section className="px-4 md:px-8 mb-8">
