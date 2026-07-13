@@ -55,6 +55,11 @@ export const metadata: Metadata = {
  index: true,
  follow: true,
  },
+ icons: {
+ icon: "/logo.png",
+ shortcut: "/logo.png",
+ apple: "/logo.png",
+ },
 };
 
 import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";

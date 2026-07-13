@@ -40,23 +40,31 @@ export default function Preloader() {
       {!isComplete && (
         <motion.div 
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
-          initial={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 1 }}
           exit={{ 
-            backgroundColor: ["#111111", "#F3B700", "#12372A", "#FFFFFF", "rgba(255,255,255,0)"],
-            opacity: [1, 1, 1, 1, 0],
-            scale: [1, 1.02, 1.05, 1.08, 1.1],
-            filter: ["blur(0px)", "blur(0px)", "blur(0px)", "blur(5px)", "blur(10px)"],
-            transition: { duration: 1.5, times: [0, 0.3, 0.6, 0.85, 1], ease: "easeInOut" }
+            opacity: 0,
+            transition: { duration: 1.5, ease: "easeInOut" }
           }}
         >
+          {/* Rolling tire color burst behind logo */}
+          <motion.div 
+            className="absolute w-48 h-48 md:w-64 md:h-64 rounded-full blur-3xl opacity-70"
+            style={{
+              background: "conic-gradient(from 0deg, #F3B700, #12372A, #5294A8, #F3B700)"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 3, filter: "blur(10px)" }}
             transition={{ duration: 0.6, ease: "easeIn" }}
+            className="relative z-10"
           >
-            {/* The Logo handles its own drawing animation on mount */}
-            <Logo className="w-32 h-32 md:w-48 md:h-48" color="#FFFFFF" animateOnMount={true} />
+            {/* The Logo component will display /logo.png */}
+            <Logo className="w-32 h-32 md:w-48 md:h-48" />
           </motion.div>
           
           <motion.div
