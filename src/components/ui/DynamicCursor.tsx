@@ -93,7 +93,7 @@ export default function DynamicCursor() {
     <>
       <style dangerouslySetInnerHTML={{__html: `
         @media (min-width: 768px) {
-          body, a, button, [data-cursor] {
+          * {
             cursor: none !important;
           }
         }
@@ -109,26 +109,23 @@ export default function DynamicCursor() {
         animate={cursorType}
         transition={{ type: "spring", damping: 30, stiffness: 400, mass: 0.2 }}
       >
-        {/* Apple-style Cursor Arrow */}
+        {/* Apple-style Hand Cursor */}
         {cursorType !== "text" && (
-          <div className="relative" style={{ left: "-4px", top: "-4px" }}>
+          <div className="relative" style={{ left: "-12px", top: "-4px" }}>
             <svg 
-              width="36" 
-              height="36" 
+              width="48" 
+              height="48" 
               viewBox="0 0 32 32" 
               xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-md"
+              className="drop-shadow-lg"
             >
               <defs>
                 <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.4"/>
+                  <feDropShadow dx="0" dy="3" stdDeviation="4" floodOpacity="0.4"/>
                 </filter>
               </defs>
               <path 
-                d={cursorType === "hover" 
-                  ? "M12.5 13.1c-.5-.6-1.4-.7-2-.2-.5.5-.6 1.4-.2 1.9l2.7 3.3-6.2-2.3c-.7-.3-1.5.1-1.8.8-.3.7.1 1.5.8 1.8l10.3 3.8.3.1c.5 1.5 1.9 2.5 3.5 2.5 2.1 0 3.8-1.7 3.8-3.8v-7.6c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v2h-1v-8c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v8h-1v-9.5c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v9.5h-1v-7.1c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v7.1h-1l-1.3-1.6z"
-                  : "M7.4 3.7l13.7 13.5-6.3 1.2 4.4 7.5-3.5 2.1-4.4-7.5-4.8 4.2V3.7z"
-                }
+                d="M12.5 13.1c-.5-.6-1.4-.7-2-.2-.5.5-.6 1.4-.2 1.9l2.7 3.3-6.2-2.3c-.7-.3-1.5.1-1.8.8-.3.7.1 1.5.8 1.8l10.3 3.8.3.1c.5 1.5 1.9 2.5 3.5 2.5 2.1 0 3.8-1.7 3.8-3.8v-7.6c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v2h-1v-8c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v8h-1v-9.5c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v9.5h-1v-7.1c0-.8-.6-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v7.1h-1l-1.3-1.6z"
                 fill="#ffffff" 
                 stroke="#000000" 
                 strokeWidth="1.2" 
