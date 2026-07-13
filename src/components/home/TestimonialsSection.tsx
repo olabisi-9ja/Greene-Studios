@@ -59,7 +59,7 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Metrics row */}
-                <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-8">
                   {Object.entries(item.metrics).map(([key, val]) => (
                     <div key={key} className="bg-[var(--brand-surface-secondary)] p-4 rounded-2xl text-center border border-[var(--brand-border)]">
                       <div className="text-lg md:text-xl font-black text-[var(--brand-text)]">{val}</div>
