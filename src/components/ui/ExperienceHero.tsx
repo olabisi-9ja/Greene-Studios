@@ -54,11 +54,6 @@ export const ExperienceHero = () => {
             </div>
           </div>
           
-          {/* Overlay G-S Logo */}
-          <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-transparent font-black tracking-tighter" style={{ fontSize: "clamp(5rem, 12vw, 15rem)", WebkitTextStroke: "1px var(--brand-text)", opacity: 0.4 }}>G-S</span>
-            <span className="text-[var(--brand-text)] font-semibold tracking-[0.3em] uppercase mt-1 opacity-40" style={{ fontSize: "clamp(0.5rem, 1vw, 1rem)" }}>GREENE STUDIOS</span>
-          </div>
         </div>
       </motion.div>
 
