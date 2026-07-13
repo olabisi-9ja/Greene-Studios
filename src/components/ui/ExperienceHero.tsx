@@ -48,10 +48,10 @@ export const ExperienceHero = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="flex-1 flex flex-col items-center justify-center w-full pointer-events-none select-none relative z-10 overflow-hidden"
+        className="flex-1 flex w-full pointer-events-none select-none relative z-10 overflow-hidden"
       >
         <motion.h1 
-          className="font-black leading-[0.8] tracking-tighter text-[var(--brand-text)] whitespace-nowrap uppercase w-full text-center transition-colors duration-1000 origin-center"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-black leading-[0.8] tracking-tighter text-[var(--brand-text)] whitespace-nowrap uppercase transition-colors duration-1000 origin-center"
           style={{ 
             fontSize: "clamp(6rem, 24vw, 35rem)", 
             y: yParallax,
