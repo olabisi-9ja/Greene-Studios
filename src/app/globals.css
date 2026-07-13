@@ -90,8 +90,6 @@
     /* Clean light beige background for Studio Modular pattern */
     background-image: none;
     background-attachment: fixed;
-    transform: translateZ(0);
-    will-change: transform;
   }
 
   /* Custom scrollbar - Minimal */

@@ -42,9 +42,9 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 w-[95%] max-w-7xl",
+          "fixed left-1/2 -translate-x-1/2 z-[80] transition-all duration-500 w-[95%] max-w-7xl",
           menuOpen ? "pointer-events-none" : "",
-          isVisible ? "top-4" : "-top-[100px]"
+          (isVisible || menuOpen) ? "top-4" : "-top-[100px]"
         )}
       >
         <div className={cn(

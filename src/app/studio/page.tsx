@@ -140,10 +140,10 @@ export default function StudioDemoPage() {
         <div className="bg-[var(--brand-primary)] text-[var(--brand-text-inverse)] rounded-[2rem] p-10 md:p-14 flex flex-col justify-between">
           <div>
             <div className="text-[var(--brand-surface-secondary)] text-8xl leading-none font-serif mb-6">
-              "
+              &quot;
             </div>
             <p className="text-lg md:text-xl font-medium leading-relaxed mb-12">
-              "We fell in love with this design, which definitely matches the vibes and energy that we want in our space. You understand what we want to create, and our project finds its place in the colors, in the typography, and in those beautiful icons. Your work is the first real step in this crazy adventure that we are starting, and we are so grateful that you made our ideas a reality with your talent."
+              &quot;We fell in love with this design, which definitely matches the vibes and energy that we want in our space. You understand what we want to create, and our project finds its place in the colors, in the typography, and in those beautiful icons. Your work is the first real step in this crazy adventure that we are starting, and we are so grateful that you made our ideas a reality with your talent.&quot;
             </p>
           </div>
           <div>
@@ -155,10 +155,10 @@ export default function StudioDemoPage() {
         <div className="border-2 border-[var(--brand-primary)] text-[var(--brand-text)] rounded-[2rem] p-10 md:p-14 flex flex-col justify-between">
           <div>
             <div className="text-[var(--brand-surface-secondary)] text-8xl leading-none font-serif mb-6">
-              "
+              &quot;
             </div>
             <p className="text-lg md:text-xl font-medium leading-relaxed mb-12">
-              "Janne heeft voor drie van onze bedrijven telkens onder de indruk van haar frisse ideeën. Wat haar echt onderscheidt zijn concepten met een feilloze opvolging. De communicatie maken van haar een partij. We zijn bijzonder tevreden over de samenwerking."
+              &quot;Janne heeft voor drie van onze bedrijven telkens onder de indruk van haar frisse ideeën. Wat haar echt onderscheidt zijn concepten met een feilloze opvolging. De communicatie maken van haar een partij. We zijn bijzonder tevreden over de samenwerking.&quot;
             </p>
           </div>
           <div>
