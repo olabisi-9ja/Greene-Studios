@@ -15,6 +15,7 @@ export const ExperienceHero = () => {
 
   // A subtle parallax for the massive text
   const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   return (
     <section ref={containerRef} className="relative min-h-[100svh] w-full flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 p-6 md:p-12 pt-32 pb-8 z-0">
@@ -46,13 +47,13 @@ export const ExperienceHero = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="flex-1 flex flex-col items-center justify-center w-full pointer-events-none select-none relative z-10"
+        className="flex-1 flex flex-col items-center justify-center w-full pointer-events-none select-none relative z-10 overflow-hidden"
       >
-        {/* The user explicitly requested GREENE to be in the brand color, not changing for all themes */}
         <motion.h1 
-          className="font-black leading-[0.8] tracking-tighter text-[#1F3D3A] whitespace-nowrap uppercase w-full text-center"
+          className="font-black leading-[0.8] tracking-tighter text-[var(--brand-text)] whitespace-nowrap uppercase w-full text-center transition-colors duration-1000"
           style={{ 
             fontSize: "clamp(6rem, 24vw, 35rem)", 
+            x: x1,
             y: yParallax 
           }}
         >
