@@ -49,9 +49,9 @@ export default function Footer() {
       </div>
 
       {/* Massive Text */}
-      <div className="w-full mt-24 flex justify-start lg:justify-center px-4 z-10 overflow-visible mb-6">
+      <div className="w-full mt-24 text-center z-10 overflow-hidden mb-6">
         <h1 
-          className="font-black leading-none tracking-tighter text-white whitespace-nowrap lg:text-center w-full flex justify-start lg:justify-center cursor-default pl-[-2vw]"
+          className="font-black leading-none tracking-tighter text-white whitespace-nowrap inline-block cursor-default"
           style={{ fontSize: "clamp(6rem, 24vw, 38rem)" }}
         >
           {"GREENE".split("").map((letter, i) => (
