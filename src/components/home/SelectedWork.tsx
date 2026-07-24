@@ -5,11 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 export default function SelectedWork() {
   const targetRef = useRef<HTMLDivElement>(null);
   const featured = PROJECTS.filter((p) => p.featured).slice(0, 4);
   const [isMobile, setIsMobile] = useState(false);
+  const mobileListRef = useStaggerAnimation<HTMLDivElement>({}, '.stagger-item');
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,12 +43,12 @@ export default function SelectedWork() {
               Projects that define us.
             </h2>
           </div>
-          <div className="flex flex-col gap-12">
+          <div ref={mobileListRef} className="flex flex-col gap-12">
             {featured.map((project) => (
               <Link 
                 href={`/work/${project.slug}`} 
                 key={project.id} 
-                className="group block"
+                className="stagger-item group block"
                 data-cursor="VIEW"
               >
                 <div className="relative aspect-[16/10] overflow-hidden rounded-[32px] bg-[var(--brand-surface-secondary)] mb-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">

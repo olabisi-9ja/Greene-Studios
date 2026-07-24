@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
 
 export default function CTASection() {
+  const sectionRef = useSectionAnimation<HTMLElement>();
+
   return (
-    <section className="py-32 bg-[#FAFAFA] relative overflow-hidden border-t border-[#E6E6E6]">
+    <section ref={sectionRef} className="py-32 bg-[#FAFAFA] relative overflow-hidden border-t border-[#E6E6E6]">
       <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-8">
           <div className="w-6 h-px bg-[#BFA36A]" />

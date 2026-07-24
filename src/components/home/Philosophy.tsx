@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 export default function Philosophy() {
+  const containerRef = useStaggerAnimation<HTMLDivElement>({}, '.stagger-item');
+
   const principles = [
     {
       num: "01",
@@ -38,20 +40,16 @@ export default function Philosophy() {
             </p>
           </div>
 
-          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div ref={containerRef} className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8">
             {principles.map((p, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="flex flex-col gap-4 p-6 bg-[var(--brand-surface)] border border-[var(--brand-border)] rounded-2xl"
+                className="stagger-item flex flex-col gap-4 p-6 bg-[var(--brand-surface)] border border-[var(--brand-border)] rounded-2xl"
               >
                 <span className="text-sm font-mono text-[var(--brand-accent)]">{p.num}</span>
                 <h3 className="text-xl font-bold text-[var(--brand-text)]">{p.title}</h3>
                 <p className="text-[var(--brand-text-secondary)] text-sm leading-relaxed">{p.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
 

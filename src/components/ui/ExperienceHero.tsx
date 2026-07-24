@@ -4,16 +4,18 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { BRAND } from '@/lib/data';
+import { useHeroAnimation } from '@/lib/hooks/useHeroAnimation';
 
 export const ExperienceHero = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const { headlineRef, textRef, buttonRef } = useHeroAnimation();
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  // A subtle parallax and depth effect for the massive text
+  // Subtle parallax for the giant background text
   const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const scaleEffect = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
   const opacityEffect = useTransform(scrollYProgress, [0, 1], [1, 0.1]);
@@ -23,24 +25,21 @@ export const ExperienceHero = () => {
       
       {/* Top Row */}
       <div className="flex justify-between items-start w-full relative z-20 mt-4 md:mt-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-md pointer-events-auto flex flex-col items-start gap-4 md:gap-6"
-        >
-          <h2 className="text-xl md:text-3xl font-bold leading-[1.1] tracking-tight">
+        <div className="max-w-md pointer-events-auto flex flex-col items-start gap-4 md:gap-6">
+          <h2 ref={headlineRef} className="text-xl md:text-3xl font-bold leading-[1.1] tracking-tight">
             Not a style, a perspective.<br />
             Because Greene is Everything.
           </h2>
-          <Link 
-            href="/contact"
-            data-cursor="CALL"
-            className="inline-flex items-center justify-center gap-3 bg-[var(--brand-text)] text-[var(--brand-bg)] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300"
-          >
-            BOOK A CALL &rarr;
-          </Link>
-        </motion.div>
+          <div ref={buttonRef}>
+            <Link 
+              href="/contact"
+              data-cursor="CALL"
+              className="inline-flex items-center justify-center gap-3 bg-[var(--brand-text)] text-[var(--brand-bg)] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300"
+            >
+              BOOK A CALL &rarr;
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Massive Center Text */}
@@ -65,21 +64,11 @@ export const ExperienceHero = () => {
 
       {/* Bottom Row */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end w-full font-bold gap-4 pointer-events-auto relative z-20">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="flex items-center gap-2 text-sm md:text-base font-bold tracking-tight whitespace-nowrap"
-        >
+        <div ref={textRef} className="flex items-center gap-2 text-sm md:text-base font-bold tracking-tight whitespace-nowrap">
           Creative studio in Nigeria
-        </motion.div>
+        </div>
         
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="flex items-center gap-2 text-xs md:text-sm font-black uppercase"
-        >
+        <div className="flex items-center gap-2 text-xs md:text-sm font-black uppercase">
           <a href={BRAND.linkedin} target="_blank" rel="noreferrer" className="hover:opacity-70 transition-opacity">
             LINKEDIN
           </a>
@@ -91,7 +80,7 @@ export const ExperienceHero = () => {
           <span className="bg-[var(--brand-text)] text-[var(--brand-bg)] px-2 py-1 rounded-sm text-[10px] leading-none ml-2">
             EN
           </span>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

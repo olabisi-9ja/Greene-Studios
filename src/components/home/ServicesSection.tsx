@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import { Code2, Paintbrush, Monitor, Cpu } from "lucide-react";
+import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 export default function ServicesSection() {
+  const containerRef = useStaggerAnimation<HTMLDivElement>({}, '.stagger-item');
+
   const services = [
     {
       title: "Product Design",
@@ -54,17 +57,19 @@ export default function ServicesSection() {
         </div>
 
         {/* Bento Grid */}
-        <BentoGrid className="mb-16">
-          {services.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              description={item.description}
-              icon={item.icon}
-              className={item.className}
-            />
-          ))}
-        </BentoGrid>
+        <div ref={containerRef}>
+          <BentoGrid className="mb-16">
+            {services.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+                className={`${item.className} stagger-item`}
+              />
+            ))}
+          </BentoGrid>
+        </div>
 
         {/* CTA */}
         <div className="pt-12 border-t border-[var(--brand-border)] flex flex-col sm:flex-row justify-between items-center gap-6">

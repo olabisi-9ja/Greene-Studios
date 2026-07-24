@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BRAND } from "@/lib/data";
+import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const footerRef = useSectionAnimation<HTMLElement>();
 
   return (
-    <footer className="bg-[var(--brand-primary)] text-white flex flex-col justify-between pt-24 pb-8 overflow-hidden relative min-h-screen">
+    <footer ref={footerRef} className="bg-[var(--brand-primary)] text-white flex flex-col justify-between pt-24 pb-8 overflow-hidden relative min-h-screen">
       <div className="max-w-[1400px] mx-auto px-6 w-full flex flex-col lg:flex-row justify-between items-start z-10 flex-1">
         
         {/* Left Section */}

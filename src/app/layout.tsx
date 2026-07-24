@@ -68,6 +68,7 @@ import NoiseTexture from "@/components/canvas/NoiseTexture";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import FloatingButtons from "@/components/FloatingButtons";
 import PageTransition from "@/components/animations/PageTransition";
+import { cn } from "@/lib/utils";
 
 export default function RootLayout({
  children,
@@ -75,7 +76,7 @@ export default function RootLayout({
  children: React.ReactNode;
 }) {
  return (
- <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
+ <html lang="en" suppressHydrationWarning className={cn(inter.variable, "font-sans")}>
  <body className="antialiased mode-clean overflow-x-hidden">
  <AtmosphereProvider>
  <ScrollProgress />

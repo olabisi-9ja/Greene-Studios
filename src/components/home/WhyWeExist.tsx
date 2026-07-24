@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 const CARDS = [
   {
@@ -32,6 +33,7 @@ const CARDS = [
 
 export default function WhyWeExist() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const containerRef = useStaggerAnimation<HTMLDivElement>({}, '.stagger-item');
 
   return (
     <section className="py-32 bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 relative">
@@ -57,7 +59,7 @@ export default function WhyWeExist() {
           </div>
         </div>
 
-        <div className="w-full flex flex-col border-t-2 border-[var(--brand-text)]">
+        <div ref={containerRef} className="w-full flex flex-col border-t-2 border-[var(--brand-text)]">
           {CARDS.map((card) => {
             const isHovered = hovered === card.id;
             return (
@@ -65,7 +67,7 @@ export default function WhyWeExist() {
                 key={card.id}
                 onMouseEnter={() => setHovered(card.id)}
                 onMouseLeave={() => setHovered(null)}
-                className="w-full group cursor-none border-b-2 border-[var(--brand-text)] relative overflow-hidden"
+                className="stagger-item w-full group cursor-none border-b-2 border-[var(--brand-text)] relative overflow-hidden"
                 data-cursor="EXPLORE"
               >
                 {/* Hover Background Fill Effect */}

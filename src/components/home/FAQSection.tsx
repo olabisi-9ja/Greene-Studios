@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { FAQS } from "@/lib/data";
 import { Plus, Minus } from "lucide-react";
+import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
 
 export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
+  const sectionRef = useSectionAnimation<HTMLElement>();
 
   return (
-    <section className="py-32 bg-white">
+    <section ref={sectionRef} className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Left */}
@@ -36,33 +38,42 @@ export default function FAQSection() {
 
           {/* Right */}
           <div className="space-y-0">
-            {FAQS.map((faq, i) => (
-              <div
-                key={i}
-                className="border-b border-[#E6E6E6]"
-              >
-                <button
-                  onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between py-6 text-left group"
+            {FAQS.map((faq, i) => {
+              const isOpen = open === i;
+              return (
+                <div
+                  key={i}
+                  className="border-b border-[#E6E6E6] overflow-hidden"
                 >
-                  <span className="text-[#101010] font-medium text-lg tracking-tight group-hover:text-[#BFA36A] transition-colors pr-4">
-                    {faq.question}
-                  </span>
-                  {open === i ? (
-                    <Minus size={20} className="text-[#BFA36A] flex-shrink-0" />
-                  ) : (
-                    <Plus size={20} className="text-[#757575] flex-shrink-0 group-hover:text-[#101010] transition-colors" />
-                  )}
-                </button>
-                {open === i && (
-                  <div className="pb-8">
-                    <p className="text-[#757575] text-base leading-relaxed">
-                      {faq.answer}
-                    </p>
+                  <button
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="w-full flex items-center justify-between py-6 text-left group"
+                  >
+                    <span className="text-[#101010] font-medium text-lg tracking-tight group-hover:text-[#BFA36A] transition-colors pr-4">
+                      {faq.question}
+                    </span>
+                    <span className="transform transition-transform duration-300 flex-shrink-0">
+                      {isOpen ? (
+                        <Minus size={20} className="text-[#BFA36A]" />
+                      ) : (
+                        <Plus size={20} className="text-[#757575] group-hover:text-[#101010] transition-colors" />
+                      )}
+                    </span>
+                  </button>
+                  <div 
+                    className={`grid transition-[grid-template-rows,padding,opacity] duration-300 ease-out ${
+                      isOpen ? 'grid-rows-[1fr] pb-8 opacity-100' : 'grid-rows-[0fr] pb-0 opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="text-[#757575] text-base leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
