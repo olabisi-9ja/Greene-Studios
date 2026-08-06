@@ -101,14 +101,12 @@
     --brand-paper: #0c1f14;
     --brand-ink: #0c1f14;
 
-    /* Punchy, vibrant abstract palette */
-    --color-abstract-orange: #ff6b2c;
-    --color-abstract-yellow: #ffd21a;
-    --color-abstract-green: #3ddc84;
+    /* Cohesive vibrant palette (analogous hues, no clashing complements) */
     --color-abstract-lemon: #d9f42c;
+    --color-abstract-green: #3ddc84;
+    --color-abstract-teal: #2ec4b6;
     --color-abstract-blue: #3aa6ff;
-    --color-abstract-pink: #ff5c8a;
-    --color-abstract-purple: #9d6bff;
+    --color-abstract-yellow: #ffd21a;
     --color-abstract-black: #0c1f14;
 
     --cta-bg: var(--color-abstract-green);
@@ -206,10 +204,10 @@
   }
 
   .glass-pill {
-    background: color-mix(in srgb, var(--brand-surface) 78%, transparent);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid color-mix(in srgb, var(--brand-border) 80%, transparent);
+    background: color-mix(in srgb, var(--brand-surface) 94%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid color-mix(in srgb, var(--brand-border) 85%, transparent);
   }
 
   /* ─── Buttons ────────────────────────────────────────────────────── */
@@ -425,7 +423,7 @@
   color: var(--color-abstract-green);
 }
 .mode-studio .hero-headline .font-serif-i {
-  color: var(--color-abstract-orange);
+  color: var(--color-abstract-lemon);
 }
 
 /* Buttons */
@@ -453,9 +451,9 @@
 
 /* Rotating badge center disc */
 .mode-studio .badge-center {
-  background: var(--color-abstract-orange);
+  background: var(--color-abstract-lemon);
   border: none;
-  box-shadow: 0 0 24px rgba(255, 107, 44, 0.45);
+  box-shadow: 0 0 24px rgba(217, 244, 44, 0.45);
 }
 
 /* Page header bottom strip */
@@ -476,7 +474,7 @@
 
 /* Selection */
 .mode-studio ::selection {
-  background: var(--color-abstract-orange);
+  background: var(--color-abstract-lemon);
   color: var(--brand-ink);
 }
 

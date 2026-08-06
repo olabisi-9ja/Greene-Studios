@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Magnetic from "@/components/animations/Magnetic";
 import RotatingBadge from "@/components/ui/RotatingBadge";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { useHeroAnimation } from "@/lib/hooks/useHeroAnimation";
@@ -83,17 +82,21 @@ export const ExperienceHero = () => {
           </p>
 
           <div ref={ctasRef} className="mt-9 flex flex-wrap items-center gap-4">
-            <Magnetic>
-              <Link href="/contact" data-cursor="HELLO" className="btn-primary">
-                Book a call
-                <span aria-hidden="true">→</span>
-              </Link>
-            </Magnetic>
-            <Magnetic>
-              <Link href="/work" data-cursor="SEE" className="btn-outline">
-                See the work
-              </Link>
-            </Magnetic>
+            <Link
+              href="/contact"
+              data-cursor="HELLO"
+              className="btn-primary transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              Book a call
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link
+              href="/work"
+              data-cursor="SEE"
+              className="btn-outline transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              See the work
+            </Link>
           </div>
 
           <div
@@ -149,7 +152,7 @@ export const ExperienceHero = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
 
               {/* bottom caption chip */}
-              <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl bg-[var(--brand-bg)]/92 px-5 py-4 backdrop-blur">
+              <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl bg-[var(--brand-bg)] px-5 py-4">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-accent)]">
                     The studio
@@ -213,7 +216,7 @@ export const ExperienceHero = () => {
             </div>
 
             {/* floating award chip */}
-            <div className="animate-float absolute -left-3 top-10 hidden items-center gap-2 rounded-full bg-[var(--brand-bg)]/92 px-4 py-2.5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] backdrop-blur md:flex md:-left-8">
+            <div className="animate-float absolute -left-3 top-10 hidden items-center gap-2 rounded-full bg-[var(--brand-bg)] px-4 py-2.5 shadow-[0_12px_36px_rgba(0,0,0,0.14)] md:flex md:-left-8">
               <span className="text-sm text-[var(--brand-accent)]" aria-hidden="true">✦</span>
               <span className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-text)]">
                 Awwwards · SOTD ×3
@@ -221,7 +224,7 @@ export const ExperienceHero = () => {
             </div>
 
             {/* floating stat chip */}
-            <div className="animate-float-delay absolute right-2 top-1/2 hidden items-center gap-2 rounded-full bg-[var(--brand-bg)]/92 px-4 py-2.5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] backdrop-blur md:flex md:-right-4">
+            <div className="animate-float-delay absolute right-2 top-1/2 hidden items-center gap-2 rounded-full bg-[var(--brand-bg)] px-4 py-2.5 shadow-[0_12px_36px_rgba(0,0,0,0.14)] md:flex md:-right-4">
               <span className="font-display text-sm font-black text-[var(--brand-text)]">40+</span>
               <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)]">
                 projects shipped

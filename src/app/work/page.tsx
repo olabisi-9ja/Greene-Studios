@@ -90,7 +90,7 @@ export default function WorkPage() {
  />
  {/* hover sweep */}
  <div
- className="work-sweep absolute inset-0 scale-x-0 opacity-90 mix-blend-overlay group-hover:scale-x-100"
+ className="work-sweep absolute inset-0 scale-x-0 opacity-90 group-hover:scale-x-100"
  aria-hidden="true"
  />
  <span className="absolute right-4 top-4 flex h-11 w-11 translate-y-1 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[var(--brand-on-accent)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
@@ -136,20 +136,29 @@ export default function WorkPage() {
  </div>
  )}
 
- {/* Experiments CTA */}
- <div className="mt-24 flex flex-col items-start justify-between gap-8 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-10 md:flex-row md:items-center md:p-14">
- <div>
- <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
- ✦ The lab
- </span>
- <h3 className="font-display text-3xl font-black uppercase leading-none tracking-tight text-[var(--brand-text)] md:text-4xl">
- Curious how we <span className="font-serif-i lowercase normal-case tracking-normal">experiment?</span>
- </h3>
- </div>
- <Link href="/experiments" data-cursor="GO" className="btn-primary shrink-0">
- Explore the lab <span aria-hidden="true">→</span>
- </Link>
- </div>
+        {/* Experiments CTA */}
+        <div className="mt-24 grid grid-cols-1 items-center gap-8 overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:grid-cols-[240px_1fr_auto] md:p-6 md:pl-10">
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-xl md:block">
+            <Image
+              src="/images/hero/mockup-1.jpg"
+              alt="A Greene Studios experiment"
+              fill
+              sizes="240px"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+              ✦ The lab
+            </span>
+            <h3 className="font-display text-3xl font-black uppercase leading-none tracking-tight text-[var(--brand-text)] md:text-4xl">
+              Curious how we <span className="font-serif-i lowercase normal-case tracking-normal">experiment?</span>
+            </h3>
+          </div>
+          <Link href="/experiments" data-cursor="GO" className="btn-primary w-fit shrink-0">
+            Explore the lab <span aria-hidden="true">→</span>
+          </Link>
+        </div>
  </div>
  </div>
  );

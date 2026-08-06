@@ -75,11 +75,11 @@ export default function StudioDemoPage() {
             <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Enhance Joy</h3>
           </div>
 
-          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-orange)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-teal)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
             <div className="self-end">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/15 text-2xl">🔥</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/15 text-2xl">🌊</div>
             </div>
-            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Bold & Playful</h3>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Fresh & Fluid</h3>
           </div>
 
           <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-blue)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
@@ -89,9 +89,9 @@ export default function StudioDemoPage() {
             <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Calm & Clear</h3>
           </div>
 
-          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-purple)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--brand-ink)] p-8 text-[var(--color-abstract-lemon)] shadow-md transition-transform duration-500 hover:-translate-y-2">
             <div className="self-end">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/15 text-2xl">🎈</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-abstract-lemon)]/15 text-2xl">🎈</div>
             </div>
             <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Dream Big</h3>
           </div>

@@ -80,21 +80,25 @@ export default function AboutPage() {
  {/* Founder */}
  <section className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
  <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-24">
- {/* Portrait placeholder */}
- <div className="relative">
-            <div className="flex aspect-[4/5] w-full flex-col items-center justify-center rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
-              <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-bg)] ring-1 ring-[var(--brand-border)]">
-                <Image
-                  src="/logo.png"
-                  alt="Greene Studios logo"
-                  fill
-                  sizes="112px"
-                  className="object-contain"
-                />
+          {/* Portrait */}
+          <div className="relative">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
+              <Image
+                src="/images/hero/team-2.jpg"
+                alt="The Greene Studios team"
+                fill
+                sizes="(max-width: 1024px) 100vw, 46vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+              <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-[var(--brand-bg)]/95 px-5 py-4">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-accent)]">
+                  The people
+                </p>
+                <p className="mt-0.5 font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">
+                  The mind behind the work
+                </p>
               </div>
-              <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
-                Founder portrait
-              </p>
             </div>
  <div className="absolute -bottom-6 -left-4 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] px-6 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:-left-8">
  <p className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">Founded 2022</p>

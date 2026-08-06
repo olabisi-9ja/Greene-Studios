@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { BRAND } from "@/lib/data";
 import PageHeader from "@/components/ui/PageHeader";
 
@@ -45,6 +46,28 @@ export default function CareersPage() {
       />
 
       <div className="mx-auto max-w-4xl px-5 md:px-10">
+        {/* Team banner */}
+        <div className="relative mb-14 overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+          <div className="relative aspect-[16/6]">
+            <Image
+              src="/images/hero/team.jpg"
+              alt="The Greene Studios team"
+              fill
+              sizes="(max-width: 768px) 100vw, 896px"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <div className="absolute inset-x-5 bottom-4 flex items-center justify-between">
+              <p className="font-display text-lg font-black uppercase tracking-tight text-white md:text-xl">
+                Small team, <span className="font-serif-i lowercase normal-case tracking-normal">big swings.</span>
+              </p>
+              <span className="hidden rounded-full bg-[var(--brand-accent)] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)] md:block">
+                2 open roles
+              </span>
+            </div>
+          </div>
+        </div>
+
         <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
           <span className="text-[var(--brand-accent)]">✦</span> Open positions
         </span>

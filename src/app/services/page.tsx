@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SERVICES } from "@/lib/data";
 import PageHeader from "@/components/ui/PageHeader";
 import PricingTiers from "@/components/services/PricingTiers";
@@ -67,7 +68,37 @@ export default function ServicesPage() {
  ))}
  </div>
 
- <PricingTiers />
+        {/* Image strip */}
+        <div className="mt-20 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+            <Image
+              src="/images/hero/branding-2.jpg"
+              alt="Brand identity work"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
+              Identity systems that <span className="font-serif-i lowercase normal-case tracking-normal">outlast trends.</span>
+            </p>
+          </div>
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+            <Image
+              src="/images/hero/mockup-1.jpg"
+              alt="Web design work"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
+              Interfaces that feel <span className="font-serif-i lowercase normal-case tracking-normal">inevitable.</span>
+            </p>
+          </div>
+        </div>
+
+        <PricingTiers />
 
  {/* Two CTA cards */}
  <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Magnetic from "@/components/animations/Magnetic";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
 
@@ -35,8 +34,7 @@ export default function CTASection() {
         </p>
 
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Magnetic>
-            <Link
+          <Link
               href="/contact"
               data-cursor="HELLO"
               className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-transform duration-300 hover:scale-[1.04]"
@@ -44,16 +42,13 @@ export default function CTASection() {
             >
               Start a project <span aria-hidden="true">→</span>
             </Link>
-          </Magnetic>
-          <Magnetic>
-            <a
+          <a
               href="mailto:hello@greenestudios.co"
               className="inline-flex items-center justify-center gap-3 rounded-full border-2 px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300 hover:bg-[var(--cta-fg)] hover:text-[var(--cta-bg)]"
               style={{ borderColor: "var(--cta-fg)", color: "var(--cta-fg)" }}
             >
               hello@greenestudios.co
             </a>
-          </Magnetic>
         </div>
 
         <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-bold uppercase tracking-[0.15em] opacity-80">
