@@ -22,8 +22,8 @@ export default function PageHeader({
  children,
  className = "",
 }: PageHeaderProps) {
- return (
- <div className={`relative overflow-hidden ${className}`}>
+  return (
+    <div className={`page-header relative overflow-hidden ${className}`}>
  {/* atmosphere: subtle grid only */}
  <div className="absolute inset-0 bg-grid-soft opacity-40" aria-hidden="true" />
 

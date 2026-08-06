@@ -72,25 +72,28 @@
     --color-abstract-pink: #a63a52;
   }
 
-  /* ─── Studio (greenhouse) ────────────────────────────────────────── */
+  /* ─── Studio (vibrant greenhouse) ───────────────────────────────── */
   .mode-studio {
     --brand-primary: #d9f42c;
-    --brand-bg: #10241a;
-    --brand-surface: #183221;
-    --brand-surface-secondary: #214030;
-    --brand-border: #36533f;
-    --brand-text: #eef6e8;
-    --brand-text-secondary: #9db9a4;
+    --brand-bg: #0c1f14; /* deep green-black so colours pop */
+    --brand-surface: #12301d;
+    --brand-surface-secondary: #1a3d26;
+    --brand-border: #2e5a3c;
+    --brand-text: #f2fbe9;
+    --brand-text-secondary: #a9c9b0;
     --brand-accent: #d9f42c;
-    --brand-paper: #10241a;
-    --brand-ink: #eef6e8;
+    --brand-paper: #0c1f14;
+    --brand-ink: #0c1f14;
 
-    --color-abstract-orange: #ff7a45;
-    --color-abstract-blue: #6fb7c9;
-    --color-abstract-green: #6fbf8b;
+    /* Punchy, vibrant abstract palette */
+    --color-abstract-orange: #ff6b2c;
+    --color-abstract-yellow: #ffd21a;
+    --color-abstract-green: #3ddc84;
     --color-abstract-lemon: #d9f42c;
-    --color-abstract-black: #eef6e8;
-    --color-abstract-pink: #e88fb0;
+    --color-abstract-blue: #3aa6ff;
+    --color-abstract-pink: #ff5c8a;
+    --color-abstract-purple: #9d6bff;
+    --color-abstract-black: #0c1f14;
   }
 
   * {
@@ -287,6 +290,105 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* ═══ Studio mode: vibrant colour system ═════════════════════════════ */
+
+/* Rainbow marquee strips */
+.mode-studio .marquee-strip,
+.mode-studio .marquee-strip-hero {
+  background: linear-gradient(90deg, #ff6b2c, #ffd21a, #3ddc84, #3aa6ff, #9d6bff, #ff5c8a, #ff6b2c);
+  background-size: 220% 100%;
+  animation: studio-hue-shift 14s linear infinite;
+  color: #0c1f14;
+}
+.mode-studio .marquee-strip-plain {
+  background: color-mix(in srgb, var(--brand-surface) 70%, transparent);
+}
+
+@keyframes studio-hue-shift {
+  to {
+    background-position: 220% 0;
+  }
+}
+
+/* Gradient headline in the hero */
+.mode-studio .hero-headline {
+  background: linear-gradient(93deg, #ff5c8a, #ff8a3d 16%, #ffd21a 34%, #3ddc84 54%, #3aa6ff 74%, #9d6bff 90%, #ff5c8a);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: studio-hue-shift 12s linear infinite;
+}
+.mode-studio .hero-headline .font-serif-i {
+  color: transparent;
+}
+
+/* Buttons */
+.mode-studio .btn-primary {
+  background: linear-gradient(90deg, #d9f42c, #3ddc84);
+  color: #0c1f14;
+}
+.mode-studio .btn-primary:hover {
+  box-shadow: 0 10px 34px rgba(61, 220, 132, 0.35);
+  transform: translateY(-1px);
+}
+.mode-studio .btn-outline {
+  border-color: var(--brand-accent);
+  color: var(--brand-text);
+}
+.mode-studio .btn-outline:hover {
+  background: rgba(217, 244, 44, 0.12);
+  border-color: var(--brand-accent);
+}
+
+/* Work row hover sweep */
+.mode-studio .work-sweep {
+  background: linear-gradient(90deg, #ff5c8a, #ff8a3d, #ffd21a, #3ddc84, #3aa6ff);
+}
+
+/* Rotating badge center disc */
+.mode-studio .badge-center {
+  background: conic-gradient(from 0deg, #ff6b2c, #ffd21a, #3ddc84, #3aa6ff, #9d6bff, #ff5c8a, #ff6b2c);
+  border: none;
+  box-shadow: 0 0 24px rgba(255, 92, 138, 0.45);
+}
+
+/* Page header bottom strip */
+.mode-studio .page-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff5c8a, #ffd21a, #3ddc84, #3aa6ff, #9d6bff);
+}
+
+/* Scroll progress */
+.mode-studio .scroll-progress {
+  background: linear-gradient(90deg, #ff5c8a, #ffd21a, #3ddc84, #3aa6ff, #9d6bff);
+}
+
+/* CTA section */
+.mode-studio .cta-vibrant {
+  background: linear-gradient(120deg, #ff5c8a, #ff8a3d 25%, #ffd21a 50%, #3ddc84 75%, #3aa6ff);
+  color: #0c1f14;
+}
+.mode-studio .cta-vibrant .btn-ink {
+  background: #0c1f14;
+  color: #d9f42c;
+}
+.mode-studio .cta-vibrant .btn-ink:hover {
+  background: #0c1f14;
+  transform: scale(1.04);
+}
+
+/* Selection */
+.mode-studio ::selection {
+  background: #ff5c8a;
+  color: #0c1f14;
 }
 
 /* ─── Shadcn tokens (kept for component compatibility) ─────────────── */

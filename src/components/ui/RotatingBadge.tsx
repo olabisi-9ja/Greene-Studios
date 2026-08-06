@@ -42,8 +42,8 @@ export default function RotatingBadge({
  </textPath>
  </text>
  </svg>
- <div className="absolute inset-0 flex items-center justify-center">
- <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="badge-center flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
  {centerImage ? (
  <Image
  src={centerImage}

@@ -11,7 +11,7 @@ export default function CTASection() {
  const sectionRef = useSectionAnimation<HTMLElement>();
 
  return (
- <section ref={sectionRef} className="relative overflow-hidden bg-[var(--brand-accent)] text-[var(--brand-ink)]">
+    <section ref={sectionRef} className="cta-vibrant relative overflow-hidden bg-[var(--brand-accent)] text-[var(--brand-ink)]">
  {/* Giant CTA */}
  <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
  <span className="mb-8 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em]">
@@ -32,13 +32,13 @@ export default function CTASection() {
 
  <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
  <Magnetic>
- <Link
- href="/contact"
- data-cursor="HELLO"
- className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--brand-ink)] px-10 py-5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-accent)] transition-transform duration-300 hover:scale-[1.04]"
- >
- Start a project <span aria-hidden="true">→</span>
- </Link>
+            <Link
+              href="/contact"
+              data-cursor="HELLO"
+              className="btn-ink inline-flex items-center justify-center gap-3 rounded-full bg-[var(--brand-ink)] px-10 py-5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-accent)] transition-transform duration-300 hover:scale-[1.04]"
+            >
+              Start a project <span aria-hidden="true">→</span>
+            </Link>
  </Magnetic>
  <Magnetic>
  <a

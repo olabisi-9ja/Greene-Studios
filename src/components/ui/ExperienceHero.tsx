@@ -43,7 +43,7 @@ export const ExperienceHero = () => {
 
           <h1
             ref={headlineRef}
-            className="font-display text-[clamp(3rem,7.2vw,7.2rem)] font-black uppercase leading-[0.92] tracking-[-0.02em] text-[var(--brand-text)]"
+            className="hero-headline font-display text-[clamp(3rem,7.2vw,7.2rem)] font-black uppercase leading-[0.92] tracking-[-0.02em] text-[var(--brand-text)]"
           >
             <span className="block overflow-hidden">
               <span className="hero-line-inner block">We build brands</span>
@@ -153,7 +153,7 @@ export const ExperienceHero = () => {
       </div>
 
       {/* ─── Marquee strip ─────────────────────────────────────────── */}
-      <div ref={marqueeRef} className="relative z-10 border-t border-[var(--brand-border)] bg-[var(--brand-accent)] py-3">
+      <div ref={marqueeRef} className="marquee-strip-hero relative z-10 border-t border-[var(--brand-border)] bg-[var(--brand-accent)] py-3">
         <Marquee>
           <MarqueeContent speed={45} autoFill>
             {CAPABILITIES.map((cap, i) => (
