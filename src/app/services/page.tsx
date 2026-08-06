@@ -1,111 +1,142 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SERVICES } from "@/lib/data";
+import PageHeader from "@/components/ui/PageHeader";
 import PricingTiers from "@/components/services/PricingTiers";
 import CTASection from "@/components/home/CTASection";
 
 export const metadata: Metadata = {
- title: "Services — What We Offer",
+ title: "Services · What We Offer",
  description:
  "Full-service digital design and development: Web Design, UI/UX, Branding, Frontend Development, Motion Design, AI Integration, and more.",
 };
 
 export default function ServicesPage() {
  return (
- <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 pt-32">
- {/* Header */}
- <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-24">
- <div className="flex items-center gap-3 mb-6">
- <div className="w-6 h-px bg-[#BFA36A]" />
- <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
- Services
- </span>
- </div>
- <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-end">
- <h1 className="text-[clamp(3.5rem,8vw,6.5rem)] font-semibold text-[#101010] leading-[1.05] tracking-tight text-balance">
- Capabilities <br className="hidden lg:block" /> built for <br className="hidden lg:block" /> ambition.
- </h1>
- <div className="pb-4">
- <p className="text-[#757575] text-lg lg:text-xl leading-relaxed mb-10 max-w-lg">
- From first sketch to final deployment, we offer the complete
- creative and technical suite. One studio, end to end.
- </p>
- <Link
- href="/contact"
- className="inline-flex items-center gap-3 bg-[#111111] hover:bg-[#BFA36A] text-white text-base font-medium px-8 py-4 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5"
- >
- Discuss Your Needs
- <span className="transition-transform group-hover:translate-x-1">→</span>
+ <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <PageHeader
+ kicker="Services"
+ title={
+ <>
+ Capabilities built
+ <br />
+ <span className="font-serif-i lowercase normal-case tracking-normal">for ambition.</span>
+ </>
+ }
+ description="From first sketch to final deployment, we offer the complete creative and technical suite. One studio, end to end."
+ right={
+ <Link href="/contact" data-cursor="HELLO" className="btn-primary">
+ Discuss your needs <span aria-hidden="true">→</span>
  </Link>
- </div>
- </div>
- </div>
+ }
+ />
 
- {/* Services List */}
- <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-32">
- <div className="flex flex-col border-t border-[#E6E6E6]">
+ {/* Services list */}
+ <div className="mx-auto max-w-[1400px] px-5 pb-24 md:px-10">
+ <div className="flex flex-col border-t border-[var(--brand-border)]">
  {SERVICES.map((service, i) => (
- <div key={service.id} className="group border-b border-[#E6E6E6] hover:bg-[#FAFAFA] transition-colors duration-300">
- <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-8 py-12 px-4 lg:px-8">
- {/* Number */}
- <div className="lg:col-span-1 pt-1">
- <span className="text-[#BFA36A] text-sm font-mono tracking-widest">
- {String(i + 1).padStart(2, "0")}
+ <Link
+ key={service.id}
+ href={`/services/${service.id}`}
+ className="group relative block border-b border-[var(--brand-border)]"
+ data-cursor="VIEW"
+ >
+              <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-9">
+ <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
+ 0{i + 1}
  </span>
- </div>
-
- {/* Title */}
- <div className="lg:col-span-3">
- <h2 className="text-3xl font-semibold text-[#101010] tracking-tight group-hover:text-[#BFA36A] transition-colors">
+ <h2 className="col-span-10 font-display text-[clamp(1.6rem,3.6vw,3.2rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:col-span-4">
  {service.title}
  </h2>
- </div>
-
- {/* Description */}
- <div className="lg:col-span-4">
- <p className="text-[#757575] text-base leading-relaxed">
+ <p className="col-span-12 mt-2 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)] md:col-span-5 md:mt-0 md:text-[15px]">
  {service.shortDesc || service.description}
  </p>
- </div>
-
- {/* Deliverables */}
- <div className="lg:col-span-4 lg:pl-8">
- <ul className="space-y-3">
- {service.deliverables.map((d) => (
- <li key={d} className="flex items-center gap-3 text-[#101010] font-medium text-sm">
- <span className="w-1.5 h-1.5 rounded-full bg-[#E6E6E6] group-hover:bg-[#BFA36A] transition-colors" />
- {d}
- </li>
- ))}
- </ul>
+ <div className="col-span-12 flex items-center gap-2 md:col-span-2 md:justify-end">
+ <span className="hidden text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)] md:block">
+ {service.deliverables.length} deliverables
+ </span>
+ <span
+ className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"
+ aria-hidden="true"
+ >
+ →
+ </span>
  </div>
  </div>
- </div>
+ </Link>
  ))}
  </div>
 
- {/* Pricing Section */}
- <PricingTiers />
+        {/* Image strip */}
+        <div className="mt-20 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+            <Image
+              src="/images/hero/branding-2.jpg"
+              alt="Brand identity work"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
+              Identity systems that <span className="font-serif-i lowercase normal-case tracking-normal">outlast trends.</span>
+            </p>
+          </div>
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+            <Image
+              src="/images/hero/mockup-1.jpg"
+              alt="Web design work"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
+              Interfaces that feel <span className="font-serif-i lowercase normal-case tracking-normal">inevitable.</span>
+            </p>
+          </div>
+        </div>
 
- {/* Packages Reference / FAQ */}
- <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
- <div className="p-10 lg:p-14 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px]">
- <h3 className="text-[#101010] text-3xl font-semibold mb-6 tracking-tight">Not sure where to start?</h3>
- <p className="text-[#757575] text-lg mb-8 leading-relaxed">
- We&apos;ll scope your project together during a free 30-minute discovery
- call. No hard sell, just clarity.
+        <PricingTiers />
+
+ {/* Two CTA cards */}
+ <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
+ <div className="flex flex-col justify-between gap-8 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-10 lg:p-12">
+ <div>
+ <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+ ✦ Not sure where to start?
+ </span>
+ <h3 className="font-display text-3xl font-black uppercase leading-none tracking-tight text-[var(--brand-text)]">
+ Let&apos;s scope it <span className="font-serif-i lowercase normal-case tracking-normal">together.</span>
+ </h3>
+ <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--brand-text-secondary)]">
+ We&apos;ll scope your project during a free 30-minute discovery call. No hard sell, just clarity.
  </p>
- <Link href="/contact" className="inline-flex items-center gap-2 bg-white border border-[#E6E6E6] hover:border-[#101010] text-[#101010] font-medium px-8 py-4 rounded-full transition-all text-sm">
- Book Discovery Call →
+ </div>
+ <Link href="/contact" data-cursor="HELLO" className="btn-outline w-fit">
+ Book discovery call <span aria-hidden="true">→</span>
  </Link>
  </div>
- <div className="p-10 lg:p-14 bg-[#111111] rounded-[24px] flex flex-col justify-center">
- <h3 className="text-white text-3xl font-semibold mb-6 tracking-tight">Enterprise & Custom</h3>
- <p className="text-white/70 text-lg mb-8 leading-relaxed">
- Have complex requirements? We build custom retainers and dedicated team extensions for high-growth companies.
+
+ <div className="flex flex-col justify-between gap-8 rounded-2xl bg-[var(--brand-text)] p-10 text-[var(--brand-bg)] lg:p-12">
+ <div>
+ <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+ ✦ Enterprise & custom
+ </span>
+ <h3 className="font-display text-3xl font-black uppercase leading-none tracking-tight">
+ Complex requirements?
+ </h3>
+ <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--brand-bg)]/70">
+ We build custom retainers and dedicated team extensions for high-growth companies.
  </p>
- <Link href="/contact" className="inline-flex items-center gap-2 bg-[#BFA36A] hover:bg-white text-[#111111] font-medium px-8 py-4 rounded-full transition-all text-sm self-start">
- Get Custom Quote →
+ </div>
+ <Link
+ href="/contact"
+ data-cursor="HELLO"
+ className="inline-flex w-fit items-center gap-3 rounded-full bg-[var(--brand-accent)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-on-accent)] transition-colors duration-300 hover:bg-[var(--brand-bg)] hover:text-[var(--brand-accent)]"
+ >
+ Get custom quote <span aria-hidden="true">→</span>
  </Link>
  </div>
  </div>

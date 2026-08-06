@@ -1,26 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useAtmosphere } from "@/lib/context/AtmosphereContext";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
 export default function DynamicCursor() {
-  const { mode, accentHex } = useAtmosphere();
-  const [cursorText, setCursorText] = useState("");
-  const [cursorType, setCursorType] = useState<"default" | "hover" | "text" | "hide">("default");
+  const [cursorLabel, setCursorLabel] = useState("");
+  const [cursorType, setCursorType] = useState<"default" | "hover">("default");
+  const [enabled, setEnabled] = useState(false);
 
-  // Mouse position
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth springing for the outer ring/label
-  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const springConfig = { damping: 28, stiffness: 380, mass: 0.4 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Only run on desktop devices
-    if (typeof window === 'undefined' || window.matchMedia("(max-width: 768px)").matches) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(max-width: 1024px)").matches || window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+    setEnabled(true);
 
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
@@ -29,24 +29,30 @@ export default function DynamicCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      
-      // Look up the DOM tree for specific tags
-      let currentElement: HTMLElement | null = target;
-      let newCursorType: typeof cursorType = "default";
 
-      while (currentElement && currentElement !== document.body) {
-        if (currentElement.tagName.toLowerCase() === 'a' || currentElement.tagName.toLowerCase() === 'button') {
-          newCursorType = "hover";
+      // Look up the tree for a [data-cursor] label or interactive element
+      let current: HTMLElement | null = target;
+      let label = "";
+      let interactive = false;
+
+      while (current && current !== document.body) {
+        const tag = current.tagName.toLowerCase();
+        if (tag === "a" || tag === "button") interactive = true;
+
+        const data = current.getAttribute("data-cursor");
+        if (data) {
+          label = data;
           break;
         }
-        currentElement = currentElement.parentElement;
+        current = current.parentElement;
       }
 
-      setCursorType(newCursorType);
+      setCursorLabel(label);
+      setCursorType(interactive || label ? "hover" : "default");
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    document.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    document.addEventListener("mouseover", handleMouseOver, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
@@ -54,66 +60,46 @@ export default function DynamicCursor() {
     };
   }, [mouseX, mouseY]);
 
-  // Hide on mobile/touch
-  if (typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches) {
-    return null;
-  }
-
-  const isStudio = mode === "studio";
-
-  const cursorVariants = {
-    default: { 
-      opacity: 1, 
-      scale: 1,
-    },
-    hover: { 
-      opacity: 1, 
-      scale: 1.1,
-    },
-    text: { 
-      opacity: 1,
-      scale: 1,
-    },
-    hide: { opacity: 0 }
-  };
-
-  const textVariants = {
-    initial: { opacity: 0, scale: 0.5 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.5 }
-  };
+  if (!enabled) return null;
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `
-        @media (min-width: 768px) {
-          * {
-            cursor: none !important;
-          }
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (min-width: 1025px) and (pointer: fine) {
+          body, a, button, [data-cursor] { cursor: none !important; }
         }
       `}} />
-      
+
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9999] flex items-start justify-start mix-blend-difference"
-        style={{
-          x: cursorX,
-          y: cursorY,
-        }}
-        variants={cursorVariants}
-        animate={cursorType}
-        transition={{ type: "spring", damping: 30, stiffness: 400, mass: 0.2 }}
+        className="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference"
+        style={{ x: cursorX, y: cursorY }}
       >
-        {/* Small Contrasting Dot */}
-        <motion.div 
-          className="rounded-full flex items-center justify-center"
-          style={{ width: "16px", height: "16px", marginLeft: "-8px", marginTop: "-8px" }}
+        {/* dot */}
+        <motion.div
+          className="rounded-full bg-white"
+          style={{ width: 10, height: 10, marginLeft: -5, marginTop: -5 }}
           animate={{
-            scale: cursorType === "hover" ? 2.5 : 1,
-            backgroundColor: cursorType === "hover" ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 1)",
-            border: cursorType === "hover" ? "2px solid rgba(255, 255, 255, 1)" : "0px solid rgba(255, 255, 255, 1)",
+            scale: cursorType === "hover" && !cursorLabel ? 2.4 : 1,
+            opacity: cursorLabel ? 0 : 1,
           }}
-          transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          transition={{ type: "spring", damping: 22, stiffness: 400 }}
         />
+
+        {/* label pill */}
+        <AnimatePresence>
+          {cursorLabel && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              transition={{ type: "spring", damping: 20, stiffness: 380 }}
+              className="absolute rounded-full border border-white bg-white px-4 py-2 font-display text-[10px] font-black uppercase tracking-[0.2em] text-black"
+              style={{ marginLeft: 12, marginTop: -16 }}
+            >
+              {cursorLabel}
+            </motion.span>
+          )}
+        </AnimatePresence>
       </motion.div>
     </>
   );

@@ -4,145 +4,161 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
+import PageHeader from "@/components/ui/PageHeader";
+import { cn } from "@/lib/utils";
 
 const FILTERS = ["All", "Web Design", "Branding", "Product", "Development", "Motion"];
 
 export default function WorkPage() {
  const [activeFilter, setActiveFilter] = useState("All");
 
- const filteredProjects = PROJECTS.filter(project => {
+ const filteredProjects = PROJECTS.filter((project) => {
  if (activeFilter === "All") return true;
- return project.category.toLowerCase().includes(activeFilter.toLowerCase()) || 
- project.tags.some(tag => tag.toLowerCase().includes(activeFilter.toLowerCase()));
+ return (
+ project.category.toLowerCase().includes(activeFilter.toLowerCase()) ||
+ project.tags.some((tag) => tag.toLowerCase().includes(activeFilter.toLowerCase()))
+ );
  });
 
  return (
- <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 pt-32">
- {/* Header */}
- <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-20">
- <div className="flex items-center gap-3 mb-6">
- <div className="w-6 h-px bg-[#BFA36A]" />
- <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
- Our Work
- </span>
- </div>
- <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
- <h1 className="text-6xl lg:text-8xl font-semibold text-[#101010] leading-[1.1] tracking-tight">
+ <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <PageHeader
+ kicker="Our work · 2023 → 2026"
+ title={
+ <>
  Projects that
  <br />
- <span className="text-[#101010]/30">define the craft.</span>
- </h1>
- <p className="text-[#757575] text-lg leading-relaxed max-w-sm">
- A curated selection of work across web design, branding, product,
- and development.
+ <span className="font-serif-i lowercase normal-case tracking-normal">define the craft.</span>
+ </>
+ }
+ description="A curated selection of work across web design, branding, product, and development."
+ right={
+ <p className="font-display text-6xl font-black leading-none text-outline md:text-7xl">
+ 0{PROJECTS.length}
  </p>
- </div>
- </div>
+ }
+ />
 
- {/* Filter Tabs */}
- <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-16">
- <div className="flex flex-wrap gap-3">
+ {/* Filters */}
+ <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+ <div className="flex flex-wrap items-center gap-2 border-b border-[var(--brand-border)] pb-6">
  {FILTERS.map((filter) => (
  <button
  key={filter}
  onClick={() => setActiveFilter(filter)}
- className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+ data-cursor="FILTER"
+ className={cn(
+ "rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300",
  activeFilter === filter
- ? "bg-[#101010] text-white"
- : "border border-[#E6E6E6] text-[#757575] hover:border-[#101010] hover:text-[#101010]"
- }`}
+ ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
+ : "border border-[var(--brand-border)] text-[var(--brand-text-secondary)] hover:border-[var(--brand-text)] hover:text-[var(--brand-text)]"
+ )}
  >
  {filter}
  </button>
  ))}
+ <span className="ml-auto hidden text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] sm:block">
+ {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}
+ </span>
  </div>
  </div>
 
- {/* Projects Grid */}
- <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-32">
+ {/* Grid */}
+ <div className="mx-auto max-w-[1400px] px-5 pb-24 pt-10 md:px-10">
  {filteredProjects.length > 0 ? (
- <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+ <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2">
  {filteredProjects.map((project, i) => (
  <Link
  key={project.id}
  href={`/work/${project.slug}`}
- className={`group block ${i === 0 && activeFilter === "All" ? "md:col-span-2" : ""}`}
+ className={cn("group", i === 0 && activeFilter === "All" && "md:col-span-2")}
+ data-cursor="VIEW"
  >
- <div className="relative overflow-hidden rounded-[24px] shadow-sm hover:shadow-md transition-shadow">
  <div
- className="relative overflow-hidden rounded-[24px] bg-[#1A1A1A] group"
- style={{ aspectRatio: i === 0 && activeFilter === "All" ? "16/7" : "4/3" }}
+ className={cn(
+ "relative overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]",
+ i === 0 && activeFilter === "All" ? "aspect-[21/9]" : "aspect-[4/3]"
+ )}
  >
  <Image
  src={project.image}
  alt={project.title}
  fill
  sizes="(max-width: 768px) 100vw, 50vw"
- priority={i < 4}
- className="object-cover transition-transform duration-700 group-hover:scale-105"
+ priority={i < 2}
+ className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
  />
- <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
-
- {/* Content */}
- <div className="absolute inset-0 flex flex-col justify-between p-8">
- <div className="flex items-start justify-between">
- <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-2 rounded-full font-medium">
- {project.category}
+ {/* hover sweep */}
+ <div
+ className="work-sweep absolute inset-0 scale-x-0 opacity-90 group-hover:scale-x-100"
+ aria-hidden="true"
+ />
+ <span className="absolute right-4 top-4 flex h-11 w-11 translate-y-1 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[var(--brand-on-accent)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+ →
  </span>
- <span className="text-white/80 text-sm font-mono bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full">{project.year}</span>
  </div>
- <div>
- <h2 className="text-3xl lg:text-4xl font-semibold text-white mb-2 tracking-tight">
+
+ <div className="mt-5 flex items-baseline justify-between gap-4">
+ <div className="flex items-baseline gap-4">
+ <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
+ 0{i + 1}
+ </span>
+ <h2 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:text-3xl">
  {project.title}
  </h2>
- <p className="text-white/80 text-sm mb-4 max-w-lg leading-relaxed">
- {project.description}
- </p>
- <div className="flex flex-wrap gap-2">
- {project.tags.map((tag) => (
- <span
- key={tag}
- className="text-white/70 text-xs px-3 py-1 border border-white/20 rounded-full backdrop-blur-sm"
- >
- {tag}
+ </div>
+ <div className="flex shrink-0 items-center gap-3">
+ <span className="hidden text-xs font-semibold text-[var(--brand-text-secondary)] sm:block">
+ {project.category}
  </span>
- ))}
- </div>
- </div>
- </div>
+ <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
+ {project.year}
+ </span>
  </div>
  </div>
  </Link>
  ))}
  </div>
  ) : (
- <div className="text-center py-24 bg-[#FAFAFA] rounded-[24px] border border-[#E6E6E6]">
- <h3 className="text-2xl font-semibold text-[#101010] mb-2">No projects found</h3>
- <p className="text-[#757575]">Try adjusting your filters or checking back later.</p>
- <button 
+ <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 text-center">
+ <h3 className="font-display text-2xl font-black uppercase text-[var(--brand-text)]">
+ No projects found
+ </h3>
+ <p className="mt-2 text-sm text-[var(--brand-text-secondary)]">
+ Try adjusting your filters or checking back later.
+ </p>
+ <button
  onClick={() => setActiveFilter("All")}
- className="mt-6 text-[#BFA36A] font-medium hover:text-[#101010] transition-colors"
+ className="btn-primary mt-8"
  >
  Clear filters
  </button>
  </div>
  )}
 
- {/* Experiments CTA */}
- <div className="mt-16 p-12 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px] text-center shadow-sm">
- <h3 className="text-[#101010] text-3xl font-semibold mb-4 tracking-tight">
- Curious about how we experiment?
- </h3>
- <p className="text-[#757575] text-lg mb-8 max-w-xl mx-auto leading-relaxed">
- Explore our lab of creative coding, 3D experiments, and interactive playgrounds.
- </p>
- <Link
- href="/experiments"
- className="inline-flex items-center gap-3 bg-[#111111] hover:bg-[#BFA36A] text-white text-base font-medium px-8 py-4 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5"
- >
- View Experiments →
- </Link>
- </div>
+        {/* Experiments CTA */}
+        <div className="mt-24 grid grid-cols-1 items-center gap-8 overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:grid-cols-[240px_1fr_auto] md:p-6 md:pl-10">
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-xl md:block">
+            <Image
+              src="/images/hero/mockup-1.jpg"
+              alt="A Greene Studios experiment"
+              fill
+              sizes="240px"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+              ✦ The lab
+            </span>
+            <h3 className="font-display text-3xl font-black uppercase leading-none tracking-tight text-[var(--brand-text)] md:text-4xl">
+              Curious how we <span className="font-serif-i lowercase normal-case tracking-normal">experiment?</span>
+            </h3>
+          </div>
+          <Link href="/experiments" data-cursor="GO" className="btn-primary w-fit shrink-0">
+            Explore the lab <span aria-hidden="true">→</span>
+          </Link>
+        </div>
  </div>
  </div>
  );

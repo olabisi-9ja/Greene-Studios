@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
-
-const inter = Inter({
- subsets: ["latin"],
- variable: "--font-inter",
- display: "swap",
-});
 
 export const viewport: import("next").Viewport = {
  width: "device-width",
@@ -20,12 +13,12 @@ export const viewport: import("next").Viewport = {
 
 export const metadata: Metadata = {
  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://greenestudios.co"),
- title: {
- default: "Greene Studios — Digital Design & Development Agency",
+  title: {
+    default: "Greene Studios · Independent Digital Design Studio",
  template: "%s | Greene Studios",
  },
  description:
- "Greene Studios is a premium digital design and development agency. We craft world-class websites, brands, and digital products that move people.",
+ "Greene Studios is an independent digital design studio. We design & build brands, websites, and digital products that make people stop scrolling.",
  keywords: [
  "web design agency",
  "UI/UX design",
@@ -33,7 +26,7 @@ export const metadata: Metadata = {
  "frontend development",
  "design studio",
  "Greene Studios",
- ],
+  ],
  authors: [{ name: "Greene Studios" }],
  creator: "Greene Studios",
  openGraph: {
@@ -41,14 +34,14 @@ export const metadata: Metadata = {
  locale: "en_US",
  url: "https://greenestudios.co",
  siteName: "Greene Studios",
- title: "Greene Studios — Digital Design & Development Agency",
+ title: "Greene Studios · Independent Digital Design Studio",
  description:
- "Premium digital design and development agency. Websites, brands, and products that move people.",
+ "Independent digital design studio. Brands, websites, and products that make people stop scrolling.",
  },
  twitter: {
  card: "summary_large_image",
- title: "Greene Studios — Digital Design & Development Agency",
- description: "Premium digital design and development agency.",
+ title: "Greene Studios · Independent Digital Design Studio",
+ description: "Brands, websites, and products that make people stop scrolling.",
  creator: "@greenestudios",
  },
  robots: {
@@ -68,7 +61,6 @@ import NoiseTexture from "@/components/canvas/NoiseTexture";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import FloatingButtons from "@/components/FloatingButtons";
 import PageTransition from "@/components/animations/PageTransition";
-import { cn } from "@/lib/utils";
 
 export default function RootLayout({
  children,
@@ -76,8 +68,8 @@ export default function RootLayout({
  children: React.ReactNode;
 }) {
  return (
- <html lang="en" suppressHydrationWarning className={cn(inter.variable, "font-sans")}>
- <body className="antialiased mode-clean overflow-x-hidden">
+ <html lang="en" suppressHydrationWarning className="font-sans">
+ <body className="antialiased mode-paper overflow-x-hidden">
  <AtmosphereProvider>
  <ScrollProgress />
  <NoiseTexture />

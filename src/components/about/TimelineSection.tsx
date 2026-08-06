@@ -6,7 +6,7 @@ const TIMELINE_DATA = [
   {
     year: "2022",
     events: [
-      "Greene Studios founded. First client: a Lagos-based fintech startup.",
+      "Greene Studios founded. First client: a fintech startup.",
       "Shipped 8 projects in year one. Developed our signature process framework.",
     ],
   },
@@ -14,7 +14,7 @@ const TIMELINE_DATA = [
     year: "2023",
     events: [
       "Expanded into product design and AI integration services.",
-      "First Awwwards nomination. Crossed $1M in client revenue generated.",
+      "Crossed $1M in client revenue generated.",
     ],
   },
   {

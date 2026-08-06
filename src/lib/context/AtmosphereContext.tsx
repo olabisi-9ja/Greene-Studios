@@ -3,8 +3,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
-export type AtmosphereMode = "clean" | "midnight" | "studio";
-export type AccentColor = 
+export type AtmosphereMode = "paper" | "midnight" | "studio";
+export type AccentColor =
   | "emerald"
   | "forest"
   | "teal"
@@ -16,14 +16,14 @@ export type AccentColor =
   | "gold";
 
 export const accentHexMap: Record<AccentColor, string> = {
-  emerald: "#1F3D3A", // Core Greene Studios green
+  emerald: "#173A2E",
   forest: "#11472B",
   teal: "#0D5C58",
   electric: "#1A49E6",
   purple: "#6324D6",
-  orange: "#E65A1A",
+  orange: "#FF5C28",
   rose: "#D6245F",
-  lime: "#BDE61A",
+  lime: "#D9F42C",
   gold: "#E6AE1A"
 };
 
@@ -37,19 +37,24 @@ interface AtmosphereContextProps {
 
 const AtmosphereContext = createContext<AtmosphereContextProps | undefined>(undefined);
 
-// No dynamic backgrounds for studio mode as requested
+const MODE_CLASSES: Record<AtmosphereMode, string> = {
+  paper: "mode-paper",
+  midnight: "mode-midnight",
+  studio: "mode-studio",
+};
 
 export function AtmosphereProvider({ children }: { children: ReactNode }) {
-  const [mode, setMode] = useState<AtmosphereMode>("clean");
-  const [accent, setAccent] = useState<AccentColor>("emerald");
+  const [mode, setMode] = useState<AtmosphereMode>("paper");
+  const [accent, setAccent] = useState<AccentColor>("lime");
 
   const pathname = usePathname();
 
   useEffect(() => {
-    // Add mode class to document body for global CSS targeting
-    document.documentElement.classList.remove("mode-clean", "mode-midnight", "mode-studio");
-    document.documentElement.classList.add(`mode-${mode}`);
-    document.documentElement.style.removeProperty("--studio-dynamic-bg");
+    // Apply the active mode class to the document root so CSS tokens cascade
+    const root = document.documentElement;
+    root.classList.remove("mode-paper", "mode-midnight", "mode-studio");
+    root.classList.add(MODE_CLASSES[mode]);
+    root.style.removeProperty("--studio-dynamic-bg");
   }, [mode, pathname]);
 
   const value = {

@@ -1,53 +1,78 @@
 "use client";
 
 import Link from "next/link";
+import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
+
+const MARQUEE_WORDS = ["LET'S TALK", "LET'S BUILD", "LET'S START", "LET'S MAKE WAVES"];
 
 export default function CTASection() {
   const sectionRef = useSectionAnimation<HTMLElement>();
 
   return (
-    <section ref={sectionRef} className="py-32 bg-[#FAFAFA] relative overflow-hidden border-t border-[#E6E6E6]">
-      <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10">
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <div className="w-6 h-px bg-[#BFA36A]" />
-          <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
-            Let&apos;s Build Together
-          </span>
-          <div className="w-6 h-px bg-[#BFA36A]" />
-        </div>
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden"
+      style={{ backgroundColor: "var(--cta-bg)", color: "var(--cta-fg)" }}
+    >
+      {/* Giant CTA */}
+      <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
+        <span className="mb-8 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em]">
+          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: "var(--cta-fg)" }} />
+          Let&apos;s build together
+          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: "var(--cta-fg)" }} />
+        </span>
 
-        <h2 className="text-[clamp(3rem,6vw,5.5rem)] font-semibold text-[#101010] leading-[1.05] tracking-tight mb-8">
-          Ready to build <br /> something extraordinary?
+        <h2 className="font-display text-[clamp(2.8rem,8vw,7.5rem)] font-black uppercase leading-[0.92] tracking-tight">
+          Ready to build something
+          <br />
+          people <span className="font-serif-i lowercase normal-case tracking-normal">can&apos;t ignore?</span>
         </h2>
 
-        <p className="text-[#757575] text-xl leading-relaxed max-w-xl mx-auto mb-12">
-          Tell us about your project. We&apos;ll respond within 24 hours with a
-          clear path forward.
+        <p className="mx-auto mt-8 max-w-xl text-base font-medium leading-relaxed opacity-80 md:text-lg">
+          Tell us about your project. We&apos;ll respond within 24 hours with a clear path forward, no fluff, no pressure.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="/contact"
-            className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-[#111111] hover:bg-[#BFA36A] text-white text-base font-medium px-10 py-5 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5"
-          >
-            Start a Project
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </Link>
+              href="/contact"
+              data-cursor="HELLO"
+              className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-transform duration-300 hover:scale-[1.04]"
+              style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
+            >
+              Start a project <span aria-hidden="true">→</span>
+            </Link>
           <a
-            href="mailto:hello@greenestudios.co"
-            className="w-full sm:w-auto flex items-center justify-center gap-3 border border-[#E6E6E6] bg-white hover:border-[#101010] text-[#101010] text-base font-medium px-10 py-5 rounded-full transition-all"
-          >
-            Send an Email
-          </a>
+              href="mailto:hello@greenestudios.co"
+              className="inline-flex items-center justify-center gap-3 rounded-full border-2 px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300 hover:bg-[var(--cta-fg)] hover:text-[var(--cta-bg)]"
+              style={{ borderColor: "var(--cta-fg)", color: "var(--cta-fg)" }}
+            >
+              hello@greenestudios.co
+            </a>
         </div>
 
-        {/* Trust signals */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-[#757575] text-sm font-medium">
-          <span>✓ Response within 24 hours</span>
+        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-bold uppercase tracking-[0.15em] opacity-80">
+          <span>✓ Response within 24h</span>
           <span>✓ No commitment required</span>
-          <span>✓ NDA available on request</span>
+          <span>✓ NDA on request</span>
         </div>
+      </div>
+
+      {/* Bottom marquee */}
+      <div
+        className="border-t-2 py-3"
+        style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)", borderColor: "var(--cta-border)" }}
+      >
+        <Marquee>
+          <MarqueeContent speed={40} autoFill>
+            {MARQUEE_WORDS.map((word, i) => (
+              <MarqueeItem key={i} className="mx-6 flex items-center gap-6">
+                <span className="font-display text-lg font-black uppercase tracking-wide md:text-xl">{word}</span>
+                <span className="text-base" aria-hidden="true">✦</span>
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
       </div>
     </section>
   );

@@ -5,132 +5,139 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 const CARDS = [
-  {
-    id: "01",
-    title: "Retail & Hospitality",
-    description: "We build custom-crafted products tailored to your unique identity, ensuring every physical and digital touchpoint resonates with your guests.",
-    color: "#5294A8", 
-  },
-  {
-    id: "02",
-    title: "Consumer & Home",
-    description: "Create experiences in real spaces by transforming standard interfaces into personal, seamless companions for everyday life.",
-    color: "#DAB758", 
-  },
-  {
-    id: "03",
-    title: "Research & Education",
-    description: "Built on modern stacks. We ensure your digital presence is scalable, accessible, and designed to foster learning and discovery.",
-    color: "#9C5248", 
-  },
-  {
-    id: "04",
-    title: "Entertainment & Experiences",
-    description: "Make every touchpoint an opportunity. We craft highly interactive platforms that keep your users engaged and coming back.",
-    color: "#46A98F", 
-  }
+ {
+ id: "01",
+ title: "Retail & Hospitality",
+ description: "Custom-crafted products tailored to your unique identity, so every physical and digital touchpoint resonates with your guests.",
+ color: "#5294A8",
+ },
+ {
+ id: "02",
+ title: "Consumer & Home",
+ description: "Experiences in real spaces, transforming standard interfaces into personal, seamless companions for everyday life.",
+ color: "#DAB758",
+ },
+ {
+ id: "03",
+ title: "Research & Education",
+ description: "Built on modern stacks. Digital presences that are scalable, accessible, and designed to foster learning and discovery.",
+ color: "#9C5248",
+ },
+ {
+ id: "04",
+ title: "Entertainment & Experiences",
+ description: "Every touchpoint is an opportunity. Highly interactive platforms that keep your audience engaged and coming back.",
+ color: "#46A98F",
+ },
 ];
 
 export default function WhyWeExist() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const containerRef = useStaggerAnimation<HTMLDivElement>({}, '.stagger-item');
+ const [hovered, setHovered] = useState<string | null>(null);
+ const containerRef = useStaggerAnimation<HTMLDivElement>({}, ".stagger-item");
 
-  return (
-    <section className="py-32 bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 relative">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="max-w-3xl">
-            <span className="text-[var(--brand-text-secondary)] text-xs tracking-widest uppercase font-semibold block mb-6">
-              Why We Exist
-            </span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tighter uppercase">
-              We build custom products that make you unforgettable.
-            </h2>
-          </div>
-          <div className="pb-4">
-            <div className="w-16 h-16 rounded-full border-2 border-[var(--brand-text)] flex items-center justify-center animate-[spin_10s_linear_infinite]">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="2" x2="12" y2="22"></line>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
-                <line x1="4.93" y1="19.07" x2="19.07" y2="4.93"></line>
-              </svg>
-            </div>
-          </div>
-        </div>
+ return (
+ <section className="relative py-24 md:py-36 bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+ {/* Header */}
+ <div className="mb-16 flex flex-col gap-8 md:mb-24 md:flex-row md:items-end md:justify-between">
+ <div className="max-w-4xl">
+ <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+ <span className="text-[var(--brand-accent)]">✦</span> Who we build for
+ </span>
+ <h2 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
+ We make brands <span className="font-serif-i lowercase normal-case tracking-normal">impossible</span> to ignore.
+ </h2>
+ </div>
+ <div className="hidden shrink-0 md:block">
+ <RotatingStamp />
+ </div>
+ </div>
 
-        <div ref={containerRef} className="w-full flex flex-col border-t-2 border-[var(--brand-text)]">
-          {CARDS.map((card) => {
-            const isHovered = hovered === card.id;
-            return (
-              <div 
-                key={card.id}
-                onMouseEnter={() => setHovered(card.id)}
-                onMouseLeave={() => setHovered(null)}
-                className="stagger-item w-full group cursor-none border-b-2 border-[var(--brand-text)] relative overflow-hidden"
-                data-cursor="EXPLORE"
-              >
-                {/* Hover Background Fill Effect */}
-                <motion.div 
-                  initial={{ height: "0%" }}
-                  animate={{ height: isHovered ? "100%" : "0%" }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="absolute bottom-0 left-0 w-full z-0 opacity-10"
-                  style={{ backgroundColor: card.color }}
-                />
+ {/* Rows */}
+ <div ref={containerRef} className="flex w-full flex-col border-t-2 border-[var(--brand-text)]">
+ {CARDS.map((card) => {
+ const isHovered = hovered === card.id;
+ return (
+ <div
+ key={card.id}
+ onMouseEnter={() => setHovered(card.id)}
+ onMouseLeave={() => setHovered(null)}
+ className="stagger-item group relative w-full overflow-hidden border-b-2 border-[var(--brand-text)]"
+ data-cursor="EXPLORE"
+ >
+ {/* hover fill */}
+ <motion.div
+ initial={{ height: "0%" }}
+ animate={{ height: isHovered ? "100%" : "0%" }}
+ transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+ className="absolute bottom-0 left-0 z-0 w-full opacity-[0.08]"
+ style={{ backgroundColor: card.color }}
+ />
 
-                <div className="py-8 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start relative z-10 w-full">
-                  <div className="col-span-1 lg:col-span-1 pt-1 md:pt-2">
-                    <span className="text-lg md:text-2xl font-bold opacity-30 font-serif block">
-                      {card.id}
-                    </span>
-                  </div>
-                  
-                  <div className="col-span-1 lg:col-span-7">
-                    <h3 
-                      className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter uppercase transition-colors duration-500 leading-[0.9]"
-                      style={{ color: isHovered ? card.color : 'var(--brand-text)' }}
-                    >
-                      {card.title}
-                    </h3>
-                  </div>
-                  
-                  <div className="col-span-1 lg:col-span-4 flex items-start justify-start lg:justify-end min-h-[80px]">
-                    <AnimatePresence mode="wait">
-                      {isHovered ? (
-                        <motion.p 
-                          key="desc"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -20 }}
-                          transition={{ duration: 0.3 }}
-                          className="text-sm md:text-base font-medium leading-relaxed max-w-sm lg:text-right pt-2"
-                          style={{ color: 'var(--brand-text)' }}
-                        >
-                          {card.description}
-                        </motion.p>
-                      ) : (
-                        <motion.div 
-                          key="arrow"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 20 }}
-                          className="hidden lg:flex w-16 h-16 rounded-full border-2 border-[var(--brand-text)] items-center justify-center transition-transform duration-500 group-hover:rotate-45"
-                        >
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                          </svg>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
+ <div className="relative z-10 grid grid-cols-12 items-center gap-4 px-1 py-8 md:py-12">
+ <span className="col-span-2 font-mono text-sm text-[var(--brand-text-secondary)] md:col-span-1 md:text-base">
+ {card.id}
+ </span>
+
+ <h3
+ className="col-span-10 font-display text-[clamp(1.9rem,4.6vw,4.2rem)] font-black uppercase leading-[0.92] tracking-tight transition-colors duration-500 md:col-span-7"
+ style={{ color: isHovered ? card.color : "var(--brand-text)" }}
+ >
+ {card.title}
+ </h3>
+
+ <div className="col-span-12 flex items-start justify-start md:col-span-4 md:justify-end">
+ <AnimatePresence mode="wait">
+ {isHovered ? (
+ <motion.p
+ key="desc"
+ initial={{ opacity: 0, y: 16 }}
+ animate={{ opacity: 1, y: 0 }}
+ exit={{ opacity: 0, y: -16 }}
+ transition={{ duration: 0.3 }}
+ className="max-w-sm pt-1 text-sm font-medium leading-relaxed text-[var(--brand-text)] md:text-right md:text-[15px]"
+ >
+ {card.description}
+ </motion.p>
+ ) : (
+ <motion.div
+ key="arrow"
+ initial={{ opacity: 0, x: -16 }}
+ animate={{ opacity: 1, x: 0 }}
+ exit={{ opacity: 0, x: 16 }}
+ className="hidden h-14 w-14 items-center justify-center rounded-full border-2 border-[var(--brand-text)] transition-transform duration-500 group-hover:rotate-45 md:flex"
+ >
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+ <line x1="5" y1="12" x2="19" y2="12" />
+ <polyline points="12 5 19 12 12 19" />
+ </svg>
+ </motion.div>
+ )}
+ </AnimatePresence>
+ </div>
+ </div>
+ </div>
+ );
+ })}
+ </div>
+ </div>
+ </section>
+ );
+}
+
+function RotatingStamp() {
+ return (
+ <svg viewBox="0 0 100 100" className="h-24 w-24 animate-spin-slow" aria-hidden="true">
+ <defs>
+ <path id="why-stamp" d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+ </defs>
+ <text className="fill-[var(--brand-text)] font-display font-bold uppercase" style={{ fontSize: "9.5px", letterSpacing: "0.2em" }}>
+ <textPath href="#why-stamp">
+ UNFORGETTABLE ✦ UNFORGETTABLE ✦
+ </textPath>
+ </text>
+ <circle cx="50" cy="50" r="8" fill="none" stroke="var(--brand-accent)" strokeWidth="2" />
+ <circle cx="50" cy="50" r="3" fill="var(--brand-accent)" />
+ </svg>
+ );
 }

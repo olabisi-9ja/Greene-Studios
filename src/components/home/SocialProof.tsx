@@ -1,48 +1,53 @@
 "use client";
 
 import AnimatedNumbers from "@/components/animations/AnimatedNumbers";
+import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
+
+const CLIENTS = ["LUMINARY", "VERA", "ARC COMMERCE", "BLOOM HEALTH", "ONYX", "PRISM"];
 
 export default function SocialProof() {
   const stats = [
-    { value: "50+", label: "Projects Delivered" },
-    { value: "15+", label: "Industries" },
-    { value: "98%", label: "Client Satisfaction" },
+    { value: "40+", label: "Projects delivered" },
+    { value: "15+", label: "Industries served" },
+    { value: "98%", label: "Client satisfaction" },
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--brand-surface)] border-y border-[var(--brand-border)] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-16 md:gap-20">
-        
-        {/* Main Stats Row */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 divide-y md:divide-y-0 md:divide-x divide-[var(--brand-border)]">
-          {stats.map((stat, i) => (
-            <div key={i} className="flex flex-col items-center justify-center text-center px-4 pt-12 md:pt-0 first:pt-0">
-              <AnimatedNumbers 
-                value={stat.value} 
-                className="text-6xl md:text-7xl lg:text-8xl font-medium text-[var(--brand-text)] tracking-tighter mb-4" 
+    <section className="overflow-hidden border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-20 text-[var(--brand-text)] transition-colors duration-1000 md:py-28">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        {/* Stats */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-4 md:divide-x md:divide-[var(--brand-border)]">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col items-center justify-center text-center md:px-8">
+              <AnimatedNumbers
+                value={stat.value}
+                className="font-display text-6xl font-black tracking-tighter text-[var(--brand-text)] md:text-7xl lg:text-8xl"
               />
-              <span className="text-[var(--brand-text-secondary)] text-sm md:text-base uppercase tracking-widest font-semibold">
+              <span className="mt-4 text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)] md:text-xs">
                 {stat.label}
               </span>
             </div>
           ))}
         </div>
 
-        {/* Worldwide Collaboration Feature */}
-        <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-8 py-5 rounded-full border border-[var(--brand-border)] bg-[var(--brand-bg)] shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--brand-accent)] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[var(--brand-accent)]"></span>
-            </div>
-            <span className="text-lg md:text-xl font-bold text-[var(--brand-text)] uppercase tracking-tight">Worldwide</span>
-          </div>
-          <span className="hidden sm:block w-px h-6 bg-[var(--brand-border)]" />
-          <span className="text-sm md:text-base text-[var(--brand-text-secondary)] tracking-wide">
-            Seamless Remote Collaboration
-          </span>
+        {/* Client marquee */}
+        <div className="mt-16 border-t border-[var(--brand-border)] pt-8 md:mt-20">
+          <p className="mb-6 text-center text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+            Trusted by founders & teams at
+          </p>
+          <Marquee>
+            <MarqueeContent speed={30} autoFill>
+              {CLIENTS.map((client, i) => (
+                <MarqueeItem key={i} className="mx-8 flex items-center gap-8">
+                  <span className="font-display text-xl font-black uppercase tracking-tight text-[var(--brand-text-secondary)] opacity-70 md:text-2xl">
+                    {client}
+                  </span>
+                  <span className="text-sm text-[var(--brand-accent)]" aria-hidden="true">✦</span>
+                </MarqueeItem>
+              ))}
+            </MarqueeContent>
+          </Marquee>
         </div>
-
       </div>
     </section>
   );

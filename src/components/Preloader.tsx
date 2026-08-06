@@ -2,30 +2,33 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Logo } from "./ui/Logo";
 
+const WORD_ONE = "GREENE".split("");
+const WORD_TWO = "STUDIOS".split("");
+
+/**
+ * Cinematic window-load: spells out GREENE STUDIOS letter by letter
+ * with a light sweep, then wipes up to reveal the page.
+ */
 export default function Preloader() {
   const [isComplete, setIsComplete] = useState(false);
   const [hasShown, setHasShown] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
-    // Check if we've already shown the loader this session
+
     if (sessionStorage.getItem("loader_shown")) {
       setHasShown(true);
       return;
     }
-    
-    // Prevent scrolling while loading
+
     document.body.style.overflow = "hidden";
 
-    // Timing to match the SVG drawing animation + a slight pause
     const timer = setTimeout(() => {
       setIsComplete(true);
       sessionStorage.setItem("loader_shown", "true");
       document.body.style.overflow = "";
-    }, 1800);
+    }, 2700);
 
     return () => {
       clearTimeout(timer);
@@ -35,46 +38,95 @@ export default function Preloader() {
 
   if (hasShown) return null;
 
+  const letterAnim = (i: number, base = 0) => ({
+    initial: { opacity: 0, y: 46, rotate: 6, filter: "blur(8px)" },
+    animate: {
+      opacity: 1,
+      y: 0,
+      rotate: 0,
+      filter: "blur(0px)",
+    },
+    transition: {
+      delay: base + i * 0.07,
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  });
+
   return (
     <AnimatePresence>
       {!isComplete && (
-        <motion.div 
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
-          initial={{ opacity: 1 }}
-          exit={{ 
-            opacity: 0,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
+        <motion.div
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-[var(--brand-bg)]"
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Rolling tire color burst behind logo */}
-          <motion.div 
-            className="absolute w-48 h-48 md:w-64 md:h-64 rounded-full blur-3xl opacity-70"
-            style={{
-              background: "conic-gradient(from 0deg, #F3B700, #12372A, #5294A8, #F3B700)"
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          />
+          {/* subtle grid */}
+          <div className="pointer-events-none absolute inset-0 bg-grid-soft opacity-30" aria-hidden="true" />
 
+          {/* light sweep across the whole loader */}
+          <div className="light-sweep pointer-events-none absolute inset-0" aria-hidden="true" />
+
+          <div className="relative z-10 flex flex-col items-center">
+            {/* GREENE */}
+            <h1
+              aria-label="GREENE STUDIOS"
+              className="flex overflow-hidden font-display text-[clamp(2.6rem,10vw,7rem)] font-black uppercase leading-none tracking-tight text-[var(--brand-text)]"
+            >
+              {WORD_ONE.map((ch, i) => (
+                <motion.span key={`g${i}`} {...letterAnim(i)} className="inline-block">
+                  {ch}
+                </motion.span>
+              ))}
+            </h1>
+
+            {/* STUDIOS */}
+            <div className="mt-1 flex items-center overflow-hidden">
+              {WORD_TWO.map((ch, i) => (
+                <motion.span
+                  key={`s${i}`}
+                  {...letterAnim(i, 0.28)}
+                  className="inline-block font-display text-[clamp(1rem,4vw,2.6rem)] font-bold uppercase tracking-[0.32em] text-[var(--brand-text-secondary)]"
+                >
+                  {ch}
+                </motion.span>
+              ))}
+              <motion.span
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.9, duration: 0.5 }}
+                className="align-super font-display text-[clamp(0.6rem,1.6vw,1rem)] font-black text-[var(--brand-text-secondary)]"
+              >
+                ®
+              </motion.span>
+            </div>
+
+            {/* expanding rule */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 1.05, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 h-[3px] w-48 origin-left rounded-full bg-[var(--brand-accent)] md:w-72"
+            />
+
+            {/* tagline */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.7 }}
+              className="mt-5 text-[10px] font-bold uppercase tracking-[0.45em] text-[var(--brand-text-secondary)]"
+            >
+              Design that can&apos;t be ignored
+            </motion.p>
+          </div>
+
+          {/* bottom progress line */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 3, filter: "blur(10px)" }}
-            transition={{ duration: 0.6, ease: "easeIn" }}
-            className="relative z-10"
-          >
-            {/* The Logo component will display /logo.png */}
-            <Logo className="w-32 h-32 md:w-48 md:h-48" />
-          </motion.div>
-          
-          <motion.div
-            className="mt-8 text-white tracking-widest text-sm uppercase font-semibold opacity-0"
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            Greene Studios
-          </motion.div>
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 2.6, ease: "linear" }}
+            className="absolute bottom-0 left-0 right-0 h-[3px] origin-left bg-[var(--brand-accent)]"
+          />
         </motion.div>
       )}
     </AnimatePresence>

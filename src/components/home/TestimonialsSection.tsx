@@ -1,164 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@radix-ui/react-tooltip";
-import { ArrowDown, ArrowUp } from "lucide-react";
-import { useState } from "react";
-import Image from "next/image";
+import { TESTIMONIALS } from "@/lib/data";
+import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 export default function TestimonialsSection() {
-  const [hoveredImage, setHoveredImage] = useState<string | null>(null);
-
-  interface StatItem {
-    percentage: string;
-    label: string;
-    isIncrease: boolean;
-    logo?: string;
-  }
-
-  const stats: StatItem[] = [
-    {
-      percentage: "140%",
-      label: "YOY Revenue",
-      isIncrease: true,
-      logo: "Acme Corp",
-    },
-    {
-      percentage: "3x",
-      label: "Traffic Increase",
-      isIncrease: true,
-      logo: "Pulse Media",
-    },
-    {
-      percentage: "45%",
-      label: "Conversion Growth",
-      isIncrease: true,
-      logo: "Acme Corp",
-    },
-    {
-      percentage: "85%",
-      label: "Sales Increase",
-      isIncrease: true,
-      logo: "Pulse Media",
-    },
-  ];
+  const containerRef = useStaggerAnimation<HTMLDivElement>({}, ".stagger-item");
 
   return (
-    <div className="bg-[var(--brand-bg)] transition-colors duration-1000 min-h-screen w-full grid place-content-center py-32 px-4 md:px-8 lg:px-16 relative">
-      <div className="max-w-6xl mx-auto">
-        {/* Header Badge */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-[var(--brand-text)] text-[var(--brand-bg)] px-4 py-1 rounded-full text-xs uppercase tracking-wider font-medium">
-            Success Stories
-          </div>
+    <section className="bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        {/* Header */}
+        <div className="mb-14 max-w-3xl md:mb-20">
+          <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+            <span className="text-[var(--brand-accent)]">✦</span> Testimonials
+          </span>
+          <h2 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
+            People we&apos;ve worked <span className="font-serif-i lowercase normal-case tracking-normal">with.</span>
+          </h2>
         </div>
 
-        {/* Main Heading with Images */}
-        <div className="text-center max-w-screen-xl mx-auto relative text-[var(--brand-text)]">
-          <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight">
-            Results that <br className="sm:hidden" />
-            <TooltipProvider>
-              <Tooltip delayDuration={100}>
-                <TooltipTrigger asChild>
-                  <div className="inline-block mx-2 align-middle relative cursor-pointer">
-                    <div className="relative overflow-hidden sm:w-16 w-12 h-12 origin-center transition-all duration-300 md:hover:w-36 hover:w-24 rounded-full border-2 border-[var(--brand-text)] bg-[var(--brand-surface-secondary)]">
-                      <Image
-                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop"
-                        alt="Jane Doe"
-                        className="object-cover w-full h-full grayscale"
-                        style={{ objectPosition: "center" }}
-                        width={300}
-                        height={300}
-                      />
-                    </div>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="bottom"
-                  className="max-w-xs bg-[var(--brand-text)] text-[var(--brand-bg)] p-4 rounded-lg shadow-lg border-none z-50 animate-in fade-in zoom-in"
-                >
-                  <p className="mb-2 text-sm italic">
-                    &quot;The team delivered beyond expectation, crafting a digital brand presence that has permanently leveled up our business.&quot;
-                  </p>
-                  <p className="font-medium text-xs tracking-widest uppercase">Jane Doe, CEO - Acme Corp</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            speak for
-          </h1>
-
-          <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-tight">
-            themselves
-            <TooltipProvider>
-              <Tooltip delayDuration={100}>
-                <TooltipTrigger asChild>
-                  <div className="inline-block mx-2 align-middle cursor-pointer">
-                    <div className="relative overflow-hidden sm:w-16 w-14 h-14 origin-center transition-all duration-300 lg:hover:w-36 md:hover:w-24 hover:w-20 rounded-full border-2 border-[var(--brand-text)] bg-[var(--brand-surface-secondary)]">
-                      <Image
-                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop"
-                        alt="John Smith"
-                        className="object-cover w-full h-full grayscale"
-                        width={300}
-                        height={300}
-                      />
-                    </div>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="bottom"
-                  className="max-w-xs bg-[var(--brand-text)] text-[var(--brand-bg)] p-4 rounded-lg shadow-lg border-none z-50 animate-in fade-in zoom-in"
-                >
-                  <p className="mb-2 text-sm italic">
-                    &quot;Antigravity UI design that completely transformed customer trust in our new content offerings.&quot;
-                  </p>
-                  <p className="font-medium text-xs tracking-widest uppercase">John Smith, Head of Product - Pulse Media</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            and for
-          </h1>
-          <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-[var(--brand-text-secondary)] leading-tight mt-2">
-            our partners.
-          </h1>
-        </div>
-        
-        {/* Stats Section */}
-        <div className="sm:flex grid grid-cols-2 gap-8 bg-[var(--brand-surface)] mt-16 w-full mx-auto px-8 py-8 border rounded-3xl border-[var(--brand-border)] shadow-sm overflow-hidden">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="flex-1 flex gap-4 pl-0 sm:pl-10 relative"
+        {/* Grid */}
+        <div ref={containerRef} className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {TESTIMONIALS.map((t) => (
+            <motion.figure
+              key={t.id}
+              className="stagger-item group flex flex-col justify-between gap-10 rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] md:p-10"
             >
-              {index !== 0 && (
-                <div className="w-0.5 h-12 border border-dashed border-[var(--brand-border)] absolute left-0 hidden sm:block opacity-30" />
-              )}
-              <div className="w-full h-full flex flex-col items-center justify-center py-4">
-                <div className="flex items-center justify-center gap-2 relative">
-                  {stat.isIncrease ? (
-                    <ArrowUp className="md:w-6 md:h-6 w-4 h-4 text-green-500" />
-                  ) : (
-                    <ArrowDown className="md:w-6 md:h-6 w-4 h-4 text-red-500" />
-                  )}
-                  <span className="md:text-4xl text-2xl font-black text-[var(--brand-text)] tracking-tighter">
-                    {stat.percentage}
-                  </span>
+              <div>
+                <div className="mb-6 flex gap-1 text-sm text-[var(--brand-accent)]" aria-label={`${t.rating} out of 5 stars`}>
+                  {"★".repeat(t.rating)}
+                  <span className="text-[var(--brand-border)]">{"★".repeat(5 - t.rating)}</span>
                 </div>
-                <p className="text-[var(--brand-text-secondary)] md:text-sm text-xs text-center uppercase tracking-widest mt-2 font-medium">
-                  {stat.label}
-                </p>
-                <div className="text-[10px] text-[var(--brand-text)]/50 uppercase tracking-widest mt-4">
-                  {stat.logo}
-                </div>
+                <blockquote className="font-serif-i text-[clamp(1.3rem,2vw,1.8rem)] leading-snug text-[var(--brand-text)]">
+                  “{t.quote}”
+                </blockquote>
               </div>
-            </div>
+
+              <figcaption className="flex items-center gap-4 border-t border-[var(--brand-border)] pt-6">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-on-accent)]">
+                  {t.avatar}
+                </span>
+                <div>
+                  <div className="font-display text-sm font-black uppercase tracking-tight">{t.author}</div>
+                  <div className="text-xs font-medium text-[var(--brand-text-secondary)]">{t.title}</div>
+                </div>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

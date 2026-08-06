@@ -14,12 +14,11 @@ export default function StudioDemoPage() {
   }, [setMode]);
 
   return (
-    <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] overflow-hidden font-sans pb-32">
-      
+    <div className="min-h-screen overflow-hidden bg-[var(--brand-bg)] pb-32 font-sans text-[var(--brand-text)]">
       {/* Navigation */}
-      <nav className="p-6 md:p-12 flex justify-between items-center relative z-50">
-        <div className="text-xl font-bold tracking-tight">Greene.</div>
-        <button className="bg-[var(--color-abstract-green)] text-[var(--brand-bg)] px-8 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-lg">
+      <nav className="relative z-50 flex items-center justify-between p-6 md:p-12">
+        <div className="font-display text-xl font-black uppercase tracking-tight">Greene<span>®</span></div>
+        <button className="rounded-full bg-[var(--color-abstract-green)] px-8 py-3 font-medium text-[var(--brand-ink)] shadow-lg transition-transform hover:scale-105">
           Menu
         </button>
       </nav>
@@ -28,18 +27,24 @@ export default function StudioDemoPage() {
       <ExperienceHero />
 
       {/* CTA Section */}
-      <section className="px-4 md:px-8 mb-8">
-        <div className="bg-[var(--color-abstract-lemon)] text-black rounded-[2rem] p-12 md:p-24 flex flex-col items-center text-center relative overflow-hidden shadow-sm">
-          <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-            <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase font-serif">
-              Where Function Meets Fun
+      <section className="mb-8 px-4 md:px-8">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[var(--color-abstract-lemon)] p-12 text-[var(--brand-ink)] md:p-24">
+          <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center text-center">
+            <span className="mb-6 rounded-full bg-[var(--brand-ink)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--color-abstract-lemon)]">
+              ✦ Studio energy
+            </span>
+            <h2 className="font-display text-4xl font-black uppercase leading-tight md:text-6xl">
+              Where function meets <span className="font-serif-i lowercase normal-case tracking-normal">fun.</span>
             </h2>
-            <p className="text-lg md:text-xl mb-12 font-medium">
+            <p className="mt-6 text-lg font-medium md:text-xl">
               Join the rush and experience a cleaner, brighter energy.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform uppercase tracking-wider">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <button className="rounded-full bg-[var(--brand-ink)] px-8 py-4 font-bold uppercase tracking-wider text-[var(--color-abstract-lemon)] transition-transform hover:scale-105">
                 Shop Now
+              </button>
+              <button className="rounded-full border-2 border-[var(--brand-ink)] px-8 py-4 font-bold uppercase tracking-wider transition-colors hover:bg-[var(--brand-ink)] hover:text-[var(--color-abstract-lemon)]">
+                Explore
               </button>
             </div>
           </div>
@@ -47,62 +52,81 @@ export default function StudioDemoPage() {
       </section>
 
       {/* Bento Grid */}
-      <section className="px-4 md:px-8 mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          
-          <div className="bg-[var(--color-abstract-green)] text-white rounded-[2rem] aspect-square p-8 flex flex-col justify-between relative group hover:-translate-y-2 transition-transform duration-500 shadow-md">
+      <section className="mb-24 px-4 md:px-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-green)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
             <div className="self-end">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">🌿</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/15 text-2xl">🌿</div>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold font-serif uppercase leading-none">Clean & Functional</h3>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Clean & Functional</h3>
           </div>
 
-          <div className="bg-[var(--color-abstract-yellow)] text-black rounded-[2rem] aspect-square p-8 flex flex-col justify-between relative group hover:-translate-y-2 transition-transform duration-500 shadow-md">
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-yellow)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
             <div className="self-end">
-               <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center text-2xl">☀️</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/10 text-2xl">☀️</div>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold font-serif uppercase leading-none">Feel Good Energy</h3>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Feel Good Energy</h3>
           </div>
 
-          <div className="bg-black text-white rounded-[2rem] aspect-square p-8 flex flex-col justify-between relative group hover:-translate-y-2 transition-transform duration-500 shadow-md">
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-lemon)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
             <div className="self-end">
-              <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl">✨</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/10 text-2xl">✨</div>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold font-serif uppercase leading-none">Enhance Joy</h3>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Enhance Joy</h3>
           </div>
 
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-teal)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
+            <div className="self-end">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/15 text-2xl">🌊</div>
+            </div>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Fresh & Fluid</h3>
+          </div>
+
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--color-abstract-blue)] p-8 text-[var(--brand-ink)] shadow-md transition-transform duration-500 hover:-translate-y-2">
+            <div className="self-end">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-ink)]/15 text-2xl">💧</div>
+            </div>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Calm & Clear</h3>
+          </div>
+
+          <div className="group relative flex aspect-square flex-col justify-between rounded-[2rem] bg-[var(--brand-ink)] p-8 text-[var(--color-abstract-lemon)] shadow-md transition-transform duration-500 hover:-translate-y-2">
+            <div className="self-end">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-abstract-lemon)]/15 text-2xl">🎈</div>
+            </div>
+            <h3 className="font-display text-3xl font-black uppercase leading-none md:text-4xl">Dream Big</h3>
+          </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
-        <div className="bg-[var(--brand-bg)] border-2 border-black text-black rounded-[2rem] p-10 md:p-14 flex flex-col justify-between">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 md:grid-cols-2 md:px-12">
+        <div className="flex flex-col justify-between rounded-[2rem] border-2 border-[var(--brand-border)] bg-[var(--brand-surface)] p-10 text-[var(--brand-text)] md:p-14">
           <div>
-            <div className="text-[var(--color-abstract-green)] text-8xl leading-none font-serif mb-6 h-12">
+            <div className="mb-6 h-12 font-serif text-8xl leading-none text-[var(--color-abstract-green)]">
               &quot;
             </div>
-            <p className="text-lg md:text-xl font-medium leading-relaxed mb-12">
+            <p className="mb-12 text-lg font-medium leading-relaxed md:text-xl">
               &quot;We fell in love with this design, which definitely matches the vibes and energy that we want in our space. Your work is the first real step in this crazy adventure.&quot;
             </p>
           </div>
           <div>
-            <div className="font-bold tracking-widest uppercase mb-1">KARIM & AURELIE</div>
-            <div className="font-medium opacity-80 uppercase tracking-widest text-xs">Verified Buyer</div>
+            <div className="mb-1 font-bold uppercase tracking-widest">KARIM & AURELIE</div>
+            <div className="text-xs font-medium uppercase tracking-widest text-[var(--brand-text-secondary)]">Verified Buyer</div>
           </div>
         </div>
 
-        <div className="bg-black text-[var(--color-abstract-lemon)] rounded-[2rem] p-10 md:p-14 flex flex-col justify-between">
+        <div className="flex flex-col justify-between rounded-[2rem] bg-[var(--brand-ink)] p-10 text-[var(--color-abstract-lemon)] md:p-14">
           <div>
-            <div className="text-[var(--color-abstract-yellow)] text-8xl leading-none font-serif mb-6 h-12">
+            <div className="mb-6 h-12 font-serif text-8xl leading-none text-[var(--color-abstract-yellow)]">
               &quot;
             </div>
-            <p className="text-lg md:text-xl font-medium leading-relaxed mb-12">
+            <p className="mb-12 text-lg font-medium leading-relaxed md:text-xl">
               &quot;Absolutely incredible flavor and the perfect amount of buzz. It has completely replaced my evening routine and I feel so much better the next day.&quot;
             </p>
           </div>
           <div>
-            <div className="font-bold tracking-widest uppercase mb-1">JORIS VAN HOECKE</div>
-            <div className="font-medium opacity-80 uppercase tracking-widest text-xs">Verified Buyer</div>
+            <div className="mb-1 font-bold uppercase tracking-widest text-[var(--brand-text)]">JORIS VAN HOECKE</div>
+            <div className="text-xs font-medium uppercase tracking-widest text-[var(--brand-text-secondary)]">Verified Buyer</div>
           </div>
         </div>
       </section>
