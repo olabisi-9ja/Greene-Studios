@@ -2,78 +2,92 @@ import { useEffect, useRef } from 'react';
 import { createTimeline, set, stagger } from 'animejs';
 
 export function useHeroAnimation() {
- const sectionRef = useRef<HTMLElement>(null);
- const wordRef = useRef<HTMLHeadingElement>(null);
- const lineRef = useRef<HTMLDivElement>(null);
- const ctasRef = useRef<HTMLDivElement>(null);
- const badgesRef = useRef<HTMLDivElement>(null);
- const marqueeRef = useRef<HTMLDivElement>(null);
- const animatedRef = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const kickerRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
+  const metaRef = useRef<HTMLDivElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const animatedRef = useRef(false);
 
- useEffect(() => {
- if (animatedRef.current) return;
+  useEffect(() => {
+    if (animatedRef.current) return;
 
- const prefersReducedMotion = typeof window !== 'undefined' &&
- window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
- const chars = Array.from(
- document.querySelectorAll<HTMLElement>('.hero-char-inner')
- );
+    const lines = Array.from(
+      document.querySelectorAll<HTMLElement>('.hero-line-inner')
+    );
 
- if (prefersReducedMotion) {
- const targets = [lineRef.current, ctasRef.current, badgesRef.current, marqueeRef.current].filter(Boolean) as HTMLElement[];
- set(targets, { opacity: 1, translateY: 0, scale: 1 });
- set(chars, { opacity: 1, translateY: '0%', rotate: 0 });
- animatedRef.current = true;
- return;
- }
+    if (prefersReducedMotion) {
+      const targets = [kickerRef.current, descRef.current, ctasRef.current, metaRef.current, visualRef.current, marqueeRef.current].filter(Boolean) as HTMLElement[];
+      set(targets, { opacity: 1, translateY: 0, scale: 1 });
+      set(lines, { opacity: 1, translateY: '0%' });
+      animatedRef.current = true;
+      return;
+    }
 
- const tl = createTimeline({
- defaults: { ease: 'cubicBezier(0.16, 1, 0.3, 1)' },
- });
+    const tl = createTimeline({
+      defaults: { ease: 'cubicBezier(0.16, 1, 0.3, 1)' },
+    });
 
- // Giant word, letters rise & straighten one by one
- set(chars, { opacity: 0, translateY: '115%', rotate: 8 });
- tl.add(chars, {
- opacity: [0, 1],
- translateY: ['115%', '0%'],
- rotate: [8, 0],
- duration: 1200,
- delay: stagger(70),
- ease: 'cubicBezier(0.16, 1, 0.3, 1)',
- }, 120);
+    // Headline lines rise out of their masks, one after another
+    set(lines, { opacity: 0, translateY: '110%' });
+    tl.add(lines, {
+      opacity: [0, 1],
+      translateY: ['110%', '0%'],
+      duration: 900,
+      delay: stagger(120),
+      ease: 'cubicBezier(0.16, 1, 0.3, 1)',
+    }, 80);
 
- // Serif line under the word
- if (lineRef.current) {
- set(lineRef.current, { opacity: 0, translateY: 20 });
- tl.add(lineRef.current, { opacity: [0, 1], translateY: [20, 0], duration: 700 }, 620);
- }
+    // Kicker
+    if (kickerRef.current) {
+      set(kickerRef.current, { opacity: 0, translateX: -14 });
+      tl.add(kickerRef.current, { opacity: [0, 1], translateX: [-14, 0], duration: 550 }, 40);
+    }
 
- // CTA row
- if (ctasRef.current) {
- set(ctasRef.current, { opacity: 0, translateY: 22 });
- tl.add(ctasRef.current, { opacity: [0, 1], translateY: [22, 0], duration: 700 }, 820);
- }
+    // Description
+    if (descRef.current) {
+      set(descRef.current, { opacity: 0, translateY: 18 });
+      tl.add(descRef.current, { opacity: [0, 1], translateY: [18, 0], duration: 600 }, 480);
+    }
 
- // Rotating badge, pops in with a bounce
- if (badgesRef.current) {
- set(badgesRef.current, { opacity: 0, scale: 0.5 });
- tl.add(badgesRef.current, {
- opacity: [0, 1],
- scale: [0.5, 1],
- duration: 800,
- ease: 'cubicBezier(0.34, 1.56, 0.64, 1)',
- }, 1000);
- }
+    // CTAs
+    if (ctasRef.current) {
+      set(ctasRef.current, { opacity: 0, translateY: 20 });
+      tl.add(ctasRef.current, { opacity: [0, 1], translateY: [20, 0], duration: 600 }, 620);
+    }
 
- // Bottom marquee
- if (marqueeRef.current) {
- set(marqueeRef.current, { opacity: 0 });
- tl.add(marqueeRef.current, { opacity: [0, 1], duration: 700 }, 1150);
- }
+    // Meta row
+    if (metaRef.current) {
+      set(metaRef.current, { opacity: 0, translateY: 16 });
+      tl.add(metaRef.current, { opacity: [0, 1], translateY: [16, 0], duration: 550 }, 760);
+    }
 
- animatedRef.current = true;
- }, []);
+    // Right visual — pops in with a soft scale
+    if (visualRef.current) {
+      set(visualRef.current, { opacity: 0, scale: 0.94, translateY: 24 });
+      tl.add(visualRef.current, {
+        opacity: [0, 1],
+        scale: [0.94, 1],
+        translateY: [24, 0],
+        duration: 900,
+        ease: 'cubicBezier(0.16, 1, 0.3, 1)',
+      }, 320);
+    }
 
- return { sectionRef, wordRef, lineRef, ctasRef, badgesRef, marqueeRef };
+    // Bottom marquee
+    if (marqueeRef.current) {
+      set(marqueeRef.current, { opacity: 0 });
+      tl.add(marqueeRef.current, { opacity: [0, 1], duration: 700 }, 950);
+    }
+
+    animatedRef.current = true;
+  }, []);
+
+  return { sectionRef, headlineRef, kickerRef, descRef, ctasRef, metaRef, visualRef, marqueeRef };
 }

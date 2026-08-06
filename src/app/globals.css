@@ -261,17 +261,9 @@
     animation: spin-slow 14s linear infinite;
   }
 
-  /* ─── Hero letter reveal ─────────────────────────────────────────── */
-  .hero-char {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: bottom;
-    line-height: 0.88;
-    padding-bottom: 0.1em;
-  }
-  .hero-char-inner {
-    display: inline-block;
-    line-height: 0.88;
+  /* ─── Hero line reveal ──────────────────────────────────────────── */
+  .hero-line-inner {
+    display: block;
     will-change: transform, opacity;
   }
 
