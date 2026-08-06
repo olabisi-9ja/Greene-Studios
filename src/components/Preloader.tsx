@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Logo } from "./ui/Logo";
 
 export default function Preloader() {
   const [isComplete, setIsComplete] = useState(false);
@@ -10,22 +9,20 @@ export default function Preloader() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
-    // Check if we've already shown the loader this session
+
+    // Skip if we've already shown the loader this session
     if (sessionStorage.getItem("loader_shown")) {
       setHasShown(true);
       return;
     }
-    
-    // Prevent scrolling while loading
+
     document.body.style.overflow = "hidden";
 
-    // Timing to match the SVG drawing animation + a slight pause
     const timer = setTimeout(() => {
       setIsComplete(true);
       sessionStorage.setItem("loader_shown", "true");
       document.body.style.overflow = "";
-    }, 1800);
+    }, 1700);
 
     return () => {
       clearTimeout(timer);
@@ -38,43 +35,59 @@ export default function Preloader() {
   return (
     <AnimatePresence>
       {!isComplete && (
-        <motion.div 
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
-          initial={{ opacity: 1 }}
-          exit={{ 
-            opacity: 0,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
+        <motion.div
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-[var(--brand-bg)]"
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Rolling tire color burst behind logo */}
-          <motion.div 
-            className="absolute w-48 h-48 md:w-64 md:h-64 rounded-full blur-3xl opacity-70"
-            style={{
-              background: "conic-gradient(from 0deg, #F3B700, #12372A, #5294A8, #F3B700)"
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          {/* lime flash behind */}
+          <motion.div
+            className="absolute -bottom-[30vh] h-[70vh] w-[70vw] rounded-full blur-[110px] glow-lime"
+            animate={{ opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            aria-hidden="true"
           />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 3, filter: "blur(10px)" }}
-            transition={{ duration: 0.6, ease: "easeIn" }}
-            className="relative z-10"
-          >
-            {/* The Logo component will display /logo.png */}
-            <Logo className="w-32 h-32 md:w-48 md:h-48" />
-          </motion.div>
-          
-          <motion.div
-            className="mt-8 text-white tracking-widest text-sm uppercase font-semibold opacity-0"
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            Greene Studios
-          </motion.div>
+          <div className="relative z-10 flex flex-col items-center">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-lg font-black text-[var(--brand-ink)]"
+            >
+              G
+            </motion.span>
+
+            <h1 className="flex overflow-hidden font-display text-4xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-6xl">
+              {"GREENE".split("").map((ch, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ y: "110%" }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.05, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.6 }}
+              className="mt-3 text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--brand-text-secondary)]"
+            >
+              Studios
+            </motion.p>
+
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.35, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 h-[3px] w-40 origin-left rounded-full bg-[var(--brand-accent)] md:w-56"
+            />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

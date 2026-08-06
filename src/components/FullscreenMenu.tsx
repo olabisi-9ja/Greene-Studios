@@ -1,118 +1,105 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { BRAND, NAV_LINKS } from "@/lib/data";
-import { X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { NAV_LINKS, BRAND } from "@/lib/data";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const MENU_ITEMS = [
+  ...NAV_LINKS,
+  { label: "Contact", href: "/contact" },
+];
+
 export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  const menuVariants = {
-    closed: { x: "100%", opacity: 0, transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] as const } },
-    open: { x: 0, opacity: 1, transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] as const } }
-  };
-
-  const linkVariants = {
-    closed: { x: 50, opacity: 0 },
-    open: (i: number) => ({
-      x: 0, 
-      opacity: 1, 
-      transition: { delay: 0.05 + i * 0.05, duration: 0.3, ease: "easeOut" as const }
-    })
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed top-0 right-0 bottom-0 md:top-4 md:right-4 md:bottom-4 w-full md:w-[360px] z-[70] flex flex-col bg-[#111] text-white md:rounded-[32px] overflow-hidden shadow-2xl"
-          initial="closed"
-          animate="open"
-          exit="closed"
-          variants={menuVariants}
+          className="fixed inset-0 z-[75] flex flex-col justify-between overflow-hidden bg-[var(--brand-bg)] px-5 pb-8 pt-28 md:px-12"
+          initial={{ clipPath: "inset(0 0 100% 0)" }}
+          animate={{ clipPath: "inset(0 0 0% 0)" }}
+          exit={{ clipPath: "inset(0 0 100% 0)" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Close button - visible mostly if they don't use the navbar one */}
-          <div className="absolute top-6 right-6 z-10 md:hidden">
-            <button 
-              onClick={onClose}
-              className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
-            >
-              <X size={20} />
-            </button>
-          </div>
+          {/* soft glow */}
+          <div
+            className="pointer-events-none absolute -right-[20vw] -top-[20vh] h-[60vh] w-[60vw] rounded-full opacity-60 blur-[100px] glow-lime"
+            aria-hidden="true"
+          />
 
-          <div className="flex-1 flex flex-col justify-center px-12 pt-16">
-            <nav className="flex flex-col gap-6">
-              {/* Primary Links */}
-              <div className="flex flex-col gap-4">
-                {NAV_LINKS.map((link, i) => (
-                  <div key={link.href} className="overflow-hidden">
-                    <motion.div custom={i} variants={linkVariants}>
-                      <Link
-                        href={link.href}
-                        onClick={onClose}
-                        className="text-4xl font-medium tracking-tight hover:text-white/70 transition-colors inline-block"
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  </div>
-                ))}
-              </div>
+          <nav className="relative z-10 flex flex-col">
+            {MENU_ITEMS.map((item, i) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.15 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="border-b border-[var(--brand-border)]"
+              >
+                <Link
+                  href={item.href}
+                  onClick={onClose}
+                  data-cursor={item.label.toUpperCase()}
+                  className="group flex items-baseline gap-4 py-3 md:gap-8 md:py-4"
+                >
+                  <span className="w-8 font-mono text-xs text-[var(--brand-accent)] md:text-sm">
+                    0{i + 1}
+                  </span>
+                  <span className="font-display text-[clamp(2.4rem,7vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-transform duration-500 group-hover:translate-x-3 md:group-hover:translate-x-6">
+                    {item.label}
+                  </span>
+                  <span
+                    className="ml-auto hidden text-2xl text-[var(--brand-text)] opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100 md:block"
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </nav>
 
-              {/* Secondary Links */}
-              <div className="flex flex-col gap-3 mt-8">
-                {["Playground", "Journal", "Newsletter"].map((item, i) => (
-                  <div key={item} className="overflow-hidden">
-                    <motion.div custom={i + NAV_LINKS.length} variants={linkVariants}>
-                      <Link
-                        href="#"
-                        onClick={onClose}
-                        className="text-sm text-white/50 hover:text-white transition-colors"
-                      >
-                        {item}
-                      </Link>
-                    </motion.div>
-                  </div>
-                ))}
-              </div>
-            </nav>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.45, duration: 0.5 }}
+            className="relative z-10 flex flex-col gap-6 pt-8 md:flex-row md:items-end md:justify-between"
+          >
+            <div className="flex flex-col gap-1">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+                Say hello
+              </span>
+              <a
+                href={`mailto:${BRAND.email}`}
+                data-cursor="MAIL"
+                className="font-display text-lg font-bold text-[var(--brand-text)] transition-colors hover:text-[var(--brand-accent)] md:text-2xl"
+              >
+                {BRAND.email}
+              </a>
+            </div>
 
-          <div className="pb-10 px-12 flex justify-end items-end gap-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="flex gap-4 text-white/50 text-sm font-medium uppercase tracking-widest"
-            >
-              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                Insta
+            <div className="flex items-center gap-5">
+              <a href={BRAND.linkedin} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)]">
+                LinkedIn
               </a>
-              <a href={BRAND.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                Twtr
+              <a href={BRAND.instagram} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)]">
+                Instagram
               </a>
-              <a href={BRAND.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                Lnkd
+              <a href={BRAND.twitter} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)]">
+                X / Twitter
               </a>
-            </motion.div>
-          </div>
+              <span className="text-[var(--brand-border)]">/</span>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+                {BRAND.location}
+              </span>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { Menu, X, Sun, Moon, PaintBucket } from "lucide-react";
 import FullscreenMenu from "./FullscreenMenu";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
-import { Logo } from "./ui/Logo";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,120 +20,130 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Hiding logic when scrolling down, show when scrolling up
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+
+      if (currentScrollY > lastScrollY && currentScrollY > 140) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      
-      setIsScrolled(currentScrollY > 50);
+
+      setIsScrolled(currentScrollY > 60);
       setLastScrollY(currentScrollY);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const isDark = mode === "midnight" || mode === "studio";
-
   return (
     <>
       <header
         className={cn(
-          "fixed left-1/2 -translate-x-1/2 z-[80] transition-all duration-500 w-[95%] max-w-7xl",
-          menuOpen ? "pointer-events-none" : "",
-          (isVisible || menuOpen) ? "top-4" : "-top-[100px]"
+          "fixed inset-x-0 top-0 z-[80] transition-transform duration-500",
+          (isVisible || menuOpen) ? "translate-y-0" : "-translate-y-full"
         )}
       >
-        <div className={cn(
-          "flex items-center justify-between transition-all duration-500 rounded-full px-6 py-3",
-          !menuOpen
-            ? "bg-[var(--brand-surface)] border border-[var(--brand-border)] shadow-lg" 
-            : "bg-transparent border border-transparent"
-        )}>
-          {/* Logo (No words next to it, only the drawing monogram) */}
-          <Link 
-            href="/" 
-            className="flex items-center gap-2 group pointer-events-auto"
-            data-cursor="HOME"
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div
+            className={cn(
+              "mt-3 md:mt-4 flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500 md:px-5",
+              isScrolled && !menuOpen
+                ? "glass-pill shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+                : "border border-transparent"
+            )}
           >
-            <Logo className="w-12 h-12 transition-colors duration-300" color={menuOpen ? "white" : "var(--brand-text)"} animateOnMount={true} />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className={cn(
-            "hidden md:flex items-center gap-1 pointer-events-auto transition-opacity duration-300",
-            menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-          )}>
-            {NAV_LINKS.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={cn(
-                    "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300",
-                    isActive
-                      ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
-                      : "text-[var(--brand-text)]/70 hover:text-[var(--brand-text)] hover:bg-[var(--brand-text)]/5"
-                  )}
-                  data-cursor={item.label.toUpperCase()}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* CTA & Menu Button */}
-          <div className="flex items-center gap-2 md:gap-4 pointer-events-auto">
+            {/* Wordmark */}
             <Link
-              href="/contact"
-              data-cursor="HI"
-              className={cn(
-                "hidden lg:flex px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
-                "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-white",
-                menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-              )}
+              href="/"
+              className="group flex items-center gap-2"
+              data-cursor="HOME"
+              aria-label="Greene Studios — home"
             >
-              Start a Project
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-ink)] transition-transform duration-300 group-hover:rotate-[18deg]">
+                G
+              </span>
+              <span className="font-display text-[15px] font-black uppercase tracking-tight text-[var(--brand-text)]">
+                Greene
+                <span className="align-super text-[8px] font-bold text-[var(--brand-accent)]">®</span>
+              </span>
             </Link>
 
-            <button
-              onClick={() => {
-                if (mode === "clean") setMode("midnight");
-                else if (mode === "midnight") setMode("studio");
-                else setMode("clean");
-              }}
-              className={cn(
-                "flex items-center justify-center transition-all duration-300 pointer-events-auto rounded-full w-10 h-10",
-                menuOpen ? "opacity-0 pointer-events-none text-white" : "opacity-100 text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
-              )}
-              title="Toggle Theme"
-              data-cursor="THEME"
-            >
-              {mode === "clean" && <Sun size={20} />}
-              {mode === "midnight" && <Moon size={20} />}
-              {mode === "studio" && <PaintBucket size={20} />}
-            </button>
+            {/* Desktop nav */}
+            <nav className={cn(
+              "hidden items-center gap-1 md:flex transition-opacity duration-300",
+              menuOpen ? "opacity-0" : "opacity-100"
+            )}>
+              {NAV_LINKS.map((item) => {
+                const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      "nav-link px-4 py-1.5 text-[13px] font-semibold tracking-wide transition-colors duration-300",
+                      isActive
+                        ? "is-active text-[var(--brand-text)]"
+                        : "text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]"
+                    )}
+                    data-cursor={item.label.toUpperCase()}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
 
-            <button 
-              className={cn(
-                "flex items-center justify-center transition-all duration-300 pointer-events-auto rounded-full w-10 h-10",
-                menuOpen ? "text-white hover:bg-white/10" : "text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
-              )}
-              onClick={() => setMenuOpen(!menuOpen)}
-              data-cursor={menuOpen ? "CLOSE" : "MENU"}
-              style={{ pointerEvents: "auto" }}
-            >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Right cluster */}
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <button
+                onClick={() => {
+                  if (mode === "paper") setMode("midnight");
+                  else if (mode === "midnight") setMode("studio");
+                  else setMode("paper");
+                }}
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300",
+                  menuOpen
+                    ? "text-[var(--brand-bg)] hover:bg-white/10"
+                    : "text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
+                )}
+                title="Toggle atmosphere"
+                data-cursor="MOOD"
+                aria-label="Toggle atmosphere"
+              >
+                {mode === "paper" && <Sun size={18} />}
+                {mode === "midnight" && <Moon size={18} />}
+                {mode === "studio" && <PaintBucket size={18} />}
+              </button>
+
+              <Link
+                href="/contact"
+                data-cursor="HELLO"
+                className={cn(
+                  "hidden items-center rounded-full bg-[var(--brand-text)] px-5 py-2.5 text-[12px] font-bold uppercase tracking-widest text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)] lg:inline-flex",
+                  menuOpen && "opacity-0"
+                )}
+              >
+                Start a project
+              </Link>
+
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                data-cursor={menuOpen ? "CLOSE" : "MENU"}
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300",
+                  menuOpen
+                    ? "text-[var(--brand-bg)] hover:bg-white/10"
+                    : "text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
+                )}
+              >
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Fullscreen Menu Overlay */}
       <FullscreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );

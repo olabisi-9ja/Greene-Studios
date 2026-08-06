@@ -9,7 +9,7 @@ export default function LegalPage() {
  return (
  <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 pt-32 pb-24">
  <div className="max-w-3xl mx-auto px-6 lg:px-12 prose prose-neutral prose-lg">
- <h1 className="text-4xl md:text-5xl font-black text-[#101010] tracking-tight mb-12">
+ <h1 className="text-4xl md:text-5xl font-black text-[var(--brand-text)] tracking-tight mb-12">
  Legal & Privacy
  </h1>
  
@@ -50,7 +50,7 @@ export default function LegalPage() {
  start of any project.
  </p>
  
- <p className="text-sm text-[#757575] mt-12">
+ <p className="text-sm text-[var(--brand-text-secondary)] mt-12">
  Last updated: July 2026
  </p>
  </div>

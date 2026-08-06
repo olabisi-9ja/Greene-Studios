@@ -1,132 +1,122 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
+type Project = (typeof PROJECTS)[number];
+
 export default function SelectedWork() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const featured = PROJECTS.filter((p) => p.featured).slice(0, 4);
-  const [isMobile, setIsMobile] = useState(false);
-  const mobileListRef = useStaggerAnimation<HTMLDivElement>({}, '.stagger-item');
+  const [active, setActive] = useState<Project | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const listRef = useStaggerAnimation<HTMLDivElement>({}, ".stagger-item");
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Featured projects: the three flagged + Bloom Health to round out a strong four
+  const featured = PROJECTS.filter((p) => p.featured).slice(0, 3);
+  const bloom = PROJECTS.find((p) => p.id === "bloom-health");
+  const projects = bloom ? [...featured, bloom] : featured;
 
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
+  // Floating preview follows the cursor
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { damping: 28, stiffness: 260, mass: 0.6 });
+  const sy = useSpring(my, { damping: 28, stiffness: 260, mass: 0.6 });
 
-  // Calculate translation range for horizontal scroll
-  // We have 4 items. Let's make it scroll -75% to leave the last item fully visible
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
-
-  if (isMobile) {
-    // Normal vertical layout on mobile devices
-    return (
-      <section className="py-20 bg-[var(--brand-bg)] transition-colors duration-1000">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
-            <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold block mb-4">
-              Selected Work
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--brand-text)] tracking-tight">
-              Projects that define us.
-            </h2>
-          </div>
-          <div ref={mobileListRef} className="flex flex-col gap-12">
-            {featured.map((project) => (
-              <Link 
-                href={`/work/${project.slug}`} 
-                key={project.id} 
-                className="stagger-item group block"
-                data-cursor="VIEW"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[32px] bg-[var(--brand-surface-secondary)] mb-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <span className="text-xs font-mono uppercase tracking-widest text-[var(--brand-text-secondary)]">{project.category}</span>
-                <h3 className="text-xl font-bold text-[var(--brand-text)] mt-2">{project.title}</h3>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const handleMove = (e: React.MouseEvent) => {
+    mx.set(e.clientX);
+    my.set(e.clientY);
+  };
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-[var(--brand-bg)] transition-colors duration-1000">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        
-        {/* Header inside sticky container */}
-        <div className="max-w-7xl mx-auto w-full px-12 mb-12 flex justify-between items-end">
+    <section
+      ref={sectionRef}
+      onMouseMove={handleMove}
+      className="relative bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36"
+    >
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        {/* Header */}
+        <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-bold block mb-4">
-              Selected Work
+            <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+              <span className="text-[var(--brand-accent)]">✦</span> Selected work — 2023 → 2026
             </span>
-            <h2 className="text-5xl font-black text-[var(--brand-text)] leading-none uppercase tracking-tighter">
-              Projects that define us.
+            <h2 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
+              Work that <span className="font-serif-i lowercase normal-case tracking-normal">works.</span>
             </h2>
           </div>
           <Link
             href="/work"
             data-cursor="GO"
-            className="text-[var(--brand-text)] hover:text-[var(--brand-accent)] text-sm font-semibold tracking-wide uppercase transition-colors"
+            className="group inline-flex w-fit items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-[var(--brand-text)]"
           >
-            All projects →
+            <span className="border-b-2 border-[var(--brand-accent)] pb-0.5 transition-colors group-hover:border-[var(--brand-text)]">
+              All projects
+            </span>
+            <span className="transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
           </Link>
         </div>
 
-        {/* Horizontal Moving Window */}
-        <div className="relative w-full flex items-center">
-          <motion.div style={{ x }} className="flex gap-8 px-12 w-max">
-            {featured.map((project) => (
-              <Link
-                key={project.id}
-                href={`/work/${project.slug}`}
-                className="group block w-[500px] flex-shrink-0"
-                data-cursor="VIEW"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[32px] bg-[var(--brand-surface-secondary)] mb-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-xs font-mono uppercase tracking-widest text-[var(--brand-text-secondary)]">
-                      {project.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-[var(--brand-text)] mt-1 group-hover:text-[var(--brand-accent)] transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
-                  <span className="text-sm font-medium text-[var(--brand-text-secondary)]">{project.year}</span>
-                </div>
-              </Link>
-            ))}
-          </motion.div>
-        </div>
+        {/* Rows */}
+        <div ref={listRef} className="flex flex-col">
+          {projects.map((project, i) => (
+            <Link
+              key={project.id}
+              href={`/work/${project.slug}`}
+              onMouseEnter={() => setActive(project)}
+              onMouseLeave={() => setActive(null)}
+              className="stagger-item group relative block border-t border-[var(--brand-border)] last:border-b"
+              data-cursor="VIEW"
+            >
+              {/* lime sweep */}
+              <div
+                className="work-sweep absolute inset-0 scale-x-0 bg-[var(--brand-accent)] group-hover:scale-x-100"
+                aria-hidden="true"
+              />
 
+              <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 md:py-10">
+                <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
+                  0{i + 1}
+                </span>
+                <h3 className="col-span-10 font-display text-[clamp(2rem,4.8vw,4.4rem)] font-black uppercase leading-[0.9] tracking-tight text-[var(--brand-text)] md:col-span-7">
+                  {project.title}
+                </h3>
+                <span className="hidden text-sm font-medium text-[var(--brand-text-secondary)] md:col-span-3 md:block">
+                  {project.category}
+                </span>
+                <span className="hidden text-right text-sm font-semibold text-[var(--brand-text-secondary)] lg:col-span-1 lg:block">
+                  {project.year}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
+
+      {/* Floating preview image */}
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[60] hidden lg:block"
+        style={{ x: sx, y: sy, marginLeft: -210, marginTop: -150 }}
+        aria-hidden="true"
+      >
+        <div
+          className={`relative h-[300px] w-[420px] overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] shadow-[0_30px_80px_rgba(0,0,0,0.25)] transition-opacity duration-300 ${
+            active ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {active && (
+            <Image
+              src={active.image}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="420px"
+            />
+          )}
+        </div>
+      </motion.div>
     </section>
   );
 }

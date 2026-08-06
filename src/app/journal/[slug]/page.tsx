@@ -33,28 +33,28 @@ export default async function JournalArticlePage({ params }: Props) {
  <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000 pt-32">
  {/* Header */}
  <div className="max-w-4xl mx-auto px-6 lg:px-12 pb-12">
- <Link href="/journal" className="inline-flex items-center gap-2 text-[#757575] hover:text-[#101010] text-sm mb-12 transition-colors">
+ <Link href="/journal" className="inline-flex items-center gap-2 text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)] text-sm mb-12 transition-colors">
  ← Back to Journal
  </Link>
- <div className="flex items-center gap-4 text-sm text-[#757575] mb-8">
- <span className="bg-[#FAFAFA] border border-[#E6E6E6] px-4 py-1.5 rounded-full font-medium text-[#101010]">
+ <div className="flex items-center gap-4 text-sm text-[var(--brand-text-secondary)] mb-8">
+ <span className="bg-[var(--brand-bg)] border border-[var(--brand-border)] px-4 py-1.5 rounded-full font-medium text-[var(--brand-text)]">
  {article.category}
  </span>
  <span>{article.date}</span>
  <span>·</span>
  <span>{article.readTime}</span>
  </div>
- <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#101010] leading-[1.1] tracking-tight mb-8">
+ <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[var(--brand-text)] leading-[1.1] tracking-tight mb-8">
  {article.title}
  </h1>
- <p className="text-[#757575] text-xl leading-relaxed">
+ <p className="text-[var(--brand-text-secondary)] text-xl leading-relaxed">
  {article.excerpt}
  </p>
  </div>
 
  {/* Hero Image */}
  <div className="max-w-6xl mx-auto px-6 lg:px-12 mb-20">
- <div className="w-full aspect-[21/9] md:aspect-[21/9] rounded-[32px] overflow-hidden bg-[#FAFAFA] border border-[#E6E6E6] relative">
+ <div className="w-full aspect-[21/9] md:aspect-[21/9] rounded-[32px] overflow-hidden bg-[var(--brand-bg)] border border-[var(--brand-border)] relative">
  <Image 
  src={article.image}
  alt={article.title}
@@ -80,12 +80,12 @@ export default async function JournalArticlePage({ params }: Props) {
  </div>
 
  {/* Related Articles */}
- <div className="bg-[#FAFAFA] py-24 border-t border-[#E6E6E6]">
+ <div className="bg-[var(--brand-bg)] py-24 border-t border-[var(--brand-border)]">
  <div className="max-w-7xl mx-auto px-6 lg:px-12">
- <h2 className="text-3xl font-semibold text-[#101010] mb-12 tracking-tight">Keep Reading</h2>
+ <h2 className="text-3xl font-semibold text-[var(--brand-text)] mb-12 tracking-tight">Keep Reading</h2>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
  {relatedArticles.map((rel) => (
- <Link key={rel.id} href={`/journal/${rel.slug}`} className="group flex flex-col h-full bg-white p-6 rounded-[24px] border border-[#E6E6E6] hover:shadow-md transition-shadow">
+ <Link key={rel.id} href={`/journal/${rel.slug}`} className="group flex flex-col h-full bg-white p-6 rounded-[24px] border border-[var(--brand-border)] hover:shadow-md transition-shadow">
  <div className="overflow-hidden rounded-[16px] mb-6 relative aspect-[16/9]">
  <Image 
  src={rel.image}
@@ -96,13 +96,13 @@ export default async function JournalArticlePage({ params }: Props) {
  />
  </div>
  <div className="flex flex-col flex-grow">
- <div className="flex items-center gap-3 text-xs text-[#757575] mb-3">
- <span className="font-medium text-[#BFA36A] uppercase tracking-wider">{rel.category}</span>
+ <div className="flex items-center gap-3 text-xs text-[var(--brand-text-secondary)] mb-3">
+ <span className="font-medium text-[var(--brand-accent)] uppercase tracking-wider">{rel.category}</span>
  </div>
- <h3 className="text-xl font-semibold text-[#101010] mb-3 leading-snug group-hover:text-[#BFA36A] transition-colors">
+ <h3 className="text-xl font-semibold text-[var(--brand-text)] mb-3 leading-snug group-hover:text-[var(--brand-accent)] transition-colors">
  {rel.title}
  </h3>
- <p className="text-[#757575] text-sm leading-relaxed mb-6 flex-grow">
+ <p className="text-[var(--brand-text-secondary)] text-sm leading-relaxed mb-6 flex-grow">
  {rel.excerpt}
  </p>
  </div>

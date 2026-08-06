@@ -44,19 +44,19 @@ export default async function CaseStudyPage({ params }: Props) {
  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-black/60 to-black/20" />
  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${project.color}50, transparent)` }} />
  <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-40">
- <Link href="/work" className="inline-flex items-center gap-2 text-[#F7F5F2]/50 hover:text-[#F7F5F2] text-sm mb-8 transition-colors">
+ <Link href="/work" className="inline-flex items-center gap-2 text-[var(--brand-surface)]/50 hover:text-[var(--brand-surface)] text-sm mb-8 transition-colors">
  ← Back to Work
  </Link>
  <div className="flex items-center gap-3 mb-4">
- <span className="bg-[#12372A] text-[#6B8F71] text-xs font-semibold px-4 py-2 rounded-full">
+ <span className="bg-[var(--brand-primary)] text-[var(--brand-accent)] text-xs font-semibold px-4 py-2 rounded-full">
  {project.category}
  </span>
- <span className="text-[#F7F5F2]/40 text-sm">{project.year}</span>
+ <span className="text-[var(--brand-surface)]/40 text-sm">{project.year}</span>
  </div>
- <h1 className="text-6xl lg:text-8xl font-black text-[#F7F5F2] leading-[0.9] tracking-tight mb-6">
+ <h1 className="text-6xl lg:text-8xl font-black text-[var(--brand-surface)] leading-[0.9] tracking-tight mb-6">
  {project.title}
  </h1>
- <p className="text-[#F7F5F2]/70 text-xl max-w-2xl leading-relaxed">{project.description}</p>
+ <p className="text-[var(--brand-surface)]/70 text-xl max-w-2xl leading-relaxed">{project.description}</p>
  </div>
  </div>
 
@@ -67,17 +67,17 @@ export default async function CaseStudyPage({ params }: Props) {
  <div className="lg:col-span-2 space-y-16">
  {/* Overview */}
  <section>
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Overview</h2>
- <p className="text-[#F7F5F2]/60 text-lg leading-relaxed">
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-6 tracking-tight">Overview</h2>
+ <p className="text-[var(--brand-surface)]/60 text-lg leading-relaxed">
  {project.description}
  </p>
  </section>
 
  {/* The Challenge */}
  <section>
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">The Challenge</h2>
- <div className="p-8 bg-[#12372A]/15 border border-[#12372A]/30 rounded-2xl">
- <p className="text-[#F7F5F2]/70 text-base leading-relaxed">
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-6 tracking-tight">The Challenge</h2>
+ <div className="p-8 bg-[var(--brand-primary)]/15 border border-[var(--brand-primary)]/30 rounded-2xl">
+ <p className="text-[var(--brand-surface)]/70 text-base leading-relaxed">
  {project.challenge || "A unique challenge in the intersection of design and technology."}
  </p>
  </div>
@@ -85,12 +85,12 @@ export default async function CaseStudyPage({ params }: Props) {
 
  {/* Goals */}
  <section>
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Goals</h2>
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-6 tracking-tight">Goals</h2>
  <div className="space-y-4">
  {(project.goals || []).map((goal: string, i: number) => (
  <div key={i} className="flex items-start gap-4">
- <span className="text-[#6B8F71] font-mono text-sm mt-1">{String(i + 1).padStart(2, "0")}</span>
- <p className="text-[#F7F5F2]/70 text-base leading-relaxed">{goal}</p>
+ <span className="text-[var(--brand-accent)] font-mono text-sm mt-1">{String(i + 1).padStart(2, "0")}</span>
+ <p className="text-[var(--brand-surface)]/70 text-base leading-relaxed">{goal}</p>
  </div>
  ))}
  </div>
@@ -98,13 +98,13 @@ export default async function CaseStudyPage({ params }: Props) {
 
  {/* Design Approach */}
  <section>
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Design Approach</h2>
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-6 tracking-tight">Design Approach</h2>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  {(project.approach || []).map((item: any, i: number) => (
  <div key={i} className="p-5 bg-white/[0.02] border border-white/5 rounded-xl">
- <div className="w-2 h-2 rounded-full bg-[#6B8F71] mb-3" />
- <p className="text-[#F7F5F2]/90 text-sm font-semibold mb-1">{item.title}</p>
- <p className="text-[#F7F5F2]/60 text-sm">{item.desc}</p>
+ <div className="w-2 h-2 rounded-full bg-[var(--brand-accent)] mb-3" />
+ <p className="text-[var(--brand-surface)]/90 text-sm font-semibold mb-1">{item.title}</p>
+ <p className="text-[var(--brand-surface)]/60 text-sm">{item.desc}</p>
  </div>
  ))}
  </div>
@@ -112,11 +112,11 @@ export default async function CaseStudyPage({ params }: Props) {
 
  {/* Results */}
  <section>
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Results</h2>
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-6 tracking-tight">Results</h2>
  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
  {project.results.map((result, i) => (
- <div key={i} className="p-6 bg-[#12372A]/20 border border-[#12372A]/40 rounded-2xl text-center">
- <p className="text-[#6B8F71] text-sm font-medium leading-relaxed">{result}</p>
+ <div key={i} className="p-6 bg-[var(--brand-primary)]/20 border border-[var(--brand-primary)]/40 rounded-2xl text-center">
+ <p className="text-[var(--brand-accent)] text-sm font-medium leading-relaxed">{result}</p>
  </div>
  ))}
  </div>
@@ -124,8 +124,8 @@ export default async function CaseStudyPage({ params }: Props) {
 
  {/* Lessons Learned */}
  <section>
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-6 tracking-tight">Lessons Learned</h2>
- <p className="text-[#F7F5F2]/60 text-lg leading-relaxed">
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-6 tracking-tight">Lessons Learned</h2>
+ <p className="text-[var(--brand-surface)]/60 text-lg leading-relaxed">
  {project.lessons || "Every project teaches us something new. This was no exception."}
  </p>
  </section>
@@ -134,7 +134,7 @@ export default async function CaseStudyPage({ params }: Props) {
  {/* Sidebar */}
  <div className="space-y-8">
  <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
- <h3 className="text-[#F7F5F2] font-bold text-sm tracking-widest uppercase mb-6">Project Details</h3>
+ <h3 className="text-[var(--brand-surface)] font-bold text-sm tracking-widest uppercase mb-6">Project Details</h3>
  <div className="space-y-4">
  {[
  { label: "Category", value: project.category },
@@ -144,21 +144,21 @@ export default async function CaseStudyPage({ params }: Props) {
  { label: "Status", value: "Launched" },
  ].map(({ label, value }) => (
  <div key={label}>
- <p className="text-[#F7F5F2]/30 text-xs tracking-wider uppercase mb-1">{label}</p>
- <p className="text-[#F7F5F2]/80 text-sm">{value}</p>
+ <p className="text-[var(--brand-surface)]/30 text-xs tracking-wider uppercase mb-1">{label}</p>
+ <p className="text-[var(--brand-surface)]/80 text-sm">{value}</p>
  </div>
  ))}
  </div>
  </div>
 
- <div className="p-6 bg-[#12372A]/20 border border-[#12372A]/40 rounded-2xl">
- <h3 className="text-[#F7F5F2] font-bold mb-3">Start Your Project</h3>
- <p className="text-[#F7F5F2]/50 text-sm mb-4 leading-relaxed">
+ <div className="p-6 bg-[var(--brand-primary)]/20 border border-[var(--brand-primary)]/40 rounded-2xl">
+ <h3 className="text-[var(--brand-surface)] font-bold mb-3">Start Your Project</h3>
+ <p className="text-[var(--brand-surface)]/50 text-sm mb-4 leading-relaxed">
  Ready to build something this good? Let&apos;s talk.
  </p>
  <Link
  href="/contact"
- className="block w-full text-center bg-[#12372A] hover:bg-[#6B8F71] text-[#F7F5F2] font-semibold py-3 rounded-xl transition-colors text-sm"
+ className="block w-full text-center bg-[var(--brand-primary)] hover:bg-[var(--brand-accent)] text-[var(--brand-surface)] font-semibold py-3 rounded-xl transition-colors text-sm"
  >
  Start a Project
  </Link>
@@ -168,7 +168,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
  {/* Related Projects */}
  <div className="mt-24 pt-16 border-t border-white/5">
- <h2 className="text-3xl font-black text-[#F7F5F2] mb-10 tracking-tight">Related Projects</h2>
+ <h2 className="text-3xl font-black text-[var(--brand-surface)] mb-10 tracking-tight">Related Projects</h2>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
  {related.map((p) => (
  <Link key={p.id} href={`/work/${p.slug}`} className="group block">
@@ -182,8 +182,8 @@ export default async function CaseStudyPage({ params }: Props) {
  />
  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
  <div className="absolute inset-0 flex flex-col justify-end p-6">
- <span className="text-[#6B8F71] text-xs mb-2">{p.category}</span>
- <h3 className="text-[#F7F5F2] text-2xl font-black tracking-tight">{p.title}</h3>
+ <span className="text-[var(--brand-accent)] text-xs mb-2">{p.category}</span>
+ <h3 className="text-[var(--brand-surface)] text-2xl font-black tracking-tight">{p.title}</h3>
  </div>
  </div>
  </Link>

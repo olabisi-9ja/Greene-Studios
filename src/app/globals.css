@@ -1,3 +1,6 @@
+@import "@fontsource-variable/archivo";
+@import "@fontsource-variable/inter";
+@import "@fontsource/instrument-serif";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -13,57 +16,81 @@
   --color-brand-text: var(--brand-text);
   --color-brand-text-secondary: var(--brand-text-secondary);
   --color-brand-accent: var(--brand-accent);
+  --color-brand-paper: var(--brand-paper);
+  --color-brand-ink: var(--brand-ink);
 
-  --font-geist: "Geist", sans-serif;
-  --font-inter: "Inter", sans-serif;
-  --font-neue: "Neue Montreal", "Inter", sans-serif;
-  --font-satoshi: "Satoshi", "Inter", sans-serif;
+  --font-display: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
 
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @layer base {
+  /* ─── Default: Paper (editorial, warm) ───────────────────────────── */
   :root {
-    /* Clean (Light) Mode */
-    --brand-primary: #1F3D3A;
-    --brand-bg: #F8F8F5;
-    --brand-surface: #FFFFFF;
-    --brand-surface-secondary: #F2F2F2;
-    --brand-border: #E6E6E6;
-    --brand-text: #121212;
-    --brand-text-secondary: #757575;
-    --brand-accent: #1F3D3A;
+    --brand-primary: #173a2e; /* deep green */
+    --brand-bg: #f1eee5; /* warm paper */
+    --brand-surface: #faf8f1; /* lighter paper */
+    --brand-surface-secondary: #e7e2d3; /* deeper paper */
+    --brand-border: #d8d1bf;
+    --brand-text: #14120e; /* ink */
+    --brand-text-secondary: #6d6759;
+    --brand-accent: #d9f42c; /* loud lime */
+    --brand-paper: #f1eee5;
+    --brand-ink: #14120e;
+
+    --color-abstract-orange: #ff5c28;
+    --color-abstract-blue: #c9e3ff;
+    --color-abstract-green: #477a44;
+    --color-abstract-lemon: #d9f42c;
+    --color-abstract-black: #14120e;
+    --color-abstract-pink: #ffd9e1;
   }
 
+  /* ─── Midnight ───────────────────────────────────────────────────── */
   .mode-midnight {
-    --brand-primary: #1F3D3A;
-    --brand-bg: #0F1113;
-    --brand-surface: #1A1C1E;
-    --brand-surface-secondary: #232527;
-    --brand-border: #333333;
-    --brand-text: #FAFAFA;
-    --brand-text-secondary: #A0A0A0;
-    --brand-accent: #1F3D3A;
+    --brand-primary: #d9f42c;
+    --brand-bg: #10110c;
+    --brand-surface: #171812;
+    --brand-surface-secondary: #202117;
+    --brand-border: #2c2d22;
+    --brand-text: #f1eee5;
+    --brand-text-secondary: #9c967f;
+    --brand-accent: #d9f42c;
+    --brand-paper: #10110c;
+    --brand-ink: #f1eee5;
+
+    --color-abstract-orange: #ff5c28;
+    --color-abstract-blue: #2f4d8f;
+    --color-abstract-green: #3f7d57;
+    --color-abstract-lemon: #d9f42c;
+    --color-abstract-black: #f1eee5;
+    --color-abstract-pink: #a63a52;
   }
 
+  /* ─── Studio (greenhouse) ────────────────────────────────────────── */
   .mode-studio {
-    --brand-primary: #121212; /* Black */
-    --brand-bg: #F4F0E6; /* Light warm beige */
-    --brand-surface: #FFFFFF; /* White */
-    --brand-surface-secondary: #477A44; /* Beautiful Green */
-    --brand-border: #121212;
-    --brand-text: #121212;
-    --brand-text-inverse: #F4F0E6;
-    --brand-text-secondary: #4A4A4A;
-    --brand-accent: #DBF72C; /* Lemon */
+    --brand-primary: #d9f42c;
+    --brand-bg: #10241a;
+    --brand-surface: #183221;
+    --brand-surface-secondary: #214030;
+    --brand-border: #36533f;
+    --brand-text: #eef6e8;
+    --brand-text-secondary: #9db9a4;
+    --brand-accent: #d9f42c;
+    --brand-paper: #10241a;
+    --brand-ink: #eef6e8;
 
-    /* Abstract Colors */
-    --color-abstract-orange: #E44926;
-    --color-abstract-yellow: #F0C929;
-    --color-abstract-green: #477A44;
-    --color-abstract-lemon: #DBF72C;
-    --color-abstract-black: #121212;
-    --color-abstract-blue: #CBE0FC;
+    --color-abstract-orange: #ff7a45;
+    --color-abstract-blue: #6fb7c9;
+    --color-abstract-green: #6fbf8b;
+    --color-abstract-lemon: #d9f42c;
+    --color-abstract-black: #eef6e8;
+    --color-abstract-pink: #e88fb0;
   }
 
   * {
@@ -81,25 +108,27 @@
   body {
     background-color: var(--brand-bg);
     color: var(--brand-text);
-    font-family: var(--font-inter);
+    font-family: var(--font-body);
     overflow-x: hidden;
     transition: background-color 0.8s ease, color 0.8s ease;
+    -webkit-font-smoothing: antialiased;
     @apply bg-background text-foreground;
   }
 
-  /* Font changes based on mode */
-  .mode-midnight body {
-    font-family: var(--font-geist);
-  }
-  .mode-studio body {
-    font-family: var(--font-neue);
-    background-color: var(--brand-bg);
-    /* Clean light beige background for Studio Modular pattern */
-    background-image: none;
-    background-attachment: fixed;
+  /* Display typeface for all headings, site-wide */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
   }
 
-  /* Custom scrollbar - Minimal */
+  ::selection {
+    background: var(--brand-accent);
+    color: var(--brand-ink);
+  }
+
+  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -113,72 +142,165 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--brand-text-secondary);
   }
-
-  /* Selection */
-  ::selection {
-    background: var(--brand-text);
-    color: var(--brand-bg);
-  }
 }
 
 @layer utilities {
+  /* ─── Typography helpers ─────────────────────────────────────────── */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-serif-i {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Outlined display text */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--brand-text);
+  }
+  .mode-midnight .text-outline,
+  .mode-studio .text-outline {
+    -webkit-text-stroke-color: var(--brand-text);
+  }
+
+  /* ─── Atmosphere ─────────────────────────────────────────────────── */
+  .bg-grid-soft {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--brand-text) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--brand-text) 5%, transparent) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .glow-lime {
+    background: radial-gradient(circle at center, color-mix(in srgb, var(--brand-accent) 45%, transparent), transparent 62%);
+  }
+
+  .glass-pill {
+    background: color-mix(in srgb, var(--brand-surface) 78%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid color-mix(in srgb, var(--brand-border) 80%, transparent);
+  }
+
+  /* ─── Buttons ────────────────────────────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    background: var(--brand-text);
+    color: var(--brand-bg);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    padding: 1rem 1.75rem;
+    transition: background-color 0.3s var(--ease-out-quart), color 0.3s var(--ease-out-quart), transform 0.3s var(--ease-out-quart), box-shadow 0.3s var(--ease-out-quart);
+  }
+  .btn-primary:hover {
+    background: var(--brand-accent);
+    color: var(--brand-ink);
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--brand-accent) 35%, transparent);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    border: 1.5px solid var(--brand-border);
+    color: var(--brand-text);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    padding: 1rem 1.75rem;
+    transition: border-color 0.3s var(--ease-out-quart), background-color 0.3s var(--ease-out-quart), color 0.3s var(--ease-out-quart);
+  }
+  .btn-outline:hover {
+    border-color: var(--brand-text);
+    background: color-mix(in srgb, var(--brand-text) 6%, transparent);
+  }
+
+  /* ─── Nav link underline sweep ───────────────────────────────────── */
+  .nav-link {
+    position: relative;
+    padding: 0.35rem 0;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1.5px;
+    width: 100%;
+    background: var(--brand-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* ─── Rotating badge (circular text) ─────────────────────────────── */
+  @keyframes spin-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 14s linear infinite;
+  }
+
+  /* ─── Hero letter reveal ─────────────────────────────────────────── */
+  .hero-char {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    line-height: 0.88;
+    padding-bottom: 0.1em;
+  }
+  .hero-char-inner {
+    display: inline-block;
+    line-height: 0.88;
+    will-change: transform, opacity;
+  }
+
+  /* ─── Marquee strip ──────────────────────────────────────────────── */
+  .marquee-strip {
+    background: var(--brand-accent);
+    color: var(--brand-ink);
+  }
+  .marquee-strip-plain {
+    border-top: 1px solid var(--brand-border);
+    border-bottom: 1px solid var(--brand-border);
+    background: var(--brand-surface);
+  }
+
+  /* ─── Work rows ──────────────────────────────────────────────────── */
+  .work-sweep {
+    transform-origin: left;
+    transition: transform 0.55s var(--ease-out-expo);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
-
-  .noise-bg {
-    position: relative;
-  }
-  .noise-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .glass-nav {
-    background: rgba(17, 17, 17, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .nivora-card {
-    background-color: var(--color-brand-surface);
-    border: 1px solid var(--color-brand-border);
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
-  }
-  .nivora-card:hover {
-    transform: translateY(-4px) scale(0.99);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
-  }
 }
 
-/* Studio Mode Enhancements */
-.mode-studio ::selection {
-  background: var(--brand-surface-secondary);
-  color: var(--brand-text);
-}
-
-.mode-studio ::-webkit-scrollbar-thumb {
-  background: var(--brand-primary);
-}
-.mode-studio ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-text-secondary);
-}
-
-/* Studio mode gradient glow on buttons */
-.mode-studio .studio-glow {
-  box-shadow: 0 0 30px rgba(203, 224, 252, 0.3), 0 0 60px rgba(26, 67, 49, 0.1);
-}
+/* ─── Shadcn tokens (kept for component compatibility) ─────────────── */
 
 @theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
+  --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

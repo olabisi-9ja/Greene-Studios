@@ -8,8 +8,8 @@ import { NAV_LINKS } from "@/lib/data";
 
 const pillColors = [
   "#2D8B57", // Artistic Green
-  "#F3B700", // Yellow
-  "#111111", // Black
+  "#D9F42C", // Yellow
+  "var(--brand-text)", // Black
   "#E65A1A", // Orange
 ];
 
@@ -36,7 +36,7 @@ export default function StudioSideMenu() {
               className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 transform group-hover:-translate-x-2 shadow-lg`}
               style={{
                 backgroundColor: color,
-                color: (color === "#111111" || color === "#2D8B57" || color === "#E65A1A") ? "#FFFFFF" : "#111111",
+                color: (color === "var(--brand-text)" || color === "#2D8B57" || color === "#E65A1A") ? "#FFFFFF" : "var(--brand-text)",
                 opacity: isActive ? 1 : 0.85,
               }}
             >

@@ -13,27 +13,27 @@ export default function ContactPage() {
  {/* Header */}
  <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
  <div className="flex items-center gap-3 mb-6">
- <div className="w-6 h-px bg-[#BFA36A]" />
- <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">Contact</span>
+ <div className="w-6 h-px bg-[var(--brand-accent)]" />
+ <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold">Contact</span>
  </div>
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-end mb-12">
- <h1 className="text-[clamp(3.5rem,8vw,6.5rem)] font-semibold text-[#101010] leading-[1.05] tracking-tight">
+ <h1 className="text-[clamp(3.5rem,8vw,6.5rem)] font-semibold text-[var(--brand-text)] leading-[1.05] tracking-tight">
  Let&apos;s build
  <br />
- <span className="text-[#757575]">something.</span>
+ <span className="text-[var(--brand-text-secondary)]">something.</span>
  </h1>
  <div className="pb-4">
- <p className="text-[#757575] text-lg lg:text-xl leading-relaxed mb-8">
+ <p className="text-[var(--brand-text-secondary)] text-lg lg:text-xl leading-relaxed mb-8">
  Tell us about your project. We respond to every inquiry within
  24 hours with a thoughtful reply — not a template.
  </p>
  <div className="space-y-3">
  <div className="flex items-center gap-3">
 
- <span className="text-[#101010] text-sm font-medium">Currently accepting new projects</span>
+ <span className="text-[var(--brand-text)] text-sm font-medium">Currently accepting new projects</span>
  </div>
- <p className="text-[#757575] text-sm pl-5">{BRAND.email}</p>
- <p className="text-[#757575] text-sm pl-5">{BRAND.location}</p>
+ <p className="text-[var(--brand-text-secondary)] text-sm pl-5">{BRAND.email}</p>
+ <p className="text-[var(--brand-text-secondary)] text-sm pl-5">{BRAND.location}</p>
  </div>
  </div>
  </div>
@@ -48,24 +48,24 @@ export default function ContactPage() {
  {/* Name + Email */}
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-2">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-2">
  Your Name *
  </label>
  <input
  type="text"
  placeholder="Sarah Chen"
- className="w-full bg-[#FAFAFA] border border-[#E6E6E6] text-[#101010] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#101010] focus:ring-1 focus:ring-[#101010] transition-all text-sm"
+ className="w-full bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text)] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[var(--brand-text)] focus:ring-1 focus:ring-[var(--brand-text)] transition-all text-sm"
  required
  />
  </div>
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-2">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-2">
  Email Address *
  </label>
  <input
  type="email"
  placeholder="sarah@company.com"
- className="w-full bg-[#FAFAFA] border border-[#E6E6E6] text-[#101010] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#101010] focus:ring-1 focus:ring-[#101010] transition-all text-sm"
+ className="w-full bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text)] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[var(--brand-text)] focus:ring-1 focus:ring-[var(--brand-text)] transition-all text-sm"
  required
  />
  </div>
@@ -73,26 +73,26 @@ export default function ContactPage() {
 
  {/* Company */}
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-2">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-2">
  Company / Project Name
  </label>
  <input
  type="text"
  placeholder="Luminary Analytics"
- className="w-full bg-[#FAFAFA] border border-[#E6E6E6] text-[#101010] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#101010] focus:ring-1 focus:ring-[#101010] transition-all text-sm"
+ className="w-full bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text)] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[var(--brand-text)] focus:ring-1 focus:ring-[var(--brand-text)] transition-all text-sm"
  />
  </div>
 
  {/* Project Type */}
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-3">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-3">
  Project Type *
  </label>
  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
  {["Web Design", "Branding", "UI/UX Design", "Development", "Motion Design", "Full Ecosystem"].map((type) => (
  <label key={type} className="relative cursor-pointer">
  <input type="checkbox" className="peer sr-only" />
- <div className="peer-checked:bg-[#111111] peer-checked:border-[#111111] bg-[#FAFAFA] border border-[#E6E6E6] text-[#757575] peer-checked:text-white text-xs px-4 py-4 rounded-xl text-center transition-all hover:border-[#101010] select-none font-medium">
+ <div className="peer-checked:bg-[var(--brand-text)] peer-checked:border-[var(--brand-text)] bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text-secondary)] peer-checked:text-white text-xs px-4 py-4 rounded-xl text-center transition-all hover:border-[var(--brand-text)] select-none font-medium">
  {type}
  </div>
  </label>
@@ -102,14 +102,14 @@ export default function ContactPage() {
 
  {/* Budget */}
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-3">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-3">
  Estimated Budget *
  </label>
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
  {["< $5K", "$5K–$15K", "$15K–$50K", "$50K+"].map((range) => (
  <label key={range} className="relative cursor-pointer">
  <input type="radio" name="budget" className="peer sr-only" />
- <div className="peer-checked:bg-[#111111] peer-checked:border-[#111111] bg-[#FAFAFA] border border-[#E6E6E6] text-[#757575] peer-checked:text-white text-xs px-4 py-4 rounded-xl text-center transition-all hover:border-[#101010] select-none cursor-pointer font-medium">
+ <div className="peer-checked:bg-[var(--brand-text)] peer-checked:border-[var(--brand-text)] bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text-secondary)] peer-checked:text-white text-xs px-4 py-4 rounded-xl text-center transition-all hover:border-[var(--brand-text)] select-none cursor-pointer font-medium">
  {range}
  </div>
  </label>
@@ -119,14 +119,14 @@ export default function ContactPage() {
 
  {/* Timeline */}
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-3">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-3">
  Timeline
  </label>
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
  {["ASAP", "1–2 months", "3–6 months", "Flexible"].map((t) => (
  <label key={t} className="relative cursor-pointer">
  <input type="radio" name="timeline" className="peer sr-only" />
- <div className="peer-checked:bg-[#111111] peer-checked:border-[#111111] bg-[#FAFAFA] border border-[#E6E6E6] text-[#757575] peer-checked:text-white text-xs px-4 py-4 rounded-xl text-center transition-all hover:border-[#101010] select-none cursor-pointer font-medium">
+ <div className="peer-checked:bg-[var(--brand-text)] peer-checked:border-[var(--brand-text)] bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text-secondary)] peer-checked:text-white text-xs px-4 py-4 rounded-xl text-center transition-all hover:border-[var(--brand-text)] select-none cursor-pointer font-medium">
  {t}
  </div>
  </label>
@@ -136,13 +136,13 @@ export default function ContactPage() {
 
  {/* Message */}
  <div>
- <label className="text-[#757575] text-xs font-semibold tracking-wider uppercase block mb-2">
+ <label className="text-[var(--brand-text-secondary)] text-xs font-semibold tracking-wider uppercase block mb-2">
  Tell Us About Your Project *
  </label>
  <textarea
  placeholder="What are you building? What's the goal? What does success look like?"
  rows={6}
- className="w-full bg-[#FAFAFA] border border-[#E6E6E6] text-[#101010] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#101010] focus:ring-1 focus:ring-[#101010] transition-all text-sm resize-none"
+ className="w-full bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-text)] px-5 py-4 rounded-xl placeholder:text-[#A3A3A3] focus:outline-none focus:border-[var(--brand-text)] focus:ring-1 focus:ring-[var(--brand-text)] transition-all text-sm resize-none"
  required
  />
  </div>
@@ -150,12 +150,12 @@ export default function ContactPage() {
  {/* Submit */}
  <button
  type="submit"
- className="w-full bg-[#111111] hover:bg-[#BFA36A] text-white font-medium py-5 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5 text-base"
+ className="w-full bg-[var(--brand-text)] hover:bg-[var(--brand-accent)] text-white font-medium py-5 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_10px_30px_color-mix(in srgb, var(--brand-accent) 30%, transparent)] hover:-translate-y-0.5 text-base"
  >
  Send Message
  </button>
 
- <p className="text-[#757575] text-xs font-medium text-center">
+ <p className="text-[var(--brand-text-secondary)] text-xs font-medium text-center">
  We respond to every inquiry within 24 hours. Your information is never shared.
  </p>
  </form>
@@ -164,8 +164,8 @@ export default function ContactPage() {
  {/* Sidebar */}
  <div className="space-y-6">
  {/* Quick info */}
- <div className="p-8 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px]">
- <h3 className="text-[#101010] font-bold text-sm tracking-widest uppercase mb-6">
+ <div className="p-8 bg-[var(--brand-bg)] border border-[var(--brand-border)] rounded-[24px]">
+ <h3 className="text-[var(--brand-text)] font-bold text-sm tracking-widest uppercase mb-6">
  Contact Details
  </h3>
  <div className="space-y-6">
@@ -176,16 +176,16 @@ export default function ContactPage() {
  { label: "Availability", value: "Open for Q1 2025" },
  ].map(({ label, value }) => (
  <div key={label}>
- <p className="text-[#BFA36A] text-xs font-bold tracking-widest uppercase mb-1.5">{label}</p>
- <p className="text-[#101010] text-sm font-medium">{value}</p>
+ <p className="text-[var(--brand-accent)] text-xs font-bold tracking-widest uppercase mb-1.5">{label}</p>
+ <p className="text-[var(--brand-text)] text-sm font-medium">{value}</p>
  </div>
  ))}
  </div>
  </div>
 
  {/* What to expect */}
- <div className="p-8 bg-white border border-[#E6E6E6] rounded-[24px]">
- <h3 className="text-[#101010] font-bold text-sm tracking-widest uppercase mb-6">
+ <div className="p-8 bg-white border border-[var(--brand-border)] rounded-[24px]">
+ <h3 className="text-[var(--brand-text)] font-bold text-sm tracking-widest uppercase mb-6">
  What Happens Next
  </h3>
  <div className="space-y-5">
@@ -196,18 +196,18 @@ export default function ContactPage() {
  { step: "4", text: "We send a detailed proposal and timeline" },
  ].map((item) => (
  <div key={item.step} className="flex gap-4">
- <span className="w-6 h-6 rounded-full bg-[#FAFAFA] border border-[#E6E6E6] flex items-center justify-center text-[#BFA36A] text-xs font-bold flex-shrink-0 mt-0.5">
+ <span className="w-6 h-6 rounded-full bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-[var(--brand-accent)] text-xs font-bold flex-shrink-0 mt-0.5">
  {item.step}
  </span>
- <p className="text-[#757575] text-sm leading-relaxed font-medium">{item.text}</p>
+ <p className="text-[var(--brand-text-secondary)] text-sm leading-relaxed font-medium">{item.text}</p>
  </div>
  ))}
  </div>
  </div>
 
  {/* Social links */}
- <div className="p-8 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px]">
- <h3 className="text-[#101010] font-bold text-sm tracking-widest uppercase mb-6">
+ <div className="p-8 bg-[var(--brand-bg)] border border-[var(--brand-border)] rounded-[24px]">
+ <h3 className="text-[var(--brand-text)] font-bold text-sm tracking-widest uppercase mb-6">
  Follow Our Work
  </h3>
  <div className="space-y-4">
@@ -221,10 +221,10 @@ export default function ContactPage() {
  href={s.href}
  target="_blank"
  rel="noopener noreferrer"
- className="flex items-center justify-between py-3 text-[#757575] hover:text-[#101010] transition-colors group font-medium"
+ className="flex items-center justify-between py-3 text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)] transition-colors group font-medium"
  >
  <div className="flex items-center gap-3">
- <s.Icon className="w-5 h-5 group-hover:text-[#BFA36A] transition-colors" />
+ <s.Icon className="w-5 h-5 group-hover:text-[var(--brand-accent)] transition-colors" />
  <span className="text-sm">{s.platform}</span>
  </div>
  <span className="text-xs group-hover:translate-x-1 transition-transform">{s.handle} →</span>

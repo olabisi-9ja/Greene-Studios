@@ -1,84 +1,86 @@
 import { useEffect, useRef } from 'react';
-import { createTimeline, stagger, set } from 'animejs';
-import SplitType from 'split-type';
+import { createTimeline, set, stagger } from 'animejs';
 
 export function useHeroAnimation() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const backgroundRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const wordRef = useRef<HTMLHeadingElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
+  const kickerRef = useRef<HTMLDivElement>(null);
+  const badgesRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
   const animatedRef = useRef(false);
 
   useEffect(() => {
     if (animatedRef.current) return;
 
-    const prefersReducedMotion = typeof window !== 'undefined' && 
+    const prefersReducedMotion = typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const chars = Array.from(
+      document.querySelectorAll<HTMLElement>('.hero-char-inner')
+    );
+
     if (prefersReducedMotion) {
-      if (headlineRef.current) headlineRef.current.style.opacity = '1';
-      if (backgroundRef.current) backgroundRef.current.style.transform = 'scale(1)';
-      if (textRef.current) textRef.current.style.opacity = '1';
-      if (buttonRef.current) buttonRef.current.style.opacity = '1';
+      const targets = [kickerRef.current, lineRef.current, ctasRef.current, badgesRef.current, marqueeRef.current].filter(Boolean) as HTMLElement[];
+      set(targets, { opacity: 1, translateY: 0, scale: 1 });
+      set(chars, { opacity: 1, translateY: '0%', rotate: 0 });
       animatedRef.current = true;
       return;
     }
 
-    let split: SplitType | null = null;
     const tl = createTimeline({
-      defaults: {
-        ease: 'cubicBezier(0.16, 1, 0.3, 1)',
-      }
+      defaults: { ease: 'cubicBezier(0.16, 1, 0.3, 1)' },
     });
 
-    if (backgroundRef.current) {
-      tl.add(backgroundRef.current, {
-        scale: [1.05, 1],
-        duration: 1200,
-      }, 0);
+    // Giant word — letters rise & straighten one by one
+    set(chars, { opacity: 0, translateY: '115%', rotate: 8 });
+    tl.add(chars, {
+      opacity: [0, 1],
+      translateY: ['115%', '0%'],
+      rotate: [8, 0],
+      duration: 1200,
+      delay: stagger(70),
+      ease: 'cubicBezier(0.16, 1, 0.3, 1)',
+    }, 120);
+
+    // Kicker
+    if (kickerRef.current) {
+      set(kickerRef.current, { opacity: 0, translateY: 14 });
+      tl.add(kickerRef.current, { opacity: [0, 1], translateY: [14, 0], duration: 600 }, 40);
     }
 
-    if (headlineRef.current) {
-      split = new SplitType(headlineRef.current, { types: 'lines,words' });
-      if (split.lines) {
-        set(split.lines, { opacity: 0, translateY: 24 });
-        
-        tl.add(split.lines, {
-          translateY: [24, 0],
-          opacity: [0, 1],
-          duration: 600,
-          delay: stagger(60),
-        }, 100);
-      }
+    // Serif line under the word
+    if (lineRef.current) {
+      set(lineRef.current, { opacity: 0, translateY: 20 });
+      tl.add(lineRef.current, { opacity: [0, 1], translateY: [20, 0], duration: 700 }, 620);
     }
 
-    if (textRef.current) {
-      set(textRef.current, { opacity: 0, translateY: 16 });
-      tl.add(textRef.current, {
-        translateY: [16, 0],
+    // CTA row
+    if (ctasRef.current) {
+      set(ctasRef.current, { opacity: 0, translateY: 22 });
+      tl.add(ctasRef.current, { opacity: [0, 1], translateY: [22, 0], duration: 700 }, 820);
+    }
+
+    // Rotating badge — pops in with a bounce
+    if (badgesRef.current) {
+      set(badgesRef.current, { opacity: 0, scale: 0.5 });
+      tl.add(badgesRef.current, {
         opacity: [0, 1],
-        duration: 500,
-      }, '-=400');
+        scale: [0.5, 1],
+        duration: 800,
+        ease: 'cubicBezier(0.34, 1.56, 0.64, 1)',
+      }, 1000);
     }
 
-    if (buttonRef.current) {
-      set(buttonRef.current, { opacity: 0, translateY: 16 });
-      tl.add(buttonRef.current, {
-        translateY: [16, 0],
-        opacity: [0, 1],
-        duration: 500,
-      }, '-=400');
+    // Bottom marquee
+    if (marqueeRef.current) {
+      set(marqueeRef.current, { opacity: 0 });
+      tl.add(marqueeRef.current, { opacity: [0, 1], duration: 700 }, 1150);
     }
 
     animatedRef.current = true;
-
-    return () => {
-      if (split) {
-        split.revert();
-      }
-    };
   }, []);
 
-  return { containerRef, headlineRef, backgroundRef, textRef, buttonRef };
+  return { sectionRef, wordRef, lineRef, ctasRef, kickerRef, badgesRef, marqueeRef };
 }

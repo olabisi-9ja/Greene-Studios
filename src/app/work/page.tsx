@@ -21,18 +21,18 @@ export default function WorkPage() {
  {/* Header */}
  <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-20">
  <div className="flex items-center gap-3 mb-6">
- <div className="w-6 h-px bg-[#BFA36A]" />
- <span className="text-[#BFA36A] text-xs tracking-widest uppercase font-semibold">
+ <div className="w-6 h-px bg-[var(--brand-accent)]" />
+ <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold">
  Our Work
  </span>
  </div>
  <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
- <h1 className="text-6xl lg:text-8xl font-semibold text-[#101010] leading-[1.1] tracking-tight">
+ <h1 className="text-6xl lg:text-8xl font-semibold text-[var(--brand-text)] leading-[1.1] tracking-tight">
  Projects that
  <br />
- <span className="text-[#101010]/30">define the craft.</span>
+ <span className="text-[var(--brand-text)]/30">define the craft.</span>
  </h1>
- <p className="text-[#757575] text-lg leading-relaxed max-w-sm">
+ <p className="text-[var(--brand-text-secondary)] text-lg leading-relaxed max-w-sm">
  A curated selection of work across web design, branding, product,
  and development.
  </p>
@@ -48,8 +48,8 @@ export default function WorkPage() {
  onClick={() => setActiveFilter(filter)}
  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
  activeFilter === filter
- ? "bg-[#101010] text-white"
- : "border border-[#E6E6E6] text-[#757575] hover:border-[#101010] hover:text-[#101010]"
+ ? "bg-[var(--brand-text)] text-white"
+ : "border border-[var(--brand-border)] text-[var(--brand-text-secondary)] hover:border-[var(--brand-text)] hover:text-[var(--brand-text)]"
  }`}
  >
  {filter}
@@ -116,12 +116,12 @@ export default function WorkPage() {
  ))}
  </div>
  ) : (
- <div className="text-center py-24 bg-[#FAFAFA] rounded-[24px] border border-[#E6E6E6]">
- <h3 className="text-2xl font-semibold text-[#101010] mb-2">No projects found</h3>
- <p className="text-[#757575]">Try adjusting your filters or checking back later.</p>
+ <div className="text-center py-24 bg-[var(--brand-bg)] rounded-[24px] border border-[var(--brand-border)]">
+ <h3 className="text-2xl font-semibold text-[var(--brand-text)] mb-2">No projects found</h3>
+ <p className="text-[var(--brand-text-secondary)]">Try adjusting your filters or checking back later.</p>
  <button 
  onClick={() => setActiveFilter("All")}
- className="mt-6 text-[#BFA36A] font-medium hover:text-[#101010] transition-colors"
+ className="mt-6 text-[var(--brand-accent)] font-medium hover:text-[var(--brand-text)] transition-colors"
  >
  Clear filters
  </button>
@@ -129,16 +129,16 @@ export default function WorkPage() {
  )}
 
  {/* Experiments CTA */}
- <div className="mt-16 p-12 bg-[#FAFAFA] border border-[#E6E6E6] rounded-[24px] text-center shadow-sm">
- <h3 className="text-[#101010] text-3xl font-semibold mb-4 tracking-tight">
+ <div className="mt-16 p-12 bg-[var(--brand-bg)] border border-[var(--brand-border)] rounded-[24px] text-center shadow-sm">
+ <h3 className="text-[var(--brand-text)] text-3xl font-semibold mb-4 tracking-tight">
  Curious about how we experiment?
  </h3>
- <p className="text-[#757575] text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+ <p className="text-[var(--brand-text-secondary)] text-lg mb-8 max-w-xl mx-auto leading-relaxed">
  Explore our lab of creative coding, 3D experiments, and interactive playgrounds.
  </p>
  <Link
  href="/experiments"
- className="inline-flex items-center gap-3 bg-[#111111] hover:bg-[#BFA36A] text-white text-base font-medium px-8 py-4 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(191,163,106,0.3)] hover:-translate-y-0.5"
+ className="inline-flex items-center gap-3 bg-[var(--brand-text)] hover:bg-[var(--brand-accent)] text-white text-base font-medium px-8 py-4 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_color-mix(in srgb, var(--brand-accent) 30%, transparent)] hover:-translate-y-0.5"
  >
  View Experiments →
  </Link>
