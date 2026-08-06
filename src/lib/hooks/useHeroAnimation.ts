@@ -9,6 +9,7 @@ export function useHeroAnimation() {
   const ctasRef = useRef<HTMLDivElement>(null);
   const metaRef = useRef<HTMLDivElement>(null);
   const visualRef = useRef<HTMLDivElement>(null);
+  const clientsRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const animatedRef = useRef(false);
 
@@ -23,7 +24,7 @@ export function useHeroAnimation() {
     );
 
     if (prefersReducedMotion) {
-      const targets = [kickerRef.current, descRef.current, ctasRef.current, metaRef.current, visualRef.current, marqueeRef.current].filter(Boolean) as HTMLElement[];
+      const targets = [kickerRef.current, descRef.current, ctasRef.current, metaRef.current, visualRef.current, clientsRef.current, marqueeRef.current].filter(Boolean) as HTMLElement[];
       set(targets, { opacity: 1, translateY: 0, scale: 1 });
       set(lines, { opacity: 1, translateY: '0%' });
       animatedRef.current = true;
@@ -80,14 +81,20 @@ export function useHeroAnimation() {
       }, 320);
     }
 
+    // Clients strip
+    if (clientsRef.current) {
+      set(clientsRef.current, { opacity: 0 });
+      tl.add(clientsRef.current, { opacity: [0, 1], duration: 600 }, 900);
+    }
+
     // Bottom marquee
     if (marqueeRef.current) {
       set(marqueeRef.current, { opacity: 0 });
-      tl.add(marqueeRef.current, { opacity: [0, 1], duration: 700 }, 950);
+      tl.add(marqueeRef.current, { opacity: [0, 1], duration: 700 }, 1000);
     }
 
     animatedRef.current = true;
   }, []);
 
-  return { sectionRef, headlineRef, kickerRef, descRef, ctasRef, metaRef, visualRef, marqueeRef };
+  return { sectionRef, headlineRef, kickerRef, descRef, ctasRef, metaRef, visualRef, clientsRef, marqueeRef };
 }
