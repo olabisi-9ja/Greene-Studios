@@ -95,7 +95,7 @@ export default function Preloader() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.9, duration: 0.5 }}
-                className="align-super font-display text-[clamp(0.6rem,1.6vw,1rem)] font-black text-[var(--brand-accent)]"
+                className="align-super font-display text-[clamp(0.6rem,1.6vw,1rem)] font-black text-[var(--brand-text-secondary)]"
               >
                 ®
               </motion.span>

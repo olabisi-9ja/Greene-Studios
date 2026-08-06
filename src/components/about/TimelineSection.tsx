@@ -14,7 +14,7 @@ const TIMELINE_DATA = [
     year: "2023",
     events: [
       "Expanded into product design and AI integration services.",
-      "First Awwwards nomination. Crossed $1M in client revenue generated.",
+      "Crossed $1M in client revenue generated.",
     ],
   },
   {

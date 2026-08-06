@@ -64,7 +64,7 @@ export const PROJECTS = [
  accentColor: "#12372A",
  featured: true,
  image: "https://images.pexels.com/photos/6892716/pexels-photo-6892716.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
- results: ["Featured on Awwwards", "4.8/5 client NPS", "200K launch day visitors"],
+ results: ["4.8/5 client NPS", "200K launch day visitors", "92% brand recall in testing"],
  slug: "vera-brand",
  challenge: "Vera was entering an incredibly saturated wellness market dominated by clinical whites and pharmaceutical blues. They needed a brand that felt luxurious, grounded, and deeply human without crossing into pseudoscience.",
  goals: [

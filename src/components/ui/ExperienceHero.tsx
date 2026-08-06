@@ -215,11 +215,11 @@ export const ExperienceHero = () => {
               />
             </div>
 
-            {/* floating award chip */}
+            {/* floating stat chip */}
             <div className="animate-float absolute -left-3 top-10 hidden items-center gap-2 rounded-full bg-[var(--brand-bg)] px-4 py-2.5 shadow-[0_12px_36px_rgba(0,0,0,0.14)] md:flex md:-left-8">
-              <span className="text-sm text-[var(--brand-accent)]" aria-hidden="true">✦</span>
-              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-text)]">
-                Awwwards · SOTD ×3
+              <span className="font-display text-sm font-black text-[var(--brand-text)]">98%</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)]">
+                client satisfaction
               </span>
             </div>
 

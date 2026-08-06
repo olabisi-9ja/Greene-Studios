@@ -17,7 +17,7 @@ export default function StudioDemoPage() {
     <div className="min-h-screen overflow-hidden bg-[var(--brand-bg)] pb-32 font-sans text-[var(--brand-text)]">
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-6 md:p-12">
-        <div className="font-display text-xl font-black uppercase tracking-tight">Greene<span className="text-[var(--brand-accent)]">®</span></div>
+        <div className="font-display text-xl font-black uppercase tracking-tight">Greene<span>®</span></div>
         <button className="rounded-full bg-[var(--color-abstract-green)] px-8 py-3 font-medium text-[var(--brand-ink)] shadow-lg transition-transform hover:scale-105">
           Menu
         </button>

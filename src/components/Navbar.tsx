@@ -68,7 +68,7 @@ export default function Navbar() {
  </span>
  <span className="hidden font-display text-base font-black uppercase tracking-tight text-[var(--brand-text)] sm:block">
  Greene
- <span className="align-super text-[8px] font-bold text-[var(--brand-accent)]">®</span>
+ <span className="align-super text-[8px] font-bold">®</span>
  </span>
  </Link>
 

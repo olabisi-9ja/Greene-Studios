@@ -59,7 +59,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                   />
                 </span>
                 <span className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">
-                  Greene<span className="text-[var(--brand-accent)]">®</span>
+                  Greene<span>®</span>
                 </span>
               </div>
               <button
