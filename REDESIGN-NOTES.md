@@ -1,4 +1,4 @@
-# Greene Studios — Site Redesign Notes
+# Greene Studios - Site Redesign Notes
 
 ## Direction
 
@@ -24,13 +24,13 @@ feel like the site itself is the studio's best portfolio piece.
 | **Karolina Hess** | Minimal hero statement, serif-italic accent lines ("No templates, no shortcuts.") |
 | **Noomo / DeepMind / Google Labs** | Immersive backgrounds, card systems, premium motion pacing |
 | **Umano** | Clear value-prop hierarchy, trust chips |
-| **Bloom / Westwing** | (Content/e-commerce references) — informed editorial layout restraint |
+| **Bloom / Westwing** | (Content/e-commerce references) - informed editorial layout restraint |
 
 ---
 
 ## Design system
 
-### Palette (CSS tokens — three atmospheres)
+### Palette (CSS tokens - three atmospheres)
 
 | Token | Paper (default) | Midnight | Studio (greenhouse) |
 |---|---|---|---|
@@ -41,9 +41,9 @@ feel like the site itself is the studio's best portfolio piece.
 | `--brand-accent` (lime) | `#D9F42C` | `#D9F42C` | `#D9F42C` |
 | `--brand-primary` (deep green) | `#173A2E` | `#D9F42C` | `#D9F42C` |
 
-### Typography (single self-hosted family via Fontsource — no external font CDN needed at build)
+### Typography (single self-hosted family via Fontsource - no external font CDN needed at build)
 - **Everything:** Archivo Variable (`font-display` for giant uppercase headlines, `font-body` for text)
-- **Editorial accent:** Archivo Variable italic — emphasis words (`font-serif-i`), same family, one font total
+- **Editorial accent:** Archivo Variable italic - emphasis words (`font-serif-i`), same family, one font total
 
 ### Signature moves
 - Giant `GREENE` hero word, letters rise & straighten one by one (animejs timeline)
@@ -63,10 +63,10 @@ feel like the site itself is the studio's best portfolio piece.
 - **Design system:** `src/app/globals.css` (tokens, fonts, utilities), `src/app/layout.tsx`
 - **Chrome:** Navbar, FullscreenMenu, Footer, Preloader, DynamicCursor, FloatingButtons, ScrollProgress, PageTransition, NoiseTexture
 - **Home page:** Hero (`ExperienceHero` + `useHeroAnimation`), WhyWeExist, Philosophy, SelectedWork, Services, Process, SocialProof, Testimonials, FAQ, CTA
-- **Sub-pages:** all rebuilt around a shared editorial `PageHeader` (✦ kicker + giant display title + italic accent) — Work, Services (+detail), About, Process, Journal (+article), Contact, Pricing, Careers, Resources, Legal, Archive, Experiments, Not-found, Creator. Fixed every dark-background assumption that rendered as invisible/faded text on the light paper (e.g. `text-[var(--brand-surface)]`, `text-white/5`, `bg-white/[0.02]`).
+- **Sub-pages:** all rebuilt around a shared editorial `PageHeader` (✦ kicker + giant display title + italic accent) - Work, Services (+detail), About, Process, Journal (+article), Contact, Pricing, Careers, Resources, Legal, Archive, Experiments, Not-found, Creator. Fixed every dark-background assumption that rendered as invisible/faded text on the light paper (e.g. `text-[var(--brand-surface)]`, `text-white/5`, `bg-white/[0.02]`).
 - **Journal articles:** installed `@tailwindcss/typography` (the `prose` classes were no-ops before) and themed prose to the brand tokens.
 - **Site-wide palette migration:** legacy hexes replaced with brand tokens
-- **Fonts:** consolidated to a single family — `@fontsource-variable/archivo` (wght + italic) — removed `next/font/google` (blocked in sandbox at build time) and the extra Inter / Instrument Serif packages
+- **Fonts:** consolidated to a single family - `@fontsource-variable/archivo` (wght + italic) - removed `next/font/google` (blocked in sandbox at build time) and the extra Inter / Instrument Serif packages
 - **Images:** remote images served directly (`unoptimized`) so Pexels photos load in the preview despite the sandbox network block
 
 ## Run

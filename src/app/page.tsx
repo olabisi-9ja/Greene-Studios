@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ExperienceHero } from "@/components/ui/ExperienceHero";
 import SocialProof from "@/components/home/SocialProof";
 import SelectedWork from "@/components/home/SelectedWork";
@@ -17,8 +18,8 @@ export default function HomePage() {
   const heroFallback = (
     <div className="flex min-h-screen w-full items-center justify-center bg-[var(--brand-bg)] text-[var(--brand-text)]">
       <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-lg font-black text-[var(--brand-ink)]">
-          G
+        <span className="relative block h-10 w-10 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
+          <Image src="/logo.png" alt="" fill sizes="40px" className="object-contain" />
         </span>
         <span className="font-display text-2xl font-black uppercase tracking-tight">Greene.</span>
       </div>

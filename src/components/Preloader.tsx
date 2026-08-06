@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function Preloader() {
   const [isComplete, setIsComplete] = useState(false);
@@ -40,25 +41,24 @@ export default function Preloader() {
           exit={{ y: "-100%" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* lime flash behind */}
-          <motion.div
-            className="absolute -bottom-[30vh] h-[70vh] w-[70vw] rounded-full blur-[110px] glow-lime"
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            aria-hidden="true"
-          />
-
           <div className="relative z-10 flex flex-col items-center">
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-lg font-black text-[var(--brand-ink)]"
+              className="relative block h-20 w-20 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)] md:h-24 md:w-24"
             >
-              G
+              <Image
+                src="/logo.png"
+                alt="Greene Studios"
+                fill
+                sizes="96px"
+                className="object-contain"
+                priority
+              />
             </motion.span>
 
-            <h1 className="flex overflow-hidden font-display text-4xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-6xl">
+            <h1 className="mt-8 flex overflow-hidden font-display text-4xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-6xl">
               {"GREENE".split("").map((ch, i) => (
                 <motion.span
                   key={i}
