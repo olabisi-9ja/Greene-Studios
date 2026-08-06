@@ -3,6 +3,12 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export default function SmoothScroll({
   children,
 }: {
@@ -10,10 +16,13 @@ export default function SmoothScroll({
 }) {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.1, // Snappy linear interpolation instead of long duration
+      lerp: 0.09, // Snappy linear interpolation instead of long duration
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });
+
+    // Expose so FloatingButtons (back-to-top) can drive it
+    window.__lenis = lenis;
 
     function raf(time: number) {
       lenis.raf(time);
@@ -23,6 +32,7 @@ export default function SmoothScroll({
     requestAnimationFrame(raf);
 
     return () => {
+      window.__lenis = undefined;
       lenis.destroy();
     };
   }, []);

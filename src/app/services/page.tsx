@@ -41,7 +41,7 @@ export default function ServicesPage() {
  className="group relative block border-b border-[var(--brand-border)]"
  data-cursor="VIEW"
  >
- <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-all duration-500 md:px-4 md:py-9 md:group-hover:px-8">
+              <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-9">
  <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
  0{i + 1}
  </span>

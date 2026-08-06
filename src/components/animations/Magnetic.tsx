@@ -16,7 +16,8 @@ export default function Magnetic({ children }: { children: React.ReactNode }) {
     const y = clientY - (top + height / 2);
     
     // Magnetic pull strength (adjust divisor to increase/decrease magnetism)
-    setPosition({ x: x * 0.35, y: y * 0.35 });
+    // Kept subtle so hovering never feels like it moves the page
+    setPosition({ x: x * 0.15, y: y * 0.15 });
   };
 
   const handleMouseLeave = () => {
