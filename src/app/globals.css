@@ -1,6 +1,5 @@
-@import "@fontsource-variable/archivo";
-@import "@fontsource-variable/inter";
-@import "@fontsource/instrument-serif";
+@import "@fontsource-variable/archivo/wght.css";
+@import "@fontsource-variable/archivo/wght-italic.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -20,8 +19,8 @@
   --color-brand-ink: var(--brand-ink);
 
   --font-display: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
-  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Archivo Variable", "Archivo", system-ui, -apple-system, sans-serif;
   --font-sans: var(--font-body);
   --font-heading: var(--font-display);
 
@@ -153,7 +152,7 @@
   .font-serif-i {
     font-family: var(--font-serif);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.01em;
   }
 

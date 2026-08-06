@@ -41,10 +41,9 @@ feel like the site itself is the studio's best portfolio piece.
 | `--brand-accent` (lime) | `#D9F42C` | `#D9F42C` | `#D9F42C` |
 | `--brand-primary` (deep green) | `#173A2E` | `#D9F42C` | `#D9F42C` |
 
-### Typography (self-hosted via Fontsource — no external font CDN needed at build)
-- **Display:** Archivo Variable — giant uppercase headlines (`font-display`)
-- **Editorial accent:** Instrument Serif italic — emphasis words (`font-serif-i`)
-- **Body:** Inter Variable
+### Typography (single self-hosted family via Fontsource — no external font CDN needed at build)
+- **Everything:** Archivo Variable (`font-display` for giant uppercase headlines, `font-body` for text)
+- **Editorial accent:** Archivo Variable italic — emphasis words (`font-serif-i`), same family, one font total
 
 ### Signature moves
 - Giant `GREENE` hero word, letters rise & straighten one by one (animejs timeline)
@@ -65,7 +64,7 @@ feel like the site itself is the studio's best portfolio piece.
 - **Chrome:** Navbar, FullscreenMenu, Footer, Preloader, DynamicCursor, FloatingButtons, ScrollProgress, PageTransition, NoiseTexture
 - **Home page:** Hero (`ExperienceHero` + `useHeroAnimation`), WhyWeExist, Philosophy, SelectedWork, Services, Process, SocialProof, Testimonials, FAQ, CTA
 - **Site-wide palette migration:** all inner pages (work, services, about, journal, contact, pricing, careers, legal, resources, not-found, work/service detail pages) — legacy hexes replaced with brand tokens
-- **Fonts:** `next/font/google` removed (blocked in sandbox at build time) → `@fontsource-variable/archivo`, `@fontsource-variable/inter`, `@fontsource/instrument-serif`
+- **Fonts:** consolidated to a single family — `@fontsource-variable/archivo` (wght + italic) — removed `next/font/google` (blocked in sandbox at build time) and the extra Inter / Instrument Serif packages
 
 ## Run
 
