@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Currency = "USD" | "EUR" | "NGN";
 
@@ -71,28 +72,33 @@ export default function PricingTiers() {
   };
 
   return (
-    <div className="py-24">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+    <div className="py-20 md:py-28">
+      <div className="mb-12 flex flex-col gap-8 md:mb-16 md:flex-row md:items-end md:justify-between">
         <div>
-          <h2 className="text-4xl md:text-5xl font-semibold text-[var(--brand-text)] tracking-tight mb-4">
-            Transparent pricing.
+          <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+            ✦ Pricing
+          </span>
+          <h2 className="font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
+            Transparent <span className="font-serif-i lowercase normal-case tracking-normal">pricing.</span>
           </h2>
-          <p className="text-[var(--brand-text-secondary)] text-lg max-w-xl">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)]">
             No hidden fees or surprise invoices. Choose the tier that matches your current stage.
           </p>
         </div>
 
         {/* Currency Toggle */}
-        <div className="flex items-center p-1 bg-[var(--brand-bg)] border border-[var(--brand-border)] rounded-full self-start md:self-auto">
+        <div className="flex w-fit items-center rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] p-1">
           {(["USD", "EUR", "NGN"] as Currency[]).map((c) => (
             <button
               key={c}
               onClick={() => setCurrency(c)}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+              data-cursor="PRICE"
+              className={cn(
+                "rounded-full px-4 py-2 text-xs font-black tracking-wider transition-all duration-300",
                 currency === c
-                  ? "bg-white text-[var(--brand-text)] shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+                  ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
                   : "text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]"
-              }`}
+              )}
             >
               {c}
             </button>
@@ -100,40 +106,55 @@ export default function PricingTiers() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {TIERS.map((tier, index) => (
           <div
             key={index}
-            className={`relative p-8 rounded-[24px] border flex flex-col ${
+            className={cn(
+              "relative flex flex-col rounded-2xl border p-8 md:p-9",
               tier.isPopular
-                ? "border-[var(--brand-accent)] bg-[var(--brand-bg)] shadow-[0_8px_30px_rgba(191,163,106,0.1)]"
-                : "border-[var(--brand-border)] bg-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow"
-            }`}
+                ? "border-[var(--brand-accent)] bg-[var(--brand-surface)] shadow-[0_20px_60px_color-mix(in_srgb,var(--brand-accent)_18%,transparent)]"
+                : "border-[var(--brand-border)] bg-[var(--brand-surface)]"
+            )}
           >
             {tier.isPopular && (
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--brand-accent)] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
-                Most Popular
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-ink)]">
+                Most popular
               </div>
             )}
-            
+
             <div className="mb-8">
-              <h3 className="text-2xl font-semibold text-[var(--brand-text)] mb-2">{tier.name}</h3>
-              <p className="text-[var(--brand-text-secondary)] text-sm leading-relaxed">{tier.description}</p>
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
+                  {tier.name}
+                </h3>
+                <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
+                  0{index + 1}
+                </span>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--brand-text-secondary)]">
+                {tier.description}
+              </p>
             </div>
 
-            <div className="mb-8 pb-8 border-b border-[var(--brand-border)]">
-              <span className="text-[var(--brand-text-secondary)] font-medium mr-1">Starts at</span>
-              <div className="flex items-baseline gap-1 mt-2">
-                <span className="text-4xl font-semibold text-[var(--brand-text)] tracking-tight">
-                  {CURRENCY_SYMBOLS[currency]}{formatPrice(tier.basePrice)}
+            <div className="mb-8 border-b border-[var(--brand-border)] pb-8">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+                Starts at
+              </span>
+              <div className="mt-2 flex items-baseline gap-1">
+                <span className="font-display text-5xl font-black tracking-tight text-[var(--brand-text)]">
+                  {CURRENCY_SYMBOLS[currency]}
+                  {formatPrice(tier.basePrice)}
                 </span>
               </div>
             </div>
 
-            <ul className="space-y-4 mb-10 flex-grow">
+            <ul className="mb-10 flex-grow space-y-4">
               {tier.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-[var(--brand-text)] font-medium">
-                  <Check size={18} className="text-[var(--brand-accent)] flex-shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-3 text-sm font-medium text-[var(--brand-text)]">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--brand-accent)]/15 text-[var(--brand-accent)]">
+                    <Check size={12} strokeWidth={3} />
+                  </span>
                   <span className="leading-relaxed">{feature}</span>
                 </li>
               ))}
@@ -141,13 +162,15 @@ export default function PricingTiers() {
 
             <Link
               href="/contact"
-              className={`w-full py-4 rounded-full text-sm font-medium transition-all duration-300 text-center ${
+              data-cursor="GO"
+              className={cn(
+                "inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-xs font-black uppercase tracking-[0.15em] transition-all duration-300",
                 tier.isPopular
-                  ? "bg-[var(--brand-text)] text-white hover:bg-[var(--brand-accent)] shadow-[0_4px_14px_rgba(0,0,0,0.1)]"
-                  : "bg-[var(--brand-bg)] text-[var(--brand-text)] border border-[var(--brand-border)] hover:border-[var(--brand-text)]"
-              }`}
+                  ? "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]"
+                  : "border border-[var(--brand-border)] text-[var(--brand-text)] hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]"
+              )}
             >
-              Get Started
+              Get started <span aria-hidden="true">→</span>
             </Link>
           </div>
         ))}

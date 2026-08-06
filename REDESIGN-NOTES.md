@@ -63,8 +63,11 @@ feel like the site itself is the studio's best portfolio piece.
 - **Design system:** `src/app/globals.css` (tokens, fonts, utilities), `src/app/layout.tsx`
 - **Chrome:** Navbar, FullscreenMenu, Footer, Preloader, DynamicCursor, FloatingButtons, ScrollProgress, PageTransition, NoiseTexture
 - **Home page:** Hero (`ExperienceHero` + `useHeroAnimation`), WhyWeExist, Philosophy, SelectedWork, Services, Process, SocialProof, Testimonials, FAQ, CTA
-- **Site-wide palette migration:** all inner pages (work, services, about, journal, contact, pricing, careers, legal, resources, not-found, work/service detail pages) — legacy hexes replaced with brand tokens
+- **Sub-pages:** all rebuilt around a shared editorial `PageHeader` (✦ kicker + giant display title + italic accent) — Work, Services (+detail), About, Process, Journal (+article), Contact, Pricing, Careers, Resources, Legal, Archive, Experiments, Not-found, Creator. Fixed every dark-background assumption that rendered as invisible/faded text on the light paper (e.g. `text-[var(--brand-surface)]`, `text-white/5`, `bg-white/[0.02]`).
+- **Journal articles:** installed `@tailwindcss/typography` (the `prose` classes were no-ops before) and themed prose to the brand tokens.
+- **Site-wide palette migration:** legacy hexes replaced with brand tokens
 - **Fonts:** consolidated to a single family — `@fontsource-variable/archivo` (wght + italic) — removed `next/font/google` (blocked in sandbox at build time) and the extra Inter / Instrument Serif packages
+- **Images:** remote images served directly (`unoptimized`) so Pexels photos load in the preview despite the sandbox network block
 
 ## Run
 

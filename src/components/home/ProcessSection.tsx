@@ -3,23 +3,27 @@
 import { motion } from "framer-motion";
 import { PROCESS_STEPS } from "@/lib/data";
 
-export default function ProcessSection() {
+export default function ProcessSection({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <section className="relative bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-14 px-5 md:px-10 lg:flex-row lg:gap-24">
         {/* Left — sticky header */}
         <div className="self-start lg:sticky lg:top-32 lg:w-1/3">
-          <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
-            <span className="text-[var(--brand-accent)]">✦</span> Process
-          </span>
-          <h2 className="font-display text-[clamp(2.6rem,5vw,4.5rem)] font-black uppercase leading-[0.95] tracking-tight">
-            From hello
-            <br />
-            to <span className="font-serif-i lowercase normal-case tracking-normal">launch.</span>
-          </h2>
-          <p className="mt-6 max-w-sm text-base leading-relaxed text-[var(--brand-text-secondary)]">
-            Exceptional products come from an exceptional process. We work systematically, sequentially, and transparently — with you in the loop at every step.
-          </p>
+          {showHeader ? (
+            <>
+              <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+                <span className="text-[var(--brand-accent)]">✦</span> Process
+              </span>
+              <h2 className="font-display text-[clamp(2.6rem,5vw,4.5rem)] font-black uppercase leading-[0.95] tracking-tight">
+                From hello
+                <br />
+                to <span className="font-serif-i lowercase normal-case tracking-normal">launch.</span>
+              </h2>
+              <p className="mt-6 max-w-sm text-base leading-relaxed text-[var(--brand-text-secondary)]">
+                Exceptional products come from an exceptional process. We work systematically, sequentially, and transparently — with you in the loop at every step.
+              </p>
+            </>
+          ) : null}
           <div className="mt-10 hidden items-center gap-3 lg:flex">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-ink)]">
               10

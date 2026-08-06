@@ -14,13 +14,13 @@ export default function CreatorPage() {
  initial={{ opacity: 0, y: 20 }}
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 0.8 }}
- className="flex-1 border-2 border-[#D94C47] rounded-3xl overflow-hidden flex flex-col bg-white"
+ className="flex-1 border-2 border-[#D94C47] rounded-3xl overflow-hidden flex flex-col bg-[var(--brand-surface)]"
  >
  <div className="bg-[#D94C47] text-white px-6 py-4 flex items-center gap-4 text-lg font-medium">
  <span className="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-sm">1</span>
  Character
  </div>
- <div className="flex-1 relative bg-gray-100 min-h-[400px]">
+ <div className="flex-1 relative bg-[var(--brand-surface-secondary)] min-h-[400px]">
  {/* Using a placeholder since we don't have the local image of Abel Adigun */}
  <Image 
  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
@@ -39,7 +39,7 @@ export default function CreatorPage() {
  initial={{ opacity: 0, x: 20 }}
  animate={{ opacity: 1, x: 0 }}
  transition={{ duration: 0.8, delay: 0.2 }}
- className="border-2 border-[#4E9BB6] rounded-3xl overflow-hidden flex flex-col bg-white h-full"
+ className="border-2 border-[#4E9BB6] rounded-3xl overflow-hidden flex flex-col bg-[var(--brand-surface)] h-full"
  >
  <div className="bg-[#4E9BB6] text-white px-6 py-4 flex items-center gap-4 text-lg font-medium">
  <span className="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-sm">2</span>
@@ -70,7 +70,7 @@ export default function CreatorPage() {
  initial={{ opacity: 0, x: 20 }}
  animate={{ opacity: 1, x: 0 }}
  transition={{ duration: 0.8, delay: 0.4 }}
- className="border-2 border-[#209267] rounded-3xl overflow-hidden flex flex-col bg-white"
+ className="border-2 border-[#209267] rounded-3xl overflow-hidden flex flex-col bg-[var(--brand-surface)]"
  >
  <div className="bg-[#209267] text-white px-6 py-4 flex items-center gap-4 text-lg font-medium">
  <span className="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-sm">3</span>
