@@ -118,7 +118,7 @@ export default function PricingTiers() {
             )}
           >
             {tier.isPopular && (
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-ink)]">
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
                 Most popular
               </div>
             )}
@@ -166,7 +166,7 @@ export default function PricingTiers() {
               className={cn(
                 "inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-xs font-black uppercase tracking-[0.15em] transition-all duration-300",
                 tier.isPopular
-                  ? "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]"
+                  ? "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]"
                   : "border border-[var(--brand-border)] text-[var(--brand-text)] hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]"
               )}
             >

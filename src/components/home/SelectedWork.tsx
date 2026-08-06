@@ -77,16 +77,16 @@ export default function SelectedWork() {
  />
 
  <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 md:py-10">
- <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
+ <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] transition-colors duration-300 group-hover:text-[var(--brand-bg)] md:col-span-1 md:text-sm">
  0{i + 1}
  </span>
- <h3 className="col-span-10 font-display text-[clamp(2rem,4.8vw,4.4rem)] font-black uppercase leading-[0.9] tracking-tight text-[var(--brand-text)] md:col-span-7">
+ <h3 className="col-span-10 font-display text-[clamp(2rem,4.8vw,4.4rem)] font-black uppercase leading-[0.9] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-bg)] md:col-span-7">
  {project.title}
  </h3>
- <span className="hidden text-sm font-medium text-[var(--brand-text-secondary)] md:col-span-3 md:block">
+ <span className="hidden text-sm font-medium text-[var(--brand-text-secondary)] transition-colors duration-300 group-hover:text-[var(--brand-bg)] md:col-span-3 md:block">
  {project.category}
  </span>
- <span className="hidden text-right text-sm font-semibold text-[var(--brand-text-secondary)] lg:col-span-1 lg:block">
+ <span className="hidden text-right text-sm font-semibold text-[var(--brand-text-secondary)] transition-colors duration-300 group-hover:text-[var(--brand-bg)] lg:col-span-1 lg:block">
  {project.year}
  </span>
  </div>

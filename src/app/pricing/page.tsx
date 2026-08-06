@@ -58,7 +58,7 @@ export default function PricingPage() {
  <Link
  href="/contact"
  data-cursor="HELLO"
- className="mt-10 inline-flex items-center gap-3 rounded-full bg-[var(--brand-accent)] px-10 py-5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-ink)] transition-colors duration-300 hover:bg-[var(--brand-bg)]"
+ className="mt-10 inline-flex items-center gap-3 rounded-full bg-[var(--brand-accent)] px-10 py-5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-on-accent)] transition-colors duration-300 hover:bg-[var(--brand-bg)] hover:text-[var(--brand-accent)]"
  >
  Book a discovery call <span aria-hidden="true">→</span>
  </Link>

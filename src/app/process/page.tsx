@@ -23,7 +23,7 @@ export default function ProcessPage() {
  description="Exceptional products come from an exceptional process. We work systematically, sequentially, and transparently, with you in the loop at every step."
  right={
  <div className="flex items-center gap-3">
- <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-base font-black text-[var(--brand-ink)]">
+ <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-base font-black text-[var(--brand-on-accent)]">
  10
  </span>
  <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">

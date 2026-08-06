@@ -137,12 +137,11 @@ export default function ContactPage() {
  Contact details
  </h3>
  <div className="space-y-6">
- {[
- { label: "Email", value: BRAND.email },
- { label: "Location", value: BRAND.location },
- { label: "Response time", value: "Within 24 hours" },
- { label: "Availability", value: "Booking Q3 2026" },
- ].map(({ label, value }) => (
+              {[
+                { label: "Email", value: BRAND.email },
+                { label: "Response time", value: "Within 24 hours" },
+                { label: "Availability", value: "Booking Q3 2026" },
+              ].map(({ label, value }) => (
  <div key={label}>
  <p className="mb-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-accent)]">{label}</p>
  <p className="text-sm font-semibold text-[var(--brand-text)]">{value}</p>

@@ -32,22 +32,30 @@
 @layer base {
   /* ─── Default: Paper (editorial, warm) ───────────────────────────── */
   :root {
-    --brand-primary: #173a2e; /* deep green */
-    --brand-bg: #f1eee5; /* warm paper */
-    --brand-surface: #faf8f1; /* lighter paper */
-    --brand-surface-secondary: #e7e2d3; /* deeper paper */
-    --brand-border: #d8d1bf;
-    --brand-text: #14120e; /* ink */
-    --brand-text-secondary: #6d6759;
-    --brand-accent: #d9f42c; /* loud lime */
-    --brand-paper: #f1eee5;
-    --brand-ink: #14120e;
+    --brand-primary: #173a2e; /* deep forest green */
+    --brand-bg: #f2efe7; /* warm paper */
+    --brand-surface: #fbf9f3; /* lighter paper */
+    --brand-surface-secondary: #e9e4d8; /* deeper paper */
+    --brand-border: #dcd6c8;
+    --brand-text: #17140e; /* ink */
+    --brand-text-secondary: #6e6758;
+    --brand-accent: #173a2e; /* deep forest green */
+    --brand-on-accent: #f2efe7; /* text sitting on the accent (paper cream) */
+    --brand-paper: #f2efe7;
+    --brand-ink: #17140e;
 
-    --color-abstract-orange: #ff5c28;
+    /* CTA block tokens (mode-aware) */
+    --cta-bg: var(--brand-accent);
+    --cta-fg: var(--brand-bg);
+    --cta-btn-bg: var(--brand-bg);
+    --cta-btn-fg: var(--brand-accent);
+    --cta-border: var(--brand-bg);
+
+    --color-abstract-orange: #c2541e;
     --color-abstract-blue: #c9e3ff;
     --color-abstract-green: #477a44;
     --color-abstract-lemon: #d9f42c;
-    --color-abstract-black: #14120e;
+    --color-abstract-black: #17140e;
     --color-abstract-pink: #ffd9e1;
   }
 
@@ -61,8 +69,15 @@
     --brand-text: #f1eee5;
     --brand-text-secondary: #9c967f;
     --brand-accent: #d9f42c;
+    --brand-on-accent: #10110c;
     --brand-paper: #10110c;
     --brand-ink: #f1eee5;
+
+    --cta-bg: var(--brand-accent);
+    --cta-fg: var(--brand-ink);
+    --cta-btn-bg: var(--brand-ink);
+    --cta-btn-fg: var(--brand-accent);
+    --cta-border: var(--brand-ink);
 
     --color-abstract-orange: #ff5c28;
     --color-abstract-blue: #2f4d8f;
@@ -82,6 +97,7 @@
     --brand-text: #f2fbe9;
     --brand-text-secondary: #a9c9b0;
     --brand-accent: #d9f42c;
+    --brand-on-accent: #0c1f14;
     --brand-paper: #0c1f14;
     --brand-ink: #0c1f14;
 
@@ -94,6 +110,12 @@
     --color-abstract-pink: #ff5c8a;
     --color-abstract-purple: #9d6bff;
     --color-abstract-black: #0c1f14;
+
+    --cta-bg: var(--color-abstract-green);
+    --cta-fg: var(--brand-ink);
+    --cta-btn-bg: var(--brand-ink);
+    --cta-btn-fg: var(--color-abstract-green);
+    --cta-border: var(--brand-ink);
   }
 
   * {
@@ -128,7 +150,12 @@
 
   ::selection {
     background: var(--brand-accent);
-    color: var(--brand-ink);
+    color: var(--brand-on-accent);
+  }
+
+  /* On the ink footer, the green accent needs to be light to stay visible */
+  footer {
+    --brand-accent: #9fc9a8;
   }
 
   /* Custom scrollbar */
@@ -203,7 +230,7 @@
   }
   .btn-primary:hover {
     background: var(--brand-accent);
-    color: var(--brand-ink);
+    color: var(--brand-on-accent);
     box-shadow: 0 8px 30px color-mix(in srgb, var(--brand-accent) 35%, transparent);
   }
 
@@ -266,10 +293,11 @@
     will-change: transform, opacity;
   }
 
-  /* ─── Marquee strip ──────────────────────────────────────────────── */
-  .marquee-strip {
+    /* ─── Marquee strip ──────────────────────────────────────────────── */
+  .marquee-strip,
+  .marquee-strip-hero {
     background: var(--brand-accent);
-    color: var(--brand-ink);
+    color: var(--brand-on-accent);
   }
   .marquee-strip-plain {
     border-top: 1px solid var(--brand-border);
@@ -305,7 +333,7 @@
   color: var(--color-abstract-green);
 }
 .mode-studio .hero-headline .font-serif-i {
-  color: var(--color-abstract-pink);
+  color: var(--color-abstract-orange);
 }
 
 /* Buttons */
@@ -333,9 +361,9 @@
 
 /* Rotating badge center disc */
 .mode-studio .badge-center {
-  background: var(--color-abstract-pink);
+  background: var(--color-abstract-orange);
   border: none;
-  box-shadow: 0 0 24px rgba(255, 92, 138, 0.45);
+  box-shadow: 0 0 24px rgba(255, 107, 44, 0.45);
 }
 
 /* Page header bottom strip */
@@ -354,23 +382,9 @@
   background: var(--color-abstract-green);
 }
 
-/* CTA section */
-.mode-studio .cta-vibrant {
-  background: var(--color-abstract-green);
-  color: var(--brand-ink);
-}
-.mode-studio .cta-vibrant .btn-ink {
-  background: var(--brand-ink);
-  color: var(--color-abstract-green);
-}
-.mode-studio .cta-vibrant .btn-ink:hover {
-  background: var(--brand-ink);
-  transform: scale(1.04);
-}
-
 /* Selection */
 .mode-studio ::selection {
-  background: var(--color-abstract-pink);
+  background: var(--color-abstract-orange);
   color: var(--brand-ink);
 }
 

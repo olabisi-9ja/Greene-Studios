@@ -98,7 +98,7 @@ export default function AboutPage() {
             </div>
  <div className="absolute -bottom-6 -left-4 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] px-6 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:-left-8">
  <p className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">Founded 2022</p>
- <p className="mt-1 text-xs font-medium text-[var(--brand-text-secondary)]">Lagos, Nigeria · Remote worldwide</p>
+ <p className="mt-1 text-xs font-medium text-[var(--brand-text-secondary)]">Remote · Working worldwide</p>
  </div>
  </div>
 
@@ -117,7 +117,7 @@ export default function AboutPage() {
  Greene Studios was born from a simple belief: that the gap between how most companies present themselves online and how good their actual product is, is an enormous opportunity.
  </p>
  <p>
- We started as a solo design practice in 2022, building websites for Lagos-based startups. What set us apart wasn&apos;t the tools we used or the style we had, it was the commitment to understanding businesses deeply before touching a design file.
+ We started as a solo design practice in 2022, building websites for early-stage startups. What set us apart wasn&apos;t the tools we used or the style we had, it was the commitment to understanding businesses deeply before touching a design file.
  </p>
  <p>
  Today, Greene Studios works with ambitious companies globally, from seed-stage startups to Series B companies, helping them close the gap between their product quality and their digital presence.
@@ -161,7 +161,7 @@ export default function AboutPage() {
  className="group rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] md:p-10"
  >
  <div className="mb-6 flex items-center justify-between">
- <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--brand-accent)] text-lg text-[var(--brand-ink)]">
+ <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--brand-accent)] text-lg text-[var(--brand-on-accent)]">
  {value.icon}
  </span>
  <span className="font-mono text-xs text-[var(--brand-text-secondary)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">

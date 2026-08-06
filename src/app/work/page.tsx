@@ -93,7 +93,7 @@ export default function WorkPage() {
  className="work-sweep absolute inset-0 scale-x-0 opacity-90 mix-blend-overlay group-hover:scale-x-100"
  aria-hidden="true"
  />
- <span className="absolute right-4 top-4 flex h-11 w-11 translate-y-1 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[var(--brand-ink)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+ <span className="absolute right-4 top-4 flex h-11 w-11 translate-y-1 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[var(--brand-on-accent)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
  →
  </span>
  </div>

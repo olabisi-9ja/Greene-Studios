@@ -45,7 +45,7 @@ export default function FAQSection() {
  <span
  className={cn(
  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--brand-border)] text-lg transition-all duration-300",
- isOpen && "rotate-45 border-[var(--brand-accent)] bg-[var(--brand-accent)] text-[var(--brand-ink)]"
+ isOpen && "rotate-45 border-[var(--brand-accent)] bg-[var(--brand-accent)] text-[var(--brand-on-accent)]"
  )}
  aria-hidden="true"
  >

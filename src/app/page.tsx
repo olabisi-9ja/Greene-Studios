@@ -66,10 +66,10 @@ export default function HomePage() {
           <MarqueeContent speed={40} direction="right" autoFill>
             {stripWords.map((word, i) => (
               <MarqueeItem key={i} className="mx-6 flex items-center gap-6">
-                <span className="font-display text-lg font-black uppercase tracking-wide text-[var(--brand-ink)] md:text-xl">
+                <span className="font-display text-lg font-black uppercase tracking-wide md:text-xl">
                   {word}
                 </span>
-                <span className="text-[var(--brand-ink)]/50" aria-hidden="true">✦</span>
+                <span className="opacity-50" aria-hidden="true">✦</span>
               </MarqueeItem>
             ))}
           </MarqueeContent>

@@ -38,7 +38,7 @@ export default function TestimonialsSection() {
               </div>
 
               <figcaption className="flex items-center gap-4 border-t border-[var(--brand-border)] pt-6">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-ink)]">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-on-accent)]">
                   {t.avatar}
                 </span>
                 <div>

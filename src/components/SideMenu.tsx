@@ -139,7 +139,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 </a>
                 <span className="text-[var(--brand-border)]">/</span>
                 <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
-                  {BRAND.location}
+                  Working worldwide
                 </span>
               </div>
             </motion.div>

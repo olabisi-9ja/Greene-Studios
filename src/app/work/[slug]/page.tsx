@@ -55,7 +55,7 @@ export default async function CaseStudyPage({ params }: Props) {
  </Link>
 
  <div className="mb-5 flex flex-wrap items-center gap-3">
- <span className="rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-ink)]">
+ <span className="rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
  {project.category}
  </span>
  <span className="font-mono text-sm text-white/60">{project.year}</span>
@@ -214,7 +214,7 @@ export default async function CaseStudyPage({ params }: Props) {
  <Link
  href="/contact"
  data-cursor="HELLO"
- className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--brand-accent)] py-3.5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-ink)] transition-colors duration-300 hover:bg-[var(--brand-bg)]"
+ className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--brand-accent)] py-3.5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-on-accent)] transition-colors duration-300 hover:bg-[var(--brand-bg)] hover:text-[var(--brand-accent)]"
  >
  Start a project <span aria-hidden="true">→</span>
  </Link>

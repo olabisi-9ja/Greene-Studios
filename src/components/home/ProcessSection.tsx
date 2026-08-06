@@ -25,7 +25,7 @@ export default function ProcessSection({ showHeader = true }: { showHeader?: boo
  </>
  ) : null}
  <div className="mt-10 hidden items-center gap-3 lg:flex">
- <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-ink)]">
+ <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-on-accent)]">
  10
  </span>
  <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">

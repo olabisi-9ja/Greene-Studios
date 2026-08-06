@@ -6,7 +6,7 @@ const TIMELINE_DATA = [
   {
     year: "2022",
     events: [
-      "Greene Studios founded. First client: a Lagos-based fintech startup.",
+      "Greene Studios founded. First client: a fintech startup.",
       "Shipped 8 projects in year one. Developed our signature process framework.",
     ],
   },

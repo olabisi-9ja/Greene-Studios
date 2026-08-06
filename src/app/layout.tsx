@@ -18,7 +18,7 @@ export const metadata: Metadata = {
  template: "%s | Greene Studios",
  },
  description:
- "Greene Studios is an independent digital design studio in Lagos. We design & build brands, websites, and digital products that make people stop scrolling.",
+ "Greene Studios is an independent digital design studio. We design & build brands, websites, and digital products that make people stop scrolling.",
  keywords: [
  "web design agency",
  "UI/UX design",
@@ -26,8 +26,7 @@ export const metadata: Metadata = {
  "frontend development",
  "design studio",
  "Greene Studios",
- "Lagos design studio",
- ],
+  ],
  authors: [{ name: "Greene Studios" }],
  creator: "Greene Studios",
  openGraph: {

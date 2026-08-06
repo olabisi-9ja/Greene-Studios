@@ -56,7 +56,7 @@ export default function ServicesPage() {
  {service.deliverables.length} deliverables
  </span>
  <span
- className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-ink)] md:ml-2"
+ className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"
  aria-hidden="true"
  >
  →
@@ -103,7 +103,7 @@ export default function ServicesPage() {
  <Link
  href="/contact"
  data-cursor="HELLO"
- className="inline-flex w-fit items-center gap-3 rounded-full bg-[var(--brand-accent)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-ink)] transition-colors duration-300 hover:bg-[var(--brand-bg)]"
+ className="inline-flex w-fit items-center gap-3 rounded-full bg-[var(--brand-accent)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-on-accent)] transition-colors duration-300 hover:bg-[var(--brand-bg)] hover:text-[var(--brand-accent)]"
  >
  Get custom quote <span aria-hidden="true">→</span>
  </Link>

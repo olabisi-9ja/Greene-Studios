@@ -37,7 +37,7 @@ export const ExperienceHero = () => {
           <div ref={kickerRef} className="mb-8 flex items-center gap-4">
             <span className="h-px w-10 bg-[var(--brand-accent)]" aria-hidden="true" />
             <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
-              Digital design studio · Lagos
+              Digital design studio
             </span>
           </div>
 
@@ -59,7 +59,7 @@ export const ExperienceHero = () => {
             ref={descRef}
             className="mt-8 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg"
           >
-            Greene Studios is a digital design studio in Lagos. We design and build brands,
+            Greene Studios is a digital design studio. We design and build brands,
             websites, and digital products that make people stop scrolling, and start paying attention.
           </p>
 
@@ -81,8 +81,6 @@ export const ExperienceHero = () => {
             ref={metaRef}
             className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]"
           >
-            <span>Lagos, Nigeria</span>
-            <span className="text-[var(--brand-border)]" aria-hidden="true">/</span>
             <span>Working worldwide</span>
             <span className="text-[var(--brand-border)]" aria-hidden="true">/</span>
             <span className="text-[var(--brand-text)]">Booking Q3 2026</span>
@@ -153,15 +151,15 @@ export const ExperienceHero = () => {
       </div>
 
       {/* ─── Marquee strip ─────────────────────────────────────────── */}
-      <div ref={marqueeRef} className="marquee-strip-hero relative z-10 border-t border-[var(--brand-border)] bg-[var(--brand-accent)] py-3">
+      <div ref={marqueeRef} className="marquee-strip-hero relative z-10 border-t border-[var(--brand-border)] py-3">
         <Marquee>
           <MarqueeContent speed={45} autoFill>
             {CAPABILITIES.map((cap, i) => (
               <MarqueeItem key={i} className="mx-6 flex items-center gap-6">
-                <span className="font-display text-lg font-black uppercase tracking-wide text-[var(--brand-ink)] md:text-xl">
+                <span className="font-display text-lg font-black uppercase tracking-wide md:text-xl">
                   {cap}
                 </span>
-                <span className="text-base text-[var(--brand-ink)]/60" aria-hidden="true">✦</span>
+                <span className="text-base opacity-60" aria-hidden="true">✦</span>
               </MarqueeItem>
             ))}
           </MarqueeContent>

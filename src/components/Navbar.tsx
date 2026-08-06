@@ -104,7 +104,7 @@ export default function Navbar() {
  "flex items-center gap-2.5 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300",
  menuOpen
  ? "bg-[var(--brand-bg)]/15 text-[var(--brand-bg)] hover:bg-[var(--brand-bg)]/25"
- : "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]"
+ : "bg-[var(--brand-text)] text-[var(--brand-bg)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]"
  )}
  >
                 <Menu size={16} strokeWidth={2.5} />

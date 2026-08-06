@@ -67,7 +67,7 @@ export default function Footer() {
  <span className="font-display text-sm font-black uppercase tracking-tight">Greene®</span>
  </div>
  <p className="mt-4 max-w-[220px] text-sm leading-relaxed text-[var(--brand-bg)]/60">
- Independent digital design studio. {BRAND.location}.
+ Independent digital design studio, working with ambitious brands worldwide.
  </p>
  </div>
 
@@ -93,11 +93,11 @@ export default function Footer() {
 
  <div className="flex flex-col items-start gap-4">
  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Since</span>
- <RotatingBadge
- text="GREENE STUDIOS ✦ EST. 2022 ✦ LAGOS ✦ "
- className="h-28 w-28 text-[var(--brand-bg)]"
- centerText="✦"
- />
+            <RotatingBadge
+              text="GREENE STUDIOS ✦ EST. 2022 ✦ WORLDWIDE ✦ "
+              className="h-28 w-28 text-[var(--brand-bg)]"
+              centerText="✦"
+            />
  </div>
  </div>
  </div>
@@ -131,9 +131,9 @@ export default function Footer() {
  <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row md:items-center md:justify-between md:px-10">
  <span>©{currentYear} Greene Studios. All rights reserved.</span>
  <span>Design &amp; build by Greene Studios</span>
- <span className="flex items-center gap-3">
- Lagos, Nigeria <span className="rounded bg-[var(--brand-bg)] px-1.5 py-0.5 text-[10px] font-black text-[var(--brand-text)]">EN</span>
- </span>
+        <span className="flex items-center gap-3">
+          <span className="rounded bg-[var(--brand-bg)] px-1.5 py-0.5 text-[10px] font-black text-[var(--brand-text)]">EN</span>
+        </span>
  </div>
  </footer>
  );

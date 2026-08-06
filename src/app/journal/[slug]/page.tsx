@@ -41,7 +41,7 @@ export default async function JournalArticlePage({ params }: Props) {
  </Link>
 
  <div className="mb-8 flex flex-wrap items-center gap-3 text-xs font-semibold text-[var(--brand-text-secondary)]">
- <span className="rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-ink)]">
+ <span className="rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
  {article.category}
  </span>
  <span>{article.date}</span>

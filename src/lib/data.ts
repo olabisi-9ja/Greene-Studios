@@ -5,7 +5,7 @@ export const BRAND = {
  tagline: "We design and build digital experiences that move people.",
  email: "hello@greenestudios.co",
  phone: "+1 (555) 000-0000",
- location: "Lagos, Nigeria · Remote",
+ location: "Working worldwide",
  instagram: "https://instagram.com/greenestudios",
  twitter: "https://twitter.com/greenestudios",
  linkedin: "https://linkedin.com/company/greenestudios",

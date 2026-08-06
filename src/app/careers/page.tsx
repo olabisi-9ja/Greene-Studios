@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const POSITIONS = [
   {
     title: "Senior Product Designer",
-    location: "Remote / Lagos",
+    location: "Remote",
     type: "Full-time",
   },
   {
@@ -76,7 +76,7 @@ export default function CareersPage() {
               <a
                 href={`mailto:${BRAND.email}?subject=Application for ${job.title}`}
                 data-cursor="APPLY"
-                className="inline-flex w-fit items-center gap-3 rounded-full bg-[var(--brand-text)] px-7 py-3.5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]"
+                className="inline-flex w-fit items-center gap-3 rounded-full bg-[var(--brand-text)] px-7 py-3.5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]"
               >
                 Apply now <span aria-hidden="true">→</span>
               </a>

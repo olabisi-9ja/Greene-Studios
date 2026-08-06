@@ -55,7 +55,7 @@ export default function FloatingButtons() {
         href="/contact"
         data-cursor="CONTACT"
         className={cn(
-          "rounded-full bg-[var(--brand-text)] px-5 py-3 text-xs font-bold uppercase tracking-widest text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]",
+          "rounded-full bg-[var(--brand-text)] px-5 py-3 text-xs font-bold uppercase tracking-widest text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
           pastHero ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
@@ -68,7 +68,7 @@ export default function FloatingButtons() {
         data-cursor="UP"
         aria-label="Back to top"
         className={cn(
-          "flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-text)] text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]",
+          "flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-text)] text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
           pastHero ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
