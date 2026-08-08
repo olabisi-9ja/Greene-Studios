@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAtmosphere } from "@/lib/context/AtmosphereContext";
-import { Menu, Sun, Moon, PaintBucket } from "lucide-react";
+import { Menu } from "lucide-react";
 import SideMenu from "./SideMenu";
+import AtmosphereSwitcher from "@/components/ui/AtmosphereSwitcher";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -13,7 +13,6 @@ export default function Navbar() {
  const [isVisible, setIsVisible] = useState(true);
  const [lastScrollY, setLastScrollY] = useState(0);
  const [menuOpen, setMenuOpen] = useState(false);
- const { mode, setMode } = useAtmosphere();
 
  useEffect(() => {
  const handleScroll = () => {
@@ -74,26 +73,7 @@ export default function Navbar() {
 
  {/* Right cluster */}
  <div className="flex items-center gap-2 md:gap-3">
- <button
- onClick={() => {
- if (mode === "paper") setMode("midnight");
- else if (mode === "midnight") setMode("studio");
- else setMode("paper");
- }}
- className={cn(
- "flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-colors duration-300",
- menuOpen
- ? "text-[var(--brand-bg)] hover:bg-white/10"
- : "text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
- )}
- title="Toggle atmosphere"
- data-cursor="MOOD"
- aria-label="Toggle atmosphere"
- >
- {mode === "paper" && <Sun size={18} />}
- {mode === "midnight" && <Moon size={18} />}
- {mode === "studio" && <PaintBucket size={18} />}
- </button>
+ <AtmosphereSwitcher />
 
  {/* MENU button · all screen sizes */}
  <button

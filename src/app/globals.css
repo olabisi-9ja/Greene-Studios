@@ -89,14 +89,14 @@
 
   /* ─── Studio (vibrant greenhouse) ───────────────────────────────── */
   .mode-studio {
-    --brand-primary: #d9f42c;
+    --brand-primary: var(--studio-accent, #d9f42c);
     --brand-bg: #0c1f14; /* deep green-black so colours pop */
     --brand-surface: #12301d;
     --brand-surface-secondary: #1a3d26;
     --brand-border: #2e5a3c;
     --brand-text: #f2fbe9;
     --brand-text-secondary: #a9c9b0;
-    --brand-accent: #d9f42c;
+    --brand-accent: var(--studio-accent, #d9f42c);
     --brand-on-accent: #0c1f14;
     --brand-paper: #0c1f14;
     --brand-ink: #0c1f14;
@@ -109,10 +109,10 @@
     --color-abstract-yellow: #ffd21a;
     --color-abstract-black: #0c1f14;
 
-    --cta-bg: var(--color-abstract-green);
+    --cta-bg: var(--studio-accent, #d9f42c);
     --cta-fg: var(--brand-ink);
     --cta-btn-bg: var(--brand-ink);
-    --cta-btn-fg: var(--color-abstract-green);
+    --cta-btn-fg: var(--studio-accent, #d9f42c);
     --cta-border: var(--brand-ink);
   }
 
@@ -120,11 +120,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    @apply border-border outline-ring/50;
+    border-color: var(--brand-border);
+    outline-color: color-mix(in srgb, var(--brand-text) 50%, transparent);
   }
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--brand-bg);
     @apply font-sans;
   }
 
@@ -135,7 +137,6 @@
     overflow-x: hidden;
     transition: background-color 0.8s ease, color 0.8s ease;
     -webkit-font-smoothing: antialiased;
-    @apply bg-background text-foreground;
   }
 
   /* Display typeface for all headings, site-wide */
@@ -151,9 +152,17 @@
     color: var(--brand-on-accent);
   }
 
-  /* On the ink footer, the green accent needs to be light to stay visible */
-  footer {
+  /* On the ink footer, the green accent needs to be light to stay visible.
+     In MIDNIGHT the footer inverts (light bg), so use the deep identity
+     green; in STUDIO the accent follows the chosen studio accent. */
+  .mode-paper footer {
     --brand-accent: #9fc9a8;
+  }
+  .mode-midnight footer {
+    --brand-accent: #1f3d3a;
+  }
+  .mode-studio footer {
+    --brand-accent: var(--studio-accent, #d9f42c);
   }
 
   /* Custom scrollbar */
@@ -411,7 +420,7 @@
 /* Solid colour strips */
 .mode-studio .marquee-strip,
 .mode-studio .marquee-strip-hero {
-  background: var(--color-abstract-green);
+  background: var(--studio-accent, #d9f42c);
   color: var(--brand-ink);
 }
 .mode-studio .marquee-strip-plain {
@@ -589,4 +598,30 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* ═══ Keep shadcn base tokens in sync with the active atmosphere ═══════ */
+/* The shadcn `:root`/`.dark` blocks above use static oklch values. Mode
+   classes are applied to <html> after those blocks in the cascade, so this
+   re-maps them to the brand tokens — otherwise `bg-background`, `bg-card`,
+   `text-foreground` etc. would stay white/black in every atmosphere. */
+.mode-paper,
+.mode-midnight,
+.mode-studio {
+  --background: var(--brand-bg);
+  --foreground: var(--brand-text);
+  --border: var(--brand-border);
+  --card: var(--brand-surface);
+  --card-foreground: var(--brand-text);
+  --popover: var(--brand-surface);
+  --popover-foreground: var(--brand-text);
+  --muted: var(--brand-surface-secondary);
+  --muted-foreground: var(--brand-text-secondary);
+  --accent: var(--brand-accent);
+  --accent-foreground: var(--brand-on-accent);
+  --primary: var(--brand-accent);
+  --primary-foreground: var(--brand-on-accent);
+  --ring: var(--brand-accent);
+  --input: var(--brand-border);
+  --destructive-foreground: var(--brand-text);
 }

@@ -1,41 +1,45 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useLayoutEffect,
+  ReactNode,
+} from "react";
 import { usePathname } from "next/navigation";
 
 export type AtmosphereMode = "paper" | "midnight" | "studio";
 export type AccentColor =
-  | "emerald"
   | "forest"
+  | "moss"
   | "teal"
-  | "electric"
-  | "purple"
-  | "orange"
-  | "rose"
   | "lime"
-  | "gold";
+  | "amber"
+  | "violet"
+  | "coral";
 
 export const accentHexMap: Record<AccentColor, string> = {
-  emerald: "#173A2E",
-  forest: "#11472B",
-  teal: "#0D5C58",
-  electric: "#1A49E6",
-  purple: "#6324D6",
-  orange: "#FF5C28",
-  rose: "#D6245F",
-  lime: "#D9F42C",
-  gold: "#E6AE1A"
+  forest: "#2F5D4E",
+  moss: "#8FAE7B",
+  teal: "#2EC4B6",
+  lime: "#C9F24B",
+  amber: "#FFB25C",
+  violet: "#8B7CF6",
+  coral: "#FF6F61",
 };
 
-interface AtmosphereContextProps {
-  mode: AtmosphereMode;
-  setMode: (mode: AtmosphereMode) => void;
-  accent: AccentColor;
-  setAccent: (accent: AccentColor) => void;
-  accentHex: string;
-}
+export const MODE_LABELS: Record<AtmosphereMode, string> = {
+  paper: "CLEAN",
+  midnight: "MIDNIGHT",
+  studio: "STUDIO",
+};
 
-const AtmosphereContext = createContext<AtmosphereContextProps | undefined>(undefined);
+export const MODE_OPTIONS: { mode: AtmosphereMode; tagline: string }[] = [
+  { mode: "paper", tagline: "Editorial / professional" },
+  { mode: "midnight", tagline: "Cinematic / premium" },
+  { mode: "studio", tagline: "Experimental / interactive" },
+];
 
 const MODE_CLASSES: Record<AtmosphereMode, string> = {
   paper: "mode-paper",
@@ -43,26 +47,87 @@ const MODE_CLASSES: Record<AtmosphereMode, string> = {
   studio: "mode-studio",
 };
 
-export function AtmosphereProvider({ children }: { children: ReactNode }) {
-  const [mode, setMode] = useState<AtmosphereMode>("paper");
-  const [accent, setAccent] = useState<AccentColor>("lime");
+const STORAGE_MODE = "greene:atmosphere";
+const STORAGE_ACCENT = "greene:studio-accent";
 
+interface AtmosphereContextProps {
+  mode: AtmosphereMode;
+  setMode: (mode: AtmosphereMode) => void;
+  accent: AccentColor;
+  setAccent: (accent: AccentColor) => void;
+  accentHex: string;
+  modeLabel: string;
+}
+
+const AtmosphereContext = createContext<AtmosphereContextProps | undefined>(undefined);
+
+function isMode(v: string | null): v is AtmosphereMode {
+  return v === "paper" || v === "midnight" || v === "studio";
+}
+function isAccent(v: string | null): v is AccentColor {
+  return !!v && v in accentHexMap;
+}
+
+export function AtmosphereProvider({ children }: { children: ReactNode }) {
+  const [mode, setModeState] = useState<AtmosphereMode>("paper");
+  const [accent, setAccentState] = useState<AccentColor>("lime");
   const pathname = usePathname();
 
-  useEffect(() => {
-    // Apply the active mode class to the document root so CSS tokens cascade
+  // Adopt persisted preferences synchronously (before paint) so there's no
+  // flash of the wrong atmosphere after hydration.
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const storedMode = window.localStorage.getItem(STORAGE_MODE);
+      const storedAccent = window.localStorage.getItem(STORAGE_ACCENT);
+      setModeState(isMode(storedMode) ? storedMode : "paper");
+      setAccentState(isAccent(storedAccent) ? storedAccent : "lime");
+    } catch {
+      /* storage unavailable — fall back to defaults */
+    }
+  }, []);
+
+  // Keep <html> mode class + studio accent variable in sync.
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
     const root = document.documentElement;
     root.classList.remove("mode-paper", "mode-midnight", "mode-studio");
     root.classList.add(MODE_CLASSES[mode]);
-    root.style.removeProperty("--studio-dynamic-bg");
-  }, [mode, pathname]);
 
-  const value = {
+    if (mode === "studio") {
+      root.setAttribute("data-studio-accent", accent);
+      root.style.setProperty("--studio-accent", accentHexMap[accent]);
+    } else {
+      root.removeAttribute("data-studio-accent");
+      root.style.removeProperty("--studio-accent");
+    }
+  }, [mode, accent, pathname]);
+
+  const setMode = (next: AtmosphereMode) => {
+    setModeState(next);
+    try {
+      window.localStorage.setItem(STORAGE_MODE, next);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const setAccent = (next: AccentColor) => {
+    setAccentState(next);
+    try {
+      window.localStorage.setItem(STORAGE_ACCENT, next);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const value: AtmosphereContextProps = {
     mode,
     setMode,
     accent,
     setAccent,
     accentHex: accentHexMap[accent],
+    modeLabel: MODE_LABELS[mode],
   };
 
   return (
