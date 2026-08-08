@@ -17,7 +17,13 @@ export default function Preloader() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (sessionStorage.getItem("loader_shown")) {
+    let shown = false;
+    try {
+      shown = !!sessionStorage.getItem("loader_shown");
+    } catch {
+      /* storage unavailable (e.g. sandboxed iframe) — show the loader */
+    }
+    if (shown) {
       setHasShown(true);
       return;
     }
@@ -26,7 +32,11 @@ export default function Preloader() {
 
     const timer = setTimeout(() => {
       setIsComplete(true);
-      sessionStorage.setItem("loader_shown", "true");
+      try {
+        sessionStorage.setItem("loader_shown", "true");
+      } catch {
+        /* ignore — storage unavailable */
+      }
       document.body.style.overflow = "";
     }, 2700);
 

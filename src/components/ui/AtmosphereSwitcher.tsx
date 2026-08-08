@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Sun, Moon, Sparkles, Hammer, Compass, ChevronDown, X } from "lucide-react";
 import {
   useAtmosphere,
   MODE_LABELS,
   MODE_OPTIONS,
   accentHexMap,
   type AccentColor,
+  type VisualMode,
 } from "@/lib/context/AtmosphereContext";
 import { cn } from "@/lib/utils";
 
@@ -39,6 +41,19 @@ function Slider({
       </span>
     </label>
   );
+}
+
+function ModeIcon({ mode, className }: { mode: VisualMode; className?: string }) {
+  switch (mode) {
+    case "day":
+      return <Sun className={className} aria-hidden="true" />;
+    case "night":
+      return <Moon className={className} aria-hidden="true" />;
+    case "studio":
+      return <Sparkles className={className} aria-hidden="true" />;
+    case "raw":
+      return <Hammer className={className} aria-hidden="true" />;
+  }
 }
 
 export default function AtmosphereSwitcher() {
@@ -77,6 +92,8 @@ export default function AtmosphereSwitcher() {
   }, [open]);
 
   const showStudioPanel = effectiveMode === "studio";
+  // What the button reports: AUTO (chosen) or the active visual mode
+  const activeMode = mode === "auto" ? "auto" : effectiveMode;
   const label = mode === "auto" ? `AUTO · ${MODE_LABELS[effectiveMode]}` : MODE_LABELS[mode];
 
   return (
@@ -94,18 +111,26 @@ export default function AtmosphereSwitcher() {
             : "border border-[var(--brand-border)] text-[var(--brand-text)] hover:border-[var(--brand-accent)]"
         )}
       >
-        <span
-          className="h-2 w-2 rounded-full transition-colors duration-500"
-          style={{
-            background:
-              effectiveMode === "studio" ? accentHexMap[accent] : "var(--brand-accent)",
-          }}
-          aria-hidden="true"
+        <ModeIcon
+          mode={effectiveMode}
+          className="h-3.5 w-3.5 shrink-0 text-[var(--brand-accent)]"
         />
-        <span className="hidden sm:inline">{label}</span>
-        <span aria-hidden="true" className="text-[8px]">
-          {open ? "✕" : "▾"}
+        <span className="hidden sm:inline">Atmosphere</span>
+        <span
+          className={cn(
+            "rounded-full px-2 py-0.5 text-[9px] font-black tracking-[0.12em] transition-colors duration-300",
+            open
+              ? "bg-[var(--brand-bg)]/15 text-[var(--brand-bg)]"
+              : "bg-[var(--brand-accent)]/10 text-[var(--brand-accent)]"
+          )}
+        >
+          {MODE_LABELS[activeMode]}
         </span>
+        {open ? (
+          <X className="h-3 w-3 shrink-0" aria-hidden="true" />
+        ) : (
+          <ChevronDown className="h-3 w-3 shrink-0" aria-hidden="true" />
+        )}
       </button>
 
       <AnimatePresence>
