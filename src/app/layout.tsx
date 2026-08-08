@@ -59,6 +59,8 @@ export const metadata: Metadata = {
 import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
 import DynamicCursor from "@/components/ui/DynamicCursor";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
+import StudioParticles from "@/components/canvas/StudioParticles";
+import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import FloatingButtons from "@/components/FloatingButtons";
 import PageTransition from "@/components/animations/PageTransition";
@@ -79,14 +81,25 @@ export default function RootLayout({
  __html: `(function(){
    try {
      var m = localStorage.getItem("greene:atmosphere");
-     if (m !== "paper" && m !== "midnight" && m !== "studio") m = null;
+     if (m === "paper") m = "day";
+     if (m === "midnight") m = "night";
+     if (m !== "auto" && m !== "day" && m !== "night" && m !== "studio" && m !== "raw") m = "auto";
+     var p = location.pathname;
+     if (m === "auto") {
+       if (p.indexOf("/work") === 0) m = "night";
+       else if (p.indexOf("/lab") === 0 || p.indexOf("/experiments") === 0) m = "studio";
+       else if (p === "/contact") m = "night";
+       else m = "day";
+     }
      var d = document.documentElement;
-     if (m) d.classList.add("mode-" + m);
+     d.classList.add("mode-" + m);
+     d.setAttribute("data-mode", m);
      if (m === "studio") {
        var a = localStorage.getItem("greene:studio-accent");
        var hex = {
          forest: "#2F5D4E", moss: "#8FAE7B", teal: "#2EC4B6",
-         lime: "#C9F24B", amber: "#FFB25C", violet: "#8B7CF6", coral: "#FF6F61"
+         lime: "#C9F24B", amber: "#FFB25C", violet: "#8B7CF6",
+         coral: "#FF6F61", blue: "#3AA6FF"
        }[a || ""] || "#C9F24B";
        d.setAttribute("data-studio-accent", a || "lime");
        d.style.setProperty("--studio-accent", hex);
@@ -99,6 +112,7 @@ export default function RootLayout({
  <AtmosphereProvider>
  <ScrollProgress />
  <NoiseTexture />
+ <StudioParticles />
  <DynamicCursor />
  <Preloader />
  <SmoothScroll>
@@ -111,6 +125,7 @@ export default function RootLayout({
  <Footer />
  <FloatingButtons />
  </SmoothScroll>
+ <FocusMode />
  </AtmosphereProvider>
  </body>
  </html>

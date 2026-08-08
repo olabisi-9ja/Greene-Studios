@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Menu } from "lucide-react";
 import SideMenu from "./SideMenu";
 import AtmosphereSwitcher from "@/components/ui/AtmosphereSwitcher";
+import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -13,6 +14,7 @@ export default function Navbar() {
  const [isVisible, setIsVisible] = useState(true);
  const [lastScrollY, setLastScrollY] = useState(0);
  const [menuOpen, setMenuOpen] = useState(false);
+ const { setFocus } = useAtmosphere();
 
  useEffect(() => {
  const handleScroll = () => {
@@ -48,12 +50,17 @@ export default function Navbar() {
  : "border border-transparent"
  )}
  >
- {/* Logo / wordmark */}
+ {/* Logo / wordmark — double-click toggles FOCUS presentation mode */}
  <Link
  href="/"
+ onDoubleClick={(e) => {
+ e.preventDefault();
+ setFocus(true);
+ }}
  className="group flex items-center gap-3"
  data-cursor="HOME"
- aria-label="Greene Studios, home"
+ aria-label="Greene Studios, home (double-click for presentation mode)"
+ title="Double-click for Focus Mode"
  >
  <span className="relative block h-9 w-9 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)] md:h-10 md:w-10">
  <Image

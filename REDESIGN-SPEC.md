@@ -1225,3 +1225,49 @@ Paste-ready draft for `src/app/globals.css` (replaces the v1 token values; keep 
   * { animation-duration: 0.4s !important; transition-duration: 0.4s !important; }
 }
 ```
+
+---
+
+## Appendix B. v2.1 — The 6-state atmosphere system (implemented)
+
+Supersedes §4.2 / §5.2 of this spec. Built and verified in the repo — this
+appendix is the source of truth for the atmosphere layer.
+
+### Modes
+
+| Mode | Code value | Personality | When (AUTO) |
+|---|---|---|---|
+| **AUTO** | `auto` (default) | Context-aware; not a theme — resolves to a visual mode per route | — |
+| **DAY** | `day` (alias of legacy `paper`) | Professional / editorial. Warm white `#F4F3EE`, ink `#111311`, Greene `#1F3D3A`, thin borders, minimal motion | Home, About, Services, Journal, Process, pricing/careers/resources/legal |
+| **NIGHT** | `night` (alias of legacy `midnight`) | Premium / cinematic. Near-black `#080A09`, surface `#101513`, moss accent `#557A70`, glass + glow + magnetic cursor | Work + case studies, Contact |
+| **STUDIO** | `studio` | The signature: living canvas. Deep green-black, dynamic `--studio-accent` (8 accents), particles, cursor trail, control panel | Lab, Experiments |
+| **RAW** | `raw` | Workshop. Paper `#EDE8DF`, marker-orange accent `#C2541E`, heavy grain, crosshair cursor with coordinates | (manual — Experimental group) |
+| **FOCUS** | `focus` (state, not a mode) | Presentation: fullscreen overlay, everything hidden, ESC/nav to move | (manual — logo double-click or switcher) |
+
+### Where the logic lives
+
+- `src/lib/context/AtmosphereContext.tsx` — `mode` (`auto|day|night|studio|raw`),
+  `effectiveMode` (AUTO resolved via `resolveAuto(pathname)`), `accent` (8 values
+  incl. `blue`), `config {grain, motion, particles}` (0–100), `focus`; persistence
+  keys `greene:atmosphere`, `greene:studio-accent`, `greene:studio-config`; writes
+  `mode-*` class + `data-mode` + `--studio-accent`/`--studio-grain`/`data-motion`
+  on `<html>`.
+- `src/app/layout.tsx` — pre-hydration guard script (resolves AUTO by pathname,
+  maps legacy `paper→day`, `midnight→night`).
+- `src/components/ui/AtmosphereSwitcher.tsx` — popover: AUTO ★/DAY/NIGHT/STUDIO,
+  Experimental group (RAW, FOCUS), Studio panel (8 accent swatches + Grain /
+  Motion / Particles sliders + Reset).
+- `src/components/ui/DynamicCursor.tsx` — DAY dot · NIGHT dot+ring · STUDIO
+  spark + particle trail · RAW crosshair+coords · FOCUS native cursor.
+- `src/components/canvas/StudioParticles.tsx` — accent-tinted Canvas 2D layer,
+  count from `config.particles`, paused off-STUDIO.
+- `src/components/FocusMode.tsx` — presentation overlay; open via switcher or
+  double-clicking the nav logo; ESC exits.
+- `src/components/canvas/NoiseTexture.tsx` — opacity from `--studio-grain`.
+
+### CSS hooks (globals.css)
+
+`[data-motion="none|reduced"]` scales animation/transition durations down (the
+Studio Motion slider); `.focus-active` hides `.focus-hide` chrome; `.mode-raw`
+adds the workshop token set and marquee treatment. The shadcn base-token sync
+block (Appendix A tail) now also covers `mode-night`/`mode-raw`.

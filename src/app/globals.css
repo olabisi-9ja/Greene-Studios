@@ -30,19 +30,19 @@
 }
 
 @layer base {
-  /* ─── Default: Paper (editorial, warm) ───────────────────────────── */
-  :root {
-    --brand-primary: #173a2e; /* deep forest green */
-    --brand-bg: #f2efe7; /* warm paper */
-    --brand-surface: #fbf9f3; /* lighter paper */
-    --brand-surface-secondary: #e9e4d8; /* deeper paper */
+  /* ─── DAY (default · professional editorial) ────────────────────── */
+  :root, .mode-paper, .mode-day {
+    --brand-primary: #1f3d3a; /* Greene Green */
+    --brand-bg: #f4f3ee; /* warm white */
+    --brand-surface: #fbfaf6; /* lighter */
+    --brand-surface-secondary: #e9e4d8; /* deeper */
     --brand-border: #dcd6c8;
-    --brand-text: #17140e; /* ink */
-    --brand-text-secondary: #6e6758;
-    --brand-accent: #173a2e; /* deep forest green */
-    --brand-on-accent: #f2efe7; /* text sitting on the accent (paper cream) */
-    --brand-paper: #f2efe7;
-    --brand-ink: #17140e;
+    --brand-text: #111311; /* ink */
+    --brand-text-secondary: #5d655f;
+    --brand-accent: #1f3d3a; /* Greene Green */
+    --brand-on-accent: #f4f3ee;
+    --brand-paper: #f4f3ee;
+    --brand-ink: #111311;
 
     /* CTA block tokens (mode-aware) */
     --cta-bg: var(--brand-accent);
@@ -57,34 +57,38 @@
     --color-abstract-lemon: #d9f42c;
     --color-abstract-black: #17140e;
     --color-abstract-pink: #ffd9e1;
+
+    --studio-grain: 0.03;
   }
 
-  /* ─── Midnight ───────────────────────────────────────────────────── */
-  .mode-midnight {
-    --brand-primary: #d9f42c;
-    --brand-bg: #10110c;
-    --brand-surface: #171812;
-    --brand-surface-secondary: #202117;
-    --brand-border: #2c2d22;
-    --brand-text: #f1eee5;
-    --brand-text-secondary: #9c967f;
-    --brand-accent: #d9f42c;
-    --brand-on-accent: #10110c;
-    --brand-paper: #10110c;
-    --brand-ink: #f1eee5;
+  /* ─── NIGHT (premium · cinematic) ───────────────────────────────── */
+  .mode-midnight, .mode-night {
+    --brand-primary: #557a70;
+    --brand-bg: #080a09;
+    --brand-surface: #101513;
+    --brand-surface-secondary: #161d1b;
+    --brand-border: rgba(242, 239, 230, 0.14);
+    --brand-text: #f2efe6;
+    --brand-text-secondary: rgba(242, 239, 230, 0.58);
+    --brand-accent: #557a70;
+    --brand-on-accent: #080a09;
+    --brand-paper: #080a09;
+    --brand-ink: #f2efe6;
 
     --cta-bg: var(--brand-accent);
-    --cta-fg: var(--brand-ink);
-    --cta-btn-bg: var(--brand-ink);
+    --cta-fg: var(--brand-bg);
+    --cta-btn-bg: var(--brand-bg);
     --cta-btn-fg: var(--brand-accent);
-    --cta-border: var(--brand-ink);
+    --cta-border: var(--brand-bg);
 
     --color-abstract-orange: #ff5c28;
     --color-abstract-blue: #2f4d8f;
     --color-abstract-green: #3f7d57;
     --color-abstract-lemon: #d9f42c;
-    --color-abstract-black: #f1eee5;
+    --color-abstract-black: #f2efe6;
     --color-abstract-pink: #a63a52;
+
+    --studio-grain: 0.05;
   }
 
   /* ─── Studio (vibrant greenhouse) ───────────────────────────────── */
@@ -114,6 +118,38 @@
     --cta-btn-bg: var(--brand-ink);
     --cta-btn-fg: var(--studio-accent, #d9f42c);
     --cta-border: var(--brand-ink);
+
+    --studio-grain: 0.04;
+  }
+
+  /* ─── RAW (workshop · behind the scenes) ────────────────────────── */
+  .mode-raw {
+    --brand-primary: #c2541e;
+    --brand-bg: #ede8df; /* workshop paper */
+    --brand-surface: #f4f0e8;
+    --brand-surface-secondary: #e0d9cc;
+    --brand-border: #c9bfa9;
+    --brand-text: #17150f;
+    --brand-text-secondary: #6b6254;
+    --brand-accent: #c2541e; /* marker orange */
+    --brand-on-accent: #f4f0e8;
+    --brand-paper: #ede8df;
+    --brand-ink: #17150f;
+
+    --cta-bg: var(--brand-accent);
+    --cta-fg: var(--brand-bg);
+    --cta-btn-bg: var(--brand-bg);
+    --cta-btn-fg: var(--brand-accent);
+    --cta-border: var(--brand-bg);
+
+    --color-abstract-orange: #c2541e;
+    --color-abstract-blue: #6b6254;
+    --color-abstract-green: #477a44;
+    --color-abstract-lemon: #c2541e;
+    --color-abstract-black: #17150f;
+    --color-abstract-pink: #c9bfa9;
+
+    --studio-grain: 0.07;
   }
 
   * {
@@ -153,16 +189,21 @@
   }
 
   /* On the ink footer, the green accent needs to be light to stay visible.
-     In MIDNIGHT the footer inverts (light bg), so use the deep identity
+     In NIGHT the footer inverts (light bg), so use the deep identity
      green; in STUDIO the accent follows the chosen studio accent. */
-  .mode-paper footer {
+  .mode-paper footer,
+  .mode-day footer {
     --brand-accent: #9fc9a8;
   }
-  .mode-midnight footer {
+  .mode-midnight footer,
+  .mode-night footer {
     --brand-accent: #1f3d3a;
   }
   .mode-studio footer {
     --brand-accent: var(--studio-accent, #d9f42c);
+  }
+  .mode-raw footer {
+    --brand-accent: #c2541e;
   }
 
   /* Custom scrollbar */
@@ -200,7 +241,9 @@
     -webkit-text-stroke: 1.5px var(--brand-text);
   }
   .mode-midnight .text-outline,
-  .mode-studio .text-outline {
+  .mode-night .text-outline,
+  .mode-studio .text-outline,
+  .mode-raw .text-outline {
     -webkit-text-stroke-color: var(--brand-text);
   }
 
@@ -423,6 +466,11 @@
   background: var(--studio-accent, #d9f42c);
   color: var(--brand-ink);
 }
+.mode-raw .marquee-strip,
+.mode-raw .marquee-strip-hero {
+  background: #c2541e;
+  color: #f4f0e8;
+}
 .mode-studio .marquee-strip-plain {
   background: color-mix(in srgb, var(--brand-surface) 70%, transparent);
 }
@@ -624,4 +672,31 @@
   --ring: var(--brand-accent);
   --input: var(--brand-border);
   --destructive-foreground: var(--brand-text);
+}
+
+/* ═══ Studio control panel outputs ═════════════════════════════════════ */
+/* Grain density (0–100) is scaled by AtmosphereContext and written to
+   --studio-grain (used by NoiseTexture). Motion level maps to none/reduced
+   so visitors can calm the site down inside Studio. */
+[data-motion="none"] *,
+[data-motion="none"] *::before,
+[data-motion="none"] *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+}
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.5s !important;
+  transition-duration: 0.3s !important;
+}
+
+/* ═══ FOCUS MODE (presentation) ════════════════════════════════════════ */
+.focus-active {
+  overflow: hidden;
+}
+.focus-active .focus-hide {
+  visibility: hidden;
+  opacity: 0;
 }
