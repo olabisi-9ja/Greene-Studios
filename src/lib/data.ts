@@ -18,6 +18,7 @@ export const BRAND = {
 export const NAV_LINKS = [
  { label: "Work", href: "/work" },
  { label: "Services", href: "/services" },
+ { label: "Lab", href: "/lab" },
  { label: "Process", href: "/process" },
  { label: "Journal", href: "/journal" },
  { label: "About", href: "/about" },

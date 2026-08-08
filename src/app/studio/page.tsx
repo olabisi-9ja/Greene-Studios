@@ -1,18 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { ExperienceHero } from "@/components/ui/ExperienceHero";
 
 export default function StudioDemoPage() {
-  const { setMode } = useAtmosphere();
-
-  useEffect(() => {
-    // Force studio mode when landing on this demo page
-    setMode("studio");
-  }, [setMode]);
-
   return (
     <div className="min-h-screen overflow-hidden bg-[var(--brand-bg)] pb-32 font-sans text-[var(--brand-text)]">
       {/* Navigation */}

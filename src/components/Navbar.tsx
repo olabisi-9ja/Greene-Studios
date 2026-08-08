@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAtmosphere } from "@/lib/context/AtmosphereContext";
-import { Menu, Sun, Moon, PaintBucket } from "lucide-react";
+import { Menu } from "lucide-react";
 import SideMenu from "./SideMenu";
+import AtmosphereSwitcher from "@/components/ui/AtmosphereSwitcher";
+import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -13,7 +14,7 @@ export default function Navbar() {
  const [isVisible, setIsVisible] = useState(true);
  const [lastScrollY, setLastScrollY] = useState(0);
  const [menuOpen, setMenuOpen] = useState(false);
- const { mode, setMode } = useAtmosphere();
+ const { setFocus } = useAtmosphere();
 
  useEffect(() => {
  const handleScroll = () => {
@@ -49,12 +50,17 @@ export default function Navbar() {
  : "border border-transparent"
  )}
  >
- {/* Logo / wordmark */}
+ {/* Logo / wordmark — double-click toggles FOCUS presentation mode */}
  <Link
  href="/"
+ onDoubleClick={(e) => {
+ e.preventDefault();
+ setFocus(true);
+ }}
  className="group flex items-center gap-3"
  data-cursor="HOME"
- aria-label="Greene Studios, home"
+ aria-label="Greene Studios, home (double-click for presentation mode)"
+ title="Double-click for Focus Mode"
  >
  <span className="relative block h-9 w-9 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)] md:h-10 md:w-10">
  <Image
@@ -74,26 +80,7 @@ export default function Navbar() {
 
  {/* Right cluster */}
  <div className="flex items-center gap-2 md:gap-3">
- <button
- onClick={() => {
- if (mode === "paper") setMode("midnight");
- else if (mode === "midnight") setMode("studio");
- else setMode("paper");
- }}
- className={cn(
- "flex h-10 w-10 items-center justify-center rounded-full border border-transparent transition-colors duration-300",
- menuOpen
- ? "text-[var(--brand-bg)] hover:bg-white/10"
- : "text-[var(--brand-text)] hover:bg-[var(--brand-text)]/10"
- )}
- title="Toggle atmosphere"
- data-cursor="MOOD"
- aria-label="Toggle atmosphere"
- >
- {mode === "paper" && <Sun size={18} />}
- {mode === "midnight" && <Moon size={18} />}
- {mode === "studio" && <PaintBucket size={18} />}
- </button>
+ <AtmosphereSwitcher />
 
  {/* MENU button · all screen sizes */}
  <button

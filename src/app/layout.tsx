@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -58,6 +59,8 @@ export const metadata: Metadata = {
 import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
 import DynamicCursor from "@/components/ui/DynamicCursor";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
+import StudioParticles from "@/components/canvas/StudioParticles";
+import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import FloatingButtons from "@/components/FloatingButtons";
 import PageTransition from "@/components/animations/PageTransition";
@@ -69,10 +72,47 @@ export default function RootLayout({
 }) {
  return (
  <html lang="en" suppressHydrationWarning className="font-sans">
- <body className="antialiased mode-paper overflow-x-hidden">
+ {/* Apply the saved atmosphere before hydration so there is no flash of
+     the wrong theme (kept in sync with AtmosphereContext). */}
+ <Script
+ id="atmosphere-guard"
+ strategy="beforeInteractive"
+ dangerouslySetInnerHTML={{
+ __html: `(function(){
+   try {
+     var m = localStorage.getItem("greene:atmosphere");
+     if (m === "paper") m = "day";
+     if (m === "midnight") m = "night";
+     if (m !== "auto" && m !== "day" && m !== "night" && m !== "studio" && m !== "raw") m = "auto";
+     var p = location.pathname;
+     if (m === "auto") {
+       if (p.indexOf("/work") === 0) m = "night";
+       else if (p.indexOf("/lab") === 0 || p.indexOf("/experiments") === 0) m = "studio";
+       else if (p === "/contact") m = "night";
+       else m = "day";
+     }
+     var d = document.documentElement;
+     d.classList.add("mode-" + m);
+     d.setAttribute("data-mode", m);
+     if (m === "studio") {
+       var a = localStorage.getItem("greene:studio-accent");
+       var hex = {
+         forest: "#2F5D4E", moss: "#8FAE7B", teal: "#2EC4B6",
+         lime: "#C9F24B", amber: "#FFB25C", violet: "#8B7CF6",
+         coral: "#FF6F61", blue: "#3AA6FF"
+       }[a || ""] || "#C9F24B";
+       d.setAttribute("data-studio-accent", a || "lime");
+       d.style.setProperty("--studio-accent", hex);
+     }
+   } catch (e) {}
+ })();`,
+ }}
+ />
+ <body className="antialiased overflow-x-hidden">
  <AtmosphereProvider>
  <ScrollProgress />
  <NoiseTexture />
+ <StudioParticles />
  <DynamicCursor />
  <Preloader />
  <SmoothScroll>
@@ -85,6 +125,7 @@ export default function RootLayout({
  <Footer />
  <FloatingButtons />
  </SmoothScroll>
+ <FocusMode />
  </AtmosphereProvider>
  </body>
  </html>
