@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/work',
     '/services',
+    '/lab',
     '/journal',
     '/about',
     '/contact',

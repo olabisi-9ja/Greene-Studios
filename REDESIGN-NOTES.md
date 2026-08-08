@@ -1,5 +1,12 @@
 # Greene Studios - Site Redesign Notes
 
+> **SUPERSEDED — v2 direction is now `REDESIGN-SPEC.md`**
+> This file documents the v1 ("paper + lime editorial") pass. The approved v2
+> direction — **GREENE / THE DIGITAL STUDIO** (living canvas, CLEAN/MIDNIGHT/STUDIO
+> atmospheres, GS monogram, sticky case-study showcase) — is specified in
+> [`REDESIGN-SPEC.md`](./REDESIGN-SPEC.md). Any future build work should follow that
+> document. Everything below is kept for historical context.
+
 ## Direction
 
 **Concept:** *"The studio that makes brands impossible to ignore."*
