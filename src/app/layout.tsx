@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -72,13 +71,13 @@ export default function RootLayout({
 }) {
  return (
  <html lang="en" suppressHydrationWarning className="font-sans">
+ <body className="antialiased overflow-x-hidden">
  {/* Apply the saved atmosphere before hydration so there is no flash of
-     the wrong theme (kept in sync with AtmosphereContext). */}
- <Script
- id="atmosphere-guard"
- strategy="beforeInteractive"
- dangerouslySetInnerHTML={{
- __html: `(function(){
+     the wrong theme. Plain inline <script> inside <body> (not next/script,
+     which renders as a child of <html> and breaks hydration). */}
+ <script
+   dangerouslySetInnerHTML={{
+     __html: `(function(){
    try {
      var m = localStorage.getItem("greene:atmosphere");
      if (m === "paper") m = "day";
@@ -106,9 +105,8 @@ export default function RootLayout({
      }
    } catch (e) {}
  })();`,
- }}
+   }}
  />
- <body className="antialiased overflow-x-hidden">
  <AtmosphereProvider>
  <ScrollProgress />
  <NoiseTexture />

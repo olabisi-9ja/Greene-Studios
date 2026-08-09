@@ -343,6 +343,19 @@
     will-change: transform, opacity;
   }
 
+  /* Scroll cue tick */
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(400%);
+    }
+  }
+  .animate-scroll-cue {
+    animation: scroll-cue 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
   /* ─── Life & motion helpers ─────────────────────────────────────── */
   @keyframes float-y {
     0%, 100% {

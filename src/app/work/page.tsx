@@ -63,63 +63,71 @@ export default function WorkPage() {
  </div>
  </div>
 
- {/* Grid */}
- <div className="mx-auto max-w-[1400px] px-5 pb-24 pt-10 md:px-10">
- {filteredProjects.length > 0 ? (
- <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2">
- {filteredProjects.map((project, i) => (
- <Link
- key={project.id}
- href={`/work/${project.slug}`}
- className={cn("group", i === 0 && activeFilter === "All" && "md:col-span-2")}
- data-cursor="VIEW"
- >
- <div
- className={cn(
- "relative overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]",
- i === 0 && activeFilter === "All" ? "aspect-[21/9]" : "aspect-[4/3]"
- )}
- >
- <Image
- src={project.image}
- alt={project.title}
- fill
- sizes="(max-width: 768px) 100vw, 50vw"
- priority={i < 2}
- className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
- />
- {/* hover sweep */}
- <div
- className="work-sweep absolute inset-0 scale-x-0 opacity-90 group-hover:scale-x-100"
- aria-hidden="true"
- />
- <span className="absolute right-4 top-4 flex h-11 w-11 translate-y-1 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[var(--brand-on-accent)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
- →
- </span>
- </div>
+  {/* Grid — Lightship-style panels: full-bleed image, giant title over a scrim */}
+  <div className="mx-auto max-w-[1400px] px-5 pb-24 pt-10 md:px-10">
+    {filteredProjects.length > 0 ? (
+      <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2">
+        {filteredProjects.map((project, i) => (
+          <Link
+            key={project.id}
+            href={`/work/${project.slug}`}
+            className={cn("group", i === 0 && activeFilter === "All" && "md:col-span-2")}
+            data-cursor="VIEW"
+          >
+            <div
+              className={cn(
+                "relative overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)] md:rounded-3xl",
+                i === 0 && activeFilter === "All" ? "aspect-[16/9] lg:aspect-[21/9]" : "aspect-[4/3]"
+              )}
+            >
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={i < 2}
+                className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+              />
+              {/* scrim for type legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/25 transition-opacity duration-700 group-hover:opacity-90" />
 
- <div className="mt-5 flex items-baseline justify-between gap-4">
- <div className="flex items-baseline gap-4">
- <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
- 0{i + 1}
- </span>
- <h2 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:text-3xl">
- {project.title}
- </h2>
- </div>
- <div className="flex shrink-0 items-center gap-3">
- <span className="hidden text-xs font-semibold text-[var(--brand-text-secondary)] sm:block">
- {project.category}
- </span>
- <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
- {project.year}
- </span>
- </div>
- </div>
- </Link>
- ))}
- </div>
- ) : (
+              <span className="absolute left-5 top-5 rounded-full bg-black/30 px-3 py-1 font-mono text-[11px] font-bold tracking-widest text-white/80 backdrop-blur-sm">
+                0{i + 1}
+              </span>
+
+              <span
+                className="absolute right-5 top-5 flex h-11 w-11 translate-y-1 items-center justify-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur-md transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+                aria-hidden="true"
+              >
+                <span className="text-lg">→</span>
+              </span>
+
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5 md:flex-row md:items-end md:justify-between md:gap-8 md:p-8">
+                <div>
+                  <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
+                    {project.category} · {project.year}
+                  </span>
+                  <h2
+                    className={cn(
+                      "font-display font-black uppercase leading-[0.9] tracking-tight text-white",
+                      i === 0 && activeFilter === "All"
+                        ? "text-[clamp(2.2rem,5vw,5rem)]"
+                        : "text-[clamp(1.9rem,3.6vw,3.4rem)]"
+                    )}
+                  >
+                    {project.title}
+                  </h2>
+                </div>
+                <span className="hidden shrink-0 items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-white/80 transition-colors duration-300 group-hover:text-white md:flex">
+                  Explore
+                  <span className="border-b-2 border-white/40 pb-0.5 transition-colors duration-300 group-hover:border-[var(--brand-accent)]" aria-hidden="true" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    ) : (
  <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 text-center">
  <h3 className="font-display text-2xl font-black uppercase text-[var(--brand-text)]">
  No projects found

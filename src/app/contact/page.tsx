@@ -29,10 +29,7 @@ export default function ContactPage() {
  description="Tell us about your project. We respond to every inquiry within 24 hours with a thoughtful reply, not a template."
  right={
  <div className="flex items-center gap-3 rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] px-5 py-3">
- <span className="relative flex h-2.5 w-2.5">
- <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-accent)] opacity-70" />
- <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--brand-accent)]" />
- </span>
+ <span className="inline-block h-2 w-2 rounded-full bg-[var(--brand-accent)]" />
  <span className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-text)]">
  Accepting new projects
  </span>
