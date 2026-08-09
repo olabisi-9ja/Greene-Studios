@@ -22,7 +22,6 @@ export const ExperienceHero = () => {
     kickerRef,
     descRef,
     ctasRef,
-    metaRef,
     visualRef,
     clientsRef,
     marqueeRef,
@@ -106,23 +105,6 @@ export const ExperienceHero = () => {
                 See the work
               </Link>
             </div>
-          </div>
-
-          <div
-            ref={metaRef}
-            className="flex flex-wrap items-center gap-x-7 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]"
-          >
-            <span>Working worldwide</span>
-            <span className="text-[var(--brand-border)]" aria-hidden="true">/</span>
-            <span className="text-[var(--brand-text)]">Booking Q3 2026</span>
-            <span className="text-[var(--brand-border)]" aria-hidden="true">/</span>
-            <span className="flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-accent)] opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand-accent)]" />
-              </span>
-              Available now
-            </span>
           </div>
         </div>
       </div>

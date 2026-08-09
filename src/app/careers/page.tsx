@@ -34,10 +34,7 @@ export default function CareersPage() {
         description="We're always looking for talented designers, developers, and strategists who are passionate about building exceptional digital experiences."
         right={
           <div className="flex items-center gap-3">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-accent)] opacity-70" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--brand-accent)]" />
-            </span>
+            <span className="inline-block h-2 w-2 rounded-full bg-[var(--brand-accent)]" />
             <span className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
               {POSITIONS.length} open roles
             </span>

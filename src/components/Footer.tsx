@@ -12,11 +12,6 @@ import { BRAND, NAV_LINKS } from "@/lib/data";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    window.__lenis?.scrollTo(0, { immediate: false });
-  };
-
   return (
     <footer className="relative overflow-hidden bg-[var(--brand-text)] pb-6 pt-20 text-[var(--brand-bg)] md:pt-28">
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 md:px-10">
@@ -79,11 +74,7 @@ export default function Footer() {
             <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-[var(--brand-bg)]/60">
               Independent digital design studio, working with ambitious brands worldwide.
             </p>
-            <span className="mt-5 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-accent)] opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--brand-accent)]" />
-              </span>
+            <span className="mt-5 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">
               Available for select projects
             </span>
           </div>
@@ -121,15 +112,7 @@ export default function Footer() {
         {/* ─── Bottom bar ─────────────────────────────────────────── */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-[var(--brand-bg)]/20 pt-6 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row">
           <span>©{currentYear} Greene Studios. All rights reserved.</span>
-          <span className="hidden md:block">Design &amp; build by Greene Studios</span>
-          <button
-            onClick={scrollToTop}
-            data-cursor="TOP"
-            className="group inline-flex items-center gap-2 rounded-full border border-[var(--brand-bg)]/25 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-bg)]/80 transition-colors duration-300 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
-          >
-            Back to top
-            <span className="transition-transform duration-300 group-hover:-translate-y-0.5" aria-hidden="true">↑</span>
-          </button>
+          <span>Design &amp; build by Greene Studios</span>
         </div>
       </div>
     </footer>
