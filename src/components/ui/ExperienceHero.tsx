@@ -21,6 +21,26 @@ const CAPABILITIES = ["WEB DESIGN", "BRANDING", "UI/UX", "MOTION", "DEVELOPMENT"
 const CLIENTS = ["LUMINARY", "VERA", "ARC", "ONYX", "PRISM", "BLOOM"];
 const WORD = "GREENE";
 
+/**
+ * Masked text — each letter of GREENE is a window into a different
+ * texture, and the textures drift inside the letters as you scroll.
+ */
+const LETTER_IMAGES = [
+  "/images/hero/letters/letter-1.jpg",
+  "/images/hero/letters/letter-2.jpg",
+  "/images/hero/letters/letter-3.jpg",
+  "/images/hero/letters/letter-4.jpg",
+  "/images/hero/letters/letter-5.jpg",
+  "/images/hero/letters/letter-6.jpg",
+];
+
+/* Pexels free-to-use loops (visitor's browser loads them, like the
+   Pexels project images). Multiple <source>s: browser falls through if
+   one 404s; poster covers total failure. */
+const VIDEO_INK_HD = "https://videos.pexels.com/video-files/6067847/6067847-hd_1920_1080_30fps.mp4";
+const VIDEO_INK_SD = "https://videos.pexels.com/video-files/6068178/6068178-sd_640_360_30fps.mp4";
+const VIDEO_DUST = "https://videos.pexels.com/video-files/5561390/5561390-sd_640_360_25fps.mp4";
+
 /* ─── Entrance variants ─────────────────────────────────────────── */
 const letters: Variants = {
   hidden: { y: "118%", rotate: 7, opacity: 0 },
@@ -38,20 +58,16 @@ const container: Variants = {
 };
 
 /**
- * Kinetic landing screen (02PX school).
+ * Kinetic landing screen (02PX school) with masked-text animation.
  *
- * The first viewport is a canvas, not a banner:
- *
- *   background (grid + glow + outlined word)     parallax -14px
- *     → artwork composition                     parallax  22px
- *       → giant type                            parallax  12px
- *         → floating objects                    parallax  40px
+ *   background (dust video + grid + glow + outlined word)   parallax -14px
+ *     → artwork composition (live ink video panel)          parallax  22px
+ *       → giant GREENE — each letter masked with a texture  parallax  12px
+ *         → floating objects                                parallax  40px
  *           → cursor layer + scroll camera
  *
- * Every layer is positioned independently, drifts on its own ambient
- * cycle, and responds to the cursor with a different intensity so the
- * eye reads depth. Scrolling transforms the whole scene (scale, rise,
- * fade) so the next section emerges through the hero.
+ * Scrolling slides the textures INSIDE the letters, drifts the whole
+ * scene (scale, rise, fade), and the next section emerges through it.
  */
 export const ExperienceHero = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -83,6 +99,16 @@ export const ExperienceHero = () => {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const typeScrollY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const artScrollY = useTransform(scrollYProgress, [0, 1], [0, 70]);
+
+  /* Textures inside the letters slide at slightly different rates. */
+  const letterBg = [
+    useTransform(scrollYProgress, [0, 1], ["50% 0%", "50% 55%"]),
+    useTransform(scrollYProgress, [0, 1], ["50% 17%", "50% 68%"]),
+    useTransform(scrollYProgress, [0, 1], ["50% 34%", "50% 79%"]),
+    useTransform(scrollYProgress, [0, 1], ["50% 5%", "50% 62%"]),
+    useTransform(scrollYProgress, [0, 1], ["50% 22%", "50% 87%"]),
+    useTransform(scrollYProgress, [0, 1], ["50% 40%", "50% 60%"]),
+  ];
 
   const onMove = (e: React.MouseEvent) => {
     mx.set(e.clientX / window.innerWidth - 0.5);
@@ -119,6 +145,20 @@ export const ExperienceHero = () => {
           transition={{ duration: 1.4, ease: EASE }}
           aria-hidden="true"
         >
+          {/* ambient dust video — the world breathes (desktop) */}
+          <div className="absolute inset-0 hidden lg:block">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-cover opacity-[0.14] mix-blend-screen"
+            >
+              <source src={VIDEO_DUST} type="video/mp4" />
+            </video>
+          </div>
+
           {/* ambient glow */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_20%,color-mix(in_srgb,var(--brand-accent)_16%,transparent),transparent_70%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_15%_85%,color-mix(in_srgb,var(--brand-accent)_10%,transparent),transparent_70%)]" />
@@ -171,27 +211,31 @@ export const ExperienceHero = () => {
             style={{ y: artScrollY }}
             className="absolute right-[5%] top-[9%] bottom-[13%] w-[32vw] max-w-[480px]"
           >
-            {/* main — agency team */}
+            {/* main — live ink video panel */}
             <motion.div
               animate={ambient(7, 9)}
               className="relative h-full w-full overflow-hidden rounded-[2rem] border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)] shadow-[0_40px_100px_rgba(0,0,0,0.28)]"
             >
-              <Image
-                src="/images/hero/team.jpg"
-                alt=""
-                fill
-                priority
-                sizes="520px"
-                className="object-cover"
-              />
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/images/hero/team.jpg"
+                className="absolute inset-0 h-full w-full object-cover"
+              >
+                <source src={VIDEO_INK_HD} type="video/mp4" />
+                <source src={VIDEO_INK_SD} type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
               <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl bg-[var(--brand-bg)] px-5 py-4">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-accent)]">
-                    The studio
+                    The process
                   </p>
                   <p className="mt-0.5 font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">
-                    People over pixels
+                    Ink &amp; ideas
                   </p>
                 </div>
                 <span className="text-xl text-[var(--brand-text)]" aria-hidden="true">✦</span>
@@ -204,7 +248,7 @@ export const ExperienceHero = () => {
               className="absolute -bottom-10 -left-14 w-44 rotate-[-4deg] overflow-hidden rounded-2xl border-4 border-[var(--brand-bg)] bg-[var(--brand-surface-secondary)] shadow-[0_28px_70px_rgba(0,0,0,0.3)]"
             >
               <div className="relative aspect-square">
-                <Image src="/images/hero/branding.jpg" alt="" fill sizes="176px" className="object-cover" />
+                <Image src="/images/hero/branding-2.jpg" alt="" fill sizes="176px" className="object-cover" />
               </div>
               <div className="flex items-center gap-2 bg-[var(--brand-bg)] px-3 py-2">
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[9px] font-black text-[var(--brand-on-accent)]">G</span>
@@ -250,7 +294,7 @@ export const ExperienceHero = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-bg)] via-[var(--brand-bg)]/60 to-[var(--brand-bg)]/40" />
         </div>
 
-        {/* ── Layer 2 — giant type (parallax 12px, rises faster on scroll) ── */}
+        {/* ── Layer 2 — giant masked type (parallax 12px) ── */}
         <motion.div className="absolute inset-0 z-10" style={{ y: typeScrollY }}>
           <motion.div className="flex h-full items-center" style={{ x: typeX, y: typeY }}>
             <div className="mx-auto w-full max-w-[1600px] px-5 md:px-10">
@@ -268,18 +312,32 @@ export const ExperienceHero = () => {
                 <span className="text-[var(--brand-accent)]">✦</span>
               </motion.div>
 
-              {/* GREENE — each letter is an animated object */}
+              {/* GREENE — each letter is a mask over a different texture */}
               <h1 className="sr-only">Greene Studios — we make digital feel alive.</h1>
               <motion.div
                 variants={container}
                 initial="hidden"
                 animate="show"
                 aria-hidden="true"
-                className="hero-headline font-display text-[clamp(3.6rem,14.5vw,15rem)] font-black uppercase leading-[0.85] tracking-[-0.04em] text-[var(--brand-text)]"
+                className="hero-headline group font-display text-[clamp(3.6rem,14.5vw,15rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
               >
                 {WORD.split("").map((letter, i) => (
                   <span key={i} className="inline-block overflow-hidden align-top">
-                    <motion.span variants={letters} className="inline-block will-change-transform">
+                    <motion.span
+                      variants={letters}
+                      whileHover={{ filter: "brightness(1.35)" }}
+                      transition={{ duration: 0.35 }}
+                      className="inline-block will-change-transform transition-[filter] duration-300"
+                      style={{
+                        backgroundImage: `url(${LETTER_IMAGES[i]})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: letterBg[i],
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        color: "transparent",
+                      }}
+                    >
                       {letter}
                     </motion.span>
                   </span>
@@ -287,7 +345,7 @@ export const ExperienceHero = () => {
                 <span className="inline-block overflow-hidden align-top">
                   <motion.span
                     variants={letters}
-                    className="inline-block align-super text-[0.18em] font-bold tracking-normal will-change-transform"
+                    className="inline-block align-super text-[0.18em] font-bold tracking-normal text-[var(--brand-accent)] will-change-transform"
                   >
                     ®
                   </motion.span>
