@@ -2,18 +2,22 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { BRAND, NAV_LINKS } from "@/lib/data";
+import RotatingBadge from "@/components/ui/RotatingBadge";
 
 /**
- * Footer — minimal, quiet, useful (Adcker school).
- * One big invitation, then columns of links, a back-to-top, and a
- * single line of legalese. No giant words, no noise.
+ * Footer — the studio's giant wordmark, layered with the minimal
+ * invitation + link columns. One footer, three signatures:
+ *   1. The invitation (adcker school): kicker, headline, email, CTAs
+ *   2. Quiet columns + the rotating stamp
+ *   3. The giant interactive GREENE® wordmark
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-[var(--brand-text)] pb-6 pt-20 text-[var(--brand-bg)] md:pt-28">
+    <footer className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-[var(--brand-text)] pb-6 pt-20 text-[var(--brand-bg)] md:pt-28">
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 md:px-10">
         {/* ─── The invitation ─────────────────────────────────────── */}
         <span className="mb-8 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-bg)]/60">
@@ -99,21 +103,62 @@ export default function Footer() {
             <a href={BRAND.github} target="_blank" rel="noreferrer" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">GitHub</a>
           </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Studio</span>
-            <a href={`mailto:${BRAND.email}`} className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
-              {BRAND.email}
-            </a>
-            <span className="w-fit text-sm font-semibold text-[var(--brand-bg)]/60">{BRAND.location}</span>
-            <span className="w-fit text-sm font-semibold text-[var(--brand-bg)]/60">Est. {BRAND.founded}</span>
+          <div className="flex flex-col items-start gap-4">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Since</span>
+            <RotatingBadge
+              text="GREENE STUDIOS ✦ EST. 2022 ✦ WORLDWIDE ✦ "
+              className="h-28 w-28 text-[var(--brand-bg)]"
+              centerText="✦"
+            />
           </div>
         </div>
+      </div>
 
-        {/* ─── Bottom bar ─────────────────────────────────────────── */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-[var(--brand-bg)]/20 pt-6 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row">
-          <span>©{currentYear} Greene Studios. All rights reserved.</span>
-          <span>Design &amp; build by Greene Studios</span>
-        </div>
+      {/* ─── Giant wordmark — the studio name, very big ───────────── */}
+      <div className="relative z-10 mb-4 mt-16 select-none overflow-hidden text-center md:mt-24">
+        <h1
+          aria-hidden="true"
+          className="font-display whitespace-nowrap font-black uppercase leading-[0.85] tracking-tight text-[var(--brand-bg)]"
+          style={{ fontSize: "clamp(4.5rem, 16vw, 24rem)" }}
+        >
+          {"GREENE".split("").map((letter, i) => (
+            <motion.span
+              key={`g-${i}`}
+              whileHover={{
+                scale: 1.08,
+                color: "var(--brand-accent)",
+                y: -14,
+                rotate: i % 2 === 0 ? 4 : -4,
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 12 }}
+              className="inline-block origin-bottom"
+            >
+              {letter}
+            </motion.span>
+          ))}
+          <br className="hidden sm:block" />
+          {"STUDIOS®".split("").map((letter, i) => (
+            <motion.span
+              key={`s-${i}`}
+              whileHover={{
+                scale: 1.08,
+                color: "var(--brand-accent)",
+                y: -14,
+                rotate: i % 2 === 0 ? -4 : 4,
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 12 }}
+              className="inline-block origin-bottom"
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </h1>
+      </div>
+
+      {/* ─── Bottom bar ───────────────────────────────────────────── */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row md:items-center md:justify-between md:px-10">
+        <span>©{currentYear} Greene Studios. All rights reserved.</span>
+        <span>Design &amp; build by Greene Studios</span>
       </div>
     </footer>
   );
