@@ -1,11 +1,25 @@
 # Greene Studios - Site Redesign Notes
 
-> **SUPERSEDED — v2 direction is now `REDESIGN-SPEC.md`**
+> **v3 direction — "THE 4 REFERENCES" PASS (current)**
+> A new pass was built on top of v2 using four user-picked references:
+>
+> | Reference | Applied to |
+> |---|---|
+> | [fourmula.ai](https://fourmula.ai/) | **Nav bar** — minimal fixed header: wordmark left, inline uppercase links center, theme icon + "Start a project" pill right; border + blur once scrolled; hide on scroll-down |
+> | [02px.com](https://02px.com/) | **Hero** — full-bleed studio photo behind giant stacked display type ("WE MAKE / DIGITAL / FEEL ALIVE."), client marquee + "scroll to explore" cue + capability ticker along the bottom edge |
+> | [adcker.com](https://adcker.com/) | **Footer** — one big invitation ("Let's create something unforgettable."), email + CTAs, minimal Menu/Socials/Studio columns, back-to-top, single copyright line (giant GREENE word & rotating badge removed) |
+> | [lightshiprv.com](https://www.lightshiprv.com/) | **Project presentations** — full-bleed rounded image panels with giant titles over a scrim, index chips, category·year meta and "explore" affordance (homepage SelectedWork + /work grid) |
+>
+> **Theme switcher:** the dropdown AtmosphereSwitcher was replaced by an
+> icon-only `ThemeToggle` — one tap cycles DAY → NIGHT → STUDIO → RAW, icon
+> only, no labels/descriptions. `AtmosphereContext` (modes, accents, config)
+> is unchanged.
+
+> **SUPERSEDED — v2 direction is `REDESIGN-SPEC.md`**
 > This file documents the v1 ("paper + lime editorial") pass. The approved v2
 > direction — **GREENE / THE DIGITAL STUDIO** (living canvas, CLEAN/MIDNIGHT/STUDIO
 > atmospheres, GS monogram, sticky case-study showcase) — is specified in
-> [`REDESIGN-SPEC.md`](./REDESIGN-SPEC.md). Any future build work should follow that
-> document. Everything below is kept for historical context.
+> [`REDESIGN-SPEC.md`](./REDESIGN-SPEC.md). Everything below is kept for historical context.
 
 ## Direction
 
