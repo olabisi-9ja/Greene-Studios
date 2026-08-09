@@ -6,7 +6,7 @@ import LabExperiments from "@/components/lab/LabExperiments";
 export const metadata: Metadata = {
   title: "Lab · Experiments",
   description:
-    "The Greene Studios lab — a small digital laboratory of cursor, typography, motion, interaction, WebGL and AI experiments.",
+    "The Greene Studios lab, a small digital laboratory of cursor, typography, motion, interaction, WebGL and AI experiments.",
 };
 
 export default function LabPage() {
@@ -21,7 +21,7 @@ export default function LabPage() {
             <span className="font-serif-i lowercase normal-case tracking-normal">to experiment.</span>
           </>
         }
-        description="A small digital laboratory. Unconstrained by client briefs, this is where we break things to see how they work — and prove the craft before we ship it."
+        description="A small digital laboratory. Unconstrained by client briefs, this is where we break things to see how they work, and prove the craft before we ship it."
         right={
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
             06 concepts · always iterating
@@ -50,7 +50,7 @@ export default function LabPage() {
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-[var(--brand-text-secondary)]">
-              Sketches, type tests, failed concepts, wireframes and prototypes — the
+              Sketches, type tests, failed concepts, wireframes and prototypes. The
               working files behind the finished work. Switch to{" "}
               <span className="font-display font-black text-[var(--brand-accent)]">RAW</span>{" "}
               atmosphere in the nav to browse in workshop style.

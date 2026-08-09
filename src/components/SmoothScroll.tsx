@@ -21,8 +21,13 @@ export default function SmoothScroll({
   // Next.js's own scroll restoration instead of being forced to top.
   const lastIdxRef = useRef<number | undefined>(undefined);
 
-  // Init Lenis once — it lives for the whole session (root layout).
+  // Init Lenis once for the whole session (root layout). Skipped entirely
+  // for reduced-motion users: they keep the native, immediate scroll.
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     const lenis = new Lenis({
       lerp: 0.09, // Snappy linear interpolation instead of long duration
       wheelMultiplier: 1,

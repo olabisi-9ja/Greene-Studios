@@ -32,7 +32,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={() => setMode(next)}
       data-cursor="MODE"
-      aria-label={`Switch atmosphere — currently ${effectiveMode}, tap for ${next}`}
+      aria-label={`Switch atmosphere. Currently ${effectiveMode}, tap for ${next}`}
       className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-colors duration-300 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
     >
       <AnimatePresence mode="wait" initial={false}>

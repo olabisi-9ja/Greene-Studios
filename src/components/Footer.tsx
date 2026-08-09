@@ -90,6 +90,9 @@ export default function Footer() {
                 {item.label}
               </Link>
             ))}
+            <Link href="/industries" data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
+              Industries
+            </Link>
             <Link href="/contact" data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
               Contact
             </Link>

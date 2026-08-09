@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
+import Magnetic from "@/components/animations/Magnetic";
 
 const MARQUEE_WORDS = ["LET'S TALK", "LET'S BUILD", "LET'S START", "LET'S MAKE WAVES"];
 
@@ -18,9 +19,9 @@ export default function CTASection() {
       {/* Giant CTA */}
       <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
         <span className="mb-8 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em]">
-          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: "var(--cta-fg)" }} />
+          <span className="h-px w-10" style={{ backgroundColor: "var(--cta-fg)" }} aria-hidden="true" />
           Let&apos;s build together
-          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: "var(--cta-fg)" }} />
+          <span className="h-px w-10" style={{ backgroundColor: "var(--cta-fg)" }} aria-hidden="true" />
         </span>
 
         <h2 className="font-display text-[clamp(2.8rem,8vw,7.5rem)] font-black uppercase leading-[0.92] tracking-tight">
@@ -30,18 +31,20 @@ export default function CTASection() {
         </h2>
 
         <p className="mx-auto mt-8 max-w-xl text-base font-medium leading-relaxed opacity-80 md:text-lg">
-          Tell us about your project. We&apos;ll respond within 24 hours with a clear path forward, no fluff, no pressure.
+          Take the two-minute project brief: what you&apos;re building, the budget, the timeline. We&apos;ll respond within 24 hours with a clear path forward, no fluff, no pressure.
         </p>
 
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-              href="/contact"
-              data-cursor="HELLO"
-              className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-transform duration-300 hover:scale-[1.04]"
-              style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
-            >
-              Start a project <span aria-hidden="true">→</span>
-            </Link>
+          <Magnetic>
+            <Link
+                href="/contact"
+                data-cursor="START"
+                className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-transform duration-300 hover:scale-[1.04]"
+                style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
+              >
+                Start your brief <span aria-hidden="true">→</span>
+              </Link>
+          </Magnetic>
           <a
               href="mailto:hello@greenestudios.co"
               className="inline-flex items-center justify-center gap-3 rounded-full border-2 px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300 hover:bg-[var(--cta-fg)] hover:text-[var(--cta-bg)]"
@@ -52,6 +55,7 @@ export default function CTASection() {
         </div>
 
         <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-bold uppercase tracking-[0.15em] opacity-80">
+          <span>✓ Two-minute brief</span>
           <span>✓ Response within 24h</span>
           <span>✓ No commitment required</span>
           <span>✓ NDA on request</span>

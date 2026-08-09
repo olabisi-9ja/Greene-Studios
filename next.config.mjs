@@ -23,6 +23,9 @@ const nextConfig = {
       { source: '/services/product', destination: '/services/ui-ux-design', permanent: false },
       { source: '/services/code', destination: '/services/frontend-development', permanent: false },
       { source: '/services/motion', destination: '/services/motion-design', permanent: false },
+      // Latent internal-link typos that previously 404'd
+      { source: '/services/ui-ux', destination: '/services/ui-ux-design', permanent: true },
+      { source: '/services/frontend-dev', destination: '/services/frontend-development', permanent: true },
     ];
   },
 };
