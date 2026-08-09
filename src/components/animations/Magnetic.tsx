@@ -1,22 +1,34 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
+/**
+ * Magnetic — children gently lean toward the cursor inside their hover
+ * zone. Only engages for precise pointers (mouse, trackpad) with no
+ * reduced-motion preference; everyone else gets an untouched element.
+ */
 export default function Magnetic({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const prefersReduced = useReducedMotion();
+  const [finePointer, setFinePointer] = useState(false);
+
+  useEffect(() => {
+    setFinePointer(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+  }, []);
+
+  if (prefersReduced || !finePointer) {
+    return <>{children}</>;
+  }
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     const { left, top, width, height } = ref.current?.getBoundingClientRect() || { left: 0, top: 0, width: 0, height: 0 };
-    
-    // Calculate distance from center of button
+
+    // Distance from center, damped so hovering never disturbs the page
     const x = clientX - (left + width / 2);
     const y = clientY - (top + height / 2);
-    
-    // Magnetic pull strength (adjust divisor to increase/decrease magnetism)
-    // Kept subtle so hovering never feels like it moves the page
     setPosition({ x: x * 0.15, y: y * 0.15 });
   };
 

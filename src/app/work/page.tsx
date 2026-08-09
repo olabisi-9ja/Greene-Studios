@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PROJECTS } from "@/lib/data";
 import PageHeader from "@/components/ui/PageHeader";
-import { cn } from "@/lib/utils";
+import { cn, colorBlurDataURL } from "@/lib/utils";
 
 const FILTERS = ["All", "Web Design", "Branding", "Product", "Development", "Motion"];
 
@@ -85,7 +85,8 @@ export default function WorkPage() {
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                priority={i < 2}
+                placeholder="blur"
+                blurDataURL={colorBlurDataURL(project.color)}
                 className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
               />
               {/* scrim for type legibility */}

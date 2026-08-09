@@ -268,7 +268,7 @@ export default function LabExperiments() {
         <MagneticDemo />
       </LabCard>
       <LabCard index={5} title="WebGL experiment" tech="THREE.JS" status="SOON">
-        <SoonDemo label="Distortion planes, particles and shaders — rendering on a machine near you." />
+        <SoonDemo label="Distortion planes, particles and shaders. Rendering on a machine near you." />
       </LabCard>
       <LabCard index={6} title="AI experiment" tech="LLM" status="SOON">
         <SoonDemo label="Prompt-to-prototype explorations with language models." />

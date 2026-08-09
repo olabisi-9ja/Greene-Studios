@@ -10,9 +10,12 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
 import WhyWeExist from "@/components/home/WhyWeExist";
+import WhyGreene from "@/components/home/WhyGreene";
+import WorkPreview from "@/components/home/WorkPreview";
 import Philosophy from "@/components/home/Philosophy";
 import ClientWrapper from "@/components/ClientWrapper";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
+import { FAQS } from "@/lib/data";
 
 export default function HomePage() {
   const heroFallback = (
@@ -33,6 +36,8 @@ export default function HomePage() {
       <ClientWrapper fallback={heroFallback}>
         <ExperienceHero />
       </ClientWrapper>
+
+      <WorkPreview />
 
       <WhyWeExist />
 
@@ -58,7 +63,9 @@ export default function HomePage() {
 
       <ServicesSection />
 
-      <ProcessSection />
+      <WhyGreene />
+
+      <ProcessSection variant="condensed" />
 
       {/* Reverse marquee strip between Process & Proof */}
       <div className="marquee-strip py-3">
@@ -85,6 +92,22 @@ export default function HomePage() {
       <FAQSection />
 
       <CTASection />
+
+      {/* FAQ structured data — the on-page FAQ, machine-readable */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.question,
+              acceptedAnswer: { "@type": "Answer", text: f.answer },
+            })),
+          }),
+        }}
+      />
     </>
   );
 }

@@ -8,11 +8,10 @@ import Preloader from "@/components/Preloader";
 export const viewport: import("next").Viewport = {
  width: "device-width",
  initialScale: 1,
- maximumScale: 1,
 };
 
 export const metadata: Metadata = {
- metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://greenestudios.co"),
+ metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app"),
   title: {
     default: "Greene Studios · Independent Digital Design Studio",
  template: "%s | Greene Studios",
@@ -113,6 +112,36 @@ export default function RootLayout({
  <StudioParticles />
  <DynamicCursor />
  <Preloader />
+ {/* Structured data: the studio, machine-readable. Organisation + site. */}
+ <script
+   type="application/ld+json"
+   dangerouslySetInnerHTML={{
+     __html: JSON.stringify({
+       "@context": "https://schema.org",
+       "@type": "Organization",
+       name: "Greene Studios",
+       url: process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app",
+       logo: "/logo.png",
+       email: "hello@greenestudios.co",
+       description:
+         "Independent digital design studio. Brands, websites, and digital products that make people stop scrolling.",
+       foundingDate: "2022",
+       sameAs: [
+         "https://instagram.com/greenestudios",
+         "https://twitter.com/greenestudios",
+         "https://linkedin.com/company/greenestudios",
+         "https://github.com/greenestudios",
+       ],
+       knowsAbout: [
+         "Web Design",
+         "UI/UX Design",
+         "Branding",
+         "Frontend Development",
+         "Motion Design",
+       ],
+     }),
+   }}
+ />
  <SmoothScroll>
  <Navbar />
  <main>

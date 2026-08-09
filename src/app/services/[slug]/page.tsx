@@ -29,9 +29,23 @@ export default async function ServicePage({ params }: Props) {
  if (!service) notFound();
 
  const relatedProjects = PROJECTS.slice(0, 3);
+ const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
  return (
  <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <script
+   type="application/ld+json"
+   dangerouslySetInnerHTML={{
+     __html: JSON.stringify({
+       "@context": "https://schema.org",
+       "@type": "BreadcrumbList",
+       itemListElement: [
+         { "@type": "ListItem", position: 1, name: "Services", item: `${base}/services` },
+         { "@type": "ListItem", position: 2, name: service.title, item: `${base}${service.href}` },
+       ],
+     }),
+   }}
+ />
  <PageHeader
  kicker={service.icon ? `${service.icon} Service` : "Service"}
  title={service.title}

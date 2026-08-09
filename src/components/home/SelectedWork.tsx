@@ -4,13 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { PROJECTS } from "@/lib/data";
+import { colorBlurDataURL } from "@/lib/utils";
 
 type Project = (typeof PROJECTS)[number];
 
 /**
- * Selected work — full-bleed case-study presentations (Lightship school).
- * Each project is a cinematic image panel with the title set in giant
- * display type over a scrim, a meta row, and an explore affordance.
+ * Selected work — full-bleed case-study presentations.
+ * Each project pairs a cinematic image panel with its story and the
+ * measurable outcome it produced, so the proof is visible before
+ * anyone even clicks through.
  */
 export default function SelectedWork() {
   // Featured projects: the three flagged + Bloom Health to round out a strong four
@@ -50,9 +52,9 @@ export default function SelectedWork() {
         </motion.div>
 
         {/* Case-study panels */}
-        <div className="flex flex-col gap-14 md:gap-20">
+        <div className="flex flex-col gap-16 md:gap-24">
           {projects.map((project, i) => (
-            <motion.div
+            <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 48 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +73,8 @@ export default function SelectedWork() {
                     alt={project.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 90vw"
-                    priority={i < 2}
+                    placeholder="blur"
+                    blurDataURL={colorBlurDataURL(project.color)}
                     className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
                   />
                   {/* scrim for type legibility */}
@@ -107,7 +110,36 @@ export default function SelectedWork() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+
+              {/* Story + outcome — the proof, sitting under the picture */}
+              <div className="mt-5 flex flex-col gap-5 md:flex-row md:items-start md:justify-between md:gap-10">
+                <p className="max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
+                  {project.description}
+                </p>
+                <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-3 md:justify-end">
+                  {project.metrics.slice(0, 2).map((m) => (
+                    <div key={m.label} className="flex flex-col md:items-end md:text-right">
+                      <span className="font-display text-2xl font-black leading-none tracking-tight text-[var(--brand-text)] md:text-3xl">
+                        {m.value}
+                      </span>
+                      <span className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+                        {m.label}
+                      </span>
+                    </div>
+                  ))}
+                  <Link
+                    href={`/work/${project.slug}`}
+                    data-cursor="READ"
+                    className="group/link ml-auto inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-text)] md:ml-0"
+                  >
+                    <span className="border-b-2 border-[var(--brand-accent)] pb-0.5 transition-colors group-hover/link:border-[var(--brand-text)]">
+                      The story
+                    </span>
+                    <span className="transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>
