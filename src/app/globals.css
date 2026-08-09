@@ -343,28 +343,6 @@
     will-change: transform, opacity;
   }
 
-  /* ─── Hero media layer (02px-style full-bleed) ──────────────────── */
-  /* The photo sits behind the giant type as an atmosphere layer; each
-     mode tunes how present it is so the headline always stays legible. */
-  .hero-media-img {
-    opacity: var(--hero-media-opacity, 0.45);
-    transition: opacity 0.8s ease;
-  }
-  .mode-day .hero-media-img,
-  .mode-paper .hero-media-img {
-    --hero-media-opacity: 0.5;
-  }
-  .mode-night .hero-media-img,
-  .mode-midnight .hero-media-img {
-    --hero-media-opacity: 0.38;
-  }
-  .mode-studio .hero-media-img {
-    --hero-media-opacity: 0.5;
-  }
-  .mode-raw .hero-media-img {
-    --hero-media-opacity: 0.42;
-  }
-
   /* Scroll cue tick */
   @keyframes scroll-cue {
     0% {

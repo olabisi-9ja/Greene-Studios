@@ -6,7 +6,7 @@
 > | Reference | Applied to |
 > |---|---|
 > | [fourmula.ai](https://fourmula.ai/) | **Nav bar** — minimal fixed header: wordmark left, inline uppercase links center, theme icon + "Start a project" pill right; border + blur once scrolled; hide on scroll-down |
-> | [02px.com](https://02px.com/) | **Hero** — full-bleed studio photo behind giant stacked display type ("WE MAKE / DIGITAL / FEEL ALIVE."), client marquee + "scroll to explore" cue + capability ticker along the bottom edge |
+> | [02px.com](https://02px.com/) | **Hero (v2)** — kinetic landing screen: 100svh canvas with 5 independent layers (background grid/glow/outlined word → artwork collage → giant GREENE letters → floating objects → bottom edge), cursor parallax with per-layer intensity (bg -14px, art 22px, type 12px, floats 40px), ambient drift loops, letter-by-letter cinematic entrance, and a scroll camera (scale 1→0.9, rise, fade) so the next section emerges through the hero. Built with framer-motion (no GSAP needed). |
 > | [adcker.com](https://adcker.com/) | **Footer** — one big invitation ("Let's create something unforgettable."), email + CTAs, minimal Menu/Socials/Studio columns, back-to-top, single copyright line (giant GREENE word & rotating badge removed) |
 > | [lightshiprv.com](https://www.lightshiprv.com/) | **Project presentations** — full-bleed rounded image panels with giant titles over a scrim, index chips, category·year meta and "explore" affordance (homepage SelectedWork + /work grid) |
 >
