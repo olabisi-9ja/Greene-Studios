@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ExperienceHero } from "@/components/ui/ExperienceHero";
 import SocialProof from "@/components/home/SocialProof";
 import SelectedWork from "@/components/home/SelectedWork";
@@ -22,7 +21,8 @@ export default function HomePage() {
     <div className="flex min-h-screen w-full items-center justify-center bg-[var(--brand-bg)] text-[var(--brand-text)]">
       <div className="flex items-center gap-3">
         <span className="relative block h-10 w-10 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
-          <Image src="/logo.png" alt="" fill sizes="40px" className="object-contain" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/gs-chip.svg" alt="" className="h-full w-full object-contain" />
         </span>
         <span className="font-display text-2xl font-black uppercase tracking-tight">Greene.</span>
       </div>

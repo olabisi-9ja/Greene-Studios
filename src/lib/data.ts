@@ -37,7 +37,7 @@ export const PROJECTS = [
  color: "#12372A",
  accentColor: "#6B8F71",
  featured: true,
- image: "https://images.pexels.com/photos/7172661/pexels-photo-7172661.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+ image: "/images/work/luminary-saas.jpg",
  results: ["340% increase in user engagement", "2.1s average load time", "98 Lighthouse score"],
  metrics: [
  { value: "+340%", label: "User engagement" },
@@ -69,7 +69,7 @@ export const PROJECTS = [
  color: "#D9C9A3",
  accentColor: "#12372A",
  featured: true,
- image: "https://images.pexels.com/photos/6892716/pexels-photo-6892716.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+ image: "/images/work/vera-brand.jpg",
  results: ["4.8/5 client NPS", "200K launch day visitors", "92% brand recall in testing"],
  metrics: [
  { value: "4.8/5", label: "Client NPS" },
@@ -101,7 +101,7 @@ export const PROJECTS = [
  color: "#1a1a1a",
  accentColor: "#D9C9A3",
  featured: true,
- image: "https://images.pexels.com/photos/8534173/pexels-photo-8534173.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+ image: "/images/work/arc-ecommerce.jpg",
  results: ["67% increase in conversion", "Avg session 4m 12s", "£2.4M launch month revenue"],
  metrics: [
  { value: "+67%", label: "Conversion rate" },
@@ -133,7 +133,7 @@ export const PROJECTS = [
  color: "#6B8F71",
  accentColor: "#F7F5F2",
  featured: false,
- image: "https://images.pexels.com/photos/7679662/pexels-photo-7679662.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+ image: "/images/work/bloom-health.jpg",
  results: ["52% reduction in drop-off", "4.9 App Store rating", "10K+ daily active users"],
  metrics: [
  { value: "−52%", label: "Patient drop-off" },
@@ -165,7 +165,7 @@ export const PROJECTS = [
  color: "#12372A",
  accentColor: "#D9C9A3",
  featured: false,
- image: "https://images.pexels.com/photos/17279854/pexels-photo-17279854.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+ image: "/images/work/onyx-fintech.jpg",
  results: ["Series A: $12M raised", "300K users in 90 days", "Techcrunch Disrupt Winner"],
  metrics: [
  { value: "$12M", label: "Series A raised" },
@@ -197,7 +197,7 @@ export const PROJECTS = [
  color: "#2d2d2d",
  accentColor: "#6B8F71",
  featured: false,
- image: "https://images.pexels.com/photos/8534041/pexels-photo-8534041.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+ image: "/images/work/prism-edu.jpg",
  results: ["92% course completion rate", "50K+ active learners", "$4M ARR in year one"],
  metrics: [
  { value: "92%", label: "Course completion rate" },
@@ -232,6 +232,7 @@ export const SERVICES = [
  description: "We craft visually stunning, strategically crafted websites that communicate your value instantly. Every pixel intentional, every interaction meaningful.",
  deliverables: ["Custom UI Design", "Responsive Layouts", "Design System", "Prototype & Handoff"],
  href: "/services/web-design",
+ from: "from $4,800",
  whatIsIt: "Web Design for us isn't just about putting pretty boxes on a screen. It's the architecture of your digital headquarters. A great website acts as your best salesperson, your brand ambassador, and your most reliable conversion engine.",
  whoItsFor: [
  "Companies launching a completely new product offering",
@@ -253,6 +254,7 @@ export const SERVICES = [
  description: "Deep user research and systems thinking combine to create products that users love instinctively. We design for outcomes, not aesthetics alone.",
  deliverables: ["UX Research", "User Flows", "Wireframes", "Usability Testing"],
  href: "/services/ui-ux-design",
+ from: "from $6,000",
  whatIsIt: "UI/UX is the science of human behavior applied to digital interfaces. It's the process of removing friction between what a user wants to do and the action required to do it. Good UI/UX feels like the product is reading the user's mind.",
  whoItsFor: [
  "SaaS platforms struggling with high churn or onboarding drop-off",
@@ -274,6 +276,7 @@ export const SERVICES = [
  description: "Your brand is a promise. We help you define it, visualise it, and scale it across every touchpoint, digital and physical.",
  deliverables: ["Brand Strategy", "Visual Identity", "Logo Design", "Brand Guidelines"],
  href: "/services/branding",
+ from: "from $6,000",
  whatIsIt: "Branding is the gut feeling people have about your company. We help you define that feeling and encode it into every visual asset, from your logo and typography to your color palette and tone of voice.",
  whoItsFor: [
  "Startups that need to look like enterprise players from day one",
@@ -295,6 +298,7 @@ export const SERVICES = [
  description: "Clean, maintainable frontend code built with modern frameworks. We close the gap between design and development, zero compromise.",
  deliverables: ["React / Next.js", "Animation & Motion", "CMS Integration", "Performance Audit"],
  href: "/services/frontend-development",
+ from: "from $6,000",
  whatIsIt: "Frontend Development is where design becomes reality. We write clean, performant, and accessible code that brings static designs to life with fluid animations and instantaneous load times.",
  whoItsFor: [
  "Design teams that need a reliable partner to build their Figma files perfectly",
@@ -316,6 +320,7 @@ export const SERVICES = [
  description: "From micro-interactions to full-scale brand films. We use motion as a narrative tool, purposeful, precise, and unforgettable.",
  deliverables: ["UI Animations", "Brand Films", "Motion Guidelines", "GSAP / Lottie"],
  href: "/services/motion-design",
+ from: "from $2,500",
  whatIsIt: "Motion Design brings the dimension of time to your digital presence. It guides the user's eye, provides context for state changes, and injects personality into otherwise static interfaces.",
  whoItsFor: [
  "Products that feel rigid and lack delight",
@@ -337,6 +342,7 @@ export const SERVICES = [
  description: "End-to-end product design from concept to launch. We embed with your team to design systems that scale with your product.",
  deliverables: ["Product Strategy", "0→1 Design", "Design Systems", "Developer Handoff"],
  href: "/services/product-design",
+ from: "from $8,000",
  whatIsIt: "Product Design encompasses the entire lifecycle of a digital tool. It bridges business strategy, UX research, UI design, and technical feasibility to create holistic applications that solve real problems.",
  whoItsFor: [
  "Founders building a 0-to-1 MVP and needing a foundational design",
@@ -358,6 +364,7 @@ export const SERVICES = [
  description: "Complex web applications with clean architecture. We handle everything from database design to deployment, so you can focus on growth.",
  deliverables: ["Full-Stack Dev", "API Design", "Database Architecture", "DevOps"],
  href: "/services/web-applications",
+ from: "from $9,500",
  whatIsIt: "We build secure, scalable, and highly interactive full-stack web applications. From the database schema to the server logic and the client interface, we architect systems designed to handle millions of users.",
  whoItsFor: [
  "Startups needing a robust MVP built rapidly but securely",
@@ -379,6 +386,7 @@ export const SERVICES = [
  description: "We integrate AI capabilities into your product thoughtfully, from LLM-powered features to computer vision, without the hype.",
  deliverables: ["AI Feature Design", "LLM Integration", "Prompt Engineering", "AI UX Patterns"],
  href: "/services/ai-integration",
+ from: "from $4,000",
  whatIsIt: "We move past the AI hype to implement genuine utility. Whether it's connecting to OpenAI, training custom models, or building intelligent agents, we design AI features that actually improve the user's workflow.",
  whoItsFor: [
  "Products that process massive amounts of unstructured text data",
@@ -400,6 +408,7 @@ export const SERVICES = [
  description: "Component libraries and design tokens that grow with your team. Consistent, accessible, and beautifully documented.",
  deliverables: ["Component Library", "Design Tokens", "Storybook Docs", "Accessibility Audit"],
  href: "/services/design-systems",
+ from: "from $5,000",
  whatIsIt: "A Design System is a single source of truth for your digital product. We build comprehensive libraries of reusable components, design tokens, and documentation that align your design and engineering teams.",
  whoItsFor: [
  "Large teams where designers and developers are constantly misaligned",
@@ -411,6 +420,28 @@ export const SERVICES = [
  { title: "Tokenization", desc: "We abstract colors, spacing, and typography into variables, making global sweeping changes effortless." },
  { title: "Figma to Code", desc: "We build a 1:1 match between your Figma component library and your React/Vue codebase." },
  { title: "Documentation", desc: "We write clear guidelines in Storybook or ZeroHeight on exactly how and when to use every component." }
+ ]
+ },
+ {
+ id: "seo-geo-aeo",
+ icon: "◍",
+ title: "SEO · GEO · AEO",
+ shortDesc: "Found by people, ranked by machines, quoted by AI.",
+ description: "Search is no longer ten blue links. We engineer technical SEO, structured data and answer-ready content into every build, so Google, assistants and generative engines surface you first.",
+ deliverables: ["Technical SEO", "Schema & structured data", "Answer-ready content", "AI-search visibility"],
+ href: "/services/seo-geo-aeo",
+ from: "from $2,000",
+ whatIsIt: "SEO gets you ranked on results pages. GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) get you cited inside ChatGPT, Perplexity and Google's AI overviews. Together they decide whether a prospect finds you, or your competitor.",
+ whoItsFor: [
+ "Brands with a beautiful site that search engines barely index",
+ "Companies whose competitors keep getting quoted by AI assistants",
+ "Teams publishing content that never earns a featured snippet",
+ "Launches that need discoverability built in from day one, not bolted on later"
+ ],
+ approach: [
+ { title: "Engineering-first", desc: "Core Web Vitals, crawlable architecture, semantic markup and metadata systems, the technical foundation every ranking depends on." },
+ { title: "Machine-readable everything", desc: "JSON-LD structured data, FAQ schemas and entity markup so answer engines can understand, trust and quote your pages." },
+ { title: "Answer-ready content", desc: "We structure copy to directly answer the questions your customers actually type, into Google or into an AI." }
  ]
  },
 ];

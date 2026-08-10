@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
 interface LogoProps {
   className?: string;
@@ -19,12 +18,11 @@ export function Logo({
   return (
     <div className={`relative ${className}`}>
       {/* We use the next/image component for optimization, relying on the parent's width/height via className */}
-      <Image 
-        src="/logo.png" 
-        alt="Greene Studios Logo" 
-        fill
-        className="object-contain"
-        sizes="(max-width: 768px) 150px, 250px"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/brand/gs-chip.svg"
+        alt="Greene Studios Logo"
+        className="h-full w-full object-contain"
       />
     </div>
   );

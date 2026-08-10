@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import SideMenu from "./SideMenu";
@@ -66,13 +65,11 @@ export default function Navbar() {
               title="Double-click for Focus Mode"
             >
               <span className="relative block h-8 w-8 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)] md:h-9 md:w-9">
-                <Image
-                  src="/logo.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/gs-chip.svg"
                   alt="Greene Studios logo"
-                  fill
-                  sizes="36px"
-                  className="object-contain transition-transform duration-500 group-hover:scale-110"
-                  priority
+                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </span>
               <span className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)] md:text-base">

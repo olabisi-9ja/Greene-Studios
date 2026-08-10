@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
 import { BRAND, NAV_LINKS } from "@/lib/data";
 import RotatingBadge from "@/components/ui/RotatingBadge";
@@ -65,12 +65,11 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2">
               <span className="relative block h-9 w-9 overflow-hidden rounded-full bg-[var(--brand-bg)]">
-                <Image
-                  src="/logo.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/gs-chip.svg"
                   alt="Greene Studios logo"
-                  fill
-                  sizes="36px"
-                  className="object-contain"
+                  className="h-full w-full object-contain"
                 />
               </span>
               <span className="font-display text-sm font-black uppercase tracking-tight">Greene®</span>
@@ -117,8 +116,13 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ─── Giant wordmark — the studio name, very big ───────────── */}
-      <div className="relative z-10 mb-4 mt-16 select-none overflow-hidden text-center md:mt-24">
+      {/* ─── Giant wordmark — the studio name, very big ─────────────
+          No overflow-hidden here: the line box (leading 0.85) is shorter
+          than the glyphs' ink, so a clip box slices the raised ® and
+          cap-height tops — worse, the slice amount depends on whether
+          the variable font has loaded, so it broke only *sometimes*.
+          The <footer> itself keeps overflow-hidden for page-edge safety. */}
+      <div className="relative z-10 mb-4 mt-16 select-none text-center md:mt-24">
         <h1
           aria-hidden="true"
           className="font-display whitespace-nowrap font-black uppercase leading-[0.85] tracking-tight text-[var(--brand-bg)]"
@@ -139,7 +143,9 @@ export default function Footer() {
               {letter}
             </motion.span>
           ))}
-          <br className="hidden sm:block" />
+          {/* always stacked — hiding this <br> on mobile fuses both
+              words into one overflowing GREENESTUDIOS® line */}
+          <br />
           {"STUDIOS®".split("").map((letter, i) => (
             <motion.span
               key={`s-${i}`}

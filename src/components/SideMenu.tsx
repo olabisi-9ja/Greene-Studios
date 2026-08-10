@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, BRAND } from "@/lib/data";
 
@@ -50,12 +49,11 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             <div className="relative z-10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="relative block h-9 w-9 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
-                  <Image
-                    src="/logo.png"
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/brand/gs-chip.svg"
                     alt="Greene Studios logo"
-                    fill
-                    sizes="36px"
-                    className="object-contain"
+                    className="h-full w-full object-contain"
                   />
                 </span>
                 <span className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">
