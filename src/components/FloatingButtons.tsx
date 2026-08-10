@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 export default function FloatingButtons() {
   const [pastHero, setPastHero] = useState(false);
+  const [footerInView, setFooterInView] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +38,22 @@ export default function FloatingButtons() {
     };
   }, []);
 
+  // Hide while the footer is on screen — otherwise the Contact pill and
+  // back-to-top button park on top of the giant wordmark and the credit
+  // line (fixed, z-70, always past-hero at page bottom).
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setFooterInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    obs.observe(footer);
+    return () => obs.disconnect();
+  }, []);
+
+  const visible = pastHero && !footerInView;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // If Lenis smooth scroll is present, drive it instead of native scroll
@@ -47,7 +64,7 @@ export default function FloatingButtons() {
     <div
       className={cn(
         "fixed bottom-6 right-6 z-[70] flex flex-col items-end gap-3 transition-all duration-500 md:bottom-8 md:right-8",
-        pastHero ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       )}
     >
       {/* Contact Button */}
@@ -56,7 +73,7 @@ export default function FloatingButtons() {
         data-cursor="CONTACT"
         className={cn(
           "rounded-full bg-[var(--brand-text)] px-5 py-3 text-xs font-bold uppercase tracking-widest text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
-          pastHero ? "pointer-events-auto" : "pointer-events-none"
+          visible ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
         Contact
@@ -69,7 +86,7 @@ export default function FloatingButtons() {
         aria-label="Back to top"
         className={cn(
           "flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-text)] text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
-          pastHero ? "pointer-events-auto" : "pointer-events-none"
+          visible ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
         <ArrowUp size={20} />

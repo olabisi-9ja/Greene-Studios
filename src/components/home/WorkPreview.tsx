@@ -36,7 +36,7 @@ export default function WorkPreview() {
             <RotatingBadge
               text="GREENE STUDIOS ✦ WEB DESIGN ✦ BRANDING ✦ MOTION ✦ "
               className="h-28 w-28 md:h-32 md:w-32"
-              centerImage="/logo.png"
+              centerImage="/brand/gs-chip.svg"
             />
           </div>
 

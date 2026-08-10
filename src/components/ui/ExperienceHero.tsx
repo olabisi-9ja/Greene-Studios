@@ -107,8 +107,9 @@ export const ExperienceHero = () => {
         className="relative z-10 flex h-full flex-col"
         style={{ scale: heroScale, y: heroY, opacity: heroOpacity }}
       >
-        {/* ── Statement block — vertically centered in the free space ── */}
-        <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 md:px-10">
+        {/* ── Statement block — vertically centered in the free space,
+               with guaranteed headroom below the fixed navbar ── */}
+        <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 pt-24 md:px-10 md:pt-32">
           <div className="w-full">
             {/* the one dominant statement */}
             <motion.h1

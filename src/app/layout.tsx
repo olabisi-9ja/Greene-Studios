@@ -48,9 +48,9 @@ export const metadata: Metadata = {
  follow: true,
  },
  icons: {
- icon: "/logo.png",
- shortcut: "/logo.png",
- apple: "/logo.png",
+ icon: "/brand/gs-chip.svg",
+ shortcut: "/brand/gs-chip.svg",
+ apple: "/brand/gs-chip.png",
  },
 };
 
@@ -121,7 +121,7 @@ export default function RootLayout({
        "@type": "Organization",
        name: "Greene Studios",
        url: process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app",
-       logo: "/logo.png",
+       logo: "/brand/gs-chip.png",
        email: "hello@greenestudios.co",
        description:
          "Independent digital design studio. Brands, websites, and digital products that make people stop scrolling.",

@@ -1,6 +1,9 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 /**
@@ -9,35 +12,47 @@ import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
  * built around that pipeline: four core pillars, in order, with the
  * supporting disciplines (research, systems, AI, strategy) demoted to
  * a quiet row instead of competing for attention.
+ *
+ * Each pillar DEMONSTRATES itself: hovering (or focusing) a row lifts a
+ * cursor-following visual of that craft, so the section shows the work
+ * instead of only describing it.
  */
 const CORE = [
   {
     href: "/services/branding",
     stage: "Brand",
     title: "Branding",
+    from: "from $6,000",
     desc: "Identity systems that outlast trends and command trust.",
     tags: ["Strategy", "Identity", "Guidelines"],
+    preview: "/images/services/brand.jpg",
   },
   {
     href: "/services/web-design",
     stage: "Interface",
     title: "Web Design",
+    from: "from $4,800",
     desc: "Websites that stop the scroll and start conversations.",
     tags: ["UI", "Design systems", "Prototyping"],
+    preview: "/images/services/interface.jpg",
   },
   {
     href: "/services/motion-design",
     stage: "Motion",
     title: "Motion Design",
+    from: "from $2,500",
     desc: "Motion that communicates, from micro-interactions to full brand films.",
     tags: ["UI motion", "Scroll", "Lottie"],
+    preview: "/images/services/motion.jpg",
   },
   {
     href: "/services/frontend-development",
     stage: "Code",
     title: "Frontend Development",
+    from: "from $6,000",
     desc: "Pixel-perfect React & Next.js code, built for motion and performance.",
     tags: ["React", "Next.js", "Performance"],
+    preview: "/images/services/code.jpg",
   },
 ];
 
@@ -47,10 +62,26 @@ const SUPPORTING = [
   { label: "Design systems", href: "/services/design-systems" },
   { label: "Web applications", href: "/services/web-applications" },
   { label: "AI integration", href: "/services/ai-integration" },
+  { label: "SEO · GEO · AEO", href: "/services/seo-geo-aeo" },
 ];
 
 export default function ServicesSection() {
   const containerRef = useStaggerAnimation<HTMLDivElement>({}, ".stagger-item");
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<number | null>(null);
+
+  /* Cursor-follow springs for the floating preview (desktop only) */
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const px = useSpring(mx, { stiffness: 180, damping: 24, mass: 0.6 });
+  const py = useSpring(my, { stiffness: 180, damping: 24, mass: 0.6 });
+
+  const trackCursor = (e: React.MouseEvent) => {
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mx.set(e.clientX - rect.left);
+    my.set(e.clientY - rect.top);
+  };
 
   return (
     <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36">
@@ -81,49 +112,94 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Core pillars, in pipeline order */}
-        <div ref={containerRef} className="flex flex-col border-t border-[var(--brand-border)]">
-          {CORE.map((service, i) => (
-            <Link
-              key={service.href}
-              href={service.href}
-              className="stagger-item group relative block border-b border-[var(--brand-border)]"
-              data-cursor="VIEW"
-            >
-              <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-9">
-                <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
-                  0{i + 1}
-                </span>
-                <div className="col-span-10 md:col-span-4">
-                  <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                    {service.stage}
+        {/* Core pillars, in pipeline order — the stage the preview floats over */}
+        <div
+          ref={stageRef}
+          className="relative"
+          onMouseMove={trackCursor}
+          onMouseLeave={() => setActive(null)}
+        >
+          <div ref={containerRef} className="flex flex-col border-t border-[var(--brand-border)]">
+            {CORE.map((service, i) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="stagger-item group relative block border-b border-[var(--brand-border)]"
+                data-cursor="VIEW"
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                onBlur={() => setActive(null)}
+              >
+                <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-9">
+                  <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
+                    0{i + 1}
                   </span>
-                  <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.2rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
-                    {service.title}
-                  </h3>
-                </div>
-                <p className="col-span-12 mt-2 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)] md:col-span-5 md:mt-0 md:text-[15px]">
-                  {service.desc}
-                </p>
-                <div className="col-span-12 flex flex-wrap items-center gap-2 md:col-span-2 md:justify-end">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--brand-text-secondary)]"
-                    >
-                      {tag}
+                  <div className="col-span-10 md:col-span-4">
+                    <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+                      {service.stage}
                     </span>
-                  ))}
-                  <span
-                    className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
+                    <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.2rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <p className="col-span-12 mt-2 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)] md:col-span-5 md:mt-0 md:text-[15px]">
+                    {service.desc}
+                  </p>
+                  <div className="col-span-12 flex flex-wrap items-center gap-2 md:col-span-2 md:justify-end">
+                    <span className="font-mono text-[11px] font-bold tracking-wide text-[var(--brand-accent)]">
+                      {service.from}
+                    </span>
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--brand-text-secondary)]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    <span
+                      className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
+
+          {/* Floating craft preview — demonstrates the capability on hover.
+              Desktop pointers only; keyboard focus reveals it too. */}
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-0 top-0 z-20 hidden lg:block"
+            style={{ x: px, y: py }}
+          >
+            <motion.div
+              animate={{
+                opacity: active !== null ? 1 : 0,
+                scale: active !== null ? 1 : 0.85,
+                rotate: active !== null ? -4 : 0,
+              }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="relative -ml-40 -mt-28 h-[220px] w-[340px] overflow-hidden rounded-2xl border border-[var(--brand-border)] shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
+            >
+              {CORE.map((service, i) => (
+                <Image
+                  key={service.preview}
+                  src={service.preview}
+                  alt=""
+                  fill
+                  sizes="340px"
+                  className={`object-cover transition-opacity duration-500 ${active === i ? "opacity-100" : "opacity-0"}`}
+                />
+              ))}
+              <span className="absolute bottom-3 left-3 rounded-full bg-black/45 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
+                {active !== null ? CORE[active].stage : ""}
+              </span>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Supporting disciplines — demoted, not deleted */}

@@ -54,7 +54,7 @@ export default function ServicesPage() {
  </p>
  <div className="col-span-12 flex items-center gap-2 md:col-span-2 md:justify-end">
  <span className="hidden text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)] md:block">
- {service.deliverables.length} deliverables
+ {service.deliverables.length} deliverables · <span className="text-[var(--brand-accent)]">{service.from}</span>
  </span>
  <span
  className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"

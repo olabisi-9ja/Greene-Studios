@@ -111,33 +111,21 @@ export default function SelectedWork() {
                 </div>
               </Link>
 
-              {/* Story + outcome — the proof, sitting under the picture */}
+              {/* Story, sitting under the picture */}
               <div className="mt-5 flex flex-col gap-5 md:flex-row md:items-start md:justify-between md:gap-10">
                 <p className="max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
                   {project.description}
                 </p>
-                <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-3 md:justify-end">
-                  {project.metrics.slice(0, 2).map((m) => (
-                    <div key={m.label} className="flex flex-col md:items-end md:text-right">
-                      <span className="font-display text-2xl font-black leading-none tracking-tight text-[var(--brand-text)] md:text-3xl">
-                        {m.value}
-                      </span>
-                      <span className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
-                        {m.label}
-                      </span>
-                    </div>
-                  ))}
-                  <Link
-                    href={`/work/${project.slug}`}
-                    data-cursor="READ"
-                    className="group/link ml-auto inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-text)] md:ml-0"
-                  >
-                    <span className="border-b-2 border-[var(--brand-accent)] pb-0.5 transition-colors group-hover/link:border-[var(--brand-text)]">
-                      The story
-                    </span>
-                    <span className="transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">→</span>
-                  </Link>
-                </div>
+                <Link
+                  href={`/work/${project.slug}`}
+                  data-cursor="READ"
+                  className="group/link inline-flex w-fit shrink-0 items-center gap-2 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-text)]"
+                >
+                  <span className="border-b-2 border-[var(--brand-accent)] pb-0.5 transition-colors group-hover/link:border-[var(--brand-text)]">
+                    The story
+                  </span>
+                  <span className="transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">→</span>
+                </Link>
               </div>
             </motion.article>
           ))}

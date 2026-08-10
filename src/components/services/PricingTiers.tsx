@@ -82,7 +82,12 @@ export default function PricingTiers() {
             Transparent <span className="font-serif-i lowercase normal-case tracking-normal">pricing.</span>
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)]">
-            No hidden fees or surprise invoices. Choose the tier that matches your current stage.
+            No hidden fees or surprise invoices. Choose the tier that matches your current stage — every tier is a
+            starting point, shaped to scope on your discovery call.
+          </p>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)]">
+            <span className="font-semibold text-[var(--brand-text)]">Lagos-based, worldwide.</span> Senior boutique work
+            without US/UK overhead, typically 30–40% below comparable boutique studios.
           </p>
         </div>
 
