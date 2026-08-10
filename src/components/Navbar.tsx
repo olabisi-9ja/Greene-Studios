@@ -87,10 +87,13 @@ export default function Navbar() {
                 const isActive =
                   pathname === item.href ||
                   (item.href !== "/" && pathname.startsWith(item.href));
+                const isExternal = item.href.startsWith("http");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
                     data-cursor={item.label.toUpperCase()}
                     className={cn(
                       "nav-link text-[11px] font-bold uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[var(--brand-accent)] xl:text-xs",

@@ -84,11 +84,21 @@ export default function Footer() {
 
           <div className="flex flex-col gap-3">
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Menu</span>
-            {NAV_LINKS.map((item) => (
-              <Link key={item.href} href={item.href} data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
-                {item.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((item) => {
+              const isExternal = item.href.startsWith("http");
+              return (
+                <Link 
+                  key={item.href} 
+                  href={item.href} 
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  data-cursor="GO" 
+                  className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link href="/industries" data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
               Industries
             </Link>
@@ -165,9 +175,22 @@ export default function Footer() {
       </div>
 
       {/* ─── Bottom bar ───────────────────────────────────────────── */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row md:items-center md:justify-between md:px-10">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row md:items-end md:justify-between md:px-10">
         <span>©{currentYear} Greene Studios. All rights reserved.</span>
-        <span>Design &amp; build by Greene Studios</span>
+        <div className="flex flex-col gap-1 text-left md:text-right">
+          <span>Designed by Greene Studios</span>
+          <span>
+            Developed with 💜 by{" "}
+            <a
+              href="https://olabisiadigun.xyz/"
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-[var(--brand-bg)]/40 underline-offset-2 transition-colors hover:text-[var(--brand-bg)] hover:decoration-[var(--brand-bg)]"
+            >
+              O L A B I S I
+            </a>
+          </span>
+        </div>
       </div>
     </footer>
   );

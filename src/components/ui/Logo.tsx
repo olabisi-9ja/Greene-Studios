@@ -20,7 +20,7 @@ export function Logo({
       {/* We use the next/image component for optimization, relying on the parent's width/height via className */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/brand/gs-chip.svg"
+        src="/brand/gs-monogram-new.svg"
         alt="Greene Studios Logo"
         className="h-full w-full object-contain"
       />

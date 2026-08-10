@@ -36,25 +36,20 @@ const LOADER_CSS = `
 .gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;transition:transform .9s cubic-bezier(.16,1,.3,1)}
 .gl-out{transform:translateY(-100%)}
 .gl-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0}
-.gl-act1{animation:gl-a1 1.3s cubic-bezier(.16,1,.3,1) 0s both}
-.gl-act2{animation:gl-a2 .9s cubic-bezier(.16,1,.3,1) .85s both}
-.gl-act3{flex-direction:column;animation:gl-fade .55s cubic-bezier(.16,1,.3,1) 1.45s both}
-.gl-tick{transform:scaleX(0);transform-origin:left;animation:gl-grow .4s cubic-bezier(.16,1,.3,1) .5s both}
-.gl-s{opacity:0;display:inline-block;animation:gl-sin .4s cubic-bezier(.16,1,.3,1) 1.07s both}
+.gl-act1{animation:gl-a1 1.4s cubic-bezier(.16,1,.3,1) 0s both}
+.gl-act3{flex-direction:column;animation:gl-fade .55s cubic-bezier(.16,1,.3,1) 1.0s both}
 .gl-l{opacity:0;display:inline-block;animation:gl-rise .55s cubic-bezier(.16,1,.3,1) both}
-.gl-rule{transform:scaleX(0);transform-origin:left;animation:gl-grow .55s cubic-bezier(.16,1,.3,1) 2.3s both}
-.gl-tag{opacity:0;animation:gl-tag .45s ease 2.55s both}
+.gl-rule{transform:scaleX(0);transform-origin:left;animation:gl-grow .55s cubic-bezier(.16,1,.3,1) 2.1s both}
+.gl-tag{opacity:0;animation:gl-tag .45s ease 2.35s both}
 .gl-bar{transform:scaleX(0);transform-origin:left;animation:gl-bar 2.7s linear 0s both}
-@keyframes gl-a1{0%{opacity:0;transform:translateY(16px);filter:blur(12px)}28%{opacity:1;transform:none;filter:none}78%{opacity:1}100%{opacity:0;transform:translateY(-10px);filter:blur(8px)}}
-@keyframes gl-a2{0%{opacity:0;transform:translateY(14px);filter:blur(10px)}30%{opacity:1;transform:none;filter:none}75%{opacity:1}100%{opacity:0;transform:translateY(-8px);filter:blur(6px)}}
+@keyframes gl-a1{0%{opacity:0;transform:translateY(16px);filter:blur(12px)}25%{opacity:1;transform:none;filter:none}75%{opacity:1}100%{opacity:0;transform:translateY(-10px);filter:blur(8px)}}
 @keyframes gl-fade{from{opacity:0;transform:translateY(14px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
 @keyframes gl-rise{from{opacity:0;transform:translateY(.55em) rotate(5deg)}to{opacity:1;transform:none}}
-@keyframes gl-sin{from{opacity:0;transform:translateX(.2em);filter:blur(8px)}to{opacity:.92;transform:none;filter:none}}
 @keyframes gl-grow{to{transform:scaleX(1)}}
 @keyframes gl-tag{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes gl-bar{to{transform:scaleX(1)}}
 @media (prefers-reduced-motion: reduce){
-.gl-act1,.gl-act2,.gl-bar{display:none}
+.gl-act1,.gl-bar{display:none}
 .gl-act3,.gl-act3 *{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
 .gl-root{transition-duration:.3s}
 }
@@ -130,40 +125,17 @@ export default function Preloader() {
         }}
       />
 
-      {/* ── Act 1 · the G device, outlined, aperture drawn ── */}
+      {/* ── Act 1 · the GS visual device ── */}
       <div className="gl-layer gl-act1" aria-hidden="true">
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/brand/g-outline-light.svg"
-            alt=""
-            style={{ height: "clamp(7rem, 22vw, 15rem)", width: "auto" }}
-          />
-          {/* the aperture cut — the recurring brand shape */}
-          <span
-            className="gl-tick absolute block"
-            style={{
-              backgroundColor: PAPER,
-              height: 3,
-              width: "clamp(1rem, 3.2vw, 2.2rem)",
-              right: "7%",
-              top: "58%",
-            }}
-          />
-        </div>
-      </div>
-
-      {/* ── Act 2 · the monogram: the GS ligature ── */}
-      <div className="gl-layer gl-act2" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/brand/gs-monogram-light.svg"
+          src="/brand/gs-monogram-new.svg"
           alt=""
           style={{ height: "clamp(6.5rem, 19vw, 13rem)", width: "auto" }}
         />
       </div>
 
-      {/* ── Act 3 · the full lockup ── */}
+      {/* ── Act 2 & 3 · the GREENE and STUDIOS lockup ── */}
       <div className="gl-layer gl-act3 px-6">
         {/* GREENE — custom-kerned wordmark */}
         <h1
@@ -175,7 +147,7 @@ export default function Preloader() {
             <span
               key={`g${i}`}
               className="gl-l"
-              style={{ marginRight: mr, animationDelay: `${1.57 + i * 0.05}s` }}
+              style={{ marginRight: mr, animationDelay: `${1.15 + i * 0.05}s` }}
             >
               {ch}
             </span>
@@ -193,7 +165,7 @@ export default function Preloader() {
                 letterSpacing: "0.34em",
                 color: `${PAPER}B3`,
                 marginRight: i === STUDIOS.length - 1 ? "-0.34em" : 0,
-                animationDelay: `${1.87 + i * 0.045}s`,
+                animationDelay: `${1.75 + i * 0.045}s`,
               }}
             >
               {ch}
@@ -204,7 +176,7 @@ export default function Preloader() {
             style={{
               fontSize: "clamp(0.6rem, 1.6vw, 1rem)",
               color: `${PAPER}B3`,
-              animationDelay: "2.3s",
+              animationDelay: "2.1s",
             }}
           >
             ®

@@ -83,7 +83,9 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 >
                   <Link
                     href={item.href}
-                    onClick={onClose}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    onClick={item.href.startsWith("http") ? undefined : onClose}
                     data-cursor={item.label.toUpperCase()}
                     className="group flex items-baseline gap-4 py-3.5"
                   >
