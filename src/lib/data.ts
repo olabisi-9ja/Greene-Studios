@@ -15,13 +15,13 @@ export const BRAND = {
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
+// The primary navigation stays deliberately small; deeper content remains
+// discoverable from the work, studio and footer experiences.
 export const NAV_LINKS = [
  { label: "Work", href: "/work" },
  { label: "Services", href: "/services" },
- { label: "Lab", href: "https://gs-labs-eta.vercel.app/" },
- { label: "Process", href: "/process" },
- { label: "Journal", href: "/journal" },
- { label: "About", href: "/about" },
+ { label: "Studio", href: "/studio" },
+ { label: "Contact", href: "/contact" },
 ];
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
@@ -515,48 +515,10 @@ export const PROCESS_STEPS = [
 // The full 10-step methodology lives on /process. These six phases summarise it.
 
 export const PROCESS_PHASES = [
- {
- number: "01",
- title: "Discover",
- stages: "Discovery · Research",
- description: "We start by listening. Your goals, your users, your market: the strategic foundation every later decision rests on.",
- duration: "1–2 weeks",
- },
- {
- number: "02",
- title: "Define",
- stages: "Strategy · Wireframes",
- description: "Architecture, content strategy and low-fidelity flows. We align on the north star and test assumptions before they get expensive.",
- duration: "1–2 weeks",
- },
- {
- number: "03",
- title: "Design",
- stages: "Design · Prototype",
- description: "High-fidelity screens and interactive prototypes with our signature attention to detail. You feel the product before a line of code exists.",
- duration: "2–4 weeks",
- },
- {
- number: "04",
- title: "Build",
- stages: "Development · Testing",
- description: "Clean, performant code built with modern frameworks. Then cross-device, accessibility and performance audits before anything ships.",
- duration: "3–8 weeks",
- },
- {
- number: "05",
- title: "Launch",
- stages: "Launch",
- description: "A coordinated go-live with monitoring, rollback plans, and your team trained on every part of the system.",
- duration: "1 week",
- },
- {
- number: "06",
- title: "Evolve",
- stages: "Support",
- description: "We don't disappear after launch. Ongoing support, iteration and growth. A long-term partnership, not a handoff.",
- duration: "Ongoing",
- },
+ { number: "01", title: "Find the signal", stages: "Strategy · Research", description: "We align on the problem, the audience and the opportunity before a single pixel is placed.", duration: "1–2 weeks" },
+ { number: "02", title: "Build the system", stages: "Architecture · Design", description: "We turn the north star into a flexible identity, interface and experience your team can actually use.", duration: "2–4 weeks" },
+ { number: "03", title: "Make it move", stages: "Development · Motion", description: "Design and engineering work together to make the system feel alive, fast and considered across every screen.", duration: "3–8 weeks" },
+ { number: "04", title: "Put it in the world", stages: "Launch · Iteration", description: "We ship carefully, measure what matters and stay close enough to improve what comes next.", duration: "Ongoing" },
 ];
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────

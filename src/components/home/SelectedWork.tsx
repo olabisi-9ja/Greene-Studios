@@ -64,7 +64,7 @@ export default function SelectedWork() {
               <Link
                 href={`/work/${project.slug}`}
                 data-cursor="VIEW"
-                className="group relative block overflow-hidden rounded-[1.5rem] border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)] md:rounded-[2rem]"
+                className={`group relative block overflow-hidden border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)] ${i % 3 === 1 ? "md:ml-[8%] md:w-[92%]" : i % 3 === 2 ? "md:mr-[8%] md:w-[92%]" : ""}`}
               >
                 {/* Media */}
                 <div className="relative aspect-[16/11] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[21/10]">

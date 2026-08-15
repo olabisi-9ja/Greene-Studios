@@ -118,9 +118,9 @@ export const ExperienceHero = () => {
               transition={{ duration: 0.85, ease: EASE, delay: 0.15 }}
               className="font-display text-[clamp(2.75rem,6.4vw,6rem)] font-black uppercase leading-[1.04] tracking-tight"
             >
-              Design that can&apos;t
+              We build digital
               <br />
-              be <span className="font-serif-i lowercase normal-case tracking-normal">ignored.</span>
+              things worth <span className="font-serif-i lowercase normal-case tracking-normal">remembering.</span>
             </motion.h1>
 
             {/* one-line subhead */}

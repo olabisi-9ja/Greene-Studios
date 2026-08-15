@@ -7,27 +7,27 @@ import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 const CARDS = [
  {
  id: "01",
- title: "Retail & Hospitality",
- description: "Custom-crafted products tailored to your unique identity, so every physical and digital touchpoint resonates with your guests.",
- color: "#5294A8",
+ title: "Strategy before decoration",
+ description: "We find the signal first: what matters, who it is for, and why it deserves attention. The visual system follows the idea.",
+ color: "#87FF5A",
  },
  {
  id: "02",
- title: "Consumer & Home",
- description: "Experiences in real spaces, transforming standard interfaces into personal, seamless companions for everyday life.",
- color: "#DAB758",
+ title: "Design and code together",
+ description: "The people shaping the experience are close to the people building it. That is how ambitious ideas survive contact with production.",
+ color: "#A8D8A0",
  },
  {
  id: "03",
- title: "Research & Education",
- description: "Built on modern stacks. Digital presences that are scalable, accessible, and designed to foster learning and discovery.",
- color: "#9C5248",
+ title: "Every interaction earns its place",
+ description: "Motion is not decoration. It should clarify, guide, or create a feeling worth remembering — otherwise it does not belong.",
+ color: "#D7E8A0",
  },
  {
  id: "04",
- title: "Entertainment & Experiences",
- description: "Every touchpoint is an opportunity. Highly interactive platforms that keep your audience engaged and coming back.",
- color: "#46A98F",
+ title: "Quiet structure. Loud work.",
+ description: "The interface stays precise and editorial so the work can be expressive, cinematic, and unmistakably itself.",
+ color: "#6FA878",
  },
 ];
 
@@ -42,10 +42,10 @@ export default function WhyWeExist() {
  <div className="mb-16 flex flex-col gap-8 md:mb-24 md:flex-row md:items-end md:justify-between">
  <div className="max-w-4xl">
  <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
- <span className="text-[var(--brand-accent)]">✦</span> Who we build for
+ <span className="text-[var(--brand-accent)]">✦</span> How we work
  </span>
  <h2 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
- We make brands <span className="font-serif-i lowercase normal-case tracking-normal">impossible</span> to ignore.
+ We design for <span className="font-serif-i lowercase normal-case tracking-normal">memory.</span>
  </h2>
  </div>
  <div className="hidden shrink-0 md:block">
