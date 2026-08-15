@@ -32,14 +32,14 @@
 @layer base {
   /* ─── DAY (default · professional editorial) ────────────────────── */
   :root, .mode-paper, .mode-day {
-    --brand-primary: #1f3d3a; /* Greene Green */
-    --brand-bg: #f4f3ee; /* warm white */
-    --brand-surface: #fbfaf6; /* lighter */
-    --brand-surface-secondary: #e9e4d8; /* deeper */
-    --brand-border: #dcd6c8;
-    --brand-text: #111311; /* ink */
-    --brand-text-secondary: #5d655f;
-    --brand-accent: #1f3d3a; /* Greene Green */
+    --brand-primary: #87ff5a; /* Greene accent */
+    --brand-bg: #f3f2ee; /* paper */
+    --brand-surface: #ffffff; /* clean surface */
+    --brand-surface-secondary: #e8e7e2; /* quiet contrast */
+    --brand-border: #d7d6d1;
+    --brand-text: #0a0a0a; /* ink */
+    --brand-text-secondary: #666663;
+    --brand-accent: #87ff5a; /* used surgically */
     --brand-on-accent: #f4f3ee;
     --brand-paper: #f4f3ee;
     --brand-ink: #111311;

@@ -76,7 +76,7 @@ export default function WorkPage() {
           >
             <div
               className={cn(
-                "relative overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)] md:rounded-3xl",
+                "relative overflow-hidden border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]",
                 i === 0 && activeFilter === "All" ? "aspect-[16/9] lg:aspect-[21/9]" : "aspect-[4/3]"
               )}
             >
@@ -90,7 +90,7 @@ export default function WorkPage() {
                 className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
               />
               {/* scrim for type legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/25 transition-opacity duration-700 group-hover:opacity-90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-95" />
 
               <span className="absolute left-5 top-5 rounded-full bg-black/30 px-3 py-1 font-mono text-[11px] font-bold tracking-widest text-white/80 backdrop-blur-sm">
                 0{i + 1}

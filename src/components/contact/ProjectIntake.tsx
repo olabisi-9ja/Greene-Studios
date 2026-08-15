@@ -17,7 +17,7 @@ const PROJECT_TYPES = [
   { id: "experimental", label: "Something experimental", desc: "AI, prototypes, lab-style R&D" },
 ];
 
-const BUDGETS = ["< $5K", "$5K – $15K", "$15K – $50K", "$50K+", "Not sure yet"];
+const BUDGETS = ["₦300k – ₦750k", "₦750k – ₦1.5m", "₦1.5m – ₦3m", "₦3m+", "Not sure yet"];
 const TIMELINES = ["ASAP", "1–3 months", "3–6 months", "Just exploring"];
 
 type Answers = {
@@ -237,7 +237,7 @@ export default function ProjectIntake() {
                 What&apos;s the <span className="font-serif-i lowercase normal-case tracking-normal">budget?</span>
               </legend>
               <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
-                Honest ranges get honest proposals. Projects start at $4.8K.
+                Honest ranges get honest proposals. If you are unsure, choose the last option and tell us more below.
               </p>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {BUDGETS.map((b) => {
