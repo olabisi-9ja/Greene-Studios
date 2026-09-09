@@ -56,13 +56,13 @@ export default function AboutPage() {
  right={
  <div className="flex items-center gap-6">
  <div>
- <p className="font-display text-5xl font-black leading-none text-[var(--brand-text)]">40+</p>
- <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">Projects shipped</p>
+ <p className="font-display text-5xl font-black leading-none text-[var(--brand-text)]">6</p>
+ <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">Brand systems built</p>
  </div>
  <span className="h-12 w-px bg-[var(--brand-border)]" />
  <div>
- <p className="font-display text-5xl font-black leading-none text-[var(--brand-text)]">$50M+</p>
- <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">Client revenue</p>
+ <p className="font-display text-5xl font-black leading-none text-[var(--brand-text)]">95+</p>
+ <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">Lighthouse, every build</p>
  </div>
  </div>
  }
@@ -130,10 +130,10 @@ export default function AboutPage() {
 
  <div className="mt-12 grid grid-cols-2 gap-4">
  {[
- { value: "40+", label: "Projects" },
- { value: "$50M+", label: "Revenue generated" },
- { value: "98%", label: "Client satisfaction" },
- { value: "3+", label: "Years of craft" },
+ { value: "6", label: "Brand systems" },
+ { value: "95+", label: "Lighthouse floor" },
+ { value: "<1.2s", label: "Target LCP" },
+ { value: "2022", label: "Founded" },
  ].map((stat) => (
  <div key={stat.label} className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-6">
  <div className="font-display text-3xl font-black tracking-tight text-[var(--brand-text)] md:text-4xl">

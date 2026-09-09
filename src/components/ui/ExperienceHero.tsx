@@ -169,9 +169,9 @@ export const ExperienceHero = () => {
               transition={{ duration: 0.8, ease: EASE, delay: 0.6 }}
               className="mt-9 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-secondary)]"
             >
-              40+ projects shipped
+              Brand · Web · Product
               <span className="mx-3 text-[var(--brand-accent)]" aria-hidden="true">✦</span>
-              98% client satisfaction
+              Lagos, working worldwide
             </motion.p>
           </div>
         </div>

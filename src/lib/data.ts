@@ -4,8 +4,7 @@ export const BRAND = {
  name: "Greene Studios",
  tagline: "We design and build digital experiences that move people.",
  email: "hello@greenestudios.co",
- phone: "+1 (555) 000-0000",
- location: "Working worldwide",
+ location: "Lagos, Nigeria — working worldwide",
  instagram: "https://instagram.com/greenestudios",
  twitter: "https://twitter.com/greenestudios",
  linkedin: "https://linkedin.com/company/greenestudios",
@@ -525,119 +524,7 @@ export const PROCESS_PHASES = [
 // Every quote is anchored to a real case study and its headline result —
 // proof, not floating praise.
 
-export const TESTIMONIALS = [
- {
- id: 1,
- quote: "Greene Studios didn't just build our website, they reimagined how our brand communicates entirely. The results were immediate and extraordinary.",
- author: "Sarah Chen",
- title: "CEO, Luminary Analytics",
- avatar: "SC",
- projectSlug: "luminary-saas",
- projectName: "Luminary",
- result: "+340% user engagement",
- },
- {
- id: 2,
- quote: "Working with Greene felt like having a world-class design team embedded in our startup. They understood our vision before we even finished explaining it.",
- author: "Marcus Williams",
- title: "Founder, Arc Commerce",
- avatar: "MW",
- projectSlug: "arc-ecommerce",
- projectName: "Arc Commerce",
- result: "+67% conversion rate",
- },
- {
- id: 3,
- quote: "The attention to detail is unmatched. Every micro-interaction, every animation, it all feels intentional. Our users notice, and they love it.",
- author: "Priya Sharma",
- title: "CPO, Bloom Health",
- avatar: "PS",
- projectSlug: "bloom-health",
- projectName: "Bloom Health",
- result: "−52% patient drop-off",
- },
- {
- id: 4,
- quote: "Three months post-launch, our numbers are still climbing. Greene didn't just make things beautiful, they made them work better.",
- author: "James Okonkwo",
- title: "Co-Founder, Onyx Finance",
- avatar: "JO",
- projectSlug: "onyx-fintech",
- projectName: "Onyx Finance",
- result: "300K users in 90 days",
- },
-];
 
-// ─── Pricing Packages ─────────────────────────────────────────────────────────
-
-export const PRICING_PACKAGES = [
- {
- id: "starter",
- name: "Starter",
- price: "$4,800",
- timeline: "3–4 weeks",
- ideal: "Founders and personal brands launching their first professional digital presence.",
- features: [
- { label: "Brand Strategy Session", included: true },
- { label: "UI Design (up to 5 pages)", included: true },
- { label: "Responsive Development", included: true },
- { label: "Basic SEO Setup", included: true },
- { label: "CMS Integration", included: false },
- { label: "Motion & Animations", included: false },
- { label: "Design System", included: false },
- { label: "AI Integration", included: false },
- { label: "Priority Support", included: false },
- ],
- support: "14 days",
- seo: "Basic",
- cta: "Start a Project",
- popular: false,
- },
- {
- id: "growth",
- name: "Growth",
- price: "$12,000",
- timeline: "6–8 weeks",
- ideal: "Growing startups and scale-ups ready to compete at a premium level.",
- features: [
- { label: "Brand Strategy Session", included: true },
- { label: "UI Design (up to 15 pages)", included: true },
- { label: "Responsive Development", included: true },
- { label: "Advanced SEO Setup", included: true },
- { label: "CMS Integration", included: true },
- { label: "Motion & Animations", included: true },
- { label: "Design System", included: false },
- { label: "AI Integration", included: false },
- { label: "Priority Support", included: false },
- ],
- support: "60 days",
- seo: "Advanced",
- cta: "Start a Project",
- popular: true,
- },
- {
- id: "premium",
- name: "Premium",
- price: "Custom",
- timeline: "10–16 weeks",
- ideal: "Enterprises and ambitious brands that want a digital ecosystem, not just a website.",
- features: [
- { label: "Brand Strategy Session", included: true },
- { label: "UI Design (unlimited pages)", included: true },
- { label: "Responsive Development", included: true },
- { label: "Enterprise SEO", included: true },
- { label: "CMS Integration", included: true },
- { label: "Motion & Animations", included: true },
- { label: "Design System", included: true },
- { label: "AI Integration", included: true },
- { label: "Priority Support", included: true },
- ],
- support: "6 months",
- seo: "Enterprise",
- cta: "Book a Call",
- popular: false,
- },
-];
 
 // ─── Journal Articles ─────────────────────────────────────────────────────────
 
@@ -818,12 +705,6 @@ export const FAQS = [
 
 // ─── Metrics ──────────────────────────────────────────────────────────────────
 
-export const METRICS = [
- { value: "40+", label: "Projects Shipped" },
- { value: "98%", label: "Client Satisfaction" },
- { value: "$50M+", label: "Revenue Generated for Clients" },
- { value: "3.2s", label: "Average Build Time Per Page" },
-];
 
 // ─── Industries ───────────────────────────────────────────────────────────────
 // Each industry is a real destination: /industries/[slug]. Service refs point at
@@ -836,7 +717,7 @@ export const INDUSTRIES = [
  icon: "⬡",
  tagline: "Products that sell themselves in the first session.",
  description: "We design SaaS products and marketing sites where the value is obvious in sixty seconds. Activation, retention and perceived quality, treated as design problems.",
- stat: { value: "+340%", label: "User engagement on Luminary" },
+ stat: { value: "50+", label: "Chart types in the Luminary system" },
  challenges: [
  { title: "Leaky onboarding", desc: "Signups arrive, tour three screens, and never come back. The product is powerful but the first-run experience hides it." },
  { title: "Feature bloat", desc: "Every release added a button. Navigation sprawls, settings multiply, and the core job-to-be-done gets buried alive." },
@@ -856,7 +737,7 @@ export const INDUSTRIES = [
  icon: "◈",
  tagline: "Storefronts where speed is the brand.",
  description: "We build headless storefronts that load in under a second, read like an editorial magazine, and check out without friction. Performance is a design feature, not a ticket.",
- stat: { value: "+67%", label: "Conversion rate on Arc Commerce" },
+ stat: { value: "0", label: "Layout shift on Arc Commerce" },
  challenges: [
  { title: "Slow and template-made", desc: "Four-second loads and a theme thousands of other stores share. Ad spend keeps rising while conversion quietly falls." },
  { title: "Content can't sell", desc: "Lookbooks, stories and campaigns live on a blog nobody visits, completely disconnected from the products they feature." },
@@ -876,7 +757,7 @@ export const INDUSTRIES = [
  icon: "◉",
  tagline: "Look funded before you are.",
  description: "We give early teams the brand, product and presence of a company three stages ahead. Investor-ready decks, user-ready products, one senior team for all of it.",
- stat: { value: "$12M", label: "Series A raised on Onyx" },
+ stat: { value: "AA", label: "Contrast floor across Onyx" },
  challenges: [
  { title: "Credibility gap", desc: "The idea is big, the mockups are not. Customers, hires and investors all judge the company by surfaces that scream day one." },
  { title: "MVP paralysis", desc: "Six months of building features nobody has validated. The roadmap is guesswork and the budget is burning." },
@@ -896,7 +777,7 @@ export const INDUSTRIES = [
  icon: "◆",
  tagline: "Complex money, made legible.",
  description: "We design fintech and financial products where the data is dense, the stakes are high, and trust is earned pixel by pixel. Compliance-friendly by default.",
- stat: { value: "300K", label: "Users in 90 days on Onyx" },
+ stat: { value: "Tabular", label: "Figures throughout Onyx" },
  challenges: [
  { title: "Institutional aesthetics", desc: "Grey tables and navy gradients that signal legacy. Younger users bounce before they ever see the product's value." },
  { title: "Data intimidation", desc: "Forecasting, portfolios and risk models crammed onto one screen. Analysts export to CSV because the product feels harder than the spreadsheet." },
@@ -916,7 +797,7 @@ export const INDUSTRIES = [
  icon: "◇",
  tagline: "Calm is a feature. We design for it.",
  description: "We build patient-facing products where clarity lowers stress and accessibility is the baseline, not the audit. WCAG 2.1 AA is the floor we start from.",
- stat: { value: "−52%", label: "Patient drop-off on Bloom Health" },
+ stat: { value: "AAA", label: "Body-text contrast on Bloom Health" },
  challenges: [
  { title: "Anxious users, hostile UI", desc: "People use health products at their most stressed. Alarmist reds, medical jargon and dense forms make hard moments harder." },
  { title: "Accessibility debt", desc: "Products serving elderly and disabled users that fail screen readers, contrast checks and basic keyboard navigation." },
@@ -936,7 +817,7 @@ export const INDUSTRIES = [
  icon: "◎",
  tagline: "Learning products people actually finish.",
  description: "We design edtech where motivation is treated as a design problem. Progress is visible, focus is protected, and completion rates prove it.",
- stat: { value: "92%", label: "Course completion on Prism" },
+ stat: { value: "8pt", label: "Grid behind every Prism screen" },
  challenges: [
  { title: "The completion cliff", desc: "Enrollment looks great in the pitch. Then reality hits: rigid linear courses and 8% of students reaching the final module." },
  { title: "Content-rich, experience-poor", desc: "World-class material trapped inside a video player and a table of contents. The content deserves a better interface." },
@@ -956,7 +837,7 @@ export const INDUSTRIES = [
  icon: "✦",
  tagline: "An audience is fleeting. A brand compounds.",
  description: "We turn creators, founders and experts into media properties. Signature identities, editorial sites and systems that turn attention into owned revenue.",
- stat: { value: "200K", label: "Launch-day visitors on Vera" },
+ stat: { value: "2", label: "Typefaces in the whole Vera system" },
  challenges: [
  { title: "Rented land", desc: "Everything lives on one platform's algorithm. The audience is real, the relationship with it is not." },
  { title: "Generic presence", desc: "A link-in-bio page, a template site, a Canva logo. The person is distinctive; the brand around them is not." },
@@ -976,7 +857,7 @@ export const INDUSTRIES = [
  icon: "⬣",
  tagline: "Your quiet specialist department.",
  description: "We plug into agencies as a white-label senior team. Overflow capacity, motion and WebGL firepower, and design systems expertise. Your name on the delivery.",
- stat: { value: "40+", label: "Projects shipped to date" },
+ stat: { value: "95+", label: "Lighthouse on every build" },
  challenges: [
  { title: "Overflow, unpredictably", desc: "The pipeline swings between drought and flood. Hiring for the peak is expensive, surviving the trough is survival." },
  { title: "Specialist gaps", desc: "The account is won, then the brief demands WebGL, design systems or motion craft the in-house team doesn't cover." },

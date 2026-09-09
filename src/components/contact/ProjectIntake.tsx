@@ -310,7 +310,7 @@ export default function ProjectIntake() {
                       type="text"
                       value={answers.name}
                       onChange={(e) => set("name", e.target.value)}
-                      placeholder="Sarah Chen"
+                      placeholder="Your name"
                       className={inputClass}
                       autoComplete="name"
                     />

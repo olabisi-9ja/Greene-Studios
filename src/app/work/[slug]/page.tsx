@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { PROJECTS, TESTIMONIALS } from "@/lib/data";
+import { PROJECTS } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { colorBlurDataURL } from "@/lib/utils";
 
@@ -28,7 +28,6 @@ export default async function CaseStudyPage({ params }: Props) {
 
   const index = PROJECTS.findIndex((p) => p.slug === slug);
   const next = PROJECTS[(index + 1) % PROJECTS.length];
-  const quote = TESTIMONIALS.find((t) => t.projectSlug === slug);
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
@@ -179,30 +178,6 @@ export default async function CaseStudyPage({ params }: Props) {
               </div>
             </section>
 
-            {quote ? (
-              <section>
-                <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                  ✦ The client
-                </span>
-                <figure className="rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:p-10">
-                  <blockquote className="font-serif-i text-[clamp(1.3rem,2vw,1.8rem)] leading-snug text-[var(--brand-text)]">
-                    “{quote.quote}”
-                  </blockquote>
-                  <figcaption className="mt-8 flex items-center gap-4 border-t border-[var(--brand-border)] pt-6">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-text)] font-display text-sm font-black text-[var(--brand-bg)]">
-                      {quote.avatar}
-                    </span>
-                    <div>
-                      <div className="font-display text-sm font-black uppercase tracking-tight">{quote.author}</div>
-                      <div className="text-xs font-medium text-[var(--brand-text-secondary)]">{quote.title}</div>
-                    </div>
-                    <span className="ml-auto rounded-full bg-[var(--brand-accent)] px-4 py-1.5 font-display text-xs font-black uppercase tracking-wider text-[var(--brand-on-accent)]">
-                      {quote.result}
-                    </span>
-                  </figcaption>
-                </figure>
-              </section>
-            ) : null}
 
             <section>
               <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">

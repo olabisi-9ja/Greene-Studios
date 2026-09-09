@@ -30,126 +30,82 @@
 }
 
 @layer base {
-  /* ─── DAY (default · professional editorial) ────────────────────── */
-  :root, .mode-paper, .mode-day {
-    --brand-primary: #87ff5a; /* Greene accent */
+  /* ─── LIGHT (default) ──────────────────────────────────────────────
+     Two themes only. `mode-paper` / `mode-studio` / `mode-raw` are kept
+     as aliases so older markup keeps resolving while it is migrated. */
+  :root,
+  .mode-light,
+  .mode-day,
+  .mode-paper,
+  .mode-studio,
+  .mode-raw {
+    --brand-primary: #1f3d3a;
     --brand-bg: #f3f2ee; /* paper */
-    --brand-surface: #ffffff; /* clean surface */
-    --brand-surface-secondary: #e8e7e2; /* quiet contrast */
+    --brand-surface: #ffffff;
+    --brand-surface-secondary: #e8e7e2;
     --brand-border: #d7d6d1;
     --brand-text: #0a0a0a; /* ink */
-    --brand-text-secondary: #666663;
-    --brand-accent: #87ff5a; /* used surgically */
+    --brand-text-secondary: #5c5c59;
+    --brand-accent: #1f3d3a;
     --brand-on-accent: #f4f3ee;
     --brand-paper: #f4f3ee;
     --brand-ink: #111311;
 
     /* CTA block tokens (mode-aware) */
-    --cta-bg: var(--brand-accent);
+    --cta-bg: var(--brand-text);
     --cta-fg: var(--brand-bg);
     --cta-btn-bg: var(--brand-bg);
-    --cta-btn-fg: var(--brand-accent);
+    --cta-btn-fg: var(--brand-text);
     --cta-border: var(--brand-bg);
 
+    /* Full abstract set — defined in BOTH themes so no page can reference
+       a token that only exists in one of them. */
     --color-abstract-orange: #c2541e;
-    --color-abstract-blue: #c9e3ff;
+    --color-abstract-blue: #3f6fa8;
     --color-abstract-green: #477a44;
-    --color-abstract-lemon: #d9f42c;
+    --color-abstract-teal: #2e7d74;
+    --color-abstract-yellow: #d8a22a;
+    --color-abstract-lemon: #c8d94a;
     --color-abstract-black: #17140e;
-    --color-abstract-pink: #ffd9e1;
+    --color-abstract-pink: #c2708a;
 
     --studio-grain: 0.03;
+    color-scheme: light;
   }
 
-  /* ─── NIGHT (premium · cinematic) ───────────────────────────────── */
-  .mode-midnight, .mode-night {
-    --brand-primary: #557a70;
+  /* ─── DARK ─────────────────────────────────────────────────────────── */
+  .mode-dark,
+  .mode-night,
+  .mode-midnight {
+    --brand-primary: #8fb3a6;
     --brand-bg: #080a09;
     --brand-surface: #101513;
     --brand-surface-secondary: #161d1b;
     --brand-border: rgba(242, 239, 230, 0.14);
     --brand-text: #f2efe6;
-    --brand-text-secondary: rgba(242, 239, 230, 0.58);
-    --brand-accent: #557a70;
+    --brand-text-secondary: rgba(242, 239, 230, 0.62);
+    --brand-accent: #8fb3a6;
     --brand-on-accent: #080a09;
     --brand-paper: #080a09;
     --brand-ink: #f2efe6;
 
-    --cta-bg: var(--brand-accent);
+    --cta-bg: var(--brand-text);
     --cta-fg: var(--brand-bg);
     --cta-btn-bg: var(--brand-bg);
-    --cta-btn-fg: var(--brand-accent);
+    --cta-btn-fg: var(--brand-text);
     --cta-border: var(--brand-bg);
 
-    --color-abstract-orange: #ff5c28;
-    --color-abstract-blue: #2f4d8f;
-    --color-abstract-green: #3f7d57;
+    --color-abstract-orange: #ff7a4d;
+    --color-abstract-blue: #6d9bd8;
+    --color-abstract-green: #5aa66f;
+    --color-abstract-teal: #48b3a6;
+    --color-abstract-yellow: #e8c25a;
     --color-abstract-lemon: #d9f42c;
     --color-abstract-black: #f2efe6;
-    --color-abstract-pink: #a63a52;
+    --color-abstract-pink: #d98aa0;
 
     --studio-grain: 0.05;
-  }
-
-  /* ─── Studio (vibrant greenhouse) ───────────────────────────────── */
-  .mode-studio {
-    --brand-primary: var(--studio-accent, #d9f42c);
-    --brand-bg: #0c1f14; /* deep green-black so colours pop */
-    --brand-surface: #12301d;
-    --brand-surface-secondary: #1a3d26;
-    --brand-border: #2e5a3c;
-    --brand-text: #f2fbe9;
-    --brand-text-secondary: #a9c9b0;
-    --brand-accent: var(--studio-accent, #d9f42c);
-    --brand-on-accent: #0c1f14;
-    --brand-paper: #0c1f14;
-    --brand-ink: #0c1f14;
-
-    /* Cohesive vibrant palette (analogous hues, no clashing complements) */
-    --color-abstract-lemon: #d9f42c;
-    --color-abstract-green: #3ddc84;
-    --color-abstract-teal: #2ec4b6;
-    --color-abstract-blue: #3aa6ff;
-    --color-abstract-yellow: #ffd21a;
-    --color-abstract-black: #0c1f14;
-
-    --cta-bg: var(--studio-accent, #d9f42c);
-    --cta-fg: var(--brand-ink);
-    --cta-btn-bg: var(--brand-ink);
-    --cta-btn-fg: var(--studio-accent, #d9f42c);
-    --cta-border: var(--brand-ink);
-
-    --studio-grain: 0.04;
-  }
-
-  /* ─── RAW (workshop · behind the scenes) ────────────────────────── */
-  .mode-raw {
-    --brand-primary: #c2541e;
-    --brand-bg: #ede8df; /* workshop paper */
-    --brand-surface: #f4f0e8;
-    --brand-surface-secondary: #e0d9cc;
-    --brand-border: #c9bfa9;
-    --brand-text: #17150f;
-    --brand-text-secondary: #6b6254;
-    --brand-accent: #c2541e; /* marker orange */
-    --brand-on-accent: #f4f0e8;
-    --brand-paper: #ede8df;
-    --brand-ink: #17150f;
-
-    --cta-bg: var(--brand-accent);
-    --cta-fg: var(--brand-bg);
-    --cta-btn-bg: var(--brand-bg);
-    --cta-btn-fg: var(--brand-accent);
-    --cta-border: var(--brand-bg);
-
-    --color-abstract-orange: #c2541e;
-    --color-abstract-blue: #6b6254;
-    --color-abstract-green: #477a44;
-    --color-abstract-lemon: #c2541e;
-    --color-abstract-black: #17150f;
-    --color-abstract-pink: #c9bfa9;
-
-    --studio-grain: 0.07;
+    color-scheme: dark;
   }
 
   * {
@@ -171,7 +127,7 @@
     color: var(--brand-text);
     font-family: var(--font-body);
     overflow-x: hidden;
-    transition: background-color 0.8s ease, color 0.8s ease;
+    transition: background-color 0.4s ease, color 0.4s ease;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -188,22 +144,19 @@
     color: var(--brand-on-accent);
   }
 
-  /* On the ink footer, the green accent needs to be light to stay visible.
-     In NIGHT the footer inverts (light bg), so use the deep identity
-     green; in STUDIO the accent follows the chosen studio accent. */
+  /* The footer inverts against the page, so its accent has to invert too. */
+  :root footer,
+  .mode-light footer,
+  .mode-day footer,
   .mode-paper footer,
-  .mode-day footer {
+  .mode-studio footer,
+  .mode-raw footer {
     --brand-accent: #9fc9a8;
   }
-  .mode-midnight footer,
-  .mode-night footer {
+  .mode-dark footer,
+  .mode-night footer,
+  .mode-midnight footer {
     --brand-accent: #1f3d3a;
-  }
-  .mode-studio footer {
-    --brand-accent: var(--studio-accent, #d9f42c);
-  }
-  .mode-raw footer {
-    --brand-accent: #c2541e;
   }
 
   /* Custom scrollbar */
@@ -239,12 +192,6 @@
   .text-outline {
     color: transparent;
     -webkit-text-stroke: 1.5px var(--brand-text);
-  }
-  .mode-midnight .text-outline,
-  .mode-night .text-outline,
-  .mode-studio .text-outline,
-  .mode-raw .text-outline {
-    -webkit-text-stroke-color: var(--brand-text);
   }
 
   /* ─── Atmosphere ─────────────────────────────────────────────────── */
@@ -712,4 +659,80 @@
 .focus-active .focus-hide {
   visibility: hidden;
   opacity: 0;
+}
+
+
+/* ═══ REVEAL (CSS-only, driven by useSectionAnimation/useStaggerAnimation) ══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s var(--ease-out-quart),
+    transform 0.5s var(--ease-out-quart);
+  will-change: opacity, transform;
+}
+.reveal.is-revealed,
+.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ═══ MARQUEE (CSS-only; replaces react-fast-marquee) ═══════════════════ */
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 30s) linear infinite;
+  animation-direction: var(--marquee-direction, normal);
+  will-change: transform;
+}
+.marquee-pausable:hover {
+  animation-play-state: paused;
+}
+
+/* ═══ REDUCED MOTION ═══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Never leave a revealed element stuck at opacity 0. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+
+/* ═══ PAGE TRANSITION ══════════════════════════════════════════════════ */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.page-transition {
+  animation: page-fade-in 0.5s var(--ease-out-quart) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
 }

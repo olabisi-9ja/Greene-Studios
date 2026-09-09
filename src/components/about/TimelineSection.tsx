@@ -6,27 +6,29 @@ const TIMELINE_DATA = [
   {
     year: "2022",
     events: [
-      "Greene Studios founded. First client: a fintech startup.",
-      "Shipped 8 projects in year one. Developed our signature process framework.",
+      "Greene Studios founded in Lagos.",
+      "Set the operating rule the studio still runs on: design and production code leave together.",
     ],
   },
   {
     year: "2023",
     events: [
-      "Expanded into product design and AI integration services.",
-      "Crossed $1M in client revenue generated.",
+      "Extended the practice from brand and web into product design.",
+      "Standardised on a token-driven design system so every build starts from a system, not a blank file.",
     ],
   },
   {
     year: "2024",
     events: [
-      "Launched Greene Journal. 40+ published case studies and articles.",
+      "Launched Greene Journal — writing on design systems, motion and performance.",
+      "Set 95+ Lighthouse as the floor for anything that ships.",
     ],
   },
   {
-    year: "2025",
+    year: "2026",
     events: [
-      "Opening 2–3 new project slots for ambitious brands worldwide.",
+      "Six concept brand systems built and published as live sites.",
+      "Open for select projects worldwide.",
     ],
   },
 ];
