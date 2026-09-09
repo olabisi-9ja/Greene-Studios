@@ -12,25 +12,25 @@ const EXPERIMENTS = [
  id: 1,
  title: "Liquid Distortion",
  tech: "WebGL · Three.js",
- image: "https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800",
+ image: "/images/covers/lab-cursor.webp",
  },
  {
  id: 2,
  title: "Typography Physics",
  tech: "Matter.js · Canvas",
- image: "https://images.pexels.com/photos/1749303/pexels-photo-1749303.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800",
+ image: "/images/covers/lab-typography.webp",
  },
  {
  id: 3,
  title: "Infinite Scroll",
  tech: "GSAP · React",
- image: "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800",
+ image: "/images/covers/lab-motion.webp",
  },
  {
  id: 4,
  title: "Particle Systems",
  tech: "WebGL · Shaders",
- image: "https://images.pexels.com/photos/1933316/pexels-photo-1933316.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800",
+ image: "/images/covers/lab-interaction.webp",
  },
 ];
 

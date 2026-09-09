@@ -1,0 +1,114 @@
+{
+  "measuredAt": "2026-09-09",
+  "base": "local production build",
+  "pages": {
+    "greene-home": {
+      "url": "/",
+      "lcp": 1428,
+      "fcp": 240,
+      "cls": 0.0001,
+      "ttfb": 12,
+      "jsKb": 215,
+      "fontKb": 0,
+      "imgKb": 5,
+      "totalKb": 469,
+      "runs": 3
+    },
+    "greene-home-return": {
+      "url": "/",
+      "lcp": 1452,
+      "fcp": 248,
+      "cls": 0.0001,
+      "ttfb": 14,
+      "jsKb": 215,
+      "fontKb": 0,
+      "imgKb": 5,
+      "totalKb": 469,
+      "runs": 3
+    },
+    "greene-work": {
+      "url": "/work",
+      "lcp": 252,
+      "fcp": 252,
+      "cls": 0.0001,
+      "ttfb": 8,
+      "jsKb": 215,
+      "fontKb": 0,
+      "imgKb": 9,
+      "totalKb": 351,
+      "runs": 3
+    },
+    "luminary": {
+      "url": "/demo/luminary",
+      "lcp": 68,
+      "fcp": 68,
+      "cls": 0,
+      "ttfb": 6,
+      "jsKb": 94,
+      "fontKb": 84,
+      "imgKb": 0,
+      "totalKb": 222,
+      "runs": 3
+    },
+    "vera": {
+      "url": "/demo/vera",
+      "lcp": 72,
+      "fcp": 72,
+      "cls": 0,
+      "ttfb": 6,
+      "jsKb": 94,
+      "fontKb": 93,
+      "imgKb": 0,
+      "totalKb": 230,
+      "runs": 3
+    },
+    "arc": {
+      "url": "/demo/arc",
+      "lcp": 88,
+      "fcp": 88,
+      "cls": 0,
+      "ttfb": 6,
+      "jsKb": 94,
+      "fontKb": 90,
+      "imgKb": 0,
+      "totalKb": 226,
+      "runs": 3
+    },
+    "bloom": {
+      "url": "/demo/bloom",
+      "lcp": 60,
+      "fcp": 60,
+      "cls": 0,
+      "ttfb": 6,
+      "jsKb": 94,
+      "fontKb": 26,
+      "imgKb": 0,
+      "totalKb": 163,
+      "runs": 3
+    },
+    "onyx": {
+      "url": "/demo/onyx",
+      "lcp": 68,
+      "fcp": 68,
+      "cls": 0,
+      "ttfb": 5,
+      "jsKb": 94,
+      "fontKb": 106,
+      "imgKb": 0,
+      "totalKb": 239,
+      "runs": 3
+    },
+    "prism": {
+      "url": "/demo/prism",
+      "lcp": 64,
+      "fcp": 64,
+      "cls": 0,
+      "ttfb": 5,
+      "jsKb": 94,
+      "fontKb": 32,
+      "imgKb": 0,
+      "totalKb": 164,
+      "runs": 3
+    }
+  }
+}

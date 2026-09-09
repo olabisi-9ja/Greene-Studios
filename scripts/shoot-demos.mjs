@@ -36,10 +36,25 @@ await withBrowser(async (browser) => {
       href: n.href,
     }))];
 
+    // A brand that defines a dark palette gets photographed in it too — for
+    // Onyx and Arc that scheme *is* the identity, so a light-only gallery
+    // would misrepresent the work.
+    const schemes = brand.palette.dark ? ["light", "dark"] : ["light"];
+
     for (const vp of VIEWPORTS) {
-      const out = path.join(outRoot, brand.slug, `home-${vp.key}.png`);
-      await shootUrl(browser, { url: base + pages[0].href, out, width: vp.width, height: vp.height, scale: vp.scale });
-      console.log(`✓ ${brand.slug} home @${vp.key}`);
+      for (const scheme of schemes) {
+        const suffix = scheme === "dark" ? "-dark" : "";
+        const out = path.join(outRoot, brand.slug, `home-${vp.key}${suffix}.png`);
+        await shootUrl(browser, {
+          url: base + pages[0].href,
+          out,
+          width: vp.width,
+          height: vp.height,
+          scale: vp.scale,
+          colorScheme: scheme,
+        });
+        console.log(`✓ ${brand.slug} home @${vp.key} ${scheme}`);
+      }
     }
 
     // One full-page desktop shot per inner page — the case study gallery.

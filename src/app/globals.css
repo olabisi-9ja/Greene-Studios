@@ -736,3 +736,27 @@
     animation: none;
   }
 }
+
+
+/* ═══ HERO STATEMENT ═══════════════════════════════════════════════════
+   The hero H1 used to start at opacity 0 and wait for framer-motion to
+   hydrate, which made it the LCP element at ~1.48s on a site whose whole
+   pitch is speed. Same choreography, run from first paint by CSS. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-rise {
+  animation: hero-rise 0.85s var(--ease-out-expo) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise {
+    animation: none;
+  }
+}

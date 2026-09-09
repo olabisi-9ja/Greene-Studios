@@ -538,7 +538,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "8 min read",
  featured: true,
  slug: "why-motion-matters",
- image: "https://images.pexels.com/photos/7172661/pexels-photo-7172661.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/why-motion-matters.webp",
  content: [
  { type: "p", text: "When we look at the digital products that truly captivate us, the ones we describe as 'magical' or 'intuitive', there is almost always a common denominator: purposeful motion design. Yet, in most product development cycles, animation is treated as the garnish. It's the sprinkles added at the very end of the process, assuming there is any budget or time remaining." },
  { type: "h2", text: "Motion is Communication, Not Decoration" },
@@ -562,7 +562,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "12 min read",
  featured: true,
  slug: "design-systems-at-scale",
- image: "https://images.pexels.com/photos/6892716/pexels-photo-6892716.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/design-systems-at-scale.webp",
  content: [
  { type: "p", text: "Three years ago, 'Design System' was the hottest buzzword in the industry. Every company, regardless of size, felt compelled to build one. We were hired to audit, rescue, or rebuild dozens of them. What we found was a graveyard of abandoned Figma files and deprecated React libraries." },
  { type: "h2", text: "The Fallacy of the 'Finished' System" },
@@ -585,7 +585,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "10 min read",
  featured: false,
  slug: "ai-in-product-design",
- image: "https://images.pexels.com/photos/17279854/pexels-photo-17279854.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/ai-in-product-design.webp",
  content: [
  { type: "p", text: "The anxiety in the design community is palpable. As AI image generators and UI generators become more sophisticated, the existential question looms: What is the role of a product designer in an AI-driven world?" },
  { type: "h2", text: "AI as a Co-Pilot, Not an Autopilot" },
@@ -610,7 +610,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "7 min read",
  featured: false,
  slug: "typography-that-converts",
- image: "https://images.pexels.com/photos/8534173/pexels-photo-8534173.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/typography-that-converts.webp",
  content: [
  { type: "p", text: "Designers love typography. We can spend hours debating the merits of Inter versus Roboto, or hunting for the perfect geometric sans-serif to elevate a brand. But how much does typography actually impact business metrics? Does the end user really care if a font has humanist terminals?" },
  { type: "p", text: "We decided to find out. Over three months, we ran extensive A/B tests across multiple high-traffic landing pages, isolating typography as the only variable." },
@@ -634,7 +634,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "15 min read",
  featured: false,
  slug: "the-0-seo-strategy",
- image: "https://images.pexels.com/photos/7679662/pexels-photo-7679662.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/the-0-seo-strategy.webp",
  content: [
  { type: "p", text: "When we launched Greene Studios, we had zero marketing budget. We couldn't compete on paid ads with massive agencies, and buying sketchy backlinks felt completely misaligned with our brand values. We had to grow organically, relying purely on the quality of our insights." },
  { type: "p", text: "18 months later, our journal drives 40,000 highly targeted organic visitors per month, resulting in a consistent pipeline of high-quality leads. Here is exactly how we did it." },
@@ -658,7 +658,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "9 min read",
  featured: false,
  slug: "freelance-to-studio",
- image: "https://images.pexels.com/photos/8534041/pexels-photo-8534041.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/freelance-to-studio.webp",
  content: [
  { type: "p", text: "For the first three years of my career, I was a successful freelancer by all external metrics. I was fully booked, working with good clients, and making a decent living. But internally, I was exhausted. I was trading time for money, which meant there was a hard ceiling on my income and a constant floor on my stress levels." },
  { type: "h2", text: "The Hourly Trap" },

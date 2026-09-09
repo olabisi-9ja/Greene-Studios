@@ -10,7 +10,11 @@
     "assets": "node scripts/render-assets.mjs",
     "assets:check": "node scripts/render-assets.mjs --check",
     "fonts": "node scripts/copy-fonts.mjs",
-    "shoot": "node scripts/shoot-demos.mjs"
+    "shoot": "node scripts/shoot-demos.mjs",
+    "images": "node scripts/optimise-images.mjs",
+    "assets:all": "npm run fonts && npm run assets && npm run shoot && npm run images",
+    "covers": "node scripts/render-covers.mjs",
+    "measure": "node scripts/measure.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -52,6 +56,7 @@
     "eslint-config-next": "14.2.14",
     "playwright": "^1.56.1",
     "postcss": "8.5.8",
+    "sharp": "^0.35.4",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3"
   }
