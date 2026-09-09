@@ -6,11 +6,20 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "assets": "node scripts/render-assets.mjs",
+    "assets:check": "node scripts/render-assets.mjs --check"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/bodoni-moda": "^5.3.0",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/inter-tight": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/outfit": "^5.3.0",
+    "@fontsource-variable/public-sans": "^5.3.0",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
     "@radix-ui/react-accordion": "^1.2.16",
     "@radix-ui/react-dialog": "^1.1.19",
     "@radix-ui/react-tabs": "^1.1.17",
@@ -39,6 +48,7 @@
     "@types/react-dom": "18.3.0",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.14",
+    "playwright": "^1.56.1",
     "postcss": "8.5.8",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3"

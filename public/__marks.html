@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#f6f6f4;font:13px/1.4 system-ui;padding:28px}
+.row{display:flex;gap:20px;flex-wrap:wrap}
+.card{background:#fff;border:1px solid #e2e2de;padding:18px;width:190px;text-align:center}
+.big{height:88px;display:flex;align-items:center;justify-content:center}
+.big svg{width:72px;height:72px}
+.sizes{display:flex;gap:12px;align-items:flex-end;justify-content:center;margin:14px 0 10px;height:34px}
+.sizes svg{display:block}
+.s32{width:32px;height:32px}.s24{width:24px;height:24px}.s16{width:16px;height:16px}
+.name{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:10px;color:#666}
+.dark{background:#101010;border-color:#2a2a2a;color:#f0f0f0}
+.dark .name{color:#999}
+</style></head><body>
+<div class="row" id="light"></div>
+<div style="height:24px"></div>
+<div class="row" id="dark"></div>
+<script>
+const brands=[["luminary","#2f6bff"],["vera","#8a6a4b"],["arc","#111111"],["bloom","#0f6b7d"],["onyx","#c9a227"],["prism","#e8542f"]];
+async function build(hostId, dark){
+  const host=document.getElementById(hostId);
+  for(const [b,accent] of brands){
+    const svg=await (await fetch('/demo/'+b+'/mark.svg')).text();
+    const d=document.createElement('div');
+    d.className='card'+(dark?' dark':'');
+    d.style.setProperty('--brand-accent', accent);
+    d.style.color = dark ? '#f0f0f0' : '#111';
+    d.innerHTML='<div class="big">'+svg+'</div><div class="sizes">'
+      +'<span class="s32">'+svg+'</span><span class="s24">'+svg+'</span><span class="s16">'+svg+'</span>'
+      +'</div><div class="name">'+b+'</div>';
+    d.querySelectorAll('.s32 svg').forEach(s=>{s.setAttribute('width',32);s.setAttribute('height',32)});
+    d.querySelectorAll('.s24 svg').forEach(s=>{s.setAttribute('width',24);s.setAttribute('height',24)});
+    d.querySelectorAll('.s16 svg').forEach(s=>{s.setAttribute('width',16);s.setAttribute('height',16)});
+    host.appendChild(d);
+  }
+}
+(async()=>{ await build('light',false); await build('dark',true); document.title='ready'; })();
+</script></body></html>
