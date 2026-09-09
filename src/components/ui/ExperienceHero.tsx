@@ -114,7 +114,7 @@ export const ExperienceHero = () => {
             {/* the one dominant statement */}
             <h1
               className="hero-rise font-display text-[clamp(2.75rem,6.4vw,6rem)] font-black uppercase leading-[1.04] tracking-tight"
-              style={{ animationDelay: "0.15s" }}
+              style={{ animationDelay: "0.06s" }}
             >
               We build digital
               <br />
@@ -124,7 +124,7 @@ export const ExperienceHero = () => {
             {/* one-line subhead */}
             <p
               className="hero-rise mt-7 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg"
-              style={{ animationDelay: "0.3s" }}
+              style={{ animationDelay: "0.18s" }}
             >
               Greene Studios designs and builds brands, websites &amp; digital products with uncommon presence.
             </p>
@@ -132,7 +132,7 @@ export const ExperienceHero = () => {
             {/* one CTA pair: primary action + quiet text link */}
             <div
               className="hero-rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
-              style={{ animationDelay: "0.45s" }}
+              style={{ animationDelay: "0.27s" }}
             >
               <Magnetic>
                 <Link
@@ -157,16 +157,14 @@ export const ExperienceHero = () => {
             </div>
 
             {/* the studio's numbers, one quiet line instead of floating chips */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.6 }}
-              className="mt-9 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-secondary)]"
+            <p
+              className="hero-rise mt-9 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-secondary)]"
+              style={{ animationDelay: "0.36s" }}
             >
               Brand · Web · Product
               <span className="mx-3 text-[var(--brand-accent)]" aria-hidden="true">✦</span>
               Lagos, working worldwide
-            </motion.p>
+            </p>
           </div>
         </div>
 
@@ -226,7 +224,7 @@ export const ExperienceHero = () => {
             <div className="mx-auto flex w-full max-w-[1600px] items-center gap-8 px-5 py-4 md:px-10">
               <div className="min-w-0 flex-1">
                 <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--brand-text-secondary)]">
-                  Trusted by ambitious teams
+                  Concept brands, built end to end
                 </p>
                 <Marquee>
                   <MarqueeContent speed={28} autoFill>

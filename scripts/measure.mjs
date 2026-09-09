@@ -19,15 +19,20 @@ const runs = Number(args.find((a) => a.startsWith("--runs="))?.split("=")[1] ?? 
 
 async function measure(browser, url, warm = false) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  const page = await context.newPage();
   if (warm) {
-    // Prime the session so the once-per-session loader does not replay.
-    await page.goto(url, { waitUntil: "networkidle", timeout: 45_000 });
-    await page.waitForTimeout(2200);
-    await page.reload({ waitUntil: "networkidle" });
-  } else {
-    await page.goto(url, { waitUntil: "networkidle", timeout: 45_000 });
+    // Set the loader's session flag before any script runs, rather than
+    // priming with a first visit and a sleep — that raced the loader's own
+    // timers and gave a warm number that was sometimes the cold one.
+    await context.addInitScript(() => {
+      try {
+        sessionStorage.setItem("loader_shown", "true");
+      } catch {
+        /* storage unavailable — the loader will play and the number says so */
+      }
+    });
   }
+  const page = await context.newPage();
+  await page.goto(url, { waitUntil: "networkidle", timeout: 45_000 });
 
   const result = await page.evaluate(
     () =>

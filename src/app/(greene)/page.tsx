@@ -7,7 +7,6 @@ import ServicesSection from "@/components/home/ServicesSection";
 import ProcessSection from "@/components/home/ProcessSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
-import ClientWrapper from "@/components/ClientWrapper";
 import { FAQS } from "@/lib/data";
 
 /**
@@ -18,23 +17,12 @@ import { FAQS } from "@/lib/data";
  * three why-us blocks are one Manifesto, and the strips are gone.
  */
 export default function HomePage() {
-  const heroFallback = (
-    <div className="flex min-h-screen w-full items-center justify-center bg-[var(--brand-bg)] text-[var(--brand-text)]">
-      <div className="flex items-center gap-3">
-        <span className="relative block h-10 w-10 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/gs-chip.svg" alt="" className="h-full w-full object-contain" />
-        </span>
-        <span className="font-display text-2xl font-black uppercase tracking-tight">Greene.</span>
-      </div>
-    </div>
-  );
-
   return (
     <>
-      <ClientWrapper fallback={heroFallback}>
-        <ExperienceHero />
-      </ClientWrapper>
+      {/* Rendered directly, not behind a mount gate. ClientWrapper served a
+          placeholder until useEffect fired, which deferred the page's main
+          content past hydration and made LCP 1.9s. */}
+      <ExperienceHero />
 
       <SelectedWork />
 

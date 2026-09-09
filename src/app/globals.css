@@ -753,7 +753,7 @@
   }
 }
 .hero-rise {
-  animation: hero-rise 0.85s var(--ease-out-expo) both;
+  animation: hero-rise 0.6s var(--ease-out-quart) both;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-rise {
