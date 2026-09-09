@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
-import Preloader from "@/components/Preloader";
 
 export const viewport: import("next").Viewport = {
  width: "device-width",
@@ -54,19 +50,16 @@ export const metadata: Metadata = {
  },
 };
 
-import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
-import DynamicCursor from "@/components/ui/DynamicCursor";
-import NoiseTexture from "@/components/canvas/NoiseTexture";
-import FocusMode from "@/components/FocusMode";
-import ScrollProgress from "@/components/animations/ScrollProgress";
-import FloatingButtons from "@/components/FloatingButtons";
-import PageTransition from "@/components/animations/PageTransition";
 
-export default function RootLayout({
- children,
-}: {
- children: React.ReactNode;
-}) {
+/**
+ * Root layout — html/body and metadata only.
+ *
+ * The Greene chrome (nav, footer, cursor, smooth scroll, preloader) lives in
+ * the (greene) route group so the concept sites under /demo can render with
+ * none of it. A demo that inherited Greene's navigation would stop being a
+ * separate brand the moment a visitor looked at the top of the page.
+ */
+export default function RootLayout({ children }: { children: React.ReactNode }) {
  return (
  <html lang="en" suppressHydrationWarning className="font-sans">
  <body className="antialiased overflow-x-hidden">
@@ -91,53 +84,7 @@ export default function RootLayout({
  })();`,
    }}
  />
- <AtmosphereProvider>
- <ScrollProgress />
- <NoiseTexture />
- <DynamicCursor />
- <Preloader />
- {/* Structured data: the studio, machine-readable. Organisation + site. */}
- <script
-   type="application/ld+json"
-   dangerouslySetInnerHTML={{
-     __html: JSON.stringify({
-       "@context": "https://schema.org",
-       "@type": "Organization",
-       name: "Greene Studios",
-       url: process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app",
-       logo: "/brand/gs-chip.png",
-       email: "hello@greenestudios.co",
-       description:
-         "Independent digital design studio. Brands, websites, and digital products that make people stop scrolling.",
-       foundingDate: "2022",
-       sameAs: [
-         "https://instagram.com/greenestudios",
-         "https://twitter.com/greenestudios",
-         "https://linkedin.com/company/greenestudios",
-         "https://github.com/greenestudios",
-       ],
-       knowsAbout: [
-         "Web Design",
-         "UI/UX Design",
-         "Branding",
-         "Frontend Development",
-         "Motion Design",
-       ],
-     }),
-   }}
- />
- <SmoothScroll>
- <Navbar />
- <main>
- <PageTransition>
  {children}
- </PageTransition>
- </main>
- <Footer />
- <FloatingButtons />
- </SmoothScroll>
- <FocusMode />
- </AtmosphereProvider>
  </body>
  </html>
  );

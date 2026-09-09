@@ -6,7 +6,7 @@
  * the type annotations and evaluate the object literal. One source of truth,
  * no duplication, no extra dependency.
  */
-import { readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 const DIR = path.join(process.cwd(), "src/lib/brands");
@@ -18,14 +18,9 @@ async function load(slug) {
   return new Function(`return (${body})`)();
 }
 
-const files = (await readdir(DIR)).filter(
-  (f) => f.endsWith(".ts") && !["types.ts", "index.ts"].includes(f)
-);
-
+/** Explicit, ordered — the directory also holds types.ts, index.ts, fonts.ts
+ *  and css.ts, none of which export a brand. */
 const ORDER = ["luminary", "vera", "arc", "bloom", "onyx", "prism"];
-const loaded = await Promise.all(files.map((f) => load(path.basename(f, ".ts"))));
 
-export const BRANDS = loaded.sort(
-  (a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug)
-);
+export const BRANDS = await Promise.all(ORDER.map(load));
 export const BRANDS_BY_SLUG = Object.fromEntries(BRANDS.map((b) => [b.slug, b]));

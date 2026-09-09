@@ -1,0 +1,177 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Demo shell — the only stylesheet the concept sites load.
+
+   Deliberately independent of the Greene design system: no --brand-* tokens
+   reach past this file, and every value below resolves from the --b-* set
+   the active brand injects. A demo that borrowed Greene's spacing or type
+   would defeat the whole exercise.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.demo-root {
+  background: var(--b-bg);
+  color: var(--b-text);
+  font-family: var(--b-body);
+  line-height: var(--b-leading);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  /* Greene's custom cursor is hidden away from its own site. */
+  cursor: auto;
+}
+.demo-root *,
+.demo-root *::before,
+.demo-root *::after {
+  box-sizing: border-box;
+  cursor: auto;
+}
+/* :where() keeps this reset at zero specificity, so component classes like
+   .d-btn (which set their own colour against a filled background) win. With a
+   plain `.demo-root a` selector the reset outranked .d-btn and every primary
+   button painted its label in the accent colour — invisible on Arc, where the
+   accent and the text colour are both near-black. */
+.demo-root :where(a) { color: inherit; text-decoration: none; }
+.demo-root :focus-visible {
+  outline: 2px solid var(--b-accent);
+  outline-offset: 3px;
+  border-radius: var(--b-r-sm);
+}
+
+/* ─── Type ─────────────────────────────────────────────────────────────── */
+.d-display {
+  font-family: var(--b-display);
+  font-weight: var(--b-display-weight);
+  letter-spacing: var(--b-display-tracking);
+  text-transform: var(--b-display-case);
+  line-height: 1.02;
+  margin: 0;
+  text-wrap: balance;
+}
+.d-h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+.d-h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+.d-h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
+/* Measure, set on the heading itself so ch resolves against its own size. */
+.d-m-xs { max-width: 12ch; }
+.d-m-sm { max-width: 16ch; }
+.d-m-md { max-width: 20ch; }
+.d-m-lg { max-width: 26ch; }
+.d-mono {
+  font-family: var(--b-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+.d-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--b-muted);
+  margin: 0;
+}
+.d-lead { font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--b-muted); max-width: 60ch; margin: 0; }
+.d-body { color: var(--b-muted); margin: 0; max-width: 68ch; }
+
+/* ─── Layout ───────────────────────────────────────────────────────────── */
+.d-wrap { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
+.d-wrap-wide { max-width: 1600px; }
+.d-section { padding-block: clamp(64px, 9vw, 132px); }
+.d-section-tight { padding-block: clamp(44px, 6vw, 84px); }
+.d-rule { border: 0; border-top: 1px solid var(--b-border); margin: 0; }
+.d-stack { display: flex; flex-direction: column; gap: calc(var(--b-grid) * 3); }
+.d-stack-lg { display: flex; flex-direction: column; gap: calc(var(--b-grid) * 6); }
+.d-grid { display: grid; gap: calc(var(--b-grid) * 3); }
+.d-cols-2, .d-cols-3, .d-cols-4 { grid-template-columns: 1fr; }
+@media (min-width: 620px) {
+  .d-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .d-cols-3 { grid-template-columns: repeat(2, 1fr); }
+  .d-cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 940px) {
+  .d-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .d-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+.d-split { display: grid; gap: clamp(28px, 5vw, 72px); grid-template-columns: 1fr; }
+@media (min-width: 900px) { .d-split { grid-template-columns: 1fr 1fr; align-items: center; } }
+
+/* ─── Surfaces ─────────────────────────────────────────────────────────── */
+.d-card {
+  background: var(--b-surface);
+  border: 1px solid var(--b-border);
+  border-radius: var(--b-r-lg);
+  padding: calc(var(--b-grid) * 4);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--b-grid) * 2);
+  transition: transform var(--b-dur) var(--b-ease), border-color var(--b-dur) var(--b-ease);
+}
+.d-card-alt { background: var(--b-surface-alt); }
+a.d-card:hover, .d-card-hover:hover { transform: translateY(-3px); border-color: var(--b-accent); }
+.d-panel { background: var(--b-surface-alt); border-radius: var(--b-r-lg); padding: clamp(24px, 4vw, 56px); }
+
+/* ─── Controls ─────────────────────────────────────────────────────────── */
+.d-btn {
+  display: inline-flex; align-items: center; gap: 0.6em;
+  padding: 0.95em 1.7em;
+  border-radius: var(--b-r-pill);
+  background: var(--b-accent); color: var(--b-on-accent);
+  border: 1px solid var(--b-accent);
+  font: inherit; font-weight: 600; font-size: 0.9375rem;
+  line-height: 1; cursor: pointer;
+  /* 48px minimum target, which Bloom's system requires and the rest inherit. */
+  min-height: 48px;
+  transition: opacity var(--b-dur) var(--b-ease), transform var(--b-dur) var(--b-ease);
+}
+.d-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.d-btn-ghost { background: transparent; color: var(--b-text); border-color: var(--b-border); }
+.d-btn-ghost:hover { border-color: var(--b-text); opacity: 1; }
+
+.d-tag {
+  display: inline-flex; align-items: center; gap: 0.45em;
+  padding: 0.4em 0.85em; border-radius: var(--b-r-pill);
+  background: color-mix(in srgb, var(--b-accent) 12%, transparent);
+  color: var(--b-accent);
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+}
+
+/* ─── Chrome ───────────────────────────────────────────────────────────── */
+.d-nav {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--b-bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--b-border);
+}
+.d-nav-inner { display: flex; align-items: center; gap: 28px; min-height: 68px; }
+.d-brand { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; }
+.d-brand svg { width: 26px; height: 26px; }
+.d-brand-name {
+  font-family: var(--b-display);
+  font-weight: var(--b-display-weight);
+  letter-spacing: var(--b-display-tracking);
+  font-size: 1.15rem;
+}
+.d-nav-links { display: none; gap: 26px; align-items: center; }
+@media (min-width: 820px) { .d-nav-links { display: flex; } }
+.d-nav-links a { font-size: 0.9rem; color: var(--b-muted); transition: color var(--b-dur) var(--b-ease); }
+.d-nav-links a:hover, .d-nav-links a[aria-current="page"] { color: var(--b-text); }
+
+.d-foot { border-top: 1px solid var(--b-border); background: var(--b-surface-alt); }
+.d-foot-inner { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; padding-block: 40px; }
+.d-foot small { color: var(--b-muted); font-size: 0.8125rem; }
+
+/* The one place a demo acknowledges Greene: a return link, clearly marked. */
+.d-badge {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.75rem; color: var(--b-muted);
+  border: 1px solid var(--b-border); border-radius: var(--b-r-pill);
+  padding: 0.5em 0.9em;
+  transition: border-color var(--b-dur) var(--b-ease), color var(--b-dur) var(--b-ease);
+}
+.d-badge:hover { color: var(--b-text); border-color: var(--b-text); }
+
+/* ─── Utility ──────────────────────────────────────────────────────────── */
+.d-media { border-radius: var(--b-r-lg); overflow: hidden; background: var(--b-surface-alt); }
+/* No forced ratio: an inline SVG already has an intrinsic one from its
+   viewBox, and overriding it letterboxed the square figures inside cards. */
+.d-figure { width: 100%; height: auto; display: block; }
+.d-accent { color: var(--b-accent); }
+.d-muted { color: var(--b-muted); }
+.d-center { text-align: center; }
+.d-max { max-width: 62ch; }
