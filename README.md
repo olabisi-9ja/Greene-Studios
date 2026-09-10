@@ -104,8 +104,32 @@ through `mask-image`. That is what lets a raster export behave like the SVGs
 it replaces — one file that takes the colour of whatever surface it sits on,
 with no white box on a dark theme.
 
-Until those files exist, every call site falls back to the hand-drawn marks
-already in `public/brand/`, so nothing breaks mid-swap.
+Until those files exist nothing breaks mid-swap: the monogram falls back to
+the generated mark below, and the wordmark to the hand-drawn
+`greene-stacked.svg` already in `public/brand/`.
+
+### The GS monogram
+
+```bash
+npm run monogram        # glyph outlines → .asset-check/monogram/ (12 candidates)
+npm run monogram:sheet  # contact sheet at 72/32/24/16px, light and dark
+```
+
+Candidates are laid out from the real font binaries — fontkit instances the
+variable weight axis and emits the contours, so the letterforms are the
+typeface's own rather than a trace. Nothing is promoted automatically.
+
+**Currently in use: `outfit-700-tight`** (Outfit, 700, -0.03em tracking),
+committed as `public/brand/gs-monogram-outfit.svg` and mirrored as JSX in
+`GreeneMark.tsx`. It is inlined rather than loaded through `<img>` for the same
+reason the concept marks are: an SVG loaded as an image is an isolated
+document, so `currentColor` resolves against nothing and the mark paints black
+— invisible on the dark theme. Inline, it takes the colour of whatever chip it
+sits in.
+
+To switch candidates, copy another SVG out of `.asset-check/monogram/` and
+replace the two paths in `MonogramGlyphs`. A real export dropped in
+`public/brand/_src/` still wins over both.
 
 ### The founder portrait
 
