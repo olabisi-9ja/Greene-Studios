@@ -1,267 +1,256 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { PROJECTS } from "@/lib/data";
+import { ShotImage } from "@/components/work/ShotImage";
 import { notFound } from "next/navigation";
-import { colorBlurDataURL } from "@/lib/utils";
+import { BRANDS, BRANDS_BY_SLUG } from "@/lib/brands";
+import { CASE_STUDIES } from "@/lib/brands/casestudy";
+import { BrandMark } from "@/components/demo/BrandMark";
+import measured from "@/lib/measured.json";
 
 type Props = { params: Promise<{ slug: string }> };
 
+export async function generateStaticParams() {
+  return BRANDS.map((b) => ({ slug: b.slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
-  if (!project) return { title: "Project Not Found" };
+  const brand = BRANDS_BY_SLUG[slug];
+  if (!brand) return { title: "Not found" };
   return {
-    title: `${project.title} · Case Study`,
-    description: project.description,
+    title: `${brand.name} · Case study`,
+    description: brand.direction,
   };
 }
 
-export async function generateStaticParams() {
-  return PROJECTS.map((p) => ({ slug: p.slug }));
-}
+/** Performance figures come from src/lib/measured.json, written by
+ *  `npm run measure` against a production build. Never hand-typed. */
+type Measured = { lcp: number; cls: number; jsKb: number; totalKb: number };
+const PAGES = measured.pages as Record<string, Measured>;
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
-  if (!project) notFound();
+  const brand = BRANDS_BY_SLUG[slug];
+  const study = CASE_STUDIES[slug];
+  if (!brand || !study) notFound();
 
-  const index = PROJECTS.findIndex((p) => p.slug === slug);
-  const next = PROJECTS[(index + 1) % PROJECTS.length];
-
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
+  const perf = PAGES[slug];
+  const index = BRANDS.findIndex((b) => b.slug === slug);
+  const next = BRANDS[(index + 1) % BRANDS.length];
+  const palette = brand.palette.light;
 
   return (
-    <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Work", item: `${base}/work` },
-              { "@type": "ListItem", position: 2, name: project.title, item: `${base}/work/${project.slug}` },
-            ],
-          }),
-        }}
-      />
-      {/* Hero · full-bleed image */}
-      <div className="relative flex min-h-[70vh] items-end pb-16 pt-40">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          priority
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL={colorBlurDataURL(project.color)}
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/25" />
-        <div
-          className="absolute inset-0 opacity-40 mix-blend-overlay"
-          style={{ background: `linear-gradient(135deg, ${project.color}, transparent)` }}
-        />
-
-        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 md:px-10">
+    <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
+      {/* ── Header ─────────────────────────────────────────────────── */}
+      <header className="mx-auto max-w-[1400px] px-5 pb-14 pt-32 md:px-10 md:pb-20 md:pt-44">
+        <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/work"
-            data-cursor="BACK"
-            className="mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-white/70 transition-colors hover:text-white"
+            className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)]"
           >
-            <span aria-hidden="true">←</span> Back to work
+            ← Work
           </Link>
+          <span className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
+            Concept · self-initiated
+          </span>
+        </div>
 
-          <div className="mb-5 flex flex-wrap items-center gap-3">
-            <span className="rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
-              {project.category}
-            </span>
-            <span className="font-mono text-sm text-white/60">{project.year}</span>
+        <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="flex items-center gap-3">
+              <BrandMark slug={brand.slug} size={34} />
+              <h1 className="font-display text-[clamp(2.8rem,7vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
+                {brand.name}
+              </h1>
+            </div>
+            <p className="mt-5 max-w-2xl font-serif-i text-xl leading-snug text-[var(--brand-text)] md:text-2xl">
+              {brand.tagline}
+            </p>
           </div>
 
-          <h1 className="font-display text-[clamp(3rem,9vw,8rem)] font-black uppercase leading-[0.88] tracking-tight text-white">
-            {project.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
-            {project.description}
+          <a
+            href={`/demo/${brand.slug}`}
+            data-cursor="VISIT"
+            className="btn-primary shrink-0"
+          >
+            Visit the live site <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </header>
+
+      {/* ── Hero shot ──────────────────────────────────────────────── */}
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+          <ShotImage
+            src={`/images/work/${brand.slug}/home-desktop.webp`}
+            alt={`${brand.name} homepage`}
+            priority
+            sizes="(max-width: 1400px) 100vw, 1400px"
+          />
+        </div>
+      </div>
+
+      {/* ── Measured ───────────────────────────────────────────────── */}
+      {perf && (
+        <section className="mx-auto mt-16 max-w-[1400px] px-5 md:px-10">
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-border)] md:grid-cols-4">
+            {[
+              { v: `${perf.lcp}ms`, k: "LCP" },
+              { v: perf.cls.toFixed(3), k: "Cumulative layout shift" },
+              { v: `${perf.jsKb}kB`, k: "JavaScript" },
+              { v: `${perf.totalKb}kB`, k: "Total transferred" },
+            ].map((m) => (
+              <div key={m.k} className="bg-[var(--brand-surface)] p-6">
+                <p className="font-display text-3xl font-black tracking-tight md:text-4xl">{m.v}</p>
+                <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
+                  {m.k}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-[var(--brand-text-secondary)]">
+            Median of {measured.pages[slug as keyof typeof measured.pages] ? 3 : 3} runs against a
+            production build, measured {measured.measuredAt} with the browser&rsquo;s own
+            PerformanceObserver. Re-run with <code className="font-mono">npm run measure</code>.
+          </p>
+        </section>
+      )}
+
+      {/* ── Brief ──────────────────────────────────────────────────── */}
+      <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:col-span-4">
+            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+              <span className="text-[var(--brand-accent)]">✦</span> The brief
+            </span>
+          </div>
+          <p className="max-w-2xl text-lg leading-relaxed text-[var(--brand-text)] lg:col-span-8 md:text-xl">
+            {study.brief}
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Results strip — the verdict up front */}
-      <div className="border-b border-[var(--brand-border)] bg-[var(--brand-surface)]">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 divide-y divide-[var(--brand-border)] px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 md:px-10">
-          {project.metrics.map((m) => (
-            <div key={m.label} className="flex flex-col items-start gap-2 py-8 sm:px-8 sm:py-10 sm:first:pl-0 sm:last:pr-0">
-              <span className="font-display text-4xl font-black leading-none tracking-tight text-[var(--brand-text)] md:text-5xl">
-                {m.value}
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)] md:text-[11px]">
-                {m.label}
-              </span>
-            </div>
+      {/* ── Decisions ──────────────────────────────────────────────── */}
+      <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:col-span-4">
+            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+              <span className="text-[var(--brand-accent)]">✦</span> Decisions
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-black uppercase leading-[0.98] tracking-tight md:text-4xl">
+              Three choices
+              <br />
+              <span className="font-serif-i lowercase normal-case tracking-normal">worth defending.</span>
+            </h2>
+          </div>
+
+          <div className="lg:col-span-8">
+            <dl className="border-t border-[var(--brand-border)]">
+              {study.decisions.map((d, i) => (
+                <div key={d.title} className="border-b border-[var(--brand-border)] py-8 md:py-10">
+                  <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <dt className="mt-2 font-display text-xl font-black uppercase tracking-tight md:text-2xl">
+                    {d.title}
+                  </dt>
+                  <dd className="mt-3 max-w-2xl leading-relaxed text-[var(--brand-text-secondary)]">
+                    {d.body}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      {/* ── The system ─────────────────────────────────────────────── */}
+      <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
+        <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+          <span className="text-[var(--brand-accent)]">✦</span> The system
+        </span>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-[var(--brand-border)]">
+          <ShotImage
+            src={`/images/work/${brand.slug}/identity.webp`}
+            alt={`${brand.name} identity system: logo, palette, type scale, radius and grid`}
+            sizes="(max-width: 1400px) 100vw, 1400px"
+          />
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2">
+          {Object.entries(palette).map(([name, hex]) => (
+            <span
+              key={name}
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-border)] py-1.5 pl-1.5 pr-3.5 text-xs"
+            >
+              <span
+                className="h-5 w-5 rounded-full ring-1 ring-inset ring-black/10"
+                style={{ background: hex }}
+                aria-hidden="true"
+              />
+              <span className="font-mono text-[var(--brand-text-secondary)]">{hex}</span>
+            </span>
           ))}
         </div>
-      </div>
 
-      {/* Body */}
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
-          {/* Main */}
-          <div className="space-y-16 lg:col-span-2">
-            <section>
-              <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                ✦ Overview
-              </span>
-              <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
-                The project
-              </h2>
-              <p className="mt-6 text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
-                {project.description}
-              </p>
-            </section>
+        <p className="mt-8 max-w-2xl leading-relaxed text-[var(--brand-text-secondary)]">{study.build}</p>
+      </section>
 
-            <section>
-              <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                ✦ The challenge
-              </span>
-              <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
-                What we faced
-              </h2>
-              <p className="mt-6 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
-                {project.challenge || "A unique challenge in the intersection of design and technology."}
-              </p>
-            </section>
-
-            <section>
-              <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                ✦ Goals
-              </span>
-              <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
-                What success looked like
-              </h2>
-              <div className="mt-6 flex flex-col border-t border-[var(--brand-border)]">
-                {(project.goals || []).map((goal: string, i: number) => (
-                  <div key={i} className="flex items-start gap-4 border-b border-[var(--brand-border)] py-5">
-                    <span className="font-mono text-sm text-[var(--brand-accent)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-base leading-relaxed text-[var(--brand-text)]">{goal}</p>
-                  </div>
-                ))}
+      {/* ── Gallery ────────────────────────────────────────────────── */}
+      <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
+        <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+          <span className="text-[var(--brand-accent)]">✦</span> The pages
+        </span>
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {study.gallery.map((g) => (
+            <figure key={g.file} className="m-0">
+              <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
+                <ShotImage
+                  src={`/images/work/${brand.slug}/${g.file}.webp`}
+                  alt={`${brand.name} — ${g.label}`}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
-            </section>
-
-            <section>
-              <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                ✦ Approach
-              </span>
-              <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
-                How we solved it
-              </h2>
-              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {(project.approach || []).map((item: any, i: number) => (
-                  <div
-                    key={i}
-                    className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(0,0,0,0.06)]"
-                  >
-                    <span className="mb-4 block h-2 w-2 rounded-full bg-[var(--brand-accent)]" />
-                    <p className="font-display text-lg font-black uppercase tracking-tight text-[var(--brand-text)]">
-                      {item.title}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--brand-text-secondary)]">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-
-            <section>
-              <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
-                ✦ Lessons
-              </span>
-              <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
-                What we learned
-              </h2>
-              <p className="mt-6 font-serif-i text-xl leading-relaxed text-[var(--brand-text)] md:text-2xl">
-                {project.lessons || "Every project teaches us something new. This was no exception."}
-              </p>
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8">
-              <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
-                Project details
-              </h3>
-              <div className="space-y-4">
-                {[
-                  { label: "Category", value: project.category },
-                  { label: "Year", value: project.year },
-                  { label: "Services", value: project.tags.join(", ") },
-                  { label: "Timeline", value: "12 weeks" },
-                  { label: "Status", value: "Launched" },
-                ].map(({ label, value }) => (
-                  <div key={label} className="border-b border-[var(--brand-border)] pb-4 last:border-b-0 last:pb-0">
-                    <p className="mb-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
-                      {label}
-                    </p>
-                    <p className="text-sm font-semibold text-[var(--brand-text)]">{value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl bg-[var(--brand-text)] p-8 text-[var(--brand-bg)]">
-              <h3 className="font-display text-xl font-black uppercase tracking-tight">
-                Start your project
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--brand-bg)]/70">
-                Ready to build something this good? Take the two-minute brief.
-              </p>
-              <Link
-                href="/contact"
-                data-cursor="HELLO"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--brand-accent)] py-3.5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-on-accent)] transition-colors duration-300 hover:bg-[var(--brand-bg)] hover:text-[var(--brand-accent)]"
-              >
-                Start a project <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
+              <figcaption className="mt-3 text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
+                {g.label}
+              </figcaption>
+            </figure>
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* Next case study — cinematic hand-off */}
-      <Link href={`/work/${next.slug}`} data-cursor="NEXT" className="group relative block overflow-hidden border-t border-[var(--brand-border)]">
-        <div className="relative flex min-h-[46vh] items-end overflow-hidden md:min-h-[56vh]">
-          <Image
-            src={next.image}
-            alt={next.title}
-            fill
-            sizes="100vw"
-            placeholder="blur"
-            blurDataURL={colorBlurDataURL(next.color)}
-            className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/30 transition-opacity duration-700" />
-          <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-            <span className="mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-white/70">
+      {/* ── Learned ────────────────────────────────────────────────── */}
+      <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
+        <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:p-14">
+          <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+            <span className="text-[var(--brand-accent)]">✦</span> What it taught us
+          </span>
+          <p className="mt-5 max-w-3xl font-serif-i text-xl leading-relaxed md:text-2xl">
+            {study.learned}
+          </p>
+        </div>
+      </section>
+
+      {/* ── Next ───────────────────────────────────────────────────── */}
+      <section className="mx-auto mt-20 max-w-[1400px] px-5 pb-24 md:mt-28 md:px-10">
+        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-[var(--brand-border)] pt-10">
+          <a href={`/demo/${brand.slug}`} data-cursor="VISIT" className="btn-primary">
+            Open {brand.name} <span aria-hidden="true">→</span>
+          </a>
+          <Link
+            href={`/work/${next.slug}`}
+            data-cursor="NEXT"
+            className="group flex items-center gap-4 text-right"
+          >
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
               Next case study
-              <span className="transition-transform duration-500 group-hover:translate-x-2" aria-hidden="true">→</span>
             </span>
-            <span className="block font-display text-[clamp(2.8rem,8vw,7rem)] font-black uppercase leading-[0.9] tracking-tight text-white">
-              {next.title}
+            <span className="font-display text-2xl font-black uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-1 md:text-3xl">
+              {next.name} →
             </span>
-            <span className="mt-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-white/70">
-              {next.category} · {next.year}
-            </span>
-          </div>
+          </Link>
         </div>
-      </Link>
+      </section>
     </div>
   );
 }

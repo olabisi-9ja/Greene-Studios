@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { INDUSTRIES, PROJECTS, SERVICES } from "@/lib/data";
+import { INDUSTRIES, SERVICES } from "@/lib/data";
+import { ConceptCard } from "@/components/work/WorkCards";
+import { BRANDS_BY_SLUG } from "@/lib/brands";
 import PageHeader from "@/components/ui/PageHeader";
 import CTASection from "@/components/home/CTASection";
-import { colorBlurDataURL } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -35,7 +36,7 @@ export default async function IndustryPage({ params }: Props) {
     .map((href) => SERVICES.find((s) => s.href === href))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
   const work = industry.work
-    .map((w) => PROJECTS.find((p) => p.slug === w))
+    .map((w) => BRANDS_BY_SLUG[w])
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
@@ -168,33 +169,7 @@ export default async function IndustryPage({ params }: Props) {
             </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {work.map((p) => (
-                <Link key={p.id} href={`/work/${p.slug}`} data-cursor="VIEW" className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
-                    <Image
-                      src={p.image}
-                      alt={p.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      placeholder="blur"
-                      blurDataURL={colorBlurDataURL(p.color)}
-                      className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/25 transition-opacity duration-700 group-hover:opacity-90" />
-                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 md:p-8">
-                      <div>
-                        <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
-                          {p.category} · {p.year}
-                        </span>
-                        <h3 className="font-display text-3xl font-black uppercase leading-[0.9] tracking-tight text-white">
-                          {p.title}
-                        </h3>
-                      </div>
-                      <span className="hidden shrink-0 rounded-full bg-[var(--brand-accent)] px-4 py-1.5 font-display text-xs font-black text-[var(--brand-on-accent)] md:block">
-                        {p.metrics[0].value}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                <ConceptCard key={p.slug} brand={p} />
               ))}
             </div>
           </section>

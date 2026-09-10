@@ -1,5 +1,3 @@
-"use client";
-
 import { ExperienceHero } from "@/components/ui/ExperienceHero";
 import SelectedWork from "@/components/home/SelectedWork";
 import Manifesto from "@/components/home/Manifesto";

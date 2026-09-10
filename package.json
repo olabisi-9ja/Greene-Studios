@@ -14,7 +14,8 @@
     "images": "node scripts/optimise-images.mjs",
     "assets:all": "npm run fonts && npm run assets && npm run shoot && npm run images",
     "covers": "node scripts/render-covers.mjs",
-    "measure": "node scripts/measure.mjs"
+    "measure": "node scripts/measure.mjs",
+    "shoot:live": "node scripts/shoot-live.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

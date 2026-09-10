@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { SERVICES, PROJECTS, FAQS } from "@/lib/data";
+import { SERVICES, FAQS } from "@/lib/data";
+import { ConceptCard } from "@/components/work/WorkCards";
+import { BRANDS } from "@/lib/brands";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
@@ -28,7 +30,7 @@ export default async function ServicePage({ params }: Props) {
  const service = SERVICES.find((s) => s.href === `/services/${slug}`);
  if (!service) notFound();
 
- const relatedProjects = PROJECTS.slice(0, 3);
+ const relatedProjects = BRANDS.slice(0, 3);
  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
  return (
@@ -144,38 +146,14 @@ export default async function ServicePage({ params }: Props) {
  <section className="border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-20 md:py-28">
  <div className="mx-auto max-w-[1400px] px-5 md:px-10">
  <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
- ✦ Proof
+ ✦ Systems we built
  </span>
  <h2 className="mb-12 font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Related <span className="font-serif-i lowercase normal-case tracking-normal">projects.</span>
+ Concept <span className="font-serif-i lowercase normal-case tracking-normal">systems.</span>
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
- {relatedProjects.map((project) => (
- <Link
- key={project.id}
- href={`/work/${project.slug}`}
- className="group block"
- data-cursor="VIEW"
- >
- <div className="relative overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
- <Image
- src={project.image}
- alt={project.title}
- fill
- sizes="(max-width: 768px) 100vw, 33vw"
- className="object-cover transition-transform duration-700 group-hover:scale-105"
- />
- <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
- <div className="absolute inset-0 flex flex-col justify-end p-6">
- <span className="mb-1 text-[10px] font-black uppercase tracking-widest text-[var(--brand-accent)]">
- {project.category}
- </span>
- <h3 className="font-display text-xl font-black uppercase tracking-tight text-white">
- {project.title}
- </h3>
- </div>
- </div>
- </Link>
+ {relatedProjects.map((brand) => (
+ <ConceptCard key={brand.slug} brand={brand} />
  ))}
  </div>
  </div>

@@ -5,12 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
-import { PROJECTS, NAV_LINKS } from "@/lib/data";
+import { NAV_LINKS } from "@/lib/data";
+import { BRANDS } from "@/lib/brands";
 
 /** Title for the current route, used as the focus-screen statement. */
 function routeTitle(pathname: string): string {
-  const project = PROJECTS.find((p) => `/work/${p.slug}` === pathname);
-  if (project) return project.title;
+  const brand = BRANDS.find((b) => `/work/${b.slug}` === pathname);
+  if (brand) return brand.name;
   if (pathname === "/") return "THE DIGITAL STUDIO";
   const seg = pathname.split("/").filter(Boolean)[0];
   if (!seg) return "GREENE";

@@ -23,202 +23,6 @@ export const NAV_LINKS = [
  { label: "Contact", href: "/contact" },
 ];
 
-// ─── Projects ─────────────────────────────────────────────────────────────────
-
-export const PROJECTS = [
- {
- id: "luminary-saas",
- title: "Luminary",
- category: "SaaS · Web Design",
- year: "2024",
- description: "A next-generation analytics platform that transforms raw data into actionable intelligence. We crafted an interface that makes complexity feel effortless.",
- tags: ["UI/UX", "Development", "Motion"],
- color: "#12372A",
- accentColor: "#6B8F71",
- featured: true,
- image: "/images/work/luminary-saas.jpg",
- results: ["340% increase in user engagement", "2.1s average load time", "98 Lighthouse score"],
- metrics: [
- { value: "+340%", label: "User engagement" },
- { value: "2.1s", label: "Average load time" },
- { value: "98", label: "Lighthouse score" },
- ],
- slug: "luminary-saas",
- challenge: "Luminary's previous interface was drowning users in data. Financial analysts were spending hours exporting CSVs rather than using the built-in tools because the visualization engine was too complex and intimidating.",
- goals: [
- "Simplify the onboarding process for non-technical users",
- "Develop a robust design system for 50+ chart types",
- "Reduce dashboard load times by 70%",
- "Establish a premium visual language that commands trust"
- ],
- approach: [
- { title: "Progressive Disclosure", desc: "We redesigned the interface to hide complexity until needed, allowing users to drill down from high-level metrics to raw data effortlessly." },
- { title: "Custom Visualization Engine", desc: "We built a bespoke charting library using D3.js and Canvas to ensure rendering 100k+ data points remains buttery smooth at 60fps." },
- { title: "Dark Mode Optimization", desc: "Created a low-contrast dark mode specifically calibrated to reduce eye strain for analysts looking at screens for 8+ hours a day." }
- ],
- lessons: "The biggest takeaway from Luminary was the power of restraint. By removing 40% of the visible UI elements and replacing them with context-aware floating menus, we actually increased feature discoverability."
- },
- {
- id: "vera-brand",
- title: "Vera",
- category: "Branding · Identity",
- year: "2024",
- description: "Complete brand identity for a luxury wellness startup. From naming and visual identity to a fully immersive digital experience.",
- tags: ["Branding", "Web Design", "Strategy"],
- color: "#D9C9A3",
- accentColor: "#12372A",
- featured: true,
- image: "/images/work/vera-brand.jpg",
- results: ["4.8/5 client NPS", "200K launch day visitors", "92% brand recall in testing"],
- metrics: [
- { value: "4.8/5", label: "Client NPS" },
- { value: "200K", label: "Launch-day visitors" },
- { value: "92%", label: "Brand recall in testing" },
- ],
- slug: "vera-brand",
- challenge: "Vera was entering an incredibly saturated wellness market dominated by clinical whites and pharmaceutical blues. They needed a brand that felt luxurious, grounded, and deeply human without crossing into pseudoscience.",
- goals: [
- "Create a distinct visual identity differentiating Vera from 100+ competitors",
- "Design physical packaging that feels like a premium unboxing experience",
- "Develop a highly sensory, tactile e-commerce website",
- "Establish a tone of voice that is authoritative yet warm"
- ],
- approach: [
- { title: "Earthy Palette", desc: "We developed a palette rooted in natural materials, clay, moss, sandstone, to evoke grounding and physical reality." },
- { title: "Tactile Digital", desc: "We used WebGL to create subtle, organic distortion effects on imagery, making the digital experience feel physically tangible." },
- { title: "Editorial Typography", desc: "Paired a robust, classic serif with an ultra-clean sans to bridge the gap between ancient apothecary and modern science." }
- ],
- lessons: "Vera taught us that digital products don't have to feel digital. By injecting organic noise, soft easing curves, and earthy tones, we can create digital spaces that lower the user's heart rate."
- },
- {
- id: "arc-ecommerce",
- title: "Arc Commerce",
- category: "E-commerce · Development",
- year: "2024",
- description: "A headless e-commerce platform for a premium fashion brand. Custom checkout flow, editorial storytelling, and 0.8s page loads.",
- tags: ["E-commerce", "Frontend Dev", "Performance"],
- color: "#1a1a1a",
- accentColor: "#D9C9A3",
- featured: true,
- image: "/images/work/arc-ecommerce.jpg",
- results: ["67% increase in conversion", "Avg session 4m 12s", "£2.4M launch month revenue"],
- metrics: [
- { value: "+67%", label: "Conversion rate" },
- { value: "0.8s", label: "Average page load" },
- { value: "£2.4M", label: "Launch-month revenue" },
- ],
- slug: "arc-ecommerce",
- challenge: "Arc's previous monolithic Shopify setup was failing. Load times exceeded 4 seconds, the design felt like a template, and they couldn't weave their rich editorial content natively into the shopping experience.",
- goals: [
- "Migrate to a headless architecture (Shopify + Next.js)",
- "Achieve sub-second page transitions",
- "Integrate editorial content seamlessly into product pages",
- "Design a frictionless, one-page custom checkout"
- ],
- approach: [
- { title: "Headless Architecture", desc: "We decoupled the frontend using Next.js and Vercel, connecting to Shopify via the Storefront API for blazing fast speeds." },
- { title: "Editorial Integration", desc: "Built a custom Sanity CMS integration that allows editors to drop shoppable products directly into long-form lookbooks." },
- { title: "Fluid Transitions", desc: "Implemented Framer Motion for seamless, app-like page transitions that keep the user immersed in the shopping journey." }
- ],
- lessons: "Performance is a design feature. We noticed that when pages load instantly, users browse 3x as many products. The engineering investment paid for itself in conversion rates within 14 days."
- },
- {
- id: "bloom-health",
- title: "Bloom Health",
- category: "Healthcare · Product Design",
- year: "2023",
- description: "Patient-centered health platform redesign. We simplified a complex medical journey into a calm, trustworthy interface.",
- tags: ["Product Design", "UX Research", "Systems"],
- color: "#6B8F71",
- accentColor: "#F7F5F2",
- featured: false,
- image: "/images/work/bloom-health.jpg",
- results: ["52% reduction in drop-off", "4.9 App Store rating", "10K+ daily active users"],
- metrics: [
- { value: "−52%", label: "Patient drop-off" },
- { value: "4.9", label: "App Store rating" },
- { value: "10K+", label: "Daily active users" },
- ],
- slug: "bloom-health",
- challenge: "Patients navigating Bloom Health were highly anxious. The existing interface used harsh medical terminology, alarming red alerts, and a confusing navigation structure that exacerbated user stress during critical moments.",
- goals: [
- "Redesign the patient portal to prioritize calm and clarity",
- "Pass strict WCAG 2.1 AA accessibility standards",
- "Simplify the prescription refill and appointment booking flows",
- "Create a unified design system across iOS, Android, and Web"
- ],
- approach: [
- { title: "Empathetic UX", desc: "We rewrote the entire product copy to be conversational, supportive, and completely jargon-free." },
- { title: "Calm Color Psychology", desc: "Removed harsh alert colors, replacing them with soft sage greens and warm neutrals that communicate safety." },
- { title: "Frictionless Forms", desc: "Broke down complex 10-page intake forms into bite-sized, conversational interactions with auto-save." }
- ],
- lessons: "In healthcare design, clarity is kindness. We learned that hiding complex medical data isn't the answer, rather, it must be paced. Progressive disclosure is vital for anxious users."
- },
- {
- id: "onyx-fintech",
- title: "Onyx Finance",
- category: "Fintech · AI Integration",
- year: "2023",
- description: "AI-powered personal finance dashboard for Gen Z. Making money management feel like a game, not a chore.",
- tags: ["AI Integration", "UI Design", "Mobile"],
- color: "#12372A",
- accentColor: "#D9C9A3",
- featured: false,
- image: "/images/work/onyx-fintech.jpg",
- results: ["Series A: $12M raised", "300K users in 90 days", "Techcrunch Disrupt Winner"],
- metrics: [
- { value: "$12M", label: "Series A raised" },
- { value: "300K", label: "Users in 90 days" },
- { value: "#1", label: "TechCrunch Disrupt" },
- ],
- slug: "onyx-fintech",
- challenge: "Gen Z users were completely disengaged from traditional banking apps. Onyx needed to present complex financial forecasting in a way that felt as native, engaging, and effortless as scrolling through social media.",
- goals: [
- "Design a mobile-first interface that breaks fintech conventions",
- "Integrate an AI financial assistant that feels like a peer",
- "Gamify savings goals without feeling patronizing",
- "Ensure Bank-level security UI elements"
- ],
- approach: [
- { title: "Neomorphic Gaming UI", desc: "We adopted a dark, neon-accented aesthetic that draws heavily from gaming interfaces rather than traditional banking." },
- { title: "Conversational AI", desc: "Built a chat interface where users can ask 'Can I afford to eat out tonight?' and the AI analyzes their budget to respond." },
- { title: "Dynamic Data Viz", desc: "Replaced boring pie charts with interactive, physics-based bubbles that users can drag and drop into savings pots." }
- ],
- lessons: "Financial tools don't have to look boring to be taken seriously. By leaning into consumer app aesthetics, Onyx built trust through high-end execution rather than traditional institutional signifiers."
- },
- {
- id: "prism-edu",
- title: "Prism Education",
- category: "EdTech · Web Application",
- year: "2023",
- description: "Adaptive learning platform connecting 50,000+ students with personalized curriculum paths and real-time progress tracking.",
- tags: ["Web App", "Design System", "Development"],
- color: "#2d2d2d",
- accentColor: "#6B8F71",
- featured: false,
- image: "/images/work/prism-edu.jpg",
- results: ["92% course completion rate", "50K+ active learners", "$4M ARR in year one"],
- metrics: [
- { value: "92%", label: "Course completion rate" },
- { value: "50K+", label: "Active learners" },
- { value: "$4M", label: "ARR in year one" },
- ],
- slug: "prism-edu",
- challenge: "Prism had a massive library of incredible educational content, but a rigid linear curriculum structure meant students were getting bored and dropping off when the material wasn't perfectly paced for their learning style.",
- goals: [
- "Build a dynamic curriculum graph UI",
- "Create an engaging, distraction-free video learning environment",
- "Implement real-time collaboration tools for students",
- "Design a robust instructor dashboard for grading"
- ],
- approach: [
- { title: "Node-Based Curriculum", desc: "We designed a visual 'skill tree' interface similar to RPG video games, allowing students to visually see their learning paths and unlock new concepts." },
- { title: "Focus Mode", desc: "Built a theater-mode learning environment that automatically dims the UI and disables notifications during deep-work sessions." },
- { title: "Micro-Interactions", desc: "Added satisfying haptic feedback and micro-animations to celebrate small wins, keeping dopamine levels steady throughout the course." }
- ],
- lessons: "We discovered that motivation is a design problem. By providing constant, visual feedback on progress and allowing non-linear exploration, student retention skyrocketed."
- },
-];
 
 // ─── Services ─────────────────────────────────────────────────────────────────
 
@@ -708,7 +512,7 @@ export const FAQS = [
 
 // ─── Industries ───────────────────────────────────────────────────────────────
 // Each industry is a real destination: /industries/[slug]. Service refs point at
-// SERVICES hrefs; work refs point at PROJECTS slugs.
+// SERVICES hrefs; work refs point at concept brand slugs (src/lib/brands).
 
 export const INDUSTRIES = [
  {
@@ -729,7 +533,7 @@ export const INDUSTRIES = [
  { title: "A site that closes", desc: "A marketing site engineered around demo conversion, with the product doing the talking instead of stock illustrations." },
  ],
  services: ["/services/ui-ux-design", "/services/product-design", "/services/web-design", "/services/design-systems"],
- work: ["luminary-saas"],
+ work: ["luminary"],
  },
  {
  slug: "ecommerce",
@@ -749,7 +553,7 @@ export const INDUSTRIES = [
  { title: "One-page checkout", desc: "A custom, brand-consistent checkout with the fewest possible fields between desire and confirmation." },
  ],
  services: ["/services/web-design", "/services/frontend-development", "/services/motion-design"],
- work: ["arc-ecommerce", "vera-brand"],
+ work: ["arc", "vera"],
  },
  {
  slug: "startups",
@@ -769,7 +573,7 @@ export const INDUSTRIES = [
  { title: "Launch assets", desc: "Site, deck, and product walkthrough built as one system. Everything an investor or first customer touches, consistent." },
  ],
  services: ["/services/branding", "/services/product-design", "/services/web-design"],
- work: ["onyx-fintech", "vera-brand", "prism-edu"],
+ work: ["onyx", "vera", "prism"],
  },
  {
  slug: "finance",
@@ -789,7 +593,7 @@ export const INDUSTRIES = [
  { title: "Designed-in compliance", desc: "Accessible, auditable component systems where disclosures and states are designed, not appended by legal later." },
  ],
  services: ["/services/ui-ux-design", "/services/product-design", "/services/ai-integration"],
- work: ["onyx-fintech", "luminary-saas"],
+ work: ["onyx", "luminary"],
  },
  {
  slug: "healthcare",
@@ -809,7 +613,7 @@ export const INDUSTRIES = [
  { title: "One system, every platform", desc: "A single design system across iOS, Android and web so patients learn the product once and trust it everywhere." },
  ],
  services: ["/services/product-design", "/services/ui-ux-design", "/services/design-systems"],
- work: ["bloom-health"],
+ work: ["bloom"],
  },
  {
  slug: "education",
@@ -829,7 +633,7 @@ export const INDUSTRIES = [
  { title: "Instructor clarity", desc: "Dashboards that show exactly where students stall, so educators spend time teaching instead of data-mining." },
  ],
  services: ["/services/product-design", "/services/ui-ux-design", "/services/web-applications"],
- work: ["prism-edu"],
+ work: ["prism"],
  },
  {
  slug: "personal-brands",
@@ -849,7 +653,7 @@ export const INDUSTRIES = [
  { title: "Content systems", desc: "Templates and a publishing setup that keep output consistent without a design team on retainer." },
  ],
  services: ["/services/branding", "/services/web-design", "/services/motion-design"],
- work: ["vera-brand"],
+ work: ["vera"],
  },
  {
  slug: "agencies",

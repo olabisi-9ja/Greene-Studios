@@ -1,0 +1,290 @@
+{
+  "/images/covers/ai-in-product-design.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/design-systems-at-scale.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/freelance-to-studio.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/lab-cursor.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/lab-interaction.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/lab-motion.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/lab-typography.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/the-0-seo-strategy.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/typography-that-converts.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/covers/why-motion-matters.webp": {
+    "w": 1200,
+    "h": 800
+  },
+  "/images/hero/letters/wordmark-texture.webp": {
+    "w": 1280,
+    "h": 698
+  },
+  "/images/work/arc/atelier.webp": {
+    "w": 2880,
+    "h": 2704
+  },
+  "/images/work/arc/collection.webp": {
+    "w": 2880,
+    "h": 4626
+  },
+  "/images/work/arc/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/arc/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/arc/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/arc/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/arc/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/arc/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/arc/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/arc/new.webp": {
+    "w": 2880,
+    "h": 4332
+  },
+  "/images/work/arc/stories.webp": {
+    "w": 2880,
+    "h": 6080
+  },
+  "/images/work/bloom/clinics.webp": {
+    "w": 2880,
+    "h": 2638
+  },
+  "/images/work/bloom/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/bloom/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/bloom/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/bloom/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/bloom/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/bloom/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/bloom/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/bloom/patients.webp": {
+    "w": 2880,
+    "h": 3856
+  },
+  "/images/work/bloom/security.webp": {
+    "w": 2880,
+    "h": 3064
+  },
+  "/images/work/bloom/support.webp": {
+    "w": 2880,
+    "h": 2000
+  },
+  "/images/work/luminary/company.webp": {
+    "w": 2880,
+    "h": 2556
+  },
+  "/images/work/luminary/docs.webp": {
+    "w": 2880,
+    "h": 3126
+  },
+  "/images/work/luminary/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/luminary/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/luminary/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/luminary/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/luminary/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/luminary/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/luminary/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/luminary/pricing.webp": {
+    "w": 2880,
+    "h": 2454
+  },
+  "/images/work/luminary/product.webp": {
+    "w": 2880,
+    "h": 4252
+  },
+  "/images/work/onyx/accounts.webp": {
+    "w": 2880,
+    "h": 3300
+  },
+  "/images/work/onyx/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/onyx/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/onyx/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/onyx/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/onyx/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/onyx/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/onyx/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/onyx/pricing.webp": {
+    "w": 2880,
+    "h": 3530
+  },
+  "/images/work/onyx/security.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/prism/courses.webp": {
+    "w": 2880,
+    "h": 3756
+  },
+  "/images/work/prism/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/prism/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/prism/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/prism/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/prism/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/prism/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/prism/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/prism/pricing.webp": {
+    "w": 2880,
+    "h": 2456
+  },
+  "/images/work/prism/schools.webp": {
+    "w": 2880,
+    "h": 2294
+  },
+  "/images/work/vera/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/vera/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/vera/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/vera/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/vera/ingredients.webp": {
+    "w": 2880,
+    "h": 3980
+  },
+  "/images/work/vera/journal.webp": {
+    "w": 2880,
+    "h": 4826
+  },
+  "/images/work/vera/ritual.webp": {
+    "w": 2880,
+    "h": 2676
+  },
+  "/images/work/vera/shop.webp": {
+    "w": 2880,
+    "h": 5836
+  }
+}
