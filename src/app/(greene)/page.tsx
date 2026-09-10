@@ -1,4 +1,5 @@
 import { ExperienceHero } from "@/components/ui/ExperienceHero";
+import ScrollRails from "@/components/scroll/ScrollRails";
 import SelectedWork from "@/components/home/SelectedWork";
 import Manifesto from "@/components/home/Manifesto";
 import ServicesSection from "@/components/home/ServicesSection";
@@ -24,11 +25,20 @@ export default function HomePage() {
 
       <SelectedWork />
 
+      {/* Section seams carry the figure that matches the turn the page is
+          taking: a detour before the principles, a spread before the price
+          of the work, a fork pointing down into the process. */}
+      <ScrollRails variant="bypass" height={300} className="bg-[var(--brand-bg)]" />
+
       <Manifesto />
 
       <ServicesSection />
 
+      <ScrollRails variant="fork" height={260} className="bg-[var(--brand-bg)]" />
+
       <ProcessSection variant="condensed" />
+
+      <ScrollRails variant="braid" height={320} lanes={5} className="bg-[var(--brand-bg)]" />
 
       <FAQSection />
 

@@ -18,7 +18,7 @@ import { BrandMark } from "@/components/demo/BrandMark";
  */
 
 const CARD =
-  "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-[var(--brand-text)]";
+  "group flex h-full flex-col overflow-hidden border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-colors duration-300 hover:border-[var(--brand-text)]";
 const MEDIA = "relative aspect-[16/10] w-full overflow-hidden bg-[var(--brand-surface-secondary)]";
 const IMG = "object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]";
 const META = "text-[11px] font-semibold text-[var(--brand-text-secondary)]";
@@ -103,7 +103,7 @@ export function ConceptCard({ brand }: { brand: BrandSystem }) {
             <BrandMark slug={brand.slug} size={22} />
           </span>
           <h3 className="font-display text-lg font-black uppercase tracking-tight">{brand.name}</h3>
-          <span className="ml-auto rounded-full border border-[var(--brand-border)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">
+          <span className="ml-auto border border-[var(--brand-border)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">
             Concept
           </span>
         </div>
@@ -122,11 +122,9 @@ export function ConceptCard({ brand }: { brand: BrandSystem }) {
 /** Shared section heading for the two work tiers. */
 export function WorkSectionHeading({ title, meta }: { title: string; meta: string }) {
   return (
-    <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[var(--brand-border)] pb-6">
-      <h2 className="font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-        <span className="text-[var(--brand-accent)]">✦</span> {title}
-      </h2>
-      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+    <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[var(--brand-border)] pb-5">
+      <h2 className="headline text-2xl md:text-3xl">{title}</h2>
+      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">
         {meta}
       </p>
     </div>

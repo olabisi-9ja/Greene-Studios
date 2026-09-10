@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import RollLabel from "@/components/ui/RollLabel";
 import { GreeneMonogram } from "@/components/ui/GreeneMark";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -68,7 +69,7 @@ export default function Navbar() {
               <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-surface)] text-[var(--brand-text)] ring-1 ring-[var(--brand-border)] transition-transform duration-500 group-hover:scale-110 md:h-9 md:w-9">
                 <GreeneMonogram fill className="h-full w-full p-[3px]" />
               </span>
-              <span className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)] md:text-base">
+              <span className="headline text-lg text-[var(--brand-text)] md:text-xl">
                 Greene
                 <span className="align-super text-[8px] font-bold">®</span>
               </span>
@@ -92,7 +93,7 @@ export default function Navbar() {
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     data-cursor={item.label.toUpperCase()}
                     className={cn(
-                      "nav-link text-[11px] font-bold uppercase tracking-[0.18em] transition-colors duration-300 hover:text-[var(--brand-accent)] xl:text-xs",
+                      "nav-link text-[15px] font-normal tracking-[-0.01em] transition-colors duration-300 hover:text-[var(--brand-accent)]",
                       isActive
                         ? "is-active text-[var(--brand-text)]"
                         : "text-[var(--brand-text-secondary)]"
@@ -112,10 +113,9 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 data-cursor="HELLO"
-                className="hidden items-center gap-2 rounded-full bg-[var(--brand-text)] px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] sm:inline-flex"
+                className="group hidden items-center gap-2 bg-[var(--brand-text)] px-4 py-2.5 text-[14px] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] sm:inline-flex"
               >
-                Start a project
-                <span aria-hidden="true">→</span>
+                <RollLabel text="Start a project" />
               </Link>
 
               {/* MENU button · mobile + tablet */}

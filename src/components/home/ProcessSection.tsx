@@ -37,30 +37,26 @@ export default function ProcessSection({ showHeader = true, variant = "full" }: 
   const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
 
   return (
-    <section className="relative bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] md:py-36">
+    <section className="relative bg-[var(--brand-bg)] py-20 text-[var(--brand-text)] md:py-28">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-14 px-5 md:px-10 lg:flex-row lg:gap-24">
         {/* Left · sticky header */}
         <div className="self-start lg:sticky lg:top-32 lg:w-1/3">
           {showHeader ? (
             <>
-              <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
-                <span className="text-[var(--brand-accent)]">✦</span> Process
-              </span>
-              <h2 className="font-display text-[clamp(2.6rem,5vw,4.5rem)] font-black uppercase leading-[0.95] tracking-tight">
-                From hello
-                <br />
-                to <span className="font-serif-i lowercase normal-case tracking-normal">launch.</span>
+              <span className="chip-mono">04 · Process</span>
+              <h2 className="headline mt-6 text-[clamp(2.1rem,4.4vw,3.75rem)]">
+                From hello to launch.
               </h2>
-              <p className="mt-6 max-w-sm text-base leading-relaxed text-[var(--brand-text-secondary)]">
+              <p className="mt-6 max-w-sm text-base leading-snug text-[var(--brand-text-secondary)]">
                 Exceptional products come from an exceptional process. We work systematically, sequentially, and transparently, with you in the loop at every step.
               </p>
             </>
           ) : null}
           <div className="mt-10 hidden items-center gap-3 lg:flex">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)] font-display text-sm font-black text-[var(--brand-on-accent)]">
+            <span className="flex h-9 w-9 items-center justify-center bg-[var(--brand-accent)] font-mono text-sm text-[var(--brand-on-accent)]">
               {condensed ? "4" : "10"}
             </span>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">
               {condensed ? "Phases, zero guesswork" : "Steps, zero guesswork"}
             </span>
           </div>
@@ -68,7 +64,7 @@ export default function ProcessSection({ showHeader = true, variant = "full" }: 
             <Link
               href="/process"
               data-cursor="GO"
-              className="group mt-8 inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-[var(--brand-text)]"
+              className="group mt-8 inline-flex items-center gap-3 text-[15px] text-[var(--brand-text)]"
             >
               <span className="border-b-2 border-[var(--brand-accent)] pb-0.5 transition-colors group-hover:border-[var(--brand-text)]">
                 The full 10-step methodology
@@ -101,20 +97,18 @@ export default function ProcessSection({ showHeader = true, variant = "full" }: 
               <span className="absolute -left-[31px] top-9 h-3 w-3 rounded-full border-2 border-[var(--brand-accent)] bg-[var(--brand-bg)] transition-all duration-300 group-hover:bg-[var(--brand-accent)] md:-left-[47px]" />
 
               <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:gap-10">
-                <span className="font-display text-4xl font-black leading-none text-outline md:w-20 md:text-5xl">
+                <span className="font-mono text-sm text-[var(--brand-text-secondary)] md:w-20 md:text-base">
                   {step.number}
                 </span>
                 <div className="flex-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                      {step.title}
-                    </h3>
-                    <span className="rounded-full bg-[var(--brand-surface-secondary)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
+                    <h3 className="headline text-2xl md:text-3xl">{step.title}</h3>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">
                       {step.duration}
                     </span>
                   </div>
                   {step.stages ? (
-                    <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
+                    <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--brand-accent)]">
                       {step.stages}
                     </p>
                   ) : null}

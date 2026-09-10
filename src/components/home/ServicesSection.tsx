@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
+import SectionHead from "@/components/ui/SectionHead";
 
 /**
  * Services — the review's consolidation. Greene's differentiator is
@@ -84,30 +85,18 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] md:py-36">
+    <section className="bg-[var(--brand-bg)] py-20 text-[var(--brand-text)] md:py-28">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        {/* Header */}
-        <div className="mb-10 max-w-3xl">
-          <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
-            <span className="text-[var(--brand-accent)]">✦</span> Services
-          </span>
-          <h2 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
-            Brand to code,
-            <br />
-            one <span className="font-serif-i lowercase normal-case tracking-normal">team.</span>
-          </h2>
-        </div>
+        <SectionHead index="03 · Services" title={<>Brand to code, one team.</>} className="mb-10" />
 
         {/* The pipeline — how the four pillars connect */}
-        <div className="mb-14 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-[var(--brand-border)] py-5 md:mb-20" aria-hidden="true">
+        <div className="mb-14 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-[var(--brand-border)] py-4 md:mb-20" aria-hidden="true">
           {["Brand", "Interface", "Motion", "Code"].map((stage, i) => (
-            <span key={stage} className="flex items-center gap-4">
-              <span className="font-display text-sm font-black uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] md:text-base">
+            <span key={stage} className="flex items-center gap-3">
+              <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
                 {stage}
               </span>
-              {i < 3 ? (
-                <span className="text-[var(--brand-accent)]">→</span>
-              ) : null}
+              {i < 3 ? <span className="text-[var(--rail)]">→</span> : null}
             </span>
           ))}
         </div>

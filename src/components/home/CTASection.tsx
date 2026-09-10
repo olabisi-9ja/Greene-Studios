@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
-import Magnetic from "@/components/animations/Magnetic";
+import RollLabel from "@/components/ui/RollLabel";
 
 const MARQUEE_WORDS = ["LET'S TALK", "LET'S BUILD", "LET'S START", "LET'S MAKE WAVES"];
 
@@ -18,43 +18,40 @@ export default function CTASection() {
     >
       {/* Giant CTA */}
       <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
-        <span className="mb-8 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em]">
-          <span className="h-px w-10" style={{ backgroundColor: "var(--cta-fg)" }} aria-hidden="true" />
-          Let&apos;s build together
-          <span className="h-px w-10" style={{ backgroundColor: "var(--cta-fg)" }} aria-hidden="true" />
+        <span
+          className="mb-8 inline-block px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em]"
+          style={{ backgroundColor: "color-mix(in srgb, var(--cta-fg) 16%, transparent)" }}
+        >
+          06 · Let&apos;s build together
         </span>
 
-        <h2 className="font-display text-[clamp(2.8rem,8vw,7.5rem)] font-black uppercase leading-[0.92] tracking-tight">
-          Ready to build something
-          <br />
-          people <span className="font-serif-i lowercase normal-case tracking-normal">can&apos;t ignore?</span>
+        <h2 className="headline text-[clamp(2.4rem,6vw,5.5rem)]">
+          Ready to build something people can&apos;t ignore?
         </h2>
 
-        <p className="mx-auto mt-8 max-w-xl text-base font-medium leading-relaxed opacity-80 md:text-lg">
+        <p className="mx-auto mt-8 max-w-xl text-base leading-snug opacity-80 md:text-lg">
           Take the two-minute project brief: what you&apos;re building, the budget, the timeline. We&apos;ll respond within 24 hours with a clear path forward, no fluff, no pressure.
         </p>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Magnetic>
-            <Link
-                href="/contact"
-                data-cursor="START"
-                className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-transform duration-300 hover:scale-[1.04]"
-                style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
-              >
-                Start your brief <span aria-hidden="true">→</span>
-              </Link>
-          </Magnetic>
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Link
+            href="/contact"
+            data-cursor="START"
+            className="group btn-block"
+            style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
+          >
+            <RollLabel text="Start your brief" />
+          </Link>
           <a
-              href="mailto:hello@greenestudios.co"
-              className="inline-flex items-center justify-center gap-3 rounded-full border-2 px-10 py-5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300 hover:bg-[var(--cta-fg)] hover:text-[var(--cta-bg)]"
-              style={{ borderColor: "var(--cta-fg)", color: "var(--cta-fg)" }}
-            >
-              hello@greenestudios.co
-            </a>
+            href="mailto:hello@greenestudios.co"
+            className="group btn-block"
+            style={{ borderColor: "color-mix(in srgb, var(--cta-fg) 40%, transparent)", color: "var(--cta-fg)" }}
+          >
+            <RollLabel text="hello@greenestudios.co" />
+          </a>
         </div>
 
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-bold uppercase tracking-[0.15em] opacity-80">
+        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-[11px] uppercase tracking-[0.1em] opacity-70">
           <span>✓ Two-minute brief</span>
           <span>✓ Response within 24h</span>
           <span>✓ No commitment required</span>
@@ -64,15 +61,15 @@ export default function CTASection() {
 
       {/* Bottom marquee */}
       <div
-        className="border-t-2 py-3"
+        className="border-t py-2.5"
         style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)", borderColor: "var(--cta-border)" }}
       >
         <Marquee>
           <MarqueeContent speed={40} autoFill>
             {MARQUEE_WORDS.map((word, i) => (
-              <MarqueeItem key={i} className="mx-6 flex items-center gap-6">
-                <span className="font-display text-lg font-black uppercase tracking-wide md:text-xl">{word}</span>
-                <span className="text-base" aria-hidden="true">✦</span>
+              <MarqueeItem key={i} className="mx-5 flex items-center gap-5">
+                <span className="font-mono text-xs uppercase tracking-[0.14em]">{word}</span>
+                <span className="text-xs" aria-hidden="true">/</span>
               </MarqueeItem>
             ))}
           </MarqueeContent>

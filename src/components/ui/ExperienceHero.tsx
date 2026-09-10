@@ -1,258 +1,85 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-  type Variants,
-} from "framer-motion";
+import ScrollRails from "@/components/scroll/ScrollRails";
+import RollLabel from "@/components/ui/RollLabel";
 import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
-import Magnetic from "@/components/animations/Magnetic";
-
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const CLIENTS = ["LUMINARY", "VERA", "ARC", "ONYX", "PRISM", "BLOOM"];
-const WORD = "GREENE";
 
 /**
- * One material, sampled across the word: every letter carries the SAME
- * moss texture but crops a different region of it, so GREENE reads as a
- * single wordmark rather than a six-panel mood board.
- */
-const LETTER_TEXTURE = "/images/hero/letters/wordmark-texture.webp";
-const LETTER_BASE_Y = [5, 18, 32, 55, 72, 88]; // % crop start per letter
-const LETTER_DRIFT = 34; // % the crops slide on scroll
-
-/* ─── Entrance variants ─────────────────────────────────────────── */
-const letters: Variants = {
-  hidden: { y: "118%", rotate: 5, opacity: 0 },
-  show: {
-    y: "0%",
-    rotate: 0,
-    opacity: 1,
-    transition: { duration: 0.9, ease: EASE },
-  },
-};
-
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.075, delayChildren: 0.35 } },
-};
-
-/**
- * The hero does exactly four jobs:
- *   eyebrow → statement → subhead + CTA pair → the GREENE wordmark.
- * Everything else (mockups, badge, stats, tickers) has been demoted to
- * sections below the fold so the first screen is one dominant statement
- * with one visual anchor — the moss-material wordmark that subtly
- * follows the cursor and slides its grain as you scroll.
+ * The hero, rebuilt around the rail system.
+ *
+ * What used to be here: a full-viewport scene with a soft grid, two radial
+ * glows, a cursor-parallax camera and GREENE set at 20rem in a scrolling moss
+ * texture — six letters, six background crops, six motion values. It was the
+ * loudest thing on the site and the slowest: the texture was the LCP element.
+ *
+ * What is here now: a drawn line, one statement, one paragraph, two buttons.
+ * The line does the work the wordmark was doing — it is the first thing that
+ * moves, and it moves because the reader scrolled, not because a timer fired.
  */
 export const ExperienceHero = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const prefersReduced = useReducedMotion();
-
-  /* ── Cursor → normalized -0.5…0.5, spring-smoothed (wordmark only) */
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 40, damping: 18, mass: 0.7 });
-  const sy = useSpring(my, { stiffness: 40, damping: 18, mass: 0.7 });
-  const typeX = useTransform(sx, (v) => v * 14);
-  const typeY = useTransform(sy, (v) => v * 10);
-
-  /* ── Scroll camera — the whole scene eases away as you scroll ── */
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, -70]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-
-  /* The moss crops drift inside the letters, all at the same rate. */
-  const letterBg = [
-    useTransform(scrollYProgress, [0, 1], [`50% ${LETTER_BASE_Y[0]}%`, `50% ${LETTER_BASE_Y[0] + LETTER_DRIFT}%`]),
-    useTransform(scrollYProgress, [0, 1], [`50% ${LETTER_BASE_Y[1]}%`, `50% ${LETTER_BASE_Y[1] + LETTER_DRIFT}%`]),
-    useTransform(scrollYProgress, [0, 1], [`50% ${LETTER_BASE_Y[2]}%`, `50% ${LETTER_BASE_Y[2] + LETTER_DRIFT}%`]),
-    useTransform(scrollYProgress, [0, 1], [`50% ${LETTER_BASE_Y[3]}%`, `50% ${LETTER_BASE_Y[3] + LETTER_DRIFT}%`]),
-    useTransform(scrollYProgress, [0, 1], [`50% ${LETTER_BASE_Y[4]}%`, `50% ${LETTER_BASE_Y[4] + LETTER_DRIFT}%`]),
-    useTransform(scrollYProgress, [0, 1], [`50% ${LETTER_BASE_Y[5]}%`, `50% ${LETTER_BASE_Y[5] + LETTER_DRIFT}%`]),
-  ];
-
-  const onMove = (e: React.MouseEvent) => {
-    if (prefersReduced) return;
-    mx.set(e.clientX / window.innerWidth - 0.5);
-    my.set(e.clientY / window.innerHeight - 0.5);
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={onMove}
-      className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-[var(--brand-bg)] text-[var(--brand-text)]"
-    >
-      {/* atmosphere — quiet by design: faint grid, two soft glows, nothing else */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 bg-grid-soft opacity-30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_75%_15%,color-mix(in_srgb,var(--brand-accent)_12%,transparent),transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_10%_90%,color-mix(in_srgb,var(--brand-accent)_8%,transparent),transparent_70%)]" />
-      </div>
+    <section className="relative w-full bg-[var(--brand-bg)] text-[var(--brand-text)]">
+      {/* The figure reads before the words do: three separate lines arriving
+          at three heights, meeting in the ring, leaving as one. */}
+      <ScrollRails variant="lens" height={360} className="mt-20 md:mt-24" />
 
-      {/* ═══ Scroll camera ═══ */}
-      <motion.div
-        className="relative z-10 flex h-full flex-col"
-        style={{ scale: heroScale, y: heroY, opacity: heroOpacity }}
-      >
-        {/* ── Statement block — vertically centered in the free space,
-               with guaranteed headroom below the fixed navbar ── */}
-        <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 pt-24 md:px-10 md:pt-32">
-          <div className="w-full">
-            {/* the one dominant statement */}
-            <h1
-              className="hero-rise font-display text-[clamp(2.75rem,6.4vw,6rem)] font-black uppercase leading-[1.04] tracking-tight"
-              style={{ animationDelay: "0.06s" }}
-            >
-              We build digital
-              <br />
-              things worth <span className="font-serif-i lowercase normal-case tracking-normal">remembering.</span>
-            </h1>
+      <div className="mx-auto w-full max-w-[1600px] px-5 pb-12 md:px-10 md:pb-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+          <h1 className="headline col-span-1 text-[clamp(2.5rem,5vw,4.75rem)] lg:col-span-7">
+            We build digital things worth remembering.
+          </h1>
 
-            {/* one-line subhead */}
-            <p
-              className="hero-rise mt-7 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg"
-              style={{ animationDelay: "0.18s" }}
-            >
-              Greene Studios designs and builds brands, websites &amp; digital products with uncommon presence.
+          <div className="col-span-1 flex flex-col gap-8 lg:col-span-5 lg:pt-3">
+            <p className="max-w-md text-lg leading-snug text-[var(--brand-text)]">
+              Greene Studios designs and builds brands, websites &amp; digital products with
+              uncommon presence.
             </p>
 
-            {/* one CTA pair: primary action + quiet text link */}
-            <div
-              className="hero-rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
-              style={{ animationDelay: "0.27s" }}
-            >
-              <Magnetic>
-                <Link
-                  href="/contact"
-                  data-cursor="HELLO"
-                  className="btn-primary transition-transform duration-300 hover:-translate-y-0.5"
-                >
-                  Book a call
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </Magnetic>
+            <div className="flex flex-wrap gap-3">
               <Link
-                href="/work"
-                data-cursor="SEE"
-                className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-[var(--brand-text)]"
+                href="/contact"
+                data-cursor="HELLO"
+                className="group btn-block btn-block-solid"
               >
-                <span className="border-b-2 border-[var(--brand-accent)] pb-0.5 transition-colors group-hover:border-[var(--brand-text)]">
-                  See the work
-                </span>
-                <span className="transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
+                <RollLabel text="Book a call" />
+              </Link>
+              <Link href="/work" data-cursor="SEE" className="group btn-block btn-block-ghost">
+                <RollLabel text="See the work" />
               </Link>
             </div>
-
-            {/* the studio's numbers, one quiet line instead of floating chips */}
-            <p
-              className="hero-rise mt-9 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-secondary)]"
-              style={{ animationDelay: "0.36s" }}
-            >
-              Brand · Web · Product
-              <span className="mx-3 text-[var(--brand-accent)]" aria-hidden="true">✦</span>
-              Lagos, working worldwide
-            </p>
           </div>
         </div>
 
-        {/* ── The visual anchor — GREENE in a single living material ── */}
-        <motion.div
-          style={prefersReduced ? undefined : { x: typeX, y: typeY }}
-          className="mx-auto w-full max-w-[1600px] shrink-0 px-5 md:px-10"
-          aria-hidden="true"
-        >
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="hero-headline group select-none whitespace-nowrap font-display font-black uppercase leading-[0.82] tracking-[-0.04em]"
-            style={{ fontSize: "clamp(4rem, 16.5vw, 20rem)" }}
-          >
-            {WORD.split("").map((letter, i) => (
-              <span key={i} className="inline-block overflow-hidden align-top">
-                <motion.span
-                  variants={letters}
-                  whileHover={{ filter: "brightness(1.25)" }}
-                  transition={{ duration: 0.35 }}
-                  className="inline-block will-change-transform transition-[filter] duration-300"
-                  style={{
-                    backgroundImage: `url(${LETTER_TEXTURE})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: prefersReduced ? `50% ${LETTER_BASE_Y[i]}%` : letterBg[i],
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    color: "transparent",
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              </span>
-            ))}
-            <span className="inline-block overflow-hidden align-top">
-              <motion.span
-                variants={letters}
-                className="inline-block align-super text-[0.16em] font-bold tracking-normal text-[var(--brand-accent)] will-change-transform"
-              >
-                ®
-              </motion.span>
-            </span>
-          </motion.div>
-        </motion.div>
+        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">
+          Brand · Web · Product — Lagos, working worldwide
+        </p>
+      </div>
 
-        {/* ── Foot — the logo strip, clearly separated below everything ── */}
-        <motion.div
-          className="mt-10 shrink-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 1.1 }}
-        >
-          <div className="border-t border-[var(--brand-border)]/60 bg-[var(--brand-bg)]/50 backdrop-blur-sm">
-            <div className="mx-auto flex w-full max-w-[1600px] items-center gap-8 px-5 py-4 md:px-10">
-              <div className="min-w-0 flex-1">
-                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--brand-text-secondary)]">
-                  Concept brands, built end to end
-                </p>
-                <Marquee>
-                  <MarqueeContent speed={28} autoFill>
-                    {CLIENTS.map((client, i) => (
-                      <MarqueeItem key={i} className="mx-6 flex items-center gap-6">
-                        <span className="font-display text-sm font-black uppercase tracking-widest text-[var(--brand-text)] opacity-60 md:text-base">
-                          {client}
-                        </span>
-                        <span className="text-[10px] text-[var(--brand-accent)]" aria-hidden="true">✦</span>
-                      </MarqueeItem>
-                    ))}
-                  </MarqueeContent>
-                </Marquee>
-              </div>
-
-              {/* scroll cue */}
-              <div className="hidden shrink-0 items-center gap-4 md:flex">
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--brand-text-secondary)]">
-                  Scroll to explore
-                </span>
-                <span className="relative block h-10 w-px overflow-hidden bg-[var(--brand-border)]" aria-hidden="true">
-                  <span className="absolute inset-x-0 top-0 h-3 animate-scroll-cue bg-[var(--brand-accent)]" />
-                </span>
-              </div>
-            </div>
+      {/* Concept brands: kept, but demoted to a hairline strip so it reads as
+          a footnote to the statement rather than competing with it. */}
+      <div className="border-y border-[var(--brand-border)]">
+        <div className="mx-auto flex w-full max-w-[1600px] items-center gap-8 px-5 py-3.5 md:px-10">
+          <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--brand-text-secondary)] sm:block">
+            Concept brands, built end to end
+          </span>
+          <div className="min-w-0 flex-1">
+            <Marquee>
+              <MarqueeContent speed={26} autoFill>
+                {CLIENTS.map((client) => (
+                  <MarqueeItem key={client} className="mx-5">
+                    <span className="font-mono text-xs tracking-[0.14em] text-[var(--brand-text-secondary)]">
+                      {client}
+                    </span>
+                  </MarqueeItem>
+                ))}
+              </MarqueeContent>
+            </Marquee>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 };
