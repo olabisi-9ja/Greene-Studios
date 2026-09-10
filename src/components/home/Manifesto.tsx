@@ -37,20 +37,16 @@ export default function Manifesto() {
   const gridRef = useStaggerAnimation<HTMLDivElement>({}, ".stagger-item");
 
   return (
-    <section className="border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] md:py-36">
+    <section className="bg-sand py-20 text-[var(--brand-text)] md:py-28">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
           {/* Statement */}
           <div className="self-start lg:sticky lg:top-32 lg:col-span-5">
-            <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
-              <span className="text-[var(--brand-accent)]">✦</span> How we work
-            </span>
-            <h2 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-black uppercase leading-[0.95] tracking-tight">
-              Good design isn&apos;t
-              <br />
-              <span className="font-serif-i lowercase normal-case tracking-normal">decoration.</span>
+            <span className="chip-mono">02 · How we work</span>
+            <h2 className="headline mt-6 text-[clamp(2.1rem,4.4vw,3.75rem)]">
+              Good design isn&apos;t decoration.
             </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-[var(--brand-text-secondary)]">
+            <p className="mt-6 max-w-md text-base leading-snug text-[var(--brand-text-secondary)]">
               It should make a business clearer, a product easier to use, and a brand harder to forget.
               Strategy, design and production code leave the studio together — so what you approve is
               exactly what your users touch.
@@ -66,9 +62,7 @@ export default function Manifesto() {
                   className="stagger-item grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-b border-[var(--brand-border)] py-8 md:grid-cols-[4rem_10rem_1fr] md:py-10"
                 >
                   <span className="font-mono text-xs text-[var(--brand-text-secondary)]">{p.num}</span>
-                  <dt className="font-display text-xl font-black uppercase tracking-tight md:text-2xl">
-                    {p.title}
-                  </dt>
+                  <dt className="headline text-xl md:text-2xl">{p.title}</dt>
                   <dd className="col-span-2 max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:col-span-1 md:text-[15px]">
                     {p.desc}
                   </dd>

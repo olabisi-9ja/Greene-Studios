@@ -870,3 +870,155 @@
     transform: none;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ALIA-DIRECTION SURFACE
+   A quieter language laid over the existing tokens: one hairline accent
+   for the rail figures, one sand band, mono chips instead of ✦ eyebrows,
+   sentence-case display type instead of uppercase black, and square
+   buttons whose labels roll on hover.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root,
+.mode-light,
+.mode-day,
+.mode-paper,
+.mode-studio,
+.mode-raw {
+  /* The rail is the accent held well back — at full strength a deep green
+     hairline running the width of the page reads as a rule, not a drawing. */
+  --rail: color-mix(in srgb, var(--brand-accent) 58%, var(--brand-bg));
+  --sand: #e9e7dc;
+}
+
+.mode-dark,
+.mode-night,
+.mode-midnight {
+  --rail: color-mix(in srgb, var(--brand-accent) 62%, var(--brand-bg));
+  --sand: #0e1312;
+}
+
+/* ─── Display type ───────────────────────────────────────────────────
+   Sentence case, heavy, tightly tracked, set almost solid. The uppercase
+   black setting is still available as `.headline-caps` for the places
+   that genuinely want to shout. */
+.headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-transform: none;
+}
+
+/* ─── Section marker ─────────────────────────────────────────────────
+   A two-digit mono chip. Replaces the ✦ eyebrow: it numbers the page
+   instead of decorating it. */
+.chip-mono {
+  display: inline-block;
+  padding: 0.3rem 0.55rem;
+  background: color-mix(in srgb, var(--brand-accent) 20%, var(--brand-bg));
+  color: var(--brand-text);
+  font-family: var(--font-mono, ui-monospace, "SFMono-Regular", Menlo, monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ─── Square buttons ─────────────────────────────────────────────────
+   Alia's buttons are rectangles, not pills. The pill utilities stay put
+   for the rest of the site; these are the ones the homepage uses. */
+.btn-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1.6rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition:
+    background-color 0.35s var(--ease-out-quart),
+    border-color 0.35s var(--ease-out-quart),
+    color 0.35s var(--ease-out-quart);
+}
+.btn-block-solid {
+  background: var(--brand-accent);
+  color: var(--brand-on-accent);
+}
+.btn-block-solid:hover {
+  background: color-mix(in srgb, var(--brand-accent) 84%, var(--brand-text));
+}
+.btn-block-ghost {
+  border-color: color-mix(in srgb, var(--brand-text) 22%, transparent);
+  color: var(--brand-text);
+}
+.btn-block-ghost:hover {
+  background: var(--sand);
+  border-color: color-mix(in srgb, var(--brand-text) 32%, transparent);
+}
+
+/* ─── Rolling label ──────────────────────────────────────────────────
+   Each character carries a second copy of itself directly below the
+   clip. On hover both copies travel up by exactly one line, so the
+   original leaves through the top as its duplicate arrives from the
+   bottom — and because the delay is staggered per character, the swap
+   runs across the label as a ripple rather than a single flip.
+
+   Pure CSS: the repo keeps framer-motion for springs and exits, and this
+   is neither. */
+.roll {
+  display: inline-flex;
+  white-space: pre;
+}
+.roll-char {
+  position: relative;
+  display: inline-block;
+  height: 1.25em;
+  overflow: hidden;
+  line-height: 1.25em;
+}
+.roll-char > span {
+  display: block;
+  transition: transform 0.42s var(--ease-out-expo);
+  /* Forced, because transition-delay is not an inherited property — this is
+     what lets the per-character delay live on one element instead of two. */
+  transition-delay: inherit;
+}
+.roll-char > span + span {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+}
+.group:hover .roll-char > span,
+.group:focus-visible .roll-char > span {
+  transform: translateY(-100%);
+}
+.group:hover .roll-char > span + span,
+.group:focus-visible .roll-char > span + span {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll-char > span {
+    transition: none;
+  }
+  .group:hover .roll-char > span,
+  .group:focus-visible .roll-char > span {
+    transform: none;
+  }
+  .group:hover .roll-char > span + span,
+  .group:focus-visible .roll-char > span + span {
+    transform: translateY(100%);
+  }
+}
+
+/* ─── Sand band ──────────────────────────────────────────────────────
+   The second surface. One step off the paper, no border needed. */
+.bg-sand {
+  background-color: var(--sand);
+}

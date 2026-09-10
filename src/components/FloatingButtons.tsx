@@ -63,7 +63,7 @@ export default function FloatingButtons() {
   return (
     <div
       className={cn(
-        "fixed bottom-6 right-6 z-[70] flex flex-col items-end gap-3 transition-all duration-500 md:bottom-8 md:right-8",
+        "fixed bottom-5 right-5 z-[70] flex flex-col items-end gap-2 transition-all duration-500 md:bottom-7 md:right-7",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       )}
     >
@@ -72,7 +72,7 @@ export default function FloatingButtons() {
         href="/contact"
         data-cursor="CONTACT"
         className={cn(
-          "rounded-full bg-[var(--brand-text)] px-5 py-3 text-xs font-bold uppercase tracking-widest text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
+          "bg-[var(--brand-text)] px-4 py-2.5 text-[13px] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
           visible ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
@@ -85,7 +85,7 @@ export default function FloatingButtons() {
         data-cursor="UP"
         aria-label="Back to top"
         className={cn(
-          "flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-text)] text-[var(--brand-bg)] shadow-lg transition-all duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
+          "flex h-10 w-10 items-center justify-center bg-[var(--brand-text)] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]",
           visible ? "pointer-events-auto" : "pointer-events-none"
         )}
       >

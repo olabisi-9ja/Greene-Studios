@@ -8,17 +8,15 @@ export default function FAQSection() {
  const [open, setOpen] = useState<number | null>(0);
 
  return (
- <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] md:py-36">
+ <section className="bg-sand py-20 text-[var(--brand-text)] md:py-28">
  <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-20">
  {/* Left */}
  <div className="lg:col-span-4">
- <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
- <span className="text-[var(--brand-accent)]">✦</span> FAQ
- </span>
- <h2 className="font-display text-[clamp(2.4rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Questions worth <span className="font-serif-i lowercase normal-case tracking-normal">asking.</span>
+ <span className="chip-mono">05 · FAQ</span>
+ <h2 className="headline mt-6 text-[clamp(2.1rem,4.4vw,3.75rem)]">
+ Questions worth asking.
  </h2>
- <p className="mt-6 max-w-sm text-base leading-relaxed text-[var(--brand-text-secondary)]">
+ <p className="mt-6 max-w-sm text-base leading-snug text-[var(--brand-text-secondary)]">
  Informed clients make better partners. These are the questions we hear most, and the honest answers.
  </p>
  </div>
@@ -37,7 +35,7 @@ export default function FAQSection() {
  data-cursor="TOGGLE"
  >
  <span className={cn(
- "font-display text-lg font-black uppercase tracking-tight transition-colors duration-300 md:text-2xl",
+ "headline text-lg transition-colors duration-300 md:text-2xl",
  isOpen ? "text-[var(--brand-accent)]" : "text-[var(--brand-text)]"
  )}>
  {faq.question}
