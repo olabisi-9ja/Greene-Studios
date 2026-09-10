@@ -23,7 +23,7 @@ export const prism: BrandSystem = {
       border: "#ded9c8",
       text: "#1b1a17",
       textMuted: "#5f5c52",
-      accent: "#e8542f",
+      accent: "#c34727",
       onAccent: "#ffffff",
     },
     dark: {

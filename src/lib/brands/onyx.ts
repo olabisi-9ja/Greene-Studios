@@ -24,7 +24,7 @@ export const onyx: BrandSystem = {
       border: "#d6d6d2",
       text: "#14140f",
       textMuted: "#63635c",
-      accent: "#8a6d2f",
+      accent: "#83682d",
       onAccent: "#ffffff",
     },
     dark: {

@@ -24,7 +24,7 @@ export const luminary: BrandSystem = {
       border: "#e3e5ea",
       text: "#0e1116",
       textMuted: "#5b6472",
-      accent: "#2f6bff",
+      accent: "#2c65f0",
       onAccent: "#ffffff",
     },
     dark: {

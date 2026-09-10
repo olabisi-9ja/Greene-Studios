@@ -72,7 +72,11 @@ rasteriser, driven by Playwright.
 npm run fonts          # copy woff2 out of node_modules into public/demo/_fonts
 npm run assets         # render the six brand identity boards
 npm run assets:check   # mark contact sheet at 72/32/24/16px, light and dark
+npm run covers         # generative cover art for the journal and lab
 npm run shoot          # photograph the running demo sites (needs a server, below)
+npm run shoot:live     # photograph the shipped sites (needs outbound network)
+npm run images         # PNG → WebP, and write src/lib/image-manifest.json
+npm run assets:all     # fonts → assets → shoot → images, in order
 ```
 
 `npm run shoot` screenshots the **live** concept sites at desktop, tablet and
@@ -87,6 +91,20 @@ npm run shoot
 Brand marks are hand-authored SVG in `public/demo/<brand>/mark.svg` (all under
 750 bytes) and mirrored as JSX in `src/components/demo/BrandMark.tsx` so they can
 resolve `currentColor` and `--b-accent` against the page.
+
+## Checks
+
+```bash
+npm run build && npx next start -p 3111   # both of the below need a server
+npm run measure          # LCP/FCP/CLS and transfer weight → src/lib/measured.json
+npm run audit:contrast   # every route, both themes, against WCAG AA
+```
+
+`measure` is the only source for the performance figures the case studies
+quote — they are never hand-typed. `audit:contrast` walks the real DOM,
+resolves the effective background through transparent ancestors, and exits
+non-zero on any failure. It found 94 the first time it ran, including a page
+of white-on-white text; it should stay at zero.
 
 ## Conventions
 

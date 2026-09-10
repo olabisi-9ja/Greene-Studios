@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 
 const TIMELINE_DATA = [
   {
@@ -34,8 +34,13 @@ const TIMELINE_DATA = [
 ];
 
 export default function TimelineSection() {
+  const listRef = useStaggerAnimation<HTMLDivElement>({}, ".stagger-item");
+
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-12 py-32 border-b border-[var(--brand-border)] bg-[var(--brand-bg)] transition-colors duration-1000">
+    <div
+      ref={listRef}
+      className="mx-auto max-w-7xl border-b border-[var(--brand-border)] bg-[var(--brand-bg)] px-6 py-32 lg:px-12"
+    >
       <div className="flex items-center gap-3 mb-6">
         <span className="text-[var(--brand-accent)] text-xs tracking-widest uppercase font-semibold">
           Timeline
@@ -61,18 +66,18 @@ export default function TimelineSection() {
             </div>
 
             {/* Events for the year */}
-            <div className="md:w-3/4 flex flex-col justify-center space-y-16 py-8">
+            {/* Body copy used to sit at opacity 0.3 until scrolled into view,
+                which reads as 2.4:1 against the page — below AA. The shared
+                reveal starts hidden and is forced visible under
+                prefers-reduced-motion. */}
+            <div className="flex flex-col justify-center space-y-16 py-8 md:w-3/4">
               {group.events.map((event, j) => (
-                <motion.p
+                <p
                   key={j}
-                  initial={{ opacity: 0.3, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.6 }}
-                  className="timeline-event text-[var(--brand-text)] text-2xl lg:text-3xl leading-relaxed tracking-tight font-medium max-w-2xl"
+                  className="stagger-item timeline-event max-w-2xl text-2xl font-medium leading-relaxed tracking-tight text-[var(--brand-text)] lg:text-3xl"
                 >
                   {event}
-                </motion.p>
+                </p>
               ))}
             </div>
           </div>

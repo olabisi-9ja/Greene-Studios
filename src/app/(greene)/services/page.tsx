@@ -78,7 +78,7 @@ export default function ServicesPage() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
             <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
               Identity systems that <span className="font-serif-i lowercase normal-case tracking-normal">outlast trends.</span>
             </p>
@@ -91,7 +91,7 @@ export default function ServicesPage() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
             <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
               Interfaces that feel <span className="font-serif-i lowercase normal-case tracking-normal">inevitable.</span>
             </p>
@@ -119,7 +119,7 @@ export default function ServicesPage() {
  </Link>
  </div>
 
- <div className="flex flex-col justify-between gap-8 rounded-2xl bg-[var(--brand-text)] p-10 text-[var(--brand-bg)] lg:p-12">
+ <div className="flex flex-col justify-between gap-8 rounded-2xl on-ink bg-[var(--brand-text)] p-10 text-[var(--brand-bg)] lg:p-12">
  <div>
  <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
  ✦ Enterprise & custom

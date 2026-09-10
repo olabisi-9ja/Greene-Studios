@@ -48,7 +48,7 @@ export default function PricingPage() {
  </div>
 
  {/* CTA */}
-        <div className="relative mt-24 overflow-hidden rounded-2xl bg-[var(--brand-text)] p-10 text-center text-[var(--brand-bg)] md:p-20">
+        <div className="relative mt-24 overflow-hidden rounded-2xl on-ink bg-[var(--brand-text)] p-10 text-center text-[var(--brand-bg)] md:p-20">
           <div className="relative z-10">
  <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
  Ready to invest in <span className="font-serif-i lowercase normal-case tracking-normal">your brand?</span>

@@ -17,6 +17,11 @@ const nextConfig = {
       { source: '/services/product', destination: '/services/ui-ux-design', permanent: false },
       { source: '/services/code', destination: '/services/frontend-development', permanent: false },
       { source: '/services/motion', destination: '/services/motion-design', permanent: false },
+      // /studio was an unreplaced template page — a beverage brand's landing
+      // page, complete with "Shop Now" and two invented "Verified Buyer"
+      // testimonials — sitting in the primary nav. /about is the real studio
+      // page, so the nav's "Studio" link now lands there.
+      { source: '/studio', destination: '/about', permanent: false },
       // Latent internal-link typos that previously 404'd
       { source: '/services/ui-ux', destination: '/services/ui-ux-design', permanent: true },
       { source: '/services/frontend-dev', destination: '/services/frontend-development', permanent: true },

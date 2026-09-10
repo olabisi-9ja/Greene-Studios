@@ -412,7 +412,7 @@ export default function ProjectIntake() {
             onClick={() => setStep((s) => s + 1)}
             disabled={!stepsValid[step]}
             data-cursor="NEXT"
-            className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+            className="btn-primary disabled:cursor-not-allowed disabled:opacity-60"
           >
             Continue <span aria-hidden="true">→</span>
           </button>

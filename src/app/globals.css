@@ -144,6 +144,23 @@
     color: var(--brand-on-accent);
   }
 
+  /* Any surface painted with --brand-text needs the accent to invert with it:
+     the light accent is a deep green, which lands at 1.68:1 on near-black.
+     `.on-ink` marks such a panel. */
+  .on-ink {
+    --brand-accent: #9fc9a8;
+    --brand-border: color-mix(in srgb, var(--brand-bg) 22%, transparent);
+    /* The panel is painted with --brand-text, so anything sitting ON the
+       inverted accent has to be that same colour — otherwise a light accent
+       keeps a light foreground and the button label disappears. */
+    --brand-on-accent: var(--brand-text);
+  }
+  .mode-dark .on-ink,
+  .mode-night .on-ink,
+  .mode-midnight .on-ink {
+    --brand-accent: #1f3d3a;
+  }
+
   /* The footer inverts against the page, so its accent has to invert too. */
   :root footer,
   .mode-light footer,
