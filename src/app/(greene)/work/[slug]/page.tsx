@@ -67,14 +67,6 @@ export default async function CaseStudyPage({ params }: Props) {
               {brand.tagline}
             </p>
           </div>
-
-          <a
-            href={`/demo/${brand.slug}`}
-            data-cursor="VISIT"
-            className="btn-primary shrink-0"
-          >
-            Visit the live site <span aria-hidden="true">→</span>
-          </a>
         </div>
       </header>
 
@@ -233,10 +225,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
       {/* ── Next ───────────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 pb-24 md:mt-28 md:px-10">
-        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-[var(--brand-border)] pt-10">
-          <a href={`/demo/${brand.slug}`} data-cursor="VISIT" className="btn-primary">
-            Open {brand.name} <span aria-hidden="true">→</span>
-          </a>
+        <div className="flex items-center justify-end gap-6 border-t border-[var(--brand-border)] pt-10">
           <Link
             href={`/work/${next.slug}`}
             data-cursor="NEXT"

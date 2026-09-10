@@ -3,7 +3,7 @@
 export const BRAND = {
  name: "Greene Studios",
  tagline: "We design and build digital experiences that move people.",
- email: "hello@greenestudios.co",
+ email: "hello@greenestudios.com",
  location: "Lagos, Nigeria — working worldwide",
  instagram: "https://instagram.com/greenestudios",
  twitter: "https://twitter.com/greenestudios",

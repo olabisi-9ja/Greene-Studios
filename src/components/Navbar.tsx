@@ -113,7 +113,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 data-cursor="HELLO"
-                className="group hidden items-center gap-2 bg-[var(--brand-text)] px-4 py-2.5 text-[14px] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] sm:inline-flex"
+                className="group hidden items-center gap-2 rounded-full bg-[var(--brand-text)] px-4 py-2.5 text-[14px] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] sm:inline-flex"
               >
                 <RollLabel text="Start a project" />
               </Link>

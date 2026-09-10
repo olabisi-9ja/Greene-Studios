@@ -27,7 +27,7 @@ export const metadata: Metadata = {
  openGraph: {
  type: "website",
  locale: "en_US",
- url: "https://greenestudios.co",
+ url: "https://greenestudios.com",
  siteName: "Greene Studios",
  title: "Greene Studios · Independent Digital Design Studio",
  description:

@@ -18,13 +18,6 @@ export default function CTASection() {
     >
       {/* Giant CTA */}
       <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
-        <span
-          className="mb-8 inline-block px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em]"
-          style={{ backgroundColor: "color-mix(in srgb, var(--cta-fg) 16%, transparent)" }}
-        >
-          06 · Let&apos;s build together
-        </span>
-
         <h2 className="headline text-[clamp(2.4rem,6vw,5.5rem)]">
           Ready to build something people can&apos;t ignore?
         </h2>
@@ -43,11 +36,11 @@ export default function CTASection() {
             <RollLabel text="Start your brief" />
           </Link>
           <a
-            href="mailto:hello@greenestudios.co"
+            href="mailto:hello@greenestudios.com"
             className="group btn-block"
             style={{ borderColor: "color-mix(in srgb, var(--cta-fg) 40%, transparent)", color: "var(--cta-fg)" }}
           >
-            <RollLabel text="hello@greenestudios.co" />
+            <RollLabel text="hello@greenestudios.com" />
           </a>
         </div>
 

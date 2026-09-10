@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import Link from "next/link";
 import Image from "next/image";
-import PageHeader from "@/components/ui/PageHeader";
+import { StudioHero } from "@/components/about/StudioHero";
 import CTASection from "@/components/home/CTASection";
 import TimelineSection from "@/components/about/TimelineSection";
 
@@ -62,30 +62,7 @@ export default function AboutPage() {
  const portrait = founderPortrait();
  return (
  <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
- <PageHeader
- kicker="About the studio"
- title={
- <>
- We believe design
- <br />
- <span className="font-serif-i lowercase normal-case tracking-normal">is a business tool.</span>
- </>
- }
- description="Not decoration. Not art for art's sake. Design, done well, changes how people feel about a company, how quickly they trust it, and how confidently they spend money with it."
- right={
- <div className="flex items-center gap-6">
- <div>
- <p className="font-display text-5xl font-black leading-none text-[var(--brand-text)]">6</p>
- <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">Brand systems built</p>
- </div>
- <span className="h-12 w-px bg-[var(--brand-border)]" />
- <div>
- <p className="font-display text-5xl font-black leading-none text-[var(--brand-text)]">95+</p>
- <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">Lighthouse, every build</p>
- </div>
- </div>
- }
- />
+  <StudioHero portrait={portrait} />
 
  {/* Mission */}
  <section className="border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 md:py-32">

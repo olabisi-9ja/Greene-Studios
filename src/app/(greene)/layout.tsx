@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
-import DynamicCursor from "@/components/ui/DynamicCursor";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
 import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
@@ -19,7 +18,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
     <AtmosphereProvider>
       <ScrollProgress />
       <NoiseTexture />
-      <DynamicCursor />
       <Preloader />
 
       {/* Structured data: the studio, machine-readable. */}
@@ -32,7 +30,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
             name: "Greene Studios",
             url: process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app",
             logo: "/brand/gs-chip.png",
-            email: "hello@greenestudios.co",
+            email: "hello@greenestudios.com",
             description:
               "Independent digital design studio. Brands, websites, and digital products that make people stop scrolling.",
             foundingDate: "2022",

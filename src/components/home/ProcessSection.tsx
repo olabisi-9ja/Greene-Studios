@@ -53,7 +53,7 @@ export default function ProcessSection({ showHeader = true, variant = "full" }: 
             </>
           ) : null}
           <div className="mt-10 hidden items-center gap-3 lg:flex">
-            <span className="flex h-9 w-9 items-center justify-center bg-[var(--brand-accent)] font-mono text-sm text-[var(--brand-on-accent)]">
+            <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-[var(--brand-accent)] font-mono text-sm text-[var(--brand-on-accent)]">
               {condensed ? "4" : "10"}
             </span>
             <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">

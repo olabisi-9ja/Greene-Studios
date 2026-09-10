@@ -712,6 +712,17 @@
   animation-play-state: paused;
 }
 
+/* ─── Scroll-cue bar (StudioHero) ─────────────────────────────────────── */
+@keyframes scroll-cue {
+  0%   { transform: scaleY(0); transform-origin: top;    opacity: 1; }
+  55%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
+  56%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+.animate-scroll-cue {
+  animation: scroll-cue 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
 /* ═══ REDUCED MOTION ═══════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -787,8 +798,8 @@
    Elevation is deliberately near-flat: a hairline border does the
    separating, so cards stack on any surface without a shadow pile-up. */
 :root {
-  --card-radius: 1rem;
-  --card-radius-lg: 1.5rem;
+  --card-radius: 1.25rem;
+  --card-radius-lg: 1.75rem;
   --card-pad: 1.5rem;
   --card-pad-lg: 2.25rem;
 }
@@ -936,8 +947,9 @@
   justify-content: center;
   gap: 0.55rem;
   padding: 0.95rem 1.6rem;
-  border-radius: 2px;
+  border-radius: 9999px;
   border: 1px solid transparent;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: -0.01em;

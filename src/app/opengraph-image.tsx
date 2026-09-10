@@ -109,7 +109,7 @@ export default async function Image() {
           }}
         >
           <span>Design that can&apos;t be ignored</span>
-          <span>greenestudios.co</span>
+          <span>greenestudios.com</span>
         </div>
       </div>
     ),

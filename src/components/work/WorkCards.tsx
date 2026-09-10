@@ -18,8 +18,8 @@ import { BrandMark } from "@/components/demo/BrandMark";
  */
 
 const CARD =
-  "group flex h-full flex-col overflow-hidden border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-colors duration-300 hover:border-[var(--brand-text)]";
-const MEDIA = "relative aspect-[16/10] w-full overflow-hidden bg-[var(--brand-surface-secondary)]";
+  "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-colors duration-300 hover:border-[var(--brand-text)]";
+const MEDIA = "relative aspect-[16/10] w-full overflow-hidden rounded-t-2xl bg-[var(--brand-surface-secondary)]";
 const IMG = "object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]";
 const META = "text-[11px] font-semibold text-[var(--brand-text-secondary)]";
 const CTA = "text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-accent)]";
