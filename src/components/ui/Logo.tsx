@@ -1,29 +1,18 @@
-"use client";
-
-import React from "react";
+import { GreeneMonogram } from "@/components/ui/GreeneMark";
 
 interface LogoProps {
   className?: string;
-  color?: string; // Kept for backwards compatibility if needed, though unused by img
-  animateOnMount?: boolean;
-  triggerRedrawOnHover?: boolean;
 }
 
-export function Logo({ 
-  className = "w-12 h-12", 
-  color,
-  animateOnMount,
-  triggerRedrawOnHover
-}: LogoProps) {
+/**
+ * Thin wrapper kept for existing call sites. The mark itself now comes from
+ * GreeneMark, which prefers the real logo export and falls back to the
+ * hand-drawn SVG until `npm run brand` has been run.
+ */
+export function Logo({ className = "w-12 h-12" }: LogoProps) {
   return (
-    <div className={`relative ${className}`}>
-      {/* We use the next/image component for optimization, relying on the parent's width/height via className */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/brand/gs-monogram-new.svg"
-        alt="Greene Studios Logo"
-        className="h-full w-full object-contain"
-      />
-    </div>
+    <span className={`relative inline-flex items-center justify-center ${className}`}>
+      <GreeneMonogram className="h-full w-full" fill />
+    </span>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { GreeneMonogram } from "@/components/ui/GreeneMark";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, BRAND } from "@/lib/data";
 
@@ -50,11 +51,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <div className="flex items-center gap-3">
                 <span className="relative block h-9 w-9 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/brand/gs-chip.svg"
-                    alt="Greene Studios logo"
-                    className="h-full w-full object-contain"
-                  />
+                  <GreeneMonogram fill className="h-full w-full p-[3px]" />
                 </span>
                 <span className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">
                   Greene<span>®</span>

@@ -17,7 +17,7 @@ export default function JournalPage() {
   const rest = filtered.filter((a) => a.id !== featured?.id);
 
   return (
-    <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)] transition-colors duration-1000">
+    <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)]">
       <PageHeader
         kicker="Journal"
         title={

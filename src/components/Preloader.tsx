@@ -1,76 +1,75 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/* ─── The wordmark, with custom kerning ─────────────────────────────
-   The logo is not the site font typed out: each pair is nudged so the
-   lockup's rhythm becomes part of the identity. */
-const GREENE = [
-  { ch: "G", mr: "0.015em" },
-  { ch: "R", mr: "-0.045em" },
-  { ch: "E", mr: "-0.01em" },
-  { ch: "E", mr: "0.005em" },
-  { ch: "N", mr: "-0.055em" },
-  { ch: "E", mr: "0" },
-];
-const STUDIOS = "STUDIOS".split("");
-
-/* Deep Greene field — the brand's identity moment is theme-independent */
+/* The identity moment is theme-independent: it is the same green field and
+   the same cream whichever theme the visitor lands in. */
 const FIELD = "#263B38";
 const PAPER = "#F5F4EF";
 
-/**
- * Cinematic window-load built around the studio's visual device: the G.
- *
- *   Act 1  ·  the outlined G appears, its aperture cut drawn as a mark
- *   Act 2  ·  S joins it — the GS monogram
- *   Act 3  ·  the full GREENE STUDIOS® lockup
- *
- * The entire show is pure CSS keyframes: it plays from first paint and
- * never depends on hydration or an animation library waking up, so the
- * panel can never sit as an empty green field. React only owns the
- * session bookkeeping, the scroll lock and the exit wipe. Add
- * ?replay-loader to the URL to watch it again any time.
- */
+/** Where the count stops. Deliberately short of 100 — it hands off mid-climb. */
+const TARGET = 99;
+/** Minimum time on screen, so a warm cache doesn't flash 0→99 in one frame.
+ *  Long enough for the climb to read, short enough that it isn't a tax. */
+const FLOOR_MS = 950;
+const FLOOR_MS_REDUCED = 350;
+/** Hard ceiling: one slow asset must never strand a visitor at 40%. */
+// readyState only reaches "complete" once every subresource has landed,
+// which on the homepage is ~1.6s — long enough to hold the count well past
+// the floor. The ceiling caps how much real readiness may delay the exit.
+const CEILING_MS = 1100;
+/** Beat at 99 before the wipe. */
+const HOLD_MS = 150;
+/** Matches the wipe transition below. */
+const WIPE_MS = 480;
+const WIPE_MS_REDUCED = 250;
+
 const LOADER_CSS = `
-.gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;
+  transition:transform ${WIPE_MS}ms cubic-bezier(.16,1,.3,1)}
 .gl-out{transform:translateY(-100%)}
-.gl-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0}
-.gl-act1{animation:gl-a1 .62s cubic-bezier(.16,1,.3,1) 0s both}
-.gl-act3{flex-direction:column;animation:gl-fade .4s cubic-bezier(.16,1,.3,1) .5s both}
-.gl-l{opacity:0;display:inline-block;animation:gl-rise .38s cubic-bezier(.16,1,.3,1) both}
-.gl-rule{transform:scaleX(0);transform-origin:left;animation:gl-grow .4s cubic-bezier(.16,1,.3,1) .85s both}
-.gl-tag{opacity:0;animation:gl-tag .35s ease .95s both}
-.gl-bar{transform:scaleX(0);transform-origin:left;animation:gl-bar 1.15s linear 0s both}
-@keyframes gl-a1{0%{opacity:0;transform:translateY(16px);filter:blur(12px)}25%{opacity:1;transform:none;filter:none}75%{opacity:1}100%{opacity:0;transform:translateY(-10px);filter:blur(8px)}}
-@keyframes gl-fade{from{opacity:0;transform:translateY(14px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
-@keyframes gl-rise{from{opacity:0;transform:translateY(.55em) rotate(5deg)}to{opacity:1;transform:none}}
-@keyframes gl-grow{to{transform:scaleX(1)}}
-@keyframes gl-tag{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes gl-bar{to{transform:scaleX(1)}}
+.gl-count{position:absolute;left:0;bottom:0;display:flex;align-items:flex-end;
+  gap:.06em;line-height:.78;padding:0 var(--gl-gutter) .06em}
+.gl-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+  letter-spacing:-.045em}
+.gl-pct{font-size:.18em;letter-spacing:.02em;opacity:.55;
+  transform:translateY(-1.55em)}
+.gl-rule{position:absolute;left:0;bottom:0;height:2px;width:100%;
+  transform-origin:left;transform:scaleX(0)}
 @media (prefers-reduced-motion: reduce){
-.gl-act1,.gl-bar{display:none}
-.gl-act3,.gl-act3 *{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
-.gl-root{transition-duration:.3s}
+  .gl-root{transition-duration:${WIPE_MS_REDUCED}ms}
 }
 `;
 
+/**
+ * The loader: a count from 0 to 99, then the site.
+ *
+ * The number is driven by what the page is actually doing — readyState, web
+ * fonts, and decoded images — rather than a timer pretending to be progress.
+ * It is smoothed and floored so it reads as motion instead of a stuttering
+ * readout, and capped so a slow asset can never hold someone hostage.
+ *
+ * It gates first paint by design. That is the cost of having one; the floor is
+ * kept short so the cost stays around a second.
+ *
+ * Plays once per session. `?replay-loader` (or `#loader`) shows it again.
+ */
 export default function Preloader() {
   const [state, setState] = useState<"pending" | "showing" | "exiting" | "done">("pending");
+  const [count, setCount] = useState(0);
+  const numRef = useRef<HTMLSpanElement>(null);
+  const ruleRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const replay =
-      window.location.search.includes("replay-loader") ||
-      window.location.hash === "#loader";
+      window.location.search.includes("replay-loader") || window.location.hash === "#loader";
 
     let shown = false;
     if (!replay) {
       try {
         shown = !!sessionStorage.getItem("loader_shown");
       } catch {
-        /* storage unavailable (e.g. sandboxed iframe) — show the loader */
+        /* storage unavailable (private mode, sandboxed iframe) — show it */
       }
     }
     if (shown) {
@@ -79,132 +78,139 @@ export default function Preloader() {
     }
 
     setState("showing");
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const reduced =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    // Was 2925ms + a 950ms exit — nearly four seconds before a first-time
-    // visitor saw the site, which measured as a 1.58s LCP on the homepage.
-    // The identity beat is worth keeping; four seconds of it is not.
-    const holdMs = reduced ? 450 : 1150;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    const floor = reduced ? FLOOR_MS_REDUCED : FLOOR_MS;
+    const wipe = reduced ? WIPE_MS_REDUCED : WIPE_MS;
+    const start = performance.now();
 
-    const exitTimer = setTimeout(() => setState("exiting"), holdMs);
-    const doneTimer = setTimeout(() => {
-      setState("done");
-      try {
-        if (!replay) sessionStorage.setItem("loader_shown", "true");
-      } catch {
-        /* ignore — storage unavailable */
+    /** Real readiness, 0–1. Three signals, evenly weighted. */
+    const readiness = () => {
+      let done = 0;
+      let total = 3;
+
+      if (document.readyState === "complete") done += 1;
+      else if (document.readyState === "interactive") done += 0.5;
+
+      if (fontsReady.current) done += 1;
+
+      // Lazy images below the fold never load while the loader covers the
+      // page, so counting them pins readiness below 1 forever.
+      const imgs = Array.from(document.images).filter((i) => i.loading !== "lazy");
+      if (imgs.length === 0) done += 1;
+      else done += imgs.filter((i) => i.complete).length / imgs.length;
+
+      return done / total;
+    };
+
+    let frame = 0;
+    let shownValue = 0;
+    let finished = false;
+
+    const tick = () => {
+      const elapsed = performance.now() - start;
+
+      // The climb is driven by an eased time curve that reaches exactly 1 at
+      // the floor, so the count lands on 99 when it is meant to rather than
+      // chasing a moving target and overshooting by half a second.
+      const t = Math.min(1, elapsed / floor);
+      const timeProgress = 1 - (1 - t) * (1 - t);
+
+      // Real readiness only holds back the last stretch — enough that the
+      // number means something, not enough to make a slow asset the story.
+      // readyState only reaches "complete" once every subresource has landed,
+      // so the ceiling releases the count regardless.
+      const cap = elapsed >= CEILING_MS ? 1 : 0.85 + 0.15 * readiness();
+
+      // Never backwards.
+      shownValue = Math.max(shownValue, Math.min(timeProgress, cap) * TARGET);
+      const rounded = Math.min(TARGET, Math.round(shownValue));
+      setCount(rounded);
+      if (ruleRef.current) {
+        ruleRef.current.style.transform = `scaleX(${(rounded / TARGET).toFixed(4)})`;
       }
-      document.body.style.overflow = "";
-    }, holdMs + 500);
+
+      if (rounded >= TARGET && elapsed >= floor) {
+        if (!finished) {
+          finished = true;
+          exitTimer = window.setTimeout(() => setState("exiting"), HOLD_MS);
+          doneTimer = window.setTimeout(() => {
+            setState("done");
+            try {
+              if (!replay) sessionStorage.setItem("loader_shown", "true");
+            } catch {
+              /* ignore */
+            }
+            document.body.style.overflow = previousOverflow;
+          }, HOLD_MS + wipe);
+        }
+        return;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    let exitTimer = 0;
+    let doneTimer = 0;
+    frame = requestAnimationFrame(tick);
 
     return () => {
+      cancelAnimationFrame(frame);
       clearTimeout(exitTimer);
       clearTimeout(doneTimer);
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, []);
 
-  // SSR + pre-hydration always render the loader; post-mount it may bail.
+  /** Tracked outside the loop so the rAF callback can read it cheaply. */
+  const fontsReady = useRef(false);
+  useEffect(() => {
+    let alive = true;
+    document.fonts?.ready.then(() => {
+      if (alive) fontsReady.current = true;
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   if (state === "done") return null;
 
   return (
     <div
       className={`gl-root${state === "exiting" ? " gl-out" : ""}`}
-      style={{ backgroundColor: FIELD }}
+      style={{ backgroundColor: FIELD, color: PAPER }}
       role="status"
-      aria-label="Greene Studios"
+      aria-live="polite"
+      aria-label={`Loading Greene Studios, ${count} percent`}
     >
       <style>{LOADER_CSS}</style>
 
-      {/* quiet vignette — depth without new colours */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="gl-count font-display font-black"
+        style={
+          {
+            fontSize: "clamp(6rem, 22vw, 20rem)",
+            // Matches the site's own page gutter.
+            ["--gl-gutter" as string]: "clamp(1.25rem, 4vw, 2.5rem)",
+          } as React.CSSProperties
+        }
         aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 70% at 50% 45%, transparent 40%, rgba(10,10,10,0.35) 100%)",
-        }}
-      />
-
-      {/* ── Act 1 · the GS visual device ── */}
-      <div className="gl-layer gl-act1" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/brand/gs-monogram-new.svg"
-          alt=""
-          style={{ height: "clamp(6.5rem, 19vw, 13rem)", width: "auto" }}
-        />
+      >
+        <span ref={numRef} className="gl-num">
+          {count}
+        </span>
+        <span className="gl-pct">%</span>
       </div>
 
-      {/* ── Act 2 & 3 · the GREENE and STUDIOS lockup ── */}
-      <div className="gl-layer gl-act3 px-6">
-        {/* GREENE — custom-kerned wordmark */}
-        <h1
-          aria-label="GREENE STUDIOS"
-          className="flex overflow-hidden font-display font-black uppercase leading-none"
-          style={{ fontSize: "clamp(2.8rem, 10vw, 7rem)", color: PAPER }}
-        >
-          {GREENE.map(({ ch, mr }, i) => (
-            <span
-              key={`g${i}`}
-              className="gl-l"
-              style={{ marginRight: mr, animationDelay: `${0.55 + i * 0.035}s` }}
-            >
-              {ch}
-            </span>
-          ))}
-        </h1>
-
-        {/* STUDIOS® */}
-        <div className="mt-3 flex items-center overflow-hidden">
-          {STUDIOS.map((ch, i) => (
-            <span
-              key={`s${i}`}
-              className="gl-l font-display font-bold uppercase"
-              style={{
-                fontSize: "clamp(1rem, 4vw, 2.4rem)",
-                letterSpacing: "0.34em",
-                color: `${PAPER}B3`,
-                marginRight: i === STUDIOS.length - 1 ? "-0.34em" : 0,
-                animationDelay: `${0.76 + i * 0.03}s`,
-              }}
-            >
-              {ch}
-            </span>
-          ))}
-          <span
-            className="gl-l ml-6 align-super font-display font-black"
-            style={{
-              fontSize: "clamp(0.6rem, 1.6vw, 1rem)",
-              color: `${PAPER}B3`,
-              animationDelay: "0.98s",
-            }}
-          >
-            ®
-          </span>
-        </div>
-
-        {/* expanding rule */}
-        <div
-          className="gl-rule mt-8 h-[3px] w-48 rounded-full md:w-72"
-          style={{ backgroundColor: PAPER }}
-        />
-
-        {/* tagline */}
-        <p
-          className="gl-tag mt-5 text-[10px] font-bold uppercase"
-          style={{ letterSpacing: "0.45em", color: `${PAPER}8C` }}
-        >
-          Design that can&apos;t be ignored
-        </p>
-      </div>
-
-      {/* bottom progress line */}
-      <div
-        className="gl-bar absolute bottom-0 left-0 right-0 h-[3px]"
-        style={{ backgroundColor: `${PAPER}40` }}
+      {/* A hairline that tracks the same value — legible at a glance from
+          across the room, where a numeral in the corner is not. */}
+      <span
+        ref={ruleRef}
+        className="gl-rule"
+        style={{ backgroundColor: PAPER, opacity: 0.28 }}
+        aria-hidden="true"
       />
     </div>
   );

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import Image from "next/image";
 import PageHeader from "@/components/ui/PageHeader";
@@ -40,9 +42,26 @@ const TECHNOLOGIES = [
  "Drizzle ORM", "Vercel", "Storybook", "Lottie",
 ];
 
+/**
+ * The founder portrait, if it has been added.
+ *
+ * Resolved at build time, the same way the shipped-work screenshots are, so
+ * the page degrades to a typographic plate rather than a broken image — and
+ * so it never falls back to the stock group photo that used to sit here under
+ * a heading that says "meet the mind", singular.
+ */
+function founderPortrait(): string | null {
+  for (const ext of ["webp", "jpg", "jpeg", "png"]) {
+    const rel = `/images/studio/founder.${ext}`;
+    if (existsSync(path.join(process.cwd(), "public", rel))) return rel;
+  }
+  return null;
+}
+
 export default function AboutPage() {
+ const portrait = founderPortrait();
  return (
- <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
  <PageHeader
  kicker="About the studio"
  title={
@@ -83,20 +102,37 @@ export default function AboutPage() {
           {/* Portrait */}
           <div className="relative">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
-              <Image
-                src="/images/hero/team-2.jpg"
-                alt="The Greene Studios team"
-                fill
-                sizes="(max-width: 1024px) 100vw, 46vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+              {portrait ? (
+                <Image
+                  src={portrait}
+                  alt="Olabisi Adigun, founder of Greene Studios"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 46vw"
+                  className="object-cover object-top"
+                />
+              ) : (
+                /* Until the portrait is added, a typographic plate rather than
+                   a stock photograph of people who do not work here. */
+                <div className="flex h-full w-full items-center justify-center p-10 text-center">
+                  <p className="font-display text-3xl font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]/25">
+                    Greene
+                    <br />
+                    Studios
+                  </p>
+                </div>
+              )}
+              {/* The scrim exists to keep the caption readable over a
+                  photograph. With no photo it just turns the plate grey. */}
+              {portrait ? (
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+              ) : null}
               <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-[var(--brand-bg)]/95 px-5 py-4">
                 <p className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-accent)]">
-                  The people
+                  Founder
                 </p>
                 <p className="mt-0.5 font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">
-                  The mind behind the work
+                  Olabisi Adigun
                 </p>
               </div>
             </div>

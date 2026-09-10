@@ -37,7 +37,7 @@ export default function ProcessSection({ showHeader = true, variant = "full" }: 
   const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
 
   return (
-    <section className="relative bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36">
+    <section className="relative bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] md:py-36">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-14 px-5 md:px-10 lg:flex-row lg:gap-24">
         {/* Left · sticky header */}
         <div className="self-start lg:sticky lg:top-32 lg:w-1/3">
