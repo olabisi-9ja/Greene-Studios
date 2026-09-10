@@ -17,7 +17,9 @@
     "measure": "node scripts/measure.mjs",
     "shoot:live": "node scripts/shoot-live.mjs",
     "audit:contrast": "node scripts/audit-contrast.mjs",
-    "brand": "node scripts/prepare-brand.mjs"
+    "brand": "node scripts/prepare-brand.mjs",
+    "monogram": "node scripts/make-monogram.mjs",
+    "monogram:sheet": "node scripts/monogram-sheet.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -57,10 +59,12 @@
     "@types/react-dom": "18.3.0",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.14",
+    "fontkit": "^2.0.4",
     "playwright": "^1.56.1",
     "postcss": "8.5.8",
     "sharp": "^0.35.4",
     "tailwindcss": "4.1.17",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "wawoff2": "^2.0.1"
   }
 }
