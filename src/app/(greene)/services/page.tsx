@@ -102,7 +102,7 @@ export default function ServicesPage() {
 
  {/* Two CTA cards */}
  <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
- <div className="flex flex-col justify-between gap-8 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-10 lg:p-12">
+ <div className="flex flex-col justify-between gap-8 card lg:p-12">
  <div>
  <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
  ✦ Not sure where to start?

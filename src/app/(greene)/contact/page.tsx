@@ -37,7 +37,7 @@ export default function ContactPage() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8">
+          <div className="card">
             <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
               Contact details
             </h3>
@@ -61,7 +61,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8">
+          <div className="card">
             <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
               What happens next
             </h3>
@@ -82,7 +82,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8">
+          <div className="card">
             <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
               Follow our work
             </h3>

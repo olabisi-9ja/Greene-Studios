@@ -101,7 +101,7 @@ export default function CareersPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-10 text-center md:p-14">
+        <div className="mt-16 card text-center md:p-14">
           <h3 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-3xl">
             Don&apos;t see a fit?
           </h3>

@@ -135,7 +135,7 @@ export default function AboutPage() {
  { value: "<1.2s", label: "Target LCP" },
  { value: "2022", label: "Founded" },
  ].map((stat) => (
- <div key={stat.label} className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-6">
+ <div key={stat.label} className="card">
  <div className="font-display text-3xl font-black tracking-tight text-[var(--brand-text)] md:text-4xl">
  {stat.value}
  </div>

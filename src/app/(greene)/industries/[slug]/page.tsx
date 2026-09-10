@@ -121,7 +121,7 @@ export default async function IndustryPage({ params }: Props) {
             {industry.moves.map((m, i) => (
               <div
                 key={m.title}
-                className="group rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--brand-accent)]/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+                className="group card card-lg transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--brand-accent)]/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
               >
                 <span className="font-mono text-sm text-[var(--brand-accent)]">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 font-display text-xl font-black uppercase tracking-tight md:text-2xl">

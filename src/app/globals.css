@@ -760,3 +760,60 @@
     animation: none;
   }
 }
+
+
+/* ═══ CARD ═════════════════════════════════════════════════════════════
+   One card system, used by src/components/ui/Card.tsx. Sixteen files used
+   to roll their own `rounded-2xl border border-[var(--brand-border)]`
+   variant, which is how a design system drifts.
+
+   Elevation is deliberately near-flat: a hairline border does the
+   separating, so cards stack on any surface without a shadow pile-up. */
+:root {
+  --card-radius: 1rem;
+  --card-radius-lg: 1.5rem;
+  --card-pad: 1.5rem;
+  --card-pad-lg: 2.25rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--brand-surface);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-pad);
+  /* Transform and border-color only — nothing that triggers layout. */
+  transition:
+    transform 0.3s var(--ease-out-quart),
+    border-color 0.3s var(--ease-out-quart),
+    opacity 0.3s var(--ease-out-quart);
+}
+@media (min-width: 768px) {
+  .card { padding: var(--card-pad-lg); }
+}
+
+.card-flush { padding: 0; gap: 0; overflow: hidden; }
+.card-alt { background: var(--brand-surface-secondary); }
+.card-lg { border-radius: var(--card-radius-lg); }
+
+.card-interactive:hover,
+.card-interactive:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--brand-text);
+}
+
+/* The featured tier. One accent border, no glow — the accent shadow the
+   pricing table used read as a notification, not as emphasis. */
+.card-featured {
+  border-color: var(--brand-accent);
+  box-shadow: inset 0 0 0 1px var(--brand-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card-interactive:hover,
+  .card-interactive:focus-visible { transform: none; }
+}

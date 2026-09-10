@@ -221,7 +221,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
       {/* ── Learned ────────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
-        <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:p-14">
+        <div className="card">
           <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
             <span className="text-[var(--brand-accent)]">✦</span> What it taught us
           </span>

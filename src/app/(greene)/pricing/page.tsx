@@ -25,7 +25,8 @@ export default function PricingPage() {
  />
 
  <div className="mx-auto max-w-[1400px] px-5 md:px-10">
- <PricingTiers />
+ {/* The page header already carries the headline. */}
+        <PricingTiers showHeader={false} />
 
  {/* FAQ */}
  <div className="mx-auto mt-8 max-w-3xl">

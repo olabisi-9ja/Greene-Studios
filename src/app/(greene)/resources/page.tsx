@@ -57,7 +57,7 @@ export default function ResourcesPage() {
             <a
               key={i}
               href={item.link}
-              className="group flex flex-col rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.07)]"
+              className="group flex flex-col card transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.07)]"
               data-cursor="DOWNLOAD"
             >
               <div className="mb-8 flex items-start justify-between">

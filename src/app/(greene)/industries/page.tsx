@@ -43,7 +43,7 @@ export default function IndustriesPage() {
               key={ind.slug}
               href={`/industries/${ind.slug}`}
               data-cursor="VIEW"
-              className="group relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--brand-accent)]/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+              className="group relative flex min-h-[260px] flex-col justify-between overflow-hidden card card-lg transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--brand-accent)]/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
             >
               <span
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"

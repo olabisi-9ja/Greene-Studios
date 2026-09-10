@@ -53,7 +53,7 @@ export default async function ServicePage({ params }: Props) {
  title={service.title}
  description={service.description}
  right={
- <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-7">
+ <div className="card">
  <h3 className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
  What&apos;s included
  </h3>
@@ -122,7 +122,7 @@ export default async function ServicePage({ params }: Props) {
  {(service.approach || []).map((item: any, i: number) => (
  <div
  key={item.title}
- className="group rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
+ className="group card transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
  >
  <div className="mb-6 flex items-center justify-between">
  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)]">

@@ -499,7 +499,7 @@ export const FAQS = [
  },
  {
  question: "What's included after launch?",
- answer: "Every package includes post-launch support ranging from 14 days (Starter) to 6 months (Premium). We monitor performance, squash bugs, and iterate based on real user data.",
+ answer: "Every tier includes post-launch support — 14 days on MVP, 30 days on Growth, 12 months on Enterprise. We watch performance, fix what breaks, and iterate on what real usage shows.",
  },
  {
  question: "Do you sign NDAs and contracts?",
@@ -689,4 +689,79 @@ export const JOURNAL_CATEGORIES = [
  "Business",
  "Freelancing",
  "Tutorials",
+];
+
+// ─── Pricing ──────────────────────────────────────────────────────────────────
+// One source of truth. These were hardcoded inside PricingTiers.tsx while a
+// second, contradictory list (Starter / Growth / Premium) sat in this file —
+// two different price lists shipping in the same build.
+
+export type Currency = "USD" | "EUR" | "NGN";
+
+export const CURRENCY_SYMBOLS: Record<Currency, string> = {
+ USD: "$",
+ EUR: "\u20ac",
+ NGN: "\u20a6",
+};
+
+/** Indicative only — a real quote is settled on the discovery call. */
+export const EXCHANGE_RATES: Record<Currency, number> = {
+ USD: 1,
+ EUR: 0.92,
+ NGN: 1500,
+};
+
+export interface PricingTier {
+ name: string;
+ description: string;
+ /** In USD; other currencies are converted at the rates above. */
+ basePrice: number;
+ timeline: string;
+ features: string[];
+ isPopular?: boolean;
+}
+
+export const PRICING_TIERS: PricingTier[] = [
+ {
+ name: "MVP",
+ description: "For an early-stage team putting a first real thing in front of people.",
+ basePrice: 4800,
+ timeline: "2 weeks",
+ features: [
+ "Brand identity — logo, palette, type",
+ "Landing page design",
+ "Next.js build, deployed",
+ "Technical SEO baseline",
+ "95+ Lighthouse, or we keep working",
+ ],
+ },
+ {
+ name: "Growth",
+ description: "For a business whose digital presence is behind its product.",
+ basePrice: 9500,
+ timeline: "4\u20136 weeks",
+ isPopular: true,
+ features: [
+ "Full brand guidelines",
+ "Custom web app design",
+ "Full-stack build (Next.js + Supabase)",
+ "Content management",
+ "Advanced SEO and analytics",
+ "95+ Lighthouse, or we keep working",
+ ],
+ },
+ {
+ name: "Enterprise",
+ description: "For complex products with real users and real constraints.",
+ basePrice: 18000,
+ timeline: "8\u201316 weeks",
+ features: [
+ "User research and testing",
+ "Multi-surface product design",
+ "Design system and component library",
+ "Custom integrations (CRM, ERP)",
+ "Dedicated project lead",
+ "12 months priority support",
+ ],
+ },
 ];

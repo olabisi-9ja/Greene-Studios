@@ -125,7 +125,7 @@ export default function ProjectIntake() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASE }}
-        className="rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:p-12"
+        className="card card-lg"
       >
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand-accent)] text-2xl text-[var(--brand-on-accent)]">
           ✓
@@ -169,7 +169,7 @@ export default function ProjectIntake() {
   const typeLabel = PROJECT_TYPES.find((t) => t.id === answers.type)?.label;
 
   return (
-    <div className="rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-6 md:p-10">
+    <div className="card card-lg">
       {/* Progress */}
       <div className="mb-8">
         <div className="mb-3 flex items-center justify-between">
