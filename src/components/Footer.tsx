@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 
-import { motion } from "framer-motion";
 import { BRAND, NAV_LINKS } from "@/lib/data";
+import { GreeneMonogram } from "@/components/ui/GreeneMark";
 import RotatingBadge from "@/components/ui/RotatingBadge";
 
 /**
@@ -64,13 +64,8 @@ export default function Footer() {
         <div className="mt-20 grid grid-cols-2 gap-10 border-t border-[var(--brand-bg)]/20 pt-12 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2">
-              <span className="relative block h-9 w-9 overflow-hidden rounded-full bg-[var(--brand-bg)]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/brand/gs-chip.svg"
-                  alt="Greene Studios logo"
-                  className="h-full w-full object-contain"
-                />
+              <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-bg)] text-[var(--brand-text)]">
+                <GreeneMonogram fill className="h-full w-full p-[3px]" />
               </span>
               <span className="font-display text-sm font-black uppercase tracking-tight">Greene®</span>
             </div>
@@ -131,46 +126,34 @@ export default function Footer() {
           than the glyphs' ink, so a clip box slices the raised ® and
           cap-height tops — worse, the slice amount depends on whether
           the variable font has loaded, so it broke only *sometimes*.
-          The <footer> itself keeps overflow-hidden for page-edge safety. */}
+          The <footer> itself keeps overflow-hidden for page-edge safety.
+
+          Sizing is min(), not clamp(): a 4.5rem floor beat 16vw below a
+          ~470px viewport and pushed STUDIOS® (8 glyphs at ~0.62em) wider
+          than the screen, where the footer's overflow-hidden clipped it.
+
+          Hover lives in CSS (.wordmark-letter in globals.css) rather than
+          in framer-motion — see the note there. */}
       <div className="relative z-10 mb-4 mt-16 select-none text-center md:mt-24">
         <h1
           aria-hidden="true"
           className="font-display whitespace-nowrap font-black uppercase leading-[0.85] tracking-tight text-[var(--brand-bg)]"
-          style={{ fontSize: "clamp(4.5rem, 16vw, 24rem)" }}
+          style={{ fontSize: "min(16vw, 24rem)" }}
         >
-          {"GREENE".split("").map((letter, i) => (
-            <motion.span
-              key={`g-${i}`}
-              whileHover={{
-                scale: 1.08,
-                color: "var(--brand-accent)",
-                y: -14,
-                rotate: i % 2 === 0 ? 4 : -4,
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 12 }}
-              className="inline-block origin-bottom"
-            >
-              {letter}
-            </motion.span>
-          ))}
-          {/* always stacked — hiding this <br> on mobile fuses both
-              words into one overflowing GREENESTUDIOS® line */}
-          <br />
-          {"STUDIOS®".split("").map((letter, i) => (
-            <motion.span
-              key={`s-${i}`}
-              whileHover={{
-                scale: 1.08,
-                color: "var(--brand-accent)",
-                y: -14,
-                rotate: i % 2 === 0 ? -4 : 4,
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 12 }}
-              className="inline-block origin-bottom"
-            >
-              {letter}
-            </motion.span>
-          ))}
+          <span className="block">
+            {"GREENE".split("").map((letter, i) => (
+              <span key={`g-${i}`} className="wordmark-letter">
+                {letter}
+              </span>
+            ))}
+          </span>
+          <span className="block">
+            {"STUDIOS®".split("").map((letter, i) => (
+              <span key={`s-${i}`} className="wordmark-letter">
+                {letter}
+              </span>
+            ))}
+          </span>
         </h1>
       </div>
 

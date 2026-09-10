@@ -8,7 +8,7 @@ export default function FAQSection() {
  const [open, setOpen] = useState<number | null>(0);
 
  return (
- <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36">
+ <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] md:py-36">
  <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-20">
  {/* Left */}
  <div className="lg:col-span-4">

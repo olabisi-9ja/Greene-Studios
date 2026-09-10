@@ -137,6 +137,14 @@ for (const scheme of ["light", "dark"]) {
     try {
       await page.goto(base + route, { waitUntil: "networkidle", timeout: 30_000 });
       await page.evaluate(() => document.fonts?.ready);
+      // Freeze transitions before sampling. getComputedStyle returns the
+      // *current* value mid-transition, so a section still crossfading its
+      // background reports an intermediate colour and every foreground on it
+      // fails against a background that was never actually painted.
+      await page.addStyleTag({
+        content: `*,*::before,*::after{transition:none!important;animation:none!important}`,
+      });
+      await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
       const issues = await page.evaluate(AUDIT);
       if (issues.length) {
         failures += issues.length;

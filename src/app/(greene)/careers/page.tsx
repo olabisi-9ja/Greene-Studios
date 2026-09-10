@@ -23,7 +23,7 @@ const POSITIONS = [
 
 export default function CareersPage() {
   return (
-    <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)] transition-colors duration-1000">
+    <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)]">
       <PageHeader
         kicker="Careers"
         title={

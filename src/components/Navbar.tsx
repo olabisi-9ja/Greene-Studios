@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { GreeneMonogram } from "@/components/ui/GreeneMark";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import SideMenu from "./SideMenu";
@@ -64,13 +65,8 @@ export default function Navbar() {
               aria-label="Greene Studios, home (double-click for presentation mode)"
               title="Double-click for Focus Mode"
             >
-              <span className="relative block h-8 w-8 overflow-hidden rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)] md:h-9 md:w-9">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/brand/gs-chip.svg"
-                  alt="Greene Studios logo"
-                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                />
+              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-surface)] text-[var(--brand-text)] ring-1 ring-[var(--brand-border)] transition-transform duration-500 group-hover:scale-110 md:h-9 md:w-9">
+                <GreeneMonogram fill className="h-full w-full p-[3px]" />
               </span>
               <span className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)] md:text-base">
                 Greene

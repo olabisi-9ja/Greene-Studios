@@ -29,7 +29,7 @@ export default async function JournalArticlePage({ params }: Props) {
  const relatedArticles = JOURNAL_ARTICLES.filter((a) => a.id !== article.id).slice(0, 2);
 
  return (
- <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)] transition-colors duration-1000">
+ <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)]">
  {/* Header */}
  <div className="mx-auto max-w-4xl px-5 pb-12 pt-32 md:px-10 md:pt-40">
  <Link

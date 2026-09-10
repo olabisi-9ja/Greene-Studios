@@ -16,7 +16,8 @@
     "covers": "node scripts/render-covers.mjs",
     "measure": "node scripts/measure.mjs",
     "shoot:live": "node scripts/shoot-live.mjs",
-    "audit:contrast": "node scripts/audit-contrast.mjs"
+    "audit:contrast": "node scripts/audit-contrast.mjs",
+    "brand": "node scripts/prepare-brand.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

@@ -84,7 +84,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] transition-colors duration-1000 md:py-36">
+    <section className="bg-[var(--brand-surface)] py-24 text-[var(--brand-text)] md:py-36">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         {/* Header */}
         <div className="mb-10 max-w-3xl">

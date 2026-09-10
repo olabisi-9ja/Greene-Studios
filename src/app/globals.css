@@ -834,3 +834,39 @@
   .card-interactive:hover,
   .card-interactive:focus-visible { transform: none; }
 }
+
+
+/* ═══ FOOTER WORDMARK ══════════════════════════════════════════════════
+   The giant GREENE STUDIOS® letters.
+
+   These were 14 framer-motion spans, each animating scale/rotate/colour on
+   hover. That promotes fourteen 300px glyphs into separate compositing
+   layers at rest, and on some GPUs Chrome drops a few of them — the letters
+   stay in the DOM at the right position but never paint, which reads as a
+   wordmark with holes in it. Plain spans with a CSS :hover keep the whole
+   line on one layer until a letter is actually hovered. */
+.wordmark-letter {
+  display: inline-block;
+  transform-origin: bottom center;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+    color 0.25s var(--ease-out-quart);
+}
+.wordmark-letter:hover {
+  color: var(--brand-accent);
+  transform: translateY(-0.045em) scale(1.08) rotate(4deg);
+  /* Promoted only while it is actually moving. */
+  will-change: transform;
+}
+.wordmark-letter:nth-child(even):hover {
+  transform: translateY(-0.045em) scale(1.08) rotate(-4deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark-letter {
+    transition: color 0.25s linear;
+  }
+  .wordmark-letter:hover {
+    transform: none;
+  }
+}

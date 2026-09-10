@@ -75,6 +75,7 @@ npm run assets:check   # mark contact sheet at 72/32/24/16px, light and dark
 npm run covers         # generative cover art for the journal and lab
 npm run shoot          # photograph the running demo sites (needs a server, below)
 npm run shoot:live     # photograph the shipped sites (needs outbound network)
+npm run brand          # turn public/brand/_src exports into usable marks
 npm run images         # PNG → WebP, and write src/lib/image-manifest.json
 npm run assets:all     # fonts → assets → shoot → images, in order
 ```
@@ -88,9 +89,29 @@ npm run build && npx next start -p 3111
 npm run shoot
 ```
 
-Brand marks are hand-authored SVG in `public/demo/<brand>/mark.svg` (all under
-750 bytes) and mirrored as JSX in `src/components/demo/BrandMark.tsx` so they can
-resolve `currentColor` and `--b-accent` against the page.
+Brand marks for the concept sites are hand-authored SVG in
+`public/demo/<brand>/mark.svg` (all under 750 bytes) and mirrored as JSX in
+`src/components/demo/BrandMark.tsx` so they can resolve `currentColor` and
+`--b-accent` against the page.
+
+### Greene's own logo
+
+Drop the exports in `public/brand/_src/` as `gs-mark.*` and
+`greene-wordmark.*`, then run `npm run brand`. SVG passes straight through;
+a PNG or JPG is trimmed and rebuilt as an **alpha mask**, which
+`src/components/ui/GreeneMark.tsx` paints with `background: currentColor`
+through `mask-image`. That is what lets a raster export behave like the SVGs
+it replaces — one file that takes the colour of whatever surface it sits on,
+with no white box on a dark theme.
+
+Until those files exist, every call site falls back to the hand-drawn marks
+already in `public/brand/`, so nothing breaks mid-swap.
+
+### The founder portrait
+
+Save it as `public/images/studio/founder.jpg`, then
+`npm run images -- --dir=public/images/studio`. The About page picks it up
+automatically and shows a typographic plate until it is there.
 
 ## Checks
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ProcessPage() {
  return (
- <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
  <PageHeader
  kicker="Process"
  title={

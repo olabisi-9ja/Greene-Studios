@@ -34,7 +34,7 @@ export default async function ServicePage({ params }: Props) {
  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
  return (
- <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)] transition-colors duration-1000">
+ <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
  <script
    type="application/ld+json"
    dangerouslySetInnerHTML={{
