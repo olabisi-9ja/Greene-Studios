@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Prism">
+  <path d="M1 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M16 5 26 26H6L16 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  <g stroke-width="2" stroke-linecap="round">
+    <path d="M20.5 13h10.5" stroke="var(--brand-accent, currentColor)"/>
+    <path d="M22.4 17.5H31" stroke="currentColor" stroke-opacity="0.6"/>
+    <path d="M24.3 22H31" stroke="currentColor" stroke-opacity="0.32"/>
+  </g>
+</svg>

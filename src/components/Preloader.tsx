@@ -36,12 +36,12 @@ const LOADER_CSS = `
 .gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;transition:transform .9s cubic-bezier(.16,1,.3,1)}
 .gl-out{transform:translateY(-100%)}
 .gl-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0}
-.gl-act1{animation:gl-a1 1.4s cubic-bezier(.16,1,.3,1) 0s both}
-.gl-act3{flex-direction:column;animation:gl-fade .55s cubic-bezier(.16,1,.3,1) 1.0s both}
-.gl-l{opacity:0;display:inline-block;animation:gl-rise .55s cubic-bezier(.16,1,.3,1) both}
-.gl-rule{transform:scaleX(0);transform-origin:left;animation:gl-grow .55s cubic-bezier(.16,1,.3,1) 2.1s both}
-.gl-tag{opacity:0;animation:gl-tag .45s ease 2.35s both}
-.gl-bar{transform:scaleX(0);transform-origin:left;animation:gl-bar 2.7s linear 0s both}
+.gl-act1{animation:gl-a1 .62s cubic-bezier(.16,1,.3,1) 0s both}
+.gl-act3{flex-direction:column;animation:gl-fade .4s cubic-bezier(.16,1,.3,1) .5s both}
+.gl-l{opacity:0;display:inline-block;animation:gl-rise .38s cubic-bezier(.16,1,.3,1) both}
+.gl-rule{transform:scaleX(0);transform-origin:left;animation:gl-grow .4s cubic-bezier(.16,1,.3,1) .85s both}
+.gl-tag{opacity:0;animation:gl-tag .35s ease .95s both}
+.gl-bar{transform:scaleX(0);transform-origin:left;animation:gl-bar 1.15s linear 0s both}
 @keyframes gl-a1{0%{opacity:0;transform:translateY(16px);filter:blur(12px)}25%{opacity:1;transform:none;filter:none}75%{opacity:1}100%{opacity:0;transform:translateY(-10px);filter:blur(8px)}}
 @keyframes gl-fade{from{opacity:0;transform:translateY(14px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
 @keyframes gl-rise{from{opacity:0;transform:translateY(.55em) rotate(5deg)}to{opacity:1;transform:none}}
@@ -83,7 +83,10 @@ export default function Preloader() {
 
     const reduced =
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    const holdMs = reduced ? 900 : 2925;
+    // Was 2925ms + a 950ms exit — nearly four seconds before a first-time
+    // visitor saw the site, which measured as a 1.58s LCP on the homepage.
+    // The identity beat is worth keeping; four seconds of it is not.
+    const holdMs = reduced ? 450 : 1150;
 
     const exitTimer = setTimeout(() => setState("exiting"), holdMs);
     const doneTimer = setTimeout(() => {
@@ -94,7 +97,7 @@ export default function Preloader() {
         /* ignore — storage unavailable */
       }
       document.body.style.overflow = "";
-    }, holdMs + 950);
+    }, holdMs + 500);
 
     return () => {
       clearTimeout(exitTimer);
@@ -147,7 +150,7 @@ export default function Preloader() {
             <span
               key={`g${i}`}
               className="gl-l"
-              style={{ marginRight: mr, animationDelay: `${1.15 + i * 0.05}s` }}
+              style={{ marginRight: mr, animationDelay: `${0.55 + i * 0.035}s` }}
             >
               {ch}
             </span>
@@ -165,7 +168,7 @@ export default function Preloader() {
                 letterSpacing: "0.34em",
                 color: `${PAPER}B3`,
                 marginRight: i === STUDIOS.length - 1 ? "-0.34em" : 0,
-                animationDelay: `${1.75 + i * 0.045}s`,
+                animationDelay: `${0.76 + i * 0.03}s`,
               }}
             >
               {ch}
@@ -176,7 +179,7 @@ export default function Preloader() {
             style={{
               fontSize: "clamp(0.6rem, 1.6vw, 1rem)",
               color: `${PAPER}B3`,
-              animationDelay: "2.1s",
+              animationDelay: "0.98s",
             }}
           >
             ®

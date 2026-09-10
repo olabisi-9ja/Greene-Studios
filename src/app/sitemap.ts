@@ -1,11 +1,12 @@
 import { MetadataRoute } from 'next'
-import { PROJECTS, JOURNAL_ARTICLES, SERVICES, INDUSTRIES } from '@/lib/data'
+import { JOURNAL_ARTICLES, SERVICES, INDUSTRIES } from '@/lib/data'
+import { BRANDS } from '@/lib/brands'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://greene-studios.vercel.app'
 
-  const projects = PROJECTS.map((project) => ({
-    url: `${baseUrl}/work/${project.slug}`,
+  const projects = BRANDS.map((brand) => ({
+    url: `${baseUrl}/work/${brand.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,

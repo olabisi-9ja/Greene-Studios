@@ -1,15 +1,8 @@
-"use client";
-
-import { useEffect } from "react";
-import { useAtmosphere } from "@/lib/context/AtmosphereContext";
-
+/**
+ * Fixed film-grain overlay. Density comes from `--studio-grain`, which each
+ * theme sets in globals.css — no JS, no re-render on theme change.
+ */
 export default function NoiseTexture() {
-  const { effectiveMode } = useAtmosphere();
-
-  useEffect(() => {
-    // re-render when mode changes so the CSS var is re-read
-  }, [effectiveMode]);
-
   return (
     <div
       className="pointer-events-none fixed inset-0 z-[50]"

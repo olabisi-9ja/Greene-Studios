@@ -4,8 +4,7 @@ export const BRAND = {
  name: "Greene Studios",
  tagline: "We design and build digital experiences that move people.",
  email: "hello@greenestudios.co",
- phone: "+1 (555) 000-0000",
- location: "Working worldwide",
+ location: "Lagos, Nigeria — working worldwide",
  instagram: "https://instagram.com/greenestudios",
  twitter: "https://twitter.com/greenestudios",
  linkedin: "https://linkedin.com/company/greenestudios",
@@ -20,206 +19,10 @@ export const BRAND = {
 export const NAV_LINKS = [
  { label: "Work", href: "/work" },
  { label: "Services", href: "/services" },
- { label: "Studio", href: "/studio" },
+ { label: "Studio", href: "/about" },
  { label: "Contact", href: "/contact" },
 ];
 
-// ─── Projects ─────────────────────────────────────────────────────────────────
-
-export const PROJECTS = [
- {
- id: "luminary-saas",
- title: "Luminary",
- category: "SaaS · Web Design",
- year: "2024",
- description: "A next-generation analytics platform that transforms raw data into actionable intelligence. We crafted an interface that makes complexity feel effortless.",
- tags: ["UI/UX", "Development", "Motion"],
- color: "#12372A",
- accentColor: "#6B8F71",
- featured: true,
- image: "/images/work/luminary-saas.jpg",
- results: ["340% increase in user engagement", "2.1s average load time", "98 Lighthouse score"],
- metrics: [
- { value: "+340%", label: "User engagement" },
- { value: "2.1s", label: "Average load time" },
- { value: "98", label: "Lighthouse score" },
- ],
- slug: "luminary-saas",
- challenge: "Luminary's previous interface was drowning users in data. Financial analysts were spending hours exporting CSVs rather than using the built-in tools because the visualization engine was too complex and intimidating.",
- goals: [
- "Simplify the onboarding process for non-technical users",
- "Develop a robust design system for 50+ chart types",
- "Reduce dashboard load times by 70%",
- "Establish a premium visual language that commands trust"
- ],
- approach: [
- { title: "Progressive Disclosure", desc: "We redesigned the interface to hide complexity until needed, allowing users to drill down from high-level metrics to raw data effortlessly." },
- { title: "Custom Visualization Engine", desc: "We built a bespoke charting library using D3.js and Canvas to ensure rendering 100k+ data points remains buttery smooth at 60fps." },
- { title: "Dark Mode Optimization", desc: "Created a low-contrast dark mode specifically calibrated to reduce eye strain for analysts looking at screens for 8+ hours a day." }
- ],
- lessons: "The biggest takeaway from Luminary was the power of restraint. By removing 40% of the visible UI elements and replacing them with context-aware floating menus, we actually increased feature discoverability."
- },
- {
- id: "vera-brand",
- title: "Vera",
- category: "Branding · Identity",
- year: "2024",
- description: "Complete brand identity for a luxury wellness startup. From naming and visual identity to a fully immersive digital experience.",
- tags: ["Branding", "Web Design", "Strategy"],
- color: "#D9C9A3",
- accentColor: "#12372A",
- featured: true,
- image: "/images/work/vera-brand.jpg",
- results: ["4.8/5 client NPS", "200K launch day visitors", "92% brand recall in testing"],
- metrics: [
- { value: "4.8/5", label: "Client NPS" },
- { value: "200K", label: "Launch-day visitors" },
- { value: "92%", label: "Brand recall in testing" },
- ],
- slug: "vera-brand",
- challenge: "Vera was entering an incredibly saturated wellness market dominated by clinical whites and pharmaceutical blues. They needed a brand that felt luxurious, grounded, and deeply human without crossing into pseudoscience.",
- goals: [
- "Create a distinct visual identity differentiating Vera from 100+ competitors",
- "Design physical packaging that feels like a premium unboxing experience",
- "Develop a highly sensory, tactile e-commerce website",
- "Establish a tone of voice that is authoritative yet warm"
- ],
- approach: [
- { title: "Earthy Palette", desc: "We developed a palette rooted in natural materials, clay, moss, sandstone, to evoke grounding and physical reality." },
- { title: "Tactile Digital", desc: "We used WebGL to create subtle, organic distortion effects on imagery, making the digital experience feel physically tangible." },
- { title: "Editorial Typography", desc: "Paired a robust, classic serif with an ultra-clean sans to bridge the gap between ancient apothecary and modern science." }
- ],
- lessons: "Vera taught us that digital products don't have to feel digital. By injecting organic noise, soft easing curves, and earthy tones, we can create digital spaces that lower the user's heart rate."
- },
- {
- id: "arc-ecommerce",
- title: "Arc Commerce",
- category: "E-commerce · Development",
- year: "2024",
- description: "A headless e-commerce platform for a premium fashion brand. Custom checkout flow, editorial storytelling, and 0.8s page loads.",
- tags: ["E-commerce", "Frontend Dev", "Performance"],
- color: "#1a1a1a",
- accentColor: "#D9C9A3",
- featured: true,
- image: "/images/work/arc-ecommerce.jpg",
- results: ["67% increase in conversion", "Avg session 4m 12s", "£2.4M launch month revenue"],
- metrics: [
- { value: "+67%", label: "Conversion rate" },
- { value: "0.8s", label: "Average page load" },
- { value: "£2.4M", label: "Launch-month revenue" },
- ],
- slug: "arc-ecommerce",
- challenge: "Arc's previous monolithic Shopify setup was failing. Load times exceeded 4 seconds, the design felt like a template, and they couldn't weave their rich editorial content natively into the shopping experience.",
- goals: [
- "Migrate to a headless architecture (Shopify + Next.js)",
- "Achieve sub-second page transitions",
- "Integrate editorial content seamlessly into product pages",
- "Design a frictionless, one-page custom checkout"
- ],
- approach: [
- { title: "Headless Architecture", desc: "We decoupled the frontend using Next.js and Vercel, connecting to Shopify via the Storefront API for blazing fast speeds." },
- { title: "Editorial Integration", desc: "Built a custom Sanity CMS integration that allows editors to drop shoppable products directly into long-form lookbooks." },
- { title: "Fluid Transitions", desc: "Implemented Framer Motion for seamless, app-like page transitions that keep the user immersed in the shopping journey." }
- ],
- lessons: "Performance is a design feature. We noticed that when pages load instantly, users browse 3x as many products. The engineering investment paid for itself in conversion rates within 14 days."
- },
- {
- id: "bloom-health",
- title: "Bloom Health",
- category: "Healthcare · Product Design",
- year: "2023",
- description: "Patient-centered health platform redesign. We simplified a complex medical journey into a calm, trustworthy interface.",
- tags: ["Product Design", "UX Research", "Systems"],
- color: "#6B8F71",
- accentColor: "#F7F5F2",
- featured: false,
- image: "/images/work/bloom-health.jpg",
- results: ["52% reduction in drop-off", "4.9 App Store rating", "10K+ daily active users"],
- metrics: [
- { value: "−52%", label: "Patient drop-off" },
- { value: "4.9", label: "App Store rating" },
- { value: "10K+", label: "Daily active users" },
- ],
- slug: "bloom-health",
- challenge: "Patients navigating Bloom Health were highly anxious. The existing interface used harsh medical terminology, alarming red alerts, and a confusing navigation structure that exacerbated user stress during critical moments.",
- goals: [
- "Redesign the patient portal to prioritize calm and clarity",
- "Pass strict WCAG 2.1 AA accessibility standards",
- "Simplify the prescription refill and appointment booking flows",
- "Create a unified design system across iOS, Android, and Web"
- ],
- approach: [
- { title: "Empathetic UX", desc: "We rewrote the entire product copy to be conversational, supportive, and completely jargon-free." },
- { title: "Calm Color Psychology", desc: "Removed harsh alert colors, replacing them with soft sage greens and warm neutrals that communicate safety." },
- { title: "Frictionless Forms", desc: "Broke down complex 10-page intake forms into bite-sized, conversational interactions with auto-save." }
- ],
- lessons: "In healthcare design, clarity is kindness. We learned that hiding complex medical data isn't the answer, rather, it must be paced. Progressive disclosure is vital for anxious users."
- },
- {
- id: "onyx-fintech",
- title: "Onyx Finance",
- category: "Fintech · AI Integration",
- year: "2023",
- description: "AI-powered personal finance dashboard for Gen Z. Making money management feel like a game, not a chore.",
- tags: ["AI Integration", "UI Design", "Mobile"],
- color: "#12372A",
- accentColor: "#D9C9A3",
- featured: false,
- image: "/images/work/onyx-fintech.jpg",
- results: ["Series A: $12M raised", "300K users in 90 days", "Techcrunch Disrupt Winner"],
- metrics: [
- { value: "$12M", label: "Series A raised" },
- { value: "300K", label: "Users in 90 days" },
- { value: "#1", label: "TechCrunch Disrupt" },
- ],
- slug: "onyx-fintech",
- challenge: "Gen Z users were completely disengaged from traditional banking apps. Onyx needed to present complex financial forecasting in a way that felt as native, engaging, and effortless as scrolling through social media.",
- goals: [
- "Design a mobile-first interface that breaks fintech conventions",
- "Integrate an AI financial assistant that feels like a peer",
- "Gamify savings goals without feeling patronizing",
- "Ensure Bank-level security UI elements"
- ],
- approach: [
- { title: "Neomorphic Gaming UI", desc: "We adopted a dark, neon-accented aesthetic that draws heavily from gaming interfaces rather than traditional banking." },
- { title: "Conversational AI", desc: "Built a chat interface where users can ask 'Can I afford to eat out tonight?' and the AI analyzes their budget to respond." },
- { title: "Dynamic Data Viz", desc: "Replaced boring pie charts with interactive, physics-based bubbles that users can drag and drop into savings pots." }
- ],
- lessons: "Financial tools don't have to look boring to be taken seriously. By leaning into consumer app aesthetics, Onyx built trust through high-end execution rather than traditional institutional signifiers."
- },
- {
- id: "prism-edu",
- title: "Prism Education",
- category: "EdTech · Web Application",
- year: "2023",
- description: "Adaptive learning platform connecting 50,000+ students with personalized curriculum paths and real-time progress tracking.",
- tags: ["Web App", "Design System", "Development"],
- color: "#2d2d2d",
- accentColor: "#6B8F71",
- featured: false,
- image: "/images/work/prism-edu.jpg",
- results: ["92% course completion rate", "50K+ active learners", "$4M ARR in year one"],
- metrics: [
- { value: "92%", label: "Course completion rate" },
- { value: "50K+", label: "Active learners" },
- { value: "$4M", label: "ARR in year one" },
- ],
- slug: "prism-edu",
- challenge: "Prism had a massive library of incredible educational content, but a rigid linear curriculum structure meant students were getting bored and dropping off when the material wasn't perfectly paced for their learning style.",
- goals: [
- "Build a dynamic curriculum graph UI",
- "Create an engaging, distraction-free video learning environment",
- "Implement real-time collaboration tools for students",
- "Design a robust instructor dashboard for grading"
- ],
- approach: [
- { title: "Node-Based Curriculum", desc: "We designed a visual 'skill tree' interface similar to RPG video games, allowing students to visually see their learning paths and unlock new concepts." },
- { title: "Focus Mode", desc: "Built a theater-mode learning environment that automatically dims the UI and disables notifications during deep-work sessions." },
- { title: "Micro-Interactions", desc: "Added satisfying haptic feedback and micro-animations to celebrate small wins, keeping dopamine levels steady throughout the course." }
- ],
- lessons: "We discovered that motivation is a design problem. By providing constant, visual feedback on progress and allowing non-linear exploration, student retention skyrocketed."
- },
-];
 
 // ─── Services ─────────────────────────────────────────────────────────────────
 
@@ -525,119 +328,7 @@ export const PROCESS_PHASES = [
 // Every quote is anchored to a real case study and its headline result —
 // proof, not floating praise.
 
-export const TESTIMONIALS = [
- {
- id: 1,
- quote: "Greene Studios didn't just build our website, they reimagined how our brand communicates entirely. The results were immediate and extraordinary.",
- author: "Sarah Chen",
- title: "CEO, Luminary Analytics",
- avatar: "SC",
- projectSlug: "luminary-saas",
- projectName: "Luminary",
- result: "+340% user engagement",
- },
- {
- id: 2,
- quote: "Working with Greene felt like having a world-class design team embedded in our startup. They understood our vision before we even finished explaining it.",
- author: "Marcus Williams",
- title: "Founder, Arc Commerce",
- avatar: "MW",
- projectSlug: "arc-ecommerce",
- projectName: "Arc Commerce",
- result: "+67% conversion rate",
- },
- {
- id: 3,
- quote: "The attention to detail is unmatched. Every micro-interaction, every animation, it all feels intentional. Our users notice, and they love it.",
- author: "Priya Sharma",
- title: "CPO, Bloom Health",
- avatar: "PS",
- projectSlug: "bloom-health",
- projectName: "Bloom Health",
- result: "−52% patient drop-off",
- },
- {
- id: 4,
- quote: "Three months post-launch, our numbers are still climbing. Greene didn't just make things beautiful, they made them work better.",
- author: "James Okonkwo",
- title: "Co-Founder, Onyx Finance",
- avatar: "JO",
- projectSlug: "onyx-fintech",
- projectName: "Onyx Finance",
- result: "300K users in 90 days",
- },
-];
 
-// ─── Pricing Packages ─────────────────────────────────────────────────────────
-
-export const PRICING_PACKAGES = [
- {
- id: "starter",
- name: "Starter",
- price: "$4,800",
- timeline: "3–4 weeks",
- ideal: "Founders and personal brands launching their first professional digital presence.",
- features: [
- { label: "Brand Strategy Session", included: true },
- { label: "UI Design (up to 5 pages)", included: true },
- { label: "Responsive Development", included: true },
- { label: "Basic SEO Setup", included: true },
- { label: "CMS Integration", included: false },
- { label: "Motion & Animations", included: false },
- { label: "Design System", included: false },
- { label: "AI Integration", included: false },
- { label: "Priority Support", included: false },
- ],
- support: "14 days",
- seo: "Basic",
- cta: "Start a Project",
- popular: false,
- },
- {
- id: "growth",
- name: "Growth",
- price: "$12,000",
- timeline: "6–8 weeks",
- ideal: "Growing startups and scale-ups ready to compete at a premium level.",
- features: [
- { label: "Brand Strategy Session", included: true },
- { label: "UI Design (up to 15 pages)", included: true },
- { label: "Responsive Development", included: true },
- { label: "Advanced SEO Setup", included: true },
- { label: "CMS Integration", included: true },
- { label: "Motion & Animations", included: true },
- { label: "Design System", included: false },
- { label: "AI Integration", included: false },
- { label: "Priority Support", included: false },
- ],
- support: "60 days",
- seo: "Advanced",
- cta: "Start a Project",
- popular: true,
- },
- {
- id: "premium",
- name: "Premium",
- price: "Custom",
- timeline: "10–16 weeks",
- ideal: "Enterprises and ambitious brands that want a digital ecosystem, not just a website.",
- features: [
- { label: "Brand Strategy Session", included: true },
- { label: "UI Design (unlimited pages)", included: true },
- { label: "Responsive Development", included: true },
- { label: "Enterprise SEO", included: true },
- { label: "CMS Integration", included: true },
- { label: "Motion & Animations", included: true },
- { label: "Design System", included: true },
- { label: "AI Integration", included: true },
- { label: "Priority Support", included: true },
- ],
- support: "6 months",
- seo: "Enterprise",
- cta: "Book a Call",
- popular: false,
- },
-];
 
 // ─── Journal Articles ─────────────────────────────────────────────────────────
 
@@ -651,7 +342,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "8 min read",
  featured: true,
  slug: "why-motion-matters",
- image: "https://images.pexels.com/photos/7172661/pexels-photo-7172661.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/why-motion-matters.webp",
  content: [
  { type: "p", text: "When we look at the digital products that truly captivate us, the ones we describe as 'magical' or 'intuitive', there is almost always a common denominator: purposeful motion design. Yet, in most product development cycles, animation is treated as the garnish. It's the sprinkles added at the very end of the process, assuming there is any budget or time remaining." },
  { type: "h2", text: "Motion is Communication, Not Decoration" },
@@ -675,7 +366,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "12 min read",
  featured: true,
  slug: "design-systems-at-scale",
- image: "https://images.pexels.com/photos/6892716/pexels-photo-6892716.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/design-systems-at-scale.webp",
  content: [
  { type: "p", text: "Three years ago, 'Design System' was the hottest buzzword in the industry. Every company, regardless of size, felt compelled to build one. We were hired to audit, rescue, or rebuild dozens of them. What we found was a graveyard of abandoned Figma files and deprecated React libraries." },
  { type: "h2", text: "The Fallacy of the 'Finished' System" },
@@ -698,7 +389,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "10 min read",
  featured: false,
  slug: "ai-in-product-design",
- image: "https://images.pexels.com/photos/17279854/pexels-photo-17279854.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/ai-in-product-design.webp",
  content: [
  { type: "p", text: "The anxiety in the design community is palpable. As AI image generators and UI generators become more sophisticated, the existential question looms: What is the role of a product designer in an AI-driven world?" },
  { type: "h2", text: "AI as a Co-Pilot, Not an Autopilot" },
@@ -723,7 +414,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "7 min read",
  featured: false,
  slug: "typography-that-converts",
- image: "https://images.pexels.com/photos/8534173/pexels-photo-8534173.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/typography-that-converts.webp",
  content: [
  { type: "p", text: "Designers love typography. We can spend hours debating the merits of Inter versus Roboto, or hunting for the perfect geometric sans-serif to elevate a brand. But how much does typography actually impact business metrics? Does the end user really care if a font has humanist terminals?" },
  { type: "p", text: "We decided to find out. Over three months, we ran extensive A/B tests across multiple high-traffic landing pages, isolating typography as the only variable." },
@@ -747,7 +438,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "15 min read",
  featured: false,
  slug: "the-0-seo-strategy",
- image: "https://images.pexels.com/photos/7679662/pexels-photo-7679662.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/the-0-seo-strategy.webp",
  content: [
  { type: "p", text: "When we launched Greene Studios, we had zero marketing budget. We couldn't compete on paid ads with massive agencies, and buying sketchy backlinks felt completely misaligned with our brand values. We had to grow organically, relying purely on the quality of our insights." },
  { type: "p", text: "18 months later, our journal drives 40,000 highly targeted organic visitors per month, resulting in a consistent pipeline of high-quality leads. Here is exactly how we did it." },
@@ -771,7 +462,7 @@ export const JOURNAL_ARTICLES = [
  readTime: "9 min read",
  featured: false,
  slug: "freelance-to-studio",
- image: "https://images.pexels.com/photos/8534041/pexels-photo-8534041.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600",
+ image: "/images/covers/freelance-to-studio.webp",
  content: [
  { type: "p", text: "For the first three years of my career, I was a successful freelancer by all external metrics. I was fully booked, working with good clients, and making a decent living. But internally, I was exhausted. I was trading time for money, which meant there was a hard ceiling on my income and a constant floor on my stress levels." },
  { type: "h2", text: "The Hourly Trap" },
@@ -808,7 +499,7 @@ export const FAQS = [
  },
  {
  question: "What's included after launch?",
- answer: "Every package includes post-launch support ranging from 14 days (Starter) to 6 months (Premium). We monitor performance, squash bugs, and iterate based on real user data.",
+ answer: "Every tier includes post-launch support — 14 days on MVP, 30 days on Growth, 12 months on Enterprise. We watch performance, fix what breaks, and iterate on what real usage shows.",
  },
  {
  question: "Do you sign NDAs and contracts?",
@@ -818,16 +509,10 @@ export const FAQS = [
 
 // ─── Metrics ──────────────────────────────────────────────────────────────────
 
-export const METRICS = [
- { value: "40+", label: "Projects Shipped" },
- { value: "98%", label: "Client Satisfaction" },
- { value: "$50M+", label: "Revenue Generated for Clients" },
- { value: "3.2s", label: "Average Build Time Per Page" },
-];
 
 // ─── Industries ───────────────────────────────────────────────────────────────
 // Each industry is a real destination: /industries/[slug]. Service refs point at
-// SERVICES hrefs; work refs point at PROJECTS slugs.
+// SERVICES hrefs; work refs point at concept brand slugs (src/lib/brands).
 
 export const INDUSTRIES = [
  {
@@ -836,7 +521,7 @@ export const INDUSTRIES = [
  icon: "⬡",
  tagline: "Products that sell themselves in the first session.",
  description: "We design SaaS products and marketing sites where the value is obvious in sixty seconds. Activation, retention and perceived quality, treated as design problems.",
- stat: { value: "+340%", label: "User engagement on Luminary" },
+ stat: { value: "50+", label: "Chart types in the Luminary system" },
  challenges: [
  { title: "Leaky onboarding", desc: "Signups arrive, tour three screens, and never come back. The product is powerful but the first-run experience hides it." },
  { title: "Feature bloat", desc: "Every release added a button. Navigation sprawls, settings multiply, and the core job-to-be-done gets buried alive." },
@@ -848,7 +533,7 @@ export const INDUSTRIES = [
  { title: "A site that closes", desc: "A marketing site engineered around demo conversion, with the product doing the talking instead of stock illustrations." },
  ],
  services: ["/services/ui-ux-design", "/services/product-design", "/services/web-design", "/services/design-systems"],
- work: ["luminary-saas"],
+ work: ["luminary"],
  },
  {
  slug: "ecommerce",
@@ -856,7 +541,7 @@ export const INDUSTRIES = [
  icon: "◈",
  tagline: "Storefronts where speed is the brand.",
  description: "We build headless storefronts that load in under a second, read like an editorial magazine, and check out without friction. Performance is a design feature, not a ticket.",
- stat: { value: "+67%", label: "Conversion rate on Arc Commerce" },
+ stat: { value: "0", label: "Layout shift on Arc Commerce" },
  challenges: [
  { title: "Slow and template-made", desc: "Four-second loads and a theme thousands of other stores share. Ad spend keeps rising while conversion quietly falls." },
  { title: "Content can't sell", desc: "Lookbooks, stories and campaigns live on a blog nobody visits, completely disconnected from the products they feature." },
@@ -868,7 +553,7 @@ export const INDUSTRIES = [
  { title: "One-page checkout", desc: "A custom, brand-consistent checkout with the fewest possible fields between desire and confirmation." },
  ],
  services: ["/services/web-design", "/services/frontend-development", "/services/motion-design"],
- work: ["arc-ecommerce", "vera-brand"],
+ work: ["arc", "vera"],
  },
  {
  slug: "startups",
@@ -876,7 +561,7 @@ export const INDUSTRIES = [
  icon: "◉",
  tagline: "Look funded before you are.",
  description: "We give early teams the brand, product and presence of a company three stages ahead. Investor-ready decks, user-ready products, one senior team for all of it.",
- stat: { value: "$12M", label: "Series A raised on Onyx" },
+ stat: { value: "AA", label: "Contrast floor across Onyx" },
  challenges: [
  { title: "Credibility gap", desc: "The idea is big, the mockups are not. Customers, hires and investors all judge the company by surfaces that scream day one." },
  { title: "MVP paralysis", desc: "Six months of building features nobody has validated. The roadmap is guesswork and the budget is burning." },
@@ -888,7 +573,7 @@ export const INDUSTRIES = [
  { title: "Launch assets", desc: "Site, deck, and product walkthrough built as one system. Everything an investor or first customer touches, consistent." },
  ],
  services: ["/services/branding", "/services/product-design", "/services/web-design"],
- work: ["onyx-fintech", "vera-brand", "prism-edu"],
+ work: ["onyx", "vera", "prism"],
  },
  {
  slug: "finance",
@@ -896,7 +581,7 @@ export const INDUSTRIES = [
  icon: "◆",
  tagline: "Complex money, made legible.",
  description: "We design fintech and financial products where the data is dense, the stakes are high, and trust is earned pixel by pixel. Compliance-friendly by default.",
- stat: { value: "300K", label: "Users in 90 days on Onyx" },
+ stat: { value: "Tabular", label: "Figures throughout Onyx" },
  challenges: [
  { title: "Institutional aesthetics", desc: "Grey tables and navy gradients that signal legacy. Younger users bounce before they ever see the product's value." },
  { title: "Data intimidation", desc: "Forecasting, portfolios and risk models crammed onto one screen. Analysts export to CSV because the product feels harder than the spreadsheet." },
@@ -908,7 +593,7 @@ export const INDUSTRIES = [
  { title: "Designed-in compliance", desc: "Accessible, auditable component systems where disclosures and states are designed, not appended by legal later." },
  ],
  services: ["/services/ui-ux-design", "/services/product-design", "/services/ai-integration"],
- work: ["onyx-fintech", "luminary-saas"],
+ work: ["onyx", "luminary"],
  },
  {
  slug: "healthcare",
@@ -916,7 +601,7 @@ export const INDUSTRIES = [
  icon: "◇",
  tagline: "Calm is a feature. We design for it.",
  description: "We build patient-facing products where clarity lowers stress and accessibility is the baseline, not the audit. WCAG 2.1 AA is the floor we start from.",
- stat: { value: "−52%", label: "Patient drop-off on Bloom Health" },
+ stat: { value: "AAA", label: "Body-text contrast on Bloom Health" },
  challenges: [
  { title: "Anxious users, hostile UI", desc: "People use health products at their most stressed. Alarmist reds, medical jargon and dense forms make hard moments harder." },
  { title: "Accessibility debt", desc: "Products serving elderly and disabled users that fail screen readers, contrast checks and basic keyboard navigation." },
@@ -928,7 +613,7 @@ export const INDUSTRIES = [
  { title: "One system, every platform", desc: "A single design system across iOS, Android and web so patients learn the product once and trust it everywhere." },
  ],
  services: ["/services/product-design", "/services/ui-ux-design", "/services/design-systems"],
- work: ["bloom-health"],
+ work: ["bloom"],
  },
  {
  slug: "education",
@@ -936,7 +621,7 @@ export const INDUSTRIES = [
  icon: "◎",
  tagline: "Learning products people actually finish.",
  description: "We design edtech where motivation is treated as a design problem. Progress is visible, focus is protected, and completion rates prove it.",
- stat: { value: "92%", label: "Course completion on Prism" },
+ stat: { value: "8pt", label: "Grid behind every Prism screen" },
  challenges: [
  { title: "The completion cliff", desc: "Enrollment looks great in the pitch. Then reality hits: rigid linear courses and 8% of students reaching the final module." },
  { title: "Content-rich, experience-poor", desc: "World-class material trapped inside a video player and a table of contents. The content deserves a better interface." },
@@ -948,7 +633,7 @@ export const INDUSTRIES = [
  { title: "Instructor clarity", desc: "Dashboards that show exactly where students stall, so educators spend time teaching instead of data-mining." },
  ],
  services: ["/services/product-design", "/services/ui-ux-design", "/services/web-applications"],
- work: ["prism-edu"],
+ work: ["prism"],
  },
  {
  slug: "personal-brands",
@@ -956,7 +641,7 @@ export const INDUSTRIES = [
  icon: "✦",
  tagline: "An audience is fleeting. A brand compounds.",
  description: "We turn creators, founders and experts into media properties. Signature identities, editorial sites and systems that turn attention into owned revenue.",
- stat: { value: "200K", label: "Launch-day visitors on Vera" },
+ stat: { value: "2", label: "Typefaces in the whole Vera system" },
  challenges: [
  { title: "Rented land", desc: "Everything lives on one platform's algorithm. The audience is real, the relationship with it is not." },
  { title: "Generic presence", desc: "A link-in-bio page, a template site, a Canva logo. The person is distinctive; the brand around them is not." },
@@ -968,7 +653,7 @@ export const INDUSTRIES = [
  { title: "Content systems", desc: "Templates and a publishing setup that keep output consistent without a design team on retainer." },
  ],
  services: ["/services/branding", "/services/web-design", "/services/motion-design"],
- work: ["vera-brand"],
+ work: ["vera"],
  },
  {
  slug: "agencies",
@@ -976,7 +661,7 @@ export const INDUSTRIES = [
  icon: "⬣",
  tagline: "Your quiet specialist department.",
  description: "We plug into agencies as a white-label senior team. Overflow capacity, motion and WebGL firepower, and design systems expertise. Your name on the delivery.",
- stat: { value: "40+", label: "Projects shipped to date" },
+ stat: { value: "95+", label: "Lighthouse on every build" },
  challenges: [
  { title: "Overflow, unpredictably", desc: "The pipeline swings between drought and flood. Hiring for the peak is expensive, surviving the trough is survival." },
  { title: "Specialist gaps", desc: "The account is won, then the brief demands WebGL, design systems or motion craft the in-house team doesn't cover." },
@@ -1004,4 +689,79 @@ export const JOURNAL_CATEGORIES = [
  "Business",
  "Freelancing",
  "Tutorials",
+];
+
+// ─── Pricing ──────────────────────────────────────────────────────────────────
+// One source of truth. These were hardcoded inside PricingTiers.tsx while a
+// second, contradictory list (Starter / Growth / Premium) sat in this file —
+// two different price lists shipping in the same build.
+
+export type Currency = "USD" | "EUR" | "NGN";
+
+export const CURRENCY_SYMBOLS: Record<Currency, string> = {
+ USD: "$",
+ EUR: "\u20ac",
+ NGN: "\u20a6",
+};
+
+/** Indicative only — a real quote is settled on the discovery call. */
+export const EXCHANGE_RATES: Record<Currency, number> = {
+ USD: 1,
+ EUR: 0.92,
+ NGN: 1500,
+};
+
+export interface PricingTier {
+ name: string;
+ description: string;
+ /** In USD; other currencies are converted at the rates above. */
+ basePrice: number;
+ timeline: string;
+ features: string[];
+ isPopular?: boolean;
+}
+
+export const PRICING_TIERS: PricingTier[] = [
+ {
+ name: "MVP",
+ description: "For an early-stage team putting a first real thing in front of people.",
+ basePrice: 4800,
+ timeline: "2 weeks",
+ features: [
+ "Brand identity — logo, palette, type",
+ "Landing page design",
+ "Next.js build, deployed",
+ "Technical SEO baseline",
+ "95+ Lighthouse, or we keep working",
+ ],
+ },
+ {
+ name: "Growth",
+ description: "For a business whose digital presence is behind its product.",
+ basePrice: 9500,
+ timeline: "4\u20136 weeks",
+ isPopular: true,
+ features: [
+ "Full brand guidelines",
+ "Custom web app design",
+ "Full-stack build (Next.js + Supabase)",
+ "Content management",
+ "Advanced SEO and analytics",
+ "95+ Lighthouse, or we keep working",
+ ],
+ },
+ {
+ name: "Enterprise",
+ description: "For complex products with real users and real constraints.",
+ basePrice: 18000,
+ timeline: "8\u201316 weeks",
+ features: [
+ "User research and testing",
+ "Multi-surface product design",
+ "Design system and component library",
+ "Custom integrations (CRM, ERP)",
+ "Dedicated project lead",
+ "12 months priority support",
+ ],
+ },
 ];

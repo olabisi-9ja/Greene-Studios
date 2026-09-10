@@ -112,33 +112,27 @@ export const ExperienceHero = () => {
         <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 pt-24 md:px-10 md:pt-32">
           <div className="w-full">
             {/* the one dominant statement */}
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, ease: EASE, delay: 0.15 }}
-              className="font-display text-[clamp(2.75rem,6.4vw,6rem)] font-black uppercase leading-[1.04] tracking-tight"
+            <h1
+              className="hero-rise font-display text-[clamp(2.75rem,6.4vw,6rem)] font-black uppercase leading-[1.04] tracking-tight"
+              style={{ animationDelay: "0.06s" }}
             >
               We build digital
               <br />
               things worth <span className="font-serif-i lowercase normal-case tracking-normal">remembering.</span>
-            </motion.h1>
+            </h1>
 
             {/* one-line subhead */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
-              className="mt-7 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg"
+            <p
+              className="hero-rise mt-7 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg"
+              style={{ animationDelay: "0.18s" }}
             >
               Greene Studios designs and builds brands, websites &amp; digital products with uncommon presence.
-            </motion.p>
+            </p>
 
             {/* one CTA pair: primary action + quiet text link */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.45 }}
-              className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+            <div
+              className="hero-rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+              style={{ animationDelay: "0.27s" }}
             >
               <Magnetic>
                 <Link
@@ -160,19 +154,17 @@ export const ExperienceHero = () => {
                 </span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
               </Link>
-            </motion.div>
+            </div>
 
             {/* the studio's numbers, one quiet line instead of floating chips */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.6 }}
-              className="mt-9 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-secondary)]"
+            <p
+              className="hero-rise mt-9 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-secondary)]"
+              style={{ animationDelay: "0.36s" }}
             >
-              40+ projects shipped
+              Brand · Web · Product
               <span className="mx-3 text-[var(--brand-accent)]" aria-hidden="true">✦</span>
-              98% client satisfaction
-            </motion.p>
+              Lagos, working worldwide
+            </p>
           </div>
         </div>
 
@@ -232,7 +224,7 @@ export const ExperienceHero = () => {
             <div className="mx-auto flex w-full max-w-[1600px] items-center gap-8 px-5 py-4 md:px-10">
               <div className="min-w-0 flex-1">
                 <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--brand-text-secondary)]">
-                  Trusted by ambitious teams
+                  Concept brands, built end to end
                 </p>
                 <Marquee>
                   <MarqueeContent speed={28} autoFill>

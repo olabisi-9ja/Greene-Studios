@@ -1,15 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
+/**
+ * Fades each route in on mount. Keyed on pathname so React remounts the
+ * wrapper — the CSS animation then replays. No animation library.
+ */
 export default function PageTransition({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
+    <div key={pathname} className="page-transition">
       {children}
-    </motion.div>
+    </div>
   );
 }
