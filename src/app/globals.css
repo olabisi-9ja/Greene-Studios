@@ -30,15 +30,11 @@
 }
 
 @layer base {
-  /* ─── LIGHT (default) ──────────────────────────────────────────────
-     Two themes only. `mode-paper` / `mode-studio` / `mode-raw` are kept
-     as aliases so older markup keeps resolving while it is migrated. */
+  /* ─── LIGHT (default) ────────────────────────────────────────────── */
   :root,
   .mode-light,
   .mode-day,
-  .mode-paper,
-  .mode-studio,
-  .mode-raw {
+  .mode-paper {
     --brand-primary: #1f3d3a;
     --brand-bg: #f3f2ee; /* paper */
     --brand-surface: #ffffff;
@@ -73,10 +69,46 @@
     color-scheme: light;
   }
 
+  /* ─── STUDIO — warm & fuzzy (warmnfuzzy.tv) ──────────────────────
+     Cream paper, burnt orange, chocolate ink, mustard. Tactile, grainy,
+     playful — used when the visitor opts into studio via the theme toggle. */
+  .mode-studio {
+    --brand-primary: #ff4d12;
+    --brand-bg: #fff7e6; /* warm cream */
+    --brand-surface: #fffbf0;
+    --brand-surface-secondary: #fbe9cc;
+    --brand-border: #e8d9b8;
+    --brand-text: #1a110a; /* chocolate */
+    --brand-text-secondary: #6b5744;
+    --brand-accent: #ff4d12; /* burnt orange */
+    --brand-on-accent: #fff7e6;
+    --brand-paper: #fff7e6;
+    --brand-ink: #1a110a;
+
+    --cta-bg: var(--brand-text);
+    --cta-fg: var(--brand-bg);
+    --cta-btn-bg: var(--brand-bg);
+    --cta-btn-fg: var(--brand-text);
+    --cta-border: var(--brand-bg);
+
+    --color-abstract-orange: #ff6b2d;
+    --color-abstract-blue: #4a7fb5;
+    --color-abstract-green: #2e7d6b;
+    --color-abstract-teal: #d97706;
+    --color-abstract-yellow: #ffb600;
+    --color-abstract-lemon: #ffe600;
+    --color-abstract-black: #1a110a;
+    --color-abstract-pink: #ff8fa3;
+
+    --studio-grain: 0.06;
+    color-scheme: light;
+  }
+
   /* ─── DARK ─────────────────────────────────────────────────────────── */
   .mode-dark,
   .mode-night,
-  .mode-midnight {
+  .mode-midnight,
+  .mode-raw {
     --brand-primary: #8fb3a6;
     --brand-bg: #080a09;
     --brand-surface: #101513;
@@ -165,14 +197,16 @@
   :root footer,
   .mode-light footer,
   .mode-day footer,
-  .mode-paper footer,
-  .mode-studio footer,
-  .mode-raw footer {
+  .mode-paper footer {
     --brand-accent: #9fc9a8;
+  }
+  .mode-studio footer {
+    --brand-accent: #ff4d12;
   }
   .mode-dark footer,
   .mode-night footer,
-  .mode-midnight footer {
+  .mode-midnight footer,
+  .mode-raw footer {
     --brand-accent: #1f3d3a;
   }
 
@@ -894,13 +928,15 @@
 :root,
 .mode-light,
 .mode-day,
-.mode-paper,
-.mode-studio,
-.mode-raw {
+.mode-paper {
   /* The rail is the accent held well back — at full strength a deep green
      hairline running the width of the page reads as a rule, not a drawing. */
   --rail: color-mix(in srgb, var(--brand-accent) 58%, var(--brand-bg));
   --sand: #e9e7dc;
+}
+.mode-studio {
+  --rail: color-mix(in srgb, var(--brand-accent) 58%, var(--brand-bg));
+  --sand: #fbe9cc;
 }
 
 .mode-dark,

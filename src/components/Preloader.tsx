@@ -28,6 +28,9 @@ const LOADER_CSS = `
 .gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;
   transition:transform ${WIPE_MS}ms cubic-bezier(.16,1,.3,1)}
 .gl-out{transform:translateY(-100%)}
+.gl-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;padding:2rem;text-align:center}
+.gl-brand{font-size:clamp(2.2rem, 8vw, 5.5rem);line-height:.9;letter-spacing:-.04em}
+.gl-tag{font-family:var(--font-mono, ui-monospace);font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
 .gl-count{position:absolute;left:0;bottom:0;display:flex;align-items:flex-end;
   gap:.06em;line-height:.78;padding:0 var(--gl-gutter) .06em}
 .gl-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
@@ -187,11 +190,17 @@ export default function Preloader() {
     >
       <style>{LOADER_CSS}</style>
 
+      {/* Karolina Hess inspired: centered brand on first visit, minimal */}
+      <div className="gl-center" aria-hidden="true">
+        <p className="gl-brand font-display font-black uppercase">Greene Studios</p>
+        <p className="gl-tag">Available worldwide · {new Date().getFullYear()}</p>
+      </div>
+
       <div
         className="gl-count font-display font-black"
         style={
           {
-            fontSize: "clamp(6rem, 22vw, 20rem)",
+            fontSize: "clamp(1.8rem, 6.6vw, 6rem)",
             // Matches the site's own page gutter.
             ["--gl-gutter" as string]: "clamp(1.25rem, 4vw, 2.5rem)",
           } as React.CSSProperties

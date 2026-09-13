@@ -23,14 +23,12 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY > lastScrollY && currentScrollY > 140) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-
-      setIsScrolled(currentScrollY > 60);
+      setIsScrolled(currentScrollY > 12);
       setLastScrollY(currentScrollY);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -41,94 +39,83 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-[80] transition-transform duration-500",
-          (isVisible || menuOpen) ? "translate-y-0" : "-translate-y-full"
+          "fixed inset-x-0 top-0 z-[80] flex justify-center px-4 pt-4 transition-transform duration-500 md:px-6",
+          (isVisible || menuOpen) ? "translate-y-0" : "-translate-y-[120%]"
         )}
       >
+        {/* Floating pill — fourmula.ai inspired: centered, rounded-full, soft shadow, minimal */}
         <div
           className={cn(
-            "transition-all duration-500",
-            isScrolled && !menuOpen
-              ? "border-b border-[var(--brand-border)] bg-[var(--brand-bg)]/85 backdrop-blur-xl"
-              : "border-b border-transparent bg-transparent"
+            "pointer-events-auto flex w-full max-w-[1280px] items-center justify-between gap-3 rounded-full border px-3 py-2 backdrop-blur-xl transition-all duration-500 md:px-5 md:py-2.5",
+            isScrolled
+              ? "border-[var(--brand-border)] bg-[var(--brand-bg)]/85 shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+              : "border-transparent bg-[var(--brand-bg)]/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)]",
+            "supports-[backdrop-filter]:bg-[var(--brand-bg)]/70"
           )}
         >
-          <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 md:px-10">
-            {/* Logo / wordmark, double-click toggles FOCUS presentation mode */}
+          <Link
+            href="/"
+            onDoubleClick={(e) => {
+              e.preventDefault();
+              setFocus(true);
+            }}
+            className="group flex items-center gap-2.5 py-1"
+            data-cursor="HOME"
+            aria-label="Greene Studios, home (double-click for presentation mode)"
+            title="Double-click for Focus Mode"
+          >
+            <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-text)] text-[var(--brand-bg)] ring-1 ring-[var(--brand-border)] transition-transform duration-500 group-hover:scale-105 md:h-9 md:w-9">
+              <GreeneMonogram fill className="h-full w-full p-[3px]" />
+            </span>
+            <span className="headline text-[17px] text-[var(--brand-text)] md:text-[19px]">
+              Greene
+              <span className="align-super text-[8px] font-bold">®</span>
+            </span>
+          </Link>
+
+          {/* Center links — pill style, minimal, large whitespace like expo/deepmind */}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+            {NAV_LINKS.map((item) => {
+              const isActive =
+                pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+              const isExternal = item.href.startsWith("http");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  data-cursor={item.label.toUpperCase()}
+                  className={cn(
+                    "rounded-full px-3.5 py-2 text-[14px] font-medium tracking-[-0.01em] transition-colors duration-300",
+                    isActive
+                      ? "bg-[var(--brand-text)] text-[var(--brand-bg)]"
+                      : "text-[var(--brand-text-secondary)] hover:bg-[var(--brand-surface-secondary)] hover:text-[var(--brand-text)]"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center gap-2 md:gap-2.5">
+            <ThemeToggle />
             <Link
-              href="/"
-              onDoubleClick={(e) => {
-                e.preventDefault();
-                setFocus(true);
-              }}
-              className="group flex items-center gap-3 py-4 md:py-5"
-              data-cursor="HOME"
-              aria-label="Greene Studios, home (double-click for presentation mode)"
-              title="Double-click for Focus Mode"
+              href="/contact"
+              data-cursor="HELLO"
+              className="group hidden items-center gap-2 rounded-full bg-[var(--brand-text)] px-5 py-2.5 text-[14px] font-medium text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] sm:inline-flex"
             >
-              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-surface)] text-[var(--brand-text)] ring-1 ring-[var(--brand-border)] transition-transform duration-500 group-hover:scale-110 md:h-9 md:w-9">
-                <GreeneMonogram fill className="h-full w-full p-[3px]" />
-              </span>
-              <span className="headline text-lg text-[var(--brand-text)] md:text-xl">
-                Greene
-                <span className="align-super text-[8px] font-bold">®</span>
-              </span>
+              <RollLabel text="Start a project" />
             </Link>
-
-            {/* Center links, desktop */}
-            <nav
-              className="hidden items-center gap-7 lg:flex xl:gap-9"
-              aria-label="Main navigation"
+            <button
+              onClick={() => setMenuOpen(true)}
+              data-cursor="MENU"
+              aria-label="Open menu"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-text)] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] lg:hidden"
             >
-              {NAV_LINKS.map((item) => {
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== "/" && pathname.startsWith(item.href));
-                const isExternal = item.href.startsWith("http");
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    data-cursor={item.label.toUpperCase()}
-                    className={cn(
-                      "nav-link text-[15px] font-normal tracking-[-0.01em] transition-colors duration-300 hover:text-[var(--brand-accent)]",
-                      isActive
-                        ? "is-active text-[var(--brand-text)]"
-                        : "text-[var(--brand-text-secondary)]"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Right cluster */}
-            <div className="flex items-center gap-2.5 md:gap-3">
-              <ThemeToggle />
-
-              {/* Start a project, desktop */}
-              <Link
-                href="/contact"
-                data-cursor="HELLO"
-                className="group hidden items-center gap-2 rounded-full bg-[var(--brand-text)] px-4 py-2.5 text-[14px] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)] sm:inline-flex"
-              >
-                <RollLabel text="Start a project" />
-              </Link>
-
-              {/* MENU button · mobile + tablet */}
-              <button
-                onClick={() => setMenuOpen(true)}
-                data-cursor="MENU"
-                aria-label="Open menu"
-                className="flex h-10 items-center gap-2 rounded-full border border-[var(--brand-border)] px-4 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-text)] transition-colors duration-300 hover:border-[var(--brand-accent)] lg:hidden"
-              >
-                <Menu size={15} strokeWidth={2.5} />
-                <span className="hidden sm:inline">Menu</span>
-              </button>
-            </div>
+              <Menu size={16} strokeWidth={2.2} />
+            </button>
           </div>
         </div>
       </header>

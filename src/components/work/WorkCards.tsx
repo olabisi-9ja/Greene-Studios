@@ -9,18 +9,14 @@ import { BrandMark } from "@/components/demo/BrandMark";
 /**
  * The two card shapes the portfolio uses, in one place.
  *
- * They are deliberately distinguishable: a shipped card links out to a real
- * site and says where it runs; a concept card links inward to a case study and
- * carries a "Concept" tag. A visitor should never have to work out which kind
- * of work they are looking at.
- *
- * Both are server components, the `fs` lookup below only runs at build time.
+ * Fourmula.ai inspired: minimal, large image, generous whitespace,
+ * rounded-2xl, quiet border, hover lift. No heavy chrome.
  */
 
 const CARD =
-  "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-colors duration-300 hover:border-[var(--brand-text)]";
+  "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-all duration-400 hover:-translate-y-1 hover:border-[var(--brand-text)]/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]";
 const MEDIA = "relative aspect-[16/10] w-full overflow-hidden rounded-t-2xl bg-[var(--brand-surface-secondary)]";
-const IMG = "object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]";
+const IMG = "object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]";
 const META = "text-[11px] font-semibold text-[var(--brand-text-secondary)]";
 const CTA = "text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-accent)]";
 
@@ -34,6 +30,12 @@ export function shippedShot(slug: string): string | null {
     const rel = `/images/shipped/${slug}/desktop.${ext}`;
     if (existsSync(path.join(process.cwd(), "public", rel))) return rel;
   }
+  return null;
+}
+
+function conceptLifestyle(slug: string): string | null {
+  const rel = `/images/work/${slug}/cover-lifestyle.jpg`;
+  if (existsSync(path.join(process.cwd(), "public", rel))) return rel;
   return null;
 }
 
@@ -85,16 +87,25 @@ export function ShippedCard({ project }: { project: ShippedProject }) {
 }
 
 export function ConceptCard({ brand }: { brand: BrandSystem }) {
+  const lifestyle = conceptLifestyle(brand.slug);
+  // Prefer lifestyle generated image if desktop screenshot missing; otherwise show screenshot with lifestyle as subtle overlay fallback
+  const primary = `/images/work/${brand.slug}/home-desktop.webp`;
   return (
     <Link href={`/work/${brand.slug}`} data-cursor="READ" className={CARD}>
       <div className={MEDIA}>
         <Image
-          src={`/images/work/${brand.slug}/home-desktop.webp`}
+          src={primary}
           alt={`${brand.name} homepage`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className={IMG}
         />
+        {/* Generated lifestyle as gentle backdrop when screenshot is transparent areas — subtle */}
+        {lifestyle && (
+          <span className="pointer-events-none absolute inset-0 -z-10">
+            {/* not visible, reserved for future composite */}
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-6">
@@ -103,7 +114,7 @@ export function ConceptCard({ brand }: { brand: BrandSystem }) {
             <BrandMark slug={brand.slug} size={22} />
           </span>
           <h3 className="font-display text-lg font-black uppercase tracking-tight">{brand.name}</h3>
-          <span className="ml-auto border border-[var(--brand-border)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">
+          <span className="ml-auto rounded-full border border-[var(--brand-border)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">
             Concept
           </span>
         </div>

@@ -202,6 +202,13 @@ export default function StudioPage() {
         <span className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-xs font-semibold">Overlap hours for reviews</span>
         <span className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-xs font-semibold">English, clear comms</span>
       </div>
+      <div className="mt-6 flex items-center gap-3 rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] px-3 py-2 w-fit">
+        <span className="relative h-7 w-7 overflow-hidden rounded-full bg-[var(--brand-surface-secondary)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/character/greene-mascot.png" alt="" className="h-full w-full object-cover" />
+        </span>
+        <span className="text-xs font-medium">Greene character — your guide across studio mode</span>
+      </div>
       <Link href="/contact" className="mt-10 inline-flex items-center justify-center rounded-full bg-[var(--brand-text)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]">
         Start a project <span aria-hidden="true" className="ml-2">→</span>
       </Link>
