@@ -9,8 +9,24 @@ import TimelineSection from "@/components/about/TimelineSection";
 import RotatingGlobe from "@/components/ui/RotatingGlobe";
 import SpreadWord from "@/components/effects/SpreadWord";
 import SpotlightGrid from "@/components/effects/SpotlightGrid";
-import Dock from "@/components/effects/Dock";
+import LogoLoop from "@/components/effects/LogoLoop";
 import ScrollExpand from "@/components/effects/ScrollExpand";
+import {
+ SiReact,
+ SiNextdotjs,
+ SiTypescript,
+ SiTailwindcss,
+ SiFramer,
+ SiGsap,
+ SiThreedotjs,
+ SiFigma,
+ SiWebflow,
+ SiPostgresql,
+ SiDrizzle,
+ SiVercel,
+ SiStorybook,
+ SiLottiefiles,
+} from "react-icons/si";
 
 export const metadata: Metadata = {
  title: "Studio · Greene Studios",
@@ -47,23 +63,22 @@ const TECHNOLOGIES = [
  "Drizzle ORM", "Vercel", "Storybook", "Lottie",
 ];
 
-/** Dock glyphs for the tech stack, one tile per tool. */
-const TECH_DOCK = [
- { glyph: "N", label: "Next.js" },
- { glyph: "⚛", label: "React" },
- { glyph: "TS", label: "TypeScript" },
- { glyph: "TW", label: "Tailwind CSS" },
- { glyph: "FM", label: "Framer Motion" },
- { glyph: "GS", label: "GSAP" },
- { glyph: "3D", label: "Three.js" },
- { glyph: "Fg", label: "Figma" },
- { glyph: "Fr", label: "Framer" },
- { glyph: "Wf", label: "Webflow" },
- { glyph: "PG", label: "PostgreSQL" },
- { glyph: "Dz", label: "Drizzle ORM" },
- { glyph: "▲", label: "Vercel" },
- { glyph: "Sb", label: "Storybook" },
- { glyph: "Lt", label: "Lottie" },
+/** Official brand marks for the tech-stack marquee. */
+const STACK_LOGOS = [
+ { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+ { node: <SiReact />, title: "React", href: "https://react.dev" },
+ { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+ { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+ { node: <SiFramer />, title: "Framer Motion", href: "https://www.framer.com/motion/" },
+ { node: <SiGsap />, title: "GSAP", href: "https://gsap.com" },
+ { node: <SiThreedotjs />, title: "Three.js", href: "https://threejs.org" },
+ { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
+ { node: <SiWebflow />, title: "Webflow", href: "https://webflow.com" },
+ { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+ { node: <SiDrizzle />, title: "Drizzle ORM", href: "https://orm.drizzle.team" },
+ { node: <SiVercel />, title: "Vercel", href: "https://vercel.com" },
+ { node: <SiStorybook />, title: "Storybook", href: "https://storybook.js.org" },
+ { node: <SiLottiefiles />, title: "Lottie", href: "https://lottiefiles.com" },
 ];
 
 function founderPortrait(): string | null {
@@ -265,7 +280,17 @@ export default function StudioPage() {
  Our tech stack
  </h2>
  <div className="flex justify-center">
- <Dock items={TECH_DOCK} />
+ <LogoLoop
+  logos={STACK_LOGOS}
+  speed={80}
+  logoHeight={40}
+  gap={64}
+  scaleOnHover
+  fadeOut
+  fadeOutColor="var(--brand-surface)"
+  ariaLabel="Our technology stack"
+  className="py-6 text-[var(--brand-text-secondary)]"
+ />
  </div>
  <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)]">
  {TECHNOLOGIES.join(" · ")}
