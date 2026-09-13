@@ -39,8 +39,7 @@ export default function ResourcesPage() {
         title={
           <>
             Free tools for
-            <br />
-            <span className="font-serif-i lowercase normal-case tracking-normal">builders.</span>
+            <br /> builders.
           </>
         }
         description="We believe in giving back to the community. Here are some free tools, templates, and guides to help you build better digital products."

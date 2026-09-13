@@ -15,7 +15,7 @@ const CAPABILITIES = [
 
 /**
  * A static SVG of the product surface, drawn from the brand's own tokens.
- * Not a screenshot of a real app — this is a concept — so it stays diagrammatic
+ * Not a screenshot of a real app, this is a concept, so it stays diagrammatic
  * rather than pretending to be a photograph of software that ships.
  */
 function ProductFigure() {

@@ -3,11 +3,11 @@
  *
  * These are drawn from each brand's own tokens rather than sourced as photos:
  * the demos ship no stock imagery, nothing loads from a CDN, and every figure
- * stays a couple of hundred bytes. Deterministic — `seed` picks a variant, so
+ * stays a couple of hundred bytes. Deterministic, `seed` picks a variant, so
  * a given product tile looks the same on every build.
  */
 
-/** Soft organic vessel — Vera. */
+/** Soft organic vessel, Vera. */
 export function OrganicFigure({ seed = 0, label }: { seed?: number; label?: string }) {
   const shapes = [
     "M50 12c22 0 34 18 34 38s-14 38-34 38-34-18-34-38S28 12 50 12Z",
@@ -28,7 +28,7 @@ export function OrganicFigure({ seed = 0, label }: { seed?: number; label?: stri
   );
 }
 
-/** Full-bleed editorial block with a figure silhouette — Arc. */
+/** Full-bleed editorial block with a figure silhouette, Arc. */
 export function EditorialFigure({ seed = 0, label }: { seed?: number; label?: string }) {
   const y = [30, 24, 34][seed % 3];
   return (
@@ -42,7 +42,7 @@ export function EditorialFigure({ seed = 0, label }: { seed?: number; label?: st
   );
 }
 
-/** Calm rounded card with a progress arc — Bloom. */
+/** Calm rounded card with a progress arc, Bloom. */
 export function CareFigure({ seed = 0, label }: { seed?: number; label?: string }) {
   const pct = [0.62, 0.84, 0.41][seed % 3];
   const r = 30;
@@ -59,7 +59,7 @@ export function CareFigure({ seed = 0, label }: { seed?: number; label?: string 
   );
 }
 
-/** Ledger rows — Onyx. */
+/** Ledger rows, Onyx. */
 export function LedgerFigure({ seed = 0, label }: { seed?: number; label?: string }) {
   const rows = [
     ["Salary", "+4,820.00"],
@@ -83,7 +83,7 @@ export function LedgerFigure({ seed = 0, label }: { seed?: number; label?: strin
   );
 }
 
-/** Flat colour-block composition on the 8px grid — Prism. */
+/** Flat colour-block composition on the 8px grid, Prism. */
 export function BlockFigure({ seed = 0, label }: { seed?: number; label?: string }) {
   const layouts = [
     [[0, 0, 60, 60], [64, 0, 36, 28], [64, 32, 36, 28], [0, 64, 100, 36]],

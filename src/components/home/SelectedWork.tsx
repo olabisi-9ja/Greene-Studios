@@ -8,41 +8,19 @@ import { BRANDS } from "@/lib/brands";
 import { SHIPPED } from "@/lib/shipped";
 import RollLabel from "@/components/ui/RollLabel";
 
-/**
- * Works marquee — editorial, asymmetric, continuously scrolling.
- *
- * Inspired by the Karolina Hess portfolio aesthetic:
- *   - Full-bleed horizontal strip with items at varying sizes and vertical offsets
- *   - CSS-driven scroll (linear, GPU-only — no JS per frame)
- *   - Framer-motion spring scale on individual card hover (Jakub polish)
- *   - Hover overlay materialises with blur (Jakub enter recipe)
- *   - Strip pauses on hover so users can inspect items
- *   - prefers-reduced-motion: pauses the strip, keeps overlays instant
- *
- * Layout math
- * -----------
- * Container: height 580px, paddingTop 70px (absorbs up-to -40px negative offsets)
- * Max rendered bottom = paddingTop(70) + maxY(80) + maxHeight(440) = 590px → within 580+10 safe-zone
- * Every RHYTHM permutation is checked: all fit within [0, 590]px.
- */
-
-// ─── Layout rhythm ────────────────────────────────────────────────────────────
-// Cycles across all items. Width (px), height (px), vertical translate (px).
-// Positive y = item sits lower in strip; negative y = item rises above midline.
 const RHYTHM = [
-  { w: 290, h: 390, y: 0 },    // portrait, top-aligned
-  { w: 480, h: 260, y: 70 },   // wide landscape, dropped
-  { w: 230, h: 430, y: -40 },  // tall, raised
-  { w: 350, h: 315, y: 40 },   // near-square, mid
-  { w: 510, h: 250, y: 80 },   // ultrawide, low
-  { w: 270, h: 370, y: 20 },   // portrait, slight drop
-  { w: 390, h: 295, y: 55 },   // landscape, mid-low
-  { w: 250, h: 440, y: -30 },  // tallest, raised
-  { w: 330, h: 330, y: 50 },   // square, mid
-  { w: 440, h: 268, y: 25 },   // landscape, near-top
+  { w: 290, h: 390, y: 0 },
+  { w: 480, h: 260, y: 70 },
+  { w: 230, h: 430, y: -40 },
+  { w: 350, h: 315, y: 40 },
+  { w: 510, h: 250, y: 80 },
+  { w: 270, h: 370, y: 20 },
+  { w: 390, h: 295, y: 55 },
+  { w: 250, h: 440, y: -30 },
+  { w: 330, h: 330, y: 50 },
+  { w: 440, h: 268, y: 25 },
 ] as const;
 
-// ─── Fallback brand colours (shown when images aren't present yet) ────────────
 const BRAND_BG: Record<string, string> = {
   luminary: "#1a2744",
   vera:     "#b89a7e",
@@ -52,7 +30,6 @@ const BRAND_BG: Record<string, string> = {
   prism:    "#5b4fcf",
 };
 
-// ─── Item shape ───────────────────────────────────────────────────────────────
 type WorkItem = {
   name:  string;
   href:  string;
@@ -78,7 +55,6 @@ function buildItems(): WorkItem[] {
     bg:    "#1f3d3a",
   }));
 
-  // Interleave concept + shipped for visual variety
   const out: WorkItem[] = [];
   const max = Math.max(brands.length, shipped.length);
   for (let i = 0; i < max; i++) {
@@ -89,9 +65,8 @@ function buildItems(): WorkItem[] {
 }
 
 const ITEMS   = buildItems();
-const DISPLAY = [...ITEMS, ...ITEMS]; // doubled for seamless -50% loop
+const DISPLAY = [...ITEMS, ...ITEMS];
 
-// ─── Single card ──────────────────────────────────────────────────────────────
 function WorkCard({
   item,
   r,
@@ -106,11 +81,9 @@ function WorkCard({
     <motion.div
       className="relative shrink-0 overflow-hidden rounded-2xl"
       style={{ width: r.w, height: r.h, y: r.y }}
-      // Spring scale — Jakub production polish, bounce: 0 = professional
       whileHover={{ scale: 1.055 }}
       transition={{ type: "spring", duration: 0.5, bounce: 0 }}
     >
-      {/* Image — falls back to coloured brand plate if not yet on disk */}
       {!imgError ? (
         <Image
           src={item.src}
@@ -131,7 +104,6 @@ function WorkCard({
         </div>
       )}
 
-      {/* Hover overlay — materialises with blur (Jakub enter recipe) */}
       <motion.div
         className="absolute inset-0 flex flex-col justify-end p-5"
         style={{
@@ -169,46 +141,30 @@ function WorkCard({
   );
 }
 
-// ─── Section ──────────────────────────────────────────────────────────────────
 export default function SelectedWork() {
   const [paused, setPaused] = useState(false);
 
   return (
     <section className="relative bg-[var(--brand-bg)] py-20 text-[var(--brand-text)] md:py-28">
-
-      {/* ── Header ──────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <span className="chip-mono mb-5 block">01 · Selected work</span>
-            <h2 className="headline flex flex-wrap items-baseline gap-x-4 text-[clamp(2.8rem,6.5vw,6rem)]">
+            <span className="chip-mono mb-5 block">Selected work</span>
+            <h2 className="headline text-[clamp(2.8rem,6.5vw,6rem)]">
               Selected works
-              <sup
-                className="font-mono text-[0.28em] font-normal tracking-[0.08em] text-[var(--brand-text-secondary)]"
-                style={{ verticalAlign: "super" }}
-              >
-                [{ITEMS.length.toString().padStart(2, "0")}]
-              </sup>
             </h2>
           </div>
 
           <Link
             href="/work"
             data-cursor="SEE"
-            className="group btn-block btn-block-ghost shrink-0"
+            className="group inline-flex items-center justify-center rounded-full border border-[var(--brand-border)] px-6 py-3 text-[14px] font-medium transition-colors duration-300 hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]"
           >
             <RollLabel text="All work" />
           </Link>
         </div>
       </div>
 
-      {/* ── Marquee strip ────────────────────────────────────────────── */}
-      {/*
-          Container maths:
-            height 580px + paddingTop 70px inside = total visual space
-            Max item bottom (worst-case): 70(pad) + 80(y) + 440(h) = 590px → clipped ≤ 10px at very bottom, acceptable
-            Min item top  (worst-case):  70(pad) - 40(y)           =  30px → never clips top
-      */}
       <div
         className="mt-14 overflow-hidden md:mt-20"
         style={{ height: "590px" }}
@@ -234,11 +190,10 @@ export default function SelectedWork() {
         </div>
       </div>
 
-      {/* ── Footer bar ───────────────────────────────────────────────── */}
       <div className="mx-auto mt-10 max-w-[1400px] px-5 md:px-10">
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--brand-border)] pt-6">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--brand-text-secondary)]">
-            {ITEMS.length} projects &mdash; shipped sites &amp; concept systems
+            Shipped sites and concept systems
           </p>
           <Link
             href="/work"

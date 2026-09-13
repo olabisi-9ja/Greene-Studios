@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 
 /**
- * The rail system — full-bleed lines that draw themselves as the page scrolls.
+ * The rail system, full-bleed lines that draw themselves as the page scrolls.
  *
  * Five figures, one engine. Each is a circuit-diagram move rather than an
  * ornament, so the seam between two sections can carry an idea:
@@ -16,7 +16,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "fr
  *   braid   one line unbraids into strands, then gathers up    (a spread)
  *
  * Geometry is generated from the band's measured pixel width, so the SVG's
- * coordinate space is 1:1 with CSS pixels — a ring stays round and a 2px
+ * coordinate space is 1:1 with CSS pixels, a ring stays round and a 2px
  * stroke stays 2px at every viewport, with no viewBox scaling to fight.
  */
 
@@ -28,7 +28,7 @@ type Figure = {
   from: number;
   /** …and where it finishes. */
   to: number;
-  /** Filled rather than stroked — the arrowhead. */
+  /** Filled rather than stroked, the arrowhead. */
   solid?: boolean;
 };
 
@@ -270,7 +270,7 @@ function DrawnPath({
   const ref = useRef<SVGPathElement>(null);
   const [length, setLength] = useState(0);
 
-  /* A cubic has no closed-form arc length — the browser has to measure it,
+  /* A cubic has no closed-form arc length, the browser has to measure it,
      and it has to be re-measured whenever the geometry changes or the dash
      maths runs against a path that no longer exists. */
   useEffect(() => {

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Top scroll-progress bar. Writes scaleX directly on a ref inside rAF —
+ * Top scroll-progress bar. Writes scaleX directly on a ref inside rAF,
  * no library, no React state, no re-render per scroll event.
  */
 export default function ScrollProgress() {

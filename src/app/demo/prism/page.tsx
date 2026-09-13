@@ -19,7 +19,7 @@ export default function PrismHome() {
             <h1 className="d-display d-h1 d-m-sm">One subject at a time.</h1>
             <p className="d-lead">
               Prism teaches one thing until it is finished, then moves on. No streaks, no points, no
-              badge for logging in — just the next piece of work and whether you have done it.
+              badge for logging in, just the next piece of work and whether you have done it.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <Link href="/demo/prism/courses" className="d-btn">Browse courses</Link>
@@ -56,7 +56,7 @@ export default function PrismHome() {
           <h2 className="d-display d-h2 d-m-md">Progress is work finished, not time spent.</h2>
           <p className="d-body">
             A course is a fixed list of problems. You have either done them or you have not, and the
-            page says which. There is no way to look busy on Prism, which is the point — a student who
+            page says which. There is no way to look busy on Prism, which is the point, a student who
             has completed twelve of forty exercises knows exactly where they are.
           </p>
         </div>

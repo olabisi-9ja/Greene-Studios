@@ -49,7 +49,7 @@ export default function LuminaryHome() {
         </div>
       </section>
 
-      {/* Signal strip — the one place the brand allows a number to be loud. */}
+      {/* Signal strip, the one place the brand allows a number to be loud. */}
       <section className="d-section-tight" style={{ background: "var(--b-surface-alt)", borderBlock: "1px solid var(--b-border)" }}>
         <div className="d-wrap">
           <dl className="d-grid d-cols-4">

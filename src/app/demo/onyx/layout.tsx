@@ -3,7 +3,7 @@ import { onyx } from "@/lib/brands";
 import { fontPreloads } from "@/lib/brands/css";
 
 export const metadata: Metadata = {
-  title: { absolute: `${onyx.name} — ${onyx.tagline}`, template: `%s · ${onyx.name}` },
+  title: { absolute: `${onyx.name} - ${onyx.tagline}`, template: `%s · ${onyx.name}` },
   description: onyx.direction,
   robots: { index: false, follow: true },
 };

@@ -7,7 +7,7 @@ import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 /**
  * Custom cursor: a dot that grows on interactive elements and swaps for a
  * label when it enters anything carrying `data-cursor`. Pointer-fine desktop
- * only — coarse pointers keep the native cursor.
+ * only, coarse pointers keep the native cursor.
  */
 export default function DynamicCursor() {
   const { effectiveMode, focus } = useAtmosphere();

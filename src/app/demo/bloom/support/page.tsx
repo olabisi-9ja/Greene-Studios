@@ -18,7 +18,7 @@ export default function BloomSupport() {
             <p className="d-eyebrow">Support</p>
             <h1 className="d-display d-h1 d-m-md">Three ways to reach us.</h1>
             <p className="d-lead">
-              If something is urgent and clinical, call 999 or your clinic directly — Bloom is not an
+              If something is urgent and clinical, call 999 or your clinic directly, Bloom is not an
               emergency service, and we say so everywhere it matters.
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function BloomSupport() {
           </dl>
 
           <p className="d-muted">
-            Concept product by Greene Studios — the number and address above are placeholders.
+            Concept product by Greene Studios, the number and address above are placeholders.
           </p>
         </div>
       </section>

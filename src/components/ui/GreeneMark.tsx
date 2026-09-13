@@ -12,7 +12,7 @@ const ASSETS = brandAssets as Record<string, string | null>;
  *
  * The prepared PNGs are alpha masks rather than coloured artwork, painted with
  * `background: currentColor` through `mask-image`. That is what lets a raster
- * export behave like the SVGs it replaces — one file that takes the colour of
+ * export behave like the SVGs it replaces, one file that takes the colour of
  * whatever surface it sits on, in either theme, with no white box on dark.
  */
 function Mark({
@@ -73,7 +73,7 @@ function Mark({
  * It is inlined rather than loaded through <img> for the same reason the six
  * concept marks are mirrored in BrandMark.tsx: an SVG loaded as an image is an
  * isolated document, so `currentColor` resolves against nothing and the mark
- * paints black — a near-invisible smudge on the dark theme. Inline, it takes
+ * paints black, a near-invisible smudge on the dark theme. Inline, it takes
  * the colour of whatever surface it sits on, which is the whole contract.
  */
 function MonogramGlyphs({
@@ -102,7 +102,7 @@ function MonogramGlyphs({
   );
 }
 
-/** The compact GS monogram — nav, footer chip, anywhere square. */
+/** The compact GS monogram, nav, footer chip, anywhere square. */
 export function GreeneMonogram({
   className,
   size = 36,
@@ -132,7 +132,7 @@ export function GreeneMonogram({
   );
 }
 
-/** The stacked "Greene Studios" wordmark — lockups and larger moments. */
+/** The stacked "Greene Studios" wordmark, lockups and larger moments. */
 export function GreeneWordmark({
   className,
   width = 180,

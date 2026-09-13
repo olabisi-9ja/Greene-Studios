@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 const FIELD = "#263B38";
 const PAPER = "#F5F4EF";
 
-/** Where the count stops. Deliberately short of 100 — it hands off mid-climb. */
+/** Where the count stops. Deliberately short of 100, it hands off mid-climb. */
 const TARGET = 99;
 /** Minimum time on screen, so a warm cache doesn't flash 0→99 in one frame.
  *  Long enough for the climb to read, short enough that it isn't a tax. */
@@ -15,7 +15,7 @@ const FLOOR_MS = 950;
 const FLOOR_MS_REDUCED = 350;
 /** Hard ceiling: one slow asset must never strand a visitor at 40%. */
 // readyState only reaches "complete" once every subresource has landed,
-// which on the homepage is ~1.6s — long enough to hold the count well past
+// which on the homepage is ~1.6s, long enough to hold the count well past
 // the floor. The ceiling caps how much real readiness may delay the exit.
 const CEILING_MS = 1100;
 /** Beat at 99 before the wipe. */
@@ -44,8 +44,8 @@ const LOADER_CSS = `
 /**
  * The loader: a count from 0 to 99, then the site.
  *
- * The number is driven by what the page is actually doing — readyState, web
- * fonts, and decoded images — rather than a timer pretending to be progress.
+ * The number is driven by what the page is actually doing, readyState, web
+ * fonts, and decoded images, rather than a timer pretending to be progress.
  * It is smoothed and floored so it reads as motion instead of a stuttering
  * readout, and capped so a slow asset can never hold someone hostage.
  *
@@ -69,7 +69,7 @@ export default function Preloader() {
       try {
         shown = !!sessionStorage.getItem("loader_shown");
       } catch {
-        /* storage unavailable (private mode, sandboxed iframe) — show it */
+        /* storage unavailable (private mode, sandboxed iframe), show it */
       }
     }
     if (shown) {
@@ -118,7 +118,7 @@ export default function Preloader() {
       const t = Math.min(1, elapsed / floor);
       const timeProgress = 1 - (1 - t) * (1 - t);
 
-      // Real readiness only holds back the last stretch — enough that the
+      // Real readiness only holds back the last stretch, enough that the
       // number means something, not enough to make a slow asset the story.
       // readyState only reaches "complete" once every subresource has landed,
       // so the ceiling releases the count regardless.
@@ -204,7 +204,7 @@ export default function Preloader() {
         <span className="gl-pct">%</span>
       </div>
 
-      {/* A hairline that tracks the same value — legible at a glance from
+      {/* A hairline that tracks the same value, legible at a glance from
           across the room, where a numeral in the corner is not. */}
       <span
         ref={ruleRef}

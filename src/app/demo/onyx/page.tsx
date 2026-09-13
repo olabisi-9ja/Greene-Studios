@@ -32,7 +32,7 @@ export default function OnyxHome() {
         </div>
       </section>
 
-      {/* The fee table on the homepage — the brand's whole argument, up front. */}
+      {/* The fee table on the homepage, the brand's whole argument, up front. */}
       <section className="d-section" style={{ background: "var(--b-surface-alt)" }}>
         <div className="d-wrap d-stack-lg">
           <h2 className="d-display d-h2 d-m-md">The whole fee schedule.</h2>

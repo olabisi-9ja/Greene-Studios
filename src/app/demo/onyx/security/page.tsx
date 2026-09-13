@@ -6,7 +6,7 @@ export const metadata = { title: "Security" };
 const ITEMS = [
   { k: "Ring-fenced deposits", v: "Held at a partner bank and never lent against. Protected to £85,000 by the FSCS." },
   { k: "Card locked by default", v: "Online, contactless, ATM and abroad are four separate switches. All off until you turn them on." },
-  { k: "Confirmation of payee", v: "Names are checked before money moves, not after — and a mismatch stops the payment." },
+  { k: "Confirmation of payee", v: "Names are checked before money moves, not after, and a mismatch stops the payment." },
   { k: "Session limits", v: "Any new device needs the app on a known device to approve it. There is no SMS fallback to intercept." },
 ];
 

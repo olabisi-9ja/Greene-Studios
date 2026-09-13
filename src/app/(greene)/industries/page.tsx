@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Industries index — eight sectors, each a real destination with its
+ * Industries index, eight sectors, each a real destination with its
  * own challenges, approach and relevant work. Sector depth sells better
  * than generic "we work with everyone" agency copy.
  */
@@ -20,12 +20,11 @@ export default function IndustriesPage() {
   return (
     <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
       <PageHeader
-        kicker={`Industries · ${String(INDUSTRIES.length).padStart(2, "0")} sectors`}
+        kicker={`Industries`}
         title={
           <>
             Where we do our
-            <br />
-            <span className="font-serif-i lowercase normal-case tracking-normal">best work.</span>
+            <br /> best work.
           </>
         }
         description="Every sector has its own failure modes. We design for yours, specifically. Pick your industry to see the problems we fix and the work that proves it."

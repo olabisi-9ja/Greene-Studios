@@ -54,7 +54,7 @@ export default function Navbar() {
           )}
         >
           <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 md:px-10">
-            {/* Logo / wordmark — double-click toggles FOCUS presentation mode */}
+            {/* Logo / wordmark, double-click toggles FOCUS presentation mode */}
             <Link
               href="/"
               onDoubleClick={(e) => {
@@ -75,7 +75,7 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* Center links — desktop */}
+            {/* Center links, desktop */}
             <nav
               className="hidden items-center gap-7 lg:flex xl:gap-9"
               aria-label="Main navigation"
@@ -109,7 +109,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2.5 md:gap-3">
               <ThemeToggle />
 
-              {/* Start a project — desktop */}
+              {/* Start a project, desktop */}
               <Link
                 href="/contact"
                 data-cursor="HELLO"

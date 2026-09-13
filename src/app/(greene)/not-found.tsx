@@ -17,7 +17,7 @@ export default function NotFound() {
  <span className="h-px w-10 bg-[var(--brand-accent)]" />
  </div>
  <h1 className="font-display text-4xl font-black uppercase leading-none tracking-tight md:text-5xl">
- This page doesn&apos;t <span className="font-serif-i lowercase normal-case tracking-normal">exist.</span>
+ This page doesn&apos;t exist.
  </h1>
  <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[var(--brand-text-secondary)]">
  But our portfolio does. Head back to explore work that actually exists.

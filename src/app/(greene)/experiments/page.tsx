@@ -40,8 +40,7 @@ export default function ExperimentsPage() {
  <PageHeader
  kicker="The lab"
  title={
- <>
- <span className="font-serif-i lowercase normal-case tracking-normal">Experiments.</span>
+ <> Experiments.
  </>
  }
  description="Our playground for creative coding, unconstrained by client briefs. This is where we break things to see how they work."

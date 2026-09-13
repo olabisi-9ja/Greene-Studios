@@ -92,7 +92,7 @@ export default function LuminaryPricing() {
 
           <p className="d-muted" style={{ fontSize: "0.875rem" }}>
             Prices in USD, billed monthly or annually. Annual is two months free. Concept pricing for a
-            concept product — Luminary is a Greene Studios brand system, not a company you can buy from.
+            concept product, Luminary is a Greene Studios brand system, not a company you can buy from.
           </p>
         </div>
       </section>

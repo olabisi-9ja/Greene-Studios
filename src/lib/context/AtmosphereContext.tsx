@@ -87,7 +87,7 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
     try {
       setModeState(normalizeMode(window.localStorage.getItem(STORAGE_MODE)));
     } catch {
-      /* storage unavailable — default to auto */
+      /* storage unavailable, default to auto */
     }
     setSystemDark(systemPrefersDark());
   }, []);

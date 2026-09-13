@@ -28,19 +28,18 @@ export default function CareersPage() {
         kicker="Careers"
         title={
           <>
-            Join the <span className="font-serif-i lowercase normal-case tracking-normal">team.</span>
+            Join the team
           </>
         }
         description="We're always looking for talented designers, developers, and strategists who are passionate about building exceptional digital experiences."
         right={
           <p className="font-display text-6xl font-black leading-none text-outline md:text-7xl">
-            0{POSITIONS.length}
+            {POSITIONS.length}
           </p>
         }
       />
 
       <div className="mx-auto max-w-4xl px-5 md:px-10">
-        {/* Team banner */}
         <div className="relative mb-14 overflow-hidden rounded-2xl border border-[var(--brand-border)]">
           <div className="relative aspect-[16/6]">
             <Image
@@ -53,10 +52,10 @@ export default function CareersPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
             <div className="absolute inset-x-5 bottom-4 flex items-center justify-between">
               <p className="font-display text-lg font-black uppercase tracking-tight text-white md:text-xl">
-                Small team, <span className="font-serif-i lowercase normal-case tracking-normal">big swings.</span>
+                Small team, big swings
               </p>
               <span className="hidden rounded-full bg-[var(--brand-accent)] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)] md:block">
-                2 open roles
+                {POSITIONS.length} open roles
               </span>
             </div>
           </div>
@@ -67,27 +66,22 @@ export default function CareersPage() {
         </span>
 
         <div className="flex flex-col border-t border-[var(--brand-border)]">
-          {POSITIONS.map((job, i) => (
+          {POSITIONS.map((job) => (
             <div
               key={job.title}
               className="group flex flex-col justify-between gap-6 border-b border-[var(--brand-border)] py-8 transition-all duration-300 sm:flex-row sm:items-center"
             >
-              <div className="flex items-baseline gap-4">
-                <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
-                  0{i + 1}
-                </span>
-                <div>
-                  <h2 className="font-display text-xl font-black uppercase tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:text-2xl">
-                    {job.title}
-                  </h2>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    <span className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)]">
-                      {job.location}
-                    </span>
-                    <span className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)]">
-                      {job.type}
-                    </span>
-                  </div>
+              <div>
+                <h2 className="font-display text-xl font-black uppercase tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:text-2xl">
+                  {job.title}
+                </h2>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)]">
+                    {job.location}
+                  </span>
+                  <span className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)]">
+                    {job.type}
+                  </span>
                 </div>
               </div>
               <a
@@ -106,7 +100,7 @@ export default function CareersPage() {
             Don&apos;t see a fit?
           </h3>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
-            We&apos;re always open to meeting interesting people. Send us your portfolio and a brief intro.
+            We are always open to meeting interesting people. Send us your portfolio and a brief intro.
           </p>
           <a
             href={`mailto:${BRAND.email}`}

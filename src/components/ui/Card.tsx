@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  *
  * Before this, sixteen files each wrote their own
  * `rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8`
- * with slightly different radii, padding and hover behaviour — which is how a
+ * with slightly different radii, padding and hover behaviour, which is how a
  * design system quietly stops being one.
  *
  * Styling lives in globals.css (`.card` and friends) so a card is one class,
@@ -21,7 +21,7 @@ type CardOwnProps = {
   alt?: boolean;
   /** Larger radius, for hero-scale cards. */
   large?: boolean;
-  /** Removes padding — for a card whose first child is a full-bleed image. */
+  /** Removes padding, for a card whose first child is a full-bleed image. */
   flush?: boolean;
   /** Accent border. At most one per group. */
   featured?: boolean;

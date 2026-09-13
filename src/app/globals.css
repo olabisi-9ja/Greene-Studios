@@ -232,7 +232,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    border-radius: 9999px;
+    border-radius: 9999px; /* all buttons rounded */
     background: var(--brand-text);
     color: var(--brand-bg);
     font-weight: 700;
@@ -253,7 +253,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    border-radius: 9999px;
+    border-radius: 9999px; /* all buttons rounded */
     border: 1.5px solid var(--brand-border);
     color: var(--brand-text);
     font-weight: 600;
@@ -928,6 +928,7 @@
 .chip-mono {
   display: inline-block;
   padding: 0.3rem 0.55rem;
+  border-radius: 9999px; /* all buttons rounded */
   background: color-mix(in srgb, var(--brand-accent) 20%, var(--brand-bg));
   color: var(--brand-text);
   font-family: var(--font-mono, ui-monospace, "SFMono-Regular", Menlo, monospace);
@@ -938,7 +939,7 @@
   line-height: 1;
 }
 
-/* ─── Square buttons ─────────────────────────────────────────────────
+/* ─── Rounded buttons ─────────────────────────────────────────────────
    Alia's buttons are rectangles, not pills. The pill utilities stay put
    for the rest of the site; these are the ones the homepage uses. */
 .btn-block {
@@ -947,7 +948,7 @@
   justify-content: center;
   gap: 0.55rem;
   padding: 0.95rem 1.6rem;
-  border-radius: 9999px;
+  border-radius: 9999px; /* all buttons rounded */
   border: 1px solid transparent;
   font-family: var(--font-body);
   font-size: 0.9375rem;

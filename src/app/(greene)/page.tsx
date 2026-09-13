@@ -9,7 +9,7 @@ import CTASection from "@/components/home/CTASection";
 import { FAQS } from "@/lib/data";
 
 /**
- * Homepage — seven sections, one idea each.
+ * Homepage, seven sections, one idea each.
  *
  * Was thirteen: two separate work sections, three separate "why us" blocks,
  * two marquee strips and a testimonials wall. Work now appears once, the
@@ -44,7 +44,7 @@ export default function HomePage() {
 
       <CTASection />
 
-      {/* FAQ structured data — the on-page FAQ, machine-readable */}
+      {/* FAQ structured data, the on-page FAQ, machine-readable */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

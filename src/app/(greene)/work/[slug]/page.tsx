@@ -23,8 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-/** Performance figures come from src/lib/measured.json, written by
- *  `npm run measure` against a production build. Never hand-typed. */
 type Measured = { lcp: number; cls: number; jsKb: number; totalKb: number };
 const PAGES = measured.pages as Record<string, Measured>;
 
@@ -41,7 +39,6 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
-      {/* ── Header ─────────────────────────────────────────────────── */}
       <header className="mx-auto max-w-[1400px] px-5 pb-14 pt-32 md:px-10 md:pb-20 md:pt-44">
         <div className="flex flex-wrap items-center gap-3">
           <Link
@@ -51,7 +48,7 @@ export default async function CaseStudyPage({ params }: Props) {
             ← Work
           </Link>
           <span className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
-            Concept · self-initiated
+            Concept, self-initiated
           </span>
         </div>
 
@@ -63,14 +60,13 @@ export default async function CaseStudyPage({ params }: Props) {
                 {brand.name}
               </h1>
             </div>
-            <p className="mt-5 max-w-2xl font-serif-i text-xl leading-snug text-[var(--brand-text)] md:text-2xl">
+            <p className="mt-5 max-w-2xl text-xl leading-snug text-[var(--brand-text-secondary)] md:text-2xl">
               {brand.tagline}
             </p>
           </div>
         </div>
       </header>
 
-      {/* ── Hero shot ──────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)]">
           <ShotImage
@@ -82,7 +78,6 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </div>
 
-      {/* ── Measured ───────────────────────────────────────────────── */}
       {perf && (
         <section className="mx-auto mt-16 max-w-[1400px] px-5 md:px-10">
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-border)] md:grid-cols-4">
@@ -101,14 +96,12 @@ export default async function CaseStudyPage({ params }: Props) {
             ))}
           </div>
           <p className="mt-3 text-xs text-[var(--brand-text-secondary)]">
-            Median of {measured.pages[slug as keyof typeof measured.pages] ? 3 : 3} runs against a
-            production build, measured {measured.measuredAt} with the browser&rsquo;s own
+            Median of 3 runs against a production build, measured {measured.measuredAt} with the browser own
             PerformanceObserver. Re-run with <code className="font-mono">npm run measure</code>.
           </p>
         </section>
       )}
 
-      {/* ── Brief ──────────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-4">
@@ -122,7 +115,6 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Decisions ──────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-4">
@@ -130,20 +122,15 @@ export default async function CaseStudyPage({ params }: Props) {
               <span className="text-[var(--brand-accent)]">✦</span> Decisions
             </span>
             <h2 className="mt-5 font-display text-3xl font-black uppercase leading-[0.98] tracking-tight md:text-4xl">
-              Three choices
-              <br />
-              <span className="font-serif-i lowercase normal-case tracking-normal">worth defending.</span>
+              Choices worth defending
             </h2>
           </div>
 
           <div className="lg:col-span-8">
             <dl className="border-t border-[var(--brand-border)]">
-              {study.decisions.map((d, i) => (
+              {study.decisions.map((d) => (
                 <div key={d.title} className="border-b border-[var(--brand-border)] py-8 md:py-10">
-                  <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <dt className="mt-2 font-display text-xl font-black uppercase tracking-tight md:text-2xl">
+                  <dt className="font-display text-xl font-black uppercase tracking-tight md:text-2xl">
                     {d.title}
                   </dt>
                   <dd className="mt-3 max-w-2xl leading-relaxed text-[var(--brand-text-secondary)]">
@@ -156,7 +143,6 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── The system ─────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
         <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
           <span className="text-[var(--brand-accent)]">✦</span> The system
@@ -188,7 +174,6 @@ export default async function CaseStudyPage({ params }: Props) {
         <p className="mt-8 max-w-2xl leading-relaxed text-[var(--brand-text-secondary)]">{study.build}</p>
       </section>
 
-      {/* ── Gallery ────────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
         <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
           <span className="text-[var(--brand-accent)]">✦</span> The pages
@@ -199,7 +184,7 @@ export default async function CaseStudyPage({ params }: Props) {
               <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
                 <ShotImage
                   src={`/images/work/${brand.slug}/${g.file}.webp`}
-                  alt={`${brand.name} — ${g.label}`}
+                  alt={`${brand.name}, ${g.label}`}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
@@ -211,19 +196,17 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Learned ────────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 md:mt-28 md:px-10">
         <div className="card">
           <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
             <span className="text-[var(--brand-accent)]">✦</span> What it taught us
           </span>
-          <p className="mt-5 max-w-3xl font-serif-i text-xl leading-relaxed md:text-2xl">
+          <p className="mt-5 max-w-3xl text-xl leading-relaxed md:text-2xl">
             {study.learned}
           </p>
         </div>
       </section>
 
-      {/* ── Next ───────────────────────────────────────────────────── */}
       <section className="mx-auto mt-20 max-w-[1400px] px-5 pb-24 md:mt-28 md:px-10">
         <div className="flex items-center justify-end gap-6 border-t border-[var(--brand-border)] pt-10">
           <Link

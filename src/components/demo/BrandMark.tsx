@@ -2,7 +2,7 @@
  * The brand marks, inlined as JSX rather than <img src="/demo/…/mark.svg">.
  *
  * They need `currentColor` and `--b-accent` to resolve against the page, which
- * an <img> cannot do — and inlining saves a request on a page whose whole
+ * an <img> cannot do, and inlining saves a request on a page whose whole
  * pitch is that it loads fast. The SVG files on disk remain the source of
  * truth for handoff and for the identity boards.
  */

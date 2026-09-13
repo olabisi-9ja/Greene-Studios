@@ -16,19 +16,15 @@ export default function PricingPage() {
  kicker="Pricing"
  title={
  <>
- Simple, transparent
- <br />
- <span className="font-serif-i lowercase normal-case tracking-normal">pricing.</span>
+ Simple, transparent pricing
  </>
  }
  description="No hidden fees, no surprise invoices. Pick the tier that matches your stage, or let us scope something custom."
  />
 
  <div className="mx-auto max-w-[1400px] px-5 md:px-10">
- {/* The page header already carries the headline. */}
         <PricingTiers showHeader={false} />
 
- {/* FAQ */}
  <div className="mx-auto mt-8 max-w-3xl">
  <span className="mb-8 block text-center text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
  <span className="text-[var(--brand-accent)]">✦</span> Frequently asked
@@ -47,14 +43,13 @@ export default function PricingPage() {
  </div>
  </div>
 
- {/* CTA */}
         <div className="relative mt-24 overflow-hidden rounded-2xl on-ink bg-[var(--brand-text)] p-10 text-center text-[var(--brand-bg)] md:p-20">
           <div className="relative z-10">
  <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Ready to invest in <span className="font-serif-i lowercase normal-case tracking-normal">your brand?</span>
+ Ready to invest in your brand
  </h2>
  <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[var(--brand-bg)]/70">
- Book a free discovery call. We&apos;ll discuss your goals and find the best package for your needs.
+ Book a free discovery call. We will discuss your goals and find the best package for your needs.
  </p>
  <Link
  href="/contact"

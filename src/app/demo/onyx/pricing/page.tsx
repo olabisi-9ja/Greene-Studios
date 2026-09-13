@@ -31,7 +31,7 @@ export default function OnyxPricing() {
             <p className="d-eyebrow">Pricing</p>
             <h1 className="d-display d-h1 d-m-md">Every fee, on one page.</h1>
             <p className="d-lead">
-              Sixteen lines. If a charge is not on this page, we do not make it — including the ones
+              Sixteen lines. If a charge is not on this page, we do not make it, including the ones
               banks usually charge you for having a bad month.
             </p>
           </div>

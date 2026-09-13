@@ -5,7 +5,7 @@ import { Moon, Sun } from "lucide-react";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 
 /**
- * Light/dark toggle. Icon-only — it shows the theme you'd switch TO, which is
+ * Light/dark toggle. Icon-only, it shows the theme you'd switch TO, which is
  * the convention every visitor already knows.
  */
 export default function ThemeToggle() {

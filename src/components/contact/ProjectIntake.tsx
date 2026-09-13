@@ -51,7 +51,7 @@ function isEmail(v: string) {
 }
 
 /**
- * Project intake — a mini qualification flow instead of a flat form.
+ * Project intake, a mini qualification flow instead of a flat form.
  * Type → budget → timeline → details → review. Submitting composes a
  * structured brief in the visitor's email client (no backend required)
  * and offers a copy-to-clipboard fallback.
@@ -108,7 +108,7 @@ export default function ProjectIntake() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      /* clipboard unavailable — the text is visible on screen to select */
+      /* clipboard unavailable, the text is visible on screen to select */
     }
   };
 
@@ -131,7 +131,7 @@ export default function ProjectIntake() {
           ✓
         </span>
         <h2 className="mt-8 font-display text-3xl font-black uppercase tracking-tight md:text-4xl">
-          Your brief is ready to <span className="font-serif-i lowercase normal-case tracking-normal">send.</span>
+          Your brief is ready to send.
         </h2>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-base">
           Your email client should have opened with the brief pre-addressed to{" "}
@@ -174,7 +174,7 @@ export default function ProjectIntake() {
       <div className="mb-8">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
-            Project brief · Step {String(Math.min(step + 1, totalSteps)).padStart(2, "0")} / {String(totalSteps).padStart(2, "0")}
+            Project brief · Step {Math.min(step + 1, totalSteps)} of {totalSteps}
           </span>
           <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] sm:block">
             ~2 minutes
@@ -201,7 +201,7 @@ export default function ProjectIntake() {
           {step === 0 && (
             <fieldset>
               <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                What are you <span className="font-serif-i lowercase normal-case tracking-normal">building?</span>
+                What are you building?
               </legend>
               <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">Pick the closest fit. We&apos;ll scope the rest together.</p>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -234,7 +234,7 @@ export default function ProjectIntake() {
           {step === 1 && (
             <fieldset>
               <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                What&apos;s the <span className="font-serif-i lowercase normal-case tracking-normal">budget?</span>
+                What&apos;s the budget?
               </legend>
               <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
                 Honest ranges get honest proposals. If you are unsure, choose the last option and tell us more below.
@@ -266,7 +266,7 @@ export default function ProjectIntake() {
           {step === 2 && (
             <fieldset>
               <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                When do you need <span className="font-serif-i lowercase normal-case tracking-normal">it live?</span>
+                When do you need it live?
               </legend>
               <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">This shapes which team and process we propose.</p>
               <div className="grid grid-cols-2 gap-3">
@@ -296,7 +296,7 @@ export default function ProjectIntake() {
           {step === 3 && (
             <fieldset>
               <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                Tell us about <span className="font-serif-i lowercase normal-case tracking-normal">it.</span>
+                Tell us about it.
               </legend>
               <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
                 The goal, the audience, what success looks like. Short and honest beats long and polished.
@@ -362,7 +362,7 @@ export default function ProjectIntake() {
           {step === 4 && (
             <div>
               <h2 className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                One last <span className="font-serif-i lowercase normal-case tracking-normal">look.</span>
+                One last look.
               </h2>
               <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
                 Check everything, then send it over. You&apos;ll hear back within 24 hours.

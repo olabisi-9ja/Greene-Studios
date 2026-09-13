@@ -14,7 +14,7 @@ import { BrandMark } from "@/components/demo/BrandMark";
  * carries a "Concept" tag. A visitor should never have to work out which kind
  * of work they are looking at.
  *
- * Both are server components — the `fs` lookup below only runs at build time.
+ * Both are server components, the `fs` lookup below only runs at build time.
  */
 
 const CARD =

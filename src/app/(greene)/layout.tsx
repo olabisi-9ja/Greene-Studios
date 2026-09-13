@@ -9,10 +9,6 @@ import ScrollProgress from "@/components/animations/ScrollProgress";
 import FloatingButtons from "@/components/FloatingButtons";
 import PageTransition from "@/components/animations/PageTransition";
 
-/**
- * The Greene Studios site itself. Everything under /demo deliberately sits
- * outside this group and shares none of this chrome.
- */
 export default function GreeneLayout({ children }: { children: React.ReactNode }) {
   return (
     <AtmosphereProvider>
@@ -20,7 +16,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
       <NoiseTexture />
       <Preloader />
 
-      {/* Structured data: the studio, machine-readable. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -34,7 +29,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
             description:
               "Independent digital design studio. Brands, websites, and digital products that make people stop scrolling.",
             foundingDate: "2022",
-            address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
             sameAs: [
               "https://instagram.com/greenestudios",
               "https://twitter.com/greenestudios",

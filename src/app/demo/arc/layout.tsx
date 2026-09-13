@@ -3,7 +3,7 @@ import { arc } from "@/lib/brands";
 import { fontPreloads } from "@/lib/brands/css";
 
 export const metadata: Metadata = {
-  title: { absolute: `${arc.name} — ${arc.tagline}`, template: `%s · ${arc.name}` },
+  title: { absolute: `${arc.name} - ${arc.tagline}`, template: `%s · ${arc.name}` },
   description: arc.direction,
   robots: { index: false, follow: true },
 };

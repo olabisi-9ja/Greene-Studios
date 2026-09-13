@@ -60,8 +60,7 @@ export default async function IndustryPage({ params }: Props) {
         kicker={`Industries · ${industry.name}`}
         title={
           <>
-            {industry.tagline.split(".")[0]}
-            <span className="font-serif-i lowercase normal-case tracking-normal">.</span>
+            {industry.tagline.split(".")[0]} .
           </>
         }
         description={industry.description}
@@ -94,7 +93,7 @@ export default async function IndustryPage({ params }: Props) {
                 {industry.challenges.map((c, i) => (
                   <div key={c.title} className="flex flex-col gap-2 border-b border-[var(--brand-border)] py-7 md:flex-row md:items-baseline md:gap-10">
                     <span className="font-mono text-sm text-[var(--brand-accent)]">
-                      {String(i + 1).padStart(2, "0")}
+                      
                     </span>
                     <div>
                       <h3 className="font-display text-xl font-black uppercase tracking-tight md:text-2xl">{c.title}</h3>
@@ -123,8 +122,7 @@ export default async function IndustryPage({ params }: Props) {
                 key={m.title}
                 className="group card card-lg transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--brand-accent)]/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
               >
-                <span className="font-mono text-sm text-[var(--brand-accent)]">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 font-display text-xl font-black uppercase tracking-tight md:text-2xl">
+<h3 className="mt-4 font-display text-xl font-black uppercase tracking-tight md:text-2xl">
                   {m.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--brand-text-secondary)]">
@@ -157,7 +155,7 @@ export default async function IndustryPage({ params }: Props) {
           <section className="border-t border-[var(--brand-border)] py-16 md:py-24">
             <div className="mb-10 flex items-end justify-between">
               <h2 className="font-display text-3xl font-black uppercase leading-[0.95] tracking-tight md:text-4xl">
-                Proof in <span className="font-serif-i lowercase normal-case tracking-normal">{industry.name.toLowerCase()}.</span>
+                Proof in {industry.name.toLowerCase()}.
               </h2>
               <Link
                 href="/work"
