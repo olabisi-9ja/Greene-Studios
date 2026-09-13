@@ -8,6 +8,7 @@ import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import PageTransition from "@/components/animations/PageTransition";
 import QuickActionsPanel from "@/components/ui/QuickActionsPanel";
+import ClickSpark from "@/components/ClickSpark";
 
 export default function GreeneLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -43,6 +44,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
       <SmoothScroll>
         <Navbar />
         <QuickActionsPanel />
+        <ClickSpark />
         <main>
           <PageTransition>{children}</PageTransition>
         </main>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/ui/PageHeader";
 import LabExperiments from "@/components/lab/LabExperiments";
+import CardStack from "@/components/effects/CardStack";
 
 export const metadata: Metadata = {
   title: "Lab · Experiments",
@@ -29,6 +30,22 @@ export default function LabPage() {
       />
 
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mb-20 flex flex-col items-center justify-between gap-10 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:flex-row md:p-12">
+          <div className="max-w-sm text-center md:text-left">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--brand-accent)]">
+              On the bench
+            </span>
+            <h2 className="mt-3 font-display text-2xl font-black uppercase leading-tight tracking-tight md:text-3xl">
+              Interaction decks, shuffled weekly
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--brand-text-secondary)]">
+              Every experiment below starts life as a card in this deck. Shuffle it —
+              that is roughly how we pick what to break next.
+            </p>
+          </div>
+          <CardStack />
+        </div>
+
         <LabExperiments />
 
         <p className="mt-12 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">

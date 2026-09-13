@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { JOURNAL_ARTICLES, JOURNAL_CATEGORIES } from "@/lib/data";
 import PageHeader from "@/components/ui/PageHeader";
+import ScrollExpand from "@/components/effects/ScrollExpand";
 import { cn } from "@/lib/utils";
 
 export default function JournalPage() {
@@ -62,41 +63,36 @@ export default function JournalPage() {
             href={`/journal/${featured.slug}`}
             className="group mb-16 block"
             data-cursor="READ"
+            aria-label={`Read featured article: ${featured.title}`}
           >
-            <div className="grid grid-cols-1 items-center gap-8 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-4 transition-all duration-500 group-hover:shadow-[0_24px_60px_rgba(0,0,0,0.08)] md:grid-cols-2 md:gap-12 md:p-8">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                />
-                <span className="absolute left-4 top-4 rounded-full bg-[var(--brand-accent)] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
+            <ScrollExpand
+              src={featured.image}
+              alt={featured.title}
+              title={featured.title}
+              scrollHint="Scroll to open"
+              useWindowScroll
+              scrollDistance={0.9}
+              holdDistance={0.25}
+              startRadius={20}
+            >
+              <div className="mb-5 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-white/85">
+                <span className="rounded-full bg-[var(--brand-accent)] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
                   Featured
                 </span>
+                <span>{featured.category}</span>
+                <span aria-hidden="true">·</span>
+                <span>{featured.date}</span>
+                <span aria-hidden="true">·</span>
+                <span>{featured.readTime}</span>
               </div>
-              <div className="px-4 pb-4 md:px-2 md:pb-2">
-                <div className="mb-5 flex flex-wrap items-center gap-3 text-xs font-semibold text-[var(--brand-text-secondary)]">
-                  <span className="text-[var(--brand-accent)]">{featured.category}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{featured.date}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{featured.readTime}</span>
-                </div>
-                <h2 className="font-display text-2xl font-black uppercase leading-[1.02] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:text-4xl">
-                  {featured.title}
-                </h2>
-                <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
-                  {featured.excerpt}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text)]">
-                  Read article
-                  <span className="transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
-                </span>
-              </div>
-            </div>
+              <p className="max-w-lg text-sm leading-relaxed text-white/90 md:text-[15px]">
+                {featured.excerpt}
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-white">
+                Read article
+                <span className="transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
+              </span>
+            </ScrollExpand>
           </Link>
         )}
 

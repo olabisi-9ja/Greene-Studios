@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import HighlightWords from "@/components/effects/HighlightWords";
 
 const STRIP = [
   {
@@ -106,10 +107,10 @@ export default function Manifesto() {
   return (
     <section className="overflow-hidden bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] md:py-32">
       <div className="mx-auto max-w-[900px] px-5 text-center md:px-10">
-        <p className="font-display text-[clamp(1.9rem,4.2vw,3.75rem)] font-medium leading-[1.18] tracking-tight text-[var(--brand-text)]">
-          In a world where everyone is trying to do everything, we choose to
-          obsess over one thing, digital work that moves people.
-        </p>
+        <HighlightWords
+          text="In a world where everyone is trying to do everything, we choose to obsess over one thing, digital work that moves people."
+          className="font-display text-[clamp(1.9rem,4.2vw,3.75rem)] font-medium leading-[1.18] tracking-tight text-[var(--brand-text)]"
+        />
 
         <Link
           href="/studio"

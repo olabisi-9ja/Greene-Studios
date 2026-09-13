@@ -3,6 +3,16 @@ import { SHIPPED } from "@/lib/shipped";
 import { BRANDS } from "@/lib/brands";
 import { ShippedCard, ConceptCard, WorkSectionHeading } from "@/components/work/WorkCards";
 import PageHeader from "@/components/ui/PageHeader";
+import ScrollImageRail from "@/components/effects/ScrollImageRail";
+
+const RAIL_IMAGES = [
+  { src: "/images/work/luminary/home-desktop.webp", alt: "Luminary homepage on desktop" },
+  { src: "/images/work/vera/home-desktop.webp", alt: "Vera homepage on desktop" },
+  { src: "/images/work/arc/home-desktop.webp", alt: "Arc homepage on desktop" },
+  { src: "/images/work/bloom/home-desktop.webp", alt: "Bloom homepage on desktop" },
+  { src: "/images/work/onyx/home-desktop.webp", alt: "Onyx homepage on desktop" },
+  { src: "/images/work/prism/home-desktop.webp", alt: "Prism homepage on desktop" },
+];
 
 export const metadata: Metadata = {
   title: "Work",
@@ -30,7 +40,11 @@ export default function WorkPage() {
         }
       />
 
-      <section className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <section aria-label="Selected work screenshots" className="border-b border-[var(--brand-border)] pb-16">
+        <ScrollImageRail images={RAIL_IMAGES} />
+      </section>
+
+      <section className="mx-auto max-w-[1400px] px-5 pt-16 md:px-10">
         <WorkSectionHeading title="Shipped" meta={`${SHIPPED.length} live sites`} />
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SHIPPED.map((project) => (
