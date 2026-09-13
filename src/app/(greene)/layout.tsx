@@ -6,7 +6,6 @@ import Preloader from "@/components/Preloader";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
 import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
-import FloatingButtons from "@/components/FloatingButtons";
 import PageTransition from "@/components/animations/PageTransition";
 import QuickActionsPanel from "@/components/ui/QuickActionsPanel";
 
@@ -48,7 +47,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
-        <FloatingButtons />
       </SmoothScroll>
       <FocusMode />
     </AtmosphereProvider>
