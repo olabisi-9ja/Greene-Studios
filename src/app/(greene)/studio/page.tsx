@@ -7,6 +7,9 @@ import { StudioHero } from "@/components/about/StudioHero";
 import CTASection from "@/components/home/CTASection";
 import TimelineSection from "@/components/about/TimelineSection";
 import RotatingGlobe from "@/components/ui/RotatingGlobe";
+import SpreadWord from "@/components/effects/SpreadWord";
+import SpotlightGrid from "@/components/effects/SpotlightGrid";
+import Dock from "@/components/effects/Dock";
 
 export const metadata: Metadata = {
  title: "Studio · Greene Studios",
@@ -43,6 +46,25 @@ const TECHNOLOGIES = [
  "Drizzle ORM", "Vercel", "Storybook", "Lottie",
 ];
 
+/** Dock glyphs for the tech stack, one tile per tool. */
+const TECH_DOCK = [
+ { glyph: "N", label: "Next.js" },
+ { glyph: "⚛", label: "React" },
+ { glyph: "TS", label: "TypeScript" },
+ { glyph: "TW", label: "Tailwind CSS" },
+ { glyph: "FM", label: "Framer Motion" },
+ { glyph: "GS", label: "GSAP" },
+ { glyph: "3D", label: "Three.js" },
+ { glyph: "Fg", label: "Figma" },
+ { glyph: "Fr", label: "Framer" },
+ { glyph: "Wf", label: "Webflow" },
+ { glyph: "PG", label: "PostgreSQL" },
+ { glyph: "Dz", label: "Drizzle ORM" },
+ { glyph: "▲", label: "Vercel" },
+ { glyph: "Sb", label: "Storybook" },
+ { glyph: "Lt", label: "Lottie" },
+];
+
 function founderPortrait(): string | null {
   for (const ext of ["webp", "jpg", "jpeg", "png"]) {
     const rel = `/images/studio/founder.${ext}`;
@@ -66,20 +88,29 @@ export default function StudioPage() {
  </div>
  </section>
 
+ {/* Word that spreads as it crosses the viewport */}
+ <section className="overflow-hidden border-b border-[var(--brand-border)] bg-[var(--brand-bg)] py-16 md:py-20" aria-hidden="true">
+ <SpreadWord
+ text="EXCELLENCE"
+ className="select-none whitespace-nowrap text-center font-display text-[clamp(2.6rem,9vw,8rem)] font-black uppercase leading-none tracking-tight text-[var(--brand-text)]"
+ spread={42}
+ />
+ </section>
+
  {/* Founder */}
  <section className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
  <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-24">
           <div className="relative">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
               {portrait ? (
-                <Image
-                  src={portrait}
-                  alt="Olabisi Adigun, founder of Greene Studios"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 46vw"
-                  className="object-cover object-top"
-                />
+ <Image
+ src={portrait}
+ alt="Olabisi Adigun, founder of Greene Studios"
+ fill
+ priority
+ sizes="(max-width: 1024px) 100vw, 46vw"
+ className="ken-burns-img object-cover object-top"
+ />
               ) : (
                 <div className="flex h-full w-full items-center justify-center p-10 text-center">
                   <p className="font-display text-3xl font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]/25">
@@ -156,29 +187,10 @@ export default function StudioPage() {
  <h2 className="mb-14 font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight md:mb-16">
  Principles we refuse to compromise
  </h2>
- <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
- {VALUES.map((value) => (
- <div
- key={value.title}
- className="group rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] md:p-10"
- >
- <div className="mb-6 flex items-center justify-between">
- <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--brand-accent)] text-lg text-[var(--brand-on-accent)]">
- {value.icon}
- </span>
- <span className="font-mono text-xs text-[var(--brand-text-secondary)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
- ✦
- </span>
- </div>
- <h3 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
- {value.title}
- </h3>
- <p className="mt-3 text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
- {value.desc}
- </p>
- </div>
- ))}
- </div>
+ <SpotlightGrid
+ items={VALUES.map((value) => ({ icon: value.icon, title: value.title, desc: value.desc }))}
+ className="mx-auto max-w-4xl"
+ />
  </div>
  </section>
 
@@ -229,16 +241,12 @@ export default function StudioPage() {
  <h2 className="mb-12 font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
  Our tech stack
  </h2>
- <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
- {TECHNOLOGIES.map((tech) => (
- <span
- key={tech}
- className="rounded-full border border-[var(--brand-border)] bg-[var(--brand-bg)] px-6 py-3 text-sm font-semibold text-[var(--brand-text)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
- >
- {tech}
- </span>
- ))}
+ <div className="flex justify-center">
+ <Dock items={TECH_DOCK} />
  </div>
+ <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)]">
+ {TECHNOLOGIES.join(" · ")}
+ </p>
  <div className="mt-14 flex flex-wrap justify-center gap-3">
   <Link href="/team" className="inline-flex items-center justify-center rounded-full border border-[var(--brand-border)] px-7 py-3 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text)] transition-colors hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]">
     Meet the team <span aria-hidden="true" className="ml-2">→</span>

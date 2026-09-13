@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageHeader from "@/components/ui/PageHeader";
+import TiltCard from "@/components/effects/TiltCard";
 
 export const metadata: Metadata = {
   title: "Team · Greene Studios",
@@ -59,9 +60,9 @@ export default function TeamPage() {
       <div className="mx-auto max-w-[1400px] px-5 pb-24 md:px-10">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {TEAM.map((member, i) => (
+            <TiltCard key={`${member.name}-${i}`} className="h-full" maxTilt={6}>
             <div
-              key={`${member.name}-${i}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-colors duration-300 hover:border-[var(--brand-text)]"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-colors duration-300 hover:border-[var(--brand-text)]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
                 {member.image ? (
@@ -112,6 +113,7 @@ export default function TeamPage() {
                 ) : null}
               </div>
             </div>
+            </TiltCard>
           ))}
         </div>
 

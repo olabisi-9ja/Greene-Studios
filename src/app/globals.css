@@ -1072,3 +1072,50 @@
 .bg-sand {
   background-color: var(--sand);
 }
+
+/* ─── Effects: Ken Burns pan & zoom ──────────────────────────────────
+   Slow cinematic drift for framed images (KenBurns, studio portrait). */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.25) translate(-3%, -2%);
+  }
+}
+.ken-burns-img {
+  animation: ken-burns 16s ease-in-out infinite alternate;
+}
+
+/* ─── Effects: click spark ───────────────────────────────────────────
+   Burst particles for the global ClickSpark layer. Colour follows the
+   theme accent so it reads in light, dark and studio modes. */
+.click-spark {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--brand-accent);
+  pointer-events: none;
+  animation: click-spark 0.6s ease-out forwards;
+}
+@keyframes click-spark {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns-img {
+    animation: none;
+  }
+  .click-spark {
+    animation: none;
+    display: none;
+  }
+}
