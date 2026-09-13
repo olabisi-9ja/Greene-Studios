@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+
 import Link from "next/link";
 
 export default function QuickInfoPanel() {
@@ -16,7 +16,8 @@ export default function QuickInfoPanel() {
         </p>
 
         <div className="mt-6 overflow-hidden rounded-xl border border-[var(--brand-border)]">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/images/character/greene-mascot.png"
             alt="Greene mascot, flat 2D character"
             width={300}
