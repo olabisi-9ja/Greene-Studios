@@ -23,10 +23,10 @@ export default function QuickActionsPanel() {
       initial={{ x: 20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="pointer-events-none fixed right-4 top-1/2 z-[70] hidden -translate-y-1/2 md:flex"
+      className="pointer-events-none fixed right-0 top-1/2 z-[70] hidden -translate-y-1/2 md:flex"
       aria-label="Quick actions"
     >
-      <div className="pointer-events-auto flex flex-col items-center gap-2 rounded-full border border-[var(--brand-border)] bg-[var(--brand-bg)]/80 p-2 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+      <div className="pointer-events-auto flex flex-col items-center gap-2 rounded-l-full border-y border-l border-[var(--brand-border)] bg-[var(--brand-bg)]/80 p-2 backdrop-blur-xl shadow-[-8px_0_32px_rgba(0,0,0,0.08)]">
         {actions.map(({ icon: Icon, label, href, action, type }) => {
           const inner = (
             <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[var(--brand-surface)] text-[var(--brand-text)] transition-all duration-300 hover:scale-110 hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)] active:scale-95">
