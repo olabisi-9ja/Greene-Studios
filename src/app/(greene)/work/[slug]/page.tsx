@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { BRANDS, BRANDS_BY_SLUG } from "@/lib/brands";
 import { CASE_STUDIES } from "@/lib/brands/casestudy";
 import { BrandMark } from "@/components/demo/BrandMark";
+import ScrollExpand from "@/components/effects/ScrollExpand";
 import measured from "@/lib/measured.json";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -71,31 +72,33 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </header>
 
-      {/* Hero duo — fourmula grid: screenshot + generated lifestyle (no more placeholder box) */}
+      {/* Cinematic opener — the brand's world expands from frame to full bleed */}
+      <ScrollExpand
+        src={`/images/work/${brand.slug}/cover-lifestyle.jpg`}
+        alt={`${brand.name} lifestyle visual`}
+        title={brand.tagline}
+        scrollHint="Scroll"
+        useWindowScroll
+        scrollDistance={1}
+        holdDistance={0.3}
+      >
+        <p className="max-w-xl text-balance text-base leading-relaxed text-white/90 md:text-lg">
+          {brand.direction}
+        </p>
+        <span className="mt-6 rounded-full bg-black/50 px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
+          Generated visual
+        </span>
+      </ScrollExpand>
+
+      {/* Hero screenshot */}
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="grid gap-4 md:grid-cols-[1.7fr_1fr]">
-          <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
-            <ShotImage
-              src={`/images/work/${brand.slug}/home-desktop.webp`}
-              alt={`${brand.name} homepage`}
-              priority
-              sizes="(max-width: 768px) 100vw, 66vw"
-            />
-          </div>
-          <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
-            <div className="relative aspect-[4/3] w-full overflow-hidden md:aspect-auto md:h-full">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`/images/work/${brand.slug}/cover-lifestyle.jpg`}
-                alt={`${brand.name} lifestyle visual`}
-                className="h-full w-full object-cover"
-                loading="eager"
-              />
-              <span className="absolute bottom-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur">
-                Generated visual
-              </span>
-            </div>
-          </div>
+        <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
+          <ShotImage
+            src={`/images/work/${brand.slug}/home-desktop.webp`}
+            alt={`${brand.name} homepage`}
+            priority
+            sizes="(max-width: 768px) 100vw, 92vw"
+          />
         </div>
       </div>
 

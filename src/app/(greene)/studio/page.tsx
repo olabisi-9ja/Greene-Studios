@@ -10,6 +10,7 @@ import RotatingGlobe from "@/components/ui/RotatingGlobe";
 import SpreadWord from "@/components/effects/SpreadWord";
 import SpotlightGrid from "@/components/effects/SpotlightGrid";
 import Dock from "@/components/effects/Dock";
+import ScrollExpand from "@/components/effects/ScrollExpand";
 
 export const metadata: Metadata = {
  title: "Studio · Greene Studios",
@@ -177,6 +178,28 @@ export default function StudioPage() {
  </div>
  </div>
  </section>
+
+ {/* Studio at work — frame opens to full bleed as you scroll */}
+ <ScrollExpand
+  src="/images/hero/team.jpg"
+  alt="The studio team working through prints and color studies on the floor"
+  title="Small team. Senior hands."
+  scrollHint="Scroll"
+  useWindowScroll
+  scrollDistance={1}
+  holdDistance={0.3}
+ >
+  <p className="max-w-xl text-base leading-relaxed text-white/90 md:text-lg">
+   The people who research, design and build your project are the ones you
+   talk to. No layers, no hand-offs, no telephone game.
+  </p>
+  <Link
+   href="/team"
+   className="mt-8 inline-flex items-center justify-center rounded-full bg-[var(--brand-bg)] px-7 py-3.5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-ink)] transition-colors hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]"
+  >
+   Meet the team <span aria-hidden="true" className="ml-2">→</span>
+  </Link>
+ </ScrollExpand>
 
  {/* Values */}
  <section className="border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 md:py-32">
