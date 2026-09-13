@@ -258,6 +258,9 @@ export default function ScrollExpand({
         playsInline
       />
     ) : (
+      // Plain <img> on purpose: the component drives this node's transform
+      // and clip directly, and callers pass pre-optimised assets.
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         ref={mediaRef as React.RefObject<HTMLImageElement>}
         className="scroll-expand__media"
