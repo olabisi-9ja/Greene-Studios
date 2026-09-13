@@ -106,7 +106,7 @@ export default function Manifesto() {
   return (
     <section className="overflow-hidden bg-[var(--brand-bg)] py-24 text-[var(--brand-text)] md:py-32">
       <div className="mx-auto max-w-[900px] px-5 text-center md:px-10">
-        <p className="font-display text-[clamp(1.71rem, 4.2vw, 3.07rem)] font-medium leading-[1.18] tracking-tight text-[var(--brand-text)]">
+        <p className="font-display text-[clamp(1.9rem,4.2vw,3.75rem)] font-medium leading-[1.18] tracking-tight text-[var(--brand-text)]">
           In a world where everyone is trying to do everything, we choose to
           obsess over one thing, digital work that moves people.
         </p>

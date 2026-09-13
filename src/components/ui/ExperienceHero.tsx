@@ -11,7 +11,7 @@ export const ExperienceHero = () => {
 
       <div className="mx-auto w-full max-w-[1600px] px-5 pb-12 md:px-10 md:pb-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-          <h1 className="headline col-span-1 text-[clamp(2.25rem, 5vw, 3.89rem)] lg:col-span-7">
+          <h1 className="headline col-span-1 text-[clamp(2.5rem,5vw,4.75rem)] lg:col-span-7">
             We build digital things worth remembering.
           </h1>
 

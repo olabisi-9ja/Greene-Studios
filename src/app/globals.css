@@ -151,7 +151,7 @@
   html {
     scroll-behavior: smooth;
     background-color: var(--brand-bg);
-    font-size: 14px; /* expo.dev scale — reduced from 16px */
+    font-size: 16px; /* transsion scale — larger, like transsion.com */ /* expo.dev scale — reduced from 16px */
     @apply font-sans;
   }
 

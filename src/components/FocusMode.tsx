@@ -82,7 +82,7 @@ export default function FocusMode() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-[clamp(2.7rem, 10vw, 6.56rem)] font-black uppercase leading-[0.9] tracking-tight"
+              className="font-display text-[clamp(3rem,10vw,8rem)] font-black uppercase leading-[0.9] tracking-tight"
             >
               {routeTitle(pathname)}
             </motion.h1>

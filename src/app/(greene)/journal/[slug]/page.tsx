@@ -49,7 +49,7 @@ export default async function JournalArticlePage({ params }: Props) {
  <span>{article.readTime}</span>
  </div>
 
- <h1 className="font-display text-[clamp(2.16rem, 5.5vw, 3.69rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
+ <h1 className="font-display text-[clamp(2.4rem,5.5vw,4.5rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
  {article.title}
  </h1>
  <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--brand-text-secondary)] md:text-xl">

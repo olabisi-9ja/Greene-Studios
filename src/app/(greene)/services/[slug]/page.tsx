@@ -81,7 +81,7 @@ export default async function ServicePage({ params }: Props) {
  <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
  ✦ What it is
  </span>
- <h2 className="font-display text-[clamp(1.8rem, 4vw, 2.79rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
  {service.title}, defined.
  </h2>
  <p className="mt-6 text-base leading-relaxed text-[var(--brand-bg)]/75 md:text-lg">
@@ -92,7 +92,7 @@ export default async function ServicePage({ params }: Props) {
  <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
  ✦ Who it&apos;s for
  </span>
- <h2 className="font-display text-[clamp(1.8rem, 4vw, 2.79rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
  Perfect for.
  </h2>
  <div className="mt-6 flex flex-col border-t border-[var(--brand-bg)]/25">
@@ -113,7 +113,7 @@ export default async function ServicePage({ params }: Props) {
  <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
  ✦ Approach
  </span>
- <h2 className="mb-12 font-display text-[clamp(1.8rem, 4vw, 2.79rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="mb-12 font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
  How we work.
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -146,7 +146,7 @@ export default async function ServicePage({ params }: Props) {
  <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
  ✦ Systems we built
  </span>
- <h2 className="mb-12 font-display text-[clamp(1.8rem, 4vw, 2.79rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="mb-12 font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
  Concept systems.
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

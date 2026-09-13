@@ -145,7 +145,7 @@ export default function SelectedWork() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <span className="chip-mono mb-4 inline-block">Selected work</span>
-            <h2 className="headline text-[clamp(2.16rem, 6vw, 4.1rem)] leading-[0.95]">
+            <h2 className="headline text-[clamp(2.4rem,6vw,5rem)] leading-[0.95]">
               Selected works
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
@@ -174,7 +174,6 @@ export default function SelectedWork() {
             onMouseMove={onMouseMove}
             onMouseUp={onMouseUp}
             onMouseLeave={onMouseLeave}
-            data-h-scroll
             className={`flex gap-5 overflow-x-auto pb-4 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
             style={{ scrollSnapType: "x proximity" }}
             aria-label="Horizontal work gallery, drag to scroll"

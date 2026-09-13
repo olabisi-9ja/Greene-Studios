@@ -84,7 +84,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                     className="group flex items-baseline gap-4 py-3.5"
                   >
 
-                    <span className="font-display text-[clamp(1.62rem, 5vw, 2.13rem)] font-black uppercase leading-none tracking-tight text-[var(--brand-text)] transition-transform duration-300 group-hover:translate-x-2">
+                    <span className="font-display text-[clamp(1.8rem,5vw,2.6rem)] font-black uppercase leading-none tracking-tight text-[var(--brand-text)] transition-transform duration-300 group-hover:translate-x-2">
                       {item.label}
                     </span>
                     <span

@@ -19,7 +19,7 @@ export default function ArcHome() {
           <div className="d-split" style={{ alignItems: "end", gap: "clamp(24px,4vw,56px)" }}>
             <div className="d-stack">
               <p className="d-eyebrow">Autumn / Winter</p>
-              <h1 className="d-display d-h1" style={{ fontSize: "clamp(2.7rem, 8vw, 5.74rem)" }}>
+              <h1 className="d-display d-h1" style={{ fontSize: "clamp(3rem,8vw,7rem)" }}>
                 Fewer,
                 <br />
                 better,

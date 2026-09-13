@@ -180,7 +180,7 @@ export default async function IndustryPage({ params }: Props) {
               Next sector
             </span>
             <span className="flex items-baseline gap-4">
-              <span className="font-display text-[clamp(1.8rem, 5vw, 3.28rem)] font-black uppercase leading-none tracking-tight transition-colors group-hover:text-[var(--brand-accent)]">
+              <span className="font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-none tracking-tight transition-colors group-hover:text-[var(--brand-accent)]">
                 {next.name}
               </span>
               <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>

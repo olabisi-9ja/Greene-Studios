@@ -38,7 +38,7 @@ export default function ProcessSection({ showHeader = true, variant = "full" }: 
           {showHeader ? (
             <>
               <span className="chip-mono">Process</span>
-              <h2 className="headline mt-6 text-[clamp(1.89rem, 4.4vw, 3.07rem)]">
+              <h2 className="headline mt-6 text-[clamp(2.1rem,4.4vw,3.75rem)]">
                 From hello to launch.
               </h2>
               <p className="mt-6 max-w-sm text-base leading-snug text-[var(--brand-text-secondary)]">

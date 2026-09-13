@@ -59,7 +59,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
             <BrandMark slug={brand.slug} size={28} />
           </span>
-          <h1 className="mt-6 font-display text-[clamp(2.52rem, 8vw, 5.33rem)] font-black uppercase leading-[0.9] tracking-tight">
+          <h1 className="mt-6 font-display text-[clamp(2.8rem,8vw,6.5rem)] font-black uppercase leading-[0.9] tracking-tight">
             {brand.name}
           </h1>
           <p className="mt-6 max-w-2xl text-balance text-lg leading-snug text-[var(--brand-text-secondary)] md:text-xl">
@@ -194,7 +194,7 @@ export default async function CaseStudyPage({ params }: Props) {
             Drag to explore
           </span>
         </div>
-        <div data-h-scroll className="mt-6 flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mt-6 flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {study.gallery.map((g) => (
             <figure key={g.file} className="m-0 w-[84vw] max-w-[520px] shrink-0">
               <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
