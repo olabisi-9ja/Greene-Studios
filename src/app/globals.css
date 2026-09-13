@@ -151,6 +151,7 @@
   html {
     scroll-behavior: smooth;
     background-color: var(--brand-bg);
+    font-size: 14px; /* expo.dev scale — reduced from 16px */
     @apply font-sans;
   }
 
@@ -832,10 +833,10 @@
    Elevation is deliberately near-flat: a hairline border does the
    separating, so cards stack on any surface without a shadow pile-up. */
 :root {
-  --card-radius: 1.25rem;
-  --card-radius-lg: 1.75rem;
-  --card-pad: 1.5rem;
-  --card-pad-lg: 2.25rem;
+  --card-radius: 1rem; /* fourmula polish — softer */
+  --card-radius-lg: 1.5rem;
+  --card-pad: 1.25rem;
+  --card-pad-lg: 2rem;
 }
 
 .card {
@@ -952,9 +953,9 @@
    that genuinely want to shout. */
 .headline {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.02;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
   text-transform: none;
 }
 

@@ -23,7 +23,7 @@ export function StudioHero({ portrait }: Props) {
 
       <h1
         className="relative select-none font-display font-black uppercase leading-[0.88] tracking-[-0.02em] text-[var(--brand-text)]"
-        style={{ fontSize: "clamp(3.8rem, 16vw, 18rem)" }}
+        style={{ fontSize: "clamp(3.42rem, 16vw, 14.76rem)" }}
       >
         <span className="block">The art</span>
 
@@ -78,10 +78,10 @@ export function StudioHero({ portrait }: Props) {
             className="absolute hidden flex-col gap-0.5 text-left md:flex"
             style={{ left: "62%", top: "12%", pointerEvents: "none" }}
           >
-            <span className="font-mono text-[clamp(0.6rem,1vw,0.875rem)] uppercase tracking-[0.18em] text-[var(--brand-text-secondary)]">
+            <span className="font-mono text-[clamp(0.54rem, 1vw, 0.72rem)] uppercase tracking-[0.18em] text-[var(--brand-text-secondary)]">
               Est. 2022
             </span>
-            <span className="font-mono text-[clamp(0.55rem,0.85vw,0.75rem)] uppercase tracking-[0.15em] text-[var(--brand-accent)]">
+            <span className="font-mono text-[clamp(0.5rem, 0.85vw, 0.61rem)] uppercase tracking-[0.15em] text-[var(--brand-accent)]">
               Remote • Worldwide
             </span>
           </span>

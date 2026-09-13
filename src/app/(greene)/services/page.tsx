@@ -45,7 +45,7 @@ export default function ServicesPage() {
  <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
  0{i + 1}
  </span>
- <h2 className="col-span-10 font-display text-[clamp(1.6rem,3.6vw,3.2rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:col-span-4">
+ <h2 className="col-span-10 font-display text-[clamp(1.44rem, 3.6vw, 2.62rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)] md:col-span-4">
  {service.title}
  </h2>
  <p className="col-span-12 mt-2 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)] md:col-span-5 md:mt-0 md:text-[15px]">

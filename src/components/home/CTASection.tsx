@@ -14,7 +14,7 @@ export default function CTASection() {
       style={{ backgroundColor: "var(--cta-bg)", color: "var(--cta-fg)" }}
     >
       <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
-        <h2 className="headline text-[clamp(2.4rem,6vw,5.5rem)]">
+        <h2 className="headline text-[clamp(2.16rem, 6vw, 4.51rem)]">
           Ready to build something people can&apos;t ignore?
         </h2>
 

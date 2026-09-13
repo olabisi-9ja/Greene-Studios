@@ -55,7 +55,7 @@ export default function LuminaryHome() {
           <dl className="d-grid d-cols-4">
             {SIGNALS.map((s) => (
               <div key={s.label}>
-                <dd className="d-display d-mono" style={{ fontSize: "clamp(2rem,3.4vw,2.9rem)", margin: 0 }}>{s.value}</dd>
+                <dd className="d-display d-mono" style={{ fontSize: "clamp(1.8rem, 3.4vw, 2.38rem)", margin: 0 }}>{s.value}</dd>
                 <dt style={{ fontWeight: 600, marginTop: 6, fontSize: "0.9375rem" }}>{s.label}</dt>
                 <p className="d-muted" style={{ fontSize: "0.8125rem", marginTop: 2 }}>{s.note}</p>
               </div>

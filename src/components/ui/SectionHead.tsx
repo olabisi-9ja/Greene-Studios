@@ -19,7 +19,7 @@ export default function SectionHead({
       <span className="chip-mono">{cleanLabel}</span>
 
       <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12">
-        <h2 className="headline max-w-3xl text-[clamp(2.1rem,4.4vw,3.75rem)]">{title}</h2>
+        <h2 className="headline max-w-3xl text-[clamp(1.89rem, 4.4vw, 3.07rem)]">{title}</h2>
 
         {note ? (
           <p className="max-w-sm text-base leading-snug text-[var(--brand-text-secondary)] md:shrink-0">

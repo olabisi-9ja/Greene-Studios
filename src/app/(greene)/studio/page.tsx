@@ -60,7 +60,7 @@ export default function StudioPage() {
  {/* Mission */}
  <section className="border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 md:py-32">
  <div className="mx-auto max-w-3xl px-5 text-center md:px-10">
- <p className="text-[clamp(1.6rem,3.2vw,2.6rem)] leading-snug tracking-tight text-[var(--brand-text)]">
+ <p className="text-[clamp(1.44rem, 3.2vw, 2.13rem)] leading-snug tracking-tight text-[var(--brand-text)]">
  Greene Studios exists to build digital experiences that give ambitious brands an unfair advantage through design excellence.
  </p>
  </div>
@@ -111,7 +111,7 @@ export default function StudioPage() {
  <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
  <span className="text-[var(--brand-accent)]">✦</span> The story
  </span>
- <h2 className="font-display text-[clamp(2.2rem,4.5vw,3.8rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="font-display text-[clamp(1.98rem, 4.5vw, 3.12rem)] font-black uppercase leading-[0.95] tracking-tight">
  Meet the mind behind Greene
  </h2>
  <div className="mt-8 space-y-6 text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
@@ -153,7 +153,7 @@ export default function StudioPage() {
  <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
  <span className="text-[var(--brand-accent)]">✦</span> Values
  </span>
- <h2 className="mb-14 font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight md:mb-16">
+ <h2 className="mb-14 font-display text-[clamp(1.98rem, 4.5vw, 3.28rem)] font-black uppercase leading-[0.95] tracking-tight md:mb-16">
  Principles we refuse to compromise
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -191,7 +191,7 @@ export default function StudioPage() {
       <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
         <span className="text-[var(--brand-accent)]">✦</span> Remote
       </span>
-      <h2 className="font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-black uppercase leading-[0.95] tracking-tight">
+      <h2 className="font-display text-[clamp(1.98rem, 4.2vw, 3.12rem)] font-black uppercase leading-[0.95] tracking-tight">
         Available worldwide, working remotely
       </h2>
       <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
@@ -226,7 +226,7 @@ export default function StudioPage() {
  <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
  <span className="text-[var(--brand-accent)]">✦</span> Toolbox
  </span>
- <h2 className="mb-12 font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="mb-12 font-display text-[clamp(1.98rem, 4.5vw, 3.28rem)] font-black uppercase leading-[0.95] tracking-tight">
  Our tech stack
  </h2>
  <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">

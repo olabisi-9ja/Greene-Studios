@@ -110,7 +110,7 @@ export default function ServicesSection() {
                     <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                       {service.stage}
                     </span>
-                    <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.2rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
+                    <h3 className="font-display text-[clamp(1.44rem, 3.6vw, 2.62rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
                       {service.title}
                     </h3>
                   </div>

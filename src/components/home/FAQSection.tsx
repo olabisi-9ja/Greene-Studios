@@ -12,7 +12,7 @@ export default function FAQSection() {
  <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-20">
  <div className="lg:col-span-4">
  <span className="chip-mono">FAQ</span>
- <h2 className="headline mt-6 text-[clamp(2.1rem,4.4vw,3.75rem)]">
+ <h2 className="headline mt-6 text-[clamp(1.89rem, 4.4vw, 3.07rem)]">
  Questions worth asking.
  </h2>
  <p className="mt-6 max-w-sm text-base leading-snug text-[var(--brand-text-secondary)]">

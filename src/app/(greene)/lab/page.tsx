@@ -41,7 +41,7 @@ export default function LabPage() {
               <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--brand-accent)]">
                 GREENE / RAW
               </span>
-              <h2 className="font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-[0.92] tracking-tight">
+              <h2 className="font-display text-[clamp(1.8rem, 5vw, 3.28rem)] font-black uppercase leading-[0.92] tracking-tight">
                 The workshop
                 <br /> Unpolished, on purpose
               </h2>

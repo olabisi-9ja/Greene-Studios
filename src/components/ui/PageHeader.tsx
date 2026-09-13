@@ -33,7 +33,7 @@ export default function PageHeader({
  </span>
 
  <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
- <h1 className="max-w-4xl font-display text-[clamp(2.8rem,7vw,6.5rem)] font-black uppercase leading-[0.92] tracking-tight text-[var(--brand-text)]">
+ <h1 className="max-w-4xl font-display text-[clamp(2.52rem, 7vw, 5.33rem)] font-black uppercase leading-[0.92] tracking-tight text-[var(--brand-text)]">
  {title}
  </h1>
  {right ? (

@@ -16,7 +16,7 @@ export default function Footer() {
           <span className="text-[var(--brand-accent)]">✦</span> Next step
         </span>
 
-        <h2 className="max-w-5xl font-display text-[clamp(2.8rem,7.5vw,7rem)] font-black uppercase leading-[0.92] tracking-tight">
+        <h2 className="max-w-5xl font-display text-[clamp(2.52rem, 7.5vw, 5.74rem)] font-black uppercase leading-[0.92] tracking-tight">
           Let&apos;s create something unforgettable
         </h2>
 

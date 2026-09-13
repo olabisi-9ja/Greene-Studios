@@ -45,7 +45,7 @@ export default function PricingPage() {
 
         <div className="relative mt-24 overflow-hidden rounded-2xl on-ink bg-[var(--brand-text)] p-10 text-center text-[var(--brand-bg)] md:p-20">
           <div className="relative z-10">
- <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
+ <h2 className="font-display text-[clamp(1.98rem, 5vw, 3.28rem)] font-black uppercase leading-[0.95] tracking-tight">
  Ready to invest in your brand
  </h2>
  <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[var(--brand-bg)]/70">

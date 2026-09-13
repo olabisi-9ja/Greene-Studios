@@ -29,7 +29,7 @@ export default function PricingTiers({ showHeader = true }: { showHeader?: boole
               <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
                 <span className="text-[var(--brand-accent)]">✦</span> Pricing
               </span>
-              <h2 className="font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
+              <h2 className="font-display text-[clamp(1.98rem, 4.5vw, 3.28rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
                 Transparent pricing
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)]">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* The identity moment is theme-independent: it is the same green field and
    the same cream whichever theme the visitor lands in. */
@@ -28,9 +29,11 @@ const LOADER_CSS = `
 .gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;
   transition:transform ${WIPE_MS}ms cubic-bezier(.16,1,.3,1)}
 .gl-out{transform:translateY(-100%)}
-.gl-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;padding:2rem;text-align:center}
-.gl-brand{font-size:clamp(2.2rem, 8vw, 5.5rem);line-height:.9;letter-spacing:-.04em}
-.gl-tag{font-family:var(--font-mono, ui-monospace);font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.gl-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;padding:2rem;text-align:center}
+.gl-brand-wrap{display:flex;align-items:baseline;gap:.35rem;font-size:clamp(2.16rem, 9vw, 4.92rem);line-height:.9;letter-spacing:-.04em;white-space:nowrap}
+.gl-word{display:inline-flex;align-items:baseline;overflow:hidden}
+.gl-letter{will-change:transform}
+.gl-rest{will-change:transform,opacity}
 .gl-count{position:absolute;left:0;bottom:0;display:flex;align-items:flex-end;
   gap:.06em;line-height:.78;padding:0 var(--gl-gutter) .06em}
 .gl-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
@@ -60,6 +63,7 @@ const LOADER_CSS = `
 export default function Preloader() {
   const [state, setState] = useState<"pending" | "showing" | "exiting" | "done">("pending");
   const [count, setCount] = useState(0);
+  const [showFull, setShowFull] = useState(false);
   const numRef = useRef<HTMLSpanElement>(null);
   const ruleRef = useRef<HTMLSpanElement>(null);
 
@@ -81,6 +85,8 @@ export default function Preloader() {
     }
 
     setState("showing");
+    // GS → Greene Studios: each initial pans left to spell out the word
+    const fullTimer = window.setTimeout(() => setShowFull(true), 520);
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -162,6 +168,7 @@ export default function Preloader() {
       cancelAnimationFrame(frame);
       clearTimeout(exitTimer);
       clearTimeout(doneTimer);
+      clearTimeout(fullTimer);
       document.body.style.overflow = previousOverflow;
     };
   }, []);
@@ -190,19 +197,52 @@ export default function Preloader() {
     >
       <style>{LOADER_CSS}</style>
 
-      {/* Karolina Hess inspired: centered brand on first visit, minimal */}
+      {/* GS → Greene Studios: G and S each pan left to spell out, animated */}
       <div className="gl-center" aria-hidden="true">
-        <p className="gl-brand font-display font-black uppercase">Greene Studios</p>
-        <p className="gl-tag">Available worldwide · {new Date().getFullYear()}</p>
+        <div className="gl-brand-wrap font-display font-black uppercase">
+          <span className="gl-word">
+            <motion.span
+              className="gl-letter"
+              animate={{ x: showFull ? -8 : 0 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            >
+              G
+            </motion.span>
+            <motion.span
+              className="gl-rest"
+              initial={{ opacity: 0, x: 12, width: 0 }}
+              animate={showFull ? { opacity: 1, x: 0, width: "auto" } : { opacity: 0, x: 12, width: 0 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: showFull ? 0.06 : 0 }}
+            >
+              reene
+            </motion.span>
+          </span>
+          <span className="gl-word">
+            <motion.span
+              className="gl-letter"
+              animate={{ x: showFull ? -8 : 0 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            >
+              S
+            </motion.span>
+            <motion.span
+              className="gl-rest"
+              initial={{ opacity: 0, x: 12, width: 0 }}
+              animate={showFull ? { opacity: 1, x: 0, width: "auto" } : { opacity: 0, x: 12, width: 0 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: showFull ? 0.14 : 0 }}
+            >
+              tudios
+            </motion.span>
+          </span>
+        </div>
       </div>
 
       <div
         className="gl-count font-display font-black"
         style={
           {
-            fontSize: "clamp(1.8rem, 6.6vw, 6rem)",
-            // Matches the site's own page gutter.
-            ["--gl-gutter" as string]: "clamp(1.25rem, 4vw, 2.5rem)",
+            fontSize: "clamp(1.62rem, 6.6vw, 4.92rem)",
+            ["--gl-gutter" as string]: "clamp(1.12rem, 4vw, 2.05rem)",
           } as React.CSSProperties
         }
         aria-hidden="true"
@@ -213,8 +253,6 @@ export default function Preloader() {
         <span className="gl-pct">%</span>
       </div>
 
-      {/* A hairline that tracks the same value, legible at a glance from
-          across the room, where a numeral in the corner is not. */}
       <span
         ref={ruleRef}
         className="gl-rule"
