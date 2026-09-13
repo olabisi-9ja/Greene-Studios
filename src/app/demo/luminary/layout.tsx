@@ -3,7 +3,7 @@ import { luminary } from "@/lib/brands";
 import { fontPreloads } from "@/lib/brands/css";
 
 export const metadata: Metadata = {
-  title: { absolute: `${luminary.name} — ${luminary.tagline}`, template: `%s · ${luminary.name}` },
+  title: { absolute: `${luminary.name} - ${luminary.tagline}`, template: `%s · ${luminary.name}` },
   description: luminary.direction,
   robots: { index: false, follow: true },
 };

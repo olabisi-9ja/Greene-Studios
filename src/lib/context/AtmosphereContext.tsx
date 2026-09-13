@@ -13,46 +13,46 @@ import React, {
 /**
  * Greene Studios theme.
  *
- * Two themes: LIGHT and DARK. AUTO is the default and follows the visitor's
- * OS preference. FOCUS is a separate presentation state (fullscreen, minimal),
- * not a theme.
- *
- * The name `Atmosphere` is kept so call sites stay stable; the four-mode
- * atmosphere system (STUDIO / RAW, per-route theming, accent picker, grain and
- * particle controls) was removed.
+ * Three visual themes: LIGHT / DARK / STUDIO.
+ * AUTO follows OS preference (light/dark only — studio is opt-in).
+ * STUDIO is the warm, tactile mode inspired by warmnfuzzy.tv — cream, burnt
+ * orange, grain, bolder radiuses. FOCUS is still a separate presentation state.
  */
-export type ThemeMode = "auto" | "light" | "dark";
-export type VisualMode = "light" | "dark";
+export type ThemeMode = "auto" | "light" | "dark" | "studio";
+export type VisualMode = "light" | "dark" | "studio";
 
 export const MODE_LABELS: Record<ThemeMode, string> = {
   auto: "AUTO",
   light: "LIGHT",
   dark: "DARK",
+  studio: "STUDIO",
 };
 
 const MODE_CLASSES: Record<VisualMode, string> = {
   light: "mode-light",
   dark: "mode-dark",
+  studio: "mode-studio",
 };
 
 /** Every theme class this app has ever written to <html>. */
 const ALL_MODE_CLASSES = [
   "mode-light",
   "mode-dark",
+  "mode-studio",
   "mode-day",
   "mode-night",
   "mode-paper",
   "mode-midnight",
-  "mode-studio",
   "mode-raw",
 ];
 
 export const STORAGE_MODE = "greene:atmosphere";
 
 function normalizeMode(v: string | null): ThemeMode {
-  // Legacy values from the four-mode system.
   if (v === "paper" || v === "day") return "light";
-  if (v === "midnight" || v === "night" || v === "studio" || v === "raw") return "dark";
+  if (v === "midnight" || v === "night") return "dark";
+  if (v === "raw") return "dark";
+  if (v === "studio") return "studio";
   if (v === "auto" || v === "light" || v === "dark") return v;
   return "auto";
 }
@@ -67,7 +67,7 @@ interface AtmosphereContextProps {
   setMode: (mode: ThemeMode) => void;
   /** The theme actually applied (AUTO resolved against the OS preference). */
   effectiveMode: VisualMode;
-  /** Flips between light and dark, leaving AUTO behind. */
+  /** Cycles light → dark → studio → light, leaving AUTO behind. */
   toggle: () => void;
   modeLabel: string;
   /** FOCUS presentation state */
@@ -87,7 +87,7 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
     try {
       setModeState(normalizeMode(window.localStorage.getItem(STORAGE_MODE)));
     } catch {
-      /* storage unavailable — default to auto */
+      /* storage unavailable, default to auto */
     }
     setSystemDark(systemPrefersDark());
   }, []);
@@ -101,7 +101,7 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const effectiveMode: VisualMode =
-    mode === "auto" ? (systemDark ? "dark" : "light") : mode;
+    mode === "studio" ? "studio" : mode === "auto" ? (systemDark ? "dark" : "light") : mode;
 
   // Keep the <html> theme class in sync.
   useLayoutEffect(() => {
@@ -127,7 +127,11 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggle = useCallback(() => {
-    setMode(effectiveMode === "dark" ? "light" : "dark");
+    // light → dark → studio → light
+    const order: VisualMode[] = ["light", "dark", "studio"];
+    const idx = order.indexOf(effectiveMode);
+    const next = order[(idx + 1) % order.length] as ThemeMode;
+    setMode(next);
   }, [effectiveMode, setMode]);
 
   return (

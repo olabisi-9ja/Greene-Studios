@@ -95,7 +95,7 @@ export default async function JournalArticlePage({ params }: Props) {
  <div className="mx-auto max-w-[1400px] px-5 md:px-10">
  <div className="mb-10 flex items-end justify-between">
  <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
- Keep <span className="font-serif-i lowercase normal-case tracking-normal">reading.</span>
+ Keep reading.
  </h2>
  <Link
  href="/journal"

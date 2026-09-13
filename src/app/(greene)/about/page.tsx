@@ -6,11 +6,12 @@ import Image from "next/image";
 import { StudioHero } from "@/components/about/StudioHero";
 import CTASection from "@/components/home/CTASection";
 import TimelineSection from "@/components/about/TimelineSection";
+import RotatingGlobe from "@/components/ui/RotatingGlobe";
 
 export const metadata: Metadata = {
- title: "About · Our Story",
+ title: "Studio · Greene Studios",
  description:
- "Greene Studios is a premium digital design and development studio. Learn about our mission, values, and the people behind the work.",
+ "Greene Studios is an independent design studio crafting brands, websites and digital products. Remote, available worldwide.",
 };
 
 const VALUES = [
@@ -42,14 +43,6 @@ const TECHNOLOGIES = [
  "Drizzle ORM", "Vercel", "Storybook", "Lottie",
 ];
 
-/**
- * The founder portrait, if it has been added.
- *
- * Resolved at build time, the same way the shipped-work screenshots are, so
- * the page degrades to a typographic plate rather than a broken image — and
- * so it never falls back to the stock group photo that used to sit here under
- * a heading that says "meet the mind", singular.
- */
 function founderPortrait(): string | null {
   for (const ext of ["webp", "jpg", "jpeg", "png"]) {
     const rel = `/images/studio/founder.${ext}`;
@@ -58,7 +51,7 @@ function founderPortrait(): string | null {
   return null;
 }
 
-export default function AboutPage() {
+export default function StudioPage() {
  const portrait = founderPortrait();
  return (
  <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
@@ -66,9 +59,9 @@ export default function AboutPage() {
 
  {/* Mission */}
  <section className="border-y border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 md:py-32">
- <div className="mx-auto max-w-5xl px-5 text-center md:px-10">
- <p className="font-serif-i text-[clamp(1.8rem,3.6vw,3rem)] leading-snug text-[var(--brand-text)]">
- “Greene Studios exists to build digital experiences that give ambitious brands an unfair competitive advantage through design excellence.”
+ <div className="mx-auto max-w-3xl px-5 text-center md:px-10">
+ <p className="text-[clamp(1.6rem,3.2vw,2.6rem)] leading-snug tracking-tight text-[var(--brand-text)]">
+ Greene Studios exists to build digital experiences that give ambitious brands an unfair advantage through design excellence.
  </p>
  </div>
  </section>
@@ -76,7 +69,6 @@ export default function AboutPage() {
  {/* Founder */}
  <section className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
  <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-24">
-          {/* Portrait */}
           <div className="relative">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
               {portrait ? (
@@ -89,8 +81,6 @@ export default function AboutPage() {
                   className="object-cover object-top"
                 />
               ) : (
-                /* Until the portrait is added, a typographic plate rather than
-                   a stock photograph of people who do not work here. */
                 <div className="flex h-full w-full items-center justify-center p-10 text-center">
                   <p className="font-display text-3xl font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]/25">
                     Greene
@@ -99,8 +89,6 @@ export default function AboutPage() {
                   </p>
                 </div>
               )}
-              {/* The scrim exists to keep the caption readable over a
-                  photograph. With no photo it just turns the plate grey. */}
               {portrait ? (
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
               ) : null}
@@ -115,26 +103,23 @@ export default function AboutPage() {
             </div>
  <div className="absolute -bottom-6 -left-4 rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] px-6 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:-left-8">
  <p className="font-display text-sm font-black uppercase tracking-tight text-[var(--brand-text)]">Founded 2022</p>
- <p className="mt-1 text-xs font-medium text-[var(--brand-text-secondary)]">Remote · Working worldwide</p>
+ <p className="mt-1 text-xs font-medium text-[var(--brand-text-secondary)]">Remote • Available worldwide</p>
  </div>
  </div>
 
- {/* Story */}
  <div>
  <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
  <span className="text-[var(--brand-accent)]">✦</span> The story
  </span>
  <h2 className="font-display text-[clamp(2.2rem,4.5vw,3.8rem)] font-black uppercase leading-[0.95] tracking-tight">
- Meet the mind
- <br />
- <span className="font-serif-i lowercase normal-case tracking-normal">behind Greene.</span>
+ Meet the mind behind Greene
  </h2>
  <div className="mt-8 space-y-6 text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
  <p>
  Greene Studios was born from a simple belief: that the gap between how most companies present themselves online and how good their actual product is, is an enormous opportunity.
  </p>
  <p>
- We started as a solo design practice in 2022, building websites for early-stage startups. What set us apart wasn&apos;t the tools we used or the style we had, it was the commitment to understanding businesses deeply before touching a design file.
+ We started as a solo design practice in 2022, building websites for early-stage startups. What set us apart was not the tools we used or the style we had, it was the commitment to understanding businesses deeply before touching a design file.
  </p>
  <p>
  Today, Greene Studios works with ambitious companies globally, from seed-stage startups to Series B companies, helping them close the gap between their product quality and their digital presence.
@@ -169,7 +154,7 @@ export default function AboutPage() {
  <span className="text-[var(--brand-accent)]">✦</span> Values
  </span>
  <h2 className="mb-14 font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight md:mb-16">
- Principles we refuse to <span className="font-serif-i lowercase normal-case tracking-normal">compromise.</span>
+ Principles we refuse to compromise
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
  {VALUES.map((value) => (
@@ -199,28 +184,62 @@ export default function AboutPage() {
 
  <TimelineSection />
 
+ {/* Remote / Globe, replaces location */}
+ <section className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+  <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <div>
+      <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
+        <span className="text-[var(--brand-accent)]">✦</span> Remote
+      </span>
+      <h2 className="font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-black uppercase leading-[0.95] tracking-tight">
+        Available worldwide, working remotely
+      </h2>
+      <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
+        We work fully remote and collaborate across time zones. No matter where you are, we bring senior craft, clear communication and reliable delivery, as if we were in the room next door.
+      </p>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <span className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-xs font-semibold">Async-friendly process</span>
+        <span className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-xs font-semibold">Overlap hours for reviews</span>
+        <span className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-xs font-semibold">English, clear comms</span>
+      </div>
+      <Link href="/contact" className="mt-10 inline-flex items-center justify-center rounded-full bg-[var(--brand-text)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]">
+        Start a project <span aria-hidden="true" className="ml-2">→</span>
+      </Link>
+    </div>
+    <div className="relative">
+      <RotatingGlobe className="mx-auto w-full max-w-[520px] aspect-square" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--brand-bg)] to-transparent" />
+    </div>
+  </div>
+ </section>
+
  {/* Technologies */}
- <section className="py-24 md:py-32">
+ <section className="border-t border-[var(--brand-border)] bg-[var(--brand-surface)] py-24 md:py-32">
  <div className="mx-auto max-w-[1400px] px-5 text-center md:px-10">
  <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
  <span className="text-[var(--brand-accent)]">✦</span> Toolbox
  </span>
  <h2 className="mb-12 font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Our tech <span className="font-serif-i lowercase normal-case tracking-normal">stack.</span>
+ Our tech stack
  </h2>
  <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
  {TECHNOLOGIES.map((tech) => (
  <span
  key={tech}
- className="rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] px-6 py-3 text-sm font-semibold text-[var(--brand-text)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
+ className="rounded-full border border-[var(--brand-border)] bg-[var(--brand-bg)] px-6 py-3 text-sm font-semibold text-[var(--brand-text)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
  >
  {tech}
  </span>
  ))}
  </div>
- <Link href="/careers" data-cursor="JOIN" className="btn-outline mt-14">
- See open roles <span aria-hidden="true">→</span>
- </Link>
+ <div className="mt-14 flex flex-wrap justify-center gap-3">
+  <Link href="/team" className="inline-flex items-center justify-center rounded-full border border-[var(--brand-border)] px-7 py-3 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text)] transition-colors hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]">
+    Meet the team <span aria-hidden="true" className="ml-2">→</span>
+  </Link>
+  <Link href="/careers" data-cursor="JOIN" className="inline-flex items-center justify-center rounded-full bg-[var(--brand-text)] px-7 py-3 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]">
+    See open roles <span aria-hidden="true" className="ml-2">→</span>
+  </Link>
+ </div>
  </div>
  </section>
 

@@ -70,7 +70,7 @@ export const SHIPPED: ShippedProject[] = [
     slug: "akpaka",
     name: "Akpaka",
     url: "https://akpaka-ng.vercel.app/",
-    summary: "Site for a Nigerian brand.",
+    summary: "Site for a lifestyle brand.",
     tags: ["Brand", "Web design"],
     platform: "Vercel",
   },

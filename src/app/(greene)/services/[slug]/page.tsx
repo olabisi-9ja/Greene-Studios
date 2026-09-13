@@ -82,7 +82,7 @@ export default async function ServicePage({ params }: Props) {
  ✦ What it is
  </span>
  <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- {service.title}, <span className="font-serif-i lowercase normal-case tracking-normal">defined.</span>
+ {service.title}, defined.
  </h2>
  <p className="mt-6 text-base leading-relaxed text-[var(--brand-bg)]/75 md:text-lg">
  {service.whatIsIt || service.description}
@@ -93,14 +93,12 @@ export default async function ServicePage({ params }: Props) {
  ✦ Who it&apos;s for
  </span>
  <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Perfect <span className="font-serif-i lowercase normal-case tracking-normal">for.</span>
+ Perfect for.
  </h2>
  <div className="mt-6 flex flex-col border-t border-[var(--brand-bg)]/25">
  {(service.whoItsFor || []).map((item: string, i: number) => (
  <div key={i} className="flex items-start gap-4 border-b border-[var(--brand-bg)]/25 py-4">
- <span className="font-mono text-sm text-[var(--brand-accent)]">
- {String(i + 1).padStart(2, "0")}
- </span>
+ <span className="mt-1 flex h-2 w-2 shrink-0 rounded-full bg-[var(--brand-accent)]" aria-hidden="true" />
  <p className="text-sm leading-relaxed text-[var(--brand-bg)]/80 md:text-[15px]">{item}</p>
  </div>
  ))}
@@ -116,7 +114,7 @@ export default async function ServicePage({ params }: Props) {
  ✦ Approach
  </span>
  <h2 className="mb-12 font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- How we <span className="font-serif-i lowercase normal-case tracking-normal">work.</span>
+ How we work.
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
  {(service.approach || []).map((item: any, i: number) => (
@@ -149,7 +147,7 @@ export default async function ServicePage({ params }: Props) {
  ✦ Systems we built
  </span>
  <h2 className="mb-12 font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Concept <span className="font-serif-i lowercase normal-case tracking-normal">systems.</span>
+ Concept systems.
  </h2>
  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
  {relatedProjects.map((brand) => (

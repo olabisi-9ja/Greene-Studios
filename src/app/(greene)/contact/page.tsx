@@ -18,7 +18,7 @@ export default function ContactPage() {
           <>
             Let&apos;s build
             <br />
-            <span className="font-serif-i lowercase normal-case tracking-normal">something.</span>
+            something
           </>
         }
         description="Five quick questions, two minutes. Tell us what you're building and we'll respond within 24 hours with a thoughtful, specific reply. Never a template."
@@ -30,12 +30,10 @@ export default function ContactPage() {
       />
 
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-3 lg:gap-16">
-        {/* Intake flow */}
         <div className="lg:col-span-2">
           <ProjectIntake />
         </div>
 
-        {/* Sidebar */}
         <div className="space-y-6">
           <div className="card">
             <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
@@ -45,7 +43,7 @@ export default function ContactPage() {
               {[
                 { label: "Email", value: BRAND.email, href: `mailto:${BRAND.email}` },
                 { label: "Response time", value: "Within 24 hours" },
-                { label: "Availability", value: "Booking Q3 2026" },
+                { label: "Availability", value: "Available" },
               ].map(({ label, value, href }) => (
                 <div key={label}>
                   <p className="mb-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-accent)]">{label}</p>

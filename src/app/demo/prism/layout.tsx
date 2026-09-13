@@ -3,7 +3,7 @@ import { prism } from "@/lib/brands";
 import { fontPreloads } from "@/lib/brands/css";
 
 export const metadata: Metadata = {
-  title: { absolute: `${prism.name} — ${prism.tagline}`, template: `%s · ${prism.name}` },
+  title: { absolute: `${prism.name} - ${prism.tagline}`, template: `%s · ${prism.name}` },
   description: prism.direction,
   robots: { index: false, follow: true },
 };

@@ -6,7 +6,7 @@ import PageHeader from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
   title: "Work archive",
-  description: "Every Greene Studios project in one list — shipped sites and concept systems.",
+  description: "Every Greene Studios project in one list, shipped sites and concept systems.",
 };
 
 /**
@@ -27,7 +27,7 @@ const ROWS: Row[] = [
     key: p.slug,
     name: p.name,
     kind: "Shipped",
-    meta: `${p.tags.join(" · ")} — ${p.platform}`,
+    meta: `${p.tags.join(" · ")}, ${p.platform}`,
     href: p.url,
     external: true,
   })),
@@ -44,9 +44,7 @@ const ROWS: Row[] = [
 function Row({ row, index }: { row: Row; index: number }) {
   const inner = (
     <div className="flex items-center gap-5 py-7 md:gap-8 md:py-9">
-      <span className="w-8 shrink-0 font-mono text-xs text-[var(--brand-text-secondary)]">
-        {String(index + 1).padStart(2, "0")}
-      </span>
+      <span className="flex h-2 w-2 shrink-0 rounded-full bg-[var(--brand-accent)]" aria-hidden="true" />
       <div className="min-w-0 flex-1">
         <h2 className="font-display text-xl font-black uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-1 md:text-3xl">
           {row.name}
@@ -87,7 +85,7 @@ export default function ArchivePage() {
         kicker="Archive"
         title={
           <>
-            Everything, <span className="font-serif-i lowercase normal-case tracking-normal">in one list.</span>
+            Everything, in one list.
           </>
         }
         description={`${SHIPPED.length} shipped sites and ${BRANDS.length} concept systems.`}

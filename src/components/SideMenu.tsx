@@ -10,10 +10,7 @@ interface SideMenuProps {
   onClose: () => void;
 }
 
-const MENU_ITEMS = [
-  ...NAV_LINKS,
-  { label: "Contact", href: "/contact" },
-];
+const MENU_ITEMS = NAV_LINKS;
 
 export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
   return (
@@ -86,9 +83,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                     data-cursor={item.label.toUpperCase()}
                     className="group flex items-baseline gap-4 py-3.5"
                   >
-                    <span className="w-7 font-mono text-xs text-[var(--brand-accent)]">
-                      0{i + 1}
-                    </span>
+
                     <span className="font-display text-[clamp(1.8rem,5vw,2.6rem)] font-black uppercase leading-none tracking-tight text-[var(--brand-text)] transition-transform duration-300 group-hover:translate-x-2">
                       {item.label}
                     </span>

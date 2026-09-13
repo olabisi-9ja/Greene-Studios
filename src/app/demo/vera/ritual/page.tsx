@@ -4,14 +4,14 @@ import { DemoShell } from "@/components/demo/DemoShell";
 export const metadata = { title: "Ritual" };
 
 const MORNING = [
-  { step: "Cleanser", time: "40 seconds", note: "Warm water. Do not scrub — oat milk does the work." },
+  { step: "Cleanser", time: "40 seconds", note: "Warm water. Do not scrub, oat milk does the work." },
   { step: "Morning Oil", time: "3 drops", note: "Press into damp skin. Damp matters; it is what the oil holds onto." },
   { step: "Balm", time: "where needed", note: "Knuckles, elbows, the corner of the mouth in winter." },
 ];
 
 const NIGHT = [
   { step: "Cleanser", time: "60 seconds", note: "Twice if you wore makeup. The second pass is the one that counts." },
-  { step: "Clay Mask", time: "twice a week", note: "Ten minutes. Rinse before it cracks — cracked clay pulls at skin." },
+  { step: "Clay Mask", time: "twice a week", note: "Ten minutes. Rinse before it cracks, cracked clay pulls at skin." },
   { step: "Night Cream", time: "a pea", note: "Face and neck. It is heavier than the oil and takes a minute to settle." },
 ];
 

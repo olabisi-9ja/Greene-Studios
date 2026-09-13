@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 
 
 /**
- * Root layout — html/body and metadata only.
+ * Root layout, html/body and metadata only.
  *
  * The Greene chrome (nav, footer, cursor, smooth scroll, preloader) lives in
  * the (greene) route group so the concept sites under /demo can render with

@@ -1,158 +1,105 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { BRANDS } from "@/lib/brands";
 import { SHIPPED } from "@/lib/shipped";
 import RollLabel from "@/components/ui/RollLabel";
+import QuickInfoPanel from "./QuickInfoPanel";
 
 /**
- * Works marquee — editorial, asymmetric, continuously scrolling.
- *
- * Inspired by the Karolina Hess portfolio aesthetic:
- *   - Full-bleed horizontal strip with items at varying sizes and vertical offsets
- *   - CSS-driven scroll (linear, GPU-only — no JS per frame)
- *   - Framer-motion spring scale on individual card hover (Jakub polish)
- *   - Hover overlay materialises with blur (Jakub enter recipe)
- *   - Strip pauses on hover so users can inspect items
- *   - prefers-reduced-motion: pauses the strip, keeps overlays instant
- *
- * Layout math
- * -----------
- * Container: height 580px, paddingTop 70px (absorbs up-to -40px negative offsets)
- * Max rendered bottom = paddingTop(70) + maxY(80) + maxHeight(440) = 590px → within 580+10 safe-zone
- * Every RHYTHM permutation is checked: all fit within [0, 590]px.
+ * Selected work — fourmula.ai inspired: minimal, large images, generous whitespace,
+ * no chrome. Layout is karolinahess.com inspired: sticky quick-info aside + horizontal scroll rail.
  */
 
-// ─── Layout rhythm ────────────────────────────────────────────────────────────
-// Cycles across all items. Width (px), height (px), vertical translate (px).
-// Positive y = item sits lower in strip; negative y = item rises above midline.
-const RHYTHM = [
-  { w: 290, h: 390, y: 0 },    // portrait, top-aligned
-  { w: 480, h: 260, y: 70 },   // wide landscape, dropped
-  { w: 230, h: 430, y: -40 },  // tall, raised
-  { w: 350, h: 315, y: 40 },   // near-square, mid
-  { w: 510, h: 250, y: 80 },   // ultrawide, low
-  { w: 270, h: 370, y: 20 },   // portrait, slight drop
-  { w: 390, h: 295, y: 55 },   // landscape, mid-low
-  { w: 250, h: 440, y: -30 },  // tallest, raised
-  { w: 330, h: 330, y: 50 },   // square, mid
-  { w: 440, h: 268, y: 25 },   // landscape, near-top
-] as const;
-
-// ─── Fallback brand colours (shown when images aren't present yet) ────────────
-const BRAND_BG: Record<string, string> = {
-  luminary: "#1a2744",
-  vera:     "#b89a7e",
-  arc:      "#111111",
-  bloom:    "#a8c9b8",
-  onyx:     "#0d1117",
-  prism:    "#5b4fcf",
+type WorkItem = {
+  name: string;
+  href: string;
+  src: string;
+  lifestyle?: string;
+  label: string;
+  bg: string;
 };
 
-// ─── Item shape ───────────────────────────────────────────────────────────────
-type WorkItem = {
-  name:  string;
-  href:  string;
-  src:   string;
-  label: string;
-  bg:    string;
+const BRAND_BG: Record<string, string> = {
+  luminary: "#1a2744",
+  vera: "#b89a7e",
+  arc: "#111111",
+  bloom: "#a8c9b8",
+  onyx: "#0d1117",
+  prism: "#5b4fcf",
 };
 
 function buildItems(): WorkItem[] {
   const brands: WorkItem[] = BRANDS.map((b) => ({
-    name:  b.name,
-    href:  `/work/${b.slug}`,
-    src:   `/images/work/${b.slug}/home-desktop.webp`,
-    label: "Case study",
-    bg:    BRAND_BG[b.slug] ?? "#1f3d3a",
+    name: b.name,
+    href: `/work/${b.slug}`,
+    src: `/images/work/${b.slug}/home-desktop.webp`,
+    lifestyle: `/images/work/${b.slug}/cover-lifestyle.jpg`,
+    label: "Concept",
+    bg: BRAND_BG[b.slug] ?? "#1f3d3a",
   }));
 
   const shipped: WorkItem[] = SHIPPED.slice(0, 4).map((p) => ({
-    name:  p.name,
-    href:  p.url,
-    src:   `/images/shipped/${p.slug}/desktop.webp`,
-    label: "Live site",
-    bg:    "#1f3d3a",
+    name: p.name,
+    href: p.url,
+    src: `/images/shipped/${p.slug}/desktop.webp`,
+    label: "Live",
+    bg: "#1f3d3a",
   }));
 
-  // Interleave concept + shipped for visual variety
+  // Interleave like before but limit to 8 for horizontal rail (like karolina recent works)
   const out: WorkItem[] = [];
   const max = Math.max(brands.length, shipped.length);
   for (let i = 0; i < max; i++) {
-    if (brands[i])  out.push(brands[i]);
+    if (brands[i]) out.push(brands[i]);
     if (shipped[i]) out.push(shipped[i]);
   }
-  return out;
+  return out.slice(0, 10);
 }
 
-const ITEMS   = buildItems();
-const DISPLAY = [...ITEMS, ...ITEMS]; // doubled for seamless -50% loop
+const ITEMS = buildItems();
 
-// ─── Single card ──────────────────────────────────────────────────────────────
-function WorkCard({
-  item,
-  r,
-}: {
-  item: WorkItem;
-  r: (typeof RHYTHM)[number];
-}) {
+function WorkCard({ item }: { item: WorkItem }) {
   const [imgError, setImgError] = useState(false);
   const isExternal = item.href.startsWith("http");
+  const displaySrc = imgError && item.lifestyle ? item.lifestyle : item.src;
 
   const card = (
-    <motion.div
-      className="relative shrink-0 overflow-hidden rounded-2xl"
-      style={{ width: r.w, height: r.h, y: r.y }}
-      // Spring scale — Jakub production polish, bounce: 0 = professional
-      whileHover={{ scale: 1.055 }}
-      transition={{ type: "spring", duration: 0.5, bounce: 0 }}
-    >
-      {/* Image — falls back to coloured brand plate if not yet on disk */}
-      {!imgError ? (
-        <Image
-          src={item.src}
-          alt={item.name}
-          fill
-          sizes="520px"
-          className="object-cover object-top"
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <div
-          className="absolute inset-0 flex items-end p-5"
-          style={{ background: item.bg }}
-        >
-          <p className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-white/70">
-            {item.name}
-          </p>
-        </div>
-      )}
-
-      {/* Hover overlay — materialises with blur (Jakub enter recipe) */}
-      <motion.div
-        className="absolute inset-0 flex flex-col justify-end p-5"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.2) 45%, transparent 100%)",
-        }}
-        initial={{ opacity: 0, filter: "blur(4px)" }}
-        whileHover={{ opacity: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <span className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">
+    <div className="group relative flex w-[88vw] max-w-[420px] shrink-0 flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:w-[420px]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
+        {!imgError || item.lifestyle ? (
+          <Image
+            src={displaySrc}
+            alt={item.name}
+            fill
+            sizes="420px"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-end p-6" style={{ background: item.bg }}>
+            <p className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-white/80">
+              {item.name}
+            </p>
+          </div>
+        )}
+        <span className="absolute left-3 top-3 rounded-full bg-[var(--brand-bg)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text)] backdrop-blur">
           {item.label}
         </span>
-        <span className="font-display text-lg font-black uppercase leading-tight tracking-tight text-white">
-          {item.name}
-        </span>
-        <span className="mt-2 font-mono text-[10px] tracking-[0.1em] text-white/50">
+      </div>
+      <div className="flex flex-1 flex-col gap-1.5 p-5">
+        <h3 className="font-display text-lg font-black uppercase tracking-tight">{item.name}</h3>
+        <p className="text-sm leading-relaxed text-[var(--brand-text-secondary)] line-clamp-2">
+          {isExternal ? "Live site — opens in new tab" : "Self-initiated concept system"}
+        </p>
+        <span className="mt-auto pt-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
           View →
         </span>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 
   if (isExternal) {
@@ -169,85 +116,105 @@ function WorkCard({
   );
 }
 
-// ─── Section ──────────────────────────────────────────────────────────────────
 export default function SelectedWork() {
-  const [paused, setPaused] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.1;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+  const onMouseUp = () => setIsDragging(false);
+  const onMouseLeave = () => setIsDragging(false);
 
   return (
-    <section className="relative bg-[var(--brand-bg)] py-20 text-[var(--brand-text)] md:py-28">
-
-      {/* ── Header ──────────────────────────────────────────────────── */}
+    <section className="relative bg-[var(--brand-bg)] py-16 text-[var(--brand-text)] md:py-24">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        {/* Header — antigravity/expo/deepmind simplicity: large type, lots of whitespace */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <span className="chip-mono mb-5 block">01 · Selected work</span>
-            <h2 className="headline flex flex-wrap items-baseline gap-x-4 text-[clamp(2.8rem,6.5vw,6rem)]">
+            <span className="chip-mono mb-4 inline-block">Selected work</span>
+            <h2 className="headline text-[clamp(2.4rem,6vw,5rem)] leading-[0.95]">
               Selected works
-              <sup
-                className="font-mono text-[0.28em] font-normal tracking-[0.08em] text-[var(--brand-text-secondary)]"
-                style={{ verticalAlign: "super" }}
-              >
-                [{ITEMS.length.toString().padStart(2, "0")}]
-              </sup>
             </h2>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
+              A mix of live sites and self-initiated concept systems — each one a real site, not a mockup.
+            </p>
           </div>
-
           <Link
             href="/work"
             data-cursor="SEE"
-            className="group btn-block btn-block-ghost shrink-0"
+            className="group hidden items-center justify-center rounded-full border border-[var(--brand-border)] px-6 py-3 text-[14px] font-medium transition-colors duration-300 hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)] md:inline-flex"
           >
             <RollLabel text="All work" />
           </Link>
         </div>
       </div>
 
-      {/* ── Marquee strip ────────────────────────────────────────────── */}
-      {/*
-          Container maths:
-            height 580px + paddingTop 70px inside = total visual space
-            Max item bottom (worst-case): 70(pad) + 80(y) + 440(h) = 590px → clipped ≤ 10px at very bottom, acceptable
-            Min item top  (worst-case):  70(pad) - 40(y)           =  30px → never clips top
-      */}
-      <div
-        className="mt-14 overflow-hidden md:mt-20"
-        style={{ height: "590px" }}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        aria-label="Scrolling portfolio preview"
-      >
-        <div
-          className="marquee-track flex items-start gap-4 px-4"
-          style={{
-            paddingTop: "70px",
-            "--marquee-duration": "65s",
-            animationPlayState: paused ? "paused" : "running",
-          } as React.CSSProperties}
-        >
-          {DISPLAY.map((item, i) => (
-            <WorkCard
-              key={`${item.name}-${i}`}
-              item={item}
-              r={RHYTHM[i % RHYTHM.length]}
-            />
-          ))}
+      {/* Karolina-style two-column: quick info sticky + horizontal rail */}
+      <div className="mx-auto mt-10 flex max-w-[1400px] flex-col gap-8 px-5 md:px-10 lg:flex-row lg:gap-8">
+        <QuickInfoPanel />
+
+        <div className="min-w-0 flex-1">
+          {/* Horizontal scroll rail — karolinahess.com inspired */}
+          <div
+            ref={scrollRef}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseLeave}
+            className={`flex gap-5 overflow-x-auto pb-4 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
+            style={{ scrollSnapType: "x proximity" }}
+            aria-label="Horizontal work gallery, drag to scroll"
+          >
+            {ITEMS.map((item) => (
+              <div key={item.name} style={{ scrollSnapAlign: "start" }}>
+                <WorkCard item={item} />
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 flex items-center justify-between">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--brand-text-secondary)]">
+              Drag to explore · {ITEMS.length} projects
+            </p>
+            <Link
+              href="/work"
+              data-cursor="SEE"
+              className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)] lg:hidden"
+            >
+              See all →
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* ── Footer bar ───────────────────────────────────────────────── */}
-      <div className="mx-auto mt-10 max-w-[1400px] px-5 md:px-10">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--brand-border)] pt-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--brand-text-secondary)]">
-            {ITEMS.length} projects &mdash; shipped sites &amp; concept systems
-          </p>
-          <Link
-            href="/work"
-            data-cursor="SEE"
-            className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-text-secondary)] transition-colors duration-300 hover:text-[var(--brand-text)]"
-          >
-            See all →
-          </Link>
-        </div>
+      {/* Mascot footer line — consistent 2D character like cardtonic/upskill */}
+      <div className="mx-auto mt-12 hidden max-w-[1400px] items-center gap-3 px-5 opacity-60 md:flex md:px-10">
+        <span className="h-px flex-1 bg-[var(--brand-border)]" />
+        <motion.div
+          initial={{ rotate: -2 }}
+          whileHover={{ rotate: 2, scale: 1.05 }}
+          className="flex items-center gap-2 rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] px-3 py-2 text-xs"
+        >
+          <span className="relative h-6 w-6 overflow-hidden rounded-full bg-[var(--brand-surface-secondary)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/character/greene-mascot.png" alt="" className="h-full w-full object-cover" />
+          </span>
+          <span className="font-medium tracking-[-0.01em]">Built with care — Greene character</span>
+        </motion.div>
+        <span className="h-px flex-1 bg-[var(--brand-border)]" />
       </div>
     </section>
   );

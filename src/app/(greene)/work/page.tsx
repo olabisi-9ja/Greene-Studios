@@ -7,17 +7,9 @@ import PageHeader from "@/components/ui/PageHeader";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Live sites built for people, and six concept brand systems built end to end. Greene Studios, Lagos.",
+    "Live sites built for people, and six concept brand systems built end to end. Greene Studios, available worldwide.",
 };
 
-/**
- * Two kinds of work, in the order that matters to a buyer.
- *
- * Shipped first: sites that are live and open in one click. Concept second:
- * complete brand systems the studio built for itself, labelled as such.
- * Leading with the concept work, or mixing the two, would misrepresent the
- * practice — a link someone can open outranks everything else on this page.
- */
 export default function WorkPage() {
   return (
     <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
@@ -27,7 +19,7 @@ export default function WorkPage() {
           <>
             Things we made
             <br />
-            <span className="font-serif-i lowercase normal-case tracking-normal">that are live.</span>
+            that are live
           </>
         }
         description={`${SHIPPED.length} sites running on the internet right now, and ${BRANDS.length} concept brand systems built end to end. Every link opens the real thing.`}
@@ -50,9 +42,9 @@ export default function WorkPage() {
       </section>
 
       <section className="mx-auto mt-24 max-w-[1400px] px-5 pb-24 md:px-10">
-        <WorkSectionHeading title="Concept systems" meta={`Self-initiated · ${BRANDS.length} brands`} />
+        <WorkSectionHeading title="Concept systems" meta={`Self-initiated, ${BRANDS.length} brands`} />
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
-          Six brands invented and built end to end — identity, interface, copy and code — to work
+          Six brands invented and built end to end, identity, interface, copy and code, to work
           through problems a client brief rarely leaves room for. Each one is a running site, not a
           mockup. None of them is a company you can buy from.
         </p>

@@ -6,29 +6,29 @@ const TIMELINE_DATA = [
   {
     year: "2022",
     events: [
-      "Greene Studios founded in Lagos.",
-      "Set the operating rule the studio still runs on: design and production code leave together.",
+      "Greene Studios founded as a solo practice. One rule from day one, design and production code leave together.",
+      "Built early websites for startups, learning to understand businesses deeply before touching a design file.",
     ],
   },
   {
     year: "2023",
     events: [
-      "Extended the practice from brand and web into product design.",
+      "Expanded from brand and web into product design, supporting teams from first prototype to launch.",
       "Standardised on a token-driven design system so every build starts from a system, not a blank file.",
     ],
   },
   {
     year: "2024",
     events: [
-      "Launched Greene Journal — writing on design systems, motion and performance.",
-      "Set 95+ Lighthouse as the floor for anything that ships.",
+      "Launched Greene Journal, writing on design systems, motion and performance from real project work.",
+      "Set 95 plus Lighthouse as the floor for anything that ships. Performance became part of the design brief, not a ticket after.",
     ],
   },
   {
     year: "2026",
     events: [
-      "Six concept brand systems built and published as live sites.",
-      "Open for select projects worldwide.",
+      "Six concept brand systems built and published as live sites, each one a full system to learn from.",
+      "Remote by design, available worldwide. Open for select projects with teams who care about craft.",
     ],
   },
 ];
@@ -46,17 +46,18 @@ export default function TimelineSection() {
           Timeline
         </span>
       </div>
-      <h2 className="text-4xl lg:text-5xl font-black text-[var(--brand-text)] mb-24 tracking-tight uppercase">
-        How we got here.
+      <h2 className="font-display text-4xl font-black tracking-tight text-[var(--brand-text)] md:text-5xl">
+        How we got here
       </h2>
+      <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--brand-text-secondary)] md:text-lg">
+        Four years of choosing craft over shortcuts. Each chapter shaped how we work today, remote, focused, and invested in work that lasts.
+      </p>
 
-      <div className="space-y-32 relative">
-        {/* A subtle line connecting all the years */}
+      <div className="space-y-32 relative mt-24">
         <div className="absolute left-[39px] top-0 bottom-0 w-px bg-[var(--brand-border)] hidden md:block" />
 
         {TIMELINE_DATA.map((group) => (
           <div key={group.year} className="flex flex-col md:flex-row gap-8 md:gap-24 relative">
-            {/* Sticky Year Column */}
             <div className="md:w-1/4 relative">
               <div className="sticky top-32 flex items-center gap-6">
                 <div className="w-20 h-20 flex-shrink-0 bg-[var(--brand-surface)] border border-[var(--brand-border)] rounded-full flex items-center justify-center shadow-sm z-10 relative">
@@ -65,11 +66,6 @@ export default function TimelineSection() {
               </div>
             </div>
 
-            {/* Events for the year */}
-            {/* Body copy used to sit at opacity 0.3 until scrolled into view,
-                which reads as 2.4:1 against the page — below AA. The shared
-                reveal starts hidden and is forced visible under
-                prefers-reduced-motion. */}
             <div className="flex flex-col justify-center space-y-16 py-8 md:w-3/4">
               {group.events.map((event, j) => (
                 <p

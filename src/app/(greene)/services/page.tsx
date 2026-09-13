@@ -20,8 +20,7 @@ export default function ServicesPage() {
  title={
  <>
  Capabilities built
- <br />
- <span className="font-serif-i lowercase normal-case tracking-normal">for ambition.</span>
+ <br /> for ambition.
  </>
  }
  description="From first sketch to final deployment, we offer the complete creative and technical suite. One studio, end to end."
@@ -80,7 +79,7 @@ export default function ServicesPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
             <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
-              Identity systems that <span className="font-serif-i lowercase normal-case tracking-normal">outlast trends.</span>
+              Identity systems that outlast trends.
             </p>
           </div>
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--brand-border)]">
@@ -93,7 +92,7 @@ export default function ServicesPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
             <p className="absolute inset-x-5 bottom-4 font-display text-xl font-black uppercase tracking-tight text-white">
-              Interfaces that feel <span className="font-serif-i lowercase normal-case tracking-normal">inevitable.</span>
+              Interfaces that feel inevitable.
             </p>
           </div>
         </div>
@@ -108,7 +107,7 @@ export default function ServicesPage() {
  ✦ Not sure where to start?
  </span>
  <h3 className="font-display text-3xl font-black uppercase leading-none tracking-tight text-[var(--brand-text)]">
- Let&apos;s scope it <span className="font-serif-i lowercase normal-case tracking-normal">together.</span>
+ Let&apos;s scope it together.
  </h3>
  <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--brand-text-secondary)]">
  We&apos;ll scope your project during a free 30-minute discovery call. No hard sell, just clarity.

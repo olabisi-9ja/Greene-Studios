@@ -56,7 +56,7 @@ export default function VeraShop() {
       <section className="d-section-tight">
         <div className="d-wrap d-center">
           <p className="d-muted" style={{ fontSize: "0.875rem" }}>
-            Vera is a concept brand by Greene Studios. The basket is illustrative — nothing here ships.{" "}
+            Vera is a concept brand by Greene Studios. The basket is illustrative, nothing here ships.{" "}
             <Link href="/work/vera" style={{ textDecoration: "underline" }}>Read the case study</Link>.
           </p>
         </div>

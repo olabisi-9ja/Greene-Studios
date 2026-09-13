@@ -23,8 +23,7 @@ export default function JournalPage() {
         title={
           <>
             Thoughts &amp;
-            <br />
-            <span className="font-serif-i lowercase normal-case tracking-normal">perspectives.</span>
+            <br /> perspectives.
           </>
         }
         description="Insights on design systems, frontend architecture, and the business of creativity."

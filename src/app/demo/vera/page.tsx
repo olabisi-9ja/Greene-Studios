@@ -12,7 +12,7 @@ const PRODUCTS = [
 export default function VeraHome() {
   return (
     <DemoShell brand={b}>
-      {/* Centred, generous, serif — the opposite composition to Luminary's grid. */}
+      {/* Centred, generous, serif, the opposite composition to Luminary's grid. */}
       <section className="d-section">
         <div className="d-wrap d-stack-lg d-center" style={{ alignItems: "center" }}>
           <p className="d-eyebrow">Skin &amp; bath</p>

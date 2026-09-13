@@ -8,7 +8,7 @@ import { BrandMark } from "./BrandMark";
  * Chrome for a concept site.
  *
  * Injects the brand's tokens and @font-face rules, then renders that brand's
- * own nav and footer. Nothing from the Greene layout reaches in here — no
+ * own nav and footer. Nothing from the Greene layout reaches in here, no
  * Navbar, no Footer, no custom cursor, no atmosphere class.
  */
 export function DemoShell({
@@ -52,7 +52,7 @@ export function DemoShell({
         <div className="d-wrap d-foot-inner">
           <BrandMark slug={brand.slug} />
           <small>
-            {brand.name} — {brand.tagline}
+            {brand.name}, {brand.tagline}
             <br />
             Concept brand and site, designed and built by Greene Studios.
           </small>

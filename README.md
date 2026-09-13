@@ -1,6 +1,6 @@
 # Greene Studios
 
-Independent digital design studio. Lagos, working worldwide.
+Independent digital design studio. Remote, available worldwide.
 
 Next.js 14 (App Router) · Tailwind v4 · TypeScript · one animation library.
 

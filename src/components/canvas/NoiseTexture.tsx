@@ -1,6 +1,6 @@
 /**
  * Fixed film-grain overlay. Density comes from `--studio-grain`, which each
- * theme sets in globals.css — no JS, no re-render on theme change.
+ * theme sets in globals.css, no JS, no re-render on theme change.
  */
 export default function NoiseTexture() {
   return (

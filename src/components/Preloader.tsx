@@ -1,26 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 /* The identity moment is theme-independent: it is the same green field and
    the same cream whichever theme the visitor lands in. */
 const FIELD = "#263B38";
 const PAPER = "#F5F4EF";
 
-/** Where the count stops. Deliberately short of 100 — it hands off mid-climb. */
+/** Where the count stops. Deliberately short of 100, it hands off mid-climb. */
 const TARGET = 99;
-/** Minimum time on screen, so a warm cache doesn't flash 0→99 in one frame.
- *  Long enough for the climb to read, short enough that it isn't a tax. */
 const FLOOR_MS = 950;
 const FLOOR_MS_REDUCED = 350;
-/** Hard ceiling: one slow asset must never strand a visitor at 40%. */
-// readyState only reaches "complete" once every subresource has landed,
-// which on the homepage is ~1.6s — long enough to hold the count well past
-// the floor. The ceiling caps how much real readiness may delay the exit.
 const CEILING_MS = 1100;
-/** Beat at 99 before the wipe. */
 const HOLD_MS = 150;
-/** Matches the wipe transition below. */
 const WIPE_MS = 480;
 const WIPE_MS_REDUCED = 250;
 
@@ -28,6 +21,11 @@ const LOADER_CSS = `
 .gl-root{position:fixed;inset:0;z-index:100;overflow:hidden;
   transition:transform ${WIPE_MS}ms cubic-bezier(.16,1,.3,1)}
 .gl-out{transform:translateY(-100%)}
+.gl-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;padding:2rem;text-align:center}
+.gl-brand-wrap{display:flex;align-items:baseline;gap:.4rem;font-size:clamp(2.6rem, 9vw, 5.6rem);line-height:.9;letter-spacing:-.04em;white-space:nowrap}
+.gl-word{display:inline-flex;align-items:baseline;overflow:hidden}
+.gl-letter{will-change:transform}
+.gl-rest{will-change:transform,opacity}
 .gl-count{position:absolute;left:0;bottom:0;display:flex;align-items:flex-end;
   gap:.06em;line-height:.78;padding:0 var(--gl-gutter) .06em}
 .gl-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
@@ -41,22 +39,10 @@ const LOADER_CSS = `
 }
 `;
 
-/**
- * The loader: a count from 0 to 99, then the site.
- *
- * The number is driven by what the page is actually doing — readyState, web
- * fonts, and decoded images — rather than a timer pretending to be progress.
- * It is smoothed and floored so it reads as motion instead of a stuttering
- * readout, and capped so a slow asset can never hold someone hostage.
- *
- * It gates first paint by design. That is the cost of having one; the floor is
- * kept short so the cost stays around a second.
- *
- * Plays once per session. `?replay-loader` (or `#loader`) shows it again.
- */
 export default function Preloader() {
   const [state, setState] = useState<"pending" | "showing" | "exiting" | "done">("pending");
   const [count, setCount] = useState(0);
+  const [showFull, setShowFull] = useState(false);
   const numRef = useRef<HTMLSpanElement>(null);
   const ruleRef = useRef<HTMLSpanElement>(null);
 
@@ -68,9 +54,7 @@ export default function Preloader() {
     if (!replay) {
       try {
         shown = !!sessionStorage.getItem("loader_shown");
-      } catch {
-        /* storage unavailable (private mode, sandboxed iframe) — show it */
-      }
+      } catch {}
     }
     if (shown) {
       setState("done");
@@ -78,6 +62,7 @@ export default function Preloader() {
     }
 
     setState("showing");
+    const fullTimer = window.setTimeout(() => setShowFull(true), 480);
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -86,22 +71,15 @@ export default function Preloader() {
     const wipe = reduced ? WIPE_MS_REDUCED : WIPE_MS;
     const start = performance.now();
 
-    /** Real readiness, 0–1. Three signals, evenly weighted. */
     const readiness = () => {
       let done = 0;
       let total = 3;
-
       if (document.readyState === "complete") done += 1;
       else if (document.readyState === "interactive") done += 0.5;
-
       if (fontsReady.current) done += 1;
-
-      // Lazy images below the fold never load while the loader covers the
-      // page, so counting them pins readiness below 1 forever.
       const imgs = Array.from(document.images).filter((i) => i.loading !== "lazy");
       if (imgs.length === 0) done += 1;
       else done += imgs.filter((i) => i.complete).length / imgs.length;
-
       return done / total;
     };
 
@@ -111,27 +89,15 @@ export default function Preloader() {
 
     const tick = () => {
       const elapsed = performance.now() - start;
-
-      // The climb is driven by an eased time curve that reaches exactly 1 at
-      // the floor, so the count lands on 99 when it is meant to rather than
-      // chasing a moving target and overshooting by half a second.
       const t = Math.min(1, elapsed / floor);
       const timeProgress = 1 - (1 - t) * (1 - t);
-
-      // Real readiness only holds back the last stretch — enough that the
-      // number means something, not enough to make a slow asset the story.
-      // readyState only reaches "complete" once every subresource has landed,
-      // so the ceiling releases the count regardless.
       const cap = elapsed >= CEILING_MS ? 1 : 0.85 + 0.15 * readiness();
-
-      // Never backwards.
       shownValue = Math.max(shownValue, Math.min(timeProgress, cap) * TARGET);
       const rounded = Math.min(TARGET, Math.round(shownValue));
       setCount(rounded);
       if (ruleRef.current) {
         ruleRef.current.style.transform = `scaleX(${(rounded / TARGET).toFixed(4)})`;
       }
-
       if (rounded >= TARGET && elapsed >= floor) {
         if (!finished) {
           finished = true;
@@ -140,9 +106,7 @@ export default function Preloader() {
             setState("done");
             try {
               if (!replay) sessionStorage.setItem("loader_shown", "true");
-            } catch {
-              /* ignore */
-            }
+            } catch {}
             document.body.style.overflow = previousOverflow;
           }, HOLD_MS + wipe);
         }
@@ -153,17 +117,30 @@ export default function Preloader() {
 
     let exitTimer = 0;
     let doneTimer = 0;
+    // Safety: force exit after 2.6s even if tick stalls (ensures loader never sticks)
+    const safetyTimer = window.setTimeout(() => {
+      if (!finished) {
+        finished = true;
+        setState("exiting");
+        window.setTimeout(() => {
+          setState("done");
+          document.body.style.overflow = previousOverflow;
+        }, wipe);
+      }
+    }, 2600);
+
     frame = requestAnimationFrame(tick);
 
     return () => {
       cancelAnimationFrame(frame);
       clearTimeout(exitTimer);
       clearTimeout(doneTimer);
+      clearTimeout(fullTimer);
+      clearTimeout(safetyTimer);
       document.body.style.overflow = previousOverflow;
     };
   }, []);
 
-  /** Tracked outside the loop so the rAF callback can read it cheaply. */
   const fontsReady = useRef(false);
   useEffect(() => {
     let alive = true;
@@ -187,12 +164,50 @@ export default function Preloader() {
     >
       <style>{LOADER_CSS}</style>
 
+      <div className="gl-center" aria-hidden="true">
+        <div className="gl-brand-wrap font-display font-black uppercase">
+          <span className="gl-word">
+            <motion.span
+              className="gl-letter"
+              animate={{ x: showFull ? -6 : 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              G
+            </motion.span>
+            <motion.span
+              className="gl-rest"
+              initial={{ opacity: 0, x: 10, width: 0 }}
+              animate={showFull ? { opacity: 1, x: 0, width: "auto" } : { opacity: 0, x: 10, width: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
+            >
+              reene
+            </motion.span>
+          </span>
+          <span className="gl-word">
+            <motion.span
+              className="gl-letter"
+              animate={{ x: showFull ? -6 : 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.06 }}
+            >
+              S
+            </motion.span>
+            <motion.span
+              className="gl-rest"
+              initial={{ opacity: 0, x: 10, width: 0 }}
+              animate={showFull ? { opacity: 1, x: 0, width: "auto" } : { opacity: 0, x: 10, width: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            >
+              tudios
+            </motion.span>
+          </span>
+        </div>
+      </div>
+
       <div
         className="gl-count font-display font-black"
         style={
           {
-            fontSize: "clamp(6rem, 22vw, 20rem)",
-            // Matches the site's own page gutter.
+            fontSize: "clamp(1.8rem, 6.6vw, 6rem)",
             ["--gl-gutter" as string]: "clamp(1.25rem, 4vw, 2.5rem)",
           } as React.CSSProperties
         }
@@ -204,8 +219,6 @@ export default function Preloader() {
         <span className="gl-pct">%</span>
       </div>
 
-      {/* A hairline that tracks the same value — legible at a glance from
-          across the room, where a numeral in the corner is not. */}
       <span
         ref={ruleRef}
         className="gl-rule"

@@ -6,31 +6,22 @@ import { BRAND, NAV_LINKS } from "@/lib/data";
 import { GreeneMonogram } from "@/components/ui/GreeneMark";
 import RotatingBadge from "@/components/ui/RotatingBadge";
 
-/**
- * Footer — the studio's giant wordmark, layered with the minimal
- * invitation + link columns. One footer, three signatures:
- *   1. The invitation (adcker school): kicker, headline, email, CTAs
- *   2. Quiet columns + the rotating stamp
- *   3. The giant interactive GREENE® wordmark
- */
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-[var(--brand-text)] pb-6 pt-20 text-[var(--brand-bg)] md:pt-28">
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 md:px-10">
-        {/* ─── The invitation ─────────────────────────────────────── */}
         <span className="mb-8 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-bg)]/60">
           <span className="text-[var(--brand-accent)]">✦</span> Next step
         </span>
 
         <h2 className="max-w-5xl font-display text-[clamp(2.8rem,7.5vw,7rem)] font-black uppercase leading-[0.92] tracking-tight">
-          Let&apos;s create something{" "}
-          <span className="font-serif-i lowercase normal-case tracking-normal">unforgettable.</span>
+          Let&apos;s create something unforgettable
         </h2>
 
         <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--brand-bg)]/60 md:text-lg">
-          Tell us what you&apos;re trying to build. We&apos;ll take it from there.
+          Tell us what you are trying to build. We will take it from there.
         </p>
 
         <div className="mt-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
@@ -60,7 +51,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ─── Columns ────────────────────────────────────────────── */}
         <div className="mt-20 grid grid-cols-2 gap-10 border-t border-[var(--brand-bg)]/20 pt-12 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2">
@@ -70,7 +60,7 @@ export default function Footer() {
               <span className="font-display text-sm font-black uppercase tracking-tight">Greene®</span>
             </div>
             <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-[var(--brand-bg)]/60">
-              Independent digital design studio, working with ambitious brands worldwide.
+              Independent design studio, working with ambitious brands worldwide. Remote, available everywhere.
             </p>
             <span className="mt-5 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">
               Available for select projects
@@ -94,11 +84,11 @@ export default function Footer() {
                 </Link>
               );
             })}
+            <Link href="/team" data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
+              Team
+            </Link>
             <Link href="/industries" data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
               Industries
-            </Link>
-            <Link href="/contact" data-cursor="GO" className="w-fit text-sm font-semibold transition-colors hover:text-[var(--brand-accent)]">
-              Contact
             </Link>
           </div>
 
@@ -121,19 +111,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ─── Giant wordmark — the studio name, very big ─────────────
-          No overflow-hidden here: the line box (leading 0.85) is shorter
-          than the glyphs' ink, so a clip box slices the raised ® and
-          cap-height tops — worse, the slice amount depends on whether
-          the variable font has loaded, so it broke only *sometimes*.
-          The <footer> itself keeps overflow-hidden for page-edge safety.
-
-          Sizing is min(), not clamp(): a 4.5rem floor beat 16vw below a
-          ~470px viewport and pushed STUDIOS® (8 glyphs at ~0.62em) wider
-          than the screen, where the footer's overflow-hidden clipped it.
-
-          Hover lives in CSS (.wordmark-letter in globals.css) rather than
-          in framer-motion — see the note there. */}
       <div className="relative z-10 mb-4 mt-16 select-none text-center md:mt-24">
         <h1
           aria-hidden="true"
@@ -157,13 +134,12 @@ export default function Footer() {
         </h1>
       </div>
 
-      {/* ─── Bottom bar ───────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 text-xs font-medium text-[var(--brand-bg)]/60 md:flex-row md:items-end md:justify-between md:px-10">
         <span>©{currentYear} Greene Studios. All rights reserved.</span>
         <div className="flex flex-col gap-1 text-left md:text-right">
           <span>Designed by Greene Studios</span>
           <span>
-            Developed with 💜 by{" "}
+            Developed with care by{" "}
             <a
               href="https://olabisiadigun.xyz/"
               target="_blank"

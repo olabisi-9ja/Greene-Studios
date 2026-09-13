@@ -10,7 +10,7 @@ const SIZES = manifest as Record<string, { w: number; h: number }>;
  * width/height guarantees layout shift. Dimensions come from
  * src/lib/image-manifest.json, written by `npm run images` from the real
  * files. An image missing from the manifest renders nothing rather than
- * collapsing the layout — that only happens before the pipeline has run.
+ * collapsing the layout, that only happens before the pipeline has run.
  */
 export function ShotImage({
   src,

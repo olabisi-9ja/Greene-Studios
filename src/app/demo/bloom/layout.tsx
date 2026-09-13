@@ -3,7 +3,7 @@ import { bloom } from "@/lib/brands";
 import { fontPreloads } from "@/lib/brands/css";
 
 export const metadata: Metadata = {
-  title: { absolute: `${bloom.name} — ${bloom.tagline}`, template: `%s · ${bloom.name}` },
+  title: { absolute: `${bloom.name} - ${bloom.tagline}`, template: `%s · ${bloom.name}` },
   description: bloom.direction,
   robots: { index: false, follow: true },
 };

@@ -72,7 +72,7 @@ export default function SmoothScroll({
     lastIdxRef.current = idx;
     if (isBackNav) return;
 
-    // Snap to top instantly — no smooth animation, no visible scroll.
+    // Snap to top instantly, no smooth animation, no visible scroll.
     lenis.scrollTo(0, { immediate: true, force: true });
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;

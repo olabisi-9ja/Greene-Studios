@@ -14,8 +14,7 @@ export default function LegalPage() {
  title={
  <>
  Legal &amp;
- <br />
- <span className="font-serif-i lowercase normal-case tracking-normal">privacy.</span>
+ <br /> privacy.
  </>
  }
  description="The fine print, kept honest and readable."

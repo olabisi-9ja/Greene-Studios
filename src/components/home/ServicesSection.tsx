@@ -7,23 +7,12 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useStaggerAnimation } from "@/lib/hooks/useStaggerAnimation";
 import SectionHead from "@/components/ui/SectionHead";
 
-/**
- * Services — the review's consolidation. Greene's differentiator is
- * Brand → Interface → Motion → Code under one roof, so the section is
- * built around that pipeline: four core pillars, in order, with the
- * supporting disciplines (research, systems, AI, strategy) demoted to
- * a quiet row instead of competing for attention.
- *
- * Each pillar DEMONSTRATES itself: hovering (or focusing) a row lifts a
- * cursor-following visual of that craft, so the section shows the work
- * instead of only describing it.
- */
 const CORE = [
   {
     href: "/services/branding",
     stage: "Brand",
     title: "Branding",
-    from: "from ₦750k",
+    from: "from $900",
     desc: "Identity systems that outlast trends and command trust.",
     tags: ["Strategy", "Identity", "Guidelines"],
     preview: "/images/services/brand.jpg",
@@ -32,7 +21,7 @@ const CORE = [
     href: "/services/web-design",
     stage: "Interface",
     title: "Web Design",
-    from: "from ₦500k",
+    from: "from $700",
     desc: "Websites that stop the scroll and start conversations.",
     tags: ["UI", "Design systems", "Prototyping"],
     preview: "/images/services/interface.jpg",
@@ -41,7 +30,7 @@ const CORE = [
     href: "/services/motion-design",
     stage: "Motion",
     title: "Motion Design",
-    from: "from ₦300k",
+    from: "from $500",
     desc: "Motion that communicates, from micro-interactions to full brand films.",
     tags: ["UI motion", "Scroll", "Lottie"],
     preview: "/images/services/motion.jpg",
@@ -50,8 +39,8 @@ const CORE = [
     href: "/services/frontend-development",
     stage: "Code",
     title: "Frontend Development",
-    from: "from ₦750k",
-    desc: "Pixel-perfect React & Next.js code, built for motion and performance.",
+    from: "from $900",
+    desc: "Pixel-perfect React and Next.js code, built for motion and performance.",
     tags: ["React", "Next.js", "Performance"],
     preview: "/images/services/code.jpg",
   },
@@ -71,7 +60,6 @@ export default function ServicesSection() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<number | null>(null);
 
-  /* Cursor-follow springs for the floating preview (desktop only) */
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const px = useSpring(mx, { stiffness: 180, damping: 24, mass: 0.6 });
@@ -87,9 +75,8 @@ export default function ServicesSection() {
   return (
     <section className="bg-[var(--brand-bg)] py-20 text-[var(--brand-text)] md:py-28">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <SectionHead index="03 · Services" title={<>Brand to code, one team.</>} className="mb-10" />
+        <SectionHead index="Services" title={<>Brand to code, one team.</>} className="mb-10" />
 
-        {/* The pipeline — how the four pillars connect */}
         <div className="mb-14 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-[var(--brand-border)] py-4 md:mb-20" aria-hidden="true">
           {["Brand", "Interface", "Motion", "Code"].map((stage, i) => (
             <span key={stage} className="flex items-center gap-3">
@@ -101,7 +88,6 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Core pillars, in pipeline order — the stage the preview floats over */}
         <div
           ref={stageRef}
           className="relative"
@@ -120,10 +106,7 @@ export default function ServicesSection() {
                 onBlur={() => setActive(null)}
               >
                 <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-9">
-                  <span className="col-span-2 font-mono text-xs text-[var(--brand-text-secondary)] md:col-span-1 md:text-sm">
-                    0{i + 1}
-                  </span>
-                  <div className="col-span-10 md:col-span-4">
+                  <div className="col-span-12 md:col-span-5">
                     <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                       {service.stage}
                     </span>
@@ -158,8 +141,6 @@ export default function ServicesSection() {
             ))}
           </div>
 
-          {/* Floating craft preview — demonstrates the capability on hover.
-              Desktop pointers only; keyboard focus reveals it too. */}
           <motion.div
             aria-hidden="true"
             className="pointer-events-none absolute left-0 top-0 z-20 hidden lg:block"
@@ -191,7 +172,6 @@ export default function ServicesSection() {
           </motion.div>
         </div>
 
-        {/* Supporting disciplines — demoted, not deleted */}
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <span className="mr-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
             Supporting every project
@@ -208,12 +188,11 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="mt-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          <p className="font-serif-i text-xl text-[var(--brand-text-secondary)] md:text-2xl">
+          <p className="text-xl text-[var(--brand-text-secondary)] md:text-2xl">
             Something more custom in mind?
           </p>
-          <Link href="/services" data-cursor="GO" className="btn-primary">
+          <Link href="/services" data-cursor="GO" className="inline-flex items-center justify-center rounded-full bg-[var(--brand-text)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]">
             Explore all services <span aria-hidden="true">→</span>
           </Link>
         </div>

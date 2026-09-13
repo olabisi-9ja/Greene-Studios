@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
- * Magnetic — children gently lean toward the cursor inside their hover
+ * Magnetic, children gently lean toward the cursor inside their hover
  * zone. Only engages for precise pointers (mouse, trackpad) with no
  * reduced-motion preference; everyone else gets an untouched element.
  */

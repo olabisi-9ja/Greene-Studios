@@ -4,7 +4,7 @@ export const BRAND = {
  name: "Greene Studios",
  tagline: "We design and build digital experiences that move people.",
  email: "hello@greenestudios.com",
- location: "Lagos, Nigeria — working worldwide",
+ location: "Remote, Available worldwide",
  instagram: "https://instagram.com/greenestudios",
  twitter: "https://twitter.com/greenestudios",
  linkedin: "https://linkedin.com/company/greenestudios",
@@ -14,12 +14,11 @@ export const BRAND = {
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
-// The primary navigation stays deliberately small; deeper content remains
-// discoverable from the work, studio and footer experiences.
 export const NAV_LINKS = [
  { label: "Work", href: "/work" },
  { label: "Services", href: "/services" },
- { label: "Studio", href: "/about" },
+ { label: "Studio", href: "/studio" },
+ { label: "Team", href: "/team" },
  { label: "Contact", href: "/contact" },
 ];
 
@@ -35,7 +34,7 @@ export const SERVICES = [
  description: "We craft visually stunning, strategically crafted websites that communicate your value instantly. Every pixel intentional, every interaction meaningful.",
  deliverables: ["Custom UI Design", "Responsive Layouts", "Design System", "Prototype & Handoff"],
  href: "/services/web-design",
- from: "from $4,800",
+ from: "from $1,200",
  whatIsIt: "Web Design for us isn't just about putting pretty boxes on a screen. It's the architecture of your digital headquarters. A great website acts as your best salesperson, your brand ambassador, and your most reliable conversion engine.",
  whoItsFor: [
  "Companies launching a completely new product offering",
@@ -57,7 +56,7 @@ export const SERVICES = [
  description: "Deep user research and systems thinking combine to create products that users love instinctively. We design for outcomes, not aesthetics alone.",
  deliverables: ["UX Research", "User Flows", "Wireframes", "Usability Testing"],
  href: "/services/ui-ux-design",
- from: "from $6,000",
+ from: "from $1,400",
  whatIsIt: "UI/UX is the science of human behavior applied to digital interfaces. It's the process of removing friction between what a user wants to do and the action required to do it. Good UI/UX feels like the product is reading the user's mind.",
  whoItsFor: [
  "SaaS platforms struggling with high churn or onboarding drop-off",
@@ -79,7 +78,7 @@ export const SERVICES = [
  description: "Your brand is a promise. We help you define it, visualise it, and scale it across every touchpoint, digital and physical.",
  deliverables: ["Brand Strategy", "Visual Identity", "Logo Design", "Brand Guidelines"],
  href: "/services/branding",
- from: "from $6,000",
+ from: "from $1,400",
  whatIsIt: "Branding is the gut feeling people have about your company. We help you define that feeling and encode it into every visual asset, from your logo and typography to your color palette and tone of voice.",
  whoItsFor: [
  "Startups that need to look like enterprise players from day one",
@@ -101,7 +100,7 @@ export const SERVICES = [
  description: "Clean, maintainable frontend code built with modern frameworks. We close the gap between design and development, zero compromise.",
  deliverables: ["React / Next.js", "Animation & Motion", "CMS Integration", "Performance Audit"],
  href: "/services/frontend-development",
- from: "from $6,000",
+ from: "from $1,400",
  whatIsIt: "Frontend Development is where design becomes reality. We write clean, performant, and accessible code that brings static designs to life with fluid animations and instantaneous load times.",
  whoItsFor: [
  "Design teams that need a reliable partner to build their Figma files perfectly",
@@ -123,7 +122,7 @@ export const SERVICES = [
  description: "From micro-interactions to full-scale brand films. We use motion as a narrative tool, purposeful, precise, and unforgettable.",
  deliverables: ["UI Animations", "Brand Films", "Motion Guidelines", "GSAP / Lottie"],
  href: "/services/motion-design",
- from: "from $2,500",
+ from: "from $700",
  whatIsIt: "Motion Design brings the dimension of time to your digital presence. It guides the user's eye, provides context for state changes, and injects personality into otherwise static interfaces.",
  whoItsFor: [
  "Products that feel rigid and lack delight",
@@ -145,7 +144,7 @@ export const SERVICES = [
  description: "End-to-end product design from concept to launch. We embed with your team to design systems that scale with your product.",
  deliverables: ["Product Strategy", "0→1 Design", "Design Systems", "Developer Handoff"],
  href: "/services/product-design",
- from: "from $8,000",
+ from: "from $1,800",
  whatIsIt: "Product Design encompasses the entire lifecycle of a digital tool. It bridges business strategy, UX research, UI design, and technical feasibility to create holistic applications that solve real problems.",
  whoItsFor: [
  "Founders building a 0-to-1 MVP and needing a foundational design",
@@ -167,7 +166,7 @@ export const SERVICES = [
  description: "Complex web applications with clean architecture. We handle everything from database design to deployment, so you can focus on growth.",
  deliverables: ["Full-Stack Dev", "API Design", "Database Architecture", "DevOps"],
  href: "/services/web-applications",
- from: "from $9,500",
+ from: "from $2,200",
  whatIsIt: "We build secure, scalable, and highly interactive full-stack web applications. From the database schema to the server logic and the client interface, we architect systems designed to handle millions of users.",
  whoItsFor: [
  "Startups needing a robust MVP built rapidly but securely",
@@ -189,7 +188,7 @@ export const SERVICES = [
  description: "We integrate AI capabilities into your product thoughtfully, from LLM-powered features to computer vision, without the hype.",
  deliverables: ["AI Feature Design", "LLM Integration", "Prompt Engineering", "AI UX Patterns"],
  href: "/services/ai-integration",
- from: "from $4,000",
+ from: "from $900",
  whatIsIt: "We move past the AI hype to implement genuine utility. Whether it's connecting to OpenAI, training custom models, or building intelligent agents, we design AI features that actually improve the user's workflow.",
  whoItsFor: [
  "Products that process massive amounts of unstructured text data",
@@ -211,7 +210,7 @@ export const SERVICES = [
  description: "Component libraries and design tokens that grow with your team. Consistent, accessible, and beautifully documented.",
  deliverables: ["Component Library", "Design Tokens", "Storybook Docs", "Accessibility Audit"],
  href: "/services/design-systems",
- from: "from $5,000",
+ from: "from $1,000",
  whatIsIt: "A Design System is a single source of truth for your digital product. We build comprehensive libraries of reusable components, design tokens, and documentation that align your design and engineering teams.",
  whoItsFor: [
  "Large teams where designers and developers are constantly misaligned",
@@ -233,7 +232,7 @@ export const SERVICES = [
  description: "Search is no longer ten blue links. We engineer technical SEO, structured data and answer-ready content into every build, so Google, assistants and generative engines surface you first.",
  deliverables: ["Technical SEO", "Schema & structured data", "Answer-ready content", "AI-search visibility"],
  href: "/services/seo-geo-aeo",
- from: "from $2,000",
+ from: "from $600",
  whatIsIt: "SEO gets you ranked on results pages. GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) get you cited inside ChatGPT, Perplexity and Google's AI overviews. Together they decide whether a prospect finds you, or your competitor.",
  whoItsFor: [
  "Brands with a beautiful site that search engines barely index",
@@ -253,61 +252,61 @@ export const SERVICES = [
 
 export const PROCESS_STEPS = [
  {
- number: "01",
+ number: "",
  title: "Discovery",
  description: "We start by listening. Deep dive into your goals, audience, competitive landscape, and what success truly looks like for your project.",
  duration: "1–2 weeks",
  },
  {
- number: "02",
+ number: "",
  title: "Research",
  description: "User interviews, competitor audits, market analysis. We build the strategic foundation that every design decision rests on.",
  duration: "1–2 weeks",
  },
  {
- number: "03",
+ number: "",
  title: "Strategy",
  description: "Architecture, content strategy, and creative direction. We align on the north star before a single pixel is placed.",
  duration: "1 week",
  },
  {
- number: "04",
+ number: "",
  title: "Wireframes",
  description: "Low-fidelity structures that prioritize flow and hierarchy. We test assumptions early before investing in high-fidelity design.",
  duration: "1–2 weeks",
  },
  {
- number: "05",
+ number: "",
  title: "Design",
  description: "High-fidelity screens brought to life with our signature attention to detail. Every state, every edge case, every delight.",
  duration: "2–4 weeks",
  },
  {
- number: "06",
+ number: "",
  title: "Prototype",
  description: "Interactive prototypes for stakeholder alignment and user testing. You'll feel the product before a line of code is written.",
  duration: "1 week",
  },
  {
- number: "07",
+ number: "",
  title: "Development",
  description: "Clean, performant code that brings designs to life with precision. We use modern frameworks and obsess over performance.",
  duration: "3–8 weeks",
  },
  {
- number: "08",
+ number: "",
  title: "Testing",
  description: "Cross-device, cross-browser, accessibility audits, performance benchmarks. We ship nothing we wouldn't be proud to sign.",
  duration: "1–2 weeks",
  },
  {
- number: "09",
+ number: "",
  title: "Launch",
  description: "Coordinated go-live with monitoring, rollback plans, and your team trained on every part of the system.",
  duration: "1 week",
  },
  {
- number: "10",
+ number: "",
  title: "Support",
  description: "We don't disappear after launch. Ongoing support, iteration, and growth, a true long-term partnership.",
  duration: "Ongoing",
@@ -315,18 +314,15 @@ export const PROCESS_STEPS = [
 ];
 
 // ─── Process · condensed phases (homepage) ────────────────────────────────────
-// The full 10-step methodology lives on /process. These six phases summarise it.
 
 export const PROCESS_PHASES = [
- { number: "01", title: "Find the signal", stages: "Strategy · Research", description: "We align on the problem, the audience and the opportunity before a single pixel is placed.", duration: "1–2 weeks" },
- { number: "02", title: "Build the system", stages: "Architecture · Design", description: "We turn the north star into a flexible identity, interface and experience your team can actually use.", duration: "2–4 weeks" },
- { number: "03", title: "Make it move", stages: "Development · Motion", description: "Design and engineering work together to make the system feel alive, fast and considered across every screen.", duration: "3–8 weeks" },
- { number: "04", title: "Put it in the world", stages: "Launch · Iteration", description: "We ship carefully, measure what matters and stay close enough to improve what comes next.", duration: "Ongoing" },
+ { number: "", title: "Find the signal", stages: "Strategy · Research", description: "We align on the problem, the audience and the opportunity before a single pixel is placed.", duration: "1–2 weeks" },
+ { number: "", title: "Build the system", stages: "Architecture · Design", description: "We turn the north star into a flexible identity, interface and experience your team can actually use.", duration: "2–4 weeks" },
+ { number: "", title: "Make it move", stages: "Development · Motion", description: "Design and engineering work together to make the system feel alive, fast and considered across every screen.", duration: "3–8 weeks" },
+ { number: "", title: "Put it in the world", stages: "Launch · Iteration", description: "We ship carefully, measure what matters and stay close enough to improve what comes next.", duration: "Ongoing" },
 ];
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
-// Every quote is anchored to a real case study and its headline result —
-// proof, not floating praise.
 
 
 
@@ -491,7 +487,7 @@ export const FAQS = [
  },
  {
  question: "What does your design process look like?",
- answer: "Discovery → Research → Strategy → Wireframes → Design → Prototype → Development → Testing → Launch → Support. Every phase has clear deliverables, reviews, and your input built in.",
+ answer: "Discovery, Research, Strategy, Wireframes, Design, Prototype, Development, Testing, Launch, Support. Every phase has clear deliverables, reviews, and your input built in.",
  },
  {
  question: "Can you work with our existing development team?",
@@ -499,7 +495,7 @@ export const FAQS = [
  },
  {
  question: "What's included after launch?",
- answer: "Every tier includes post-launch support — 14 days on MVP, 30 days on Growth, 12 months on Enterprise. We watch performance, fix what breaks, and iterate on what real usage shows.",
+ answer: "Every tier includes post-launch support, 14 days on MVP, 30 days on Growth, 12 months on Enterprise. We watch performance, fix what breaks, and iterate on what real usage shows.",
  },
  {
  question: "Do you sign NDAs and contracts?",
@@ -511,8 +507,6 @@ export const FAQS = [
 
 
 // ─── Industries ───────────────────────────────────────────────────────────────
-// Each industry is a real destination: /industries/[slug]. Service refs point at
-// SERVICES hrefs; work refs point at concept brand slugs (src/lib/brands).
 
 export const INDUSTRIES = [
  {
@@ -692,9 +686,6 @@ export const JOURNAL_CATEGORIES = [
 ];
 
 // ─── Pricing ──────────────────────────────────────────────────────────────────
-// One source of truth. These were hardcoded inside PricingTiers.tsx while a
-// second, contradictory list (Starter / Growth / Premium) sat in this file —
-// two different price lists shipping in the same build.
 
 export type Currency = "USD" | "EUR" | "NGN";
 
@@ -704,7 +695,6 @@ export const CURRENCY_SYMBOLS: Record<Currency, string> = {
  NGN: "\u20a6",
 };
 
-/** Indicative only — a real quote is settled on the discovery call. */
 export const EXCHANGE_RATES: Record<Currency, number> = {
  USD: 1,
  EUR: 0.92,
@@ -714,7 +704,6 @@ export const EXCHANGE_RATES: Record<Currency, number> = {
 export interface PricingTier {
  name: string;
  description: string;
- /** In USD; other currencies are converted at the rates above. */
  basePrice: number;
  timeline: string;
  features: string[];
@@ -723,12 +712,12 @@ export interface PricingTier {
 
 export const PRICING_TIERS: PricingTier[] = [
  {
- name: "MVP",
- description: "For an early-stage team putting a first real thing in front of people.",
- basePrice: 4800,
+ name: "Starter",
+ description: "For founders getting the first version in front of real people.",
+ basePrice: 1200,
  timeline: "2 weeks",
  features: [
- "Brand identity — logo, palette, type",
+ "Brand identity, logo, palette, type",
  "Landing page design",
  "Next.js build, deployed",
  "Technical SEO baseline",
@@ -737,9 +726,9 @@ export const PRICING_TIERS: PricingTier[] = [
  },
  {
  name: "Growth",
- description: "For a business whose digital presence is behind its product.",
- basePrice: 9500,
- timeline: "4\u20136 weeks",
+ description: "For teams whose product has outgrown its presence.",
+ basePrice: 2800,
+ timeline: "4 to 6 weeks",
  isPopular: true,
  features: [
  "Full brand guidelines",
@@ -751,10 +740,10 @@ export const PRICING_TIERS: PricingTier[] = [
  ],
  },
  {
- name: "Enterprise",
- description: "For complex products with real users and real constraints.",
- basePrice: 18000,
- timeline: "8\u201316 weeks",
+ name: "Scale",
+ description: "For complex products with real users and constraints.",
+ basePrice: 6500,
+ timeline: "8 to 16 weeks",
  features: [
  "User research and testing",
  "Multi-surface product design",

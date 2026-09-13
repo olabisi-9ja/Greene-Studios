@@ -12,14 +12,6 @@ import {
   type Currency,
 } from "@/lib/data";
 
-/**
- * Pricing. One source of truth (PRICING_TIERS in src/lib/data.ts) — the tiers
- * used to be hardcoded here while a second, contradictory list sat in data.ts.
- *
- * The currency toggle stays: buyers in Lagos, the EU and the US all read this
- * page, and making them convert in their head is a real cost. It is the one
- * genuinely unusual thing on the page, so it is worth keeping.
- */
 export default function PricingTiers({ showHeader = true }: { showHeader?: boolean }) {
   const [currency, setCurrency] = useState<Currency>("USD");
 
@@ -38,8 +30,7 @@ export default function PricingTiers({ showHeader = true }: { showHeader?: boole
                 <span className="text-[var(--brand-accent)]">✦</span> Pricing
               </span>
               <h2 className="font-display text-[clamp(2.2rem,4.5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
-                Transparent{" "}
-                <span className="font-serif-i lowercase normal-case tracking-normal">pricing.</span>
+                Transparent pricing
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--brand-text-secondary)]">
                 Every tier is a starting point, shaped to scope on the discovery call. No hidden fees
@@ -48,8 +39,8 @@ export default function PricingTiers({ showHeader = true }: { showHeader?: boole
             </>
           ) : null}
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--brand-text-secondary)]">
-            <span className="font-semibold text-[var(--brand-text)]">Lagos-based, worldwide.</span>{" "}
-            Senior boutique work without US or UK overhead.
+            <span className="font-semibold text-[var(--brand-text)]">Remote, available worldwide.</span>{" "}
+            Senior work without big-agency overhead.
           </p>
         </div>
 
@@ -79,7 +70,7 @@ export default function PricingTiers({ showHeader = true }: { showHeader?: boole
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {PRICING_TIERS.map((tier, index) => (
+        {PRICING_TIERS.map((tier) => (
           <Card as="article" key={tier.name} featured={tier.isPopular} className="gap-0">
             {tier.isPopular && (
               <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
@@ -88,14 +79,9 @@ export default function PricingTiers({ showHeader = true }: { showHeader?: boole
             )}
 
             <div className="mb-8">
-              <div className="flex items-baseline justify-between gap-3">
-                <h3 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
-                  {tier.name}
-                </h3>
-                <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
+              <h3 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
+                {tier.name}
+              </h3>
               <p className="mt-2 text-sm leading-relaxed text-[var(--brand-text-secondary)]">
                 {tier.description}
               </p>
@@ -151,7 +137,7 @@ export default function PricingTiers({ showHeader = true }: { showHeader?: boole
 
       <p className="mt-8 max-w-2xl text-xs leading-relaxed text-[var(--brand-text-secondary)]">
         Prices shown in {currency}. EUR and NGN are converted from USD at an indicative rate and are
-        settled in the currency agreed on your discovery call.
+        settled in the currency agreed on your discovery call. Flexible payment plans available.
       </p>
     </div>
   );

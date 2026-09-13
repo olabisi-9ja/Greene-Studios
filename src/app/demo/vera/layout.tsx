@@ -3,7 +3,7 @@ import { vera } from "@/lib/brands";
 import { fontPreloads } from "@/lib/brands/css";
 
 export const metadata: Metadata = {
-  title: { absolute: `${vera.name} — ${vera.tagline}`, template: `%s · ${vera.name}` },
+  title: { absolute: `${vera.name} - ${vera.tagline}`, template: `%s · ${vera.name}` },
   description: vera.direction,
   robots: { index: false, follow: true },
 };
