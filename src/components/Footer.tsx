@@ -1,154 +1,88 @@
-"use client";
-
 import Link from "next/link";
+import { BRAND } from "@/lib/data";
+import Runner from "@/components/brand/Runner";
 
-import { BRAND, NAV_LINKS } from "@/lib/data";
-import { GreeneMonogram } from "@/components/ui/GreeneMark";
-import RotatingBadge from "@/components/ui/RotatingBadge";
+const PAGES = [
+  { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Studio", href: "/studio" },
+  { label: "Journal", href: "/journal" },
+  { label: "Start here", href: "/start" },
+  { label: "Contact", href: "/contact" },
+];
+
+const SOCIAL = [
+  { label: "Instagram", href: BRAND.instagram },
+  { label: "LinkedIn", href: BRAND.linkedin },
+  { label: "X", href: BRAND.twitter },
+  { label: "GitHub", href: BRAND.github },
+];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-[var(--brand-text)] pb-6 pt-20 text-[var(--brand-bg)] md:pt-28">
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 md:px-10">
-        <span className="mb-8 block text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-bg)]/60">
-          <span className="text-[var(--brand-accent)]">✦</span> Next step
-        </span>
-
-        <h2 className="max-w-5xl font-display text-[clamp(2.2rem,6vw,5.5rem)] font-black uppercase leading-[0.92] tracking-tight">
-          Let&apos;s create something unforgettable
-        </h2>
-
-        <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--brand-bg)]/60">
-          Tell us what you are trying to build. We will take it from there.
-        </p>
-
-        <div className="mt-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-          <a
-            href={`mailto:${BRAND.email}`}
-            data-cursor="MAIL"
-            className="group font-display text-xl font-black tracking-tight underline decoration-[var(--brand-accent)] decoration-4 underline-offset-8 transition-colors hover:text-[var(--brand-accent)] md:text-3xl"
-          >
-            {BRAND.email}
-            <span className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
-          </a>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/contact"
-              data-cursor="HELLO"
-              className="inline-flex items-center gap-3 rounded-full bg-[var(--brand-bg)] px-7 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-text)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-ink)]"
-            >
-              Book a call <span aria-hidden="true">→</span>
+    <footer className="border-t border-[var(--brand-border)] px-5 pb-8 pt-20 sm:px-8">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div>
+            <Link href="/" className="inline-flex items-center gap-3 text-[var(--logo)]" aria-label="Greene Studios, home">
+              <Runner mode="scroll" className="h-14 w-auto" title="" />
+              <span className="wordmark text-3xl">Greene</span>
             </Link>
+            <p className="mt-5 max-w-[34ch] text-[var(--brand-text-secondary)]">
+              Brand, web and product design. Working worldwide.
+            </p>
             <a
               href={`mailto:${BRAND.email}`}
-              className="inline-flex items-center gap-3 rounded-full border-[1.5px] border-[var(--brand-bg)]/40 px-7 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:border-[var(--brand-bg)] hover:bg-[var(--brand-bg)] hover:text-[var(--brand-text)]"
+              className="mt-6 inline-block text-xl font-semibold underline decoration-[var(--brand-accent)] decoration-2 underline-offset-[6px]"
             >
-              Drop us an email
+              {BRAND.email}
             </a>
+            <p className="mt-2 text-sm text-[var(--brand-text-secondary)]">We reply within one working day, Monday to Friday.</p>
+          </div>
+
+          <nav aria-label="Footer">
+            <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">Pages</p>
+            <ul className="mt-4 list-none space-y-2 p-0">
+              {PAGES.map((p) => (
+                <li key={p.href}>
+                  <Link href={p.href} className="hover:text-[var(--brand-accent)]">
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">Elsewhere</p>
+            <ul className="mt-4 list-none space-y-2 p-0">
+              {SOCIAL.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-accent)]">
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 gap-10 border-t border-[var(--brand-bg)]/20 pt-12 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-[var(--brand-bg)] text-[var(--brand-text)]">
-                <GreeneMonogram fill className="h-full w-full p-[3px]" />
-              </span>
-              <span className="font-display text-xs font-black uppercase tracking-tight">Greene®</span>
-            </div>
-            <p className="mt-4 max-w-[240px] text-xs leading-relaxed text-[var(--brand-bg)]/60">
-              Independent design studio, working with ambitious brands worldwide. Remote, available everywhere.
-            </p>
-            <span className="mt-5 inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">
-              Available for select projects
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Menu</span>
-            {NAV_LINKS.map((item) => {
-              const isExternal = item.href.startsWith("http");
-              return (
-                <Link 
-                  key={item.href} 
-                  href={item.href} 
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                  data-cursor="GO" 
-                  className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]"
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <Link href="/team" data-cursor="GO" className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]">
-              Team
+        <div className="mt-16 flex flex-col gap-3 border-t border-[var(--brand-border)] pt-6 text-sm text-[var(--brand-text-secondary)] md:flex-row md:items-center md:justify-between">
+          <span>© {year} Greene Studios</span>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/legal#privacy" className="hover:text-[var(--brand-text)]">
+              Privacy
             </Link>
-            <Link href="/industries" data-cursor="GO" className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]">
-              Industries
+            <Link href="/legal#terms" className="hover:text-[var(--brand-text)]">
+              Terms
             </Link>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Socials</span>
-            <a href={BRAND.linkedin} target="_blank" rel="noreferrer" className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]">LinkedIn</a>
-            <a href={BRAND.instagram} target="_blank" rel="noreferrer" className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]">Instagram</a>
-            <a href={BRAND.twitter} target="_blank" rel="noreferrer" className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]">X / Twitter</a>
-            <a href={BRAND.github} target="_blank" rel="noreferrer" className="w-fit text-xs font-semibold transition-colors hover:text-[var(--brand-accent)]">GitHub</a>
-          </div>
-
-          <div className="flex flex-col items-start gap-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-bg)]/50">Since</span>
-            <RotatingBadge
-              text="GREENE STUDIOS ✦ EST. 2022 ✦ WORLDWIDE ✦ "
-              className="h-24 w-24 text-[var(--brand-bg)]"
-              centerText="✦"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="relative z-10 mb-4 mt-16 select-none text-center md:mt-24">
-        <h1
-          aria-hidden="true"
-          className="font-display whitespace-nowrap font-black uppercase leading-[0.85] tracking-tight text-[var(--brand-bg)]"
-          style={{ fontSize: "min(13vw, 20rem)" }}
-        >
-          <span className="block">
-            {"GREENE".split("").map((letter, i) => (
-              <span key={`g-${i}`} className="wordmark-letter">
-                {letter}
-              </span>
-            ))}
-          </span>
-          <span className="block">
-            {"STUDIOS®".split("").map((letter, i) => (
-              <span key={`s-${i}`} className="wordmark-letter">
-                {letter}
-              </span>
-            ))}
-          </span>
-        </h1>
-      </div>
-
-      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 text-[11px] font-medium text-[var(--brand-bg)]/60 md:flex-row md:items-end md:justify-between md:px-10">
-        <span>©{currentYear} Greene Studios. All rights reserved.</span>
-        <div className="flex flex-col gap-1 text-left md:text-right">
-          <span>Designed by Greene Studios</span>
-          <span>
-            Developed with care by{" "}
-            <a
-              href="https://olabisiadigun.xyz/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline decoration-[var(--brand-bg)]/40 underline-offset-2 transition-colors hover:text-[var(--brand-bg)] hover:decoration-[var(--brand-bg)]"
-            >
-              O L A B I S I
+            <a href="https://olabisiadigun.xyz/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-text)]">
+              Built by Olabisi Adigun
             </a>
-          </span>
+          </div>
         </div>
       </div>
     </footer>

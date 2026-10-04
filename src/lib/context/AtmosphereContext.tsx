@@ -13,25 +13,27 @@ import React, {
 /**
  * Greene Studios theme.
  *
- * Three visual themes: LIGHT / DARK / STUDIO.
+ * Four visual themes: LIGHT (sun) / DARK (moon) / STUDIO / RAW.
  * AUTO follows OS preference (light/dark only — studio is opt-in).
  * STUDIO is the bold, energetic mode — cobalt, acid gold, void ink, grain.
  * FOCUS is still a separate presentation state.
  */
-export type ThemeMode = "auto" | "light" | "dark" | "studio";
-export type VisualMode = "light" | "dark" | "studio";
+export type ThemeMode = "auto" | "light" | "dark" | "studio" | "raw";
+export type VisualMode = "light" | "dark" | "studio" | "raw";
 
 export const MODE_LABELS: Record<ThemeMode, string> = {
   auto: "AUTO",
   light: "LIGHT",
   dark: "DARK",
   studio: "STUDIO",
+  raw: "RAW",
 };
 
 const MODE_CLASSES: Record<VisualMode, string> = {
   light: "mode-light",
   dark: "mode-dark",
   studio: "mode-studio",
+  raw: "mode-raw",
 };
 
 /** Every theme class this app has ever written to <html>. */
@@ -51,7 +53,7 @@ export const STORAGE_MODE = "greene:atmosphere";
 function normalizeMode(v: string | null): ThemeMode {
   if (v === "paper" || v === "day") return "light";
   if (v === "midnight" || v === "night") return "dark";
-  if (v === "raw") return "dark";
+  if (v === "raw") return "raw";
   if (v === "studio") return "studio";
   if (v === "auto" || v === "light" || v === "dark") return v;
   return "auto";
@@ -101,7 +103,7 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const effectiveMode: VisualMode =
-    mode === "studio" ? "studio" : mode === "auto" ? (systemDark ? "dark" : "light") : mode;
+    mode === "studio" || mode === "raw" ? mode : mode === "auto" ? (systemDark ? "dark" : "light") : mode;
 
   // Keep the <html> theme class in sync.
   useLayoutEffect(() => {
@@ -127,8 +129,8 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggle = useCallback(() => {
-    // light → dark → studio → light
-    const order: VisualMode[] = ["light", "dark", "studio"];
+    // light → dark → studio → raw → light
+    const order: VisualMode[] = ["light", "dark", "studio", "raw"];
     const idx = order.indexOf(effectiveMode);
     const next = order[(idx + 1) % order.length] as ThemeMode;
     setMode(next);

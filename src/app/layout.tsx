@@ -72,14 +72,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
    try {
      var m = localStorage.getItem("greene:atmosphere");
       if (m === "paper" || m === "day") m = "light";
-      else if (m === "midnight" || m === "night" || m === "raw") m = "dark";
-      if (m !== "auto" && m !== "light" && m !== "dark" && m !== "studio") m = "auto";
+      else if (m === "midnight" || m === "night") m = "dark";
+      if (m !== "auto" && m !== "light" && m !== "dark" && m !== "studio" && m !== "raw") m = "auto";
      if (m === "auto") {
        m = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
      }
      var d = document.documentElement;
      d.classList.add("mode-" + m);
      d.setAttribute("data-mode", m);
+     if (sessionStorage.getItem("greene:loaded") === "1") d.classList.add("loader-seen");
    } catch (e) {}
  })();`,
    }}

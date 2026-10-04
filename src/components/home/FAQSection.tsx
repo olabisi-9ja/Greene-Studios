@@ -30,7 +30,7 @@ export default function FAQSection() {
  onClick={() => setOpen(isOpen ? null : i)}
  className="flex w-full items-center justify-between gap-6 py-6 text-left"
  aria-expanded={isOpen}
- data-cursor="TOGGLE"
+
  >
  <span className={cn(
  "headline text-base transition-colors duration-300 md:text-xl",
@@ -40,7 +40,7 @@ export default function FAQSection() {
  </span>
  <span
  className={cn(
- "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--brand-border)] text-base transition-all duration-300",
+ "flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] border border-[var(--brand-border)] text-base transition-all duration-300",
  isOpen && "rotate-45 border-[var(--brand-accent)] bg-[var(--brand-accent)] text-[var(--brand-on-accent)]"
  )}
  aria-hidden="true"

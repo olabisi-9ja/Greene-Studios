@@ -22,7 +22,7 @@ export default function LegalPage() {
 
  <div className="mx-auto max-w-3xl px-5 md:px-10">
  <div className="border-t border-[var(--brand-border)] pt-10">
- <h2 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
+ <h2 id="privacy" className="scroll-mt-28 font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
  Privacy policy
  </h2>
  <p className="mt-4 text-base leading-relaxed text-[var(--brand-text-secondary)]">
@@ -45,7 +45,7 @@ export default function LegalPage() {
 
  <hr className="my-12 border-[var(--brand-border)]" />
 
- <h2 className="font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
+ <h2 id="terms" className="scroll-mt-28 font-display text-2xl font-black uppercase tracking-tight text-[var(--brand-text)]">
  Terms of service
  </h2>
  <p className="mt-4 text-base leading-relaxed text-[var(--brand-text-secondary)]">

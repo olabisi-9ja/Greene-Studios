@@ -1,5 +1,5 @@
-@import "@fontsource-variable/archivo/wght.css";
-@import "@fontsource-variable/archivo/wght-italic.css";
+@import "@fontsource-variable/montserrat/wght-italic.css";
+@import "@fontsource-variable/montserrat/wght.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -19,9 +19,11 @@
   --color-brand-paper: var(--brand-paper);
   --color-brand-ink: var(--brand-ink);
 
-  --font-display: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Archivo Variable", "Archivo", system-ui, -apple-system, sans-serif;
+  /* One permanent face across the site: Montserrat, the wordmark's font. */
+  --font-display: "Montserrat Variable", "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Montserrat Variable", "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Montserrat Variable", "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-mono: "Montserrat Variable", "Montserrat", system-ui, sans-serif;
   --font-sans: var(--font-body);
   --font-heading: var(--font-display);
 
@@ -30,97 +32,73 @@
 }
 
 @layer base {
-  /* ─── LIGHT (default) ────────────────────────────────────────────── */
+  /* Greene palette, from the logo sheet:
+     Greene Green #0F5132 · Charcoal #1A1A1A · Off White #FAFAF7.
+     Each theme also sets --logo, the colour the running mark and the
+     wordmark take on that surface (green on light, lifted green on
+     charcoal, yellow on studio green, charcoal on raw orange). */
+
+  /* ─── SUN · light (default) ──────────────────────────────────────── */
   :root,
   .mode-light,
   .mode-day,
   .mode-paper {
-    --brand-primary: #1f3d3a;
-    --brand-bg: #f3f2ee; /* paper */
+    --brand-primary: #0f5132;
+    --brand-bg: #fafaf7;
     --brand-surface: #ffffff;
-    --brand-surface-secondary: #e8e7e2;
-    --brand-border: #d7d6d1;
-    --brand-text: #0a0a0a; /* ink */
-    --brand-text-secondary: #5c5c59;
-    --brand-accent: #1f3d3a;
-    --brand-on-accent: #f4f3ee;
-    --brand-paper: #f4f3ee;
-    --brand-ink: #111311;
+    --brand-surface-secondary: #f0f0ea;
+    --brand-border: #e2e2da;
+    --brand-text: #1a1a1a;
+    --brand-text-secondary: #5b5b55;
+    --brand-accent: #0f5132;
+    --brand-on-accent: #fafaf7;
+    --brand-paper: #fafaf7;
+    --brand-ink: #1a1a1a;
+    --logo: #0f5132;
+    --dock-bg: rgba(26, 26, 26, 0.9);
+    --dock-fg: #fafaf7;
+    --dock-active-bg: #0f5132;
+    --dock-active-fg: #fafaf7;
 
-    /* CTA block tokens (mode-aware) */
     --cta-bg: var(--brand-text);
     --cta-fg: var(--brand-bg);
     --cta-btn-bg: var(--brand-bg);
     --cta-btn-fg: var(--brand-text);
     --cta-border: var(--brand-bg);
 
-    /* Full abstract set — defined in BOTH themes so no page can reference
-       a token that only exists in one of them. */
     --color-abstract-orange: #c2541e;
     --color-abstract-blue: #3f6fa8;
-    --color-abstract-green: #477a44;
+    --color-abstract-green: #0f5132;
     --color-abstract-teal: #2e7d74;
     --color-abstract-yellow: #d8a22a;
     --color-abstract-lemon: #c8d94a;
-    --color-abstract-black: #17140e;
+    --color-abstract-black: #1a1a1a;
     --color-abstract-pink: #c2708a;
 
     --studio-grain: 0.03;
     color-scheme: light;
   }
 
-  /* ─── STUDIO — cobalt & gold (warmnfuzzy.tv) ──────────────────────
-     Deep void ink, electric cobalt, acid gold. Energetic, bold,
-     aggressive — used when the visitor opts into studio via the theme toggle. */
-  .mode-studio {
-    --brand-primary: #e5cf4f;
-    --brand-bg: #0a0a14; /* deep void ink */
-    --brand-surface: #12101e;
-    --brand-surface-secondary: #1a1730;
-    --brand-border: rgba(255, 255, 255, 0.12);
-    --brand-text: #ffffff; /* stark white */
-    --brand-text-secondary: rgba(255, 255, 255, 0.62);
-    --brand-accent: #e5cf4f; /* acid gold */
-    --brand-on-accent: #0a0a14;
-    --brand-paper: #0a0a14;
-    --brand-ink: #ffffff;
-    --studio-punch: #190bb6; /* cobalt blue for highlights */
-
-    --cta-bg: var(--brand-text);
-    --cta-fg: var(--brand-bg);
-    --cta-btn-bg: var(--brand-bg);
-    --cta-btn-fg: var(--brand-text);
-    --cta-border: var(--brand-bg);
-
-    --color-abstract-orange: #ff6b2d;
-    --color-abstract-blue: #190bb6;
-    --color-abstract-green: #e5cf4f;
-    --color-abstract-teal: #30c0cf;
-    --color-abstract-yellow: #e5cf4f;
-    --color-abstract-lemon: #e5cf4f;
-    --color-abstract-black: #ffffff;
-    --color-abstract-pink: #ff8fa3;
-
-    --studio-grain: 0.04;
-    color-scheme: dark;
-  }
-
-  /* ─── DARK ─────────────────────────────────────────────────────────── */
+  /* ─── MOON · charcoal dark ───────────────────────────────────────── */
   .mode-dark,
   .mode-night,
-  .mode-midnight,
-  .mode-raw {
-    --brand-primary: #8fb3a6;
-    --brand-bg: #080a09;
-    --brand-surface: #101513;
-    --brand-surface-secondary: #161d1b;
-    --brand-border: rgba(242, 239, 230, 0.14);
-    --brand-text: #f2efe6;
-    --brand-text-secondary: rgba(242, 239, 230, 0.62);
-    --brand-accent: #8fb3a6;
-    --brand-on-accent: #080a09;
-    --brand-paper: #080a09;
-    --brand-ink: #f2efe6;
+  .mode-midnight {
+    --brand-primary: #5fbf8a;
+    --brand-bg: #1a1a1a;
+    --brand-surface: #222220;
+    --brand-surface-secondary: #2a2a27;
+    --brand-border: rgba(250, 250, 247, 0.12);
+    --brand-text: #fafaf7;
+    --brand-text-secondary: rgba(250, 250, 247, 0.64);
+    --brand-accent: #5fbf8a;
+    --brand-on-accent: #1a1a1a;
+    --brand-paper: #1a1a1a;
+    --brand-ink: #fafaf7;
+    --logo: #4fae7c;
+    --dock-bg: rgba(58, 58, 55, 0.88);
+    --dock-fg: #fafaf7;
+    --dock-active-bg: #0f5132;
+    --dock-active-fg: #fafaf7;
 
     --cta-bg: var(--brand-text);
     --cta-fg: var(--brand-bg);
@@ -130,15 +108,94 @@
 
     --color-abstract-orange: #ff7a4d;
     --color-abstract-blue: #6d9bd8;
-    --color-abstract-green: #5aa66f;
+    --color-abstract-green: #5fbf8a;
     --color-abstract-teal: #48b3a6;
     --color-abstract-yellow: #e8c25a;
     --color-abstract-lemon: #d9f42c;
-    --color-abstract-black: #f2efe6;
+    --color-abstract-black: #fafaf7;
     --color-abstract-pink: #d98aa0;
 
     --studio-grain: 0.05;
     color-scheme: dark;
+  }
+
+  /* ─── STUDIO · deep green, yellow, black ─────────────────────────── */
+  .mode-studio {
+    --brand-primary: #ffd23f;
+    --brand-bg: #0b3d26;
+    --brand-surface: #0a0a0a;
+    --brand-surface-secondary: #0f5132;
+    --brand-border: rgba(250, 250, 247, 0.16);
+    --brand-text: #fafaf7;
+    --brand-text-secondary: rgba(250, 250, 247, 0.7);
+    --brand-accent: #ffd23f;
+    --brand-on-accent: #0a0a0a;
+    --brand-paper: #0b3d26;
+    --brand-ink: #fafaf7;
+    --logo: #ffd23f;
+    --dock-bg: rgba(10, 10, 10, 0.88);
+    --dock-fg: #fafaf7;
+    --dock-active-bg: #ffd23f;
+    --dock-active-fg: #0a0a0a;
+    --studio-punch: #ffd23f;
+
+    --cta-bg: #0a0a0a;
+    --cta-fg: #fafaf7;
+    --cta-btn-bg: #ffd23f;
+    --cta-btn-fg: #0a0a0a;
+    --cta-border: #ffd23f;
+
+    --color-abstract-orange: #ff6b2d;
+    --color-abstract-blue: #3f6fa8;
+    --color-abstract-green: #ffd23f;
+    --color-abstract-teal: #30c0cf;
+    --color-abstract-yellow: #ffd23f;
+    --color-abstract-lemon: #ffd23f;
+    --color-abstract-black: #fafaf7;
+    --color-abstract-pink: #ff8fa3;
+
+    --studio-grain: 0.04;
+    color-scheme: dark;
+  }
+
+  /* ─── RAW · orange skeleton ──────────────────────────────────────────
+     The site with its skin off: orange ground, charcoal outlines on every
+     block, a visible layout grid and monospace type. */
+  .mode-raw {
+    --brand-primary: #1a1a1a;
+    --brand-bg: #ff6a1a;
+    --brand-surface: #ff7a33;
+    --brand-surface-secondary: #ff8c4d;
+    --brand-border: #1a1a1a;
+    --brand-text: #1a1a1a;
+    --brand-text-secondary: rgba(26, 26, 26, 0.74);
+    --brand-accent: #1a1a1a;
+    --brand-on-accent: #ff6a1a;
+    --brand-paper: #ff6a1a;
+    --brand-ink: #1a1a1a;
+    --logo: #1a1a1a;
+    --dock-bg: #1a1a1a;
+    --dock-fg: #ff6a1a;
+    --dock-active-bg: #ff6a1a;
+    --dock-active-fg: #1a1a1a;
+
+    --cta-bg: #1a1a1a;
+    --cta-fg: #ff6a1a;
+    --cta-btn-bg: #ff6a1a;
+    --cta-btn-fg: #1a1a1a;
+    --cta-border: #ff6a1a;
+
+    --color-abstract-orange: #1a1a1a;
+    --color-abstract-blue: #1a1a1a;
+    --color-abstract-green: #1a1a1a;
+    --color-abstract-teal: #1a1a1a;
+    --color-abstract-yellow: #1a1a1a;
+    --color-abstract-lemon: #1a1a1a;
+    --color-abstract-black: #1a1a1a;
+    --color-abstract-pink: #1a1a1a;
+
+    --studio-grain: 0;
+    color-scheme: light;
   }
 
   * {
@@ -182,7 +239,7 @@
      the light accent is a deep green, which lands at 1.68:1 on near-black.
      `.on-ink` marks such a panel. */
   .on-ink {
-    --brand-accent: #9fc9a8;
+    --brand-accent: #5fbf8a;
     --brand-border: color-mix(in srgb, var(--brand-bg) 22%, transparent);
     /* The panel is painted with --brand-text, so anything sitting ON the
        inverted accent has to be that same colour — otherwise a light accent
@@ -192,7 +249,13 @@
   .mode-dark .on-ink,
   .mode-night .on-ink,
   .mode-midnight .on-ink {
-    --brand-accent: #1f3d3a;
+    --brand-accent: #0f5132;
+  }
+  .mode-studio .on-ink {
+    --brand-accent: #0f5132;
+  }
+  .mode-raw .on-ink {
+    --brand-accent: #ff6a1a;
   }
 
   /* The footer inverts against the page, so its accent has to invert too. */
@@ -200,16 +263,18 @@
   .mode-light footer,
   .mode-day footer,
   .mode-paper footer {
-    --brand-accent: #9fc9a8;
+    --brand-accent: #5fbf8a;
   }
   .mode-studio footer {
-    --brand-accent: #e5cf4f;
+    --brand-accent: #0f5132;
   }
   .mode-dark footer,
   .mode-night footer,
-  .mode-midnight footer,
+  .mode-midnight footer {
+    --brand-accent: #0f5132;
+  }
   .mode-raw footer {
-    --brand-accent: #1f3d3a;
+    --brand-accent: #ff6a1a;
   }
 
   /* Custom scrollbar */
@@ -1132,4 +1197,38 @@
     animation: none;
     display: none;
   }
+}
+
+
+/* ─── Greene wordmark: Montserrat, as on the brand sheet ───────────── */
+.wordmark {
+  font-family: "Montserrat Variable", "Montserrat", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--logo);
+}
+
+/* ─── RAW: the site with its skin off ──────────────────────────────── */
+.mode-raw body {
+  background-image:
+    linear-gradient(rgba(26, 26, 26, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 26, 26, 0.09) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.mode-raw main section {
+  outline: 1px dashed rgba(26, 26, 26, 0.55);
+  outline-offset: -10px;
+}
+.mode-raw main img {
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: multiply;
+}
+
+/* Loader: skipped before paint on repeat visits; locks scroll while up. */
+.loader-seen [data-loader] {
+  display: none;
+}
+html.is-loading {
+  overflow: hidden;
 }

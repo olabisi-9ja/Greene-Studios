@@ -1,66 +1,49 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import PricingTiers from "@/components/services/PricingTiers";
-import PageHeader from "@/components/ui/PageHeader";
+import PricingCards from "@/components/services/PricingCards";
 import { FAQS } from "@/lib/data";
 
 export const metadata: Metadata = {
- title: "Pricing",
- description: "Transparent pricing for world-class digital design and development.",
+  title: "Pricing",
+  description:
+    "Four ways to work with Greene Studios: brand identity, website, product build and monthly retainer, with price ranges and timelines.",
+  alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {
- return (
- <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)]">
- <PageHeader
- kicker="Pricing"
- title={
- <>
- Simple, transparent pricing
- </>
- }
- description="No hidden fees, no surprise invoices. Pick the tier that matches your stage, or let us scope something custom."
- />
+  return (
+    <div className="px-5 pb-32 pt-32 sm:px-8 sm:pt-40">
+      <div className="mx-auto max-w-[1400px]">
+        <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Pricing</p>
+        <h1 className="mt-4 max-w-[16ch] text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
+          Choose how we work together.
+        </h1>
+        <p className="mt-6 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">
+          Every project is quoted after a short call. Prices in USD.
+        </p>
 
- <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <PricingTiers showHeader={false} />
+        <div className="mt-16">
+          <PricingCards />
+        </div>
 
- <div className="mx-auto mt-8 max-w-3xl">
- <span className="mb-8 block text-center text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
- <span className="text-[var(--brand-accent)]">✦</span> Frequently asked
- </span>
- <div className="flex flex-col border-t border-[var(--brand-border)]">
- {FAQS.slice(0, 5).map((faq, index) => (
- <div key={index} className="border-b border-[var(--brand-border)] py-6">
- <h3 className="font-display text-lg font-black uppercase tracking-tight text-[var(--brand-text)] md:text-xl">
- {faq.question}
- </h3>
- <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
- {faq.answer}
- </p>
- </div>
- ))}
- </div>
- </div>
-
-        <div className="relative mt-24 overflow-hidden rounded-2xl on-ink bg-[var(--brand-text)] p-10 text-center text-[var(--brand-bg)] md:p-20">
-          <div className="relative z-10">
- <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Ready to invest in your brand
- </h2>
- <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[var(--brand-bg)]/70">
- Book a free discovery call. We will discuss your goals and find the best package for your needs.
- </p>
- <Link
- href="/contact"
- data-cursor="HELLO"
- className="mt-10 inline-flex items-center gap-3 rounded-full bg-[var(--brand-accent)] px-10 py-5 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-on-accent)] transition-colors duration-300 hover:bg-[var(--brand-bg)] hover:text-[var(--brand-accent)]"
- >
- Book a discovery call <span aria-hidden="true">→</span>
- </Link>
- </div>
- </div>
- </div>
- </div>
- );
+        <section className="mx-auto mt-28 max-w-3xl" aria-labelledby="pricing-faq">
+          <h2 id="pricing-faq" className="text-3xl font-semibold tracking-[-0.03em]">
+            Questions
+          </h2>
+          <div className="mt-8 border-t border-[var(--brand-border)]">
+            {FAQS.slice(0, 5).map((faq) => (
+              <details key={faq.question} className="group border-b border-[var(--brand-border)] py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-medium [&::-webkit-details-marker]:hidden">
+                  {faq.question}
+                  <span className="font-mono text-xl text-[var(--brand-text-secondary)] transition-transform group-open:rotate-45" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 max-w-2xl leading-relaxed text-[var(--brand-text-secondary)]">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 }

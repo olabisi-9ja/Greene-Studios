@@ -1,58 +1,39 @@
-"use client";
-
 import Link from "next/link";
-import { useSectionAnimation } from "@/lib/hooks/useSectionAnimation";
-import RollLabel from "@/components/ui/RollLabel";
-import BlurReveal from "@/components/effects/BlurReveal";
-import MagneticPull from "@/components/effects/MagneticPull";
+import { BRAND } from "@/lib/data";
+import { IconArrow } from "@/components/icons/GreeneIcons";
 
 export default function CTASection() {
-  const sectionRef = useSectionAnimation<HTMLElement>();
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ backgroundColor: "var(--cta-bg)", color: "var(--cta-fg)" }}
-    >
-      <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
-        <BlurReveal
-          text="Ready to build something people can't ignore?"
-          headingClassName="text-[clamp(1.8rem,3.8vw,3.25rem)]"
-        />
-
-        <p className="mx-auto mt-8 max-w-xl text-[15px] leading-relaxed opacity-80">
-          Take the two-minute project brief: what you are building, the budget, the timeline. We will respond within 24 hours with a clear path forward, no fluff, no pressure.
+    <section className="px-5 sm:px-8" style={{ backgroundColor: "var(--cta-bg)", color: "var(--cta-fg)" }}>
+      <div className="mx-auto max-w-[1400px] py-24 md:py-32">
+        <h2 className="max-w-[18ch] text-[clamp(2.2rem,5.4vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
+          Tell us what you&apos;re building.
+        </h2>
+        <p className="mt-6 max-w-[48ch] text-lg opacity-80">
+          We reply within one working day.
         </p>
-
-        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <MagneticPull strength={0.3}>
-            <Link
-              href="/contact"
-              data-cursor="START"
-              className="group inline-block rounded-full px-8 py-4 text-[14px] font-medium transition-colors duration-300"
-              style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
-            >
-              <RollLabel text="Start your brief" />
-            </Link>
-          </MagneticPull>
-          <MagneticPull strength={0.3}>
-            <a
-              href="mailto:hello@greenestudios.com"
-              className="group inline-block rounded-full border px-8 py-4 text-[14px] font-medium transition-colors duration-300"
-              style={{ borderColor: "color-mix(in srgb, var(--cta-fg) 40%, transparent)", color: "var(--cta-fg)" }}
-            >
-              <RollLabel text="hello@greenestudios.com" />
-            </a>
-          </MagneticPull>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link
+            href="/contact"
+            className="inline-flex h-12 items-center gap-2 rounded-[4px] px-6 font-medium transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "var(--cta-btn-bg)", color: "var(--cta-btn-fg)" }}
+          >
+            Start your brief <IconArrow className="size-4" />
+          </Link>
+          <Link
+            href="/start"
+            className="inline-flex h-12 items-center rounded-[4px] border px-6 font-medium"
+            style={{ borderColor: "color-mix(in srgb, var(--cta-fg) 40%, transparent)" }}
+          >
+            Not sure yet? Take the quiz
+          </Link>
         </div>
-
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-[11px] uppercase tracking-[0.1em] opacity-70">
-          <span>Two-minute brief</span>
-          <span>Response within 24h</span>
-          <span>No commitment required</span>
-          <span>NDA on request</span>
-        </div>
+        <p className="mt-10 text-sm opacity-70">
+          Or email{" "}
+          <a href={`mailto:${BRAND.email}`} className="underline underline-offset-4">
+            {BRAND.email}
+          </a>
+        </p>
       </div>
     </section>
   );

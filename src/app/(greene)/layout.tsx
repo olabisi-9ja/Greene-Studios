@@ -1,13 +1,13 @@
 import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
-import Navbar from "@/components/Navbar";
+import TopBar from "@/components/chrome/TopBar";
+import DockNav from "@/components/chrome/DockNav";
+import Loader from "@/components/chrome/Loader";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
 import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import PageTransition from "@/components/animations/PageTransition";
-import QuickActionsPanel from "@/components/ui/QuickActionsPanel";
-import ClickSpark from "@/components/ClickSpark";
 
 export default function GreeneLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -39,15 +39,23 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
         }}
       />
 
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[4px] focus:bg-[var(--brand-accent)] focus:px-4 focus:py-2 focus:text-[var(--brand-on-accent)]"
+      >
+        Skip to content
+      </a>
+      <Loader />
       <SmoothScroll>
-        <Navbar />
-        <QuickActionsPanel />
-        <ClickSpark />
-        <main>
+        <TopBar />
+        <main id="main">
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
+        {/* room for the floating dock under the footer */}
+        <div className="h-28" aria-hidden="true" />
       </SmoothScroll>
+      <DockNav />
       <FocusMode />
     </AtmosphereProvider>
   );
