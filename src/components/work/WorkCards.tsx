@@ -14,9 +14,9 @@ import { BrandMark } from "@/components/demo/BrandMark";
  */
 
 const CARD =
-  "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-all duration-400 hover:-translate-y-1 hover:border-[var(--brand-text)]/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]";
-const MEDIA = "relative aspect-[16/10] w-full overflow-hidden rounded-t-2xl bg-[var(--brand-surface-secondary)]";
-const IMG = "object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]";
+  "group flex h-full flex-col overflow-hidden rounded-xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-[var(--brand-text)]/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)]";
+const MEDIA = "relative aspect-[16/10] w-full overflow-hidden rounded-t-xl bg-[var(--brand-surface-secondary)]";
+const IMG = "object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]";
 const META = "text-[11px] font-semibold text-[var(--brand-text-secondary)]";
 const CTA = "text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-accent)]";
 
@@ -69,12 +69,12 @@ export function ShippedCard({ project }: { project: ShippedProject }) {
 
       <div className="flex flex-1 flex-col gap-3 p-6">
         <div className="flex items-baseline justify-between gap-3">
-          <h3 className="font-display text-lg font-black uppercase tracking-tight">{project.name}</h3>
+          <h3 className="font-display text-[17px] font-semibold uppercase tracking-tight">{project.name}</h3>
           <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
             {project.platform}
           </span>
         </div>
-        <p className="text-sm leading-relaxed text-[var(--brand-text-secondary)]">{project.summary}</p>
+        <p className="text-[13px] leading-relaxed text-[var(--brand-text-secondary)]">{project.summary}</p>
         <div className="mt-auto flex items-center justify-between gap-3 pt-2">
           <span className={META}>{project.tags.join(" · ")}</span>
           <span className={CTA}>
@@ -113,12 +113,12 @@ export function ConceptCard({ brand }: { brand: BrandSystem }) {
           <span className="text-[var(--brand-text)]">
             <BrandMark slug={brand.slug} size={22} />
           </span>
-          <h3 className="font-display text-lg font-black uppercase tracking-tight">{brand.name}</h3>
+          <h3 className="font-display text-[17px] font-semibold uppercase tracking-tight">{brand.name}</h3>
           <span className="ml-auto rounded-full border border-[var(--brand-border)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">
             Concept
           </span>
         </div>
-        <p className="text-sm leading-relaxed text-[var(--brand-text-secondary)]">{brand.tagline}</p>
+        <p className="text-[13px] leading-relaxed text-[var(--brand-text-secondary)]">{brand.tagline}</p>
         <div className="mt-auto flex items-center justify-between gap-3 pt-2">
           <span className={META}>{brand.sector}</span>
           <span className={CTA}>

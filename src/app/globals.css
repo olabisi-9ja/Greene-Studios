@@ -69,21 +69,22 @@
     color-scheme: light;
   }
 
-  /* ─── STUDIO — warm & fuzzy (warmnfuzzy.tv) ──────────────────────
-     Cream paper, burnt orange, chocolate ink, mustard. Tactile, grainy,
-     playful — used when the visitor opts into studio via the theme toggle. */
+  /* ─── STUDIO — cobalt & gold (warmnfuzzy.tv) ──────────────────────
+     Deep void ink, electric cobalt, acid gold. Energetic, bold,
+     aggressive — used when the visitor opts into studio via the theme toggle. */
   .mode-studio {
-    --brand-primary: #ff4d12;
-    --brand-bg: #fff7e6; /* warm cream */
-    --brand-surface: #fffbf0;
-    --brand-surface-secondary: #fbe9cc;
-    --brand-border: #e8d9b8;
-    --brand-text: #1a110a; /* chocolate */
-    --brand-text-secondary: #6b5744;
-    --brand-accent: #ff4d12; /* burnt orange */
-    --brand-on-accent: #fff7e6;
-    --brand-paper: #fff7e6;
-    --brand-ink: #1a110a;
+    --brand-primary: #e5cf4f;
+    --brand-bg: #0a0a14; /* deep void ink */
+    --brand-surface: #12101e;
+    --brand-surface-secondary: #1a1730;
+    --brand-border: rgba(255, 255, 255, 0.12);
+    --brand-text: #ffffff; /* stark white */
+    --brand-text-secondary: rgba(255, 255, 255, 0.62);
+    --brand-accent: #e5cf4f; /* acid gold */
+    --brand-on-accent: #0a0a14;
+    --brand-paper: #0a0a14;
+    --brand-ink: #ffffff;
+    --studio-punch: #190bb6; /* cobalt blue for highlights */
 
     --cta-bg: var(--brand-text);
     --cta-fg: var(--brand-bg);
@@ -92,16 +93,16 @@
     --cta-border: var(--brand-bg);
 
     --color-abstract-orange: #ff6b2d;
-    --color-abstract-blue: #4a7fb5;
-    --color-abstract-green: #2e7d6b;
-    --color-abstract-teal: #d97706;
-    --color-abstract-yellow: #ffb600;
-    --color-abstract-lemon: #ffe600;
-    --color-abstract-black: #1a110a;
+    --color-abstract-blue: #190bb6;
+    --color-abstract-green: #e5cf4f;
+    --color-abstract-teal: #30c0cf;
+    --color-abstract-yellow: #e5cf4f;
+    --color-abstract-lemon: #e5cf4f;
+    --color-abstract-black: #ffffff;
     --color-abstract-pink: #ff8fa3;
 
-    --studio-grain: 0.06;
-    color-scheme: light;
+    --studio-grain: 0.04;
+    color-scheme: dark;
   }
 
   /* ─── DARK ─────────────────────────────────────────────────────────── */
@@ -151,7 +152,7 @@
   html {
     scroll-behavior: smooth;
     background-color: var(--brand-bg);
-    font-size: 16px; /* transsion scale — larger, like transsion.com */ /* expo.dev scale — reduced from 16px */
+    font-size: 15px; /* transsion scale — larger, like transsion.com */ /* expo.dev scale — reduced from 16px */
     @apply font-sans;
   }
 
@@ -202,7 +203,7 @@
     --brand-accent: #9fc9a8;
   }
   .mode-studio footer {
-    --brand-accent: #ff4d12;
+    --brand-accent: #e5cf4f;
   }
   .mode-dark footer,
   .mode-night footer,
@@ -468,6 +469,19 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* ─── Interactive icons ──────────────────────────────────────────── */
+  .icon-interactive {
+    transition: transform 0.2s ease-out, color 0.2s ease-out;
+    cursor: pointer;
+  }
+  .icon-interactive:hover {
+    transform: scale(1.15) rotate(5deg);
+    color: var(--brand-accent);
+  }
+  .icon-interactive:active {
+    transform: scale(0.95);
+  }
 }
 
 /* ═══ Studio mode: vibrant colour system ═════════════════════════════ */
@@ -475,8 +489,8 @@
 /* Solid colour strips */
 .mode-studio .marquee-strip,
 .mode-studio .marquee-strip-hero {
-  background: var(--studio-accent, #d9f42c);
-  color: var(--brand-ink);
+  background: var(--studio-punch, #190bb6);
+  color: #e5cf4f;
 }
 .mode-raw .marquee-strip,
 .mode-raw .marquee-strip-hero {
@@ -497,19 +511,19 @@
 
 /* Buttons */
 .mode-studio .btn-primary {
-  background: var(--color-abstract-green);
-  color: var(--brand-ink);
+  background: var(--brand-accent);
+  color: var(--brand-bg);
 }
 .mode-studio .btn-primary:hover {
-  box-shadow: 0 10px 34px rgba(61, 220, 132, 0.35);
+  box-shadow: 0 10px 34px rgba(229, 207, 79, 0.35);
   transform: translateY(-1px);
 }
 .mode-studio .btn-outline {
-  border-color: var(--brand-accent);
+  border-color: rgba(255, 255, 255, 0.2);
   color: var(--brand-text);
 }
 .mode-studio .btn-outline:hover {
-  background: rgba(217, 244, 44, 0.12);
+  background: rgba(229, 207, 79, 0.12);
   border-color: var(--brand-accent);
 }
 
@@ -538,13 +552,13 @@
 
 /* Scroll progress */
 .mode-studio .scroll-progress {
-  background: var(--color-abstract-green);
+  background: var(--brand-accent);
 }
 
 /* Selection */
 .mode-studio ::selection {
-  background: var(--color-abstract-lemon);
-  color: var(--brand-ink);
+  background: var(--brand-accent);
+  color: var(--brand-bg);
 }
 
 /* ─── Shadcn tokens (kept for component compatibility) ─────────────── */
@@ -937,7 +951,7 @@
 }
 .mode-studio {
   --rail: color-mix(in srgb, var(--brand-accent) 58%, var(--brand-bg));
-  --sand: #fbe9cc;
+  --sand: #12101e;
 }
 
 .mode-dark,
@@ -953,9 +967,9 @@
    that genuinely want to shout. */
 .headline {
   font-family: var(--font-display);
-  font-weight: 750;
-  letter-spacing: -0.03em;
-  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   text-transform: none;
 }
 

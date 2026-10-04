@@ -26,11 +26,11 @@ export default function QuickActionsPanel() {
       className="pointer-events-none fixed right-0 top-1/2 z-[70] hidden -translate-y-1/2 md:flex"
       aria-label="Quick actions"
     >
-      <div className="pointer-events-auto flex flex-col items-center gap-2 rounded-l-full border-y border-l border-[var(--brand-border)] bg-[var(--brand-bg)]/80 p-2 backdrop-blur-xl shadow-[-8px_0_32px_rgba(0,0,0,0.08)]">
+      <div className="pointer-events-auto flex flex-col items-center gap-2 rounded-l-2xl border-y border-l border-[var(--brand-border)] bg-[var(--brand-bg)]/92 p-2.5 backdrop-blur-xl shadow-[-8px_0_32px_rgba(0,0,0,0.08)]">
         {actions.map(({ icon: Icon, label, href, action, type }) => {
           const inner = (
             <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[var(--brand-surface)] text-[var(--brand-text)] transition-all duration-300 hover:scale-110 hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)] active:scale-95">
-              <Icon size={16} strokeWidth={1.8} />
+              <Icon size={16} strokeWidth={1.8} className="icon-interactive" />
             </span>
           );
           return type === "link" && href ? (
@@ -43,7 +43,7 @@ export default function QuickActionsPanel() {
               className="group relative flex items-center"
             >
               {inner}
-              <span className="pointer-events-none absolute right-[calc(100%+10px)] whitespace-nowrap rounded-full bg-[var(--brand-text)] px-3 py-1 text-xs font-medium text-[var(--brand-bg)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <span className="pointer-events-none absolute right-[calc(100%+14px)] whitespace-nowrap rounded-full bg-[var(--brand-text)] px-3 py-1 text-xs font-medium text-[var(--brand-bg)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 {label}
               </span>
             </Link>
@@ -57,7 +57,7 @@ export default function QuickActionsPanel() {
               className="group relative flex items-center"
             >
               {inner}
-              <span className="pointer-events-none absolute right-[calc(100%+10px)] whitespace-nowrap rounded-full bg-[var(--brand-text)] px-3 py-1 text-xs font-medium text-[var(--brand-bg)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <span className="pointer-events-none absolute right-[calc(100%+14px)] whitespace-nowrap rounded-full bg-[var(--brand-text)] px-3 py-1 text-xs font-medium text-[var(--brand-bg)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 {label}
               </span>
             </button>
@@ -72,9 +72,9 @@ export default function QuickActionsPanel() {
           className="group relative flex items-center"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--brand-accent)] text-[var(--brand-on-accent)] transition-all duration-300 hover:scale-110 active:scale-95">
-            <ArrowUp size={16} strokeWidth={2} />
+            <ArrowUp size={16} strokeWidth={2} className="icon-interactive" />
           </span>
-          <span className="pointer-events-none absolute right-[calc(100%+10px)] whitespace-nowrap rounded-full bg-[var(--brand-text)] px-3 py-1 text-xs font-medium text-[var(--brand-bg)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          <span className="pointer-events-none absolute right-[calc(100%+14px)] whitespace-nowrap rounded-full bg-[var(--brand-text)] px-3 py-1 text-xs font-medium text-[var(--brand-bg)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
             Back to top
           </span>
         </button>

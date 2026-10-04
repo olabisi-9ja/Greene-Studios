@@ -6,6 +6,7 @@ import ServicesSection from "@/components/home/ServicesSection";
 import ProcessSection from "@/components/home/ProcessSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
+import BrandShowcase from "@/components/home/BrandShowcase";
 import { FAQS } from "@/lib/data";
 
 /**
@@ -24,6 +25,8 @@ export default function HomePage() {
       <ExperienceHero />
 
       <SelectedWork />
+
+      <BrandShowcase />
 
       {/* Section seams carry the figure that matches the turn the page is
           taking: a detour before the principles, a spread before the price

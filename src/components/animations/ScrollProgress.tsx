@@ -60,20 +60,20 @@ export default function ScrollProgress() {
   return (
     <>
       {/* Top horizontal — always visible track + moving fill */}
-      <div className="pointer-events-none fixed left-0 right-0 top-0 z-[100] h-[2px] bg-[var(--brand-border)]/40">
+      <div className="pointer-events-none fixed left-0 right-0 top-0 z-[100] h-[2px] bg-[var(--brand-border)]/20">
         <div
           ref={hBarRef}
           aria-hidden="true"
-          className="h-full w-full origin-left bg-[var(--brand-accent)] will-change-transform"
+          className="h-full w-full origin-left bg-[var(--brand-accent)] transition-[transform] duration-75 ease-out will-change-transform"
           style={{ transform: "scaleX(0)" }}
         />
       </div>
-      {/* Left vertical rail — subtle, follows vertical scroll */}
-      <div className="pointer-events-none fixed bottom-0 left-0 top-0 z-[90] hidden w-[2px] bg-[var(--brand-border)]/30 md:block">
+      {/* Left vertical rail — always visible on desktop, follows vertical scroll */}
+      <div className="pointer-events-none fixed bottom-0 left-0 top-0 z-[90] hidden w-[2px] bg-[var(--brand-border)]/20 md:block">
         <div
           ref={vBarRef}
           aria-hidden="true"
-          className="h-full w-full origin-top bg-[var(--brand-accent)] will-change-transform"
+          className="h-full w-full origin-top bg-[var(--brand-accent)] transition-[transform] duration-75 ease-out will-change-transform"
           style={{ transform: "scaleY(0)" }}
         />
       </div>
@@ -82,7 +82,7 @@ export default function ScrollProgress() {
         <div
           ref={hBottomRef}
           aria-hidden="true"
-          className="h-full w-full origin-left bg-[var(--brand-accent)] opacity-60 will-change-transform"
+          className="h-full w-full origin-left bg-[var(--brand-accent)] opacity-60 transition-[transform] duration-75 ease-out will-change-transform"
           style={{ transform: "scaleX(0)" }}
         />
       </div>

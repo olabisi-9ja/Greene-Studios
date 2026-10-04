@@ -44,9 +44,9 @@ export default function WorkPage() {
         <ScrollImageRail images={RAIL_IMAGES} />
       </section>
 
-      <section className="mx-auto max-w-[1400px] px-5 pt-16 md:px-10">
+      <section className="mx-auto max-w-[1400px] px-5 pt-12 md:px-10 md:pt-16">
         <WorkSectionHeading title="Shipped" meta={`${SHIPPED.length} live sites`} />
-        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SHIPPED.map((project) => (
             <li key={project.slug}>
               <ShippedCard project={project} />
@@ -55,14 +55,14 @@ export default function WorkPage() {
         </ul>
       </section>
 
-      <section className="mx-auto mt-24 max-w-[1400px] px-5 pb-24 md:px-10">
+      <section className="mx-auto py-16 md:py-24 max-w-[1400px] px-5 md:px-10">
         <WorkSectionHeading title="Concept systems" meta={`Self-initiated, ${BRANDS.length} brands`} />
-        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
+        <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">
           Six brands invented and built end to end, identity, interface, copy and code, to work
           through problems a client brief rarely leaves room for. Each one is a running site, not a
           mockup. None of them is a company you can buy from.
         </p>
-        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {BRANDS.map((brand) => (
             <li key={brand.slug}>
               <ConceptCard brand={brand} />

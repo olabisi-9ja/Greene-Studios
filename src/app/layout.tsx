@@ -71,9 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      __html: `(function(){
    try {
      var m = localStorage.getItem("greene:atmosphere");
-     if (m === "paper" || m === "day") m = "light";
-     else if (m === "midnight" || m === "night" || m === "studio" || m === "raw") m = "dark";
-     if (m !== "auto" && m !== "light" && m !== "dark") m = "auto";
+      if (m === "paper" || m === "day") m = "light";
+      else if (m === "midnight" || m === "night" || m === "raw") m = "dark";
+      if (m !== "auto" && m !== "light" && m !== "dark" && m !== "studio") m = "auto";
      if (m === "auto") {
        m = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
      }

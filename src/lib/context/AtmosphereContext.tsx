@@ -15,8 +15,8 @@ import React, {
  *
  * Three visual themes: LIGHT / DARK / STUDIO.
  * AUTO follows OS preference (light/dark only — studio is opt-in).
- * STUDIO is the warm, tactile mode inspired by warmnfuzzy.tv — cream, burnt
- * orange, grain, bolder radiuses. FOCUS is still a separate presentation state.
+ * STUDIO is the bold, energetic mode — cobalt, acid gold, void ink, grain.
+ * FOCUS is still a separate presentation state.
  */
 export type ThemeMode = "auto" | "light" | "dark" | "studio";
 export type VisualMode = "light" | "dark" | "studio";

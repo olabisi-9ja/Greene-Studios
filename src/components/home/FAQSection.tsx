@@ -12,10 +12,10 @@ export default function FAQSection() {
  <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-20">
  <div className="lg:col-span-4">
  <span className="chip-mono">FAQ</span>
- <h2 className="headline mt-6 text-[clamp(2.1rem,4.4vw,3.75rem)]">
+ <h2 className="headline mt-6 text-[clamp(1.8rem,3.8vw,3.25rem)]">
  Questions worth asking.
  </h2>
- <p className="mt-6 max-w-sm text-base leading-snug text-[var(--brand-text-secondary)]">
+ <p className="mt-6 max-w-sm text-[15px] leading-snug text-[var(--brand-text-secondary)]">
  Informed clients make better partners. These are the questions we hear most, and the honest answers.
  </p>
  </div>
@@ -33,14 +33,14 @@ export default function FAQSection() {
  data-cursor="TOGGLE"
  >
  <span className={cn(
- "headline text-lg transition-colors duration-300 md:text-2xl",
+ "headline text-base transition-colors duration-300 md:text-xl",
  isOpen ? "text-[var(--brand-accent)]" : "text-[var(--brand-text)]"
  )}>
  {faq.question}
  </span>
  <span
  className={cn(
- "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--brand-border)] text-lg transition-all duration-300",
+ "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--brand-border)] text-base transition-all duration-300",
  isOpen && "rotate-45 border-[var(--brand-accent)] bg-[var(--brand-accent)] text-[var(--brand-on-accent)]"
  )}
  aria-hidden="true"
@@ -55,7 +55,7 @@ export default function FAQSection() {
  )}
  >
  <div className="overflow-hidden">
- <p className="max-w-2xl pb-7 pl-0 text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
+ <p className="max-w-2xl pb-7 pl-0 text-[13px] leading-relaxed text-[var(--brand-text-secondary)] md:text-sm">
  {faq.answer}
  </p>
  </div>

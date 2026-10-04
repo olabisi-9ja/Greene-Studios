@@ -60,13 +60,13 @@ export default async function CaseStudyPage({ params }: Props) {
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
             <BrandMark slug={brand.slug} size={28} />
           </span>
-          <h1 className="mt-6 font-display text-[clamp(2.8rem,8vw,6.5rem)] font-black uppercase leading-[0.9] tracking-tight">
+          <h1 className="mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] font-black uppercase leading-[0.9] tracking-tight">
             {brand.name}
           </h1>
-          <p className="mt-6 max-w-2xl text-balance text-lg leading-snug text-[var(--brand-text-secondary)] md:text-xl">
+          <p className="mt-5 max-w-2xl text-balance text-lg leading-snug text-[var(--brand-text-secondary)] md:text-xl">
             {brand.tagline}
           </p>
-          <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-[var(--brand-text-secondary)]">
+          <p className="mx-auto mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">
             {brand.direction}
           </p>
         </div>
@@ -74,7 +74,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
       {/* Cinematic opener — the brand's world expands from frame to full bleed */}
       <ScrollExpand
-        src={`/images/work/${brand.slug}/cover-lifestyle.jpg`}
+        src={`/images/work/${brand.slug}/hero-lifestyle.jpg`}
         alt={`${brand.name} lifestyle visual`}
         title={brand.tagline}
         scrollHint="Scroll"
@@ -122,23 +122,23 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
       )}
 
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 md:mt-24 md:px-10">
+      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <span className="chip-mono">Brief</span>
           </div>
-          <p className="max-w-2xl text-lg leading-relaxed text-[var(--brand-text)] lg:col-span-8 md:text-xl">
+          <p className="max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text)] lg:col-span-8 md:text-[17px]">
             {study.brief}
           </p>
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 md:mt-24 md:px-10">
+      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <span className="chip-mono">Decisions</span>
-            <h2 className="headline mt-4 text-3xl md:text-4xl">Choices worth defending</h2>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--brand-text-secondary)]">
+            <h2 className="headline mt-4 text-2xl md:text-3xl">Choices worth defending</h2>
+            <p className="mt-3 text-[13px] leading-relaxed text-[var(--brand-text-secondary)]">
               No templates. Every decision earns its place — like Fourmula&apos;s PDPs, each visual is generated to a purpose.
             </p>
           </div>
@@ -147,7 +147,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <dl className="divide-y divide-[var(--brand-border)] border-y border-[var(--brand-border)]">
               {study.decisions.map((d) => (
                 <div key={d.title} className="py-7 md:py-8">
-                  <dt className="font-display text-lg font-black uppercase tracking-tight md:text-xl">
+                  <dt className="font-display text-[17px] font-semibold uppercase tracking-tight">
                     {d.title}
                   </dt>
                   <dd className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">
@@ -160,7 +160,7 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 md:mt-24 md:px-10">
+      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
         <span className="chip-mono">System</span>
         <div className="mt-6 overflow-hidden rounded-2xl border border-[var(--brand-border)]">
           <ShotImage
@@ -186,11 +186,11 @@ export default async function CaseStudyPage({ params }: Props) {
           ))}
         </div>
 
-        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--brand-text-secondary)]">{study.build}</p>
+        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">{study.build}</p>
       </section>
 
       {/* Horizontal scroll — karolinahess.com inspired */}
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 md:mt-24 md:px-10">
+      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
         <div className="flex items-baseline justify-between gap-4">
           <span className="chip-mono">Pages</span>
           <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
@@ -218,7 +218,7 @@ export default async function CaseStudyPage({ params }: Props) {
               <div className="relative aspect-[16/10] w-full">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`/images/work/${brand.slug}/cover-lifestyle.jpg`}
+                  src={`/images/work/${brand.slug}/hero-lifestyle.jpg`}
                   alt={`${brand.name} lifestyle`}
                   className="h-full w-full object-cover"
                 />
@@ -231,11 +231,11 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 md:mt-24 md:px-10">
+      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
         <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:p-10">
           <span className="chip-mono">Learned</span>
-          <p className="mt-4 max-w-3xl text-xl leading-relaxed md:text-2xl">{study.learned}</p>
-          <div className="mt-8 flex items-center gap-3 border-t border-[var(--brand-border)] pt-6 text-sm text-[var(--brand-text-secondary)]">
+          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed md:text-lg">{study.learned}</p>
+          <div className="mt-8 flex items-center gap-3 border-t border-[var(--brand-border)] pt-6 text-[13px] text-[var(--brand-text-secondary)]">
             <span className="relative h-8 w-8 overflow-hidden rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/character/greene-mascot.png" alt="" className="h-full w-full object-cover" />
@@ -245,7 +245,7 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-[1400px] px-5 pb-24 md:mt-24 md:px-10">
+      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
         <div className="flex items-center justify-end gap-6 border-t border-[var(--brand-border)] pt-10">
           <Link
             href={`/work/${next.slug}`}
@@ -255,7 +255,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <span className="hidden text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-text-secondary)] md:inline">
               Next case study
             </span>
-            <span className="font-display text-2xl font-black uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-1 md:text-3xl">
+            <span className="font-display text-[22px] font-black uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-1 md:text-[28px]">
               {next.name} →
             </span>
           </Link>

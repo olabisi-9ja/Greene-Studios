@@ -105,32 +105,32 @@ export default function ServicesSection() {
                 onFocus={() => setActive(i)}
                 onBlur={() => setActive(null)}
               >
-                <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-9">
+                <div className="relative z-10 grid grid-cols-12 items-center gap-3 px-1 py-7 transition-colors duration-300 md:px-4 md:py-8">
                   <div className="col-span-12 md:col-span-5">
                     <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
                       {service.stage}
                     </span>
-                    <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.2rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
+                    <h3 className="font-display text-[clamp(1.3rem,2.8vw,2.5rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
                       {service.title}
                     </h3>
                   </div>
-                  <p className="col-span-12 mt-2 max-w-md text-sm leading-relaxed text-[var(--brand-text-secondary)] md:col-span-5 md:mt-0 md:text-[15px]">
+                  <p className="col-span-12 mt-2 max-w-md text-xs leading-relaxed text-[var(--brand-text-secondary)] md:col-span-5 md:mt-0 md:text-sm">
                     {service.desc}
                   </p>
                   <div className="col-span-12 flex flex-wrap items-center gap-2 md:col-span-2 md:justify-end">
-                    <span className="font-mono text-[11px] font-bold tracking-wide text-[var(--brand-accent)]">
+                    <span className="font-mono text-[10px] font-bold tracking-wide text-[var(--brand-accent)]">
                       {service.from}
                     </span>
                     {service.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--brand-text-secondary)]"
+                        className="rounded-full border border-[var(--brand-border)] px-3 py-1 text-[9px] font-semibold uppercase tracking-wider text-[var(--brand-text-secondary)]"
                       >
                         {tag}
                       </span>
                     ))}
                     <span
-                      className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-border)] text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"
+                      className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--brand-border)] text-sm text-[var(--brand-text)] transition-all duration-300 group-hover:rotate-[-45deg] group-hover:border-[var(--brand-accent)] group-hover:bg-[var(--brand-accent)] group-hover:text-[var(--brand-on-accent)] md:ml-2"
                       aria-hidden="true"
                     >
                       →
@@ -173,7 +173,7 @@ export default function ServicesSection() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <span className="mr-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
+          <span className="mr-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
             Supporting every project
           </span>
           {SUPPORTING.map((s) => (
@@ -181,7 +181,7 @@ export default function ServicesSection() {
               key={s.href}
               href={s.href}
               data-cursor="GO"
-              className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[var(--brand-text-secondary)] transition-all duration-300 hover:border-[var(--brand-accent)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]"
+              className="rounded-full border border-[var(--brand-border)] px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[var(--brand-text-secondary)] transition-all duration-300 hover:border-[var(--brand-accent)] hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]"
             >
               {s.label}
             </Link>
@@ -189,10 +189,10 @@ export default function ServicesSection() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          <p className="text-xl text-[var(--brand-text-secondary)] md:text-2xl">
+          <p className="text-lg text-[var(--brand-text-secondary)] md:text-xl">
             Something more custom in mind?
           </p>
-          <Link href="/services" data-cursor="GO" className="inline-flex items-center justify-center rounded-full bg-[var(--brand-text)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]">
+          <Link href="/services" data-cursor="GO" className="inline-flex items-center justify-center rounded-full bg-[var(--brand-text)] px-7 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-[var(--brand-bg)] transition-colors duration-300 hover:bg-[var(--brand-accent)] hover:text-[var(--brand-on-accent)]">
             Explore all services <span aria-hidden="true">→</span>
           </Link>
         </div>

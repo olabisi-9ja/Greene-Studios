@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Moon, Sun, Palette } from "lucide-react";
+import { Moon, Sun, Sparkles } from "lucide-react";
 import { useAtmosphere } from "@/lib/context/AtmosphereContext";
 
 /**
@@ -16,7 +16,7 @@ export default function ThemeToggle() {
   const nextMap: Record<string, string> = { light: "dark", dark: "studio", studio: "light" };
   const next = nextMap[current] ?? "light";
 
-  const Icon = current === "light" ? Sun : current === "dark" ? Moon : Palette;
+  const Icon = current === "light" ? Sun : current === "dark" ? Moon : Sparkles;
   const label = `Switch to ${next} mode (now ${current})`;
 
   return (
@@ -32,12 +32,12 @@ export default function ThemeToggle() {
         <motion.span
           key={current}
           initial={{ opacity: 0, rotate: -70, scale: 0.6 }}
-          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          animate={{ opacity: 1, rotate: 0, scale: [1, 1.2, 1] }}
           exit={{ opacity: 0, rotate: 70, scale: 0.6 }}
-          transition={{ duration: 0.22, ease: [0.25, 1, 0.5, 1] }}
+          transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
           className="flex items-center justify-center"
         >
-          <Icon size={16} strokeWidth={2} />
+          <Icon size={16} strokeWidth={2} className="icon-interactive" />
         </motion.span>
       </AnimatePresence>
       {current === "studio" && (

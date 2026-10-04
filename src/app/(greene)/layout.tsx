@@ -2,7 +2,6 @@ import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import Preloader from "@/components/Preloader";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
 import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
@@ -15,7 +14,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
     <AtmosphereProvider>
       <ScrollProgress />
       <NoiseTexture />
-      <Preloader />
 
       <script
         type="application/ld+json"

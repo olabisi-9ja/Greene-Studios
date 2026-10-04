@@ -72,10 +72,10 @@ function StripCard({
             className="absolute inset-0 flex flex-col items-start justify-end p-5"
             style={{ background: color }}
           >
-            <p className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-white/75">
+            <p className="font-display text-xl font-black uppercase leading-tight tracking-tight text-white/75">
               {label}
             </p>
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/45">
+            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-white/45">
               {sub}
             </p>
           </div>
@@ -91,10 +91,10 @@ function StripCard({
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <p className="font-display text-xl font-black uppercase leading-tight tracking-tight text-white">
+          <p className="font-display text-lg font-black uppercase leading-tight tracking-tight text-white">
             {label}
           </p>
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">
+          <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-white/55">
             {sub}
           </p>
         </motion.div>
@@ -109,13 +109,13 @@ export default function Manifesto() {
       <div className="mx-auto max-w-[900px] px-5 text-center md:px-10">
         <HighlightWords
           text="In a world where everyone is trying to do everything, we choose to obsess over one thing, digital work that moves people."
-          className="font-display text-[clamp(1.9rem,4.2vw,3.75rem)] font-medium leading-[1.18] tracking-tight text-[var(--brand-text)]"
+          className="font-display text-[clamp(1.6rem,3.5vw,3rem)] font-medium leading-[1.18] tracking-tight text-[var(--brand-text)]"
         />
 
         <Link
           href="/studio"
           data-cursor="READ"
-          className="mt-10 inline-flex items-center justify-center rounded-full border border-[var(--brand-border)] px-7 py-3 font-mono text-[13px] uppercase tracking-[0.14em] text-[var(--brand-text)] transition-colors duration-300 hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]"
+          className="mt-10 inline-flex items-center justify-center rounded-full border border-[var(--brand-border)] px-7 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--brand-text)] transition-colors duration-300 hover:border-[var(--brand-text)] hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]"
         >
           More about us
         </Link>

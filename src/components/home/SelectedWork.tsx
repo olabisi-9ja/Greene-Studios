@@ -63,36 +63,25 @@ function buildItems(): WorkItem[] {
 const ITEMS = buildItems();
 
 function WorkCard({ item }: { item: WorkItem }) {
-  const [imgError, setImgError] = useState(false);
   const isExternal = item.href.startsWith("http");
-  const displaySrc = imgError && item.lifestyle ? item.lifestyle : item.src;
 
   const card = (
-    <div className="group relative flex w-[88vw] max-w-[420px] shrink-0 flex-col overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] md:w-[420px]">
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
-        {!imgError || item.lifestyle ? (
-          <Image
-            src={displaySrc}
-            alt={item.name}
-            fill
-            sizes="420px"
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-end p-6" style={{ background: item.bg }}>
-            <p className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-white/80">
-              {item.name}
-            </p>
-          </div>
-        )}
-        <span className="absolute left-3 top-3 rounded-full bg-[var(--brand-bg)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text)] backdrop-blur">
+    <div className="group relative flex w-[88vw] max-w-[460px] shrink-0 flex-col overflow-hidden rounded-xl border border-[var(--brand-border)] bg-[var(--brand-surface)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] md:w-[460px]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
+        <Image
+          src={item.src}
+          alt={item.name}
+          fill
+          sizes="460px"
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+        <span className="absolute left-3 top-3 rounded-full bg-[var(--brand-bg)]/90 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text)] backdrop-blur">
           {item.label}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-5">
-        <h3 className="font-display text-lg font-black uppercase tracking-tight">{item.name}</h3>
-        <p className="text-sm leading-relaxed text-[var(--brand-text-secondary)] line-clamp-2">
+        <h3 className="font-display text-[17px] font-semibold uppercase tracking-tight">{item.name}</h3>
+        <p className="text-[13px] leading-relaxed text-[var(--brand-text-secondary)] line-clamp-2">
           {isExternal ? "Live site — opens in new tab" : "Self-initiated concept system"}
         </p>
         <span className="mt-auto pt-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
@@ -175,7 +164,7 @@ export default function SelectedWork() {
             onMouseUp={onMouseUp}
             onMouseLeave={onMouseLeave}
             className={`flex gap-5 overflow-x-auto pb-4 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
-            style={{ scrollSnapType: "x proximity" }}
+            style={{ scrollSnapType: "x mandatory" }}
             aria-label="Horizontal work gallery, drag to scroll"
           >
             {ITEMS.map((item) => (
@@ -200,22 +189,6 @@ export default function SelectedWork() {
         </div>
       </div>
 
-      {/* Mascot footer line — consistent 2D character like cardtonic/upskill */}
-      <div className="mx-auto mt-12 hidden max-w-[1400px] items-center gap-3 px-5 opacity-60 md:flex md:px-10">
-        <span className="h-px flex-1 bg-[var(--brand-border)]" />
-        <motion.div
-          initial={{ rotate: -2 }}
-          whileHover={{ rotate: 2, scale: 1.05 }}
-          className="flex items-center gap-2 rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] px-3 py-2 text-xs"
-        >
-          <span className="relative h-6 w-6 overflow-hidden rounded-full bg-[var(--brand-surface-secondary)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/character/greene-mascot.png" alt="" className="h-full w-full object-cover" />
-          </span>
-          <span className="font-medium tracking-[-0.01em]">Built with care — Greene character</span>
-        </motion.div>
-        <span className="h-px flex-1 bg-[var(--brand-border)]" />
-      </div>
     </section>
   );
 }

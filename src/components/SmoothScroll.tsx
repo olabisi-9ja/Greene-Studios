@@ -35,8 +35,6 @@ export default function SmoothScroll({
     });
 
     lenisRef.current = lenis;
-    // Expose so FloatingButtons (back-to-top) can drive it
-    window.__lenis = lenis;
 
     let rafId: number;
     function raf(time: number) {

@@ -18,10 +18,10 @@ export default function CTASection() {
       <div className="mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
         <BlurReveal
           text="Ready to build something people can't ignore?"
-          headingClassName="text-[clamp(2.4rem,6vw,5.5rem)]"
+          headingClassName="text-[clamp(1.8rem,3.8vw,3.25rem)]"
         />
 
-        <p className="mx-auto mt-8 max-w-xl text-base leading-snug opacity-80 md:text-lg">
+        <p className="mx-auto mt-8 max-w-xl text-[15px] leading-relaxed opacity-80">
           Take the two-minute project brief: what you are building, the budget, the timeline. We will respond within 24 hours with a clear path forward, no fluff, no pressure.
         </p>
 
