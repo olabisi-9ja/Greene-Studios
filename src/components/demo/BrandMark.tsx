@@ -81,6 +81,21 @@ const PATHS: Record<string, React.ReactNode> = {
       </g>
     </>
   ),
+  pace: (
+    <>
+      <path d="M3 26 11 6h5L8 26Z" fill="currentColor"/><path d="M11 26 19 6h5l-8 20Z" fill="currentColor"/><path d="M19 26 27 6h3l-8 20Z" fill="var(--b-accent, currentColor)"/>
+    </>
+  ),
+  chopbox: (
+    <>
+      <path d="M3 15h26c0 7.2-5.8 13-13 13S3 22.2 3 15Z" fill="var(--b-accent, currentColor)"/><path d="M11 11c0-2 2-2.5 2-4.5M16 11c0-2 2-2.5 2-4.5M21 11c0-2 2-2.5 2-4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    </>
+  ),
+  kora: (
+    <>
+      <rect x="3" y="3" width="26" height="26" rx="7" stroke="currentColor" strokeWidth="2.4"/><path d="M3 16h7M22 16h7M16 3v7M16 22v7" stroke="currentColor" strokeWidth="2.4"/><rect x="11" y="11" width="10" height="10" rx="2.5" fill="var(--b-accent, currentColor)"/>
+    </>
+  ),
 };
 
 export function BrandMark({ slug, size = 26 }: { slug: string; size?: number }) {

@@ -1,0 +1,15 @@
+# Greene Studios
+
+> Independent design studio. Brand identity, websites and web/mobile products, designed and built in-house. Remote, working worldwide.
+
+## Pages
+- [Home](https://greene-studios.vercel.app/): globe hero, selected work, services
+- [Work](https://greene-studios.vercel.app/work): live client sites and nine studio concept brands
+- [Services](https://greene-studios.vercel.app/services): what the studio does
+- [Pricing](https://greene-studios.vercel.app/pricing): Brand Identity, Website, Product Build, Monthly Retainer
+- [Start here](https://greene-studios.vercel.app/start): six-question quiz that recommends a starting package
+- [Contact](https://greene-studios.vercel.app/contact): project brief
+
+## Notes
+- Concept brands (Luminary, Vera, Arc, Bloom, Onyx, Prism, Pace, Chopbox, Kora) are self-initiated studio work, not client projects. Each has a working demo site under /demo/<name>.
+- Contact: hello@greenestudios.com

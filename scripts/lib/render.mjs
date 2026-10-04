@@ -11,8 +11,19 @@ import { dirname } from "node:path";
  * demo sites come through `shootUrl`, which is why the case study imagery can
  * never drift from the live site: one is a photograph of the other.
  */
+/** Playwright's bundled Chromium if it has been downloaded, otherwise the
+ *  system Chrome (`PW_CHANNEL=chrome` forces it). */
+export async function launch() {
+  if (process.env.PW_CHANNEL) return chromium.launch({ channel: process.env.PW_CHANNEL });
+  try {
+    return await chromium.launch();
+  } catch {
+    return chromium.launch({ channel: "chrome" });
+  }
+}
+
 export async function withBrowser(fn) {
-  const browser = await chromium.launch();
+  const browser = await launch();
   try {
     return await fn(browser);
   } finally {

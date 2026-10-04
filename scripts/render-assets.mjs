@@ -57,6 +57,9 @@ const FONT_PACKAGES = {
   "public-sans": "Public Sans Variable",
   "space-grotesk": "Space Grotesk Variable",
   outfit: "Outfit Variable",
+  archivo: "Archivo Variable",
+  "bricolage-grotesque": "Bricolage Grotesque Variable",
+  manrope: "Manrope Variable",
 };
 
 async function allFontCss() {

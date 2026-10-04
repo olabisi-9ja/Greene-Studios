@@ -21,6 +21,9 @@ const PACKAGES = {
   "Public Sans Variable": "public-sans",
   "Space Grotesk Variable": "space-grotesk",
   "Outfit Variable": "outfit",
+  "Archivo Variable": "archivo",
+  "Bricolage Grotesque Variable": "bricolage-grotesque",
+  "Manrope Variable": "manrope",
 };
 
 // Mirrors FONT_FACES in src/lib/brands/fonts.ts.
@@ -32,6 +35,9 @@ const FILES = {
   "public-sans": ["public-sans-latin-wght-normal.woff2"],
   "space-grotesk": ["space-grotesk-latin-wght-normal.woff2"],
   outfit: ["outfit-latin-wght-normal.woff2"],
+  archivo: ["archivo-latin-standard-normal.woff2"],
+  "bricolage-grotesque": ["bricolage-grotesque-latin-standard-normal.woff2"],
+  manrope: ["manrope-latin-wght-normal.woff2"],
 };
 
 const primary = (stack) => stack.split(",")[0].trim().replace(/^["']|["']$/g, "");

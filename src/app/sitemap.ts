@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/process',
     '/pricing',
+    '/start',
     '/careers',
     '/experiments',
     '/resources',

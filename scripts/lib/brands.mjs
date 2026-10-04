@@ -20,7 +20,7 @@ async function load(slug) {
 
 /** Explicit, ordered — the directory also holds types.ts, index.ts, fonts.ts
  *  and css.ts, none of which export a brand. */
-const ORDER = ["luminary", "vera", "arc", "bloom", "onyx", "prism"];
+const ORDER = ["luminary", "vera", "arc", "bloom", "onyx", "prism", "pace", "chopbox", "kora"];
 
 export const BRANDS = await Promise.all(ORDER.map(load));
 export const BRANDS_BY_SLUG = Object.fromEntries(BRANDS.map((b) => [b.slug, b]));

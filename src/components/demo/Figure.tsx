@@ -101,3 +101,44 @@ export function BlockFigure({ seed = 0, label }: { seed?: number; label?: string
     </svg>
   );
 }
+
+/** Running shoe in side profile on lane lines, Pace. */
+export function ShoeFigure({ seed = 0, label }: { seed?: number; label?: string }) {
+  const tilt = [-4, 0, 5][seed % 3];
+  const tone = [1, 0.82, 0.64][seed % 3];
+  return (
+    <svg viewBox="0 0 100 100" className="d-figure" role="img" aria-label={label ?? "Shoe"}>
+      <rect width="100" height="100" fill="var(--b-surface-alt)" />
+      {[78, 84, 90].map((y) => (
+        <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="var(--b-border)" strokeWidth="0.8" />
+      ))}
+      <g transform={`rotate(${tilt} 50 58)`}>
+        <path d="M14 66c0-6 3-10 9-11l14-3c5-1 8-6 11-11 2-4 6-5 10-3l4 2c2 1 3 3 3 5l-1 4c6 2 12 4 17 7 5 2 7 6 7 10v2H14Z"
+              fill="var(--b-text)" opacity={tone} />
+        <path d="M14 69h74v4c0 2-1 3-3 3H18c-2 0-4-2-4-4Z" fill="var(--b-accent)" />
+        <path d="M44 48l6 5M48 45l6 5M52 42l6 5" stroke="var(--b-surface)" strokeWidth="1.4" strokeLinecap="round" />
+      </g>
+    </svg>
+  );
+}
+
+/** A plate seen from above, Chopbox. */
+export function DishFigure({ seed = 0, label }: { seed?: number; label?: string }) {
+  const sauce = ["var(--b-accent)", "#e8a317", "#3f7d3a"][seed % 3];
+  const bits = [
+    [38, 40], [58, 36], [62, 56], [44, 60], [52, 48],
+  ];
+  return (
+    <svg viewBox="0 0 100 100" className="d-figure" role="img" aria-label={label ?? "Dish"}>
+      <rect width="100" height="100" fill="var(--b-surface-alt)" />
+      <circle cx="50" cy="50" r="38" fill="var(--b-surface)" />
+      <circle cx="50" cy="50" r="38" fill="none" stroke="var(--b-border)" strokeWidth="1.2" />
+      <circle cx="50" cy="50" r="27" fill={sauce} opacity="0.88" />
+      {bits.map(([x, y], i) => (
+        <ellipse key={i} cx={x + (seed % 2) * 2} cy={y} rx="4.2" ry="3" fill="var(--b-surface)" opacity="0.85"
+                 transform={`rotate(${(i * 37 + seed * 20) % 180} ${x} ${y})`} />
+      ))}
+      <path d="M76 22c3 3 3 7 0 10" stroke="var(--b-muted)" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.6" />
+    </svg>
+  );
+}

@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { IconArrow } from "@/components/icons/GreeneIcons";
-import { BRANDS } from "@/lib/brands";
+import { BRANDS_BY_SLUG } from "@/lib/brands";
 import { cn } from "@/lib/utils";
 
 /**
@@ -16,7 +16,10 @@ import { cn } from "@/lib/utils";
  * Mobile: each project carries its own pair of phones inline.
  * No horizontal scrolling anywhere.
  */
-const HAS_DARK = new Set(["luminary", "arc", "bloom", "onyx", "prism"]);
+/** The six on the home page, in this order. All nine live on /work. */
+const FEATURED = ["chopbox", "kora", "pace", "luminary", "vera", "onyx"].map((s) => BRANDS_BY_SLUG[s]);
+
+const HAS_DARK = new Set(["luminary", "arc", "bloom", "onyx", "prism", "pace", "chopbox", "kora"]);
 
 const shots = (slug: string) => ({
   front: `/images/work/${slug}/home-mobile.webp`,
@@ -82,7 +85,7 @@ export default function WorkPhones() {
 
         <div className="lg:grid lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-16 lg:pb-24">
           <ol className="m-0 list-none p-0">
-            {BRANDS.map((b, i) => (
+            {FEATURED.map((b, i) => (
               <li
                 key={b.slug}
                 ref={(el) => {
@@ -120,7 +123,7 @@ export default function WorkPhones() {
 
           <div className="hidden lg:block">
             <div className="sticky top-[12vh] h-[76vh]">
-              {BRANDS.map((b, i) => (
+              {FEATURED.map((b, i) => (
                 <div
                   key={b.slug}
                   aria-hidden={active !== i}

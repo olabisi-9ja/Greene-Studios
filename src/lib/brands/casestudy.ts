@@ -196,6 +196,60 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
       { label: "Pricing", file: "pricing" },
     ],
   },
+  pace: {
+    slug: "pace",
+    brief:
+      "Running brands shout. Pace was a test of the opposite: a shop that reads like a training log, where the spec does the selling.",
+    decisions: [
+      { title: "Condensed type for speed", body: "Archivo at 70% width. Headlines stay big on a phone without wrapping into a tower." },
+      { title: "Specs as the hero", body: "Grams, millimetres and kilometres sit where most shops put a slogan." },
+      { title: "One orange, used sparingly", body: "Signal orange marks the sole and the next action. Nothing else." },
+    ],
+    build:
+      "Three pages: home, shop and run club. Lane lines are the only ornament, drawn in SVG from the brand tokens.",
+    learned:
+      "Cutting the copy made the product feel more expensive, not less.",
+    gallery: [
+      { label: "Shop", file: "shop" },
+      { label: "Run club", file: "club" },
+    ],
+  },
+  chopbox: {
+    slug: "chopbox",
+    brief:
+      "Food delivery in Lagos is ordered one-handed, on the move, often on a slow connection. Chopbox was designed for that moment first.",
+    decisions: [
+      { title: "Thumb-sized everything", body: "Buttons and inputs start at 52px tall. Easy to hit on a moving bus." },
+      { title: "Time and price up front", body: "Every card shows delivery time and naira cost before anything else." },
+      { title: "Warm, local colour", body: "Pepper red, palm green and cream. It looks like food, not fintech." },
+    ],
+    build:
+      "Three pages: home with an address search, restaurant list and rider sign-up. Dishes are drawn from the brand tokens, so nothing heavy loads.",
+    learned:
+      "Riders are users too. Their page got the same care as the customer's.",
+    gallery: [
+      { label: "Restaurants", file: "restaurants" },
+      { label: "Ride with us", file: "riders" },
+    ],
+  },
+  kora: {
+    slug: "kora",
+    brief:
+      "AI products look the same: purple glow, robot hands, big promises. Kora sells plumbing to developers, so it shows the plumbing.",
+    decisions: [
+      { title: "Code on the first screen", body: "The hero is the request a developer would send. No metaphor needed." },
+      { title: "One lime signal", body: "Ink and paper everywhere else. Lime only marks success and the next step." },
+      { title: "No gradients, no glow", body: "Calm surfaces make a reliability product feel reliable." },
+    ],
+    build:
+      "Three pages: home, platform and pricing, with a readable request log as the main product shot.",
+    learned:
+      "Developers trust what they can copy. The code block did more than any headline.",
+    gallery: [
+      { label: "Platform", file: "platform" },
+      { label: "Pricing", file: "pricing" },
+    ],
+  },
 };
 
 export function caseStudyFor(brand: BrandSystem): CaseStudy | undefined {

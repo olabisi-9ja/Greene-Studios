@@ -1,15 +1,20 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { ShotImage } from "@/components/work/ShotImage";
 import { notFound } from "next/navigation";
 import { BRANDS, BRANDS_BY_SLUG } from "@/lib/brands";
 import { CASE_STUDIES } from "@/lib/brands/casestudy";
-import { BrandMark } from "@/components/demo/BrandMark";
-import ScrollExpand from "@/components/effects/ScrollExpand";
-import measured from "@/lib/measured.json";
+import { IconArrow } from "@/components/icons/GreeneIcons";
 
+/**
+ * Case study, media first (after Onda Studio's project pages): a full-bleed
+ * opener, the facts as tags, one line of intro with the full story folded
+ * away, then the work itself, frame after frame.
+ */
 type Props = { params: Promise<{ slug: string }> };
+
+const HAS_DARK = new Set(["luminary", "arc", "bloom", "onyx", "prism", "pace", "chopbox", "kora"]);
+const SCOPE = ["Brand identity", "Design system", "Web design", "Front-end build"];
 
 export async function generateStaticParams() {
   return BRANDS.map((b) => ({ slug: b.slug }));
@@ -21,12 +26,47 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!brand) return { title: "Not found" };
   return {
     title: `${brand.name} · Case study`,
-    description: brand.direction,
+    description: `${brand.tagline} ${brand.direction}`,
+    alternates: { canonical: `/work/${slug}` },
+    openGraph: { images: [`/images/work/${slug}/identity.webp`] },
   };
 }
 
-type Measured = { lcp: number; cls: number; jsKb: number; totalKb: number };
-const PAGES = measured.pages as Record<string, Measured>;
+function Frame({ src, alt, caption, tall = false }: { src: string; alt: string; caption?: string; tall?: boolean }) {
+  return (
+    <figure className="m-0">
+      <div
+        className={`relative overflow-hidden rounded-[4px] bg-[var(--brand-surface-secondary)] ${
+          tall ? "aspect-[16/11]" : "aspect-[16/9]"
+        }`}
+      >
+        <img src={src} alt={alt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-top" />
+      </div>
+      {caption && <figcaption className="mt-3 text-sm text-[var(--brand-text-secondary)]">{caption}</figcaption>}
+    </figure>
+  );
+}
+
+function Phone({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="aspect-[1170/2532] w-full rounded-[2.4rem] bg-[#0b0b0b] p-[0.5rem] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.5)]">
+      <div className="relative h-full overflow-hidden rounded-[1.95rem]">
+        <img src={src} alt={alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+        <span className="absolute left-1/2 top-[1.6%] h-[3.2%] w-[30%] -translate-x-1/2 rounded-full bg-black" aria-hidden="true" />
+      </div>
+    </div>
+  );
+}
+
+const Chip = ({ children, strong = false }: { children: React.ReactNode; strong?: boolean }) => (
+  <span
+    className={`inline-flex h-8 items-center rounded-[3px] px-3 text-xs font-semibold uppercase tracking-[0.04em] ${
+      strong ? "bg-[var(--brand-accent)] text-[var(--brand-on-accent)]" : "bg-[var(--brand-surface-secondary)]"
+    }`}
+  >
+    {children}
+  </span>
+);
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
@@ -34,233 +74,152 @@ export default async function CaseStudyPage({ params }: Props) {
   const study = CASE_STUDIES[slug];
   if (!brand || !study) notFound();
 
-  const perf = PAGES[slug];
   const index = BRANDS.findIndex((b) => b.slug === slug);
   const next = BRANDS[(index + 1) % BRANDS.length];
-  const palette = brand.palette.light;
+  const img = (f: string) => `/images/work/${slug}/${f}`;
+  const dark = HAS_DARK.has(slug);
+  const [g1, g2, ...rest] = study.gallery;
 
   return (
-    <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
-      {/* Fourmula.ai inspired header: centered, massive, lots of whitespace */}
-      <header className="mx-auto max-w-[1400px] px-5 pb-10 pt-28 text-center md:px-10 md:pb-14 md:pt-36">
-        <div className="mx-auto flex max-w-fit items-center justify-center gap-3 rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] px-3 py-1.5">
-          <Link
-            href="/work"
-            className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]"
-          >
-            ← Work
-          </Link>
-          <span className="h-3 w-px bg-[var(--brand-border)]" />
-          <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
-            Concept · self-initiated
-          </span>
-        </div>
-
-        <div className="mt-8 flex flex-col items-center">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-surface)] ring-1 ring-[var(--brand-border)]">
-            <BrandMark slug={brand.slug} size={28} />
-          </span>
-          <h1 className="mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] font-black uppercase leading-[0.9] tracking-tight">
-            {brand.name}
-          </h1>
-          <p className="mt-5 max-w-2xl text-balance text-lg leading-snug text-[var(--brand-text-secondary)] md:text-xl">
-            {brand.tagline}
-          </p>
-          <p className="mx-auto mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">
-            {brand.direction}
-          </p>
-        </div>
-      </header>
-
-      {/* Cinematic opener — the brand's world expands from frame to full bleed */}
-      <ScrollExpand
-        src={`/images/work/${brand.slug}/hero-lifestyle.jpg`}
-        alt={`${brand.name} lifestyle visual`}
-        title={brand.tagline}
-        scrollHint="Scroll"
-        useWindowScroll
-        scrollDistance={1}
-        holdDistance={0.3}
-      >
-        <p className="max-w-xl text-balance text-base leading-relaxed text-white/90 md:text-lg">
-          {brand.direction}
-        </p>
-        <span className="mt-6 rounded-full bg-black/50 px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-          Generated visual
-        </span>
-      </ScrollExpand>
-
-      {/* Hero screenshot */}
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
-          <ShotImage
-            src={`/images/work/${brand.slug}/home-desktop.webp`}
-            alt={`${brand.name} homepage`}
-            priority
-            sizes="(max-width: 768px) 100vw, 92vw"
-          />
+    <article>
+      {/* Opener */}
+      <div className="px-3 pt-[72px] sm:px-5 sm:pt-[84px]">
+        <div className="relative mx-auto aspect-[16/9] max-h-[calc(100svh-100px)] w-full max-w-[1600px] overflow-hidden rounded-[4px] bg-[var(--brand-surface-secondary)]">
+          <img src={img("identity.webp")} alt={`${brand.name} identity`} className="absolute inset-0 h-full w-full object-cover" />
         </div>
       </div>
 
-      {perf && (
-        <section className="mx-auto mt-10 max-w-[1400px] px-5 md:px-10">
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-border)] md:grid-cols-4">
-            {[
-              { v: `${perf.lcp}ms`, k: "LCP" },
-              { v: perf.cls.toFixed(3), k: "CLS" },
-              { v: `${perf.jsKb}kB`, k: "JS" },
-              { v: `${perf.totalKb}kB`, k: "Total" },
-            ].map((m) => (
-              <div key={m.k} className="bg-[var(--brand-surface)] p-5 text-center md:p-6">
-                <p className="font-display text-2xl font-black tracking-tight md:text-3xl">{m.v}</p>
-                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
-                  {m.k}
-                </p>
+      {/* Facts */}
+      <div className="px-5 pt-20 sm:px-8 md:pt-28">
+        <div className="mx-auto max-w-[1400px]">
+          <nav aria-label="Breadcrumb" className="mb-8 text-sm text-[var(--brand-text-secondary)]">
+            <Link href="/work" className="hover:text-[var(--brand-text)]">
+              Work
+            </Link>{" "}
+            / <span aria-current="page">{brand.name}</span>
+          </nav>
+          <h1 className="text-[clamp(3rem,9vw,8rem)] font-semibold leading-[0.9] tracking-[-0.05em]">{brand.name}</h1>
+
+          <div className="mt-14 grid border-t border-[var(--brand-text)] lg:grid-cols-[1.4fr_1fr]">
+            <dl className="m-0">
+              <div className="border-b border-[var(--brand-border)] py-7">
+                <dt className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Industry</dt>
+                <dd className="m-0 flex flex-wrap gap-2">
+                  {brand.sector.split("·").map((s) => (
+                    <Chip key={s} strong>
+                      {s.trim()}
+                    </Chip>
+                  ))}
+                </dd>
               </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
-            <span className="chip-mono">Brief</span>
-          </div>
-          <p className="max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text)] lg:col-span-8 md:text-[17px]">
-            {study.brief}
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
-            <span className="chip-mono">Decisions</span>
-            <h2 className="headline mt-4 text-2xl md:text-3xl">Choices worth defending</h2>
-            <p className="mt-3 text-[13px] leading-relaxed text-[var(--brand-text-secondary)]">
-              No templates. Every decision earns its place — like Fourmula&apos;s PDPs, each visual is generated to a purpose.
-            </p>
-          </div>
-
-          <div className="lg:col-span-8">
-            <dl className="divide-y divide-[var(--brand-border)] border-y border-[var(--brand-border)]">
-              {study.decisions.map((d) => (
-                <div key={d.title} className="py-7 md:py-8">
-                  <dt className="font-display text-[17px] font-semibold uppercase tracking-tight">
-                    {d.title}
-                  </dt>
-                  <dd className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">
-                    {d.body}
-                  </dd>
-                </div>
-              ))}
+              <div className="border-b border-[var(--brand-border)] py-7">
+                <dt className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">What we did</dt>
+                <dd className="m-0 flex flex-wrap gap-2">
+                  {SCOPE.map((s) => (
+                    <Chip key={s}>{s}</Chip>
+                  ))}
+                </dd>
+              </div>
+              <div className="py-7">
+                <dt className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Type</dt>
+                <dd className="m-0">
+                  <Chip>Studio concept</Chip>
+                </dd>
+              </div>
             </dl>
+
+            <div className="border-[var(--brand-border)] py-7 lg:border-l lg:pl-10">
+              <h2 className="text-xl font-semibold tracking-[-0.02em]">{brand.tagline}</h2>
+              <p className="mt-3 text-[var(--brand-text-secondary)]">{brand.direction}</p>
+
+              <Link
+                href={`/demo/${slug}`}
+                className="mt-6 inline-flex h-11 items-center gap-2 rounded-[4px] bg-[var(--brand-accent)] px-5 text-sm font-medium text-[var(--brand-on-accent)]"
+              >
+                Visit the live site <IconArrow className="size-4" />
+              </Link>
+
+              <details className="group mt-3">
+                <summary className="inline-flex h-11 cursor-pointer list-none items-center rounded-[4px] bg-[var(--brand-text)] px-5 text-sm font-medium text-[var(--brand-bg)] [&::-webkit-details-marker]:hidden">
+                  <span className="group-open:hidden">Read the full story</span>
+                  <span className="hidden group-open:inline">Close the story</span>
+                </summary>
+                <div className="mt-6 space-y-5 text-[var(--brand-text-secondary)]">
+                  <div>
+                    <h3 className="font-semibold text-[var(--brand-text)]">The brief</h3>
+                    <p className="mt-1">{study.brief}</p>
+                  </div>
+                  {study.decisions.map((d) => (
+                    <div key={d.title}>
+                      <h3 className="font-semibold text-[var(--brand-text)]">{d.title}</h3>
+                      <p className="mt-1">{d.body}</p>
+                    </div>
+                  ))}
+                  <div>
+                    <h3 className="font-semibold text-[var(--brand-text)]">The build</h3>
+                    <p className="mt-1">{study.build}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[var(--brand-text)]">What we learned</h3>
+                    <p className="mt-1">{study.learned}</p>
+                  </div>
+                </div>
+              </details>
+
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
-        <span className="chip-mono">System</span>
-        <div className="mt-6 overflow-hidden rounded-2xl border border-[var(--brand-border)]">
-          <ShotImage
-            src={`/images/work/${brand.slug}/identity.webp`}
-            alt={`${brand.name} identity system: logo, palette, type scale, radius and grid`}
-            sizes="(max-width: 1400px) 100vw, 1400px"
-          />
-        </div>
+      {/* The work */}
+      <div className="px-5 pb-24 pt-16 sm:px-8 md:pt-24">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-5">
+          <Frame src={img("home-desktop.webp")} alt={`${brand.name} home page on desktop`} />
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {Object.entries(palette).map(([name, hex]) => (
-            <span
-              key={name}
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface)] py-1.5 pl-1.5 pr-3.5 text-xs"
-            >
-              <span
-                className="h-5 w-5 rounded-full ring-1 ring-inset ring-black/10"
-                style={{ background: hex }}
-                aria-hidden="true"
-              />
-              <span className="font-mono text-[var(--brand-text-secondary)]">{hex}</span>
-            </span>
-          ))}
-        </div>
-
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--brand-text-secondary)]">{study.build}</p>
-      </section>
-
-      {/* Horizontal scroll — karolinahess.com inspired */}
-      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
-        <div className="flex items-baseline justify-between gap-4">
-          <span className="chip-mono">Pages</span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
-            Drag to explore
-          </span>
-        </div>
-        <div className="mt-6 flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {study.gallery.map((g) => (
-            <figure key={g.file} className="m-0 w-[84vw] max-w-[520px] shrink-0">
-              <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)]">
-                <ShotImage
-                  src={`/images/work/${brand.slug}/${g.file}.webp`}
-                  alt={`${brand.name}, ${g.label}`}
-                  sizes="520px"
-                />
-              </div>
-              <figcaption className="mt-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
-                {g.label}
-              </figcaption>
-            </figure>
-          ))}
-          {/* Extra lifestyle card at end to ensure no placeholder box remains */}
-          <figure className="m-0 w-[84vw] max-w-[520px] shrink-0">
-            <div className="overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
-              <div className="relative aspect-[16/10] w-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/images/work/${brand.slug}/hero-lifestyle.jpg`}
-                  alt={`${brand.name} lifestyle`}
-                  className="h-full w-full object-cover"
-                />
+          <div className="grid items-center gap-8 rounded-[4px] bg-[var(--brand-surface-secondary)] p-8 md:grid-cols-[1fr_1.1fr] md:p-16">
+            <div className="mx-auto grid w-full max-w-[460px] grid-cols-2 gap-5">
+              <Phone src={img("home-mobile.webp")} alt={`${brand.name} on mobile, light`} />
+              <div className="mt-16">
+                <Phone src={img(dark ? "home-mobile-dark.webp" : "home-mobile.webp")} alt={`${brand.name} on mobile${dark ? ", dark" : ""}`} />
               </div>
             </div>
-            <figcaption className="mt-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-secondary)]">
-              Lifestyle · generated
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
-        <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-8 md:p-10">
-          <span className="chip-mono">Learned</span>
-          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed md:text-lg">{study.learned}</p>
-          <div className="mt-8 flex items-center gap-3 border-t border-[var(--brand-border)] pt-6 text-[13px] text-[var(--brand-text-secondary)]">
-            <span className="relative h-8 w-8 overflow-hidden rounded-full border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/character/greene-mascot.png" alt="" className="h-full w-full object-cover" />
-            </span>
-            <span>Greene character — appears consistently across the site, like Cardtonic&apos;s Upskill.</span>
+            <div>
+              <h2 className="text-2xl font-semibold tracking-[-0.03em]">{study.decisions[0]?.title}</h2>
+              <p className="mt-3 max-w-[40ch] text-[var(--brand-text-secondary)]">Built mobile first, light and dark.</p>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section className="mx-auto py-16 max-w-[1400px] px-5 md:py-24 md:px-10">
-        <div className="flex items-center justify-end gap-6 border-t border-[var(--brand-border)] pt-10">
-          <Link
-            href={`/work/${next.slug}`}
-            data-cursor="NEXT"
-            className="group flex items-center gap-4 text-right"
-          >
-            <span className="hidden text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-text-secondary)] md:inline">
-              Next case study
-            </span>
-            <span className="font-display text-[22px] font-black uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-1 md:text-[28px]">
-              {next.name} →
-            </span>
-          </Link>
+          {dark && <Frame src={img("home-desktop-dark.webp")} alt={`${brand.name} home page, dark`} />}
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {g1 && <Frame src={img(`${g1.file}.webp`)} alt={`${brand.name} ${g1.label} page`} caption={g1.label} tall />}
+            {g2 && <Frame src={img(`${g2.file}.webp`)} alt={`${brand.name} ${g2.label} page`} caption={g2.label} tall />}
+          </div>
+
+          <Frame src={img("home-tablet.webp")} alt={`${brand.name} on tablet`} />
+
+          {rest.length > 0 && (
+            <div className="grid gap-5 md:grid-cols-2">
+              {rest.map((g) => (
+                <Frame key={g.file} src={img(`${g.file}.webp`)} alt={`${brand.name} ${g.label} page`} caption={g.label} tall />
+              ))}
+            </div>
+          )}
         </div>
-      </section>
-    </div>
+      </div>
+
+      {/* Next */}
+      <Link href={`/work/${next.slug}`} className="group block border-t border-[var(--brand-border)] px-5 py-20 sm:px-8 md:py-28">
+        <div className="mx-auto flex max-w-[1400px] items-end justify-between gap-6">
+          <div>
+            <p className="text-sm text-[var(--brand-text-secondary)]">Next project</p>
+            <p className="mt-2 text-[clamp(2.4rem,7vw,6rem)] font-semibold leading-none tracking-[-0.05em] transition-colors group-hover:text-[var(--brand-accent)]">
+              {next.name}
+            </p>
+          </div>
+          <IconArrow className="mb-3 size-10 shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+        </div>
+      </Link>
+    </article>
   );
 }

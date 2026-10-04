@@ -40,6 +40,15 @@ export const FONT_FACES: Record<string, FontFace[]> = {
   "Outfit Variable": [
     { family: "Outfit Variable", file: "outfit-latin-wght-normal.woff2", style: "normal", variable: true },
   ],
+  "Archivo Variable": [
+    { family: "Archivo Variable", file: "archivo-latin-standard-normal.woff2", style: "normal", variable: true },
+  ],
+  "Bricolage Grotesque Variable": [
+    { family: "Bricolage Grotesque Variable", file: "bricolage-grotesque-latin-standard-normal.woff2", style: "normal", variable: true },
+  ],
+  "Manrope Variable": [
+    { family: "Manrope Variable", file: "manrope-latin-wght-normal.woff2", style: "normal", variable: true },
+  ],
 };
 
 /** The first family in a CSS stack, unquoted. */
@@ -71,6 +80,8 @@ export function fontFaceCss(brand: BrandSystem): string {
     .map(
       (f) =>
         `@font-face{font-family:"${f.family}";font-style:${f.style};font-weight:100 900;font-display:swap;` +
+        // "standard" files carry a width axis as well as weight
+        (f.file.includes("-standard-") ? "font-stretch:62% 125%;" : "") +
         `src:url("${FONT_DIR}/${f.file}") format("woff2${f.variable ? "-variations" : ""}")}`
     )
     .join("");

@@ -286,5 +286,113 @@
   "/images/work/vera/shop.webp": {
     "w": 2880,
     "h": 5836
+  },
+  "/images/work/pace/club.webp": {
+    "w": 2880,
+    "h": 3316
+  },
+  "/images/work/pace/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/pace/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/pace/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/pace/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/pace/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/pace/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/pace/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/pace/shop.webp": {
+    "w": 2880,
+    "h": 4378
+  },
+  "/images/work/chopbox/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/chopbox/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/chopbox/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/chopbox/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/chopbox/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/chopbox/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/chopbox/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/chopbox/restaurants.webp": {
+    "w": 2880,
+    "h": 4274
+  },
+  "/images/work/chopbox/riders.webp": {
+    "w": 2880,
+    "h": 3862
+  },
+  "/images/work/kora/home-desktop-dark.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/kora/home-desktop.webp": {
+    "w": 2880,
+    "h": 1800
+  },
+  "/images/work/kora/home-mobile-dark.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/kora/home-mobile.webp": {
+    "w": 1170,
+    "h": 2532
+  },
+  "/images/work/kora/home-tablet-dark.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/kora/home-tablet.webp": {
+    "w": 1668,
+    "h": 2224
+  },
+  "/images/work/kora/identity.webp": {
+    "w": 3200,
+    "h": 1800
+  },
+  "/images/work/kora/platform.webp": {
+    "w": 2880,
+    "h": 3262
+  },
+  "/images/work/kora/pricing.webp": {
+    "w": 2880,
+    "h": 2598
   }
 }
