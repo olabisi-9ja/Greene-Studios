@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { BRAND } from "@/lib/data";
 import { PACKAGES, type PackageId } from "@/lib/offer";
+import { useCurrency } from "@/lib/context/CurrencyContext";
 
 /**
  * Project brief, one question at a time: what, budget, timeline, details. Arriving from
@@ -18,7 +19,8 @@ const TYPES: { id: TypeId; label: string }[] = [
   { id: "other", label: "Something else" },
 ];
 
-const BUDGETS = ["Under $500", "$500 to $1k", "$1k to $3k", "$3k or more", "A monthly amount", "Not sure yet"];
+/** USD amounts in braces are shown in the visitor's currency */
+const BUDGETS = ["Under {500}", "{500} to {1000}", "{1000} to {3000}", "{3000} or more", "A monthly amount", "Not sure yet"];
 const TIMELINES = ["Within a month", "In 1 to 3 months", "In 3 months or more", "Flexible"];
 
 type Answers = {
@@ -84,6 +86,8 @@ export default function ProjectIntake() {
 
   const [answers, setAnswers] = useState<Answers>({ ...EMPTY, type: preset });
   const [step, setStep] = useState(preset ? 1 : 0);
+  const { money } = useCurrency();
+  const priced = (label: string) => label.replace(/\{(\d+)\}/g, (_, usd: string) => money(Number(usd)));
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -228,7 +232,7 @@ export default function ProjectIntake() {
           )}
           <Choices
             name="budget"
-            options={BUDGETS.map((b) => ({ id: b, label: b }))}
+            options={BUDGETS.map((b) => ({ id: priced(b), label: priced(b) }))}
             value={answers.budget}
             onPick={(id) => set("budget", id)}
           />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ADD_ONS, PACKAGES } from "@/lib/offer";
+import Price from "@/components/ui/Price";
 
 /**
  * The rate card: a row of package cards. Each leads with the price and the
@@ -32,7 +33,9 @@ export default function PricingCards() {
 
               <div className="flex flex-1 flex-col px-7 pb-8 pt-6">
                 <h3 className="text-lg font-semibold tracking-[-0.02em]">{p.name}</h3>
-                <p className="mt-4 text-[clamp(2rem,2.6vw,2.5rem)] font-extrabold leading-none tracking-[-0.04em]">{p.price}</p>
+                <p className="mt-4 text-[clamp(2rem,2.6vw,2.5rem)] font-extrabold leading-none tracking-[-0.04em]">
+                  <Price usd={p.priceUsd} from={p.priceFrom} per={p.pricePer} />
+                </p>
                 <p className="mt-3 min-h-[3.2em] text-sm leading-relaxed text-[var(--brand-text-secondary)]">{p.pitch}</p>
 
                 <Link
@@ -84,7 +87,7 @@ export default function PricingCards() {
           {ADD_ONS.map((a) => (
             <li key={a.name} className="flex items-baseline justify-between gap-4 border-b border-[var(--brand-border)] py-4">
               <span>{a.name}</span>
-              <span className="text-sm text-[var(--brand-text-secondary)]">from {a.from}</span>
+              <span className="text-sm text-[var(--brand-text-secondary)]">from <Price usd={a.usd} /></span>
             </li>
           ))}
         </ul>

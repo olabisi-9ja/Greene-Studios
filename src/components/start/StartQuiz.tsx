@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { PACKAGES, type PackageId } from "@/lib/offer";
+import Price from "@/components/ui/Price";
+import { useCurrency } from "@/lib/context/CurrencyContext";
 import { IconArrow } from "@/components/icons/GreeneIcons";
 
 /**
@@ -82,10 +84,10 @@ const QUESTIONS: Q[] = [
     kind: "single",
     title: "What budget are you working with?",
     choices: [
-      { id: "lt1", label: "Under $500" },
-      { id: "1to3", label: "$500 to $1k" },
-      { id: "3to6", label: "$1k to $3k" },
-      { id: "6plus", label: "$3k or more" },
+      { id: "lt1", label: "Under {500}" },
+      { id: "1to3", label: "{500} to {1000}" },
+      { id: "3to6", label: "{1000} to {3000}" },
+      { id: "6plus", label: "{3000} or more" },
       { id: "monthly", label: "A monthly amount" },
     ],
   },
@@ -134,6 +136,9 @@ function recommend(a: Answers): { primary: PackageId; also: PackageId[]; reasons
 export default function StartQuiz() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
+  const { money } = useCurrency();
+  // budget labels hold USD amounts in braces, shown in the visitor's currency
+  const priced = (label: string) => label.replace(/\{(\d+)\}/g, (_, usd: string) => money(Number(usd)));
   const done = step >= QUESTIONS.length;
   const q = QUESTIONS[Math.min(step, QUESTIONS.length - 1)];
 
@@ -165,7 +170,7 @@ export default function StartQuiz() {
         <h2 className="mt-3 text-[clamp(2.4rem,6vw,4.5rem)] font-semibold leading-none tracking-[-0.045em]">{pkg.name}</h2>
         <p className="mt-4 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">{pkg.pitch}</p>
         <p className="mt-6 text-xl font-semibold">
-          {pkg.price} <span className="font-normal text-[var(--brand-text-secondary)]">· {pkg.timeline}</span>
+          <Price usd={pkg.priceUsd} from={pkg.priceFrom} per={pkg.pricePer} /> <span className="font-normal text-[var(--brand-text-secondary)]">· {pkg.timeline}</span>
         </p>
         {result.reasons.length > 0 && (
           <ul className="mt-8 list-none space-y-2 border-l-2 border-[var(--brand-accent)] pl-5">
@@ -244,7 +249,7 @@ export default function StartQuiz() {
                     onChange={() => toggle(q, c.id)}
                     className="size-4 accent-[var(--brand-accent)]"
                   />
-                  <span>{c.label}</span>
+                  <span>{priced(c.label)}</span>
                 </label>
               );
             })}

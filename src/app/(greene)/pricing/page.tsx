@@ -23,7 +23,7 @@ export default function PricingPage() {
           Choose how we work together.
         </h1>
         <p className="mt-6 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">
-          Every project is quoted after a short call. Prices in USD.
+          Every project is quoted after a short call. Prices are converted from USD at today&apos;s rate; change the currency at the bottom of the page.
         </p>
         </div>
 

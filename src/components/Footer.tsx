@@ -3,6 +3,7 @@ import { BRAND } from "@/lib/data";
 import DotGlobe from "@/components/home/DotGlobe";
 import BrandLottie from "@/components/brand/BrandLottie";
 import PagePeel from "@/components/chrome/PagePeel";
+import CurrencySelect from "@/components/chrome/CurrencySelect";
 
 const PAGES = [
   { label: "Work", href: "/work" },
@@ -14,12 +15,12 @@ const PAGES = [
   { label: "Contact", href: "/contact" },
 ];
 
-const SOCIAL = [
-  { label: "Instagram", href: BRAND.instagram },
-  { label: "LinkedIn", href: BRAND.linkedin },
-  { label: "X", href: BRAND.twitter },
-  { label: "GitHub", href: BRAND.github },
-];
+/**
+ * Social accounts: none listed until the real ones are connected. Add
+ * them here (e.g. { label: "Instagram", href: BRAND.instagram }) and the
+ * "Elsewhere" column appears.
+ */
+const SOCIAL: { label: string; href: string }[] = [];
 
 /**
  * Footer: links, then the upper half of the dotted globe fading out, then
@@ -58,18 +59,20 @@ export default function Footer() {
             </ul>
           </nav>
 
+          {SOCIAL.length > 0 && (
           <div>
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Elsewhere</p>
-            <ul className="mt-4 list-none space-y-2 p-0">
-              {SOCIAL.map((s) => (
-                <li key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--logo)]">
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Elsewhere</p>
+              <ul className="mt-4 list-none space-y-2 p-0">
+                {SOCIAL.map((s) => (
+                  <li key={s.label}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--logo)]">
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div className="pointer-events-none mx-auto mt-16 w-[min(340px,80vw)]">
@@ -94,7 +97,8 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col gap-3 text-sm text-[var(--brand-text-secondary)] md:flex-row md:items-center md:justify-between">
           <span>© {year} Greene Studios</span>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <CurrencySelect />
             <Link href="/legal#privacy" className="hover:text-[var(--brand-text)]">
               Privacy
             </Link>

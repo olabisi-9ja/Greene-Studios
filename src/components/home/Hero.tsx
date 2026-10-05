@@ -1,34 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DeskScene from "./DeskScene";
 import BrandLottie from "@/components/brand/BrandLottie";
 
 /**
  * Hero, after Hello Monday: a clean page, an illustration, and a word that
  * comes round. Each word has its own animation: /public/lottie/hero-<word>.json
- * (recoloured to the brand). Until those files are in, the drawn scenes in
- * DeskScene stand in.
+ * (recoloured to the brand).
  */
 const WORDS = ["Brands", "Websites", "Apps", "Products"];
 const HOLD = 3.6; // seconds per word
 
 export default function Hero() {
   const [job, setJob] = useState(0);
-  const [since, setSince] = useState(0);
-  const [lotties, setLotties] = useState(false);
 
   useEffect(() => {
-    fetch("/lottie/hero-brands.json", { method: "HEAD" })
-      .then((r) => setLotties(r.ok))
-      .catch(() => setLotties(false));
-  }, []);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setSince(5);
-      return;
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let raf = 0;
     let last = performance.now();
     let clock = 0;
@@ -36,7 +23,6 @@ export default function Hero() {
       clock += Math.max(0, Math.min(0.05, (now - last) / 1000));
       last = now;
       setJob(Math.floor(clock / HOLD) % WORDS.length);
-      setSince(clock % HOLD);
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -48,11 +34,7 @@ export default function Hero() {
   return (
     <section className="flex min-h-[100svh] flex-col items-center justify-center px-5 pb-28 pt-28 text-center sm:px-8">
       <div className="w-[min(560px,92vw)] text-[var(--logo)]">
-        {lotties ? (
-          <BrandLottie key={word} name={`hero-${word.toLowerCase()}`} className="mx-auto aspect-[4/3] w-full" fallback={<DeskScene job={job} since={since} />} />
-        ) : (
-          <DeskScene job={job} since={since} />
-        )}
+        <BrandLottie key={word} name={`hero-${word.toLowerCase()}`} className="mx-auto aspect-[4/3] w-full" />
       </div>
 
       <p className="mt-10 text-base text-[var(--brand-text-secondary)] sm:text-lg">We design and build</p>

@@ -34,7 +34,7 @@ export const SERVICES = [
  description: "We craft visually stunning, strategically crafted websites that communicate your value instantly. Every pixel intentional, every interaction meaningful.",
  deliverables: ["Custom UI Design", "Responsive Layouts", "Design System", "Prototype & Handoff"],
  href: "/services/web-design",
- from: "from $690",
+ fromUsd: 690,
  whatIsIt: "Web Design for us isn't just about putting pretty boxes on a screen. It's the architecture of your digital headquarters. A great website acts as your best salesperson, your brand ambassador, and your most reliable conversion engine.",
  whoItsFor: [
  "Companies launching a completely new product offering",
@@ -56,7 +56,7 @@ export const SERVICES = [
  description: "Deep user research and systems thinking combine to create products that users love instinctively. We design for outcomes, not aesthetics alone.",
  deliverables: ["UX Research", "User Flows", "Wireframes", "Usability Testing"],
  href: "/services/ui-ux-design",
- from: "from $590",
+ fromUsd: 590,
  whatIsIt: "UI/UX is the science of human behavior applied to digital interfaces. It's the process of removing friction between what a user wants to do and the action required to do it. Good UI/UX feels like the product is reading the user's mind.",
  whoItsFor: [
  "SaaS platforms struggling with high churn or onboarding drop-off",
@@ -78,7 +78,7 @@ export const SERVICES = [
  description: "Your brand is a promise. We help you define it, visualise it, and scale it across every touchpoint, digital and physical.",
  deliverables: ["Brand Strategy", "Visual Identity", "Logo Design", "Brand Guidelines"],
  href: "/services/branding",
- from: "from $480",
+ fromUsd: 480,
  whatIsIt: "Branding is the gut feeling people have about your company. We help you define that feeling and encode it into every visual asset, from your logo and typography to your color palette and tone of voice.",
  whoItsFor: [
  "Startups that need to look like enterprise players from day one",
@@ -100,7 +100,7 @@ export const SERVICES = [
  description: "Clean, maintainable frontend code built with modern frameworks. We close the gap between design and development, zero compromise.",
  deliverables: ["React / Next.js", "Animation & Motion", "CMS Integration", "Performance Audit"],
  href: "/services/frontend-development",
- from: "from $690",
+ fromUsd: 690,
  whatIsIt: "Frontend Development is where design becomes reality. We write clean, performant, and accessible code that brings static designs to life with fluid animations and instantaneous load times.",
  whoItsFor: [
  "Design teams that need a reliable partner to build their Figma files perfectly",
@@ -122,7 +122,7 @@ export const SERVICES = [
  description: "From micro-interactions to full-scale brand films. We use motion as a narrative tool, purposeful, precise, and unforgettable.",
  deliverables: ["UI Animations", "Brand Films", "Motion Guidelines", "GSAP / Lottie"],
  href: "/services/motion-design",
- from: "from $190",
+ fromUsd: 190,
  whatIsIt: "Motion Design brings the dimension of time to your digital presence. It guides the user's eye, provides context for state changes, and injects personality into otherwise static interfaces.",
  whoItsFor: [
  "Products that feel rigid and lack delight",
@@ -144,7 +144,7 @@ export const SERVICES = [
  description: "End-to-end product design from concept to launch. We embed with your team to design systems that scale with your product.",
  deliverables: ["Product Strategy", "0→1 Design", "Design Systems", "Developer Handoff"],
  href: "/services/product-design",
- from: "from $890",
+ fromUsd: 890,
  whatIsIt: "Product Design encompasses the entire lifecycle of a digital tool. It bridges business strategy, UX research, UI design, and technical feasibility to create holistic applications that solve real problems.",
  whoItsFor: [
  "Founders building a 0-to-1 MVP and needing a foundational design",
@@ -166,7 +166,7 @@ export const SERVICES = [
  description: "Complex web applications with clean architecture. We handle everything from database design to deployment, so you can focus on growth.",
  deliverables: ["Full-Stack Dev", "API Design", "Database Architecture", "DevOps"],
  href: "/services/web-applications",
- from: "from $1,500",
+ fromUsd: 1500,
  whatIsIt: "We build secure, scalable, and highly interactive full-stack web applications. From the database schema to the server logic and the client interface, we architect systems designed to handle millions of users.",
  whoItsFor: [
  "Startups needing a robust MVP built rapidly but securely",
@@ -188,7 +188,7 @@ export const SERVICES = [
  description: "We integrate AI capabilities into your product thoughtfully, from LLM-powered features to computer vision, without the hype.",
  deliverables: ["AI Feature Design", "LLM Integration", "Prompt Engineering", "AI UX Patterns"],
  href: "/services/ai-integration",
- from: "from $490",
+ fromUsd: 490,
  whatIsIt: "We move past the AI hype to implement genuine utility. Whether it's connecting to OpenAI, training custom models, or building intelligent agents, we design AI features that actually improve the user's workflow.",
  whoItsFor: [
  "Products that process massive amounts of unstructured text data",
@@ -210,7 +210,7 @@ export const SERVICES = [
  description: "Component libraries and design tokens that grow with your team. Consistent, accessible, and beautifully documented.",
  deliverables: ["Component Library", "Design Tokens", "Storybook Docs", "Accessibility Audit"],
  href: "/services/design-systems",
- from: "from $590",
+ fromUsd: 590,
  whatIsIt: "A Design System is a single source of truth for your digital product. We build comprehensive libraries of reusable components, design tokens, and documentation that align your design and engineering teams.",
  whoItsFor: [
  "Large teams where designers and developers are constantly misaligned",
@@ -232,7 +232,7 @@ export const SERVICES = [
  description: "Search is no longer ten blue links. We engineer technical SEO, structured data and answer-ready content into every build, so Google, assistants and generative engines surface you first.",
  deliverables: ["Technical SEO", "Schema & structured data", "Answer-ready content", "AI-search visibility"],
  href: "/services/seo-geo-aeo",
- from: "from $190",
+ fromUsd: 190,
  whatIsIt: "SEO gets you ranked on results pages. GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) get you cited inside ChatGPT, Perplexity and Google's AI overviews. Together they decide whether a prospect finds you, or your competitor.",
  whoItsFor: [
  "Brands with a beautiful site that search engines barely index",

@@ -1,4 +1,5 @@
 import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
+import { CurrencyProvider } from "@/lib/context/CurrencyContext";
 import TopBar from "@/components/chrome/TopBar";
 import DockNav from "@/components/chrome/DockNav";
 import Loader from "@/components/chrome/Loader";
@@ -13,6 +14,7 @@ import PageTransition from "@/components/animations/PageTransition";
 export default function GreeneLayout({ children }: { children: React.ReactNode }) {
   return (
     <AtmosphereProvider>
+      <CurrencyProvider>
       <ScrollProgress />
       <NoiseTexture />
 
@@ -29,12 +31,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
             description:
               "Digital design studio. Brands, websites, and digital products that make people stop scrolling.",
             foundingDate: "2022",
-            sameAs: [
-              "https://instagram.com/greenestudios",
-              "https://twitter.com/greenestudios",
-              "https://linkedin.com/company/greenestudios",
-              "https://github.com/greenestudios",
-            ],
             knowsAbout: ["Web Design", "UI/UX Design", "Branding", "Frontend Development", "Motion Design"],
           }),
         }}
@@ -57,6 +53,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
       <DockNav />
       <SiteTour />
       <FocusMode />
+      </CurrencyProvider>
     </AtmosphereProvider>
   );
 }

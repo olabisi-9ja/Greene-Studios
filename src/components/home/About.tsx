@@ -1,5 +1,6 @@
 import { CountUp } from "@/components/effects/TextFx";
 import { PlateLink } from "@/components/ui/Tag";
+import Price from "@/components/ui/Price";
 
 /**
  * Who we are, in one sentence, then
@@ -7,11 +8,11 @@ import { PlateLink } from "@/components/ui/Tag";
  * offer itself, nothing invented.
  */
 const FACTS = [
-  { pre: "$", value: "480", label: "Brand identity, starting price" },
-  { pre: "", value: "4", label: "Ways to work with us" },
-  { pre: "", value: "1–3", label: "Weeks to launch a website" },
-  { pre: "", value: "2", label: "Revision rounds included" },
-  { pre: "", value: "30", label: "Days of support after launch" },
+  { pre: "", value: "", usd: 480, label: "Brand identity, starting price" },
+  { pre: "", value: "4", usd: 0, label: "Ways to work with us" },
+  { pre: "", value: "1–3", usd: 0, label: "Weeks to launch a website" },
+  { pre: "", value: "2", usd: 0, label: "Revision rounds included" },
+  { pre: "", value: "30", usd: 0, label: "Days of support after launch" },
 ];
 
 /** Sizes and colours per card, in the order of FACTS: deliberately uneven. */
@@ -42,8 +43,14 @@ export default function About() {
               >
                 <dt className="order-2 mt-8 max-w-[18ch] text-sm font-medium leading-snug opacity-80">{f.label}</dt>
                 <dd className="order-1 m-0 text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em]">
-                  {f.pre}
-                  {/^\d+$/.test(f.value) ? <CountUp to={Number(f.value)} /> : f.value}
+                  {f.usd ? (
+                    <Price usd={f.usd} />
+                  ) : (
+                    <>
+                      {f.pre}
+                      {/^\d+$/.test(f.value) ? <CountUp to={Number(f.value)} /> : f.value}
+                    </>
+                  )}
                 </dd>
               </div>
             ))}
