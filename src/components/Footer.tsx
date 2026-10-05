@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BRAND } from "@/lib/data";
 import DotGlobe from "@/components/home/DotGlobe";
 import BrandLottie from "@/components/brand/BrandLottie";
+import PagePeel from "@/components/chrome/PagePeel";
 
 const PAGES = [
   { label: "Work", href: "/work" },
@@ -28,7 +29,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="overflow-hidden border-t border-[var(--brand-border)] px-5 pb-36 pt-20 sm:px-8">
+    <footer className="relative overflow-hidden border-t border-[var(--brand-border)] px-5 pb-36 pt-20 sm:px-8">
 
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -106,6 +107,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <PagePeel />
     </footer>
   );
 }

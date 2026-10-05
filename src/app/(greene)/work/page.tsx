@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Work from "@/components/home/Work";
 import { SHIPPED } from "@/lib/shipped";
+import BrandLottie from "@/components/brand/BrandLottie";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -14,7 +15,12 @@ export default function WorkPage() {
       <Work title="Work" all={false} />
 
       <section className="mx-auto max-w-[1400px] px-5 pb-32 sm:px-8">
-        <h2 className="text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-none tracking-[-0.04em]">Live sites</h2>
+        <div className="flex items-end justify-between gap-6">
+          <h2 className="text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-none tracking-[-0.04em]">Live sites</h2>
+          <div className="pointer-events-none -mb-10 w-[min(150px,34vw)] shrink-0">
+            <BrandLottie name="work" className="aspect-[2/3] w-full" />
+          </div>
+        </div>
         <ul className="m-0 mt-10 list-none border-t border-[var(--brand-border)] p-0">
           {SHIPPED.map((p) => (
             <li key={p.slug}>

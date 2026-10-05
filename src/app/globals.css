@@ -258,6 +258,92 @@
     --brand-accent: #ff6a1a;
   }
 
+  /* Lottie ink and paper follow the theme. brand-lottie.ts snaps near-black
+     to charcoal and near-white to off-white, and those exact values are
+     swapped here for the surface's own text and background colours, so a
+     black-on-white drawing inverts cleanly on dark surfaces. */
+  .brand-lottie [fill="rgb(26,26,26)"] { fill: var(--brand-text); }
+  .brand-lottie [stroke="rgb(26,26,26)"] { stroke: var(--brand-text); }
+  .brand-lottie [fill="rgb(250,250,247)"] { fill: var(--brand-bg); }
+  .brand-lottie [stroke="rgb(250,250,247)"] { stroke: var(--brand-bg); }
+  /* every colour in a Lottie becomes one accent (plus a pale tint of it):
+     green on light, lifted green on charcoal, yellow on studio green,
+     ink on raw orange */
+  .brand-lottie { --lottie-accent: #1f9d63; --lottie-soft: #cfeedd; }
+  .mode-dark .brand-lottie,
+  .mode-night .brand-lottie,
+  .mode-midnight .brand-lottie { --lottie-accent: #5fbf8a; --lottie-soft: #24382d; }
+  .mode-studio .brand-lottie { --lottie-accent: #ffd23f; --lottie-soft: #155c3a; }
+  .mode-raw .brand-lottie { --lottie-accent: #1a1a1a; --lottie-soft: color-mix(in srgb, #ff6a1a 70%, #fafaf7); }
+  /* a dark panel keeps the lifted green whatever the page theme */
+  .lottie-on-dark .brand-lottie { --lottie-accent: #5fbf8a; --lottie-soft: #24382d; }
+  .brand-lottie [fill="rgb(31,157,99)"] { fill: var(--lottie-accent); }
+  .brand-lottie [stroke="rgb(31,157,99)"] { stroke: var(--lottie-accent); }
+  .brand-lottie [fill="rgb(207,238,221)"] { fill: var(--lottie-soft); }
+  .brand-lottie [stroke="rgb(207,238,221)"] { stroke: var(--lottie-soft); }
+
+  /* Back to top: the page's bottom-right corner folded back along its
+     diagonal. The flap (back of the sheet) is the upper-left triangle, the
+     uncovered sheet underneath is the lower-right one. */
+  .page-peel {
+    --peel: 64px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: var(--peel);
+    height: var(--peel);
+    cursor: pointer;
+    transition: width 0.45s var(--ease-out-quart), height 0.45s var(--ease-out-quart);
+  }
+  .page-peel:hover,
+  .page-peel:focus-visible {
+    --peel: 128px;
+  }
+  .page-peel:focus-visible { outline: none; }
+  .page-peel-under {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 0 12px 12px 0;
+    background: var(--brand-accent);
+    color: var(--brand-on-accent);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+  .page-peel-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .page-peel:hover .page-peel-label,
+  .page-peel:focus-visible .page-peel-label {
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+  .page-peel-shadow {
+    position: absolute;
+    inset: 0;
+    filter: drop-shadow(3px 3px 4px rgb(0 0 0 / 0.22));
+  }
+  .page-peel-flap {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    /* back of the sheet: lit at the tip, shading into the fold */
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--brand-bg) 88%, #fff) 0%,
+      color-mix(in srgb, var(--brand-bg) 80%, var(--brand-text)) 46%,
+      color-mix(in srgb, var(--brand-bg) 62%, var(--brand-text)) 50%
+    );
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-peel { transition: none; }
+  }
+
   /* The footer inverts against the page, so its accent has to invert too. */
   :root footer,
   .mode-light footer,

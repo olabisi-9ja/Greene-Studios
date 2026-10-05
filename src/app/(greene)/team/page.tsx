@@ -14,7 +14,7 @@ const TEAM = [
     name: "Olabisi Adigun",
     role: "Founder, Creative Director",
     bio: "Leads brand and product direction. Obsessed with systems that make good work repeatable.",
-    image: null as string | null,
+    image: "/images/studio/founder.webp" as string | null,
   },
   {
     name: "Team Member",

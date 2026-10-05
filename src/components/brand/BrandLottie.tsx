@@ -42,5 +42,5 @@ export default function BrandLottie({
 
   if (missing) return <>{fallback}</>;
   if (!data) return <div className={className} aria-hidden="true" />;
-  return <Lottie src={data} loop={loop} autoplay={!still} className={className} aria-hidden="true" />;
+  return <Lottie src={data} loop={loop} autoplay={!still} className={`brand-lottie ${className}`} aria-hidden="true" />;
 }
