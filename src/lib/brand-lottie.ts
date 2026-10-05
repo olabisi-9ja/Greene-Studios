@@ -26,9 +26,11 @@ function toHsl([r, g, b]: RGB): [number, number, number] {
 }
 
 
-// lottie-web truncates to integers, so +0.2 lands exactly on 31,157,99 / 207,238,221
+// lottie-web truncates to integers, so +0.2 lands exactly on these values
 const ACCENT: RGB = [31.2 / 255, 157.2 / 255, 99.2 / 255];
 const ACCENT_SOFT: RGB = [207.2 / 255, 238.2 / 255, 221.2 / 255];
+const ACCENT_LIGHT: RGB = [120.2 / 255, 200.2 / 255, 160.2 / 255];
+const ACCENT_DEEP: RGB = [21.2 / 255, 107.2 / 255, 67.2 / 255];
 
 export function brandColor(c: RGB): RGB {
   const [h, s, l] = toHsl(c);
@@ -42,9 +44,13 @@ export function brandColor(c: RGB): RGB {
   }
   const skin = h >= 12 && h <= 42 && s >= 0.2 && s <= 0.8 && l >= 0.45 && l <= 0.88;
   if (skin) return c;
-  // every other colour is the accent: pale tints become the soft accent.
-  // Both are exact values globals.css swaps for the theme's accent.
-  return l > 0.8 ? ACCENT_SOFT : ACCENT;
+  // every other colour becomes a shade of the accent, picked by lightness so
+  // stripes and shading survive. All four are exact values globals.css swaps
+  // for shades of the theme's accent.
+  if (l > 0.8) return ACCENT_SOFT;
+  if (l > 0.64) return ACCENT_LIGHT;
+  if (l < 0.42) return ACCENT_DEEP;
+  return ACCENT;
 }
 
 const isRgbArray = (v: unknown): v is number[] =>

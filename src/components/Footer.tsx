@@ -72,8 +72,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pointer-events-none mx-auto mt-16 w-[min(160px,40vw)]">
-          <BrandLottie name="footer" className="aspect-square w-full" />
+        <div className="pointer-events-none mx-auto mt-16 w-[min(340px,80vw)]">
+          <BrandLottie name="footer" className="aspect-[1070/456] w-full" />
         </div>
 
         {/* the globe's upper half, fading out into the wordmark */}

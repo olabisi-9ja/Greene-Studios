@@ -284,6 +284,14 @@
   .brand-lottie [stroke="rgb(31,157,99)"] { stroke: var(--lottie-accent); }
   .brand-lottie [fill="rgb(207,238,221)"] { fill: var(--lottie-soft); }
   .brand-lottie [stroke="rgb(207,238,221)"] { stroke: var(--lottie-soft); }
+  .brand-lottie {
+    --lottie-light: color-mix(in srgb, var(--lottie-accent) 62%, #fff);
+    --lottie-deep: color-mix(in srgb, var(--lottie-accent) 62%, #000);
+  }
+  .brand-lottie [fill="rgb(120,200,160)"] { fill: var(--lottie-light); }
+  .brand-lottie [stroke="rgb(120,200,160)"] { stroke: var(--lottie-light); }
+  .brand-lottie [fill="rgb(21,107,67)"] { fill: var(--lottie-deep); }
+  .brand-lottie [stroke="rgb(21,107,67)"] { stroke: var(--lottie-deep); }
 
   /* Back to top: the page's bottom-right corner folded back along its
      diagonal. The flap (back of the sheet) is the upper-left triangle, the
@@ -1325,9 +1333,13 @@
   line-height: 1;
   color: var(--logo);
 }
-/* in the top bar the wordmark sits on a solid chip of the logo colour */
-.wordmark.wordmark-chip {
-  color: var(--brand-bg);
+/* in the top bar the wordmark floats over the page with no chip; a halo in
+   the page colour keeps it readable over whatever scrolls beneath */
+.wordmark.wordmark-float {
+  text-shadow:
+    0 0 6px var(--brand-bg),
+    0 0 14px var(--brand-bg),
+    0 0 24px color-mix(in srgb, var(--brand-bg) 70%, transparent);
 }
 
 /* ─── RAW: the site with its skin off ──────────────────────────────── */

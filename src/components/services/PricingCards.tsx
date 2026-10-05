@@ -80,7 +80,7 @@ export default function PricingCards() {
           <h3 className="text-2xl font-semibold tracking-[-0.03em]">Smaller jobs</h3>
           <p className="mt-3 max-w-[34ch] text-[var(--brand-text-secondary)]">Just need one thing?</p>
         </div>
-        <ul className="m-0 grid list-none grid-cols-1 p-0 sm:grid-cols-2">
+        <ul className="m-0 grid list-none grid-cols-1 gap-x-14 p-0 sm:grid-cols-2">
           {ADD_ONS.map((a) => (
             <li key={a.name} className="flex items-baseline justify-between gap-4 border-b border-[var(--brand-border)] py-4">
               <span>{a.name}</span>

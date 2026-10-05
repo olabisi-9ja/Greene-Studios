@@ -18,7 +18,8 @@ const THEMES: { mode: VisualMode; name: string; Icon: typeof IconMoon }[] = [
 /**
  * Top of every page: the running mark (left), the wordmark (centre) and one
  * theme switch (right) that steps moon → sun → studio → raw. No bar behind
- * them: each floats on its own, solid like the dock's buttons. Always in
+ * them: the mark and the switch are solid like the dock's buttons, the
+ * wordmark is bare text with a halo in the page colour. Always in
  * place; only the dock at the bottom hides on scroll.
  */
 export default function TopBar() {
@@ -48,7 +49,7 @@ export default function TopBar() {
           </span>
         </Link>
 
-        <Link href="/" data-slot="wordmark" className="wordmark wordmark-chip pointer-events-auto absolute left-1/2 top-1/2 flex h-10 -translate-x-1/2 -translate-y-1/2 items-center rounded-full px-5 text-[1.2rem] leading-none bg-[var(--logo)] text-[var(--brand-bg)] shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-0.5 active:scale-90 sm:h-12 sm:px-6 sm:text-[1.5rem]" aria-hidden="true" tabIndex={-1}>
+        <Link href="/" data-slot="wordmark" className="wordmark wordmark-float pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[1.45rem] leading-none sm:text-[2.1rem]" aria-hidden="true" tabIndex={-1}>
           Greene
         </Link>
 

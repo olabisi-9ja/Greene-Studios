@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import About from "@/components/home/About";
+import ToolMarquee from "@/components/home/ToolMarquee";
 import Work from "@/components/home/Work";
 import Services from "@/components/home/Services";
 import FAQSection from "@/components/home/FAQSection";
@@ -7,13 +8,14 @@ import NextPage from "@/components/home/NextPage";
 import { FAQS } from "@/lib/data";
 
 /**
- * Homepage: the hero, the studio, the work, what we do, questions, and the
+ * Homepage: the hero, the tools we use, the studio, the work, what we do, questions, and the
  * next step. The footer carries the globe.
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <ToolMarquee />
       <About />
       <Work />
       <Services />
