@@ -52,8 +52,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
-        {/* room for the floating dock under the footer */}
-        <div className="h-28" aria-hidden="true" />
       </SmoothScroll>
       <DockNav />
       <FocusMode />

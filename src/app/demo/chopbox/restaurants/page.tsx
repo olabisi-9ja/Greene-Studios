@@ -8,12 +8,12 @@ export const metadata = { title: "Restaurants" };
 const CATS = ["All", "Rice", "Swallow", "Grills", "Breakfast", "Drinks"];
 
 const SPOTS = [
-  { name: "Mama Put Corner", dish: "Jollof, plantain, chicken", eta: "20 to 30 min", fee: "₦700 delivery", rating: "4.8" },
-  { name: "Suya Republic", dish: "Beef suya, onions, yaji", eta: "25 to 35 min", fee: "₦900 delivery", rating: "4.7" },
-  { name: "Amala Joint", dish: "Amala, ewedu, gbegiri", eta: "30 to 40 min", fee: "₦800 delivery", rating: "4.6" },
-  { name: "The Akara Shop", dish: "Akara, pap, bread", eta: "15 to 25 min", fee: "₦500 delivery", rating: "4.9" },
-  { name: "Ofada Kitchen", dish: "Ofada rice, ayamase", eta: "30 to 45 min", fee: "₦900 delivery", rating: "4.7" },
-  { name: "Zobo & Co", dish: "Zobo, chapman, kunu", eta: "15 to 20 min", fee: "₦400 delivery", rating: "4.8" },
+  { name: "Mama Put Corner", dish: "Jollof, plantain, chicken", eta: "20 to 30 min", fee: "$2 delivery", rating: "4.8" },
+  { name: "Suya Republic", dish: "Beef suya, onions, yaji", eta: "25 to 35 min", fee: "$2 delivery", rating: "4.7" },
+  { name: "Amala Joint", dish: "Amala, ewedu, gbegiri", eta: "30 to 40 min", fee: "$2 delivery", rating: "4.6" },
+  { name: "The Akara Shop", dish: "Akara, pap, bread", eta: "15 to 25 min", fee: "$1 delivery", rating: "4.9" },
+  { name: "Ofada Kitchen", dish: "Ofada rice, ayamase", eta: "30 to 45 min", fee: "$2 delivery", rating: "4.7" },
+  { name: "Zobo & Co", dish: "Zobo, chapman, kunu", eta: "15 to 20 min", fee: "$1 delivery", rating: "4.8" },
 ];
 
 export default function ChopboxRestaurants() {
@@ -21,7 +21,7 @@ export default function ChopboxRestaurants() {
     <DemoShell brand={b} current="/demo/chopbox/restaurants">
       <section className="d-section-tight">
         <div className="d-wrap d-stack">
-          <p className="d-eyebrow">Delivering to Lekki Phase 1</p>
+          <p className="d-eyebrow">Delivering near you</p>
           <h1 className="d-display d-h1 d-m-xs">What are you craving?</h1>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
             {CATS.map((c, i) => (

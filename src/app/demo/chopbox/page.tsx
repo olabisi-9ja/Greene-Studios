@@ -4,9 +4,9 @@ import { DemoShell } from "@/components/demo/DemoShell";
 import { DishFigure } from "@/components/demo/Figure";
 
 const NEAR = [
-  { name: "Mama Put Corner", dish: "Jollof, plantain, chicken", eta: "20 to 30 min", price: "₦4,500" },
-  { name: "Suya Republic", dish: "Beef suya, onions, yaji", eta: "25 to 35 min", price: "₦3,800" },
-  { name: "Amala Joint", dish: "Amala, ewedu, gbegiri", eta: "30 to 40 min", price: "₦3,200" },
+  { name: "Mama Put Corner", dish: "Jollof, plantain, chicken", eta: "20 to 30 min", price: "$9" },
+  { name: "Suya Republic", dish: "Beef suya, onions, yaji", eta: "25 to 35 min", price: "$7" },
+  { name: "Amala Joint", dish: "Amala, ewedu, gbegiri", eta: "30 to 40 min", price: "$6" },
 ];
 
 const STEPS = [
@@ -21,7 +21,7 @@ export default function ChopboxHome() {
       <section className="d-section">
         <div className="d-wrap d-split">
           <div className="d-stack-lg">
-            <p className="d-eyebrow">Lekki · Yaba · Ikeja · Surulere</p>
+            <p className="d-eyebrow">Fast delivery near you</p>
             <h1 className="d-display d-h1 d-m-md">Hot food from your area, fast.</h1>
             <p className="d-lead">Real kitchens near you. Delivered by riders who know the roads.</p>
             <form className="d-stack" style={{ maxWidth: 460 }} action="/demo/chopbox/restaurants">
@@ -30,7 +30,7 @@ export default function ChopboxHome() {
                 <input
                   id="cb-area"
                   name="area"
-                  placeholder="e.g. Admiralty Way, Lekki"
+                  placeholder="Your street or area"
                   style={{
                     flex: 1, minHeight: 52, padding: "0 16px", borderRadius: "var(--b-r-md)",
                     border: "1px solid var(--b-border)", background: "var(--b-surface)", color: "var(--b-text)", font: "inherit",

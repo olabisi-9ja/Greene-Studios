@@ -1,24 +1,24 @@
-import GlobeHero from "@/components/home/GlobeHero";
-import WorkPhones from "@/components/home/WorkPhones";
-import BrandGallery from "@/components/home/BrandGallery";
-import ServicesOverview from "@/components/home/ServicesOverview";
+import Hero from "@/components/home/Hero";
+import About from "@/components/home/About";
+import Work from "@/components/home/Work";
+import Services from "@/components/home/Services";
 import FAQSection from "@/components/home/FAQSection";
-import CTASection from "@/components/home/CTASection";
+import NextPage from "@/components/home/NextPage";
 import { FAQS } from "@/lib/data";
 
 /**
- * Homepage: hero, work, identity gallery, services, questions, next step.
- * Pricing lives on /pricing and is linked, not pushed.
+ * Homepage: the hero, the studio, the work, what we do, questions, and the
+ * next step. The footer carries the globe.
  */
 export default function HomePage() {
   return (
     <>
-      <GlobeHero />
-      <WorkPhones />
-      <BrandGallery />
-      <ServicesOverview />
+      <Hero />
+      <About />
+      <Work />
+      <Services />
       <FAQSection />
-      <CTASection />
+      <NextPage />
 
       <script
         type="application/ld+json"

@@ -217,10 +217,10 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
   chopbox: {
     slug: "chopbox",
     brief:
-      "Food delivery in Lagos is ordered one-handed, on the move, often on a slow connection. Chopbox was designed for that moment first.",
+      "Food delivery is ordered one-handed, on the move, often on a slow connection. Chopbox was designed for that moment first.",
     decisions: [
       { title: "Thumb-sized everything", body: "Buttons and inputs start at 52px tall. Easy to hit on a moving bus." },
-      { title: "Time and price up front", body: "Every card shows delivery time and naira cost before anything else." },
+      { title: "Time and price up front", body: "Every card shows delivery time and full cost before anything else." },
       { title: "Warm, local colour", body: "Pepper red, palm green and cream. It looks like food, not fintech." },
     ],
     build:

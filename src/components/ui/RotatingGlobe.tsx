@@ -125,7 +125,7 @@ export default function RotatingGlobe({ className = "" }: { className?: string }
       // continents approximation as blobs - simplified shapes that move with rotation
       // we draw a few irregular shapes using projected 3D points to give earth feel without texture
       const continents: Array<Array<[number, number]>> = [
-        // Africa-ish
+        
         [[20, -30], [35, -30], [38, 10], [30, 30], [15, 30], [10, 0]],
         // Europe-ish
         [[15, 40], [30, 45], [35, 35], [20, 35]],

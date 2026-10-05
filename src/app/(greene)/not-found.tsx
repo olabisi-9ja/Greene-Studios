@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BrandLottie from "@/components/brand/BrandLottie";
 
 export default function NotFound() {
  return (
@@ -8,6 +9,9 @@ export default function NotFound() {
  404
  </div>
 
+ <div className="pointer-events-none w-[min(260px,70vw)]">
+ <BrandLottie name="not-found" className="aspect-square w-full" />
+ </div>
  <div className="relative z-10 -mt-6 md:-mt-10">
  <div className="mb-6 flex items-center justify-center gap-3">
  <span className="h-px w-10 bg-[var(--brand-accent)]" />

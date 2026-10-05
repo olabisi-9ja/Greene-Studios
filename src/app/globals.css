@@ -1220,9 +1220,11 @@
   outline: 1px dashed rgba(26, 26, 26, 0.55);
   outline-offset: -10px;
 }
-.mode-raw main img {
+.mode-raw main img,
+.mode-raw main video {
+  /* plain grey, not tinted by the orange page */
   filter: grayscale(1) contrast(1.05);
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
 }
 
 /* Loader: skipped before paint on repeat visits; locks scroll while up. */
@@ -1232,3 +1234,56 @@
 html.is-loading {
   overflow: hidden;
 }
+/* The loader's wordmark and runner fly into these slots; keep the real ones
+   hidden until they land so there is only ever one of each. Before the
+   loader script runs (first paint) the same applies unless it was seen. */
+html.is-loading [data-slot],
+html:not(.loader-seen):not(.loader-done) [data-slot] {
+  opacity: 0;
+}
+
+/* ═══ TEXT EFFECTS (GS Labs) ═══════════════════════════════════════════ */
+@keyframes fx-roll-in {
+  from { transform: translateY(105%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.fx-roll-in { animation: fx-roll-in 0.55s cubic-bezier(0.19, 1, 0.22, 1) both; }
+
+@keyframes fx-shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+.fx-shimmer {
+  background: linear-gradient(100deg, currentColor 40%, color-mix(in srgb, currentColor 35%, var(--brand-bg)) 50%, currentColor 60%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fx-shimmer 3.2s linear infinite;
+}
+
+@keyframes fx-gradient { to { background-position: 200% 0; } }
+.fx-gradient {
+  background: linear-gradient(90deg, var(--logo), #2e7d74, #d8a22a, var(--logo));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fx-gradient 6s linear infinite;
+}
+
+@keyframes fx-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.12em); } }
+.fx-wave { animation: fx-wave 1.8s ease-in-out infinite; }
+
+@keyframes fx-caret { 50% { opacity: 0; } }
+.fx-caret { margin-left: 0.05em; animation: fx-caret 1s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-roll-in, .fx-shimmer, .fx-gradient, .fx-wave, .fx-caret { animation: none; }
+}
+
+/* the mascot's nap */
+@keyframes mascot-z {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(8px, -14px) scale(1.1); opacity: 0; }
+}
+.mascot-z { animation: mascot-z 1.8s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .mascot-z { animation: none; } }

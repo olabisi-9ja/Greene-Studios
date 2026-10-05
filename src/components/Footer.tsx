@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/data";
-import Runner from "@/components/brand/Runner";
+import DotGlobe from "@/components/home/DotGlobe";
+import BrandLottie from "@/components/brand/BrandLottie";
 
 const PAGES = [
   { label: "Work", href: "/work" },
@@ -19,36 +20,36 @@ const SOCIAL = [
   { label: "GitHub", href: BRAND.github },
 ];
 
+/**
+ * Footer: links, then the upper half of the dotted globe fading out, then
+ * the wordmark and the small print.
+ */
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[var(--brand-border)] px-5 pb-8 pt-20 sm:px-8">
+    <footer className="overflow-hidden border-t border-[var(--brand-border)] px-5 pb-36 pt-20 sm:px-8">
+
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Link href="/" className="inline-flex items-center gap-3 text-[var(--logo)]" aria-label="Greene Studios, home">
-              <Runner mode="scroll" className="h-14 w-auto" title="" />
-              <span className="wordmark text-3xl">Greene</span>
-            </Link>
-            <p className="mt-5 max-w-[34ch] text-[var(--brand-text-secondary)]">
-              Brand, web and product design. Working worldwide.
+            <p className="text-[clamp(1.8rem,3.6vw,2.8rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
+              Have a project in mind?
             </p>
             <a
               href={`mailto:${BRAND.email}`}
-              className="mt-6 inline-block text-xl font-semibold underline decoration-[var(--brand-accent)] decoration-2 underline-offset-[6px]"
+              className="mt-6 inline-block text-xl font-semibold underline decoration-[var(--logo)] decoration-2 underline-offset-[6px]"
             >
               {BRAND.email}
             </a>
-            <p className="mt-2 text-sm text-[var(--brand-text-secondary)]">We reply within one working day, Monday to Friday.</p>
           </div>
 
           <nav aria-label="Footer">
-            <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">Pages</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Pages</p>
             <ul className="mt-4 list-none space-y-2 p-0">
               {PAGES.map((p) => (
                 <li key={p.href}>
-                  <Link href={p.href} className="hover:text-[var(--brand-accent)]">
+                  <Link href={p.href} className="hover:text-[var(--logo)]">
                     {p.label}
                   </Link>
                 </li>
@@ -57,11 +58,11 @@ export default function Footer() {
           </nav>
 
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">Elsewhere</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Elsewhere</p>
             <ul className="mt-4 list-none space-y-2 p-0">
               {SOCIAL.map((s) => (
                 <li key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-accent)]">
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--logo)]">
                     {s.label}
                   </a>
                 </li>
@@ -70,7 +71,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-[var(--brand-border)] pt-6 text-sm text-[var(--brand-text-secondary)] md:flex-row md:items-center md:justify-between">
+        <div className="pointer-events-none mx-auto mt-16 w-[min(160px,40vw)]">
+          <BrandLottie name="footer" className="aspect-square w-full" />
+        </div>
+
+        {/* the globe's upper half, fading out into the wordmark */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none mx-auto mt-20 h-[min(330px,42vw)] w-[min(680px,86vw)] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_45%,transparent)]"
+        >
+          <DotGlobe />
+        </div>
+
+        <p className="wordmark -mt-6 select-none text-center text-[clamp(5rem,22vw,19rem)] leading-[0.8]" aria-hidden="true">
+          {"Greene".split("").map((c, i) => (
+            <span key={i} className="wordmark-letter">
+              {c}
+            </span>
+          ))}
+        </p>
+
+        <div className="mt-10 flex flex-col gap-3 text-sm text-[var(--brand-text-secondary)] md:flex-row md:items-center md:justify-between">
           <span>© {year} Greene Studios</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link href="/legal#privacy" className="hover:text-[var(--brand-text)]">

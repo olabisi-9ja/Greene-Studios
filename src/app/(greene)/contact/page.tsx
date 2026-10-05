@@ -1,112 +1,55 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { BRAND } from "@/lib/data";
-import PageHeader from "@/components/ui/PageHeader";
 import ProjectIntake from "@/components/contact/ProjectIntake";
+import BrandLottie from "@/components/brand/BrandLottie";
 
 export const metadata: Metadata = {
-  title: "Contact · Start a Project",
-  description:
-    "Ready to build something extraordinary? Take the two-minute project brief and get a thoughtful response within 24 hours.",
+  title: "Contact",
+  description: "Tell Greene Studios what you need: four quick questions, then we reply by email.",
+  alternates: { canonical: "/contact" },
 };
+
+const SOCIALS = [
+  { label: "Instagram", href: BRAND.instagram },
+  { label: "X", href: BRAND.twitter },
+  { label: "LinkedIn", href: BRAND.linkedin },
+];
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)]">
-      <PageHeader
-        kicker="Start a project"
-        title={
-          <>
-            Let&apos;s build
-            <br />
-            something
-          </>
-        }
-        description="Five quick questions, two minutes. Tell us what you're building and we'll respond within 24 hours with a thoughtful, specific reply. Never a template."
-        right={
-          <span className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
-            Accepting new projects
-          </span>
-        }
-      />
-
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-3 lg:gap-16">
-        <div className="lg:col-span-2">
-          <ProjectIntake />
+    <div className="pt-32 sm:pt-40">
+      <div className="relative mx-auto max-w-[1400px] px-5 pb-16 sm:px-8">
+        <div className="pointer-events-none mb-8 w-[min(200px,50vw)] lg:absolute lg:right-8 lg:top-0 lg:mb-0 lg:w-[240px]">
+          <BrandLottie name="contact" className="aspect-square w-full" />
         </div>
+        <h1 className="max-w-[12ch] text-[clamp(2.8rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
+          Start a project
+        </h1>
+        <p className="mt-5 text-lg text-[var(--brand-text-secondary)]">Four quick questions. We reply by email.</p>
+      </div>
 
-        <div className="space-y-6">
-          <div className="card">
-            <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
-              Contact details
-            </h3>
-            <div className="space-y-6">
-              {[
-                { label: "Email", value: BRAND.email, href: `mailto:${BRAND.email}` },
-                { label: "Response time", value: "Within 24 hours" },
-                { label: "Availability", value: "Available" },
-              ].map(({ label, value, href }) => (
-                <div key={label}>
-                  <p className="mb-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-accent)]">{label}</p>
-                  {href ? (
-                    <a href={href} className="text-sm font-semibold text-[var(--brand-text)] underline underline-offset-4">
-                      {value}
-                    </a>
-                  ) : (
-                    <p className="text-sm font-semibold text-[var(--brand-text)]">{value}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="card">
-            <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
-              What happens next
-            </h3>
-            <div className="space-y-5">
-              {[
-                { step: "1", text: "You complete the two-minute brief: type, budget, timeline, story" },
-                { step: "2", text: "We review it and research your company before replying" },
-                { step: "3", text: "You receive a thoughtful, specific response within 24h" },
-                { step: "4", text: "We schedule a 30-min discovery call and send a proposal" },
-              ].map((item) => (
-                <div key={item.step} className="flex gap-4">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--brand-border)] bg-[var(--brand-bg)] text-xs font-black text-[var(--brand-accent)]">
-                    {item.step}
-                  </span>
-                  <p className="text-sm font-medium leading-relaxed text-[var(--brand-text-secondary)]">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="card">
-            <h3 className="mb-6 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
-              Follow our work
-            </h3>
-            <div className="flex flex-col">
-              {[
-                { platform: "Instagram", handle: "@greenestudios", href: BRAND.instagram },
-                { platform: "Twitter", handle: "@greenestudios", href: BRAND.twitter },
-                { platform: "LinkedIn", handle: "Greene Studios", href: BRAND.linkedin },
-              ].map((s) => (
-                <a
-                  key={s.platform}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between border-b border-[var(--brand-border)] py-4 text-sm font-semibold text-[var(--brand-text-secondary)] transition-colors last:border-b-0 hover:text-[var(--brand-text)]"
-                >
-                  <span>{s.platform}</span>
-                  <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-                    {s.handle}
-                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
+      <section className="bg-[#141414] px-5 py-20 text-white [--logo:#5fbf8a] sm:px-8 sm:py-28">
+        <div className="mx-auto max-w-3xl">
+          <Suspense fallback={null}>
+            <ProjectIntake />
+          </Suspense>
         </div>
+      </section>
+
+      <div className="mx-auto flex max-w-[1400px] flex-wrap items-baseline justify-between gap-6 px-5 py-16 sm:px-8">
+        <a href={`mailto:${BRAND.email}`} className="text-xl font-semibold underline decoration-[var(--logo)] decoration-2 underline-offset-[6px]">
+          {BRAND.email}
+        </a>
+        <ul className="m-0 flex list-none gap-8 p-0">
+          {SOCIALS.map((s) => (
+            <li key={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--logo)]">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

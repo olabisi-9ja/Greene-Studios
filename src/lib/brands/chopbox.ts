@@ -1,7 +1,7 @@
 import type { BrandSystem } from "./types";
 
 /**
- * CHOPBOX — food delivery across Lagos.
+ * CHOPBOX — food delivery across the city.
  *
  * Direction: warm and quick. Pepper red, palm green and cream, a chunky
  * Bricolage Grotesque that reads at a glance, and buttons sized for a thumb
@@ -50,7 +50,7 @@ export const chopbox: BrandSystem = {
   motion: { duration: 240, ease: "cubic-bezier(0.34, 1.4, 0.64, 1)" },
   voice: [
     "Talk like a friend who knows every buka in the area.",
-    "Times and prices up front, always in naira.",
+    "Times and prices up front, always in local currency.",
     "Pidgin welcome in small doses; never in the checkout.",
   ],
   nav: [

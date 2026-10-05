@@ -2,29 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  IconHome,
-  IconHomeFill,
-  IconWork,
-  IconWorkFill,
-  IconNib,
-  IconNibFill,
-  IconMail,
-  IconMailFill,
-} from "@/components/icons/GreeneIcons";
+import { NavHome, NavHomeOn, NavWork, NavWorkOn, NavSend, NavSendOn } from "@/components/icons/NavIcons";
 import { useChromeHidden } from "@/lib/hooks/useChromeHidden";
 import { cn } from "@/lib/utils";
 
+/** Three places: home, the work, and starting a project. Everything else is a link away. */
 const LINKS = [
-  { href: "/", label: "Home", Icon: IconHome, Active: IconHomeFill },
-  { href: "/work", label: "Work", Icon: IconWork, Active: IconWorkFill },
-  { href: "/services", label: "Services", Icon: IconNib, Active: IconNibFill },
-  { href: "/contact", label: "Start a project", Icon: IconMail, Active: IconMailFill },
+  { href: "/", label: "Home", Icon: NavHome, Active: NavHomeOn },
+  { href: "/work", label: "Work", Icon: NavWork, Active: NavWorkOn },
+  { href: "/contact", label: "Start a project", Icon: NavSend, Active: NavSendOn },
 ];
 
 /**
- * Four separate floating tiles, icons only. The current page shows a filled
- * icon. Hides while scrolling down; returns on any scroll up.
+ * Three solid icons, each on a solid circle in the brand green so they read
+ * over anything. The current page carries a ring. They step aside while you
+ * scroll down and come back the moment you scroll up.
  */
 export default function DockNav() {
   const hidden = useChromeHidden();
@@ -34,14 +26,14 @@ export default function DockNav() {
     <nav
       aria-label="Primary"
       className={cn(
-        "fixed bottom-5 left-1/2 z-50 -translate-x-1/2 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]",
-        hidden && "pointer-events-none translate-y-[calc(100%+2rem)] opacity-0",
+        "fixed bottom-5 left-1/2 z-50 -translate-x-1/2 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] sm:bottom-7",
+        hidden && "pointer-events-none translate-y-[calc(100%+2.5rem)] opacity-0",
       )}
     >
       <ul className="m-0 flex list-none items-center gap-2 p-0">
-        {LINKS.map(({ href, label, Icon, Active }) => {
+        {LINKS.map(({ href, label, Active }) => {
           const on = href === "/" ? pathname === "/" : Boolean(pathname?.startsWith(href));
-          const Glyph = on ? Active : Icon;
+          const Glyph = Active;
           return (
             <li key={href}>
               <Link
@@ -49,9 +41,9 @@ export default function DockNav() {
                 aria-label={label}
                 title={label}
                 aria-current={on ? "page" : undefined}
-                className="grid size-[58px] place-items-center rounded-[18px] bg-[var(--dock-bg)] text-[var(--dock-fg)] shadow-[0_14px_30px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-transform duration-200 hover:-translate-y-0.5 active:scale-95 sm:size-16 sm:rounded-[20px]"
+                className={cn("group grid size-9 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 active:scale-90", on && "ring-1 ring-[var(--logo)] ring-offset-[3px] ring-offset-[var(--brand-bg)]")}
               >
-                <Glyph className={cn("size-[26px]", !on && "opacity-90")} />
+                <Glyph className="size-4" />
               </Link>
             </li>
           );

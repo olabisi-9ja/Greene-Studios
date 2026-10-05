@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PricingCards from "@/components/services/PricingCards";
+import BrandLottie from "@/components/brand/BrandLottie";
 import { FAQS } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -12,7 +13,10 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <div className="px-5 pb-32 pt-32 sm:px-8 sm:pt-40">
-      <div className="mx-auto max-w-[1400px]">
+      <div className="relative mx-auto max-w-[1400px]">
+        <div className="pointer-events-none mb-8 w-[min(220px,55vw)] lg:absolute lg:right-0 lg:top-0 lg:mb-0 lg:w-[260px]">
+          <BrandLottie name="pricing" className="aspect-square w-full" />
+        </div>
         <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Pricing</p>
         <h1 className="mt-4 max-w-[16ch] text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
           Choose how we work together.

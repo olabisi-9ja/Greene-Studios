@@ -3,8 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { INDUSTRIES, SERVICES } from "@/lib/data";
-import { ConceptCard } from "@/components/work/WorkCards";
-import { BRANDS_BY_SLUG } from "@/lib/brands";
 import PageHeader from "@/components/ui/PageHeader";
 import CTASection from "@/components/home/CTASection";
 
@@ -35,9 +33,6 @@ export default async function IndustryPage({ params }: Props) {
   const services = industry.services
     .map((href) => SERVICES.find((s) => s.href === href))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
-  const work = industry.work
-    .map((w) => BRANDS_BY_SLUG[w])
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
@@ -150,28 +145,6 @@ export default async function IndustryPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Related work */}
-        {work.length > 0 ? (
-          <section className="border-t border-[var(--brand-border)] py-16 md:py-24">
-            <div className="mb-10 flex items-end justify-between">
-              <h2 className="font-display text-3xl font-black uppercase leading-[0.95] tracking-tight md:text-4xl">
-                Proof in {industry.name.toLowerCase()}.
-              </h2>
-              <Link
-                href="/work"
-                data-cursor="GO"
-                className="hidden text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text)] sm:block"
-              >
-                All projects →
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {work.map((p) => (
-                <ConceptCard key={p.slug} brand={p} />
-              ))}
-            </div>
-          </section>
-        ) : null}
 
         {/* Next industry */}
         <section className="border-t border-[var(--brand-border)] py-14">

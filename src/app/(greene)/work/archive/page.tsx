@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SHIPPED } from "@/lib/shipped";
-import { BRANDS } from "@/lib/brands";
+import { PROJECTS } from "@/lib/work";
 import PageHeader from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
   title: "Work archive",
-  description: "Every Greene Studios project in one list, shipped sites and concept systems.",
+  description: "Every Greene Studios project in one list: case studies and live sites.",
 };
 
 /**
@@ -31,12 +31,12 @@ const ROWS: Row[] = [
     href: p.url,
     external: true,
   })),
-  ...BRANDS.map((b) => ({
-    key: b.slug,
-    name: b.name,
-    kind: "Concept",
-    meta: b.sector,
-    href: `/work/${b.slug}`,
+  ...PROJECTS.map((p) => ({
+    key: `case-${p.slug}`,
+    name: p.name,
+    kind: "Case study",
+    meta: p.kind,
+    href: `/work/${p.slug}`,
     external: false,
   })),
 ];
@@ -88,7 +88,7 @@ export default function ArchivePage() {
             Everything, in one list.
           </>
         }
-        description={`${SHIPPED.length} shipped sites and ${BRANDS.length} concept systems.`}
+        description={`${PROJECTS.length} case studies and ${SHIPPED.length} live sites.`}
         right={
           <Link
             href="/work"

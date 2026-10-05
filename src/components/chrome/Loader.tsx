@@ -1,18 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Runner from "@/components/brand/Runner";
 
 const SEEN = "greene:loaded";
 
 /**
  * Window-load screen: the wordmark, the runner running between the lines,
- * and "Studios" at a third of the wordmark's size. Holds until the window
- * has loaded (and at least ~1.1s, so it reads as intentional), then lifts.
- * Plays once per browser session.
+ * "Studios" at a third of the size, and a counter.
+ *
+ * When the page has loaded the counter reaches 100, then the wordmark and
+ * the runner fly up and shrink into their places in the top bar (measured,
+ * so they land exactly), while the screen behind them fades. The top bar's
+ * own wordmark and logo stay hidden until the hand-off, so there is never
+ * two of anything. Plays once per browser session.
  */
 export default function Loader() {
-  const [phase, setPhase] = useState<"show" | "leave" | "gone">("show");
+  const [phase, setPhase] = useState<"show" | "fly" | "gone">("show");
+  const count = useRef<HTMLSpanElement>(null);
+  const word = useRef<HTMLSpanElement>(null);
+  const mark = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let seen = false;
@@ -21,63 +28,104 @@ export default function Loader() {
     } catch {
       /* storage blocked: just play it */
     }
+    const root = document.documentElement;
     if (seen) {
+      root.classList.remove("is-loading");
+      root.classList.add("loader-done");
       setPhase("gone");
       return;
     }
+    root.classList.add("is-loading");
 
     const started = performance.now();
-    let t1: ReturnType<typeof setTimeout>;
-    let t2: ReturnType<typeof setTimeout>;
-    const finish = () => {
-      const wait = Math.max(0, 1100 - (performance.now() - started));
-      t1 = setTimeout(() => {
-        setPhase("leave");
-        try {
-          sessionStorage.setItem(SEEN, "1");
-        } catch {
-          /* ignore */
-        }
-        t2 = setTimeout(() => setPhase("gone"), 750);
-      }, wait);
-    };
-    if (document.readyState === "complete") finish();
-    else window.addEventListener("load", finish, { once: true });
-    // Never trap the visitor behind a stalled asset.
-    const failsafe = setTimeout(finish, 6000);
+    let loaded = document.readyState === "complete";
+    let shown = 0;
+    let raf = 0;
+    const onLoad = () => (loaded = true);
+    window.addEventListener("load", onLoad, { once: true });
+    const failsafe = setTimeout(() => (loaded = true), 6000);
 
+    const step = (now: number) => {
+      const t = (now - started) / 1000;
+      // creep towards 90 while assets arrive, then run home once loaded (and at least 1.2s in)
+      const target = loaded && t > 1.2 ? 100 : 90 * (1 - Math.exp(-t * 1.4));
+      shown += (target - shown) * 0.12;
+      if (target === 100 && 100 - shown < 0.6) shown = 100;
+      if (count.current) count.current.textContent = `${Math.floor(shown)}`.padStart(2, "0");
+      if (shown >= 100) {
+        fly();
+        return;
+      }
+      raf = requestAnimationFrame(step);
+    };
+
+    const toSlot = (el: HTMLElement | null, slot: string) => {
+      const target = document.querySelector<HTMLElement>(`[data-slot="${slot}"]`);
+      if (!el || !target) return;
+      const a = el.getBoundingClientRect();
+      const b = target.getBoundingClientRect();
+      const s = b.height / a.height;
+      const dx = b.left + b.width / 2 - (a.left + a.width / 2);
+      const dy = b.top + b.height / 2 - (a.top + a.height / 2);
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+    };
+
+    let t1: ReturnType<typeof setTimeout>;
+    const fly = () => {
+      setPhase("fly");
+      requestAnimationFrame(() => {
+        toSlot(word.current, "wordmark");
+        toSlot(mark.current, "logo");
+      });
+      try {
+        sessionStorage.setItem(SEEN, "1");
+      } catch {
+        /* ignore */
+      }
+      t1 = setTimeout(() => {
+        root.classList.remove("is-loading");
+        root.classList.add("loader-done");
+        setPhase("gone");
+      }, 950);
+    };
+
+    raf = requestAnimationFrame(step);
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
+      cancelAnimationFrame(raf);
       clearTimeout(failsafe);
-      window.removeEventListener("load", finish);
+      clearTimeout(t1);
+      window.removeEventListener("load", onLoad);
     };
   }, []);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("is-loading", phase === "show" && !root.classList.contains("loader-seen"));
-  }, [phase]);
-
   if (phase === "gone") return null;
+  const flying = phase === "fly";
+  const move = "transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] origin-center will-change-transform";
 
   return (
-    <div
-      role="status"
-      data-loader
-      aria-label="Loading Greene Studios"
-      className={`fixed inset-0 z-[200] grid place-items-center bg-[var(--brand-bg)] transition-[clip-path] duration-700 ease-[cubic-bezier(0.7,0,0.2,1)] ${
-        phase === "leave" ? "[clip-path:inset(0_0_100%_0)]" : "[clip-path:inset(0_0_0_0)]"
-      }`}
-    >
+    <div role="status" data-loader aria-label="Loading Greene Studios" className="fixed inset-0 z-[200]">
       <div
-        className={`flex flex-col items-center transition-[opacity,transform] duration-300 ${
-          phase === "leave" ? "-translate-y-4 opacity-0" : ""
-        }`}
-      >
-        <span className="wordmark text-[clamp(3.5rem,11vw,7.5rem)]">Greene</span>
-        <Runner mode="loop" className="my-3 h-[clamp(5rem,14vw,8.5rem)] w-auto text-[var(--logo)]" title="" />
-        <span className="wordmark text-[clamp(1.17rem,3.67vw,2.5rem)] tracking-[0.02em]">Studios</span>
+        className={`absolute inset-0 bg-[var(--brand-bg)] transition-opacity duration-500 ${flying ? "opacity-0 delay-500" : ""}`}
+      />
+      <div className="relative grid h-full place-items-center">
+        <div className="flex flex-col items-center">
+          <span ref={word} className={`wordmark text-[clamp(3.5rem,11vw,7.5rem)] leading-none ${move}`}>
+            Greene
+          </span>
+          <div ref={mark} className={`my-4 text-[var(--logo)] ${move}`}>
+            <Runner mode="loop" className="h-[clamp(5rem,14vw,8.5rem)] w-auto" title="" />
+          </div>
+          <span
+            className={`wordmark text-[clamp(1.17rem,3.67vw,2.5rem)] tracking-[0.02em] transition-opacity duration-300 ${flying ? "opacity-0" : ""}`}
+          >
+            Studios
+          </span>
+          <span
+            className={`mt-6 font-mono text-sm tabular-nums text-[var(--brand-text-secondary)] transition-opacity duration-300 ${flying ? "opacity-0" : ""}`}
+          >
+            <span ref={count}>00</span>%
+          </span>
+        </div>
       </div>
     </div>
   );

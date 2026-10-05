@@ -33,6 +33,8 @@ export const PACKAGES: {
   id: PackageId;
   name: string;
   pitch: string;
+  /** What the client walks away with, one sentence. */
+  outcome: string;
   price: string;
   timeline: string;
   note?: string;
@@ -43,6 +45,7 @@ export const PACKAGES: {
     id: "identity",
     name: "Brand Identity",
     pitch: "For new businesses, and ones that have outgrown the logo they started with.",
+    outcome: "A distinctive logo and visual system, ready to use everywhere the business shows up.",
     price: "$800 – $1.2k",
     timeline: "1 – 3 weeks",
     includes: [
@@ -59,6 +62,7 @@ export const PACKAGES: {
     id: "website",
     name: "Website",
     pitch: "A site that explains what you do clearly and gets people to act.",
+    outcome: "A fast, custom website that explains what you do in one look and turns visitors into enquiries.",
     price: "$1k – $1.5k",
     timeline: "1 – 3 weeks",
     includes: [
@@ -75,6 +79,7 @@ export const PACKAGES: {
     id: "product",
     name: "Product Build",
     pitch: "For startups that need a web or mobile product built properly, start to launch.",
+    outcome: "A working web or mobile product, designed and engineered by one team, live in the stores.",
     price: "$3k – $6k",
     timeline: "3 – 6 months",
     note: "Best for MVPs and rebuilds",
@@ -92,6 +97,7 @@ export const PACKAGES: {
     id: "retainer",
     name: "Monthly Retainer",
     pitch: "Design and engineering capacity on tap, so your team keeps shipping.",
+    outcome: "Design and development every month, without hiring, so your team keeps shipping.",
     price: "From $1k / month",
     timeline: "Contract based",
     includes: [

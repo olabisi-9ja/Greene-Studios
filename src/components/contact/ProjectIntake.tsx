@@ -1,27 +1,28 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { BRAND } from "@/lib/data";
+import { PACKAGES, type PackageId } from "@/lib/offer";
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+/**
+ * Project brief, one question at a time: what, budget, timeline, details. Arriving from
+ * /pricing or the /start quiz with ?package= preselects the first answer and
+ * skips ahead to budget. Sending composes the brief in the visitor's email
+ * client (no backend), with a copy fallback.
+ */
+type TypeId = PackageId | "other";
 
-/* ─── Intake options ─────────────────────────────────────────────── */
-
-const PROJECT_TYPES = [
-  { id: "website", label: "Website", desc: "Marketing site, portfolio, landing page" },
-  { id: "product", label: "Digital product", desc: "SaaS, dashboard, web or mobile app" },
-  { id: "brand", label: "Brand identity", desc: "Naming, logo, visual system, guidelines" },
-  { id: "ecommerce", label: "E-commerce", desc: "Storefront, headless commerce, checkout" },
-  { id: "motion", label: "Motion & interaction", desc: "Animation systems, WebGL, micro-interactions" },
-  { id: "experimental", label: "Something experimental", desc: "AI, prototypes, lab-style R&D" },
+const TYPES: { id: TypeId; label: string }[] = [
+  ...PACKAGES.map((p) => ({ id: p.id as TypeId, label: p.name })),
+  { id: "other", label: "Something else" },
 ];
 
-const BUDGETS = ["₦300k – ₦750k", "₦750k – ₦1.5m", "₦1.5m – ₦3m", "₦3m+", "Not sure yet"];
-const TIMELINES = ["ASAP", "1–3 months", "3–6 months", "Just exploring"];
+const BUDGETS = ["Under $1k", "$1k to $3k", "$3k to $6k", "$6k or more", "A monthly amount", "Not sure yet"];
+const TIMELINES = ["Within a month", "In 1 to 3 months", "In 3 months or more", "Flexible"];
 
 type Answers = {
-  type: string;
+  type: TypeId | "";
   budget: string;
   timeline: string;
   name: string;
@@ -30,402 +31,275 @@ type Answers = {
   message: string;
 };
 
-const INITIAL: Answers = {
-  type: "",
-  budget: "",
-  timeline: "",
-  name: "",
-  email: "",
-  company: "",
-  message: "",
-};
+const EMPTY: Answers = { type: "", budget: "", timeline: "", name: "", email: "", company: "", message: "" };
 
-const inputClass =
-  "w-full rounded-xl border border-[var(--brand-border)] bg-[var(--brand-bg)] px-5 py-4 text-sm text-[var(--brand-text)] transition-all placeholder:text-[var(--brand-text-secondary)]/70 focus:border-[var(--brand-text)] focus:outline-none focus:ring-1 focus:ring-[var(--brand-text)]";
+const STEPS = ["What", "Budget", "Timeline", "Details"];
 
-const labelClass =
-  "mb-2 block text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]";
+const field =
+  "w-full border-0 border-b-2 border-white/30 bg-transparent px-0 py-3 text-xl text-white placeholder:text-white/40 focus:border-[var(--logo)] focus:outline-none";
 
-function isEmail(v: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
+function readPackage(raw: string | null): TypeId | "" {
+  return PACKAGES.some((p) => p.id === raw) ? (raw as PackageId) : "";
 }
 
-/**
- * Project intake, a mini qualification flow instead of a flat form.
- * Type → budget → timeline → details → review. Submitting composes a
- * structured brief in the visitor's email client (no backend required)
- * and offers a copy-to-clipboard fallback.
- */
+function Choices({
+  name,
+  options,
+  value,
+  onPick,
+}: {
+  name: string;
+  options: { id: string; label: string }[];
+  value: string;
+  onPick: (id: string) => void;
+}) {
+  return (
+    <div className="mt-10 space-y-5">
+      {options.map((o) => {
+        const on = value === o.id;
+        return (
+          <label key={o.id} className="group flex cursor-pointer items-center gap-5 text-[clamp(1.15rem,2.2vw,1.5rem)] leading-snug">
+            <input type="radio" name={name} checked={on} onChange={() => onPick(o.id)} className="peer sr-only" />
+            <span
+              aria-hidden="true"
+              className={`grid size-7 shrink-0 place-items-center border-2 transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 ${
+                on ? "border-[var(--logo)] bg-[var(--logo)]" : "border-white/40 group-hover:border-white"
+              }`}
+            >
+              {on && <span className="size-2.5 bg-[#141414]" />}
+            </span>
+            <span className={on ? "text-white" : "text-white/80"}>{o.label}</span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function ProjectIntake() {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<Answers>(INITIAL);
+  const params = useSearchParams();
+  const preset = readPackage(params.get("package"));
+
+  const [answers, setAnswers] = useState<Answers>({ ...EMPTY, type: preset });
+  const [step, setStep] = useState(preset ? 1 : 0);
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
-    setAnswers((a) => ({ ...a, [key]: value }));
+  const set = <K extends keyof Answers>(key: K, value: Answers[K]) => setAnswers((a) => ({ ...a, [key]: value }));
 
-  const stepsValid = useMemo(
-    () => [
-      answers.type !== "",
-      answers.budget !== "",
-      answers.timeline !== "",
-      answers.name.trim() !== "" && isEmail(answers.email) && answers.message.trim().length >= 10,
-      true,
-    ],
-    [answers]
+  const valid = [
+    answers.type !== "",
+    answers.budget !== "",
+    answers.timeline !== "",
+    answers.name.trim() !== "" && isEmail(answers.email) && answers.message.trim().length >= 10,
+  ];
+
+  const typeLabel = TYPES.find((t) => t.id === answers.type)?.label ?? "";
+
+  const brief = useMemo(
+    () =>
+      [
+        `Brief from ${answers.name}${answers.company ? `, ${answers.company}` : ""}`,
+        "",
+        `Looking for: ${typeLabel}`,
+        `Budget: ${answers.budget}`,
+        `Timeline: ${answers.timeline}`,
+        "",
+        answers.message,
+        "",
+        `Reply to: ${answers.name} <${answers.email}>`,
+      ].join("\n"),
+    [answers, typeLabel]
   );
 
-  const briefText = useMemo(() => {
-    const typeLabel = PROJECT_TYPES.find((t) => t.id === answers.type)?.label ?? answers.type;
-    return [
-      `PROJECT BRIEF FROM ${answers.name}${answers.company ? ` · ${answers.company}` : ""}`,
-      "",
-      `What they're building : ${typeLabel}`,
-      `Budget                : ${answers.budget}`,
-      `Timeline              : ${answers.timeline}`,
-      "",
-      "About the project:",
-      answers.message,
-      "",
-      `Reply to: ${answers.name} <${answers.email}>`,
-    ].join("\n");
-  }, [answers]);
+  const mailto = `mailto:${BRAND.email}?subject=${encodeURIComponent(
+    `Brief: ${typeLabel} for ${answers.company || answers.name}`
+  )}&body=${encodeURIComponent(brief)}`;
 
-  const mailtoHref = useMemo(() => {
-    const subject = `Project brief from ${answers.name}${answers.company ? ` · ${answers.company}` : ""}`;
-    return `mailto:${BRAND.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(briefText)}`;
-  }, [answers, briefText]);
-
-  const submit = () => {
-    window.location.href = mailtoHref;
-    setSent(true);
-  };
-
-  const copyBrief = async () => {
+  const copy = async () => {
     try {
-      await navigator.clipboard.writeText(briefText);
+      await navigator.clipboard.writeText(brief);
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      /* clipboard unavailable, the text is visible on screen to select */
+      /* clipboard blocked; the brief is on screen to select */
     }
   };
 
-  const restart = () => {
-    setAnswers(INITIAL);
-    setStep(0);
-    setSent(false);
-  };
-
-  /* ── Success state ─────────────────────────────────────────────── */
   if (sent) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: EASE }}
-        className="card card-lg"
-      >
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand-accent)] text-2xl text-[var(--brand-on-accent)]">
-          ✓
-        </span>
-        <h2 className="mt-8 font-display text-3xl font-black uppercase tracking-tight md:text-4xl">
-          Your brief is ready to send.
+      <div aria-live="polite">
+        <p className="font-mono text-sm text-white/70">Almost there</p>
+        <h2 className="mt-3 text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+          Your email app should be open.
         </h2>
-        <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-base">
-          Your email client should have opened with the brief pre-addressed to{" "}
-          <a href={`mailto:${BRAND.email}`} className="font-semibold text-[var(--brand-text)] underline underline-offset-4">
+        <p className="mt-4 max-w-[52ch] text-lg text-white/70">
+          Hit send there. Nothing opened? Copy the brief and email it to{" "}
+          <a href={`mailto:${BRAND.email}`} className="text-white underline underline-offset-4">
             {BRAND.email}
           </a>
-          . Nothing opened? Copy the brief below and send it manually. We respond to every inquiry within 24 hours.
+          .
         </p>
-
-        <pre className="mt-8 max-h-64 overflow-auto whitespace-pre-wrap rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-6 font-mono text-xs leading-relaxed text-[var(--brand-text-secondary)]">
-          {briefText}
+        <pre className="mt-8 max-h-72 overflow-auto whitespace-pre-wrap rounded-[4px] border border-white/20 p-5 font-mono text-sm leading-relaxed text-white/70">
+          {brief}
         </pre>
-
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <button type="button" onClick={copyBrief} data-cursor="COPY" className="btn-primary">
-            {copied ? "Copied ✓" : "Copy brief"}
+        <div className="mt-8 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={copy}
+            className="inline-flex h-12 items-center rounded-[4px] bg-[var(--logo)] px-6 font-semibold text-[#141414]"
+          >
+            {copied ? "Copied" : "Copy brief"}
           </button>
-          <a href={mailtoHref} data-cursor="SEND" className="btn-outline">
-            Open email again <span aria-hidden="true">→</span>
+          <a href={mailto} className="inline-flex h-12 items-center rounded-[4px] border border-white px-6 font-medium">
+            Open email again
           </a>
           <button
             type="button"
-            onClick={restart}
-            className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)]"
+            onClick={() => {
+              setAnswers(EMPTY);
+              setStep(0);
+              setSent(false);
+            }}
+            className="inline-flex h-12 items-center px-2 font-medium text-white/70 underline-offset-4 hover:underline"
           >
-            Start a new brief
+            Start over
           </button>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
-  /* ── The flow ──────────────────────────────────────────────────── */
-  const totalSteps = 5;
-  const typeLabel = PROJECT_TYPES.find((t) => t.id === answers.type)?.label;
+  const last = STEPS.length - 1;
 
   return (
-    <div className="card card-lg">
-      {/* Progress */}
-      <div className="mb-8">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)]">
-            Project brief · Step {Math.min(step + 1, totalSteps)} of {totalSteps}
-          </span>
-          <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-text-secondary)] sm:block">
-            ~2 minutes
-          </span>
-        </div>
-        <div className="h-1 w-full overflow-hidden rounded-full bg-[var(--brand-border)]">
-          <motion.div
-            className="h-full rounded-full bg-[var(--brand-accent)]"
-            animate={{ width: `${((step + 1) / totalSteps) * 100}%` }}
-            transition={{ duration: 0.5, ease: EASE }}
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (step === last) {
+          window.location.href = mailto;
+          setSent(true);
+        } else if (valid[step]) {
+          setStep((s) => s + 1);
+        }
+      }}
+    >
+      <div className="mb-10">
+        <div
+          className="h-[3px] w-full bg-white/15"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={STEPS.length}
+          aria-valuenow={step}
+        >
+          <div
+            className="h-full bg-[var(--logo)] transition-[width] duration-500"
+            style={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
           />
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step}
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -24 }}
-          transition={{ duration: 0.35, ease: EASE }}
-        >
-          {/* ── Step 1 · What are you building? ─────────────────── */}
-          {step === 0 && (
-            <fieldset>
-              <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                What are you building?
-              </legend>
-              <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">Pick the closest fit. We&apos;ll scope the rest together.</p>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {PROJECT_TYPES.map((t) => {
-                  const active = answers.type === t.id;
-                  return (
-                    <button
-                      key={t.id}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => set("type", t.id)}
-                      className={`rounded-2xl border p-5 text-left transition-all duration-300 ${
-                        active
-                          ? "border-[var(--brand-text)] bg-[var(--brand-text)] text-[var(--brand-bg)]"
-                          : "border-[var(--brand-border)] bg-[var(--brand-bg)] hover:border-[var(--brand-text)]"
-                      }`}
-                    >
-                      <span className="font-display text-base font-black uppercase tracking-tight">{t.label}</span>
-                      <span className={`mt-1 block text-xs leading-relaxed ${active ? "opacity-70" : "text-[var(--brand-text-secondary)]"}`}>
-                        {t.desc}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </fieldset>
-          )}
+      {step === 0 && (
+        <fieldset className="m-0 border-0 p-0">
+          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+            What do you need?
+          </legend>
+          <Choices name="type" options={TYPES} value={answers.type} onPick={(id) => set("type", id as TypeId)} />
+        </fieldset>
+      )}
 
-          {/* ── Step 2 · Budget ─────────────────────────────────── */}
-          {step === 1 && (
-            <fieldset>
-              <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                What&apos;s the budget?
-              </legend>
-              <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
-                Honest ranges get honest proposals. If you are unsure, choose the last option and tell us more below.
-              </p>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {BUDGETS.map((b) => {
-                  const active = answers.budget === b;
-                  return (
-                    <button
-                      key={b}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => set("budget", b)}
-                      className={`rounded-2xl border px-4 py-5 text-center font-display text-sm font-black uppercase tracking-tight transition-all duration-300 ${
-                        active
-                          ? "border-[var(--brand-text)] bg-[var(--brand-text)] text-[var(--brand-bg)]"
-                          : "border-[var(--brand-border)] bg-[var(--brand-bg)] hover:border-[var(--brand-text)]"
-                      }`}
-                    >
-                      {b}
-                    </button>
-                  );
-                })}
-              </div>
-            </fieldset>
+      {step === 1 && (
+        <fieldset className="m-0 border-0 p-0">
+          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+            What budget are you working with?
+          </legend>
+          {preset && answers.type === preset && (
+            <p className="mt-3 text-white/60">
+              For {typeLabel}.{" "}
+              <button type="button" onClick={() => setStep(0)} className="underline underline-offset-4 hover:text-white">
+                Change
+              </button>
+            </p>
           )}
+          <Choices
+            name="budget"
+            options={BUDGETS.map((b) => ({ id: b, label: b }))}
+            value={answers.budget}
+            onPick={(id) => set("budget", id)}
+          />
+        </fieldset>
+      )}
 
-          {/* ── Step 3 · Timeline ───────────────────────────────── */}
-          {step === 2 && (
-            <fieldset>
-              <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                When do you need it live?
-              </legend>
-              <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">This shapes which team and process we propose.</p>
-              <div className="grid grid-cols-2 gap-3">
-                {TIMELINES.map((t) => {
-                  const active = answers.timeline === t;
-                  return (
-                    <button
-                      key={t}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => set("timeline", t)}
-                      className={`rounded-2xl border px-4 py-5 text-center font-display text-sm font-black uppercase tracking-tight transition-all duration-300 ${
-                        active
-                          ? "border-[var(--brand-text)] bg-[var(--brand-text)] text-[var(--brand-bg)]"
-                          : "border-[var(--brand-border)] bg-[var(--brand-bg)] hover:border-[var(--brand-text)]"
-                      }`}
-                    >
-                      {t}
-                    </button>
-                  );
-                })}
-              </div>
-            </fieldset>
-          )}
+      {step === 2 && (
+        <fieldset className="m-0 border-0 p-0">
+          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+            When do you want to start?
+          </legend>
+          <Choices
+            name="timeline"
+            options={TIMELINES.map((t) => ({ id: t, label: t }))}
+            value={answers.timeline}
+            onPick={(id) => set("timeline", id)}
+          />
+        </fieldset>
+      )}
 
-          {/* ── Step 4 · Details ────────────────────────────────── */}
-          {step === 3 && (
-            <fieldset>
-              <legend className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                Tell us about it.
-              </legend>
-              <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
-                The goal, the audience, what success looks like. Short and honest beats long and polished.
-              </p>
-              <div className="space-y-5">
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="intake-name" className={labelClass}>Your name *</label>
-                    <input
-                      id="intake-name"
-                      type="text"
-                      value={answers.name}
-                      onChange={(e) => set("name", e.target.value)}
-                      placeholder="Your name"
-                      className={inputClass}
-                      autoComplete="name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="intake-email" className={labelClass}>Email address *</label>
-                    <input
-                      id="intake-email"
-                      type="email"
-                      value={answers.email}
-                      onChange={(e) => set("email", e.target.value)}
-                      placeholder="sarah@company.com"
-                      className={inputClass}
-                      autoComplete="email"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="intake-company" className={labelClass}>Company / project name</label>
-                  <input
-                    id="intake-company"
-                    type="text"
-                    value={answers.company}
-                    onChange={(e) => set("company", e.target.value)}
-                    placeholder="Luminary Analytics"
-                    className={inputClass}
-                    autoComplete="organization"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="intake-message" className={labelClass}>About the project *</label>
-                  <textarea
-                    id="intake-message"
-                    rows={5}
-                    value={answers.message}
-                    onChange={(e) => set("message", e.target.value)}
-                    placeholder="What are you building? What's the goal? What does success look like?"
-                    className={`${inputClass} resize-none`}
-                  />
-                  <p className="mt-2 text-right text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)]">
-                    {answers.message.trim().length < 10 ? `${10 - answers.message.trim().length} more characters` : `${answers.message.trim().length} characters`}
-                  </p>
-                </div>
-              </div>
-            </fieldset>
-          )}
+      {step === 3 && (
+        <fieldset className="m-0 border-0 p-0">
+          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+            Tell us about it.
+          </legend>
+          <p className="mt-3 text-white/60">A few lines is enough.</p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            <label className="block">
+              <span className="block text-sm text-white/60">Name</span>
+              <input className={field} value={answers.name} onChange={(e) => set("name", e.target.value)} autoComplete="name" required />
+            </label>
+            <label className="block">
+              <span className="block text-sm text-white/60">Email</span>
+              <input
+                type="email"
+                className={field}
+                value={answers.email}
+                onChange={(e) => set("email", e.target.value)}
+                autoComplete="email"
+                required
+              />
+            </label>
+            <label className="block sm:col-span-2">
+              <span className="block text-sm text-white/60">Company (optional)</span>
+              <input className={field} value={answers.company} onChange={(e) => set("company", e.target.value)} autoComplete="organization" />
+            </label>
+            <label className="block sm:col-span-2">
+              <span className="block text-sm text-white/60">What are you building?</span>
+              <textarea
+                rows={5}
+                className={`${field} resize-none`}
+                value={answers.message}
+                onChange={(e) => set("message", e.target.value)}
+                placeholder="The goal, who it's for, and what a good result looks like."
+                required
+              />
+            </label>
+          </div>
+        </fieldset>
+      )}
 
-          {/* ── Step 5 · Review ─────────────────────────────────── */}
-          {step === 4 && (
-            <div>
-              <h2 className="mb-2 font-display text-2xl font-black uppercase tracking-tight md:text-3xl">
-                One last look.
-              </h2>
-              <p className="mb-6 text-sm text-[var(--brand-text-secondary)]">
-                Check everything, then send it over. You&apos;ll hear back within 24 hours.
-              </p>
-              <dl className="flex flex-col divide-y divide-[var(--brand-border)] rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg)]">
-                {[
-                  { label: "Building", value: typeLabel ?? "", edit: 0 },
-                  { label: "Budget", value: answers.budget, edit: 1 },
-                  { label: "Timeline", value: answers.timeline, edit: 2 },
-                  { label: "From", value: `${answers.name} · ${answers.email}${answers.company ? ` · ${answers.company}` : ""}`, edit: 3 },
-                  { label: "The project", value: answers.message, edit: 3 },
-                ].map((row) => (
-                  <div key={row.label} className="flex items-start justify-between gap-4 p-5">
-                    <div className="min-w-0">
-                      <dt className="mb-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-accent)]">{row.label}</dt>
-                      <dd className="break-words text-sm font-medium leading-relaxed text-[var(--brand-text)]">{row.value}</dd>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setStep(row.edit)}
-                      className="shrink-0 text-[10px] font-black uppercase tracking-[0.15em] text-[var(--brand-text-secondary)] underline underline-offset-4 transition-colors hover:text-[var(--brand-text)]"
-                    >
-                      Edit
-                    </button>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
 
-      {/* Nav */}
-      <div className="mt-8 flex items-center justify-between gap-4 border-t border-[var(--brand-border)] pt-6">
-        <button
-          type="button"
-          onClick={() => setStep((s) => Math.max(0, s - 1))}
-          disabled={step === 0}
-          className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text-secondary)] transition-colors enabled:hover:text-[var(--brand-text)] disabled:opacity-0"
-        >
-          <span aria-hidden="true">←</span> Back
+      <button
+        type="submit"
+        disabled={!valid[step]}
+        className="mt-12 flex h-14 w-full items-center justify-center bg-[var(--logo)] text-lg font-semibold text-[#141414] transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
+      >
+        {step === last ? "Send" : "Next"}
+      </button>
+      {step > 0 && (
+        <button type="button" onClick={() => setStep((s) => s - 1)} className="mt-5 text-white/60 underline-offset-4 hover:text-white hover:underline">
+          Back
         </button>
-
-        {step < totalSteps - 1 ? (
-          <button
-            type="button"
-            onClick={() => setStep((s) => s + 1)}
-            disabled={!stepsValid[step]}
-            data-cursor="NEXT"
-            className="btn-primary disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            Continue <span aria-hidden="true">→</span>
-          </button>
-        ) : (
-          <button type="button" onClick={submit} data-cursor="SEND" className="btn-primary py-4">
-            Send the brief <span aria-hidden="true">→</span>
-          </button>
-        )}
-      </div>
-
-      <p className="mt-5 text-center text-[11px] font-medium text-[var(--brand-text-secondary)]">
-        ✓ Response within 24h&nbsp;&nbsp;·&nbsp;&nbsp;✓ No commitment required&nbsp;&nbsp;·&nbsp;&nbsp;✓ NDA on request
-      </p>
-    </div>
+      )}
+    </form>
   );
 }
