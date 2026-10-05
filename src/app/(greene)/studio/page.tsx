@@ -17,17 +17,31 @@ export const metadata: Metadata = {
 
 const WAYS = [
   {
-    title: "Design and code in one place",
-    body: "The people who design your product build it, so nothing gets lost between a design file and the code.",
+    title: "Find the real problem",
+    body: "Before touching a screen, we work out what's actually wrong. A slow download can turn out to be a distribution problem, and that changes the whole product.",
   },
   {
-    title: "Plain updates",
-    body: "You always know where the project stands, what it costs and what comes next.",
+    title: "Turn it into a system",
+    body: "A messy idea becomes clear parts that can each be designed, built and changed on their own.",
   },
   {
-    title: "Built to last",
-    body: "We would rather take an extra week and ship something that holds up for years.",
+    title: "Put it in people's hands",
+    body: "Ship it, watch how people use it, and improve it. Design and code come from the same hands, so nothing gets lost between them.",
   },
+];
+
+/** The road to the studio, year by year. */
+const JOURNEY = [
+  { year: "2022", title: "Started with design", body: "Typography, layout and visual systems. Still how every product here is looked at." },
+  { year: "2023", title: "Freelancing", body: "Real clients and real briefs, and learning to turn ideas into products people use." },
+  { year: "2024", title: "Software", body: "Deeper into engineering, to build complete products, not just screens." },
+  { year: "2025", title: "First startup", body: "MeshLearn: shipping, failing and improving in public." },
+  { year: "2026", title: "Greene Studios", body: "AI, fintech and offline-first products, and a studio for founders who want design and code from one team." },
+];
+
+const RECOGNITION = [
+  { award: "First place", event: "Build with Gemma", project: "Sentry", year: "2026" },
+  { award: "Runner-up", event: "KWASU Tech Conference", project: "MeshLearn", year: "2026" },
 ];
 
 /** Three pictures from different projects, placed unevenly. */
@@ -60,6 +74,26 @@ export default function StudioPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+        <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Why Greene exists</p>
+        <p className="mt-6 max-w-[22ch] text-[clamp(2rem,4.6vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+          To help ambitious internet products look and feel as good as they actually are.
+        </p>
+        <div className="mt-12 grid gap-8 text-lg leading-relaxed text-[var(--brand-text-secondary)] md:grid-cols-2 md:gap-16">
+          <p>
+            Most founders build something genuinely interesting, then present it in a way that undersells it. We work with startups and founders in
+            their first 18 months, when the brand is still taking shape and the design decisions will compound for years.
+          </p>
+          <p>
+            And we don&apos;t hand over a design file and wish you luck. We build it, so good design has to work in production. Small and selective
+            by choice: closer to an architect&apos;s practice than an agency.
+          </p>
+        </div>
+        <Link href="/journal/building-greene-studios" className="mt-10 inline-flex items-center gap-2 font-semibold underline-offset-4 hover:underline">
+          Read the full story <span aria-hidden="true">→</span>
+        </Link>
+      </section>
+
       <section className="mx-auto grid max-w-[1400px] items-center gap-12 px-5 py-24 sm:px-8 md:grid-cols-[6fr_5fr] md:gap-20">
         <div>
           <h2 className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-semibold leading-[0.98] tracking-[-0.045em]">How we work</h2>
@@ -75,6 +109,32 @@ export default function StudioPage() {
         <div className="pointer-events-none mx-auto w-full max-w-[420px]">
           <BrandLottie name="services" className="aspect-square w-full" />
         </div>
+      </section>
+
+      <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+        <h2 className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-semibold leading-[0.98] tracking-[-0.045em]">The journey</h2>
+        <ol className="m-0 mt-10 list-none border-t border-[var(--brand-border)] p-0">
+          {JOURNEY.map((j) => (
+            <li key={j.year} className="grid gap-2 border-b border-[var(--brand-border)] py-6 md:grid-cols-[8rem_14rem_1fr] md:items-baseline md:gap-8">
+              <span className="font-mono text-sm text-[var(--brand-text-secondary)]">{j.year}</span>
+              <span className="text-xl font-semibold tracking-[-0.02em]">{j.title}</span>
+              <span className="text-[var(--brand-text-secondary)]">{j.body}</span>
+            </li>
+          ))}
+        </ol>
+
+        <h3 className="mt-20 text-2xl font-semibold tracking-[-0.03em]">Recognition</h3>
+        <ul className="m-0 mt-6 grid list-none gap-4 p-0 sm:grid-cols-2">
+          {RECOGNITION.map((r) => (
+            <li key={r.event} className="rounded-[12px] bg-[var(--brand-surface)] p-7 shadow-[0_1px_0_var(--brand-border)]">
+              <p className="text-3xl font-semibold tracking-[-0.03em]">{r.award}</p>
+              <p className="mt-2">{r.event}</p>
+              <p className="mt-1 text-sm text-[var(--brand-text-secondary)]">
+                {r.project} · {r.year}
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">

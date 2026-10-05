@@ -1,6 +1,5 @@
 /**
- * Generative cover art for the journal and the lab, replacing the Pexels
- * photography those sections used to hot-link from a CDN.
+ * Generative cover art for the journal.
  *
  *   node scripts/render-covers.mjs
  *
@@ -17,13 +16,8 @@ const COVERS = [
   { slug: "why-motion-matters", tone: "ink" },
   { slug: "design-systems-at-scale", tone: "paper" },
   { slug: "ai-in-product-design", tone: "ink" },
-  { slug: "typography-that-converts", tone: "paper" },
-  { slug: "the-0-seo-strategy", tone: "ink" },
-  { slug: "freelance-to-studio", tone: "paper" },
-  { slug: "lab-cursor", tone: "paper" },
-  { slug: "lab-typography", tone: "ink" },
-  { slug: "lab-motion", tone: "paper" },
-  { slug: "lab-interaction", tone: "ink" },
+  { slug: "building-greene-studios", tone: "paper" },
+  { slug: "why-i-built-meshlearn", tone: "ink" },
 ];
 
 /** Deterministic 32-bit hash → a small PRNG, so a slug always draws the same art. */

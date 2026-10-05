@@ -12,8 +12,8 @@ export type Person = {
 export const TEAM: Person[] = [
   {
     name: "Olabisi Adigun",
-    role: "Founder, Creative Director",
-    bio: "Leads brand and product direction, and designs and builds alongside every client. Obsessed with systems that make good work repeatable.",
+    role: "Founder · Designer and full-stack engineer",
+    bio: "Olabisi started with typography and layout, moved into freelance work, then into software. Today Olabisi designs and builds AI and offline-first products end to end, from the brand to the database, and leads every Greene project from the first sketch to launch day.",
     image: "/images/studio/founder.webp",
   },
 ];

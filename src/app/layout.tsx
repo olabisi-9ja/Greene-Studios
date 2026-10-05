@@ -60,10 +60,10 @@ export const metadata: Metadata = {
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
  return (
- <html lang="en" suppressHydrationWarning className="font-sans">
+ <html lang="en" suppressHydrationWarning className="font-sans mode-studio" data-mode="studio">
  <body className="antialiased overflow-x-hidden">
- {/* Apply the saved atmosphere before hydration so there is no flash of
-     the wrong theme. Plain inline <script> inside <body> (not next/script,
+ {/* Apply the saved theme before hydration so there is no flash of the
+     wrong one; the page is served in studio, the default. Plain inline <script> inside <body> (not next/script,
      which renders as a child of <html> and breaks hydration). */}
  <script
    dangerouslySetInnerHTML={{
@@ -72,11 +72,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      var m = localStorage.getItem("greene:atmosphere");
       if (m === "paper" || m === "day") m = "light";
       else if (m === "midnight" || m === "night") m = "dark";
-      if (m !== "auto" && m !== "light" && m !== "dark" && m !== "studio" && m !== "raw") m = "auto";
+      // first visit (nothing saved): the studio theme, for everyone
+      if (m !== "auto" && m !== "light" && m !== "dark" && m !== "studio" && m !== "raw") m = "studio";
      if (m === "auto") {
        m = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
      }
      var d = document.documentElement;
+     d.classList.remove("mode-studio");
      d.classList.add("mode-" + m);
      d.setAttribute("data-mode", m);
      if (sessionStorage.getItem("greene:loaded") === "1") d.classList.add("loader-seen");

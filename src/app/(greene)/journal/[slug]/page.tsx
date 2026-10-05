@@ -10,10 +10,13 @@ type Props = { params: Promise<{ slug: string }> };
 
 const find = (slug: string) => JOURNAL_ARTICLES.find((a) => a.slug === slug);
 
+/** Articles first published on olabisiadigun.xyz keep that as their canonical home. */
+const originalOf = (a: (typeof JOURNAL_ARTICLES)[number]): string | undefined => ("original" in a ? (a.original as string) : undefined);
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = find((await params).slug);
   if (!article) return { title: "Article not found" };
-  return { title: article.title, description: article.excerpt, alternates: { canonical: `/journal/${article.slug}` } };
+  return { title: article.title, description: article.excerpt, alternates: { canonical: originalOf(article) ?? `/journal/${article.slug}` } };
 }
 
 export async function generateStaticParams() {
@@ -52,6 +55,7 @@ export default async function JournalArticlePage({ params }: Props) {
         </p>
         <h1 className="mt-4 text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">{article.title}</h1>
         <p className="mt-6 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">{article.excerpt}</p>
+        <p className="mt-6 text-sm text-[var(--brand-text-secondary)]">By Olabisi Adigun</p>
       </header>
 
       <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -75,6 +79,15 @@ export default async function JournalArticlePage({ params }: Props) {
               {b.text}
             </p>
           ),
+        )}
+        {originalOf(article) && (
+          <p className="mt-12 border-t border-[var(--brand-border)] pt-6 text-sm text-[var(--brand-text-secondary)]">
+            First published on{" "}
+            <a href={originalOf(article)} className="text-[var(--brand-text)] underline underline-offset-4">
+              olabisiadigun.xyz
+            </a>
+            .
+          </p>
         )}
       </div>
 

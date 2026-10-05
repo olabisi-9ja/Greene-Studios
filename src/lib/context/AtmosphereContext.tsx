@@ -58,7 +58,8 @@ function normalizeMode(v: string | null): ThemeMode {
   if (v === "raw") return "raw";
   if (v === "studio") return "studio";
   if (v === "auto" || v === "light" || v === "dark") return v;
-  return "auto";
+  // nothing saved yet: everyone starts in the studio theme
+  return "studio";
 }
 
 function systemPrefersDark(): boolean {
@@ -79,7 +80,7 @@ interface AtmosphereContextProps {
 const AtmosphereContext = createContext<AtmosphereContextProps | undefined>(undefined);
 
 export function AtmosphereProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<ThemeMode>("auto");
+  const [mode, setModeState] = useState<ThemeMode>("studio");
   const [systemDark, setSystemDark] = useState(false);
 
   // Adopt persisted preference synchronously (before paint).

@@ -140,7 +140,7 @@ export default function ProjectIntake() {
           Your email app should be open.
         </h2>
         <p className="mt-4 max-w-[52ch] text-lg text-white/70">
-          Hit send there. Nothing opened? Copy the brief and email it to{" "}
+          Hit send there and we&apos;ll reply within hours, always within one working day. Nothing opened? Copy the brief and email it to{" "}
           <a href={`mailto:${BRAND.email}`} className="text-white underline underline-offset-4">
             {BRAND.email}
           </a>

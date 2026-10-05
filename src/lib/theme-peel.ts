@@ -79,7 +79,16 @@ type DocWithVT = Document & { startViewTransition?: (cb: () => void) => ViewTran
  */
 export function peelTheme(apply: () => void) {
   const doc = document as DocWithVT;
-  if (!doc.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  // a hidden page never renders, so a transition there would hold the switch
+  // back until the tab is shown again: switch straight away instead
+  let motionOff = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try {
+    const saved = localStorage.getItem("greene-motion");
+    if (saved) motionOff = saved === "off";
+  } catch {
+    /* keep the device setting */
+  }
+  if (!doc.startViewTransition || document.hidden || motionOff) {
     apply();
     return;
   }
@@ -99,13 +108,22 @@ export function peelTheme(apply: () => void) {
     document.body.appendChild(flapEl);
   });
 
+  // the animations hold their end state until the transition is over, then
+  // must be cancelled: left alive, they would apply to the next switch's
+  // pseudo-elements and jump it straight to the end
+  const running: Animation[] = [];
   t.ready
     .then(() => {
       const { flat, flap } = frames(window.innerWidth, window.innerHeight);
-      const timing = { duration: DURATION, easing: "linear", fill: "both" as const };
-      root.animate(flat, { ...timing, pseudoElement: "::view-transition-old(root)" });
-      root.animate(flap, { ...timing, pseudoElement: "::view-transition-new(theme-flap)" });
+      const timing = { duration: DURATION, easing: "linear", fill: "forwards" as const };
+      running.push(root.animate(flat, { ...timing, pseudoElement: "::view-transition-old(root)" }));
+      running.push(root.animate(flap, { ...timing, pseudoElement: "::view-transition-new(theme-flap)" }));
     })
     .catch(() => {});
-  t.finished.catch(() => {}).finally(() => flapEl.remove());
+  t.finished
+    .catch(() => {})
+    .finally(() => {
+      running.forEach((a) => a.cancel());
+      flapEl.remove();
+    });
 }

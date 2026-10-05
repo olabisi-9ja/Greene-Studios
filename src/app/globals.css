@@ -298,66 +298,24 @@
   .brand-lottie [fill="rgb(21,107,67)"] { fill: var(--lottie-deep); }
   .brand-lottie [stroke="rgb(21,107,67)"] { stroke: var(--lottie-deep); }
 
-  /* Back to top: the page's bottom-right corner folded back along its
-     diagonal. The flap (back of the sheet) is the upper-left triangle, the
-     uncovered sheet underneath is the lower-right one. */
-  .page-peel {
-    --peel: 64px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: var(--peel);
-    height: var(--peel);
-    cursor: pointer;
-    transition: width 0.45s var(--ease-out-quart), height 0.45s var(--ease-out-quart);
-  }
-  .page-peel:hover,
-  .page-peel:focus-visible {
-    --peel: 128px;
-  }
-  .page-peel:focus-visible { outline: none; }
-  .page-peel-under {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    gap: 6px;
-    padding: 0 12px 12px 0;
-    background: var(--brand-accent);
-    color: var(--brand-on-accent);
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  }
-  .page-peel-label {
-    font-size: 0.8rem;
-    font-weight: 600;
+  /* Back to top sits where the dock does: the dock steps aside while it shows */
+  .at-page-end nav[aria-label="Primary"] {
     opacity: 0;
-    transition: opacity 0.2s;
+    pointer-events: none;
+    /* the dock centres itself with --tw-translate-x; only move it down */
+    --tw-translate-y: calc(100% + 2.5rem);
   }
-  .page-peel:hover .page-peel-label,
-  .page-peel:focus-visible .page-peel-label {
-    opacity: 1;
-    transition-delay: 0.2s;
+  .back-to-top svg {
+    transform-origin: bottom center;
+    transition: transform 0.45s var(--ease-out-quart);
   }
-  .page-peel-shadow {
-    position: absolute;
-    inset: 0;
-    filter: drop-shadow(3px 3px 4px rgb(0 0 0 / 0.22));
+  .back-to-top:hover svg,
+  .back-to-top:focus-visible svg {
+    transform: scaleY(1.18);
   }
-  .page-peel-flap {
-    position: absolute;
-    inset: 0;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    /* back of the sheet: lit at the tip, shading into the fold */
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--brand-bg) 88%, #fff) 0%,
-      color-mix(in srgb, var(--brand-bg) 80%, var(--brand-text)) 46%,
-      color-mix(in srgb, var(--brand-bg) 62%, var(--brand-text)) 50%
-    );
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .page-peel { transition: none; }
+  .back-to-top:focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 4px;
   }
 
   /* First-visit tour: a spotlight hole in a dim veil, and a card beside it */
@@ -374,18 +332,19 @@
   @keyframes tour-card-in {
     from { opacity: 0; translate: 0 8px; }
   }
-  /* the peel demo curls and settles on a loop */
-  .site-tour-peel {
+  /* the back-to-top demo rises and settles on a loop */
+  .site-tour-tab {
     z-index: 1;
-    animation: tour-peel 2.4s var(--ease-out-quart) infinite;
+    transform-origin: bottom center;
+    animation: tour-tab 2.4s var(--ease-out-quart) infinite;
   }
-  @keyframes tour-peel {
-    0%, 100% { width: 64px; height: 64px; }
-    45%, 70% { width: 128px; height: 128px; }
+  @keyframes tour-tab {
+    0%, 100% { transform: translateY(30%); }
+    45%, 70% { transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
     .site-tour-hole, .site-tour-card { transition: none; animation: none; }
-    .site-tour-peel { animation: none; width: 128px; height: 128px; }
+    .site-tour-tab { animation: none; transform: none; }
   }
 
   /* The footer inverts against the page, so its accent has to invert too. */
@@ -969,6 +928,11 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
   pointer-events: none;
   view-transition-name: theme-flap;
 }
+/* the flap only exists to be captured by the transition; never paint it on
+   the live page, so it can't flash for a frame after the peel ends */
+html:not(:active-view-transition) .theme-flap {
+  display: none;
+}
 ::view-transition-group(root),
 ::view-transition-group(theme-flap) {
   animation: none;
@@ -1001,7 +965,7 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
   nav[aria-label="Primary"],
   [data-loader],
   .site-tour,
-  .page-peel,
+  .back-to-top,
   .brand-lottie,
   section[aria-label="Tools we use"] {
     display: none !important;

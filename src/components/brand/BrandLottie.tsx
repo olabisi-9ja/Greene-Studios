@@ -4,8 +4,12 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import type { LottieHandle } from "lottie-react";
 import { recolorLottie } from "@/lib/brand-lottie";
+import { useMotionOff } from "@/lib/motion-pref";
 
-const Lottie = dynamic(() => import("lottie-react").then((m) => m.Lottie), { ssr: false });
+// start fetching the player as soon as this module runs (during hydration),
+// not when the first animation asks for it
+const player = typeof window !== "undefined" ? import("lottie-react") : null;
+const Lottie = dynamic(() => (player ?? import("lottie-react")).then((m) => m.Lottie), { ssr: false });
 
 /** Parsed and recoloured files, shared by every slot that uses them. */
 const cache = new Map<string, Promise<object>>();
@@ -29,31 +33,37 @@ export function preloadLottie(name: string) {
 /**
  * A Lottie animation from /public/lottie, recoloured into the Greene
  * palette (see lib/brand-lottie). Nothing is fetched until the slot is near
- * the screen, and it pauses while off screen. If the file isn't there it
- * shows the fallback. Reduced motion: the first frame, still.
+ * the screen, and it pauses while off screen or when `paused`. With
+ * animations switched off (footer setting, or reduced motion) it shows the
+ * first frame, still. If the file isn't there it shows the fallback.
  */
 export default function BrandLottie({
   name,
   fallback = null,
   loop = true,
+  paused = false,
+  eager = false,
   className = "",
 }: {
   /** File name in /public/lottie, without .json */
   name: string;
   fallback?: ReactNode;
   loop?: boolean;
+  /** hold still even when on screen (e.g. a hero picture not currently shown) */
+  paused?: boolean;
+  /** load straight away instead of waiting until it's near the screen (the hero) */
+  eager?: boolean;
   className?: string;
 }) {
   const box = useRef<HTMLDivElement>(null);
-  const player = useRef<LottieHandle>(null);
-  const [near, setNear] = useState(false);
+  const handle = useRef<LottieHandle>(null);
+  const [near, setNear] = useState(eager);
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState<object | null>(null);
   const [missing, setMissing] = useState(false);
-  const [still, setStill] = useState(false);
+  const still = useMotionOff();
 
   useEffect(() => {
-    setStill(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     const el = box.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -78,17 +88,20 @@ export default function BrandLottie({
     };
   }, [name, near]);
 
-  // play only while on screen
+  // play only while on screen, not paused, and with animations on;
+  // switching animations off returns it to its first frame
   useEffect(() => {
-    if (!player.current || still) return;
-    if (visible) player.current.play();
-    else player.current.pause();
-  }, [visible, data, still]);
+    const p = handle.current;
+    if (!p) return;
+    if (still) p.stop();
+    else if (visible && !paused) p.play();
+    else p.pause();
+  }, [visible, paused, data, still]);
 
   if (missing) return <>{fallback}</>;
   return (
     <div ref={box} className={className} aria-hidden="true">
-      {data && <Lottie lottieRef={player} src={data} loop={loop} autoplay={!still} className="brand-lottie h-full w-full" />}
+      {data && <Lottie lottieRef={handle} src={data} loop={loop} autoplay={!still && !paused} className="brand-lottie h-full w-full" />}
     </div>
   );
 }

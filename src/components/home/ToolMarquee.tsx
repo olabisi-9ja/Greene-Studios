@@ -6,6 +6,7 @@ import {
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 import LogoLoop, { type LogoItem } from "@/components/effects/LogoLoop";
+import { useMotionOff } from "@/lib/motion-pref";
 
 /**
  * Tool: icon, name (screen readers only) and brand colour. A null colour
@@ -46,11 +47,13 @@ const tile = (item: LogoItem, key: string) => (
  * opposite directions at different speeds and fading out at the edges.
  */
 export default function ToolMarquee() {
-  const row = { logoHeight: 84, gap: 18, fadeOut: true, fadeOutColor: "var(--brand-bg)", hoverSpeed: 8, renderItem: tile };
+  // with animations off the rows hold still
+  const still = useMotionOff();
+  const row = { logoHeight: 84, gap: 18, fadeOut: true, fadeOutColor: "var(--brand-bg)", hoverSpeed: still ? 0 : 8, renderItem: tile };
   return (
     <section aria-label="Tools we use" className="space-y-5 overflow-hidden py-12">
-      <LogoLoop logos={toLogos(DESIGN)} direction="left" speed={34} ariaLabel="Design tools" {...row} />
-      <LogoLoop logos={toLogos(BUILD)} direction="right" speed={24} ariaLabel="Build tools" {...row} />
+      <LogoLoop logos={toLogos(DESIGN)} direction="left" speed={still ? 0 : 34} ariaLabel="Design tools" {...row} />
+      <LogoLoop logos={toLogos(BUILD)} direction="right" speed={still ? 0 : 24} ariaLabel="Build tools" {...row} />
     </section>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
+import { HUMP_PATH } from "@/components/chrome/BackToTop";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
 const DONE = "greene-tour-done";
 
 type Step = {
-  /** data-tour value of the element to light up; null for the peel demo */
+  /** data-tour value of the element to light up; null for the back-to-top demo */
   target: string | null;
   title: string;
   body: string;
@@ -15,7 +16,7 @@ const STEPS: Step[] = [
   {
     target: "theme",
     title: "Four themes",
-    body: "Tap here to turn the page to the next one. Sun, moon, studio green and raw orange.",
+    body: "Tap here and the page peels away to the next one. Studio green, sun, moon and raw orange.",
   },
   {
     target: "dock",
@@ -25,7 +26,7 @@ const STEPS: Step[] = [
   {
     target: null,
     title: "Back to the top",
-    body: "At the very bottom of every page, peel this corner to go back up.",
+    body: "At the very bottom of every page, tap this tab to go back up.",
   },
 ];
 
@@ -33,7 +34,7 @@ const PAD = 8;
 
 /**
  * A short first-visit tour of the site's chrome: the theme switch, the dock
- * and the page-peel back to top. It lights each one up in turn with a card
+ * and the back-to-top tab. It lights each one up in turn with a card
  * beside it, shows once per browser, and can be skipped at any step.
  */
 export default function SiteTour() {
@@ -112,8 +113,8 @@ export default function SiteTour() {
       ? { top: box.bottom + PAD + 14, right: Math.max(16, window.innerWidth - box.right - PAD) }
       : { bottom: window.innerHeight - box.top + PAD + 14, left: "50%", transform: "translateX(-50%)" }
     : { bottom: 120, left: "50%", transform: "translateX(-50%)" };
-  // the peel step: the card sits clear above the demo corner
-  if (!current.target) Object.assign(cardStyle, { bottom: 156, left: "auto", right: 16, transform: "none" });
+  // the back-to-top step: the card sits centred, clear above the demo tab
+  if (!current.target) Object.assign(cardStyle, { bottom: 128, left: "50%", right: "auto", transform: "translateX(-50%)" });
 
   return (
     <div className="site-tour fixed inset-0 z-[400]" role="dialog" aria-modal="true" aria-labelledby="tour-title">
@@ -128,17 +129,13 @@ export default function SiteTour() {
       )}
       <button type="button" className="fixed inset-0 cursor-default" aria-label="Close tour" onClick={finish} />
 
-      {/* the peel demo: the same corner as the real one, shown here because the real one is at the very bottom */}
+      {/* the tab demo: the same shape as the real one, shown here because the real one is at the very bottom */}
       {!current.target && (
-        <div className="site-tour-peel fixed bottom-0 right-0 size-[128px]" aria-hidden="true">
-          <span className="page-peel-under">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" />
-            </svg>
-          </span>
-          <span className="page-peel-shadow">
-            <span className="page-peel-flap" />
-          </span>
+        <div className="site-tour-tab pointer-events-none fixed inset-x-0 bottom-0 mx-auto w-[min(800px,100%)]" aria-hidden="true">
+          <svg viewBox="0 0 800 96" preserveAspectRatio="none" className="block h-[84px] w-full sm:h-[96px]">
+            <path d={HUMP_PATH} className="fill-[var(--brand-text)]" />
+          </svg>
+          <span className="absolute inset-x-0 bottom-[22px] text-center font-semibold text-[var(--brand-bg)] sm:bottom-[26px]">Back to top</span>
         </div>
       )}
 

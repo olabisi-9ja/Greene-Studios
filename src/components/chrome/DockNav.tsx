@@ -31,7 +31,7 @@ export default function DockNav() {
         hidden && "pointer-events-none translate-y-[calc(100%+2.5rem)] opacity-0",
       )}
     >
-      <ul className="m-0 flex list-none items-center gap-2 p-0">
+      <ul className="m-0 flex list-none items-center gap-3 p-0">
         {LINKS.map(({ href, label, Active }) => {
           const on = href === "/" ? pathname === "/" : Boolean(pathname?.startsWith(href));
           const Glyph = Active;
@@ -42,9 +42,9 @@ export default function DockNav() {
                 aria-label={label}
                 title={label}
                 aria-current={on ? "page" : undefined}
-                className={cn("group grid size-9 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 active:scale-90", on && "ring-1 ring-[var(--logo)] ring-offset-[3px] ring-offset-[var(--brand-bg)]")}
+                className={cn("group grid size-12 place-items-center rounded-full sm:size-14 bg-[var(--logo)] text-[var(--brand-bg)] shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 active:scale-90", on && "ring-1 ring-[var(--logo)] ring-offset-[4px] ring-offset-[var(--brand-bg)]")}
               >
-                <Glyph className="size-4" />
+                <Glyph className="size-5 sm:size-6" />
               </Link>
             </li>
           );

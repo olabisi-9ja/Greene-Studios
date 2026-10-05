@@ -1,9 +1,11 @@
 import Link from "next/link";
+import type { IconType } from "react-icons";
 import { BRAND } from "@/lib/data";
 import DotGlobe from "@/components/home/DotGlobe";
 import BrandLottie from "@/components/brand/BrandLottie";
-import PagePeel from "@/components/chrome/PagePeel";
+import BackToTop from "@/components/chrome/BackToTop";
 import CurrencySelect from "@/components/chrome/CurrencySelect";
+import MotionToggle from "@/components/chrome/MotionToggle";
 
 const PAGES = [
   { label: "Work", href: "/work" },
@@ -18,11 +20,13 @@ const PAGES = [
 ];
 
 /**
- * Social accounts: none listed until the real ones are connected. Add
- * them here (e.g. { label: "Instagram", href: BRAND.instagram }) and the
- * "Elsewhere" column appears.
+ * Social accounts, shown as their official icons in the theme's colours.
+ * None listed until the real ones are connected; add them here, e.g.
+ *   { label: "Instagram", href: "https://instagram.com/…", Icon: SiInstagram }
+ * (icons from "react-icons/si": SiInstagram, SiX, SiGithub, SiDribbble, SiBehance…
+ * LinkedIn is FaLinkedin from "react-icons/fa").
  */
-const SOCIAL: { label: string; href: string }[] = [];
+const SOCIAL: { label: string; href: string; Icon: IconType }[] = [];
 
 /**
  * Footer: links, then the upper half of the dotted globe fading out, then
@@ -32,7 +36,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--brand-border)] px-5 pb-36 pt-20 sm:px-8">
+    <footer className="relative overflow-hidden border-t border-[var(--brand-border)] px-5 pt-20 sm:px-8">
 
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -46,6 +50,7 @@ export default function Footer() {
             >
               {BRAND.email}
             </a>
+            <p className="mt-3 text-sm text-[var(--brand-text-secondary)]">We reply within hours, and always within one working day.</p>
           </div>
 
           <nav aria-label="Footer">
@@ -61,24 +66,30 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {SOCIAL.length > 0 && (
-          <div>
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Elsewhere</p>
-              <ul className="mt-4 list-none space-y-2 p-0">
-                {SOCIAL.map((s) => (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--logo)]">
-                      {s.label}
+          {/* the cat holds the third column; the social icons sit under it once added */}
+          <div className="flex flex-col items-center md:items-start">
+            <div className="pointer-events-none w-full max-w-[360px]">
+              <BrandLottie name="footer" className="aspect-[1070/456] w-full" />
+            </div>
+            {SOCIAL.length > 0 && (
+              <ul className="m-0 mt-8 flex list-none flex-wrap gap-3 p-0" aria-label="Elsewhere">
+                {SOCIAL.map(({ label, href, Icon }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      title={label}
+                      className="grid size-11 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] transition-transform hover:-translate-y-0.5"
+                    >
+                      <Icon className="size-5" aria-hidden="true" />
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
-        </div>
-
-        <div className="pointer-events-none mx-auto mt-16 w-[min(340px,80vw)]">
-          <BrandLottie name="footer" className="aspect-[1070/456] w-full" />
+            )}
+          </div>
         </div>
 
         {/* the globe's upper half, fading out into the wordmark */}
@@ -101,6 +112,7 @@ export default function Footer() {
           <span>© {year} Greene Studios</span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <CurrencySelect />
+            <MotionToggle />
             <Link href="/legal#privacy" className="hover:text-[var(--brand-text)]">
               Privacy
             </Link>
@@ -114,7 +126,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <PagePeel />
+      <BackToTop />
     </footer>
   );
 }

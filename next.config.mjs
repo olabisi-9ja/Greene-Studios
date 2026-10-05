@@ -62,6 +62,7 @@ const nextConfig = {
       { source: '/demo', destination: '/work', permanent: true },
       { source: '/work/archive', destination: '/work', permanent: true },
       { source: '/journal/typography-that-converts', destination: '/journal', permanent: true },
+      { source: '/journal/freelance-to-studio', destination: '/journal/building-greene-studios', permanent: true },
       { source: '/journal/the-\$0-seo-strategy', destination: '/journal', permanent: true },
       { source: '/services/frontend-dev', destination: '/services/frontend-development', permanent: true },
     ];

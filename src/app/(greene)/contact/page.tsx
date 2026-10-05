@@ -26,7 +26,7 @@ export default function ContactPage() {
         <h1 className="max-w-[12ch] text-[clamp(2.8rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
           Start a project
         </h1>
-        <p className="mt-5 text-lg text-[var(--brand-text-secondary)]">Four quick questions. We reply by email.</p>
+        <p className="mt-5 text-lg text-[var(--brand-text-secondary)]">Four quick questions. We reply within hours, and always within one working day.</p>
       </div>
 
       <section className="bg-[#141414] px-5 py-20 text-white [--logo:#5fbf8a] sm:px-8 sm:py-28">
