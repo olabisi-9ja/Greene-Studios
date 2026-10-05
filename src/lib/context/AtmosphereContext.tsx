@@ -9,6 +9,7 @@ import React, {
   useState,
   ReactNode,
 } from "react";
+import { flushSync } from "react-dom";
 
 /**
  * Greene Studios theme.
@@ -120,7 +121,16 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }, [focus]);
 
   const setMode = useCallback((next: ThemeMode) => {
-    setModeState(next);
+    // The current theme turns away like a page, opening onto the next one
+    // (see ::view-transition rules in globals.css). Without the View
+    // Transitions API, or with reduced motion, it just switches.
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (doc.startViewTransition && !still) {
+      doc.startViewTransition(() => flushSync(() => setModeState(next)));
+    } else {
+      setModeState(next);
+    }
     try {
       window.localStorage.setItem(STORAGE_MODE, next);
     } catch {

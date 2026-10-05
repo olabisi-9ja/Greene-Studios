@@ -2,6 +2,7 @@ import { AtmosphereProvider } from "@/lib/context/AtmosphereContext";
 import TopBar from "@/components/chrome/TopBar";
 import DockNav from "@/components/chrome/DockNav";
 import Loader from "@/components/chrome/Loader";
+import SiteTour from "@/components/chrome/SiteTour";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
@@ -54,6 +55,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
         <Footer />
       </SmoothScroll>
       <DockNav />
+      <SiteTour />
       <FocusMode />
     </AtmosphereProvider>
   );

@@ -344,6 +344,34 @@
     .page-peel { transition: none; }
   }
 
+  /* First-visit tour: a spotlight hole in a dim veil, and a card beside it */
+  .site-tour-hole {
+    box-shadow: 0 0 0 200vmax rgb(0 0 0 / 0.55);
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+    transition: top 0.45s var(--ease-out-quart), left 0.45s var(--ease-out-quart),
+      width 0.45s var(--ease-out-quart), height 0.45s var(--ease-out-quart);
+  }
+  .site-tour-card {
+    animation: tour-card-in 0.35s var(--ease-out-quart) both;
+  }
+  @keyframes tour-card-in {
+    from { opacity: 0; translate: 0 8px; }
+  }
+  /* the peel demo curls and settles on a loop */
+  .site-tour-peel {
+    z-index: 1;
+    animation: tour-peel 2.4s var(--ease-out-quart) infinite;
+  }
+  @keyframes tour-peel {
+    0%, 100% { width: 64px; height: 64px; }
+    45%, 70% { width: 128px; height: 128px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-tour-hole, .site-tour-card { transition: none; animation: none; }
+    .site-tour-peel { animation: none; width: 128px; height: 128px; }
+  }
+
   /* The footer inverts against the page, so its accent has to invert too. */
   :root footer,
   .mode-light footer,
@@ -1373,3 +1401,37 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
 }
 .mascot-z { animation: mascot-z 1.8s ease-out infinite; }
 @media (prefers-reduced-motion: reduce) { .mascot-z { animation: none; } }
+
+/* Theme switch: the current theme is a page that swings open from its left
+   edge, uncovering the next theme beneath it. AtmosphereContext wraps the
+   switch in document.startViewTransition. */
+::view-transition-group(root) {
+  animation-duration: 0.9s;
+}
+::view-transition-image-pair(root) {
+  perspective: 2600px;
+}
+::view-transition-new(root) {
+  animation: none;
+  z-index: 1;
+}
+::view-transition-old(root) {
+  z-index: 2;
+  transform-origin: left center;
+  animation: theme-page-turn 0.9s cubic-bezier(0.55, 0.05, 0.3, 1) both;
+}
+@keyframes theme-page-turn {
+  0% {
+    transform: rotateY(0deg);
+    box-shadow: 0 0 0 rgb(0 0 0 / 0);
+    filter: brightness(1);
+  }
+  60% {
+    box-shadow: 30px 0 80px rgb(0 0 0 / 0.35);
+  }
+  100% {
+    transform: rotateY(-104deg);
+    box-shadow: 30px 0 80px rgb(0 0 0 / 0);
+    filter: brightness(0.75);
+  }
+}

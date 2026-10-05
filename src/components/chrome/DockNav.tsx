@@ -25,6 +25,7 @@ export default function DockNav() {
   return (
     <nav
       aria-label="Primary"
+      data-tour="dock"
       className={cn(
         "fixed bottom-5 left-1/2 z-50 -translate-x-1/2 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] sm:bottom-7",
         hidden && "pointer-events-none translate-y-[calc(100%+2.5rem)] opacity-0",

@@ -55,6 +55,7 @@ export default function TopBar() {
         <button
           type="button"
           onClick={() => setMode(next.mode)}
+          data-tour="theme"
           aria-label={`Theme: ${current.name}. Switch to ${next.name}.`}
           title={`${current.name} theme (tap for ${next.name})`}
           className="grid size-10 place-items-center text-[var(--logo)] transition-transform hover:rotate-12 active:scale-90 sm:size-11"
