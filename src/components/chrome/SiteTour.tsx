@@ -131,11 +131,11 @@ export default function SiteTour() {
 
       {/* the tab demo: the same shape as the real one, shown here because the real one is at the very bottom */}
       {!current.target && (
-        <div className="site-tour-tab pointer-events-none fixed inset-x-0 bottom-0 mx-auto w-[min(800px,100%)]" aria-hidden="true">
-          <svg viewBox="0 0 800 96" preserveAspectRatio="none" className="block h-[84px] w-full sm:h-[96px]">
-            <path d={HUMP_PATH} className="fill-[var(--brand-text)]" />
+        <div className="site-tour-tab pointer-events-none fixed inset-x-0 bottom-0 mx-auto w-[min(440px,100%)]" aria-hidden="true">
+          <svg viewBox="0 0 800 96" preserveAspectRatio="none" className="block h-[52px] w-full sm:h-[60px]">
+            <path d={HUMP_PATH} className="fill-[var(--logo)]" />
           </svg>
-          <span className="absolute inset-x-0 bottom-[22px] text-center font-semibold text-[var(--brand-bg)] sm:bottom-[26px]">Back to top</span>
+          <span className="absolute inset-x-0 bottom-[12px] text-center text-sm font-semibold text-[var(--brand-paper)] sm:bottom-[15px]">Back to top</span>
         </div>
       )}
 

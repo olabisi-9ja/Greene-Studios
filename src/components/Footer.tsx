@@ -39,7 +39,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-[var(--brand-border)] px-5 pt-20 sm:px-8">
 
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[1fr_1.5fr]">
           <div>
             <p className="text-[clamp(1.8rem,3.6vw,2.8rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
               Have a project in mind?
@@ -53,42 +53,45 @@ export default function Footer() {
             <p className="mt-3 text-sm text-[var(--brand-text-secondary)]">We reply within hours, and always within one working day.</p>
           </div>
 
-          <nav aria-label="Footer">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Pages</p>
-            <ul className="mt-4 list-none space-y-2 p-0">
-              {PAGES.map((p) => (
-                <li key={p.href}>
-                  <Link href={p.href} className="hover:text-[var(--logo)]">
-                    {p.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* the cat holds the third column; the social icons sit under it once added */}
-          <div className="flex flex-col items-center md:items-start">
-            <div className="pointer-events-none w-full max-w-[360px]">
-              <BrandLottie name="footer" className="aspect-[1070/456] w-full" />
-            </div>
-            {SOCIAL.length > 0 && (
-              <ul className="m-0 mt-8 flex list-none flex-wrap gap-3 p-0" aria-label="Elsewhere">
-                {SOCIAL.map(({ label, href, Icon }) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      title={label}
-                      className="grid size-11 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] transition-transform hover:-translate-y-0.5"
-                    >
-                      <Icon className="size-5" aria-hidden="true" />
-                    </a>
+          {/* the page list with the cat beside it, filling the space on its right */}
+          <div className="flex items-center gap-6 sm:gap-10">
+            <nav aria-label="Footer" className="shrink-0">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Pages</p>
+              <ul className="mt-4 list-none space-y-2 p-0">
+                {PAGES.map((p) => (
+                  <li key={p.href}>
+                    <Link href={p.href} className="hover:text-[var(--logo)]">
+                      {p.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
-            )}
+            </nav>
+
+            {/* the social icons sit under the cat once added */}
+            <div className="flex min-w-0 flex-1 flex-col items-center">
+              <div className="pointer-events-none w-full max-w-[520px]">
+                <BrandLottie name="footer" className="aspect-[1070/456] w-full" />
+              </div>
+              {SOCIAL.length > 0 && (
+                <ul className="m-0 mt-8 flex list-none flex-wrap gap-3 p-0" aria-label="Elsewhere">
+                  {SOCIAL.map(({ label, href, Icon }) => (
+                    <li key={label}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        title={label}
+                        className="grid size-11 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] transition-transform hover:-translate-y-0.5"
+                      >
+                        <Icon className="size-5" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
 
@@ -119,9 +122,6 @@ export default function Footer() {
             <Link href="/legal#terms" className="hover:text-[var(--brand-text)]">
               Terms
             </Link>
-            <a href="https://olabisiadigun.xyz/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-text)]">
-              Built by Olabisi Adigun
-            </a>
           </div>
         </div>
       </div>

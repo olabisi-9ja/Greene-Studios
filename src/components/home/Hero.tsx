@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import BrandLottie from "@/components/brand/BrandLottie";
 import { useMotionOff } from "@/lib/motion-pref";
+import { HERO_WORDS as WORDS } from "@/lib/hero-words";
 
 /**
- * Hero: who's behind the studio, a word that comes round, and an
- * illustration for each word (/public/lottie/hero-<word>.json, recoloured to
- * the theme). Words on the left and a large illustration on the right on wide
- * screens; stacked on phones. All four illustrations stay mounted and
- * cross-fade, so the picture never blinks empty; only the one showing plays.
+ * Hero, after Hello Monday: a clean page, an illustration, and a word that
+ * comes round with a line of its own (lib/hero-words). Each word has its own
+ * animation, recoloured to the theme. Each picture mounts one word before its
+ * turn and then stays, so they cross-fade without ever blinking empty and the
+ * later ones don't weigh on the first load; only the one showing plays.
  */
-const WORDS = ["Brands", "Websites", "Apps", "Products"];
 const HOLD = 3.6; // seconds per word
 
 export default function Hero() {
@@ -36,51 +35,38 @@ export default function Hero() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [still]);
 
-  const word = WORDS[job];
+  // how far round the words have come: everything up to the next word is mounted
+  const [reach, setReach] = useState(1);
+  useEffect(() => setReach((r) => Math.max(r, Math.min(job + 1, WORDS.length - 1))), [job]);
+
+  const { word, line } = WORDS[job];
 
   return (
-    <section className="mx-auto grid min-h-[100svh] max-w-[1400px] items-center gap-4 px-5 pb-28 pt-20 sm:gap-6 sm:pb-32 sm:pt-24 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:gap-10 lg:pb-24">
-      <div className="order-2 text-center lg:order-1 lg:text-left">
-        <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Greene Studios, by Olabisi Adigun</p>
-        <p className="mt-3 text-lg text-[var(--brand-text-secondary)] sm:mt-5 sm:text-xl">We design and build</p>
-        {/* clipped top and bottom for the roll-in only, never sideways, so the
-            tight tracking can't shave the last letter */}
-        <h1 className="h-[1.3em] pr-[0.08em] text-[clamp(3rem,8.4vw,7rem)] font-semibold leading-[1.3] tracking-[-0.045em] [overflow:visible_clip]">
-          <span className="sr-only">We design and build brands, websites, apps and products.</span>
-          <span key={word} aria-hidden="true" className={`block ${still ? "" : "fx-roll-in"}`}>
-            {word}
-          </span>
-        </h1>
-        <p className="mx-auto mt-3 max-w-[42ch] text-base leading-relaxed sm:text-lg lg:mx-0">
-          Hi, I&apos;m Olabisi, a designer and full-stack engineer. I started Greene so founders get design and code from the same hands, from the
-          first sketch to launch day.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
-          <Link
-            href="/contact"
-            className="inline-flex h-12 items-center rounded-[6px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)] transition-opacity hover:opacity-90"
-          >
-            Start a project
-          </Link>
-          <Link href="/studio" className="font-semibold underline-offset-4 hover:underline">
-            Meet Olabisi <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* large on wide screens; on phones it shares the height with the words
-          so the buttons always clear the dock */}
-      <div className="order-1 mx-auto grid w-[min(100%,calc((100svh-31rem)*4/3))] min-w-[200px] text-[var(--logo)] lg:order-2 lg:w-full lg:max-w-[640px]">
-        {WORDS.map((w, i) => (
+    <section className="flex min-h-[100svh] flex-col items-center justify-center px-5 pb-28 pt-24 text-center sm:px-8">
+      <div className="grid w-[min(560px,92vw,calc((100svh-24rem)*4/3))] min-w-[220px] text-[var(--logo)]">
+        {WORDS.map((w, i) => (i > reach && i !== job ? null : (
           <div
-            key={w}
+            key={w.slug}
             className={`col-start-1 row-start-1 transition-opacity duration-500 ${i === job ? "opacity-100" : "opacity-0"}`}
             aria-hidden="true"
           >
-            <BrandLottie name={`hero-${w.toLowerCase()}`} paused={i !== job} eager className="aspect-[4/3] w-full" />
+            <BrandLottie name={`hero-${w.slug}`} paused={i !== job} eager className="aspect-[4/3] w-full" />
           </div>
-        ))}
+        )))}
       </div>
+
+      <p className="mt-8 text-base text-[var(--brand-text-secondary)] sm:text-lg">We design and build</p>
+      {/* clipped top and bottom for the roll-in only, never sideways, so the
+          tight tracking can't shave the last letter */}
+      <h1 className="mt-1 h-[1.3em] pr-[0.08em] whitespace-nowrap text-[clamp(2.4rem,9vw,6.5rem)] font-semibold leading-[1.3] tracking-[-0.045em] [overflow:visible_clip]">
+        <span className="sr-only">We design and build {WORDS.map((w) => w.word.toLowerCase()).join(", ")}.</span>
+        <span key={word} aria-hidden="true" className={`block ${still ? "" : "fx-roll-in"}`}>
+          {word}
+        </span>
+      </h1>
+      <p key={line} aria-hidden="true" className={`mt-2 min-h-[3.2em] max-w-[34ch] text-lg leading-snug sm:text-xl ${still ? "" : "fx-fade-up"}`}>
+        {line}
+      </p>
     </section>
   );
 }

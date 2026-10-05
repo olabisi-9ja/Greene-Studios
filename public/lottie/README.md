@@ -9,7 +9,7 @@ when off it.
 
 | File | Where it shows |
 |---|---|
-| `hero-brands/websites/apps/products.json` | Home hero, one per word (also the service pages and the price card) |
+| `hero-<word>.json` (10, see `src/lib/hero-words.ts`) | Home hero, one per word (brands/websites/apps/products also on the service pages and the price card) |
 | `next.json` | "Got something to build?" on the home and inner pages |
 | `questions.json` | Home, Questions |
 | `footer.json` | Footer |

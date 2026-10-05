@@ -3,16 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Runner from "@/components/brand/Runner";
 import { preloadLottie } from "@/components/brand/BrandLottie";
+import { HERO_FIRST } from "@/lib/hero-words";
 
-/** On the home page the loader holds until the hero's animations are in. */
-const HERO_LOTTIES = ["hero-brands", "hero-websites", "hero-apps", "hero-products"];
+/** On the home page the loader holds until the hero's first animations are in. */
+const HERO_LOTTIES = HERO_FIRST;
 
 const SEEN = "greene:loaded";
 
 /**
  * Window-load screen: the runner, running, and a counter. No wordmark.
  * It waits for the page to load and, on the home page, for the hero's
- * four animations, so the hero is complete the moment it shows.
+ * first animations, so the hero is complete the moment it shows.
  *
  * When the page has loaded the counter reaches 100, then the runner flies
  * up and shrinks into its place in the top bar (measured, so it lands

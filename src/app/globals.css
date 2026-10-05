@@ -914,8 +914,16 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
 }
 .fx-roll-in { animation: fx-roll-in 0.55s cubic-bezier(0.19, 1, 0.22, 1) both; }
 
+/* the line under the hero word follows it in, a beat later */
+@keyframes fx-fade-up {
+  from { transform: translateY(0.4em); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.fx-fade-up { animation: fx-fade-up 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0.12s both; }
+
 @media (prefers-reduced-motion: reduce) {
-  .fx-roll-in { animation: none; }
+  .fx-roll-in,
+  .fx-fade-up { animation: none; }
 }
 
 /* Theme switch: a page peel from the top-right corner (lib/theme-peel).

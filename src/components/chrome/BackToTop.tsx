@@ -6,8 +6,8 @@ import { useEffect, useRef } from "react";
 export const HUMP_PATH = "M0 96 C 170 96 250 6 400 6 C 550 6 630 96 800 96 Z";
 
 /**
- * Back to top, after Hello Monday: a dark tab rising from the very bottom of
- * the page, centred. While it's on screen the dock steps aside (it sits in
+ * Back to top, after Hello Monday: a tab in the theme's logo colour rising from
+ * the very bottom of the page, centred. While it's on screen the dock steps aside (it sits in
  * the same place), via a class on <html>.
  */
 export default function BackToTop() {
@@ -32,11 +32,11 @@ export default function BackToTop() {
   };
 
   return (
-    <button ref={ref} type="button" onClick={toTop} className="back-to-top group relative mx-auto mt-16 block w-[min(800px,100%)]">
-      <svg viewBox="0 0 800 96" preserveAspectRatio="none" aria-hidden="true" className="block h-[84px] w-full sm:h-[96px]">
-        <path d={HUMP_PATH} className="fill-[var(--brand-text)]" />
+    <button ref={ref} type="button" onClick={toTop} className="back-to-top group relative mx-auto mt-16 block w-[min(440px,100%)]">
+      <svg viewBox="0 0 800 96" preserveAspectRatio="none" aria-hidden="true" className="block h-[52px] w-full sm:h-[60px]">
+        <path d={HUMP_PATH} className="fill-[var(--logo)] transition-[fill] duration-300" />
       </svg>
-      <span className="absolute inset-x-0 bottom-[22px] text-center font-semibold text-[var(--brand-bg)] sm:bottom-[26px]">Back to top</span>
+      <span className="absolute inset-x-0 bottom-[12px] text-center text-sm font-semibold text-[var(--brand-paper)] sm:bottom-[15px]">Back to top</span>
     </button>
   );
 }
