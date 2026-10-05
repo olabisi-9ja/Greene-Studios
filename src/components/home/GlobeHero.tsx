@@ -12,7 +12,7 @@ export default function GlobeHero() {
       <h1 className="mt-6 text-[clamp(1.6rem,3.2vw,2.4rem)] font-semibold leading-tight tracking-[-0.03em]">
         Brand, web and product design.
       </h1>
-      <p className="mt-2 text-[var(--brand-text-secondary)]">Independent studio. Working worldwide.</p>
+      <p className="mt-2 text-[var(--brand-text-secondary)]">Digital design studio. Working worldwide.</p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Link
           href="#work"

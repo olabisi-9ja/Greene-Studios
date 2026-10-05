@@ -168,6 +168,9 @@ export default function ProjectIntake() {
             Start over
           </button>
         </div>
+        <a href="/gallery" className="mt-12 inline-flex items-center gap-2 text-lg font-semibold text-white underline-offset-4 hover:underline">
+          While you wait, see all our work <span aria-hidden="true">→</span>
+        </a>
       </div>
     );
   }

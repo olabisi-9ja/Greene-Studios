@@ -1,6 +1,6 @@
 # Greene Studios
 
-> Independent design studio. Brand identity, websites and web/mobile products, designed and built in-house. Remote, working worldwide.
+> Digital design studio. Brand identity, websites and web/mobile products, designed and built in-house. Remote, working worldwide.
 
 ## Pages
 - [Home](https://greene-studios.vercel.app/): globe hero, selected work, services

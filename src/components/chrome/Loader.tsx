@@ -6,19 +6,17 @@ import Runner from "@/components/brand/Runner";
 const SEEN = "greene:loaded";
 
 /**
- * Window-load screen: the wordmark, the runner running between the lines,
- * "Studios" at a third of the size, and a counter.
+ * Window-load screen: the runner, running, and a counter. No wordmark.
  *
- * When the page has loaded the counter reaches 100, then the wordmark and
- * the runner fly up and shrink into their places in the top bar (measured,
- * so they land exactly), while the screen behind them fades. The top bar's
- * own wordmark and logo stay hidden until the hand-off, so there is never
- * two of anything. Plays once per browser session.
+ * When the page has loaded the counter reaches 100, then the runner flies
+ * up and shrinks into its place in the top bar (measured, so it lands
+ * exactly), while the screen behind fades. The top bar's own logo and
+ * wordmark stay hidden until the hand-off, so there is never two of
+ * anything. Plays once per browser session.
  */
 export default function Loader() {
   const [phase, setPhase] = useState<"show" | "fly" | "gone">("show");
   const count = useRef<HTMLSpanElement>(null);
-  const word = useRef<HTMLSpanElement>(null);
   const mark = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,7 +72,6 @@ export default function Loader() {
     const fly = () => {
       setPhase("fly");
       requestAnimationFrame(() => {
-        toSlot(word.current, "wordmark");
         toSlot(mark.current, "logo");
       });
       try {
@@ -109,17 +106,9 @@ export default function Loader() {
       />
       <div className="relative grid h-full place-items-center">
         <div className="flex flex-col items-center">
-          <span ref={word} className={`wordmark text-[clamp(3.5rem,11vw,7.5rem)] leading-none ${move}`}>
-            Greene
-          </span>
-          <div ref={mark} className={`my-4 text-[var(--logo)] ${move}`}>
+          <div ref={mark} className={`text-[var(--logo)] ${move}`}>
             <Runner mode="loop" className="h-[clamp(5rem,14vw,8.5rem)] w-auto" title="" />
           </div>
-          <span
-            className={`wordmark text-[clamp(1.17rem,3.67vw,2.5rem)] tracking-[0.02em] transition-opacity duration-300 ${flying ? "opacity-0" : ""}`}
-          >
-            Studios
-          </span>
           <span
             className={`mt-6 font-mono text-sm tabular-nums text-[var(--brand-text-secondary)] transition-opacity duration-300 ${flying ? "opacity-0" : ""}`}
           >

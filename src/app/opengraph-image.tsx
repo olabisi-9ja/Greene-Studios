@@ -89,7 +89,7 @@ export default async function Image() {
             textTransform: 'uppercase',
           }}
         >
-          Independent Digital Design Studio
+          Digital Design Studio
         </div>
 
         {/* bottom strip */}

@@ -9,11 +9,11 @@ export const viewport: import("next").Viewport = {
 export const metadata: Metadata = {
  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app"),
   title: {
-    default: "Greene Studios · Independent Digital Design Studio",
+    default: "Greene Studios · Digital Design Studio",
  template: "%s | Greene Studios",
  },
  description:
- "Greene Studios is an independent digital design studio. We design & build brands, websites, and digital products that make people stop scrolling.",
+ "Greene Studios is a digital design studio. We design & build brands, websites, and digital products that make people stop scrolling.",
  keywords: [
  "web design agency",
  "UI/UX design",
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
  locale: "en_US",
  url: "https://greenestudios.com",
  siteName: "Greene Studios",
- title: "Greene Studios · Independent Digital Design Studio",
+ title: "Greene Studios · Digital Design Studio",
  description:
- "Independent digital design studio. Brands, websites, and products that make people stop scrolling.",
+ "Digital design studio. Brands, websites, and products that make people stop scrolling.",
  },
  twitter: {
  card: "summary_large_image",
- title: "Greene Studios · Independent Digital Design Studio",
+ title: "Greene Studios · Digital Design Studio",
  description: "Brands, websites, and products that make people stop scrolling.",
  creator: "@greenestudios",
  },

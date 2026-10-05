@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
     '/work',
+    '/gallery',
     '/services',
     '/industries',
     '/lab',

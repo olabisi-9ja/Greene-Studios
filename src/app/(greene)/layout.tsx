@@ -27,7 +27,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
             logo: "/brand/gs-chip.png",
             email: "hello@greenestudios.com",
             description:
-              "Independent digital design studio. Brands, websites, and digital products that make people stop scrolling.",
+              "Digital design studio. Brands, websites, and digital products that make people stop scrolling.",
             foundingDate: "2022",
             sameAs: [
               "https://instagram.com/greenestudios",

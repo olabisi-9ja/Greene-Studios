@@ -11,7 +11,7 @@ import RotatingGlobe from "@/components/ui/RotatingGlobe";
 export const metadata: Metadata = {
  title: "Studio · Greene Studios",
  description:
- "Greene Studios is an independent design studio crafting brands, websites and digital products. Remote, available worldwide.",
+ "Greene Studios is a digital design studio crafting brands, websites and digital products. Remote, available worldwide.",
 };
 
 const VALUES = [
