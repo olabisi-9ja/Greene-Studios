@@ -201,7 +201,7 @@ export const SERVICES = [
  "Hosting and deployment"
  ],
  href: "/services/web-applications",
- fromUsd: 1500,
+ fromUsd: 2000,
  whatIsIt: "A web application is software people use in the browser, like a dashboard, a booking system or a platform. We build all of it, from how the data is stored to the screens people use.",
  whoItsFor: [
  "Startups that need a first version built well",
