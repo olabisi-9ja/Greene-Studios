@@ -14,7 +14,8 @@ export default function PricingPage() {
   return (
     <div className="px-5 pb-32 pt-32 sm:px-8 sm:pt-40">
       <div className="relative mx-auto max-w-[1400px]">
-        <div className="pointer-events-none mb-8 w-[min(220px,55vw)] lg:absolute lg:right-0 lg:top-0 lg:mb-0 lg:w-[260px]">
+        <div className="flex flex-col items-center text-center">
+        <div className="pointer-events-none mb-6 w-[min(220px,55vw)]">
           <BrandLottie name="pricing" className="aspect-square w-full" />
         </div>
         <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Pricing</p>
@@ -24,6 +25,7 @@ export default function PricingPage() {
         <p className="mt-6 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">
           Every project is quoted after a short call. Prices in USD.
         </p>
+        </div>
 
         <div className="mt-16">
           <PricingCards />

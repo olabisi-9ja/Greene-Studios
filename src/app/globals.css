@@ -1421,36 +1421,38 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
 .mascot-z { animation: mascot-z 1.8s ease-out infinite; }
 @media (prefers-reduced-motion: reduce) { .mascot-z { animation: none; } }
 
-/* Theme switch: the current theme is a page that swings open from its left
-   edge, uncovering the next theme beneath it. AtmosphereContext wraps the
-   switch in document.startViewTransition. */
-::view-transition-group(root) {
-  animation-duration: 0.9s;
+/* Theme switch: a page peel from the top-right corner (lib/theme-peel).
+   The old page is clipped to what's still flat and the flap, the back of the
+   sheet, is its own transition layer with a shadow; both clip-paths are
+   animated from script. */
+.theme-flap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  view-transition-name: theme-flap;
 }
-::view-transition-image-pair(root) {
-  perspective: 2600px;
+::view-transition-group(root),
+::view-transition-group(theme-flap) {
+  animation: none;
 }
+::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
-  z-index: 1;
+  mix-blend-mode: normal;
 }
 ::view-transition-old(root) {
   z-index: 2;
-  transform-origin: left center;
-  animation: theme-page-turn 0.9s cubic-bezier(0.55, 0.05, 0.3, 1) both;
 }
-@keyframes theme-page-turn {
-  0% {
-    transform: rotateY(0deg);
-    box-shadow: 0 0 0 rgb(0 0 0 / 0);
-    filter: brightness(1);
-  }
-  60% {
-    box-shadow: 30px 0 80px rgb(0 0 0 / 0.35);
-  }
-  100% {
-    transform: rotateY(-104deg);
-    box-shadow: 30px 0 80px rgb(0 0 0 / 0);
-    filter: brightness(0.75);
-  }
+::view-transition-new(root) {
+  z-index: 1;
+}
+::view-transition-group(theme-flap) {
+  z-index: 3;
+  filter: drop-shadow(-10px 10px 18px rgb(0 0 0 / 0.28));
+}
+::view-transition-old(theme-flap) {
+  display: none;
+}
+::view-transition-new(theme-flap) {
+  animation: none;
 }

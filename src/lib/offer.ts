@@ -46,7 +46,7 @@ export const PACKAGES: {
     name: "Brand Identity",
     pitch: "For new businesses, and ones that have outgrown the logo they started with.",
     outcome: "A distinctive logo and visual system, ready to use everywhere the business shows up.",
-    price: "$800 – $1.2k",
+    price: "$480",
     timeline: "1 – 3 weeks",
     includes: [
       "Logo suite and marks",
@@ -63,7 +63,7 @@ export const PACKAGES: {
     name: "Website",
     pitch: "A site that explains what you do clearly and gets people to act.",
     outcome: "A fast, custom website that explains what you do in one look and turns visitors into enquiries.",
-    price: "$1k – $1.5k",
+    price: "$690",
     timeline: "1 – 3 weeks",
     includes: [
       "Custom design, up to 6 pages",
@@ -80,7 +80,7 @@ export const PACKAGES: {
     name: "Product Build",
     pitch: "For startups that need a web or mobile product built properly, start to launch.",
     outcome: "A working web or mobile product, designed and engineered by one team, live in the stores.",
-    price: "$3k – $6k",
+    price: "From $1.5k",
     timeline: "3 – 6 months",
     note: "Best for MVPs and rebuilds",
     includes: [
@@ -98,7 +98,7 @@ export const PACKAGES: {
     name: "Monthly Retainer",
     pitch: "Design and engineering capacity on tap, so your team keeps shipping.",
     outcome: "Design and development every month, without hiring, so your team keeps shipping.",
-    price: "From $1k / month",
+    price: "$490 / month",
     timeline: "Contract based",
     includes: [
       "Design and development each month",
@@ -113,12 +113,12 @@ export const PACKAGES: {
 ];
 
 export const ADD_ONS = [
-  { name: "Logo only", from: "$300" },
-  { name: "Landing page", from: "$500" },
-  { name: "Pitch deck", from: "$350" },
-  { name: "Social media kit", from: "$250" },
-  { name: "Logo animation", from: "$200" },
-  { name: "Naming and copy", from: "$250" },
-  { name: "SEO and analytics setup", from: "$200" },
-  { name: "E-commerce store", from: "$1.8k" },
+  { name: "Logo only", from: "$280" },
+  { name: "Landing page", from: "$350" },
+  { name: "Pitch deck", from: "$220" },
+  { name: "Social media kit", from: "$150" },
+  { name: "Logo animation", from: "$120" },
+  { name: "Naming and copy", from: "$150" },
+  { name: "SEO and analytics setup", from: "$120" },
+  { name: "E-commerce store", from: "$890" },
 ];

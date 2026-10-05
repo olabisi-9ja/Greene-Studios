@@ -19,8 +19,8 @@ const SOCIALS = [
 export default function ContactPage() {
   return (
     <div className="pt-32 sm:pt-40">
-      <div className="relative mx-auto max-w-[1400px] px-5 pb-16 sm:px-8">
-        <div className="pointer-events-none mb-8 w-[min(200px,50vw)] lg:absolute lg:right-8 lg:top-0 lg:mb-0 lg:w-[240px]">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 pb-16 text-center sm:px-8">
+        <div className="pointer-events-none mb-6 w-[min(200px,50vw)]">
           <BrandLottie name="contact" className="aspect-square w-full" />
         </div>
         <h1 className="max-w-[12ch] text-[clamp(2.8rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em]">

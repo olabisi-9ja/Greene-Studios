@@ -10,6 +10,7 @@ import React, {
   ReactNode,
 } from "react";
 import { flushSync } from "react-dom";
+import { peelTheme } from "@/lib/theme-peel";
 
 /**
  * Greene Studios theme.
@@ -121,23 +122,9 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
   }, [focus]);
 
   const setMode = useCallback((next: ThemeMode) => {
-    // The current theme turns away like a page, opening onto the next one
-    // (see ::view-transition rules in globals.css). Without the View
-    // Transitions API, or with reduced motion, it just switches.
-    const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (doc.startViewTransition && !still) {
-      // a transition the browser skips (hidden tab, one already running)
-      // rejects its promises; the theme still changes
-      const t = doc.startViewTransition(() => flushSync(() => setModeState(next))) as {
-        ready: Promise<void>;
-        finished: Promise<void>;
-      };
-      t.ready.catch(() => {});
-      t.finished.catch(() => {});
-    } else {
-      setModeState(next);
-    }
+    // The current theme peels away from the top-right corner like a page,
+    // uncovering the next one (lib/theme-peel).
+    peelTheme(() => flushSync(() => setModeState(next)));
     try {
       window.localStorage.setItem(STORAGE_MODE, next);
     } catch {

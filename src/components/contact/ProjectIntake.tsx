@@ -18,7 +18,7 @@ const TYPES: { id: TypeId; label: string }[] = [
   { id: "other", label: "Something else" },
 ];
 
-const BUDGETS = ["Under $1k", "$1k to $3k", "$3k to $6k", "$6k or more", "A monthly amount", "Not sure yet"];
+const BUDGETS = ["Under $500", "$500 to $1k", "$1k to $3k", "$3k or more", "A monthly amount", "Not sure yet"];
 const TIMELINES = ["Within a month", "In 1 to 3 months", "In 3 months or more", "Flexible"];
 
 type Answers = {

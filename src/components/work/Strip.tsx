@@ -6,11 +6,37 @@ import { useEffect, useRef, useState } from "react";
 /**
  * A project's pictures in a sideways row: swipe or trackpad, or the two
  * arrows (which step one picture at a time and grey out at either end).
+ * A picture too wide for the screen becomes a panorama, the way Instagram
+ * does it: cut into slides that sit flush, so the arrow (or a swipe) brings
+ * in the rest of the same picture.
  */
 export default function Strip({ images, name, kind }: { images: string[]; name: string; kind: string }) {
   const row = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(images.length < 2);
+  /** natural width / height of each picture, once loaded */
+  const [ratios, setRatios] = useState<Record<string, number>>({});
+  /** visible width of the row and the picture height, for panorama maths */
+  const [box, setBox] = useState({ w: 0, h: 0 });
+
+  useEffect(() => {
+    const el = row.current;
+    if (!el) return;
+    const measure = () => {
+      const cs = getComputedStyle(el);
+      const w = el.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+      setBox({ w, h: Math.min(window.innerHeight * 0.62, 560) });
+    };
+    measure();
+    // pictures that finished loading before hydration never fire onLoad
+    const ready: Record<string, number> = {};
+    el.querySelectorAll("img").forEach((img) => {
+      if (img.complete && img.naturalWidth) ready[img.getAttribute("src") ?? ""] = img.naturalWidth / img.naturalHeight;
+    });
+    if (Object.keys(ready).length) setRatios((r) => ({ ...ready, ...r }));
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   useEffect(() => {
     const el = row.current;
@@ -26,12 +52,12 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
       el.removeEventListener("scroll", check);
       window.removeEventListener("resize", check);
     };
-  }, []);
+  }, [ratios]);
 
   const step = (dir: 1 | -1) => {
     const el = row.current;
     if (!el) return;
-    const items = Array.from(el.children) as HTMLElement[];
+    const items = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
     const left = el.scrollLeft;
     const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
     const target =
@@ -47,20 +73,59 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
     <div>
       <ul
         ref={row}
-        className="m-0 mt-8 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 [scrollbar-width:none] sm:scroll-px-8 sm:px-8 [&::-webkit-scrollbar]:hidden"
+        className="relative m-0 mt-8 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 [scrollbar-width:none] sm:scroll-px-8 sm:px-8 [&::-webkit-scrollbar]:hidden"
         aria-label={`${name} pictures`}
       >
-        {images.map((src, i) => (
-          <li key={src} className="shrink-0 snap-start">
-            <img
-              src={src}
-              alt={i === 0 ? `${name}, ${kind}` : ""}
-              loading="lazy"
-              decoding="async"
-              className="h-[min(62vh,560px)] w-auto rounded-[8px] bg-[var(--brand-surface-secondary)] object-cover"
-            />
-          </li>
-        ))}
+        {images.map((src, i) => {
+          const ratio = ratios[src];
+          // how much wider than the screen the picture is at full height:
+          // a little over just fits to the width, clearly wider becomes a
+          // panorama of two or three slides at about full height
+          const over = ratio && box.w ? (ratio * box.h) / box.w : 0;
+          const fit = over > 1.04 && over < 1.6;
+          const parts = over >= 1.6 ? Math.min(3, Math.round(over)) : 1;
+          if (parts > 1) {
+            // slides keep the row's height; each takes an equal share of the
+            // picture's width, which lands within a few percent of the screen
+            const slideW = (ratio * box.h) / parts;
+            return (
+              <li key={src} className="flex shrink-0" aria-label={i === 0 ? `${name}, ${kind}` : undefined}>
+                {Array.from({ length: parts }, (_, k) => (
+                  <div
+                    key={k}
+                    data-slide
+                    role="img"
+                    aria-label={k === 0 ? `${name}, part ${k + 1} of ${parts}` : `part ${k + 1} of ${parts}`}
+                    className="snap-start bg-[var(--brand-surface-secondary)] bg-no-repeat first:rounded-l-[8px] last:rounded-r-[8px]"
+                    style={{
+                      width: slideW,
+                      height: box.h,
+                      backgroundImage: `url(${src})`,
+                      backgroundSize: `${parts * 100}% 100%`,
+                      backgroundPosition: `${(k / (parts - 1)) * 100}% 0`,
+                    }}
+                  />
+                ))}
+              </li>
+            );
+          }
+          return (
+            <li key={src} data-slide className="shrink-0 snap-start">
+              <img
+                src={src}
+                alt={i === 0 ? `${name}, ${kind}` : ""}
+                loading="lazy"
+                decoding="async"
+                onLoad={(e) => {
+                  const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+                  if (w && h) setRatios((r) => (r[src] ? r : { ...r, [src]: w / h }));
+                }}
+                style={fit ? { width: box.w, height: "auto" } : undefined}
+                className="h-[min(62vh,560px)] w-auto rounded-[8px] bg-[var(--brand-surface-secondary)] object-cover"
+              />
+            </li>
+          );
+        })}
       </ul>
       {images.length > 1 && (
         <div className="mx-auto mt-5 flex max-w-[1400px] justify-end gap-2 px-5 sm:px-8">

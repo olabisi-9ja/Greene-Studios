@@ -7,7 +7,7 @@ import { PlateLink } from "@/components/ui/Tag";
  * offer itself, nothing invented.
  */
 const FACTS = [
-  { pre: "$", value: "800", label: "Brand identity, starting price" },
+  { pre: "$", value: "480", label: "Brand identity, starting price" },
   { pre: "", value: "4", label: "Ways to work with us" },
   { pre: "", value: "1–3", label: "Weeks to launch a website" },
   { pre: "", value: "2", label: "Revision rounds included" },
