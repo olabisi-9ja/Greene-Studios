@@ -127,7 +127,14 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
     const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (doc.startViewTransition && !still) {
-      doc.startViewTransition(() => flushSync(() => setModeState(next)));
+      // a transition the browser skips (hidden tab, one already running)
+      // rejects its promises; the theme still changes
+      const t = doc.startViewTransition(() => flushSync(() => setModeState(next))) as {
+        ready: Promise<void>;
+        finished: Promise<void>;
+      };
+      t.ready.catch(() => {});
+      t.finished.catch(() => {});
     } else {
       setModeState(next);
     }

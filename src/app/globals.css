@@ -275,8 +275,11 @@
   .mode-midnight .brand-lottie { --lottie-accent: #5fbf8a; --lottie-soft: #24382d; }
   .mode-studio .brand-lottie { --lottie-accent: #ffd23f; --lottie-soft: #155c3a; }
   .mode-raw .brand-lottie { --lottie-accent: #1a1a1a; --lottie-soft: color-mix(in srgb, #ff6a1a 70%, #fafaf7); }
-  /* a dark panel keeps the lifted green whatever the page theme */
-  .lottie-on-dark .brand-lottie { --lottie-accent: #5fbf8a; --lottie-soft: #24382d; }
+  /* on a dark panel the accent still follows the theme; the soft tint is
+     mixed into the panel, and raw's ink accent becomes its orange so it
+     shows on the dark */
+  .lottie-on-dark .brand-lottie { --lottie-soft: color-mix(in srgb, var(--lottie-accent) 30%, #111); }
+  .mode-raw .lottie-on-dark .brand-lottie { --lottie-accent: #ff6a1a; }
   .brand-lottie [fill="rgb(31,157,99)"] { fill: var(--lottie-accent); }
   .brand-lottie [stroke="rgb(31,157,99)"] { stroke: var(--lottie-accent); }
   .brand-lottie [fill="rgb(207,238,221)"] { fill: var(--lottie-soft); }
@@ -1321,6 +1324,10 @@
   letter-spacing: -0.01em;
   line-height: 1;
   color: var(--logo);
+}
+/* in the top bar the wordmark sits on a solid chip of the logo colour */
+.wordmark.wordmark-chip {
+  color: var(--brand-bg);
 }
 
 /* ─── RAW: the site with its skin off ──────────────────────────────── */
