@@ -1,149 +1,91 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { JOURNAL_ARTICLES } from "@/lib/data";
 import { notFound } from "next/navigation";
+import { JOURNAL_ARTICLES } from "@/lib/data";
 
 type Props = { params: Promise<{ slug: string }> };
 
+const find = (slug: string) => JOURNAL_ARTICLES.find((a) => a.slug === slug);
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
- const { slug } = await params;
- const article = JOURNAL_ARTICLES.find((a) => a.slug === slug);
- if (!article) return { title: "Article Not Found" };
- return {
- title: `${article.title} · Journal`,
- description: article.excerpt,
- };
+  const article = find((await params).slug);
+  if (!article) return { title: "Article not found" };
+  return { title: article.title, description: article.excerpt, alternates: { canonical: `/journal/${article.slug}` } };
 }
 
 export async function generateStaticParams() {
- return JOURNAL_ARTICLES.map((a) => ({ slug: a.slug }));
+  return JOURNAL_ARTICLES.map((a) => ({ slug: a.slug }));
 }
 
+type Block = { type: string; text: string };
+
+/** An article: centred title, the cover, the text in a readable column, two more to read. */
 export default async function JournalArticlePage({ params }: Props) {
- const { slug } = await params;
- const article = JOURNAL_ARTICLES.find((a) => a.slug === slug);
+  const article = find((await params).slug);
+  if (!article) notFound();
+  const related = JOURNAL_ARTICLES.filter((a) => a.id !== article.id).slice(0, 2);
 
- if (!article) notFound();
+  return (
+    <article>
+      <header className="mx-auto flex max-w-4xl flex-col items-center px-5 pb-12 pt-32 text-center sm:px-8 sm:pt-40">
+        <Link href="/journal" className="text-sm text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]">
+          <span aria-hidden="true">←</span> Journal
+        </Link>
+        <p className="mt-8 text-sm text-[var(--brand-text-secondary)]">
+          {article.category} · {article.date} · {article.readTime}
+        </p>
+        <h1 className="mt-4 text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">{article.title}</h1>
+        <p className="mt-6 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">{article.excerpt}</p>
+      </header>
 
- const relatedArticles = JOURNAL_ARTICLES.filter((a) => a.id !== article.id).slice(0, 2);
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+        <div className="relative aspect-[16/8] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
+          <Image src={article.image} alt="" fill priority sizes="(min-width: 1200px) 1200px, 100vw" className="object-cover" />
+        </div>
+      </div>
 
- return (
- <div className="min-h-screen bg-[var(--brand-bg)] pb-24 text-[var(--brand-text)]">
- {/* Header */}
- <div className="mx-auto max-w-4xl px-5 pb-12 pt-32 md:px-10 md:pt-40">
- <Link
- href="/journal"
- data-cursor="BACK"
- className="mb-10 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-text-secondary)] transition-colors hover:text-[var(--brand-text)]"
- >
- <span aria-hidden="true">←</span> Back to journal
- </Link>
+      <div className="mx-auto max-w-[68ch] px-5 py-20 text-[1.12rem] leading-[1.75] sm:px-8">
+        {(article.content as Block[] | undefined)?.map((b, i) =>
+          b.type === "h2" ? (
+            <h2 key={i} className="mb-4 mt-14 text-[1.7rem] font-semibold leading-tight tracking-[-0.03em]">
+              {b.text}
+            </h2>
+          ) : b.type === "quote" ? (
+            <blockquote key={i} className="my-10 border-l-2 border-[var(--logo)] pl-6 text-[1.4rem] font-medium leading-snug">
+              {b.text}
+            </blockquote>
+          ) : (
+            <p key={i} className="mb-6 text-[var(--brand-text-secondary)]">
+              {b.text}
+            </p>
+          ),
+        )}
+      </div>
 
- <div className="mb-8 flex flex-wrap items-center gap-3 text-xs font-semibold text-[var(--brand-text-secondary)]">
- <span className="rounded-full bg-[var(--brand-accent)] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--brand-on-accent)]">
- {article.category}
- </span>
- <span>{article.date}</span>
- <span aria-hidden="true">·</span>
- <span>{article.readTime}</span>
- </div>
-
- <h1 className="font-display text-[clamp(2.4rem,5.5vw,4.5rem)] font-black uppercase leading-[0.95] tracking-tight text-[var(--brand-text)]">
- {article.title}
- </h1>
- <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--brand-text-secondary)] md:text-xl">
- {article.excerpt}
- </p>
- </div>
-
- {/* Hero image */}
- <div className="mx-auto max-w-6xl px-5 pb-16 md:px-10 md:pb-20">
- <div className="relative aspect-[21/9] overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface-secondary)]">
- <Image
- src={article.image}
- alt={article.title}
- fill
- priority
- sizes="100vw"
- className="object-cover"
- />
- </div>
- </div>
-
- {/* Content body */}
- <div className="mx-auto max-w-3xl px-5 md:px-10">
- <div className="prose prose-lg max-w-none
- prose-headings:font-display prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-headings:text-[var(--brand-text)]
- prose-p:text-[var(--brand-text-secondary)] prose-p:leading-relaxed
- prose-blockquote:border-[var(--brand-accent)] prose-blockquote:font-serif prose-blockquote:not-italic prose-blockquote:text-[var(--brand-text)] prose-blockquote:text-xl
- prose-strong:text-[var(--brand-text)]">
- {article.content?.map((block: any, i: number) => {
- if (block.type === "h2") {
- return <h2 key={i}>{block.text}</h2>;
- }
- if (block.type === "quote") {
- return <blockquote key={i}>{block.text}</blockquote>;
- }
- return <p key={i}>{block.text}</p>;
- })}
- </div>
- </div>
-
- {/* Related */}
- <div className="mt-20 border-t border-[var(--brand-border)] py-20">
- <div className="mx-auto max-w-[1400px] px-5 md:px-10">
- <div className="mb-10 flex items-end justify-between">
- <h2 className="font-display text-3xl font-black uppercase tracking-tight text-[var(--brand-text)] md:text-4xl">
- Keep reading.
- </h2>
- <Link
- href="/journal"
- data-cursor="GO"
- className="hidden text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text)] sm:block"
- >
- All articles →
- </Link>
- </div>
- <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
- {relatedArticles.map((rel) => (
- <Link
- key={rel.id}
- href={`/journal/${rel.slug}`}
- className="group flex h-full flex-col rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.07)]"
- data-cursor="READ"
- >
- <div className="relative mb-5 aspect-[16/9] overflow-hidden rounded-xl">
- <Image
- src={rel.image}
- alt={rel.title}
- fill
- sizes="(max-width: 768px) 100vw, 50vw"
- className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
- />
- </div>
- <div className="flex flex-grow flex-col">
- <div className="mb-3 flex items-center gap-3 text-xs font-semibold text-[var(--brand-text-secondary)]">
- <span className="font-bold uppercase tracking-wider text-[var(--brand-accent)]">{rel.category}</span>
- <span aria-hidden="true">·</span>
- <span>{rel.readTime}</span>
- </div>
- <h3 className="font-display text-xl font-black uppercase leading-tight tracking-tight text-[var(--brand-text)] transition-colors duration-300 group-hover:text-[var(--brand-accent)]">
- {rel.title}
- </h3>
- <p className="mt-3 flex-grow text-sm leading-relaxed text-[var(--brand-text-secondary)]">
- {rel.excerpt}
- </p>
- <span className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-[var(--brand-text)]">
- Read article
- <span className="transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
- </span>
- </div>
- </Link>
- ))}
- </div>
- </div>
- </div>
- </div>
- );
+      <section className="mx-auto max-w-[1400px] border-t border-[var(--brand-border)] px-5 py-20 sm:px-8">
+        <div className="flex items-end justify-between gap-6">
+          <h2 className="text-[clamp(1.9rem,3.6vw,2.8rem)] font-semibold tracking-[-0.04em]">Keep reading</h2>
+          <Link href="/journal" className="font-semibold underline-offset-4 hover:underline">
+            All notes <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+        <ul className="m-0 mt-10 grid list-none gap-8 p-0 md:grid-cols-2">
+          {related.map((r) => (
+            <li key={r.id}>
+              <Link href={`/journal/${r.slug}`} className="group block">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
+                  <Image src={r.image} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                </div>
+                <p className="mt-5 text-sm text-[var(--brand-text-secondary)]">
+                  {r.category} · {r.readTime}
+                </p>
+                <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] group-hover:text-[var(--logo)]">{r.title}</h3>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
 }

@@ -1,6 +1,7 @@
 import { CountUp } from "@/components/effects/TextFx";
 import { PlateLink } from "@/components/ui/Tag";
 import Price from "@/components/ui/Price";
+import BrandLottie from "@/components/brand/BrandLottie";
 
 /**
  * Who we are, in one sentence, then
@@ -29,7 +30,7 @@ export default function About() {
     <section className="px-5 py-24 sm:px-8 sm:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-20">
         <div>
-          <p className="max-w-[24ch] text-[clamp(1.9rem,4.4vw,3.6rem)] font-semibold leading-[1.04] tracking-[-0.035em]">Greene designs and builds brands, websites and apps. One team from the first sketch to launch day, so nothing gets lost between design and code.</p>
+          <p className="max-w-[24ch] text-[clamp(1.9rem,4.4vw,3.6rem)] font-semibold leading-[1.04] tracking-[-0.035em]">Greene Studios designs and builds brands, websites and apps. One team from the first sketch to launch day, so nothing gets lost between design and code.</p>
 
           {/* the facts as cards of different sizes: the price leads, the rest fall in around it */}
           <dl className="m-0 mt-16 grid grid-cols-2 gap-3 sm:grid-cols-6">
@@ -37,12 +38,17 @@ export default function About() {
               <div
                 key={f.label}
                 className={[
-                  "flex flex-col justify-between rounded-[18px] p-6",
+                  "relative flex flex-col justify-between overflow-hidden rounded-[18px] p-6",
                   CARD[i],
                 ].join(" ")}
               >
-                <dt className="order-2 mt-8 max-w-[18ch] text-sm font-medium leading-snug opacity-80">{f.label}</dt>
-                <dd className="order-1 m-0 text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em]">
+                {f.usd > 0 && (
+                  <div aria-hidden="true" className="lottie-on-accent pointer-events-none absolute -right-2 bottom-2 w-[52%] max-w-[230px] sm:-right-4 sm:bottom-4">
+                    <BrandLottie name="hero-brands" className="aspect-[4/3] w-full" />
+                  </div>
+                )}
+                <dt className="relative order-2 mt-8 max-w-[18ch] text-sm font-medium leading-snug opacity-80">{f.label}</dt>
+                <dd className="relative order-1 m-0 text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em]">
                   {f.usd ? (
                     <Price usd={f.usd} />
                   ) : (

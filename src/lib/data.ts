@@ -332,7 +332,7 @@ export const JOURNAL_ARTICLES = [
  {
  id: "why-motion-matters",
  title: "Why Motion Design Is the Most Undervalued Investment in UX",
- excerpt: "Most teams treat animation as decoration. The studios winning awards treat it as communication. Here's the difference.",
+ excerpt: "Most teams treat animation as decoration. It works better as communication. Here's the difference.",
  category: "Motion Design",
  date: "December 12, 2024",
  readTime: "8 min read",
@@ -346,7 +346,7 @@ export const JOURNAL_ARTICLES = [
  { type: "p", text: "When an interface lacks motion, it lacks physics. Objects suddenly appear and disappear in zero milliseconds. Menus teleport. Content jumps. This causes a microscopic cognitive load on the user. Their brain has to constantly reconcile these impossible state changes." },
  { type: "quote", text: "Good motion design bridges the gap between state A and state B. It answers the user's subconscious question: 'Where did that come from, and where did it go?'" },
  { type: "h2", text: "The ROI of Delight" },
- { type: "p", text: "Stakeholders often ask for the ROI of motion design. It's notoriously difficult to measure directly through A/B testing because motion affects long-term brand perception and emotional resonance rather than immediate click-through rates. However, when we implemented a comprehensive motion system for a recent FinTech client, we noticed a 14% drop in support tickets related to 'I don't know where to find X'." },
+ { type: "p", text: "Stakeholders often ask for the ROI of motion design. It's notoriously difficult to measure directly through A/B testing because motion affects long-term brand perception and emotional resonance rather than immediate click-through rates. Still, motion that explains where things come from and where they go answers the 'where did that go?' questions before anyone has to ask them." },
  { type: "p", text: "Why? Because when a user clicked a menu icon, the items slid out from the icon's origin point. The user's eye naturally tracked the movement, establishing a spatial relationship in their mind. They learned the interface through physics." },
  { type: "h2", text: "Implementing Motion Sensibly" },
  { type: "p", text: "To do motion right, it needs to be established at the design system level, not the component level. Define your easing curves globally. Decide on your duration tokens (e.g., 150ms for micro-interactions, 300ms for large layout shifts). Treat motion as a core brand element, just like your typography or color palette." },
@@ -355,8 +355,8 @@ export const JOURNAL_ARTICLES = [
  },
  {
  id: "design-systems-at-scale",
- title: "Design Systems at Scale: Lessons from 3 Years of Building Component Libraries",
- excerpt: "Building a design system isn't a sprint, it's a discipline. After three years and dozens of implementations, here's what we've learned.",
+ title: "Design Systems at Scale: What Makes One Last",
+ excerpt: "Building a design system isn't a sprint, it's a discipline. Here's what makes the difference between one that lasts and one that's abandoned.",
  category: "Design Systems",
  date: "November 28, 2024",
  readTime: "12 min read",
@@ -364,7 +364,7 @@ export const JOURNAL_ARTICLES = [
  slug: "design-systems-at-scale",
  image: "/images/covers/design-systems-at-scale.webp",
  content: [
- { type: "p", text: "Three years ago, 'Design System' was the hottest buzzword in the industry. Every company, regardless of size, felt compelled to build one. We were hired to audit, rescue, or rebuild dozens of them. What we found was a graveyard of abandoned Figma files and deprecated React libraries." },
+ { type: "p", text: "Three years ago, 'Design System' was the hottest buzzword in the industry. Every company, regardless of size, felt compelled to build one. Many of them ended up as a graveyard of abandoned Figma files and deprecated React libraries." },
  { type: "h2", text: "The Fallacy of the 'Finished' System" },
  { type: "p", text: "The most common failure mode we observe is treating a design system as a project with a finish line. A team is assembled, they spend three months building 50 components, they launch 'Version 1.0', and then the team is disbanded back to feature work. Within six months, the system is obsolete." },
  { type: "p", text: "A design system is not a project; it is a product. And like any product, it needs dedicated maintainers, a roadmap, and a continuous feedback loop from its users (the developers and designers)." },
@@ -379,7 +379,7 @@ export const JOURNAL_ARTICLES = [
  {
  id: "ai-in-product-design",
  title: "AI in Product Design: Separating Signal from Hype",
- excerpt: "Every week brings a new AI tool claiming to replace designers. After testing dozens of them, here's our honest assessment.",
+ excerpt: "Every week brings a new AI tool claiming to replace designers. Here's our honest take on where it helps and where it doesn't.",
  category: "AI",
  date: "November 14, 2024",
  readTime: "10 min read",
@@ -399,54 +399,6 @@ export const JOURNAL_ARTICLES = [
  { type: "p", text: "3. Edge Case Generation: We ask AI to act as an adversarial user and identify edge cases or error states we might have missed in our happy-path designs." },
  { type: "h2", text: "The Human Premium" },
  { type: "p", text: "As digital experiences become easier and cheaper to generate, the market will flood with competent, homogeneous interfaces. In this environment, human idiosyncrasy, emotional resonance, and brand point-of-view will command a massive premium. The future of design isn't pushing pixels; it's editorial taste and strategic curation." }
- ]
- },
- {
- id: "typography-that-converts",
- title: "Typography That Converts: The Science of Type in Landing Pages",
- excerpt: "We A/B tested 14 typeface combinations across 6 client sites. The results surprised us, and will change how you choose fonts.",
- category: "Design",
- date: "October 30, 2024",
- readTime: "7 min read",
- featured: false,
- slug: "typography-that-converts",
- image: "/images/covers/typography-that-converts.webp",
- content: [
- { type: "p", text: "Designers love typography. We can spend hours debating the merits of Inter versus Roboto, or hunting for the perfect geometric sans-serif to elevate a brand. But how much does typography actually impact business metrics? Does the end user really care if a font has humanist terminals?" },
- { type: "p", text: "We decided to find out. Over three months, we ran extensive A/B tests across multiple high-traffic landing pages, isolating typography as the only variable." },
- { type: "h2", text: "Legibility Over Personality" },
- { type: "p", text: "Our first major finding was that legibility trumps brand personality when it comes to conversion. In one test for a fintech client, we swapped a highly stylized, 'techy' display font in the hero section for a standard, highly readable system font (San Francisco/Inter). The conversion rate increased by 8.4%." },
- { type: "p", text: "Users spend milliseconds evaluating a page. If their brain has to work even 10% harder to decode the letterforms, cognitive friction increases, and they bounce. Highly stylized fonts should be reserved for massive headings or decorative elements, never for value propositions." },
- { type: "quote", text: "Nobody ever abandoned a checkout flow because the font was too boring. Millions have abandoned them because the font was too hard to read." },
- { type: "h2", text: "The Serif Trust Factor" },
- { type: "p", text: "Interestingly, we found that for high-ticket items and B2B services, introducing a classic serif (like Garamond or Playfair Display) in headers significantly increased perceived trust. In a survey of users who saw the serif version of a consulting landing page, responses rated the company as 'more established' and 'authoritative' compared to the sans-serif control group." },
- { type: "h2", text: "Line Height and Line Length" },
- { type: "p", text: "Perhaps the most impactful typographic change wasn't the font family at all, but the typesetting. We found that restricting line lengths to 60-70 characters and increasing line-height to 1.6 on body copy increased time-on-page by an average of 22%. Users were actually reading the content rather than skimming." },
- { type: "p", text: "Typography is the voice of your interface. Make sure it's speaking clearly." }
- ]
- },
- {
- id: "the-$0-seo-strategy",
- title: "The $0 SEO Strategy That Got Us 40K Monthly Visitors",
- excerpt: "No paid backlinks, no black-hat tricks. Just a content system that compounded over 18 months. Here's the full playbook.",
- category: "Business",
- date: "October 15, 2024",
- readTime: "15 min read",
- featured: false,
- slug: "the-0-seo-strategy",
- image: "/images/covers/the-0-seo-strategy.webp",
- content: [
- { type: "p", text: "When we launched Greene Studios, we had zero marketing budget. We couldn't compete on paid ads with massive agencies, and buying sketchy backlinks felt completely misaligned with our brand values. We had to grow organically, relying purely on the quality of our insights." },
- { type: "p", text: "18 months later, our journal drives 40,000 highly targeted organic visitors per month, resulting in a consistent pipeline of high-quality leads. Here is exactly how we did it." },
- { type: "h2", text: "Writing for the Practitioner, Not the Algorithm" },
- { type: "p", text: "The biggest mistake companies make with SEO is writing 'SEO content'. You know what I'm talking about: articles titled 'What is UI Design?' that read like a Wikipedia entry written by a robot. Nobody shares that content. Nobody links to it organically." },
- { type: "p", text: "Instead of targeting massive, impossible keywords, we targeted hyper-specific problems we were solving in our daily work. We wrote highly technical deep-dives on topics like 'Managing Z-Index in complex React Applications' or 'Designing state machines for checkout flows'. These articles had low search volume, but incredibly high intent." },
- { type: "quote", text: "Don't write content to answer a search query. Write content to solve a peer's problem so thoroughly that they bookmark it." },
- { type: "h2", text: "The compounding effect of 'Original Research'" },
- { type: "p", text: "Our biggest spikes in traffic came from publishing original data. Whenever we ran an A/B test or audited 50 SaaS pricing pages, we published the raw data and our analysis. Because we were the primary source of this data, other blogs and newsletters linked to us naturally. One article containing original research generated more backlinks than 20 opinion pieces combined." },
- { type: "h2", text: "Technical SEO Basics" },
- { type: "p", text: "While content is king, you must provide a clean house for it. We ensured our Next.js architecture delivered sub-second load times, perfect semantic HTML, and dynamic OpenGraph images for social sharing. Google rewards fast, accessible websites with higher rankings." },
- { type: "p", text: "SEO isn't a hack. It's the natural byproduct of consistently publishing excellent, helpful content on a well-built website." }
  ]
  },
  {
@@ -471,7 +423,7 @@ export const JOURNAL_ARTICLES = [
  { type: "h2", text: "Saying No to Say Yes" },
  { type: "p", text: "The hardest part of the transition was turning down work that didn't fit our new model. We had to reject lucrative hourly contracts because they diluted our focus. But saying 'no' to the wrong work created the vacuum necessary to attract the right work, clients who respected our process and valued our expertise over our time." }
  ]
- },
+ }
 ];
 
 // ─── FAQs ─────────────────────────────────────────────────────────────────────

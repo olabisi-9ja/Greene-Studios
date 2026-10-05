@@ -21,6 +21,11 @@ function load(name: string) {
   return p;
 }
 
+/** Fetch and prepare an animation ahead of time (the loader waits on the hero's). */
+export function preloadLottie(name: string) {
+  return load(name);
+}
+
 /**
  * A Lottie animation from /public/lottie, recoloured into the Greene
  * palette (see lib/brand-lottie). Nothing is fetched until the slot is near

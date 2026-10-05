@@ -7,9 +7,11 @@ import CurrencySelect from "@/components/chrome/CurrencySelect";
 
 const PAGES = [
   { label: "Work", href: "/work" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
   { label: "Studio", href: "/studio" },
+  { label: "Team", href: "/team" },
   { label: "Journal", href: "/journal" },
   { label: "Start here", href: "/start" },
   { label: "Contact", href: "/contact" },

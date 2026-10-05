@@ -2,11 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import Runner from "@/components/brand/Runner";
+import { preloadLottie } from "@/components/brand/BrandLottie";
+
+/** On the home page the loader holds until the hero's animations are in. */
+const HERO_LOTTIES = ["hero-brands", "hero-websites", "hero-apps", "hero-products"];
 
 const SEEN = "greene:loaded";
 
 /**
  * Window-load screen: the runner, running, and a counter. No wordmark.
+ * It waits for the page to load and, on the home page, for the hero's
+ * four animations, so the hero is complete the moment it shows.
  *
  * When the page has loaded the counter reaches 100, then the runner flies
  * up and shrinks into its place in the top bar (measured, so it lands
@@ -36,17 +42,25 @@ export default function Loader() {
     root.classList.add("is-loading");
 
     const started = performance.now();
-    let loaded = document.readyState === "complete";
+    let pageLoaded = document.readyState === "complete";
+    let heroReady = window.location.pathname !== "/";
+    if (!heroReady) {
+      Promise.allSettled(HERO_LOTTIES.map(preloadLottie)).then(() => (heroReady = true));
+    }
     let shown = 0;
     let raf = 0;
-    const onLoad = () => (loaded = true);
+    const onLoad = () => (pageLoaded = true);
     window.addEventListener("load", onLoad, { once: true });
-    const failsafe = setTimeout(() => (loaded = true), 6000);
+    // never hold anyone longer than this, whatever is still on its way
+    const failsafe = setTimeout(() => {
+      pageLoaded = true;
+      heroReady = true;
+    }, 8000);
 
     const step = (now: number) => {
       const t = (now - started) / 1000;
       // creep towards 90 while assets arrive, then run home once loaded (and at least 1.2s in)
-      const target = loaded && t > 1.2 ? 100 : 90 * (1 - Math.exp(-t * 1.4));
+      const target = pageLoaded && heroReady && t > 1.2 ? 100 : 90 * (1 - Math.exp(-t * 1.4));
       shown += (target - shown) * 0.12;
       if (target === 100 && 100 - shown < 0.6) shown = 100;
       if (count.current) count.current.textContent = `${Math.floor(shown)}`.padStart(2, "0");

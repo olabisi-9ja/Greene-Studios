@@ -14,6 +14,8 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
   const row = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(images.length < 2);
+  /** arrows only when the row is wider than the screen */
+  const [scrollable, setScrollable] = useState(false);
   /** natural width / height of each picture, once loaded */
   const [ratios, setRatios] = useState<Record<string, number>>({});
   /** visible width of the row and the picture height, for panorama maths */
@@ -44,12 +46,16 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
     const check = () => {
       setAtStart(el.scrollLeft < 8);
       setAtEnd(el.scrollLeft + el.clientWidth > el.scrollWidth - 8);
+      setScrollable(el.scrollWidth > el.clientWidth + 8);
     };
     check();
     el.addEventListener("scroll", check, { passive: true });
+    // pictures change the row's width as they load
+    el.addEventListener("load", check, true);
     window.addEventListener("resize", check);
     return () => {
       el.removeEventListener("scroll", check);
+      el.removeEventListener("load", check, true);
       window.removeEventListener("resize", check);
     };
   }, [ratios]);
@@ -127,7 +133,7 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
           );
         })}
       </ul>
-      {images.length > 1 && (
+      {scrollable && (
         <div className="mx-auto mt-5 flex max-w-[1400px] justify-end gap-2 px-5 sm:px-8">
           <button type="button" onClick={() => step(-1)} disabled={atStart} aria-label={`Previous ${name} picture`} className={arrow}>
             <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

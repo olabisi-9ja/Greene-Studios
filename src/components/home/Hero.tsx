@@ -44,7 +44,6 @@ export default function Hero() {
           {word}
         </span>
       </h1>
-      <span aria-hidden="true" className="mt-10 size-1.5 animate-bounce rounded-full bg-[var(--brand-text)]" />
     </section>
   );
 }

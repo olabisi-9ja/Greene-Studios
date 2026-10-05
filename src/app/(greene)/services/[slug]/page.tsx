@@ -1,166 +1,140 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { SERVICES, FAQS } from "@/lib/data";
-import { ConceptCard } from "@/components/work/WorkCards";
 import { notFound } from "next/navigation";
-import { Check } from "lucide-react";
-import PageHeader from "@/components/ui/PageHeader";
-import CTASection from "@/components/home/CTASection";
+import { SERVICES } from "@/lib/data";
+import PageIntro from "@/components/ui/PageIntro";
+import Price from "@/components/ui/Price";
+import NextPage from "@/components/home/NextPage";
 
 type Props = { params: Promise<{ slug: string }> };
 
+const find = (slug: string) => SERVICES.find((s) => s.href === `/services/${slug}`);
+
+/** Each service opens with the hero animation of its discipline. */
+const LOTTIE: Record<string, string> = {
+  "web-design": "hero-websites",
+  "frontend-dev": "hero-websites",
+  "seo-geo-aeo": "hero-websites",
+  branding: "hero-brands",
+  "motion-design": "hero-brands",
+  "ui-ux": "hero-apps",
+  "product-design": "hero-apps",
+  "design-systems": "hero-apps",
+  "web-applications": "hero-products",
+  "ai-integration": "hero-products",
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
- const { slug } = await params;
- const service = SERVICES.find((s) => s.href === `/services/${slug}`);
- if (!service) return { title: "Service Not Found" };
- return {
- title: `${service.title} · Services`,
- description: service.description,
- };
+  const service = find((await params).slug);
+  if (!service) return { title: "Service not found" };
+  return { title: service.title, description: service.description, alternates: { canonical: service.href } };
 }
 
 export async function generateStaticParams() {
- return SERVICES.map((s) => ({ slug: s.href.replace("/services/", "") }));
+  return SERVICES.map((s) => ({ slug: s.href.replace("/services/", "") }));
 }
 
+const h2 = "text-[clamp(1.9rem,3.6vw,2.8rem)] font-semibold leading-[1] tracking-[-0.04em]";
+
+/** One service: what it is, who it's for, how we go about it, what you get. */
 export default async function ServicePage({ params }: Props) {
- const { slug } = await params;
- const service = SERVICES.find((s) => s.href === `/services/${slug}`);
- if (!service) notFound();
+  const service = find((await params).slug);
+  if (!service) notFound();
+  const others = SERVICES.filter((s) => s.id !== service.id).slice(0, 3);
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
- const base = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Services", item: `${base}/services` },
+              { "@type": "ListItem", position: 2, name: service.title, item: `${base}${service.href}` },
+            ],
+          }),
+        }}
+      />
 
- return (
- <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
- <script
-   type="application/ld+json"
-   dangerouslySetInnerHTML={{
-     __html: JSON.stringify({
-       "@context": "https://schema.org",
-       "@type": "BreadcrumbList",
-       itemListElement: [
-         { "@type": "ListItem", position: 1, name: "Services", item: `${base}/services` },
-         { "@type": "ListItem", position: 2, name: service.title, item: `${base}${service.href}` },
-       ],
-     }),
-   }}
- />
- <PageHeader
- kicker={service.icon ? `${service.icon} Service` : "Service"}
- title={service.title}
- description={service.description}
- right={
- <div className="card">
- <h3 className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
- What&apos;s included
- </h3>
- <div className="space-y-3">
- {service.deliverables.map((d) => (
- <div key={d} className="flex items-center gap-3">
- <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--brand-accent)]/15 text-[var(--brand-accent)]">
- <Check size={12} strokeWidth={3} />
- </span>
- <span className="text-sm font-semibold text-[var(--brand-text)]">{d}</span>
- </div>
- ))}
- </div>
- <Link href="/contact" data-cursor="HELLO" className="btn-primary mt-6 w-full">
- Start a {service.title} project <span aria-hidden="true">→</span>
- </Link>
- </div>
- }
- />
+      <PageIntro lottie={LOTTIE[service.id]} label="Service" title={service.title} lead={service.description} />
 
- {/* What is it / Who it's for · inverted ink section */}
- <section className="bg-[var(--brand-text)] py-20 text-[var(--brand-bg)] md:py-28">
- <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 md:px-10 lg:grid-cols-2 lg:gap-20">
- <div>
- <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
- ✦ What it is
- </span>
- <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- {service.title}, defined.
- </h2>
- <p className="mt-6 text-base leading-relaxed text-[var(--brand-bg)]/75 md:text-lg">
- {service.whatIsIt || service.description}
- </p>
- </div>
- <div>
- <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
- ✦ Who it&apos;s for
- </span>
- <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- Perfect for.
- </h2>
- <div className="mt-6 flex flex-col border-t border-[var(--brand-bg)]/25">
- {(service.whoItsFor || []).map((item: string, i: number) => (
- <div key={i} className="flex items-start gap-4 border-b border-[var(--brand-bg)]/25 py-4">
- <span className="mt-1 flex h-2 w-2 shrink-0 rounded-full bg-[var(--brand-accent)]" aria-hidden="true" />
- <p className="text-sm leading-relaxed text-[var(--brand-bg)]/80 md:text-[15px]">{item}</p>
- </div>
- ))}
- </div>
- </div>
- </div>
- </section>
+      <div className="mx-auto -mt-4 flex max-w-[1400px] flex-wrap items-center justify-center gap-6 px-5 pb-20 sm:px-8">
+        <p className="text-2xl font-semibold tracking-[-0.03em]">
+          <Price usd={service.fromUsd} from />
+        </p>
+        <Link
+          href="/contact"
+          className="inline-flex h-12 items-center rounded-[6px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)] transition-opacity hover:opacity-90"
+        >
+          Start a project
+        </Link>
+      </div>
 
- {/* Our approach */}
- <section className="py-20 md:py-28">
- <div className="mx-auto max-w-[1400px] px-5 md:px-10">
- <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-accent)]">
- ✦ Approach
- </span>
- <h2 className="mb-12 font-display text-[clamp(2rem,4vw,3.4rem)] font-black uppercase leading-[0.95] tracking-tight">
- How we work.
- </h2>
- <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
- {(service.approach || []).map((item: any, i: number) => (
- <div
- key={item.title}
- className="group card transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
- >
- <div className="mb-6 flex items-center justify-between">
- <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-accent)]">
- <span className="h-2 w-2 rounded-full bg-[var(--brand-ink)]" />
- </span>
- <span className="font-mono text-xs text-[var(--brand-text-secondary)]">
- 0{i + 1}
- </span>
- </div>
- <h3 className="font-display text-xl font-black uppercase tracking-tight text-[var(--brand-text)]">
- {item.title}
- </h3>
- <p className="mt-3 text-sm leading-relaxed text-[var(--brand-text-secondary)]">{item.desc}</p>
- </div>
- ))}
- </div>
- </div>
- </section>
+      <section className="mx-auto grid max-w-[1400px] gap-16 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:gap-24">
+        <div>
+          <h2 className={h2}>What it is</h2>
+          <p className="mt-6 max-w-[54ch] text-lg leading-relaxed">{service.whatIsIt}</p>
+        </div>
+        <div>
+          <h2 className={h2}>Who it&apos;s for</h2>
+          <ul className="m-0 mt-6 list-none border-t border-[var(--brand-border)] p-0">
+            {service.whoItsFor.map((w) => (
+              <li key={w} className="border-b border-[var(--brand-border)] py-4">
+                {w}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
+      <section className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8">
+        <h2 className={h2}>How we go about it</h2>
+        <ul className="m-0 mt-8 grid list-none gap-4 p-0 md:grid-cols-3">
+          {service.approach.map((a) => (
+            <li key={a.title} className="rounded-[12px] bg-[var(--brand-surface)] p-7 shadow-[0_1px_0_var(--brand-border)]">
+              <h3 className="text-xl font-semibold tracking-[-0.02em]">{a.title}</h3>
+              <p className="mt-3 leading-relaxed text-[var(--brand-text-secondary)]">{a.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
- {/* FAQ */}
- <section className="py-20 md:py-28">
- <div className="mx-auto max-w-4xl px-5 md:px-10">
- <span className="mb-5 block text-center text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-text-secondary)]">
- <span className="text-[var(--brand-accent)]">✦</span> Common questions
- </span>
- <div className="flex flex-col border-t border-[var(--brand-border)]">
- {FAQS.slice(0, 4).map((faq, i) => (
- <div key={i} className="border-b border-[var(--brand-border)] py-6">
- <h3 className="font-display text-lg font-black uppercase tracking-tight text-[var(--brand-text)] md:text-xl">
- {faq.question}
- </h3>
- <p className="mt-3 text-sm leading-relaxed text-[var(--brand-text-secondary)] md:text-[15px]">
- {faq.answer}
- </p>
- </div>
- ))}
- </div>
- </div>
- </section>
+      <section className="mx-auto grid max-w-[1400px] gap-16 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:gap-24">
+        <div>
+          <h2 className={h2}>What you get</h2>
+          <ul className="m-0 mt-6 list-none border-t border-[var(--brand-border)] p-0">
+            {service.deliverables.map((d) => (
+              <li key={d} className="border-b border-[var(--brand-border)] py-4">
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className={h2}>Also from the studio</h2>
+          <ul className="m-0 mt-6 list-none border-t border-[var(--brand-border)] p-0">
+            {others.map((o) => (
+              <li key={o.id}>
+                <Link href={o.href} className="flex items-baseline justify-between gap-4 border-b border-[var(--brand-border)] py-4 hover:text-[var(--logo)]">
+                  <span className="font-semibold">{o.title}</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/services" className="flex items-baseline justify-between gap-4 border-b border-[var(--brand-border)] py-4 hover:text-[var(--logo)]">
+                <span className="font-semibold">All services</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
 
- <CTASection />
- </div>
- );
+      <NextPage />
+    </>
+  );
 }

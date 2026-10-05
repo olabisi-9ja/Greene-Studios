@@ -280,6 +280,14 @@
      shows on the dark */
   .lottie-on-dark .brand-lottie { --lottie-soft: color-mix(in srgb, var(--lottie-accent) 30%, #111); }
   .mode-raw .lottie-on-dark .brand-lottie { --lottie-accent: #ff6a1a; }
+  /* on a card filled with the logo colour the drawing takes the card's
+     colours: lines in its text colour, paper in its fill */
+  .lottie-on-accent .brand-lottie {
+    --brand-text: currentColor;
+    --brand-bg: var(--logo);
+    --lottie-accent: color-mix(in srgb, currentColor 80%, var(--logo));
+    --lottie-soft: color-mix(in srgb, currentColor 25%, var(--logo));
+  }
   .brand-lottie [fill="rgb(31,157,99)"] { fill: var(--lottie-accent); }
   .brand-lottie [stroke="rgb(31,157,99)"] { stroke: var(--lottie-accent); }
   .brand-lottie [fill="rgb(207,238,221)"] { fill: var(--lottie-soft); }
