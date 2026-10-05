@@ -30,220 +30,270 @@ export const SERVICES = [
  id: "web-design",
  icon: "✦",
  title: "Web Design",
- shortDesc: "Websites that stop the scroll and start conversations.",
- description: "We craft visually stunning, strategically crafted websites that communicate your value instantly. Every pixel intentional, every interaction meaningful.",
- deliverables: ["Custom UI Design", "Responsive Layouts", "Design System", "Prototype & Handoff"],
+ shortDesc: "Websites that explain what you do and bring in enquiries.",
+ description: "A custom website that tells people what you do, why it matters to them and what to do next. Designed around your content, not a template.",
+ deliverables: [
+ "Custom page designs",
+ "Layouts for phone, tablet and desktop",
+ "A small design system",
+ "Clickable prototype"
+ ],
  href: "/services/web-design",
  fromUsd: 690,
- whatIsIt: "Web Design for us isn't just about putting pretty boxes on a screen. It's the architecture of your digital headquarters. A great website acts as your best salesperson, your brand ambassador, and your most reliable conversion engine.",
+ whatIsIt: "Your website is often the first proper look someone gets at your business. We design it so a visitor understands what you offer quickly, trusts you, and knows how to get in touch.",
  whoItsFor: [
- "Companies launching a completely new product offering",
- "Established brands whose digital presence feels 5 years behind",
- "Startups needing a high-converting landing page to secure funding",
- "E-commerce brands transitioning to custom headless storefronts"
+ "Businesses launching something new",
+ "Companies whose site no longer matches how good they are",
+ "Startups that need a clear landing page for customers or investors",
+ "Shops moving to a custom storefront"
  ],
  approach: [
- { title: "Content-First Wireframing", desc: "We don't design around lorem ipsum. We structure the narrative first, ensuring the design serves the message, not the other way around." },
- { title: "Creative Direction", desc: "We establish a unique visual language, typography, color, grid systems, that ensures you don't look like another template." },
- { title: "Interactive Prototyping", desc: "You'll feel the website before we write a single line of code, allowing us to perfect the pacing and flow." }
+ { title: "Words first", desc: "We sort out what the page needs to say before we design it, so the design supports the message." },
+ { title: "A look of your own", desc: "Type, colour and layout chosen for your brand, so the site doesn't look like a template." },
+ { title: "See it before it's built", desc: "You click through a prototype first, so changes are cheap and fast." }
  ]
  },
  {
  id: "ui-ux",
  icon: "◈",
  title: "UI/UX Design",
- shortDesc: "Interfaces that feel inevitable.",
- description: "Deep user research and systems thinking combine to create products that users love instinctively. We design for outcomes, not aesthetics alone.",
- deliverables: ["UX Research", "User Flows", "Wireframes", "Usability Testing"],
+ shortDesc: "Apps and tools that are easy to use.",
+ description: "We work out how people use your product, then design screens that make the common tasks quick and obvious.",
+ deliverables: [
+ "User research",
+ "User flows",
+ "Wireframes",
+ "Usability testing"
+ ],
  href: "/services/ui-ux-design",
  fromUsd: 590,
- whatIsIt: "UI/UX is the science of human behavior applied to digital interfaces. It's the process of removing friction between what a user wants to do and the action required to do it. Good UI/UX feels like the product is reading the user's mind.",
+ whatIsIt: "UI/UX design is about making a product easy to use. We look at what people are trying to do, remove the steps that get in the way, and design screens that are clear at a glance.",
  whoItsFor: [
- "SaaS platforms struggling with high churn or onboarding drop-off",
- "Complex legacy software that needs consumer-grade modernization",
- "Mobile apps failing to retain daily active users",
- "Founders who want to validate their product with a clickable prototype"
+ "Software where users drop off during sign-up or setup",
+ "Older tools that work but are hard to use",
+ "Apps people download but don't come back to",
+ "Founders who want to test an idea with a clickable prototype"
  ],
  approach: [
- { title: "Empathy Mapping", desc: "We interview your actual users, map their emotional journey, and identify exactly where they experience frustration." },
- { title: "Information Architecture", desc: "We organize your data and features logically, ensuring users can find what they need in 3 clicks or less." },
- { title: "High-Fidelity UI", desc: "We wrap our structural logic in beautiful, accessible, and intuitive interfaces that elevate your brand perception." }
+ { title: "Talk to users", desc: "We speak to the people who use your product and note where they get stuck." },
+ { title: "Put things where people look", desc: "We organise features and content so the important things are easy to find." },
+ { title: "Clear, accessible screens", desc: "Final designs that are readable, consistent and work for everyone." }
  ]
  },
  {
  id: "branding",
  icon: "◉",
  title: "Branding",
- shortDesc: "Identity systems that outlast trends.",
- description: "Your brand is a promise. We help you define it, visualise it, and scale it across every touchpoint, digital and physical.",
- deliverables: ["Brand Strategy", "Visual Identity", "Logo Design", "Brand Guidelines"],
+ shortDesc: "A brand that looks like you, everywhere.",
+ description: "We help you decide what your brand stands for, then design the logo and visual system that shows it on screen and in print.",
+ deliverables: [
+ "Brand strategy",
+ "Visual identity",
+ "Logo design",
+ "Brand guidelines"
+ ],
  href: "/services/branding",
  fromUsd: 480,
- whatIsIt: "Branding is the gut feeling people have about your company. We help you define that feeling and encode it into every visual asset, from your logo and typography to your color palette and tone of voice.",
+ whatIsIt: "Your brand is how people recognise and remember you. We work out who you're for and how you want to come across, then turn that into a logo, colours, type and a tone that fit together.",
  whoItsFor: [
- "Startups that need to look like enterprise players from day one",
- "Companies pivoting their offering and needing a visual reset",
- "Fragmented brands that look different across every platform",
- "Products launching into highly saturated, competitive markets"
+ "New businesses that want to look established from the start",
+ "Companies that have changed what they do",
+ "Brands that look different on every platform",
+ "Products entering a crowded market"
  ],
  approach: [
- { title: "Strategic Positioning", desc: "We define your archetype, your audience, and your wedge in the market before sketching a single concept." },
- { title: "Visual Identity System", desc: "We design flexible systems, not just a logo, including typography rules, color logic, and photographic direction." },
- { title: "Comprehensive Guidelines", desc: "We deliver a robust playbook so your internal team can scale the brand consistently for years to come." }
+ { title: "Positioning first", desc: "We agree who you're for and what makes you different before any sketching." },
+ { title: "A system, not only a logo", desc: "Logo, colour, type and imagery rules that work together." },
+ { title: "Guidelines you can use", desc: "A clear guide so your team can keep the brand consistent." }
  ]
  },
  {
  id: "frontend-dev",
  icon: "⬡",
  title: "Frontend Development",
- shortDesc: "Pixel-perfect code, blazing performance.",
- description: "Clean, maintainable frontend code built with modern frameworks. We close the gap between design and development, zero compromise.",
- deliverables: ["React / Next.js", "Animation & Motion", "CMS Integration", "Performance Audit"],
+ shortDesc: "Designs turned into fast, reliable websites.",
+ description: "We build what's been designed, in clean, maintainable code. The people who design it build it, so nothing gets lost in between.",
+ deliverables: [
+ "React and Next.js builds",
+ "Animation and motion",
+ "CMS setup",
+ "Speed check"
+ ],
  href: "/services/frontend-development",
  fromUsd: 690,
- whatIsIt: "Frontend Development is where design becomes reality. We write clean, performant, and accessible code that brings static designs to life with fluid animations and instantaneous load times.",
+ whatIsIt: "Frontend development turns a design into a working site or app. We write code that loads quickly, works on every screen and is easy to keep updating.",
  whoItsFor: [
- "Design teams that need a reliable partner to build their Figma files perfectly",
- "Companies needing a migration to modern stacks (Next.js, React)",
- "Websites suffering from poor Lighthouse scores and SEO penalties",
- "Brands wanting complex WebGL or GSAP animations on their site"
+ "Design teams who need their Figma files built properly",
+ "Companies moving to a modern setup like Next.js",
+ "Sites that are slow or rank poorly because of it",
+ "Brands that want rich animation on their site"
  ],
  approach: [
- { title: "Component-Driven", desc: "We build modular, reusable React components that ensure consistency and make future updates trivial." },
- { title: "Motion as a First Principle", desc: "We integrate GSAP and Framer Motion directly into the architecture, ensuring animations are performant, not bolted-on." },
- { title: "Obsessive Optimization", desc: "We aggressively optimize assets, implement edge caching, and ensure your site scores 95+ on Lighthouse." }
+ { title: "Reusable parts", desc: "Built from components, so the site stays consistent and updates are easy." },
+ { title: "Motion built in", desc: "Animation planned with the build, so it stays smooth." },
+ { title: "Fast by default", desc: "Images, code and hosting set up so pages load quickly." }
  ]
  },
  {
  id: "motion-design",
  icon: "◎",
  title: "Motion Design",
- shortDesc: "Motion that communicates, not just decorates.",
- description: "From micro-interactions to full-scale brand films. We use motion as a narrative tool, purposeful, precise, and unforgettable.",
- deliverables: ["UI Animations", "Brand Films", "Motion Guidelines", "GSAP / Lottie"],
+ shortDesc: "Animation that helps people understand.",
+ description: "From small interface animations to logo animations, we use motion to explain what's happening and give your brand some character.",
+ deliverables: [
+ "Interface animations",
+ "Logo animation",
+ "Motion guidelines",
+ "Lottie and GSAP files"
+ ],
  href: "/services/motion-design",
  fromUsd: 190,
- whatIsIt: "Motion Design brings the dimension of time to your digital presence. It guides the user's eye, provides context for state changes, and injects personality into otherwise static interfaces.",
+ whatIsIt: "Motion design adds movement to your product or brand. Done well, it shows people where to look, explains what just changed, and makes the experience feel more like you.",
  whoItsFor: [
- "Products that feel rigid and lack delight",
- "Complex dashboards that need to explain data transitions clearly",
- "Marketing sites that need to demonstrate a physical product digitally",
- "Brands wanting a signature 'feel' to their digital interactions"
+ "Products that feel stiff",
+ "Dashboards where data changes need explaining",
+ "Websites showing a physical product",
+ "Brands that want a recognisable feel"
  ],
  approach: [
- { title: "Choreography", desc: "We design the timing and easing curves of your entire interface so elements enter and exit with a cohesive rhythm." },
- { title: "Functional Micro-interactions", desc: "We animate buttons, toggles, and loaders to provide immediate, satisfying feedback to user actions." },
- { title: "Scroll Storytelling", desc: "We build complex, scroll-triggered WebGL and CSS animations that unveil your product's story as the user scrolls." }
+ { title: "One rhythm", desc: "Timing and easing chosen once, so everything moves the same way." },
+ { title: "Feedback that helps", desc: "Buttons, toggles and loaders that react clearly when used." },
+ { title: "Story on scroll", desc: "Animations that reveal your product as people scroll, where it helps." }
  ]
  },
  {
  id: "product-design",
  icon: "⬣",
  title: "Product Design",
- shortDesc: "Products users choose to return to.",
- description: "End-to-end product design from concept to launch. We embed with your team to design systems that scale with your product.",
- deliverables: ["Product Strategy", "0→1 Design", "Design Systems", "Developer Handoff"],
+ shortDesc: "Products people come back to.",
+ description: "Product design from first idea to launch. We work with your team to design the product and the system behind it.",
+ deliverables: [
+ "Product strategy",
+ "Design from scratch",
+ "Design system",
+ "Handoff to developers"
+ ],
  href: "/services/product-design",
  fromUsd: 890,
- whatIsIt: "Product Design encompasses the entire lifecycle of a digital tool. It bridges business strategy, UX research, UI design, and technical feasibility to create holistic applications that solve real problems.",
+ whatIsIt: "Product design covers the whole product: what it should do, how it works, how it looks, and whether it can be built. We help you make those decisions and design something people actually use.",
  whoItsFor: [
- "Founders building a 0-to-1 MVP and needing a foundational design",
- "SaaS companies requiring a complete overhaul of their core application",
- "Teams that need an embedded design partner to work alongside engineering",
- "Products scaling rapidly and needing design systems to maintain speed"
+ "Founders building a first version",
+ "Software companies redesigning their main product",
+ "Teams who need a designer working alongside their developers",
+ "Products that need a design system to keep up with growth"
  ],
  approach: [
- { title: "Business Alignment", desc: "We start by deeply understanding your unit economics, growth loops, and technical constraints." },
- { title: "Systems Thinking", desc: "We don't just design screens; we design flexible components and states that account for edge cases and future features." },
- { title: "Continuous Delivery", desc: "We work in agile sprints, shipping design directly to engineering and iterating based on real user feedback." }
+ { title: "Start with the business", desc: "We learn your goals, your users and your limits first." },
+ { title: "Design for the edge cases", desc: "Screens and states that cover more than the happy path." },
+ { title: "Ship in steps", desc: "Design delivered in rounds and improved with real feedback." }
  ]
  },
  {
  id: "web-applications",
  icon: "◆",
  title: "Web Applications",
- shortDesc: "Full-stack apps built to last.",
- description: "Complex web applications with clean architecture. We handle everything from database design to deployment, so you can focus on growth.",
- deliverables: ["Full-Stack Dev", "API Design", "Database Architecture", "DevOps"],
+ shortDesc: "Web apps, built properly from front to back.",
+ description: "We build complete web applications: the database, the server and the screens. You get a working product you can grow.",
+ deliverables: [
+ "Full-stack development",
+ "API design",
+ "Database design",
+ "Hosting and deployment"
+ ],
  href: "/services/web-applications",
  fromUsd: 1500,
- whatIsIt: "We build secure, scalable, and highly interactive full-stack web applications. From the database schema to the server logic and the client interface, we architect systems designed to handle millions of users.",
+ whatIsIt: "A web application is software people use in the browser, like a dashboard, a booking system or a platform. We build all of it, from how the data is stored to the screens people use.",
  whoItsFor: [
- "Startups needing a robust MVP built rapidly but securely",
- "Enterprises replacing legacy internal tools with modern web apps",
- "Founders who have a design but need an elite engineering team to build it",
- "Platforms that require real-time data, websockets, or complex state management"
+ "Startups that need a first version built well",
+ "Companies replacing old internal tools",
+ "Founders with a design who need it built",
+ "Products that need live updates or complex logic"
  ],
  approach: [
- { title: "Modern Stack", desc: "We build on battle-tested modern infrastructure: Next.js, Node, PostgreSQL, and Vercel/AWS." },
- { title: "API-First Design", desc: "We architect clean, well-documented REST or GraphQL APIs that allow your product to easily scale to mobile in the future." },
- { title: "Security & Testing", desc: "We implement robust auth, CI/CD pipelines, and automated testing to ensure your application never breaks in production." }
+ { title: "Proven tools", desc: "Built on Next.js, Node and PostgreSQL, hosted on Vercel or AWS." },
+ { title: "Ready for mobile later", desc: "A clean API, so a mobile app can use the same backend." },
+ { title: "Tested and secure", desc: "Sign-in, automated tests and deploy checks set up from the start." }
  ]
  },
  {
  id: "ai-integration",
  icon: "⬟",
  title: "AI Integration",
- shortDesc: "Making AI actually useful in your product.",
- description: "We integrate AI capabilities into your product thoughtfully, from LLM-powered features to computer vision, without the hype.",
- deliverables: ["AI Feature Design", "LLM Integration", "Prompt Engineering", "AI UX Patterns"],
+ shortDesc: "AI features that actually help.",
+ description: "We add AI to your product where it saves people time, such as search, writing help or support, and design it so people can trust it.",
+ deliverables: [
+ "AI feature design",
+ "LLM integration",
+ "Prompt design",
+ "AI interface patterns"
+ ],
  href: "/services/ai-integration",
  fromUsd: 490,
- whatIsIt: "We move past the AI hype to implement genuine utility. Whether it's connecting to OpenAI, training custom models, or building intelligent agents, we design AI features that actually improve the user's workflow.",
+ whatIsIt: "AI integration means adding features powered by models like GPT or Claude to your product. We pick the places where it genuinely helps and design the experience around it.",
  whoItsFor: [
- "Products that process massive amounts of unstructured text data",
- "Platforms looking to replace complex UI forms with conversational interfaces",
- "Tools that can benefit from predictive analytics or auto-categorization",
- "Companies wanting to automate customer support or onboarding"
+ "Products that handle lots of text",
+ "Tools where long forms could become a conversation",
+ "Apps that could sort or suggest things automatically",
+ "Companies that want help with support or onboarding"
  ],
  approach: [
- { title: "Ethical UX Design", desc: "We design clear AI affordances, ensuring users always know when they are interacting with AI and how their data is used." },
- { title: "Robust Engineering", desc: "We handle rate-limiting, streaming responses, and context-window management to ensure a seamless experience." },
- { title: "Graceful Degradation", desc: "We design fallbacks and error states for when models hallucinate or APIs go down, keeping the product usable." }
+ { title: "Be clear it's AI", desc: "People always know when AI is involved and how their data is used." },
+ { title: "Built to be reliable", desc: "Streaming, limits and long conversations handled properly." },
+ { title: "Plan for mistakes", desc: "Fallbacks for when the model gets it wrong or the service is down." }
  ]
  },
  {
  id: "design-systems",
  icon: "◇",
  title: "Design Systems",
- shortDesc: "Scale your design. Maintain your sanity.",
- description: "Component libraries and design tokens that grow with your team. Consistent, accessible, and beautifully documented.",
- deliverables: ["Component Library", "Design Tokens", "Storybook Docs", "Accessibility Audit"],
+ shortDesc: "One set of parts for design and code.",
+ description: "A shared library of components, styles and documentation, so your product stays consistent as it grows.",
+ deliverables: [
+ "Component library",
+ "Design tokens",
+ "Documentation",
+ "Accessibility check"
+ ],
  href: "/services/design-systems",
  fromUsd: 590,
- whatIsIt: "A Design System is a single source of truth for your digital product. We build comprehensive libraries of reusable components, design tokens, and documentation that align your design and engineering teams.",
+ whatIsIt: "A design system is one shared set of building blocks for your product: buttons, forms, colours, type and the rules for using them, kept in step in Figma and in code.",
  whoItsFor: [
- "Large teams where designers and developers are constantly misaligned",
- "Products that look inconsistent because they were built over many years",
- "Companies preparing to scale their engineering team rapidly",
- "Organizations managing multiple products under one umbrella brand"
+ "Teams where design and code keep drifting apart",
+ "Products that look inconsistent after years of changes",
+ "Companies about to grow their team",
+ "Businesses running several products under one brand"
  ],
  approach: [
- { title: "Tokenization", desc: "We abstract colors, spacing, and typography into variables, making global sweeping changes effortless." },
- { title: "Figma to Code", desc: "We build a 1:1 match between your Figma component library and your React/Vue codebase." },
- { title: "Documentation", desc: "We write clear guidelines in Storybook or ZeroHeight on exactly how and when to use every component." }
+ { title: "Tokens", desc: "Colour, spacing and type stored as variables, so a change is made once." },
+ { title: "Figma matches code", desc: "Each Figma component has a matching coded one." },
+ { title: "Written down", desc: "Clear notes on when and how to use each part." }
  ]
  },
  {
  id: "seo-geo-aeo",
  icon: "◍",
  title: "SEO · GEO · AEO",
- shortDesc: "Found by people, ranked by machines, quoted by AI.",
- description: "Search is no longer ten blue links. We engineer technical SEO, structured data and answer-ready content into every build, so Google, assistants and generative engines surface you first.",
- deliverables: ["Technical SEO", "Schema & structured data", "Answer-ready content", "AI-search visibility"],
+ shortDesc: "Easy to find on Google and in AI answers.",
+ description: "We build search into your site from the start: fast pages, clear structure and content that answers real questions, so search engines and AI assistants can find and quote you.",
+ deliverables: [
+ "Technical SEO",
+ "Structured data",
+ "Answer-ready content",
+ "AI search visibility"
+ ],
  href: "/services/seo-geo-aeo",
  fromUsd: 190,
- whatIsIt: "SEO gets you ranked on results pages. GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) get you cited inside ChatGPT, Perplexity and Google's AI overviews. Together they decide whether a prospect finds you, or your competitor.",
+ whatIsIt: "SEO helps you show up in Google results. GEO and AEO help you get mentioned in AI answers from tools like ChatGPT and Perplexity. All three depend on a well-built site with clear, useful content.",
  whoItsFor: [
- "Brands with a beautiful site that search engines barely index",
- "Companies whose competitors keep getting quoted by AI assistants",
- "Teams publishing content that never earns a featured snippet",
- "Launches that need discoverability built in from day one, not bolted on later"
+ "Good-looking sites that barely show up in search",
+ "Businesses whose competitors get mentioned by AI tools",
+ "Teams whose articles never get picked up",
+ "Launches that want search built in from day one"
  ],
  approach: [
- { title: "Engineering-first", desc: "Core Web Vitals, crawlable architecture, semantic markup and metadata systems, the technical foundation every ranking depends on." },
- { title: "Machine-readable everything", desc: "JSON-LD structured data, FAQ schemas and entity markup so answer engines can understand, trust and quote your pages." },
- { title: "Answer-ready content", desc: "We structure copy to directly answer the questions your customers actually type, into Google or into an AI." }
+ { title: "Solid foundations", desc: "Fast pages, clean structure and the right metadata." },
+ { title: "Readable by machines", desc: "Structured data so search engines and AI tools understand your pages." },
+ { title: "Answer real questions", desc: "Copy that answers what customers actually search for." }
  ]
  },
 ];
