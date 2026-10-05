@@ -1,15 +1,24 @@
 # Greene Studios
 
-> Digital design studio. Brand identity, websites and web/mobile products, designed and built in-house. Remote, working worldwide.
+> Digital design studio. Greene Studios designs and builds brands, websites and apps, one team from the first sketch to launch day.
 
 ## Pages
-- [Home](https://greene-studios.vercel.app/): globe hero, selected work, services
-- [Work](https://greene-studios.vercel.app/work): live client sites and nine studio concept brands
-- [Services](https://greene-studios.vercel.app/services): what the studio does
-- [Pricing](https://greene-studios.vercel.app/pricing): Brand Identity, Website, Product Build, Monthly Retainer
+- [Home](https://greene-studios.vercel.app/): what the studio does, selected work, services, questions
+- [Work](https://greene-studios.vercel.app/work): client projects (AiPal, PayVault, Strike, S.A.F.E., Crypto with Shola, Greene Studios) and live sites
+- [Gallery](https://greene-studios.vercel.app/gallery): every picture from the work in one scroll
+- [Services](https://greene-studios.vercel.app/services): brand identity, web design, UI/UX, frontend development, motion, product design, web applications, AI integration, design systems, SEO
+- [Pricing](https://greene-studios.vercel.app/pricing): packages and smaller jobs
+- [Studio](https://greene-studios.vercel.app/studio): who we are and how we work
+- [Team](https://greene-studios.vercel.app/team): the people at Greene
+- [Journal](https://greene-studios.vercel.app/journal): notes on design and building products
 - [Start here](https://greene-studios.vercel.app/start): six-question quiz that recommends a starting package
-- [Contact](https://greene-studios.vercel.app/contact): project brief
+- [Contact](https://greene-studios.vercel.app/contact): send a project brief
 
-## Notes
-- Concept brands (Luminary, Vera, Arc, Bloom, Onyx, Prism, Pace, Chopbox, Kora) are self-initiated studio work, not client projects. Each has a working demo site under /demo/<name>.
-- Contact: hello@greenestudios.com
+## Packages (USD; every project is quoted after a short call)
+- Brand Identity: $480, 1 to 3 weeks
+- Website: $690, 1 to 3 weeks
+- Product Build: from $2,000, 2 to 4 months
+- Monthly Retainer: $490 a month
+
+## Contact
+- hello@greenestudios.com

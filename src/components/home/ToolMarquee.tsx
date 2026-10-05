@@ -48,7 +48,7 @@ const tile = (item: LogoItem, key: string) => (
 export default function ToolMarquee() {
   const row = { logoHeight: 84, gap: 18, fadeOut: true, fadeOutColor: "var(--brand-bg)", hoverSpeed: 8, renderItem: tile };
   return (
-    <section aria-label="Tools we use" className="space-y-5 py-12">
+    <section aria-label="Tools we use" className="space-y-5 overflow-hidden py-12">
       <LogoLoop logos={toLogos(DESIGN)} direction="left" speed={34} ariaLabel="Design tools" {...row} />
       <LogoLoop logos={toLogos(BUILD)} direction="right" speed={24} ariaLabel="Build tools" {...row} />
     </section>

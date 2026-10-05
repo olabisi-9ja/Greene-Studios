@@ -1,44 +1,25 @@
 import Link from "next/link";
-import BrandLottie from "@/components/brand/BrandLottie";
+import PageIntro from "@/components/ui/PageIntro";
 
+/** 404: the lost-page animation, a plain line, and two ways back. */
 export default function NotFound() {
- return (
- <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--brand-bg)] px-6 text-center text-[var(--brand-text)]">
- {/* Big 404 */}
- <div className="font-display select-none text-[22vw] font-black uppercase leading-none tracking-tight text-outline">
- 404
- </div>
-
- <div className="pointer-events-none w-[min(260px,70vw)]">
- <BrandLottie name="not-found" className="aspect-square w-full" />
- </div>
- <div className="relative z-10 -mt-6 md:-mt-10">
- <div className="mb-6 flex items-center justify-center gap-3">
- <span className="h-px w-10 bg-[var(--brand-accent)]" />
- <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[var(--brand-accent)]">
- Page not found
- </span>
- <span className="h-px w-10 bg-[var(--brand-accent)]" />
- </div>
- <h1 className="font-display text-4xl font-black uppercase leading-none tracking-tight md:text-5xl">
- This page doesn&apos;t exist.
- </h1>
- <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[var(--brand-text-secondary)]">
- But our portfolio does. Head back to explore work that actually exists.
- </p>
- <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
- <Link href="/" data-cursor="HOME" className="btn-primary">
- Back to home <span aria-hidden="true">→</span>
- </Link>
- <Link href="/work" data-cursor="VIEW" className="btn-outline">
- View work
- </Link>
- </div>
- </div>
-
- <p className="absolute bottom-8 text-xs font-medium text-[var(--brand-text-secondary)]/60">
- psst, try the Konami Code ↑↑↓↓←→←→BA
- </p>
- </div>
- );
+  return (
+    <div className="pb-32">
+      <PageIntro lottie="not-found" label="Page not found" title="This page isn't here." lead="It may have moved, or the link may be wrong. These will get you back on track." />
+      <div className="flex flex-wrap justify-center gap-3 px-5">
+        <Link
+          href="/"
+          className="inline-flex h-12 items-center rounded-[6px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)] transition-opacity hover:opacity-90"
+        >
+          Back to home
+        </Link>
+        <Link
+          href="/work"
+          className="inline-flex h-12 items-center rounded-[6px] border border-[var(--brand-text)] px-6 font-medium hover:bg-[var(--brand-text)] hover:text-[var(--brand-bg)]"
+        >
+          See the work
+        </Link>
+      </div>
+    </div>
+  );
 }

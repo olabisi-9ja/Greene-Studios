@@ -49,64 +49,8 @@ export const IconBone = (p: P) => (
   </svg>
 );
 
-export const IconHome = (p: P) => (
-  <svg {...base(p)}>
-    <path d="M3.5 10.5 12 3.5l8.5 7V20.5h-6v-6h-5v6h-6Z" />
-  </svg>
-);
-
-export const IconWork = (p: P) => (
-  <svg {...base(p)}>
-    <path d="M3.5 3.5h7v7h-7ZM13.5 3.5h7v7h-7ZM3.5 13.5h7v7h-7ZM13.5 13.5h7v7h-7Z" />
-  </svg>
-);
-
-/** The fountain-pen nib the runner carries. */
-export const IconNib = (p: P) => (
-  <svg {...base(p)}>
-    <path d="M12 21.5 6 12l2.5-8.5h7L18 12Z" />
-    <path d="M12 21.5V13" />
-    <circle cx="12" cy="11" r="1.6" />
-  </svg>
-);
-
-export const IconMail = (p: P) => (
-  <svg {...base(p)}>
-    <path d="M3 5.5h18v13H3Z" />
-    <path d="m3.5 6 8.5 7 8.5-7" />
-  </svg>
-);
-
 export const IconArrow = (p: P) => (
   <svg {...base(p)}>
     <path d="M7 17 17 7M8.5 7H17v8.5" />
-  </svg>
-);
-
-/* Filled versions, for the dock's current page. */
-const solid = (props: P) => ({ ...base(props), fill: "currentColor", stroke: "none" });
-
-export const IconHomeFill = (p: P) => (
-  <svg {...solid(p)}>
-    <path d="M12 2.6 21.5 10.4V21.5h-7v-6.5h-5v6.5h-7V10.4Z" />
-  </svg>
-);
-
-export const IconWorkFill = (p: P) => (
-  <svg {...solid(p)}>
-    <path d="M2.5 2.5h8v8h-8ZM13.5 2.5h8v8h-8ZM2.5 13.5h8v8h-8ZM13.5 13.5h8v8h-8Z" />
-  </svg>
-);
-
-export const IconNibFill = (p: P) => (
-  <svg {...solid(p)} fillRule="evenodd">
-    <path d="M12 22.5 5.2 12 8 2.5h8L18.8 12Zm-.85-1.9V13.4a2.2 2.2 0 1 1 1.7 0v7.2Z" />
-  </svg>
-);
-
-export const IconMailFill = (p: P) => (
-  <svg {...solid(p)}>
-    <path d="M2.5 5h19v1.2L12 13.6 2.5 6.2Z" />
-    <path d="M2.5 8.7 12 16.1l9.5-7.4V19h-19Z" />
   </svg>
 );

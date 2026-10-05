@@ -4,6 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { JOURNAL_ARTICLES } from "@/lib/data";
 
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
+
 type Props = { params: Promise<{ slug: string }> };
 
 const find = (slug: string) => JOURNAL_ARTICLES.find((a) => a.slug === slug);
@@ -28,6 +30,19 @@ export default async function JournalArticlePage({ params }: Props) {
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Journal", item: `${SITE}/journal` },
+              { "@type": "ListItem", position: 2, name: article.title, item: `${SITE}/journal/${article.slug}` },
+            ],
+          }),
+        }}
+      />
       <header className="mx-auto flex max-w-4xl flex-col items-center px-5 pb-12 pt-32 text-center sm:px-8 sm:pt-40">
         <Link href="/journal" className="text-sm text-[var(--brand-text-secondary)] hover:text-[var(--brand-text)]">
           <span aria-hidden="true">←</span> Journal

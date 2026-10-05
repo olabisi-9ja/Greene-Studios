@@ -7,7 +7,6 @@ import SiteTour from "@/components/chrome/SiteTour";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import NoiseTexture from "@/components/canvas/NoiseTexture";
-import FocusMode from "@/components/FocusMode";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import PageTransition from "@/components/animations/PageTransition";
 
@@ -29,7 +28,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
             logo: "/brand/gs-chip.png",
             email: "hello@greenestudios.com",
             description:
-              "Digital design studio. Brands, websites, and digital products that make people stop scrolling.",
+              "Greene Studios is a digital design studio. We design and build brands, websites and apps, one team from the first sketch to launch day.",
             foundingDate: "2022",
             knowsAbout: ["Web Design", "UI/UX Design", "Branding", "Frontend Development", "Motion Design"],
           }),
@@ -52,7 +51,6 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
       </SmoothScroll>
       <DockNav />
       <SiteTour />
-      <FocusMode />
       </CurrencyProvider>
     </AtmosphereProvider>
   );

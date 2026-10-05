@@ -13,7 +13,7 @@ export const metadata: Metadata = {
  template: "%s | Greene Studios",
  },
  description:
- "Greene Studios is a digital design studio. We design & build brands, websites, and digital products that make people stop scrolling.",
+ "Greene Studios is a digital design studio. We design and build brands, websites and apps, one team from the first sketch to launch day.",
  keywords: [
  "web design agency",
  "UI/UX design",
@@ -27,17 +27,16 @@ export const metadata: Metadata = {
  openGraph: {
  type: "website",
  locale: "en_US",
- url: "https://greenestudios.com",
+ url: "/",
  siteName: "Greene Studios",
  title: "Greene Studios · Digital Design Studio",
  description:
- "Digital design studio. Brands, websites, and products that make people stop scrolling.",
+ "Greene Studios is a digital design studio. We design and build brands, websites and apps, one team from the first sketch to launch day.",
  },
  twitter: {
  card: "summary_large_image",
  title: "Greene Studios · Digital Design Studio",
- description: "Brands, websites, and products that make people stop scrolling.",
- creator: "@greenestudios",
+ description: "Greene Studios is a digital design studio. We design and build brands, websites and apps, one team from the first sketch to launch day.",
  },
  robots: {
  index: true,

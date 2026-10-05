@@ -12,19 +12,22 @@ export default function Work({
   title = "Selected work",
   all = true,
   lottie,
+  heading: Heading = "h2",
 }: {
   title?: string;
   all?: boolean;
   /** a /public/lottie animation shown beside the title */
   lottie?: string;
+  /** h1 when this is the page's main title (the /work page) */
+  heading?: "h1" | "h2";
 }) {
   return (
     <section id="work" className="scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2 className="text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
+          <Heading className="text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
             {title}
-          </h2>
+          </Heading>
           {lottie && (
             <div className="pointer-events-none -mb-4 w-[min(170px,38vw)] shrink-0">
               <BrandLottie name={lottie} className="aspect-[2/3] w-full" />

@@ -74,9 +74,6 @@ interface AtmosphereContextProps {
   /** Cycles light → dark → studio → light, leaving AUTO behind. */
   toggle: () => void;
   modeLabel: string;
-  /** FOCUS presentation state */
-  focus: boolean;
-  setFocus: (on: boolean) => void;
 }
 
 const AtmosphereContext = createContext<AtmosphereContextProps | undefined>(undefined);
@@ -84,7 +81,6 @@ const AtmosphereContext = createContext<AtmosphereContextProps | undefined>(unde
 export function AtmosphereProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<ThemeMode>("auto");
   const [systemDark, setSystemDark] = useState(false);
-  const [focus, setFocusState] = useState(false);
 
   // Adopt persisted preference synchronously (before paint).
   useLayoutEffect(() => {
@@ -115,11 +111,6 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
     root.setAttribute("data-mode", effectiveMode);
   }, [effectiveMode]);
 
-  // FOCUS locks scroll.
-  useLayoutEffect(() => {
-    document.body.classList.toggle("focus-active", focus);
-    return () => document.body.classList.remove("focus-active");
-  }, [focus]);
 
   const setMode = useCallback((next: ThemeMode) => {
     // The current theme peels away from the top-right corner like a page,
@@ -148,8 +139,6 @@ export function AtmosphereProvider({ children }: { children: ReactNode }) {
         effectiveMode,
         toggle,
         modeLabel: MODE_LABELS[mode],
-        focus,
-        setFocus: setFocusState,
       }}
     >
       {children}

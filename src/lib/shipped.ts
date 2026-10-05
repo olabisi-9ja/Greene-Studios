@@ -107,7 +107,3 @@ export const SHIPPED: ShippedProject[] = [
     platform: "Cloudflare Workers",
   },
 ];
-
-export const SHIPPED_BY_SLUG: Record<string, ShippedProject> = Object.fromEntries(
-  SHIPPED.map((p) => [p.slug, p])
-);

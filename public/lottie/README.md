@@ -1,26 +1,25 @@
 # Lottie animations
 
-Drop **Lottie JSON** files here (on LottieFiles: Download → "Lottie JSON").
-Every file is recoloured into the Greene palette automatically when it loads
-(`src/lib/brand-lottie.ts`): colours become Greene greens, bright warm accents
-become brand yellow, greys stay neutral, skin tones are left alone.
+Lottie JSON files, loaded by name (`<BrandLottie name="hero-brands" />`
+loads `hero-brands.json`). Each file is recoloured to the current theme when
+it loads (`src/lib/brand-lottie.ts`): black and white become the theme's ink
+and paper, every other colour becomes a shade of the theme's accent, and skin
+tones are left alone. Animations load only when near the screen and pause
+when off it.
 
-A slot that has no file shows nothing (the hero shows the drawn desk scenes),
-so add them one at a time.
+| File | Where it shows |
+|---|---|
+| `hero-brands/websites/apps/products.json` | Home hero, one per word (also the service pages and the price card) |
+| `next.json` | "Got something to build?" on the home and inner pages |
+| `questions.json` | Home, Questions |
+| `footer.json` | Footer |
+| `work.json` | Work page title |
+| `pricing.json`, `contact.json`, `start.json` | Those pages' openings |
+| `studio.json`, `services.json` | Studio page |
+| `about.json` | Team page |
+| `services-intro.json` | Services page |
+| `journal.json` | Journal |
+| `not-found.json` | 404 |
 
-| File name | Where it shows | What to look for |
-|---|---|---|
-| `hero-brands.json` | Home hero, word "Brands" | someone designing a logo / brand (e.g. "Designer" by Mahendra Bhunwal: lottiefiles.com/free-animation/designer-X1D1PZvKRt) |
-| `hero-websites.json` | Home hero, "Websites" | building a website (e.g. lottiefiles.com/free-animation/website-design-animation-rUKN4FDofV) |
-| `hero-apps.json` | Home hero, "Apps" | someone using / building a mobile app |
-| `hero-products.json` | Home hero, "Products" | a product shipping (e.g. "Order confirmed" by Mahendra Bhunwal: lottiefiles.com/free-animation/order-confirmed-Edkng7cpMO) |
-| `pricing.json` | Pricing page header | playful: money, a piggy bank, a happy client |
-| `contact.json` | Contact page header | an envelope / message being sent (e.g. "Email" by Mahendra Bhunwal: lottiefiles.com/free-animation/email-puPVmWxfLt) |
-| `start.json` | Start-here quiz | someone thinking, or a checklist |
-| `questions.json` | Home, Questions section | playful: a thinking character, a question mark |
-| `footer.json` | Footer, above the globe | playful: a cat (Abdul Latif's cats), a wave goodbye |
-| `not-found.json` | 404 page | playful: lost, confused, a cat with a ball of wool |
-
-Tips: pick animations from **one artist** for the four hero words so the
-style matches. Check each one's licence on its page ("Lottie Simple License"
-is free for commercial use; skip any that say "contact me for commercial use").
+Adding one: download "Lottie JSON" from LottieFiles (check the licence allows
+commercial use), remove any background layer, and keep the file small.

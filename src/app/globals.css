@@ -1,9 +1,6 @@
 @import "@fontsource-variable/montserrat/wght-italic.css";
 @import "@fontsource-variable/montserrat/wght.css";
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -428,169 +425,22 @@
 
 @layer utilities {
   /* ─── Typography helpers ─────────────────────────────────────────── */
-  .font-display {
-    font-family: var(--font-display);
-  }
-
-  .font-serif-i {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
 
   /* Outlined display text */
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--brand-text);
-  }
 
   /* ─── Atmosphere ─────────────────────────────────────────────────── */
-  .bg-grid-soft {
-    background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--brand-text) 5%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--brand-text) 5%, transparent) 1px, transparent 1px);
-    background-size: 72px 72px;
-  }
-
-  .glass-pill {
-    background: color-mix(in srgb, var(--brand-surface) 94%, transparent);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid color-mix(in srgb, var(--brand-border) 85%, transparent);
-  }
 
   /* ─── Buttons ────────────────────────────────────────────────────── */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    border-radius: 9999px; /* all buttons rounded */
-    background: var(--brand-text);
-    color: var(--brand-bg);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.72rem;
-    padding: 1rem 1.75rem;
-    transition: background-color 0.3s var(--ease-out-quart), color 0.3s var(--ease-out-quart), transform 0.3s var(--ease-out-quart), box-shadow 0.3s var(--ease-out-quart);
-  }
-  .btn-primary:hover {
-    background: var(--brand-accent);
-    color: var(--brand-on-accent);
-    box-shadow: 0 8px 30px color-mix(in srgb, var(--brand-accent) 35%, transparent);
-  }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    border-radius: 9999px; /* all buttons rounded */
-    border: 1.5px solid var(--brand-border);
-    color: var(--brand-text);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.72rem;
-    padding: 1rem 1.75rem;
-    transition: border-color 0.3s var(--ease-out-quart), background-color 0.3s var(--ease-out-quart), color 0.3s var(--ease-out-quart);
-  }
-  .btn-outline:hover {
-    border-color: var(--brand-text);
-    background: color-mix(in srgb, var(--brand-text) 6%, transparent);
-  }
 
   /* ─── Nav link underline sweep ───────────────────────────────────── */
-  .nav-link {
-    position: relative;
-    padding: 0.35rem 0;
-  }
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 1.5px;
-    width: 100%;
-    background: var(--brand-accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.35s var(--ease-out-expo);
-  }
-  .nav-link:hover::after,
-  .nav-link.is-active::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
 
   /* ─── Rotating badge (circular text) ─────────────────────────────── */
-  @keyframes spin-slow {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .animate-spin-slow {
-    animation: spin-slow 14s linear infinite;
-  }
 
   /* ─── Hero line reveal ──────────────────────────────────────────── */
-  .hero-line-inner {
-    display: block;
-    will-change: transform, opacity;
-  }
 
   /* Scroll cue tick */
-  @keyframes scroll-cue {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(400%);
-    }
-  }
-  .animate-scroll-cue {
-    animation: scroll-cue 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  }
 
   /* ─── Life & motion helpers ─────────────────────────────────────── */
-  @keyframes float-y {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  .animate-float {
-    animation: float-y 5s ease-in-out infinite;
-  }
-  .animate-float-slow {
-    animation: float-y 7s ease-in-out infinite;
-  }
-  .animate-float-delay {
-    animation: float-y 6s ease-in-out 1.2s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-  .skeleton-bar {
-    background: linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--brand-text) 8%, transparent) 25%,
-      color-mix(in srgb, var(--brand-text) 18%, transparent) 50%,
-      color-mix(in srgb, var(--brand-text) 8%, transparent) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.8s linear infinite;
-  }
 
   @keyframes light-sweep {
     0% {
@@ -621,137 +471,28 @@
     pointer-events: none;
   }
 
-  @keyframes draw-dash {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-  .draw-path {
-    stroke-dasharray: 360;
-    stroke-dashoffset: 360;
-    animation: draw-dash 1.6s ease-out forwards;
-  }
-
-  @keyframes pop-in {
-    0% {
-      opacity: 0;
-      transform: scale(0.6) translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-  .animate-pop {
-    animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  }
-
     /* ─── Marquee strip ──────────────────────────────────────────────── */
-  .marquee-strip,
-  .marquee-strip-hero {
-    background: var(--brand-accent);
-    color: var(--brand-on-accent);
-  }
-  .marquee-strip-plain {
-    border-top: 1px solid var(--brand-border);
-    border-bottom: 1px solid var(--brand-border);
-    background: var(--brand-surface);
-  }
 
   /* ─── Work rows ──────────────────────────────────────────────────── */
-  .work-sweep {
-    transform-origin: left;
-    transition: transform 0.55s var(--ease-out-expo);
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
 
   /* ─── Interactive icons ──────────────────────────────────────────── */
-  .icon-interactive {
-    transition: transform 0.2s ease-out, color 0.2s ease-out;
-    cursor: pointer;
-  }
-  .icon-interactive:hover {
-    transform: scale(1.15) rotate(5deg);
-    color: var(--brand-accent);
-  }
-  .icon-interactive:active {
-    transform: scale(0.95);
-  }
 }
 
 /* ═══ Studio mode: vibrant colour system ═════════════════════════════ */
 
 /* Solid colour strips */
-.mode-studio .marquee-strip,
-.mode-studio .marquee-strip-hero {
-  background: var(--studio-punch, #190bb6);
-  color: #e5cf4f;
-}
-.mode-raw .marquee-strip,
-.mode-raw .marquee-strip-hero {
-  background: #c2541e;
-  color: #f4f0e8;
-}
-.mode-studio .marquee-strip-plain {
-  background: color-mix(in srgb, var(--brand-surface) 70%, transparent);
-}
 
 /* Solid hero headline colour */
-.mode-studio .hero-headline {
-  color: var(--color-abstract-green);
-}
-.mode-studio .hero-headline .font-serif-i {
-  color: var(--color-abstract-lemon);
-}
 
 /* Buttons */
-.mode-studio .btn-primary {
-  background: var(--brand-accent);
-  color: var(--brand-bg);
-}
-.mode-studio .btn-primary:hover {
-  box-shadow: 0 10px 34px rgba(229, 207, 79, 0.35);
-  transform: translateY(-1px);
-}
-.mode-studio .btn-outline {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--brand-text);
-}
-.mode-studio .btn-outline:hover {
-  background: rgba(229, 207, 79, 0.12);
-  border-color: var(--brand-accent);
-}
 
 /* Work row hover sweep */
-.mode-studio .work-sweep {
-  background: var(--color-abstract-green);
-}
 
 /* Rotating badge center disc */
-.mode-studio .badge-center {
-  background: var(--color-abstract-lemon);
-  border: none;
-  box-shadow: 0 0 24px rgba(217, 244, 44, 0.45);
-}
 
 /* Page header bottom strip */
-.mode-studio .page-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 4px;
-  background: var(--color-abstract-green);
-}
 
 /* Scroll progress */
-.mode-studio .scroll-progress {
-  background: var(--brand-accent);
-}
 
 /* Selection */
 .mode-studio ::selection {
@@ -917,14 +658,6 @@
 }
 
 /* ═══ FOCUS MODE (presentation) ════════════════════════════════════════ */
-.focus-active {
-  overflow: hidden;
-}
-.focus-active .focus-hide {
-  visibility: hidden;
-  opacity: 0;
-}
-
 
 /* ═══ REVEAL (CSS-only, driven by useSectionAnimation/useStaggerAnimation) ══ */
 .reveal {
@@ -935,40 +668,10 @@
     transform 0.5s var(--ease-out-quart);
   will-change: opacity, transform;
 }
-.reveal.is-revealed,
-.is-revealed {
-  opacity: 1;
-  transform: none;
-}
 
 /* ═══ MARQUEE (CSS-only; replaces react-fast-marquee) ═══════════════════ */
-@keyframes marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-.marquee-track {
-  animation: marquee-scroll var(--marquee-duration, 30s) linear infinite;
-  animation-direction: var(--marquee-direction, normal);
-  will-change: transform;
-}
-.marquee-pausable:hover {
-  animation-play-state: paused;
-}
 
 /* ─── Scroll-cue bar (StudioHero) ─────────────────────────────────────── */
-@keyframes scroll-cue {
-  0%   { transform: scaleY(0); transform-origin: top;    opacity: 1; }
-  55%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
-  56%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
-  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
-}
-.animate-scroll-cue {
-  animation: scroll-cue 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
-}
 
 /* ═══ REDUCED MOTION ═══════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
@@ -988,11 +691,7 @@
     opacity: 1;
     transform: none;
   }
-  .marquee-track {
-    animation: none;
-  }
 }
-
 
 /* ═══ PAGE TRANSITION ══════════════════════════════════════════════════ */
 @keyframes page-fade-in {
@@ -1012,30 +711,10 @@
   }
 }
 
-
 /* ═══ HERO STATEMENT ═══════════════════════════════════════════════════
    The hero H1 used to start at opacity 0 and wait for framer-motion to
    hydrate, which made it the LCP element at ~1.48s on a site whose whole
    pitch is speed. Same choreography, run from first paint by CSS. */
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.hero-rise {
-  animation: hero-rise 0.6s var(--ease-out-quart) both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-rise {
-    animation: none;
-  }
-}
-
 
 /* ═══ CARD ═════════════════════════════════════════════════════════════
    One card system, used by src/components/ui/Card.tsx. Sixteen files used
@@ -1070,29 +749,12 @@
   .card { padding: var(--card-pad-lg); }
 }
 
-.card-flush { padding: 0; gap: 0; overflow: hidden; }
-.card-alt { background: var(--brand-surface-secondary); }
-.card-lg { border-radius: var(--card-radius-lg); }
-
-.card-interactive:hover,
-.card-interactive:focus-visible {
-  transform: translateY(-3px);
-  border-color: var(--brand-text);
-}
-
 /* The featured tier. One accent border, no glow — the accent shadow the
    pricing table used read as a notification, not as emphasis. */
-.card-featured {
-  border-color: var(--brand-accent);
-  box-shadow: inset 0 0 0 1px var(--brand-accent);
-}
 
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; }
-  .card-interactive:hover,
-  .card-interactive:focus-visible { transform: none; }
 }
-
 
 /* ═══ FOOTER WORDMARK ══════════════════════════════════════════════════
    The giant GREENE STUDIOS® letters.
@@ -1129,7 +791,6 @@
   }
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    ALIA-DIRECTION SURFACE
    A quieter language laid over the existing tokens: one hairline accent
@@ -1163,66 +824,14 @@
    Sentence case, heavy, tightly tracked, set almost solid. The uppercase
    black setting is still available as `.headline-caps` for the places
    that genuinely want to shout. */
-.headline {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-  text-transform: none;
-}
 
 /* ─── Section marker ─────────────────────────────────────────────────
    A two-digit mono chip. Replaces the ✦ eyebrow: it numbers the page
    instead of decorating it. */
-.chip-mono {
-  display: inline-block;
-  padding: 0.3rem 0.55rem;
-  border-radius: 9999px; /* all buttons rounded */
-  background: color-mix(in srgb, var(--brand-accent) 20%, var(--brand-bg));
-  color: var(--brand-text);
-  font-family: var(--font-mono, ui-monospace, "SFMono-Regular", Menlo, monospace);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1;
-}
 
 /* ─── Rounded buttons ─────────────────────────────────────────────────
    Alia's buttons are rectangles, not pills. The pill utilities stay put
    for the rest of the site; these are the ones the homepage uses. */
-.btn-block {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  padding: 0.95rem 1.6rem;
-  border-radius: 9999px; /* all buttons rounded */
-  border: 1px solid transparent;
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  transition:
-    background-color 0.35s var(--ease-out-quart),
-    border-color 0.35s var(--ease-out-quart),
-    color 0.35s var(--ease-out-quart);
-}
-.btn-block-solid {
-  background: var(--brand-accent);
-  color: var(--brand-on-accent);
-}
-.btn-block-solid:hover {
-  background: color-mix(in srgb, var(--brand-accent) 84%, var(--brand-text));
-}
-.btn-block-ghost {
-  border-color: color-mix(in srgb, var(--brand-text) 22%, transparent);
-  color: var(--brand-text);
-}
-.btn-block-ghost:hover {
-  background: var(--sand);
-  border-color: color-mix(in srgb, var(--brand-text) 32%, transparent);
-}
 
 /* ─── Rolling label ──────────────────────────────────────────────────
    Each character carries a second copy of itself directly below the
@@ -1281,57 +890,13 @@
 
 /* ─── Sand band ──────────────────────────────────────────────────────
    The second surface. One step off the paper, no border needed. */
-.bg-sand {
-  background-color: var(--sand);
-}
 
 /* ─── Effects: Ken Burns pan & zoom ──────────────────────────────────
    Slow cinematic drift for framed images (KenBurns, studio portrait). */
-@keyframes ken-burns {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  100% {
-    transform: scale(1.25) translate(-3%, -2%);
-  }
-}
-.ken-burns-img {
-  animation: ken-burns 16s ease-in-out infinite alternate;
-}
 
 /* ─── Effects: click spark ───────────────────────────────────────────
    Burst particles for the global ClickSpark layer. Colour follows the
    theme accent so it reads in light, dark and studio modes. */
-.click-spark {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 9999px;
-  background: var(--brand-accent);
-  pointer-events: none;
-  animation: click-spark 0.6s ease-out forwards;
-}
-@keyframes click-spark {
-  from {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ken-burns-img {
-    animation: none;
-  }
-  .click-spark {
-    animation: none;
-    display: none;
-  }
-}
-
 
 /* ─── Greene wordmark: Montserrat, as on the brand sheet ───────────── */
 .wordmark {
@@ -1390,44 +955,9 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
 }
 .fx-roll-in { animation: fx-roll-in 0.55s cubic-bezier(0.19, 1, 0.22, 1) both; }
 
-@keyframes fx-shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
-.fx-shimmer {
-  background: linear-gradient(100deg, currentColor 40%, color-mix(in srgb, currentColor 35%, var(--brand-bg)) 50%, currentColor 60%);
-  background-size: 250% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fx-shimmer 3.2s linear infinite;
-}
-
-@keyframes fx-gradient { to { background-position: 200% 0; } }
-.fx-gradient {
-  background: linear-gradient(90deg, var(--logo), #2e7d74, #d8a22a, var(--logo));
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fx-gradient 6s linear infinite;
-}
-
-@keyframes fx-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.12em); } }
-.fx-wave { animation: fx-wave 1.8s ease-in-out infinite; }
-
-@keyframes fx-caret { 50% { opacity: 0; } }
-.fx-caret { margin-left: 0.05em; animation: fx-caret 1s steps(1) infinite; }
-
 @media (prefers-reduced-motion: reduce) {
-  .fx-roll-in, .fx-shimmer, .fx-gradient, .fx-wave, .fx-caret { animation: none; }
+  .fx-roll-in { animation: none; }
 }
-
-/* the mascot's nap */
-@keyframes mascot-z {
-  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translate(8px, -14px) scale(1.1); opacity: 0; }
-}
-.mascot-z { animation: mascot-z 1.8s ease-out infinite; }
-@media (prefers-reduced-motion: reduce) { .mascot-z { animation: none; } }
 
 /* Theme switch: a page peel from the top-right corner (lib/theme-peel).
    The old page is clipped to what's still flat and the flap, the back of the
@@ -1463,4 +993,29 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
 }
 ::view-transition-new(theme-flap) {
   animation: none;
+}
+
+/* Print: the content in black on white, without the floating chrome */
+@media print {
+  header.fixed,
+  nav[aria-label="Primary"],
+  [data-loader],
+  .site-tour,
+  .page-peel,
+  .brand-lottie,
+  section[aria-label="Tools we use"] {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+  img {
+    break-inside: avoid;
+  }
 }

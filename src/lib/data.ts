@@ -12,16 +12,6 @@ export const BRAND = {
  founded: "2022",
 };
 
-// ─── Navigation ───────────────────────────────────────────────────────────────
-
-export const NAV_LINKS = [
- { label: "Work", href: "/work" },
- { label: "Services", href: "/services" },
- { label: "Studio", href: "/studio" },
- { label: "Team", href: "/team" },
- { label: "Contact", href: "/contact" },
-];
-
 
 // ─── Services ─────────────────────────────────────────────────────────────────
 
@@ -298,83 +288,6 @@ export const SERVICES = [
  },
 ];
 
-// ─── Process Steps ────────────────────────────────────────────────────────────
-
-export const PROCESS_STEPS = [
- {
- number: "",
- title: "Discovery",
- description: "We start by listening. Deep dive into your goals, audience, competitive landscape, and what success truly looks like for your project.",
- duration: "1–2 weeks",
- },
- {
- number: "",
- title: "Research",
- description: "User interviews, competitor audits, market analysis. We build the strategic foundation that every design decision rests on.",
- duration: "1–2 weeks",
- },
- {
- number: "",
- title: "Strategy",
- description: "Architecture, content strategy, and creative direction. We align on the north star before a single pixel is placed.",
- duration: "1 week",
- },
- {
- number: "",
- title: "Wireframes",
- description: "Low-fidelity structures that prioritize flow and hierarchy. We test assumptions early before investing in high-fidelity design.",
- duration: "1–2 weeks",
- },
- {
- number: "",
- title: "Design",
- description: "High-fidelity screens brought to life with our signature attention to detail. Every state, every edge case, every delight.",
- duration: "2–4 weeks",
- },
- {
- number: "",
- title: "Prototype",
- description: "Interactive prototypes for stakeholder alignment and user testing. You'll feel the product before a line of code is written.",
- duration: "1 week",
- },
- {
- number: "",
- title: "Development",
- description: "Clean, performant code that brings designs to life with precision. We use modern frameworks and obsess over performance.",
- duration: "3–8 weeks",
- },
- {
- number: "",
- title: "Testing",
- description: "Cross-device, cross-browser, accessibility audits, performance benchmarks. We ship nothing we wouldn't be proud to sign.",
- duration: "1–2 weeks",
- },
- {
- number: "",
- title: "Launch",
- description: "Coordinated go-live with monitoring, rollback plans, and your team trained on every part of the system.",
- duration: "1 week",
- },
- {
- number: "",
- title: "Support",
- description: "We don't disappear after launch. Ongoing support, iteration, and growth, a true long-term partnership.",
- duration: "Ongoing",
- },
-];
-
-// ─── Process · condensed phases (homepage) ────────────────────────────────────
-
-export const PROCESS_PHASES = [
- { number: "", title: "Find the signal", stages: "Strategy · Research", description: "We align on the problem, the audience and the opportunity before a single pixel is placed.", duration: "1–2 weeks" },
- { number: "", title: "Build the system", stages: "Architecture · Design", description: "We turn the north star into a flexible identity, interface and experience your team can actually use.", duration: "2–4 weeks" },
- { number: "", title: "Make it move", stages: "Development · Motion", description: "Design and engineering work together to make the system feel alive, fast and considered across every screen.", duration: "3–8 weeks" },
- { number: "", title: "Put it in the world", stages: "Launch · Iteration", description: "We ship carefully, measure what matters and stay close enough to improve what comes next.", duration: "Ongoing" },
-];
-
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-
-
 
 // ─── Journal Articles ─────────────────────────────────────────────────────────
 
@@ -480,279 +393,31 @@ export const JOURNAL_ARTICLES = [
 
 export const FAQS = [
  {
- question: "How long does a typical project take?",
- answer: "Most projects run 4–16 weeks depending on scope. A focused website can be completed in 4 weeks. A full brand + web + app ecosystem typically takes 12–16 weeks. We'll give you a detailed timeline in your discovery call.",
+ question: "How long does a project take?",
+ answer: "A brand identity or a website usually takes 1 to 3 weeks. A web or mobile app takes 2 to 4 months. You get a timeline with your quote, before anything starts.",
  },
  {
- question: "Do you work with startups or only established companies?",
- answer: "Both. We have packages designed for founders at day one, and we work with series B+ companies who need a complete digital overhaul. What matters is ambition and clarity of vision.",
+ question: "Do you work with startups?",
+ answer: "Yes. We work with founders who are just starting and with established businesses. There's a package for each stage, and smaller one-off jobs too.",
  },
  {
- question: "What does your design process look like?",
- answer: "Discovery, Research, Strategy, Wireframes, Design, Prototype, Development, Testing, Launch, Support. Every phase has clear deliverables, reviews, and your input built in.",
+ question: "What does working with you look like?",
+ answer: "A short call first, then a quote and timeline. Once you're happy, we design, share the work with you for feedback, build, test and launch. You see progress at every step.",
  },
  {
- question: "Can you work with our existing development team?",
- answer: "Absolutely. We often act as a design partner for technical teams, delivering pixel-perfect Figma files, design systems, and detailed component specs that make developer handoff seamless.",
+ question: "Can you work with our own developers?",
+ answer: "Yes. We can design and hand over the files and a design system to your team, or design and build alongside them.",
  },
  {
- question: "What's included after launch?",
- answer: "Every tier includes post-launch support, 14 days on MVP, 30 days on Growth, 12 months on Enterprise. We watch performance, fix what breaks, and iterate on what real usage shows.",
+ question: "What happens after launch?",
+ answer: "App builds include 30 days of support after launch. For ongoing changes and new features there's a monthly retainer.",
  },
  {
  question: "Do you sign NDAs and contracts?",
- answer: "Yes, always. Every project starts with a detailed contract covering scope, IP, payment terms, and confidentiality. We take these seriously because your work is valuable.",
- },
-];
-
-// ─── Metrics ──────────────────────────────────────────────────────────────────
-
-
-// ─── Industries ───────────────────────────────────────────────────────────────
-
-export const INDUSTRIES = [
- {
- slug: "saas",
- name: "SaaS",
- icon: "⬡",
- tagline: "Products that sell themselves in the first session.",
- description: "We design SaaS products and marketing sites where the value is obvious in sixty seconds. Activation, retention and perceived quality, treated as design problems.",
- stat: { value: "50+", label: "Chart types in the Luminary system" },
- challenges: [
- { title: "Leaky onboarding", desc: "Signups arrive, tour three screens, and never come back. The product is powerful but the first-run experience hides it." },
- { title: "Feature bloat", desc: "Every release added a button. Navigation sprawls, settings multiply, and the core job-to-be-done gets buried alive." },
- { title: "Looks early-stage", desc: "The engineering is enterprise-grade, but the interface still looks like the MVP. Procurement teams notice, and it slows deals down." },
- ],
- moves: [
- { title: "Activation-first UX", desc: "We redesign the first session around the aha-moment. Progressive disclosure, opinionated defaults, empty states that teach." },
- { title: "Systems that scale", desc: "A tokenized design system covering every chart, form and state, so the product ships faster without drifting apart visually." },
- { title: "A site that closes", desc: "A marketing site engineered around demo conversion, with the product doing the talking instead of stock illustrations." },
- ],
- services: ["/services/ui-ux-design", "/services/product-design", "/services/web-design", "/services/design-systems"],
- work: ["luminary"],
+ answer: "Yes. Every project starts with a contract covering scope, ownership, payment and confidentiality, and we're happy to sign your NDA.",
  },
  {
- slug: "ecommerce",
- name: "E-commerce",
- icon: "◈",
- tagline: "Storefronts where speed is the brand.",
- description: "We build headless storefronts that load in under a second, read like an editorial magazine, and check out without friction. Performance is a design feature, not a ticket.",
- stat: { value: "0", label: "Layout shift on Arc Commerce" },
- challenges: [
- { title: "Slow and template-made", desc: "Four-second loads and a theme thousands of other stores share. Ad spend keeps rising while conversion quietly falls." },
- { title: "Content can't sell", desc: "Lookbooks, stories and campaigns live on a blog nobody visits, completely disconnected from the products they feature." },
- { title: "Checkout friction", desc: "Six steps, three accounts offers, surprise shipping costs. Carts get abandoned at the exact moment of intent." },
- ],
- moves: [
- { title: "Headless performance", desc: "Next.js storefronts on edge infrastructure with sub-second transitions. Every 100ms saved shows up in revenue." },
- { title: "Editorial commerce", desc: "Shoppable storytelling built into the CMS, so campaigns and products sell together on the same page." },
- { title: "One-page checkout", desc: "A custom, brand-consistent checkout with the fewest possible fields between desire and confirmation." },
- ],
- services: ["/services/web-design", "/services/frontend-development", "/services/motion-design"],
- work: ["arc", "vera"],
- },
- {
- slug: "startups",
- name: "Startups",
- icon: "◉",
- tagline: "Look funded before you are.",
- description: "We give early teams the brand, product and presence of a company three stages ahead. Investor-ready decks, user-ready products, one senior team for all of it.",
- stat: { value: "AA", label: "Contrast floor across Onyx" },
- challenges: [
- { title: "Credibility gap", desc: "The idea is big, the mockups are not. Customers, hires and investors all judge the company by surfaces that scream day one." },
- { title: "MVP paralysis", desc: "Six months of building features nobody has validated. The roadmap is guesswork and the budget is burning." },
- { title: "No story", desc: "The pitch explains what the product does, but never why anyone should care. Same deck, same gradients, same stock art." },
- ],
- moves: [
- { title: "Brand in three weeks", desc: "Positioning, identity and a messaging spine that makes a two-person team look inevitable, not aspirational." },
- { title: "Prototype before code", desc: "Testable, clickable product prototypes in weeks, so the roadmap is evidence instead of hope." },
- { title: "Launch assets", desc: "Site, deck, and product walkthrough built as one system. Everything an investor or first customer touches, consistent." },
- ],
- services: ["/services/branding", "/services/product-design", "/services/web-design"],
- work: ["onyx", "vera", "prism"],
- },
- {
- slug: "finance",
- name: "Finance",
- icon: "◆",
- tagline: "Complex money, made legible.",
- description: "We design fintech and financial products where the data is dense, the stakes are high, and trust is earned pixel by pixel. Compliance-friendly by default.",
- stat: { value: "Tabular", label: "Figures throughout Onyx" },
- challenges: [
- { title: "Institutional aesthetics", desc: "Grey tables and navy gradients that signal legacy. Younger users bounce before they ever see the product's value." },
- { title: "Data intimidation", desc: "Forecasting, portfolios and risk models crammed onto one screen. Analysts export to CSV because the product feels harder than the spreadsheet." },
- { title: "Trust without personality", desc: "Security theatre everywhere, humanity nowhere. The product is safe and completely forgettable." },
- ],
- moves: [
- { title: "Visualizations people read", desc: "Custom chart systems that reveal high-level truth first and raw data on demand. Density without intimidation." },
- { title: "Mainstream polish", desc: "Consumer-grade interfaces with gaming-native cues, proving finance can feel like a product people choose, not endure." },
- { title: "Designed-in compliance", desc: "Accessible, auditable component systems where disclosures and states are designed, not appended by legal later." },
- ],
- services: ["/services/ui-ux-design", "/services/product-design", "/services/ai-integration"],
- work: ["onyx", "luminary"],
- },
- {
- slug: "healthcare",
- name: "Healthcare",
- icon: "◇",
- tagline: "Calm is a feature. We design for it.",
- description: "We build patient-facing products where clarity lowers stress and accessibility is the baseline, not the audit. WCAG 2.1 AA is the floor we start from.",
- stat: { value: "AAA", label: "Body-text contrast on Bloom Health" },
- challenges: [
- { title: "Anxious users, hostile UI", desc: "People use health products at their most stressed. Alarmist reds, medical jargon and dense forms make hard moments harder." },
- { title: "Accessibility debt", desc: "Products serving elderly and disabled users that fail screen readers, contrast checks and basic keyboard navigation." },
- { title: "Fragmented experience", desc: "Portal, app and booking system all feel like different companies. Patients relearn the interface at every touchpoint." },
- ],
- moves: [
- { title: "Empathetic UX", desc: "Jargon-free content design, paced information, and flows written for a person having a difficult day, not a power user." },
- { title: "Calm visual systems", desc: "Color and type chosen for reassurance, with alert patterns that inform without alarming." },
- { title: "One system, every platform", desc: "A single design system across iOS, Android and web so patients learn the product once and trust it everywhere." },
- ],
- services: ["/services/product-design", "/services/ui-ux-design", "/services/design-systems"],
- work: ["bloom"],
- },
- {
- slug: "education",
- name: "Education",
- icon: "◎",
- tagline: "Learning products people actually finish.",
- description: "We design edtech where motivation is treated as a design problem. Progress is visible, focus is protected, and completion rates prove it.",
- stat: { value: "8pt", label: "Grid behind every Prism screen" },
- challenges: [
- { title: "The completion cliff", desc: "Enrollment looks great in the pitch. Then reality hits: rigid linear courses and 8% of students reaching the final module." },
- { title: "Content-rich, experience-poor", desc: "World-class material trapped inside a video player and a table of contents. The content deserves a better interface." },
- { title: "Invisible progress", desc: "Students can't see how far they've come or what's next. Without feedback, motivation quietly drains away." },
- ],
- moves: [
- { title: "Learning loops", desc: "Skill-tree curricula, unlockable paths and micro-feedback that make progress feel tangible session after session." },
- { title: "Focus-first environments", desc: "Theater-mode learning spaces that dim the interface, silence the noise and protect deep work." },
- { title: "Instructor clarity", desc: "Dashboards that show exactly where students stall, so educators spend time teaching instead of data-mining." },
- ],
- services: ["/services/product-design", "/services/ui-ux-design", "/services/web-applications"],
- work: ["prism"],
- },
- {
- slug: "personal-brands",
- name: "Personal Brands",
- icon: "✦",
- tagline: "An audience is fleeting. A brand compounds.",
- description: "We turn creators, founders and experts into media properties. Signature identities, editorial sites and systems that turn attention into owned revenue.",
- stat: { value: "2", label: "Typefaces in the whole Vera system" },
- challenges: [
- { title: "Rented land", desc: "Everything lives on one platform's algorithm. The audience is real, the relationship with it is not." },
- { title: "Generic presence", desc: "A link-in-bio page, a template site, a Canva logo. The person is distinctive; the brand around them is not." },
- { title: "Attention without revenue", desc: "High engagement, weak conversion. There's no system carrying followers toward products, bookings or sponsorships." },
- ],
- moves: [
- { title: "Signature identity", desc: "A recognisable visual language designed around one person's voice, and impossible to confuse with anyone else's." },
- { title: "The owned home base", desc: "An editorial-grade website that captures email, ranks on search, and makes every platform post a funnel, not a dead end." },
- { title: "Content systems", desc: "Templates and a publishing setup that keep output consistent without a design team on retainer." },
- ],
- services: ["/services/branding", "/services/web-design", "/services/motion-design"],
- work: ["vera"],
- },
- {
- slug: "agencies",
- name: "Agencies",
- icon: "⬣",
- tagline: "Your quiet specialist department.",
- description: "We plug into agencies as a white-label senior team. Overflow capacity, motion and WebGL firepower, and design systems expertise. Your name on the delivery.",
- stat: { value: "95+", label: "Lighthouse on every build" },
- challenges: [
- { title: "Overflow, unpredictably", desc: "The pipeline swings between drought and flood. Hiring for the peak is expensive, surviving the trough is survival." },
- { title: "Specialist gaps", desc: "The account is won, then the brief demands WebGL, design systems or motion craft the in-house team doesn't cover." },
- { title: "Risky subcontractors", desc: "Freelancers who vanish mid-sprint, hand off mystery files, or need managing you don't have time for." },
- ],
- moves: [
- { title: "White-label delivery", desc: "Senior design and build shipped under your brand, with NDAs as standard and your PMs in full control of the client." },
- { title: "Firepower on demand", desc: "Motion systems, interactive WebGL and design-system architecture, booked by the sprint without a hiring process." },
- { title: "Predictable process", desc: "Fixed-scope sprints, weekly demos, and handoff documentation your team can actually maintain after we leave." },
- ],
- services: ["/services/frontend-development", "/services/motion-design", "/services/design-systems"],
- work: [],
- },
-];
-
-// ─── Journal Categories ───────────────────────────────────────────────────────
-
-export const JOURNAL_CATEGORIES = [
- "All",
- "Design",
- "Development",
- "Branding",
- "Animation",
- "AI",
- "Business",
- "Freelancing",
- "Tutorials",
-];
-
-// ─── Pricing ──────────────────────────────────────────────────────────────────
-
-export type Currency = "USD" | "EUR" | "NGN";
-
-export const CURRENCY_SYMBOLS: Record<Currency, string> = {
- USD: "$",
- EUR: "\u20ac",
- NGN: "\u20a6",
-};
-
-export const EXCHANGE_RATES: Record<Currency, number> = {
- USD: 1,
- EUR: 0.92,
- NGN: 1500,
-};
-
-export interface PricingTier {
- name: string;
- description: string;
- basePrice: number;
- timeline: string;
- features: string[];
- isPopular?: boolean;
-}
-
-export const PRICING_TIERS: PricingTier[] = [
- {
- name: "Starter",
- description: "For founders getting the first version in front of real people.",
- basePrice: 1200,
- timeline: "2 weeks",
- features: [
- "Brand identity, logo, palette, type",
- "Landing page design",
- "Next.js build, deployed",
- "Technical SEO baseline",
- "95+ Lighthouse, or we keep working",
- ],
- },
- {
- name: "Growth",
- description: "For teams whose product has outgrown its presence.",
- basePrice: 2800,
- timeline: "4 to 6 weeks",
- isPopular: true,
- features: [
- "Full brand guidelines",
- "Custom web app design",
- "Full-stack build (Next.js + Supabase)",
- "Content management",
- "Advanced SEO and analytics",
- "95+ Lighthouse, or we keep working",
- ],
- },
- {
- name: "Scale",
- description: "For complex products with real users and constraints.",
- basePrice: 6500,
- timeline: "8 to 16 weeks",
- features: [
- "User research and testing",
- "Multi-surface product design",
- "Design system and component library",
- "Custom integrations (CRM, ERP)",
- "Dedicated project lead",
- "12 months priority support",
- ],
- },
+ question: "Can I pay in my own currency?",
+ answer: "Prices are set in US dollars and shown in your currency as a guide. We quote and invoice in the currency we agree with you.",
+ }
 ];

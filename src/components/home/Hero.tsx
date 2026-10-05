@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import BrandLottie from "@/components/brand/BrandLottie";
 
 /**
@@ -38,12 +39,18 @@ export default function Hero() {
       </div>
 
       <p className="mt-10 text-base text-[var(--brand-text-secondary)] sm:text-lg">We design and build</p>
-      <h1 className="mt-2 h-[1.1em] overflow-hidden text-[clamp(3rem,9vw,6.5rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
+      <h1 className="mt-2 h-[1.3em] overflow-hidden text-[clamp(3rem,9vw,6.5rem)] font-semibold leading-[1.3] tracking-[-0.045em]">
         <span className="sr-only">Brands, websites, apps and products.</span>
         <span key={word} aria-hidden="true" className="fx-roll-in block">
           {word}
         </span>
       </h1>
+      <Link
+        href="/contact"
+        className="mt-10 inline-flex h-12 items-center rounded-[6px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)] transition-opacity hover:opacity-90"
+      >
+        Start a project
+      </Link>
     </section>
   );
 }

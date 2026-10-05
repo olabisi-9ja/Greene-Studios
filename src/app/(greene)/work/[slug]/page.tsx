@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROJECTS, PROJECTS_BY_SLUG, type Project } from "@/lib/work";
 
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
@@ -62,6 +64,19 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Work", item: `${SITE}/work` },
+              { "@type": "ListItem", position: 2, name: p.name, item: `${SITE}/work/${p.slug}` },
+            ],
+          }),
+        }}
+      />
       {/* opener */}
       <div className="h-[86svh] min-h-[420px] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
         <img src={p.images[0]} alt={`${p.name}, ${p.kind}`} className="h-full w-full object-cover" />

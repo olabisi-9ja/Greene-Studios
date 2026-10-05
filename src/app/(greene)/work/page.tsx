@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <div className="pt-20">
-      <Work title="Work" all={false} lottie="work" />
+      <Work title="Work" all={false} lottie="work" heading="h1" />
 
       <section className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8">
         <h2 className="text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-none tracking-[-0.04em]">Live sites</h2>
