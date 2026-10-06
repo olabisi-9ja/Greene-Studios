@@ -53,7 +53,10 @@ export function CountUp({ to, className = "", duration = 1400 }: { to: number; c
     return () => cancelAnimationFrame(raf);
   }, [seen, to, duration]);
   return (
-    <span ref={ref} className={`tabular-nums ${className}`} aria-label={String(to)}>
+    // screen readers get the final number; the count-up is for the eyes only
+    // (aria-label isn't allowed on a plain span)
+    <span ref={ref} className={`tabular-nums ${className}`}>
+      <span className="sr-only">{to}</span>
       <span aria-hidden="true">{n}</span>
     </span>
   );

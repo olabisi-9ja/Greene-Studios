@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +7,7 @@ import ToolMarquee from "@/components/home/ToolMarquee";
 import NextPage from "@/components/home/NextPage";
 import { TEAM } from "@/lib/team";
 import { PROJECTS } from "@/lib/work";
+import Pic from "@/components/ui/Pic";
 
 export const metadata: Metadata = {
   title: "Studio",
@@ -152,7 +152,7 @@ export default function StudioPage() {
         <ul className="m-0 mt-12 grid list-none gap-8 p-0 md:grid-cols-12 md:gap-x-6">
           {PEEK.map((p, i) => (
             <li key={p.src} className={PEEK_PLACE[i]}>
-              <img src={p.src} alt={`${p.name}, picture`} loading="lazy" decoding="async" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
+              <Pic src={p.src} alt={`${p.name}, picture`} sizes="(min-width: 768px) 40vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
             </li>
           ))}
         </ul>

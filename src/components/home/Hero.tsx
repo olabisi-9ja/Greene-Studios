@@ -35,9 +35,20 @@ export default function Hero() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [still]);
 
-  // how far round the words have come: everything up to the next word is mounted
-  const [reach, setReach] = useState(1);
-  useEffect(() => setReach((r) => Math.max(r, Math.min(job + 1, WORDS.length - 1))), [job]);
+  // how far round the words have come: everything up to the next word is
+  // mounted. The next picture is built once the browser is idle after the
+  // first paint, not during the page load.
+  const [reach, setReach] = useState(0);
+  useEffect(() => {
+    if (job > 0) {
+      setReach((r) => Math.max(r, Math.min(job + 1, WORDS.length - 1)));
+      return;
+    }
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
+    const cancel = window.cancelIdleCallback ?? window.clearTimeout;
+    const id = idle(() => setReach((r) => Math.max(r, 1)), { timeout: 2500 });
+    return () => cancel(id);
+  }, [job]);
 
   const { word, line } = WORDS[job];
 

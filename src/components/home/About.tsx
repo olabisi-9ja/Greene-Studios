@@ -2,6 +2,7 @@ import { CountUp } from "@/components/effects/TextFx";
 import { PlateLink } from "@/components/ui/Tag";
 import Price from "@/components/ui/Price";
 import BrandLottie from "@/components/brand/BrandLottie";
+import Pic from "@/components/ui/Pic";
 
 /**
  * Who we are, in one sentence, then
@@ -67,12 +68,10 @@ export default function About() {
           </div>
         </div>
         <div className="lg:sticky lg:top-28 lg:self-start">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Pic
             src="/images/real/greene/06.webp"
             alt="A Greene Studios card held up to the light"
-            loading="lazy"
-            decoding="async"
+            sizes="(min-width: 1024px) 45vw, 100vw"
             className="aspect-[4/5] w-full rounded-[12px] object-cover"
           />
         </div>

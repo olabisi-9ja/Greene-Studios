@@ -1,5 +1,3 @@
-@import "@fontsource-variable/montserrat/wght-italic.css";
-@import "@fontsource-variable/montserrat/wght.css";
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -17,10 +15,10 @@
   --color-brand-ink: var(--brand-ink);
 
   /* One permanent face across the site: Montserrat, the wordmark's font. */
-  --font-display: "Montserrat Variable", "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Montserrat Variable", "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Montserrat Variable", "Montserrat", system-ui, -apple-system, sans-serif;
-  --font-mono: "Montserrat Variable", "Montserrat", system-ui, sans-serif;
+  --font-display: var(--font-montserrat), "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-montserrat), "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-montserrat), "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
   --font-sans: var(--font-body);
   --font-heading: var(--font-display);
 
@@ -323,8 +321,7 @@
     box-shadow: 0 0 0 200vmax rgb(0 0 0 / 0.55);
     outline: 2px solid var(--brand-accent);
     outline-offset: 2px;
-    transition: top 0.45s var(--ease-out-quart), left 0.45s var(--ease-out-quart),
-      width 0.45s var(--ease-out-quart), height 0.45s var(--ease-out-quart);
+    transition: transform 0.45s var(--ease-out-quart), width 0.45s var(--ease-out-quart), height 0.45s var(--ease-out-quart);
   }
   .site-tour-card {
     animation: tour-card-in 0.35s var(--ease-out-quart) both;
@@ -859,7 +856,7 @@
 
 /* ─── Greene wordmark: Montserrat, as on the brand sheet ───────────── */
 .wordmark {
-  font-family: "Montserrat Variable", "Montserrat", sans-serif;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1;
@@ -1082,4 +1079,13 @@ html:not(:active-view-transition) .theme-flap {
   .liquid-label { transform: none !important; opacity: 0; transition: opacity 0.15s linear; }
   .liquid-tip:hover :is(.liquid-drop, .liquid-label),
   .liquid-tip:has(:focus-visible) :is(.liquid-drop, .liquid-label) { opacity: 1; transition-delay: 0s; }
+}
+
+/* Sections below the fold: the browser skips styling, layout and paint for
+   them until they come near the screen, which speeds up the first load and
+   the theme switch. contain-intrinsic-size keeps the scrollbar honest (auto
+   remembers the real height once it has been seen). */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
 }

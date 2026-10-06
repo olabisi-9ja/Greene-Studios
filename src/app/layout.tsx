@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
+
+/**
+ * Montserrat, self-hosted and preloaded: the Latin variable file (every
+ * weight in one), with a fallback sized to match so nothing shifts when it
+ * arrives. Rare Latin Extended letters fall back to the system font.
+ */
+const montserrat = localFont({
+  src: [{ path: "../../node_modules/@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-montserrat",
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "Arial", "sans-serif"],
+  adjustFontFallback: "Arial",
+});
 
 export const viewport: import("next").Viewport = {
  width: "device-width",
@@ -60,7 +75,7 @@ export const metadata: Metadata = {
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
  return (
- <html lang="en" suppressHydrationWarning className="font-sans mode-studio" data-mode="studio">
+ <html lang="en" suppressHydrationWarning className={`${montserrat.variable} font-sans mode-studio`} data-mode="studio">
  <body className="antialiased overflow-x-hidden">
  {/* Apply the saved theme before hydration so there is no flash of the
      wrong one; the page is served in studio, the default. Plain inline <script> inside <body> (not next/script,

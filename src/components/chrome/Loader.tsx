@@ -5,15 +5,15 @@ import Runner from "@/components/brand/Runner";
 import { preloadLottie } from "@/components/brand/BrandLottie";
 import { HERO_FIRST } from "@/lib/hero-words";
 
-/** On the home page the loader holds until the hero's first animations are in. */
-const HERO_LOTTIES = HERO_FIRST;
+/** On the home page the loader holds until the hero's first picture is in (the next one follows in the background). */
+const HERO_LOTTIES = HERO_FIRST.slice(0, 1);
 
 const SEEN = "greene:loaded";
 
 /**
- * Window-load screen: the runner, running, and a counter. No wordmark.
- * It waits for the page to load and, on the home page, for the hero's
- * first animations, so the hero is complete the moment it shows.
+ * Loading screen: the runner, running, and a counter. No wordmark.
+ * It waits for the type and, on the home page, the hero's first picture, so
+ * the hero is complete the moment it shows (at least 1.2s, at most 3s).
  *
  * When the page has loaded the counter reaches 100, then the runner flies
  * up and shrinks into its place in the top bar (measured, so it lands
@@ -43,20 +43,21 @@ export default function Loader() {
     root.classList.add("is-loading");
 
     const started = performance.now();
-    let pageLoaded = document.readyState === "complete";
+    // ready once the type is in (not every picture on the page: those load
+    // lazily, as they're needed)
+    let pageLoaded = false;
+    document.fonts.ready.then(() => (pageLoaded = true));
     let heroReady = window.location.pathname !== "/";
     if (!heroReady) {
       Promise.allSettled(HERO_LOTTIES.map(preloadLottie)).then(() => (heroReady = true));
     }
     let shown = 0;
     let raf = 0;
-    const onLoad = () => (pageLoaded = true);
-    window.addEventListener("load", onLoad, { once: true });
     // never hold anyone longer than this, whatever is still on its way
     const failsafe = setTimeout(() => {
       pageLoaded = true;
       heroReady = true;
-    }, 8000);
+    }, 3000);
 
     const step = (now: number) => {
       const t = (now - started) / 1000;
@@ -106,7 +107,6 @@ export default function Loader() {
       cancelAnimationFrame(raf);
       clearTimeout(failsafe);
       clearTimeout(t1);
-      window.removeEventListener("load", onLoad);
     };
   }, []);
 

@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import dynamic from "next/dynamic";
-import type { LottieHandle } from "lottie-react";
+import type { AnimationItem } from "lottie-web";
 import { recolorLottie } from "@/lib/brand-lottie";
 import { useMotionOff } from "@/lib/motion-pref";
 
-// start fetching the player as soon as this module runs (during hydration),
-// not when the first animation asks for it
-const player = typeof window !== "undefined" ? import("lottie-react") : null;
-const Lottie = dynamic(() => (player ?? import("lottie-react")).then((m) => m.Lottie), { ssr: false });
+// lottie-web's light build: the SVG renderer only, no expression engine (the
+// recolour strips expressions anyway), about half the full player. Fetching
+// starts as soon as this module runs (during hydration), not when the first
+// animation asks for it.
+type Player = typeof import("lottie-web/build/player/lottie_light").default;
+let player: Promise<Player> | null = null;
+const getPlayer = () => (player ??= import("lottie-web/build/player/lottie_light").then((m) => m.default));
+if (typeof window !== "undefined") getPlayer();
 
 /** Parsed and recoloured files, shared by every slot that uses them. */
 const cache = new Map<string, Promise<object>>();
@@ -56,7 +59,8 @@ export default function BrandLottie({
   className?: string;
 }) {
   const box = useRef<HTMLDivElement>(null);
-  const handle = useRef<LottieHandle>(null);
+  const holder = useRef<HTMLDivElement>(null);
+  const handle = useRef<AnimationItem | null>(null);
   const [near, setNear] = useState(eager);
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState<object | null>(null);
@@ -88,20 +92,41 @@ export default function BrandLottie({
     };
   }, [name, near]);
 
+  // mount the player once the data is in
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const el = holder.current;
+    if (!data || !el) return;
+    let anim: AnimationItem | null = null;
+    let live = true;
+    getPlayer().then((lottie) => {
+      if (!live) return;
+      anim = lottie.loadAnimation({ container: el, renderer: "svg", loop, autoplay: false, animationData: data });
+      handle.current = anim;
+      setReady(true);
+    });
+    return () => {
+      live = false;
+      anim?.destroy();
+      handle.current = null;
+      setReady(false);
+    };
+  }, [data, loop]);
+
   // play only while on screen, not paused, and with animations on;
   // switching animations off returns it to its first frame
   useEffect(() => {
     const p = handle.current;
     if (!p) return;
-    if (still) p.stop();
+    if (still) p.goToAndStop(0, true);
     else if (visible && !paused) p.play();
     else p.pause();
-  }, [visible, paused, data, still]);
+  }, [visible, paused, ready, still]);
 
   if (missing) return <>{fallback}</>;
   return (
     <div ref={box} className={className} aria-hidden="true">
-      {data && <Lottie lottieRef={handle} src={data} loop={loop} autoplay={!still && !paused} className="brand-lottie h-full w-full" />}
+      <div ref={holder} className="brand-lottie h-full w-full" />
     </div>
   );
 }

@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROJECTS, PROJECTS_BY_SLUG, type Project } from "@/lib/work";
+import Pic from "@/components/ui/Pic";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
@@ -79,7 +79,7 @@ export default async function ProjectPage({ params }: Props) {
       />
       {/* opener */}
       <div className="h-[86svh] min-h-[420px] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
-        <img src={p.images[0]} alt={`${p.name}, ${p.kind}`} className="h-full w-full object-cover" />
+        <Pic src={p.images[0]} alt={`${p.name}, ${p.kind}`} sizes="100vw" priority className="h-full w-full object-cover" />
       </div>
 
       {/* facts and story */}
@@ -128,22 +128,22 @@ export default async function ProjectPage({ params }: Props) {
               return (
                 <div key={k} className="grid gap-6 sm:grid-cols-2 sm:gap-10">
                   {s.src!.map((src) => (
-                    <img key={src} src={src} alt="" loading="lazy" className={`${pic} aspect-[4/5]`} />
+                    <Pic key={src} src={src} alt="" sizes="(min-width: 640px) 50vw, 100vw" className={`${pic} aspect-[4/5]`} />
                   ))}
                 </div>
               );
             if (s.kind === "offset")
               return (
                 <div key={k} className="grid sm:grid-cols-12">
-                  <img
+                  <Pic
                     src={s.src![0]}
                     alt=""
-                    loading="lazy"
+                    sizes="(min-width: 640px) 66vw, 100vw"
                     className={`${pic} aspect-[4/3] sm:col-span-8 ${s.side === "right" ? "sm:col-start-5" : "sm:col-start-1"}`}
                   />
                 </div>
               );
-            return <img key={k} src={s.src![0]} alt="" loading="lazy" className={`${pic} aspect-[16/9]`} />;
+            return <Pic key={k} src={s.src![0]} alt="" sizes="(min-width: 1400px) 1400px, 100vw" className={`${pic} aspect-[16/9]`} />;
           })}
         </div>
       </section>
@@ -156,7 +156,7 @@ export default async function ProjectPage({ params }: Props) {
             {related.map((r) => (
               <Link key={r.slug} href={`/work/${r.slug}`} className="group block">
                 <div className="aspect-[4/3] overflow-hidden bg-[var(--brand-surface-secondary)]">
-                  <img src={r.images[0]} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <Pic src={r.images[0]} alt="" sizes="(min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                 </div>
                 <p className="mt-4 text-xl font-semibold tracking-[-0.02em] group-hover:text-[var(--logo)]">
                   {r.name}: {r.line}

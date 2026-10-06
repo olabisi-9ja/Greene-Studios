@@ -21,6 +21,8 @@ export default function Work({
   /** h1 when this is the page's main title (the /work page) */
   heading?: "h1" | "h2";
 }) {
+  // project names sit one level under the section title
+  const Sub = Heading === "h1" ? "h2" : "h3";
   return (
     <section id="work" className="scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -42,21 +44,21 @@ export default function Work({
       </div>
 
       <div className="mt-16 space-y-24 sm:space-y-28">
-        {PROJECTS.map((p) => {
+        {PROJECTS.map((p, idx) => {
           return (
             <article key={p.slug}>
               <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
                 <div>
-                  <h3 className="text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-none tracking-[-0.04em]">
+                  <Sub className="text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-none tracking-[-0.04em]">
                     {p.name}
-                  </h3>
+                  </Sub>
                   <div className="mt-5 flex flex-wrap items-center justify-between gap-5">
                     <KindChips kind={p.kind} />
                     <ViewProject href={`/work/${p.slug}`} />
                   </div>
                 </div>
               </div>
-              <Strip images={allPictures(p)} name={p.name} kind={p.kind} />
+              <Strip images={allPictures(p)} name={p.name} kind={p.kind} priority={Heading === "h1" && idx === 0} />
             </article>
           );
         })}

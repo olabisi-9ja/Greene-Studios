@@ -121,8 +121,9 @@ export default function SiteTour() {
       {/* the spotlight: a hole in a dim veil, around the element */}
       {box ? (
         <div
-          className="site-tour-hole pointer-events-none fixed rounded-[14px]"
-          style={{ top: box.top - PAD, left: box.left - PAD, width: box.width + PAD * 2, height: box.height + PAD * 2 }}
+          className="site-tour-hole pointer-events-none fixed left-0 top-0 rounded-[14px]"
+          // moved with a transform (not top/left), so it glides without counting as a layout shift
+          style={{ transform: `translate(${box.left - PAD}px, ${box.top - PAD}px)`, width: box.width + PAD * 2, height: box.height + PAD * 2 }}
         />
       ) : (
         <div className="fixed inset-0 bg-black/55" />

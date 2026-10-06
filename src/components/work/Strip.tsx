@@ -1,23 +1,37 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useRef, useState } from "react";
+import Pic, { ratioOf } from "@/components/ui/Pic";
 
 /**
  * A project's pictures in a sideways row: swipe or trackpad, or the two
  * arrows (which step one picture at a time and grey out at either end).
  * A picture too wide for the screen becomes a panorama, the way Instagram
  * does it: cut into slides that sit flush, so the arrow (or a swipe) brings
- * in the rest of the same picture.
+ * in the rest of the same picture. Picture shapes come from lib/image-dims,
+ * so the row is laid out before anything loads.
  */
-export default function Strip({ images, name, kind }: { images: string[]; name: string; kind: string }) {
+export default function Strip({
+  images,
+  name,
+  kind,
+  priority = false,
+}: {
+  images: string[];
+  name: string;
+  kind: string;
+  /** the first strip on the page: its first picture loads straight away */
+  priority?: boolean;
+}) {
   const row = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(images.length < 2);
   /** arrows only when the row is wider than the screen */
   const [scrollable, setScrollable] = useState(false);
-  /** natural width / height of each picture, once loaded */
-  const [ratios, setRatios] = useState<Record<string, number>>({});
+  /** natural width / height of each picture: known up front, or once loaded */
+  const [ratios, setRatios] = useState<Record<string, number>>(() =>
+    Object.fromEntries(images.flatMap((src) => (ratioOf(src) ? [[src, ratioOf(src)!]] : []))),
+  );
   /** visible width of the row and the picture height, for panorama maths */
   const [box, setBox] = useState({ w: 0, h: 0 });
 
@@ -30,14 +44,15 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
       setBox({ w, h: Math.min(window.innerHeight * 0.62, 560) });
     };
     measure();
-    // pictures that finished loading before hydration never fire onLoad
-    const ready: Record<string, number> = {};
-    el.querySelectorAll("img").forEach((img) => {
-      if (img.complete && img.naturalWidth) ready[img.getAttribute("src") ?? ""] = img.naturalWidth / img.naturalHeight;
-    });
-    if (Object.keys(ready).length) setRatios((r) => ({ ...ready, ...r }));
+    // a ResizeObserver, not just window resize: the section may be skipped
+    // while off screen (content-visibility) and only get a width later
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, []);
 
   useEffect(() => {
@@ -49,11 +64,14 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
       setScrollable(el.scrollWidth > el.clientWidth + 8);
     };
     check();
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
     el.addEventListener("scroll", check, { passive: true });
     // pictures change the row's width as they load
     el.addEventListener("load", check, true);
     window.addEventListener("resize", check);
     return () => {
+      ro.disconnect();
       el.removeEventListener("scroll", check);
       el.removeEventListener("load", check, true);
       window.removeEventListener("resize", check);
@@ -90,45 +108,53 @@ export default function Strip({ images, name, kind }: { images: string[]; name: 
           const over = ratio && box.w ? (ratio * box.h) / box.w : 0;
           const fit = over > 1.04 && over < 1.6;
           const parts = over >= 1.6 ? Math.min(3, Math.round(over)) : 1;
-          if (parts > 1) {
-            // slides keep the row's height; each takes an equal share of the
-            // picture's width, which lands within a few percent of the screen
-            const slideW = (ratio * box.h) / parts;
-            return (
-              <li key={src} className="flex shrink-0" aria-label={i === 0 ? `${name}, ${kind}` : undefined}>
-                {Array.from({ length: parts }, (_, k) => (
+          // slides keep the row's height; each takes an equal share of the
+          // picture's width, which lands within a few percent of the screen
+          const slideW = parts > 1 ? (ratio * box.h) / parts : 0;
+          // the first slide is the same element whether or not the picture
+          // turns into a panorama after hydration, so the picture painted
+          // from the server stays on screen (and counts as the page's
+          // largest paint) instead of being swapped for a new one; both ask
+          // for the same size, so it isn't fetched twice
+          return (
+            <li key={src} className="flex shrink-0">
+              {Array.from({ length: parts }, (_, k) =>
+                parts > 1 ? (
+                  // each slide is a window onto its share of the one picture
                   <div
                     key={k}
                     data-slide
                     role="img"
                     aria-label={k === 0 ? `${name}, part ${k + 1} of ${parts}` : `part ${k + 1} of ${parts}`}
-                    className="snap-start bg-[var(--brand-surface-secondary)] bg-no-repeat first:rounded-l-[8px] last:rounded-r-[8px]"
-                    style={{
-                      width: slideW,
-                      height: box.h,
-                      backgroundImage: `url(${src})`,
-                      backgroundSize: `${parts * 100}% 100%`,
-                      backgroundPosition: `${(k / (parts - 1)) * 100}% 0`,
-                    }}
-                  />
-                ))}
-              </li>
-            );
-          }
-          return (
-            <li key={src} data-slide className="shrink-0 snap-start">
-              <img
-                src={src}
-                alt={i === 0 ? `${name}, ${kind}` : ""}
-                loading="lazy"
-                decoding="async"
-                onLoad={(e) => {
-                  const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
-                  if (w && h) setRatios((r) => (r[src] ? r : { ...r, [src]: w / h }));
-                }}
-                style={fit ? { width: box.w, height: "auto" } : undefined}
-                className="h-[min(62vh,560px)] w-auto rounded-[8px] bg-[var(--brand-surface-secondary)] object-cover"
-              />
+                    className="relative snap-start overflow-hidden bg-[var(--brand-surface-secondary)] first:rounded-l-[8px] last:rounded-r-[8px]"
+                    style={{ width: slideW, height: box.h }}
+                  >
+                    <Pic
+                      src={src}
+                      alt=""
+                      sizes={`${Math.round((ratio ?? 1.5) * 560)}px`}
+                      priority={priority && i === 0}
+                      className="absolute top-0 h-full max-w-none"
+                      style={{ width: slideW * parts, left: -k * slideW }}
+                    />
+                  </div>
+                ) : (
+                  <div key={k} data-slide className="snap-start">
+                    <Pic
+                      src={src}
+                      alt={i === 0 ? `${name}, ${kind}` : ""}
+                      sizes={`${Math.round((ratio ?? 1.5) * 560)}px`}
+                      priority={priority && i === 0}
+                      onLoad={(e) => {
+                        const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+                        if (w && h) setRatios((r) => (r[src] ? r : { ...r, [src]: w / h }));
+                      }}
+                      style={fit ? { width: box.w, height: "auto" } : undefined}
+                      className="h-[min(62vh,560px)] w-auto rounded-[8px] bg-[var(--brand-surface-secondary)] object-cover"
+                    />
+                  </div>
+                ),
+              )}
             </li>
           );
         })}

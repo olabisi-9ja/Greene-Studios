@@ -7,6 +7,15 @@ const nextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    // optimised pictures are cached on the CDN for a month (files in /public keep their names,
+    // so not forever)
+    minimumCacheTTL: 2592000,
+  },
+  experimental: {
+    // the stylesheet goes inline in the HTML, so first paint doesn't wait on a separate CSS request
+    inlineCss: true,
+    // only the icons actually used ship from these packages
+    optimizePackageImports: ['react-icons'],
   },
   async headers() {
     const csp = [
@@ -24,7 +33,13 @@ const nextConfig = {
       "object-src 'none'",
       'upgrade-insecure-requests',
     ].join('; ');
+    // files in /public keep their names when they change, so they're cached for a week and
+    // refreshed in the background after that; /_next/static is hashed and cached forever by Next
+    const assetCache = [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=2592000' }];
     return [
+      { source: '/lottie/:path*', headers: assetCache },
+      { source: '/images/:path*', headers: assetCache },
+      { source: '/fonts/:path*', headers: assetCache },
       {
         source: '/:path*',
         headers: [

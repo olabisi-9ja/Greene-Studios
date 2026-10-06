@@ -36,7 +36,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--brand-border)] px-5 pt-20 sm:px-8">
+    <footer className="cv-auto relative overflow-hidden border-t border-[var(--brand-border)] px-5 pt-20 sm:px-8">
 
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-[1fr_1.5fr]">

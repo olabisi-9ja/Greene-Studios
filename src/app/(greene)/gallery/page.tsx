@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import { PROJECTS, allPictures } from "@/lib/work";
+import Pic from "@/components/ui/Pic";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -44,11 +44,11 @@ export default function GalleryPage() {
       <ul className="m-0 mx-auto grid max-w-[1400px] list-none grid-cols-6 gap-x-4 gap-y-10 p-0 md:grid-cols-12 md:gap-x-6 md:gap-y-24">
         {pictures.map((p, i) => (
           <li key={p.src} className={PLACE[i % PLACE.length]}>
-            <img
+            <Pic
               src={p.src}
               alt={`${p.name}, picture`}
-              loading={i < 2 ? "eager" : "lazy"}
-              decoding="async"
+              sizes="(min-width: 768px) 45vw, 70vw"
+              priority={i < 2}
               className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]"
             />
           </li>

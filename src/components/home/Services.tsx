@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { PlateLink } from "@/components/ui/Tag";
 import { SERVICE_GROUPS } from "@/lib/offer";
+import Pic from "@/components/ui/Pic";
 
 /**
  * What we do: one card per service group, each led by a picture of our own
@@ -32,11 +32,10 @@ export default function Services() {
           {SERVICE_GROUPS.map((g) => (
             <li key={g.id}>
               <article className="flex h-full flex-col overflow-hidden rounded-[12px] bg-[var(--brand-surface)] shadow-[0_1px_0_var(--brand-border)]">
-                <img
+                <Pic
                   src={PICTURE[g.id].src}
                   alt={PICTURE[g.id].alt}
-                  loading="lazy"
-                  decoding="async"
+                  sizes="(min-width: 768px) 50vw, 100vw"
                   className="aspect-[16/10] w-full object-cover object-top"
                 />
                 <div className="flex flex-1 flex-col p-7 sm:p-9">

@@ -23,10 +23,19 @@ export default function HomePage() {
     <>
       <Hero />
       <ToolMarquee />
-      <About />
-      <Work />
-      <Services />
-      <FAQSection />
+      {/* below the fold: skipped by the browser until scrolled near (.cv-auto) */}
+      <div className="cv-auto">
+        <About />
+      </div>
+      <div className="cv-auto">
+        <Work />
+      </div>
+      <div className="cv-auto">
+        <Services />
+      </div>
+      <div className="cv-auto">
+        <FAQSection />
+      </div>
       <NextPage />
 
       <script
