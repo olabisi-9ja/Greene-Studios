@@ -63,17 +63,23 @@ const fKneeN = bis(fThigh, fShin);
 const fAnkleN = bis(fShin, fFoot);
 
 const BACK_LEG = "M200 468L312 494L306 532L240 662H0V468Z";
-const FRONT_LEG = "M300 466L346 460L693 460V715H440L404 604L300 530Z";
+// the lower edge passes between the foot and the tip of the ground shadow, so
+// no scrap of shadow rides along with the leg
+// and the upper edge starts below the sharp V where the torso meets the thigh
+// (the torso keeps that), so the thigh carries no point of the body with it
+const FRONT_LEG = "M300 466L340 480L354 479L364 472L400 460L693 460V715H478L470 668L404 604L300 530Z";
 
 /** Clip chains: a piece is the intersection of all its regions. */
 const CLIPS: Record<string, string[]> = {
-  head: ["M262 222H445V318L392 330L338 352L300 346L262 330Z"],
-  backArm: ["M95 322H326L344 346L336 392L298 402L232 470H95Z"],
-  frontArm: ["M356 352L384 342L470 300L470 0H693V430L470 432L388 420L372 400Z"],
+  // head and scarf part along the gap between them, so neither carries a sliver of the other
+  head: ["M262 222H445V318L392 330L372 350L338 356L333 338L320 340L300 333L280 321L262 318Z"],
+  backArm: ["M95 330H262L280 321L300 333L320 340L333 338L344 346L336 392L298 402L232 470H95Z"],
+  // the left edge leans left as it rises, so the clover's left leaf isn't shaved
+  frontArm: ["M356 352L384 342L470 300L440 0H693V430L470 432L388 420L372 400Z"],
   /** The same arm with an empty fist: no clover stem above, no nib below. */
   frontArmBare: ["M356 352L384 342L470 300L508 271L586 271L590 312L572 324L548 328L506 412L470 432L388 420L372 400Z"],
   torso: [
-    "M326 340L360 352L372 400L388 420L392 448L346 466L330 520L296 528L240 506L222 480L250 432L298 402L336 392Z",
+    "M326 340L360 352L372 400L388 420L392 448L362 470L354 481L340 483L330 520L296 528L240 506L222 480L250 432L298 402L336 392Z",
   ],
   backThigh: [BACK_LEG, half(J.backHip, bThigh), half(J.backKnee, neg(bKneeN))],
   backShin: [BACK_LEG, half(J.backKnee, bKneeN), half(J.backAnkle, neg(bAnkleN))],
@@ -84,8 +90,26 @@ const CLIPS: Record<string, string[]> = {
   shadow: ["M90 674H470V715H90Z"],
 };
 
-/** Joint caps: radius = half the limb's width at the joint. */
-const CAP = { backHip: 34, backKnee: 35, backAnkle: 29, frontHip: 33, frontKnee: 36, frontAnkle: 33 };
+/**
+ * Joint caps: a disc under each seam so a bending joint stays round and its
+ * cut faces can't open a crack. The knee and ankle caps sit on the middle of
+ * the cut and span all of it (the ankle cuts run through the heel, so
+ * they're wide), and are trimmed to the limb as both pieces see it: the logo
+ * as drawn, and the logo turned to sit where the piece above the joint is.
+ * So a cap fills the limb's own shape across the bend and never bulges past
+ * it, and at rest it adds nothing to the logo. The hips keep plain discs, as
+ * the torso is there. Cap centres are measured off the logo.
+ */
+type Joint = { r: number; at: readonly [number, number]; fit?: true };
+const JOINT = {
+  backHip: { r: 34, at: J.backHip },
+  backKnee: { r: 38, at: [178.1, 570.2], fit: true },
+  backAnkle: { r: 42, at: [93.6, 559.7], fit: true },
+  frontHip: { r: 33, at: J.frontHip },
+  frontKnee: { r: 42, at: [447.3, 524.2], fit: true },
+  frontAnkle: { r: 54, at: [515.9, 630], fit: true },
+} satisfies Record<string, Joint>;
+type JointKey = keyof typeof JOINT;
 
 // ── the run cycle ──────────────────────────────────────────────────────
 // Each leg follows a foot path, in units of its own length, relative to its
@@ -365,6 +389,8 @@ const LogoRig = forwardRef<LogoRigHandle, { className?: string; title?: string; 
     frontFoot: useRef<SVGGElement>(null),
     shadow: useRef<SVGGElement>(null),
   };
+  /** the turned outline in each fitted cap's clip */
+  const turned = useRef<Partial<Record<JointKey, SVGPathElement | null>>>({});
 
   useImperativeHandle(ref, () => {
     const set = (r: React.RefObject<SVGGElement | null>, t: string) => r.current?.setAttribute("transform", t);
@@ -381,6 +407,14 @@ const LogoRig = forwardRef<LogoRigHandle, { className?: string; title?: string; 
       set(g.head, rot(r.head, J.neck));
       set(g.backArm, rot(r.backArm, J.shoulderBack));
       set(g.frontArm, rot(r.frontArm, J.shoulderFront));
+      // each fitted cap's outline: the logo turned to sit where the piece above the joint is
+      const turn: Partial<Record<JointKey, string>> = {
+        backKnee: rot(-r.bk, J.backKnee),
+        backAnkle: rot(r.bf, J.backAnkle),
+        frontKnee: rot(-r.fk, J.frontKnee),
+        frontAnkle: rot(r.ff, J.frontAnkle),
+      };
+      for (const k of Object.keys(turn) as JointKey[]) turned.current[k]?.setAttribute("transform", turn[k]!);
       set(g.shadow, `translate(280 694) scale(${Math.max(0, r.shadow).toFixed(3)} 1) translate(-280 -694)`);
     };
     const hold = (p: Prop) => {
@@ -398,7 +432,21 @@ const LogoRig = forwardRef<LogoRigHandle, { className?: string; title?: string; 
       (inner, _r, i) => <g clipPath={`url(#${uid}${id}${i})`}>{inner}</g>,
       <path d={RUNNER_D} fillRule="evenodd" fill={debug && tint ? tint : undefined} />,
     );
-  const disc = (c: readonly number[], r: number) => <circle cx={c[0]} cy={c[1]} r={r} fill={debug ? "#111" : undefined} opacity={debug ? 0.35 : undefined} />;
+  const disc = (k: JointKey) => {
+    const j: Joint = JOINT[k];
+    const circle = (
+      <circle
+        cx={j.at[0]}
+        cy={j.at[1]}
+        r={j.r}
+        clipPath={j.fit ? `url(#${uid}turn${k})` : undefined}
+        fill={debug ? "#111" : undefined}
+        opacity={debug ? 0.35 : undefined}
+      />
+    );
+    // every cap stays inside the logo as its own piece sees it
+    return <g clipPath={`url(#${uid}logo)`}>{circle}</g>;
+  };
 
   return (
     <svg
@@ -418,19 +466,35 @@ const LogoRig = forwardRef<LogoRigHandle, { className?: string; title?: string; 
             </clipPath>
           )),
         )}
+        <clipPath id={`${uid}logo`}>
+          <path d={RUNNER_D} clipRule="evenodd" />
+        </clipPath>
+        {(Object.keys(JOINT) as JointKey[])
+          .filter((k) => (JOINT[k] as Joint).fit)
+          .map((k) => (
+            <clipPath key={k} id={`${uid}turn${k}`}>
+              <path
+                ref={(el) => {
+                  turned.current[k] = el;
+                }}
+                d={RUNNER_D}
+                clipRule="evenodd"
+              />
+            </clipPath>
+          ))}
       </defs>
       <g ref={g.shadow}>{C("shadow")}</g>
       <g ref={g.bob}>
         {/* back leg sits behind the body */}
         <g ref={g.backThigh}>
           {C("backThigh", "#2563eb")}
-          {disc(J.backHip, CAP.backHip)}
+          {disc("backHip")}
           <g ref={g.backShin}>
             {C("backShin", "#7c3aed")}
-            {disc(J.backKnee, CAP.backKnee)}
+            {disc("backKnee")}
             <g ref={g.backFoot}>
               {C("backFoot", "#db2777")}
-              {disc(J.backAnkle, CAP.backAnkle)}
+              {disc("backAnkle")}
             </g>
           </g>
         </g>
@@ -496,13 +560,13 @@ const LogoRig = forwardRef<LogoRigHandle, { className?: string; title?: string; 
         </g>
         <g ref={g.frontThigh}>
           {C("frontThigh", "#0891b2")}
-          {disc(J.frontHip, CAP.frontHip)}
+          {disc("frontHip")}
           <g ref={g.frontShin}>
             {C("frontShin", "#65a30d")}
-            {disc(J.frontKnee, CAP.frontKnee)}
+            {disc("frontKnee")}
             <g ref={g.frontFoot}>
               {C("frontFoot", "#c2410c")}
-              {disc(J.frontAnkle, CAP.frontAnkle)}
+              {disc("frontAnkle")}
             </g>
           </g>
         </g>
