@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { NavHome, NavHomeOn, NavWork, NavWorkOn, NavSend, NavSendOn } from "@/components/icons/NavIcons";
 import { useChromeHidden } from "@/lib/hooks/useChromeHidden";
 import { cn } from "@/lib/utils";
+import LiquidTip from "@/components/chrome/LiquidTip";
 
 /** Three places: home, the work, and starting a project. Everything else is a link away. */
 const LINKS = [
@@ -37,15 +38,16 @@ export default function DockNav() {
           const Glyph = Active;
           return (
             <li key={href}>
+              <LiquidTip label={label} side="up">
               <Link
                 href={href}
                 aria-label={label}
-                title={label}
                 aria-current={on ? "page" : undefined}
-                className={cn("group grid size-12 place-items-center rounded-full sm:size-14 bg-[var(--logo)] text-[var(--brand-bg)] shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 active:scale-90", on && "ring-1 ring-[var(--logo)] ring-offset-[4px] ring-offset-[var(--brand-bg)]")}
+                className={cn("group grid size-12 place-items-center rounded-full sm:size-14 bg-[var(--logo)] text-[var(--brand-bg)] shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] active:scale-90", on && "ring-1 ring-[var(--logo)] ring-offset-[4px] ring-offset-[var(--brand-bg)]")}
               >
                 <Glyph className="size-5 sm:size-6" />
               </Link>
+              </LiquidTip>
             </li>
           );
         })}

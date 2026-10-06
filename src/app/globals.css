@@ -930,6 +930,12 @@ html:not(.loader-seen):not(.loader-done) [data-slot] {
    The old page is clipped to what's still flat and the flap, the back of the
    sheet, is its own transition layer with a shadow; both clip-paths are
    animated from script. */
+/* while the theme changes, nothing fades: it switches in one step under the peel */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
 .theme-flap {
   position: fixed;
   inset: 0;
@@ -990,4 +996,90 @@ html:not(:active-view-transition) .theme-flap {
   img {
     break-inside: avoid;
   }
+}
+
+/* ═══ LIQUID LABELS (components/chrome/LiquidTip) ═════════════════════════
+   The drop starts tucked into the button, small, then springs out to its
+   place; through the goo filter it stretches out of the circle and pinches
+   off. The words fade in once it has landed. */
+.liquid-tip {
+  position: relative;
+  display: inline-grid;
+  isolation: isolate;
+  transition: translate 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --liquid-gap: 14px;
+}
+.liquid-goo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  filter: url(#greene-goo);
+}
+/* the disc the drop pulls away from, tucked under the button */
+.liquid-goo::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 999px;
+  background: var(--logo);
+}
+.liquid-drop,
+.liquid-label {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 14px;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  pointer-events: none;
+}
+.liquid-up :is(.liquid-drop, .liquid-label) { bottom: calc(100% + var(--liquid-gap)); }
+.liquid-down :is(.liquid-drop, .liquid-label) { top: calc(100% + var(--liquid-gap)); }
+.liquid-start :is(.liquid-drop, .liquid-label) { left: 0; translate: none; }
+.liquid-end :is(.liquid-drop, .liquid-label) { left: auto; right: 0; translate: none; }
+
+/* the backing: sized by its own (invisible) copy of the words. At rest it is
+   shrunk and tucked behind the button, solid, so on hover it squeezes out of
+   the circle (the goo shows the neck) and on leave it is drawn back in */
+.liquid-drop {
+  background: var(--logo);
+  color: transparent;
+  transform: translateY(var(--liquid-from)) scale(0.3);
+  transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1);
+}
+.liquid-up { --liquid-from: calc(var(--liquid-gap) + 1.6rem); }
+.liquid-down { --liquid-from: calc(-1 * (var(--liquid-gap) + 1.6rem)); }
+.liquid-up .liquid-drop { transform-origin: 50% 100%; }
+.liquid-down .liquid-drop { transform-origin: 50% 0; }
+.liquid-start .liquid-drop { transform-origin: 1.5rem 0; }
+.liquid-end .liquid-drop { transform-origin: calc(100% - 1.5rem) 0; }
+
+.liquid-label {
+  color: var(--brand-paper);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.12s linear, transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (hover: hover) {
+  .liquid-tip:hover { translate: 0 -3px; }
+  .liquid-tip:hover .liquid-drop { transform: none; }
+  .liquid-tip:hover .liquid-label { opacity: 1; transform: none; transition-delay: 0.18s; }
+}
+.liquid-tip:has(:focus-visible) .liquid-drop { transform: none; }
+.liquid-tip:has(:focus-visible) .liquid-label { opacity: 1; transform: none; transition-delay: 0.18s; }
+
+/* no pouring: the label simply fades in, in place */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-tip { transition: none; }
+  .liquid-tip:hover { translate: none; }
+  .liquid-drop,
+  .liquid-label { transform: none !important; opacity: 0; transition: opacity 0.15s linear; }
+  .liquid-tip:hover :is(.liquid-drop, .liquid-label),
+  .liquid-tip:has(:focus-visible) :is(.liquid-drop, .liquid-label) { opacity: 1; transition-delay: 0s; }
 }

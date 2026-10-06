@@ -88,14 +88,22 @@ export function peelTheme(apply: () => void) {
   } catch {
     /* keep the device setting */
   }
+  // every colour transition on the page (hundreds of elements) would start
+  // at once on the switch and be restyled each frame, starving the peel of
+  // frames for its first half; the theme changes in one step instead
+  const root = document.documentElement;
+  const still = () => root.classList.add("theme-switching");
+  const settle = () => requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("theme-switching")));
+
   if (!doc.startViewTransition || document.hidden || motionOff) {
+    still();
     apply();
+    settle();
     return;
   }
 
   // the flap is the back of the current sheet, so it takes the current
   // theme's paper, a touch shaded by its ink
-  const root = document.documentElement;
   const css = getComputedStyle(root);
   const paper = css.getPropertyValue("--brand-bg").trim() || "#fafaf7";
   const ink = css.getPropertyValue("--brand-text").trim() || "#1a1a1a";
@@ -104,6 +112,7 @@ export function peelTheme(apply: () => void) {
   flapEl.style.background = `linear-gradient(135deg, color-mix(in srgb, ${paper} 94%, ${ink}), color-mix(in srgb, ${paper} 84%, ${ink}))`;
 
   const t = doc.startViewTransition(() => {
+    still();
     apply();
     document.body.appendChild(flapEl);
   });
@@ -125,5 +134,6 @@ export function peelTheme(apply: () => void) {
     .finally(() => {
       running.forEach((a) => a.cancel());
       flapEl.remove();
+      settle();
     });
 }
