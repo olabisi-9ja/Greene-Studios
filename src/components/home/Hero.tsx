@@ -66,16 +66,16 @@ export default function Hero() {
         )))}
       </div>
 
-      <p className="mt-8 text-base text-[var(--brand-text-secondary)] sm:text-lg">We design and build</p>
+      <p className="mt-8 text-base text-[var(--brand-text-secondary)] sm:text-base">We design and build</p>
       {/* clipped top and bottom for the roll-in only, never sideways, so the
           tight tracking can't shave the last letter */}
-      <h1 className="mt-1 h-[1.3em] pr-[0.08em] whitespace-nowrap text-[clamp(2.4rem,9vw,6.5rem)] font-semibold leading-[1.3] tracking-[-0.045em] [overflow:visible_clip]">
+      <h1 className="mt-1 h-[1.3em] pr-[0.08em] whitespace-nowrap text-display font-semibold leading-[1.3] tracking-[-0.045em] [overflow:visible_clip]">
         <span className="sr-only">We design and build {WORDS.map((w) => w.word.toLowerCase()).join(", ")}.</span>
         <span key={word} aria-hidden="true" className={`block ${still ? "" : "fx-roll-in"}`}>
           {word}
         </span>
       </h1>
-      <p key={line} aria-hidden="true" className={`mt-2 min-h-[3.2em] max-w-[34ch] text-lg leading-snug sm:text-xl ${still ? "" : "fx-fade-up"}`}>
+      <p key={line} aria-hidden="true" className={`mt-2 min-h-[3.2em] max-w-[34ch] text-base leading-snug sm:text-title ${still ? "" : "fx-fade-up"}`}>
         {line}
       </p>
     </section>

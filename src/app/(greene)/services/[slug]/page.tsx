@@ -34,7 +34,7 @@ export async function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.href.replace("/services/", "") }));
 }
 
-const h2 = "text-[clamp(1.9rem,3.6vw,2.8rem)] font-semibold leading-[1] tracking-[-0.04em]";
+const h2 = "text-title font-semibold leading-[1] tracking-[-0.04em]";
 
 /** One service: what it is, who it's for, how we go about it, what you get. */
 export default async function ServicePage({ params }: Props) {
@@ -62,12 +62,12 @@ export default async function ServicePage({ params }: Props) {
       <PageIntro lottie={LOTTIE[service.id]} label="Service" title={service.title} lead={service.description} />
 
       <div className="mx-auto -mt-4 flex max-w-[1400px] flex-wrap items-center justify-center gap-6 px-5 pb-20 sm:px-8">
-        <p className="text-2xl font-semibold tracking-[-0.03em]">
+        <p className="text-title font-semibold tracking-[-0.03em]">
           <Price usd={service.fromUsd} from />
         </p>
         <Link
           href="/contact"
-          className="inline-flex h-12 items-center rounded-[6px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)] transition-opacity hover:opacity-90"
+          className="inline-flex h-12 items-center rounded-[6px] bg-[var(--brand-accent)] px-6 font-semibold text-[var(--brand-on-accent)] transition-opacity hover:opacity-90"
         >
           Start a project
         </Link>
@@ -76,7 +76,7 @@ export default async function ServicePage({ params }: Props) {
       <section className="mx-auto grid max-w-[1400px] gap-16 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:gap-24">
         <div>
           <h2 className={h2}>What it is</h2>
-          <p className="mt-6 max-w-[54ch] text-lg leading-relaxed">{service.whatIsIt}</p>
+          <p className="mt-6 max-w-[54ch] text-base leading-relaxed">{service.whatIsIt}</p>
         </div>
         <div>
           <h2 className={h2}>Who it&apos;s for</h2>
@@ -95,7 +95,7 @@ export default async function ServicePage({ params }: Props) {
         <ul className="m-0 mt-8 grid list-none gap-4 p-0 md:grid-cols-3">
           {service.approach.map((a) => (
             <li key={a.title} className="rounded-[12px] bg-[var(--brand-surface)] p-7 shadow-[0_1px_0_var(--brand-border)]">
-              <h3 className="text-xl font-semibold tracking-[-0.02em]">{a.title}</h3>
+              <h3 className="text-title font-semibold tracking-[-0.02em]">{a.title}</h3>
               <p className="mt-3 leading-relaxed text-[var(--brand-text-secondary)]">{a.desc}</p>
             </li>
           ))}

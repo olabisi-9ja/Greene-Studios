@@ -26,7 +26,7 @@ export default function TeamPage() {
           {TEAM.map((p, i) => (
             <li key={p.name} className={i === 0 && TEAM.length === 1 ? "sm:col-span-2 lg:col-start-2 lg:col-span-1" : ""}>
               {p.image && <Pic src={p.image} alt={p.name} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />}
-              <h2 className="mt-6 text-2xl font-semibold tracking-[-0.03em]">{p.name}</h2>
+              <h2 className="mt-6 text-title font-semibold tracking-[-0.03em]">{p.name}</h2>
               <p className="mt-1 text-[var(--brand-text-secondary)]">{p.role}</p>
               <p className="mt-4 max-w-[42ch] leading-relaxed">{p.bio}</p>
             </li>

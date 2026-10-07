@@ -167,9 +167,9 @@ export default function StartQuiz() {
     return (
       <div aria-live="polite">
         <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Your starting point</p>
-        <h2 className="mt-3 text-[clamp(2.4rem,6vw,4.5rem)] font-semibold leading-none tracking-[-0.045em]">{pkg.name}</h2>
-        <p className="mt-4 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">{pkg.pitch}</p>
-        <p className="mt-6 text-xl font-semibold">
+        <h2 className="mt-3 text-display font-semibold leading-none tracking-[-0.045em]">{pkg.name}</h2>
+        <p className="mt-4 max-w-[52ch] text-base text-[var(--brand-text-secondary)]">{pkg.pitch}</p>
+        <p className="mt-6 text-title font-semibold">
           <Price usd={pkg.priceUsd} from={pkg.priceFrom} per={pkg.pricePer} /> <span className="font-normal text-[var(--brand-text-secondary)]">· {pkg.timeline}</span>
         </p>
         {result.reasons.length > 0 && (
@@ -187,11 +187,11 @@ export default function StartQuiz() {
         <div className="mt-10 flex flex-wrap gap-3">
           <Link
             href={`/contact?package=${pkg.id}`}
-            className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)]"
+            className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[var(--brand-accent)] px-6 font-semibold text-[var(--brand-on-accent)]"
           >
             Send us a brief <IconArrow className="size-4" />
           </Link>
-          <Link href="/pricing" className="inline-flex h-12 items-center rounded-[4px] border border-[var(--brand-text)] px-6 font-medium">
+          <Link href="/pricing" className="inline-flex h-12 items-center rounded-[4px] border border-[var(--brand-text)] px-6 font-semibold">
             Compare all packages
           </Link>
           <button
@@ -200,7 +200,7 @@ export default function StartQuiz() {
               setAnswers({});
               setStep(0);
             }}
-            className="inline-flex h-12 items-center px-2 font-medium text-[var(--brand-text-secondary)] underline-offset-4 hover:underline"
+            className="inline-flex h-12 items-center px-2 font-semibold text-[var(--brand-text-secondary)] underline-offset-4 hover:underline"
           >
             Start over
           </button>
@@ -228,7 +228,7 @@ export default function StartQuiz() {
       </div>
 
       <fieldset key={q.id} className="m-0 border-0 p-0">
-        <legend className="text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.04em]">{q.title}</legend>
+        <legend className="text-display font-semibold leading-[1.02] tracking-[-0.04em]">{q.title}</legend>
         {q.hint && <p className="mt-3 text-[var(--brand-text-secondary)]">{q.hint}</p>}
 
         {q.kind !== "scale" ? (
@@ -260,7 +260,7 @@ export default function StartQuiz() {
               const v = (answers[q.id] as Record<string, number>)?.[r.id];
               return (
                 <fieldset key={r.id} className="m-0 border-0 border-b border-[var(--brand-border)] p-0 pb-6">
-                  <legend className="mb-3 text-lg">{r.label}</legend>
+                  <legend className="mb-3 text-base">{r.label}</legend>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {SCALE.map((s, n) => (
                       <label
@@ -286,7 +286,7 @@ export default function StartQuiz() {
           <button
             type="button"
             onClick={() => setStep((s) => s - 1)}
-            className="inline-flex h-12 items-center rounded-[4px] border border-[var(--brand-border)] px-6 font-medium"
+            className="inline-flex h-12 items-center rounded-[4px] border border-[var(--brand-border)] px-6 font-semibold"
           >
             Back
           </button>
@@ -294,7 +294,7 @@ export default function StartQuiz() {
         <button
           type="submit"
           disabled={!answered(q)}
-          className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[var(--brand-accent)] px-6 font-medium text-[var(--brand-on-accent)] transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[var(--brand-accent)] px-6 font-semibold text-[var(--brand-on-accent)] transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
         >
           {step === QUESTIONS.length - 1 ? "See my result" : "Next"} <IconArrow className="size-4" />
         </button>

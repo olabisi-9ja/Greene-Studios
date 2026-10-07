@@ -24,7 +24,7 @@ export default function Services() {
   return (
     <section className="px-5 py-24 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-[1400px]">
-        <h2 className="text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
+        <h2 className="text-display font-semibold leading-[0.95] tracking-[-0.045em]">
           What we do
         </h2>
 
@@ -39,8 +39,8 @@ export default function Services() {
                   className="block h-auto w-full"
                 />
                 <div className="flex flex-1 flex-col p-7 sm:p-9">
-                  <h3 className="text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold leading-none tracking-[-0.035em]">{g.title}</h3>
-                  <p className="mt-4 max-w-[40ch] text-lg text-[var(--brand-text-secondary)]">{BLURB[g.id]}</p>
+                  <h3 className="text-title font-semibold leading-none tracking-[-0.035em]">{g.title}</h3>
+                  <p className="mt-4 max-w-[40ch] text-base text-[var(--brand-text-secondary)]">{BLURB[g.id]}</p>
                   <p className="mt-auto pt-8 text-sm leading-relaxed text-[var(--brand-text-secondary)]">{g.items.join(" · ")}</p>
                 </div>
               </article>

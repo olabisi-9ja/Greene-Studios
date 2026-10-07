@@ -29,7 +29,7 @@ export function KindChips({ kind }: { kind: string }) {
       {kind.split("·").map((k) => k.trim()).map((k) => (
         <li
           key={k}
-          className="inline-flex items-center gap-1.5 rounded-[6px] border border-[var(--brand-border)] bg-[var(--brand-surface)] px-2.5 py-1.5 text-sm text-[var(--brand-text)]"
+          className="inline-flex items-center gap-2 rounded-[6px] border border-[var(--brand-border)] bg-[var(--brand-surface)] px-3 py-2 text-sm text-[var(--brand-text)]"
         >
           <span className="text-[var(--logo)]">{iconFor(k)}</span>
           {k}
@@ -41,7 +41,7 @@ export function KindChips({ kind }: { kind: string }) {
 
 export function ViewProject({ href }: { href: string }) {
   return (
-    <Link href={href} className="group inline-flex items-center gap-3 font-medium">
+    <Link href={href} className="group inline-flex items-center gap-3 font-semibold">
       View project
       <span className="grid size-10 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] transition-transform duration-300 group-hover:translate-x-1">
         <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

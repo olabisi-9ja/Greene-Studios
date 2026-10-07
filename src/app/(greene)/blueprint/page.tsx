@@ -56,9 +56,9 @@ function Slide({ id, title, body, children }: { id: string; title: string; body:
     // every slide but the first is skipped by the browser until scrolled near (.cv-auto)
     <section id={id} className={`${id === "primary-logo" ? "" : "cv-auto "}grid scroll-mt-24 gap-8 border-t border-[var(--brand-border)] py-14 md:grid-cols-[1fr_2fr] md:gap-12 md:py-20`}>
       <div className="flex flex-col md:sticky md:top-28 md:min-h-[min(60vh,520px)] md:self-start">
-        <h2 className="text-[clamp(1.9rem,3.4vw,2.8rem)] font-semibold leading-[1] tracking-[-0.04em]">{title}</h2>
+        <h2 className="text-title font-semibold leading-[1] tracking-[-0.04em]">{title}</h2>
         <div className="mt-5 max-w-[42ch] space-y-3 leading-relaxed text-[var(--brand-text-secondary)]">{body}</div>
-        <p className="mt-8 text-xs font-light text-[var(--brand-text-secondary)] md:mt-auto md:pt-10">Copyright © {YEAR} Greene Studios</p>
+        <p className="mt-8 text-sm font-normal text-[var(--brand-text-secondary)] md:mt-auto md:pt-10">Copyright © {YEAR} Greene Studios</p>
       </div>
       <div className="min-w-0">{children}</div>
     </section>
@@ -68,8 +68,8 @@ function Slide({ id, title, body, children }: { id: string; title: string; body:
 function Phase({ title, lead }: { title: string; lead: string }) {
   return (
     <div className="pb-6 pt-24">
-      <h2 className="text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[0.9] tracking-[-0.05em]">{title}</h2>
-      <p className="mt-4 max-w-[48ch] text-lg text-[var(--brand-text-secondary)]">{lead}</p>
+      <h2 className="text-display font-semibold leading-[0.9] tracking-[-0.05em]">{title}</h2>
+      <p className="mt-4 max-w-[48ch] text-base text-[var(--brand-text-secondary)]">{lead}</p>
     </div>
   );
 }
@@ -108,17 +108,17 @@ export default function BlueprintPage() {
 
       <header className="grid gap-10 md:grid-cols-[1fr_2fr] md:gap-12">
         <div>
-          <h1 className="text-[clamp(3.2rem,10vw,8rem)] font-semibold leading-[0.9] tracking-[-0.05em]">Blueprint</h1>
-          <p className="mt-6 max-w-[40ch] text-lg text-[var(--brand-text-secondary)]">
+          <h1 className="text-display font-semibold leading-[0.9] tracking-[-0.05em]">Blueprint</h1>
+          <p className="mt-6 max-w-[40ch] text-base text-[var(--brand-text-secondary)]">
             The Greene brand in one place. Every colour, file, font and rule here copies with one tap, so it can go straight into your work.
           </p>
         </div>
         <dl className="m-0 grid content-end gap-3 sm:grid-cols-2">
           {BASICS.map((b) => (
             <div key={b.label} className="rounded-[10px] bg-[var(--brand-surface-secondary)] p-4">
-              <dt className="text-xs text-[var(--brand-text-secondary)]">{b.label}</dt>
+              <dt className="text-sm text-[var(--brand-text-secondary)]">{b.label}</dt>
               <dd className="m-0 mt-1">
-                <Copy value={b.value} label={b.label} className="text-lg font-semibold" />
+                <Copy value={b.value} label={b.label} className="text-base font-semibold" />
               </dd>
             </div>
           ))}
@@ -144,10 +144,10 @@ export default function BlueprintPage() {
             <Lockup className="text-[clamp(2.6rem,6vw,4.4rem)]" />
           </LogoTile>
           <LogoTile ground={ink} ink={paper} name="On dark" svg={lockupSvg(paper)} file="greene-logo-paper.svg">
-            <Lockup className="text-[clamp(2.6rem,6vw,4.4rem)]" />
+            <Lockup className="text-display" />
           </LogoTile>
           <LogoTile ground={studio} ink={yellow} name="On brand colour" svg={lockupSvg(yellow)} file="greene-logo-yellow.svg">
-            <Lockup className="text-[clamp(2.6rem,6vw,4.4rem)]" />
+            <Lockup className="text-display" />
           </LogoTile>
         </div>
       </Slide>
@@ -187,7 +187,7 @@ export default function BlueprintPage() {
         <div className="rounded-[10px] bg-[var(--brand-surface-secondary)] p-6 sm:p-10">
           <p className="text-[clamp(4rem,12vw,9rem)] font-semibold leading-none tracking-[-0.05em]">Aa</p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Copy value={TYPEFACE.name} label="font name" className="text-lg font-semibold" />
+            <Copy value={TYPEFACE.name} label="font name" className="text-base font-semibold" />
             <Copy value={TYPEFACE.stack} label="CSS font stack">CSS font stack</Copy>
             <Copy value={TYPEFACE.css} label="web font import">Web font import</Copy>
             <Copy value={TYPEFACE.link} label="Google Fonts link">Google Fonts link</Copy>
@@ -255,7 +255,7 @@ export default function BlueprintPage() {
           {COLOURS.map((c) => (
             <div key={c.hex} className="rounded-[10px] p-6 sm:p-8" style={{ background: c.hex, color: c.on, boxShadow: "inset 0 0 0 1px var(--brand-border)" }}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                <Copy value={c.name} label="colour name" tone="on-color" className="text-2xl font-semibold tracking-[-0.03em]" />
+                <Copy value={c.name} label="colour name" tone="on-color" className="text-title font-semibold tracking-[-0.03em]" />
                 <p className="text-sm opacity-80">{c.role}</p>
               </div>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -294,7 +294,7 @@ export default function BlueprintPage() {
           ].map((src) => (
             <figure key={src} className="m-0 break-inside-avoid">
               <Pic src={src} alt="" sizes="(min-width: 1024px) 300px, 45vw" className="block h-auto w-full rounded-[8px]" />
-              <Copy value={`https://greene-studios.vercel.app${src}`} label="picture link" className="mt-2 text-xs">
+              <Copy value={`https://greene-studios.vercel.app${src}`} label="picture link" className="mt-2 text-sm">
                 Copy link
               </Copy>
             </figure>
@@ -367,10 +367,10 @@ export default function BlueprintPage() {
               <p className="text-xl font-semibold tracking-[-0.02em]">Greene Studios</p>
             </div>
             <div className="flex aspect-[85/55] flex-col justify-between rounded-[8px] bg-[#FAFAF7] p-6 text-[#1A1A1A] shadow-[inset_0_0_0_1px_var(--brand-border)]">
-              <p className="text-xs font-light">Digital Design Studio</p>
+              <p className="text-sm font-normal">Digital Design Studio</p>
               <div className="text-sm">
                 <p className="font-semibold">hello@greenestudios.com</p>
-                <p className="font-light">greene-studios.vercel.app</p>
+                <p className="font-normal">greene-studios.vercel.app</p>
               </div>
             </div>
           </div>

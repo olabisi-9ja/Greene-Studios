@@ -27,7 +27,7 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-[1400px] px-5 pb-32 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2 className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-semibold leading-[0.98] tracking-[-0.045em]">Every service</h2>
+          <h2 className="text-display font-semibold leading-[0.98] tracking-[-0.045em]">Every service</h2>
           <Link href="/pricing" className="font-semibold underline-offset-4 hover:underline">
             See packages and prices <span aria-hidden="true">→</span>
           </Link>
@@ -39,11 +39,11 @@ export default function ServicesPage() {
                 href={s.href}
                 className="group grid gap-2 border-b border-[var(--brand-border)] py-6 transition-colors hover:text-[var(--logo)] md:grid-cols-[1fr_1.4fr_auto] md:items-baseline md:gap-8"
               >
-                <span className="text-2xl font-semibold tracking-[-0.03em]">{s.title}</span>
+                <span className="text-title font-semibold tracking-[-0.03em]">{s.title}</span>
                 <span className="text-[var(--brand-text-secondary)]">{s.shortDesc || s.description}</span>
                 <span className="flex items-center gap-4 text-sm text-[var(--brand-text-secondary)]">
                   <Price usd={s.fromUsd} from />
-                  <span aria-hidden="true" className="text-lg text-[var(--brand-text)] transition-transform duration-300 group-hover:translate-x-1">
+                  <span aria-hidden="true" className="text-base text-[var(--brand-text)] transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
                 </span>

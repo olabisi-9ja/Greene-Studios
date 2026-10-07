@@ -53,13 +53,13 @@ export default function MapPage() {
   return (
     <div className="mx-auto max-w-[1400px] px-5 pb-40 pt-32 sm:px-8 sm:pt-40">
       <MarkSeen path="/map" />
-      <h1 className="text-[clamp(3.2rem,10vw,8rem)] font-semibold leading-[0.9] tracking-[-0.05em]">Map</h1>
-      <p className="mt-6 max-w-[40ch] text-lg text-[var(--brand-text-secondary)]">Every page on the site, in one place.</p>
+      <h1 className="text-display font-semibold leading-[0.9] tracking-[-0.05em]">Map</h1>
+      <p className="mt-6 max-w-[40ch] text-base text-[var(--brand-text-secondary)]">Every page on the site, in one place.</p>
 
       <div className="mt-20 grid gap-x-10 gap-y-16 md:grid-cols-2 xl:grid-cols-3">
         {GROUPS.map((g) => (
           <nav key={g.title} aria-label={g.title}>
-            <h2 className="border-b border-[var(--brand-border)] pb-3 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">
+            <h2 className="border-b border-[var(--brand-border)] pb-3 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-[var(--brand-text-secondary)]">
               {g.title}
             </h2>
             <ul className="m-0 mt-2 list-none p-0">

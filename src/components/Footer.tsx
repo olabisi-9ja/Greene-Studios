@@ -35,12 +35,12 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-[1fr_1.5fr]">
           <div>
-            <p className="text-[clamp(1.8rem,3.6vw,2.8rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
+            <p className="text-title font-semibold leading-[1.02] tracking-[-0.035em]">
               Have a project in mind?
             </p>
             <a
               href={`mailto:${BRAND.email}`}
-              className="mt-6 inline-block text-xl font-semibold underline decoration-[var(--logo)] decoration-2 underline-offset-[6px]"
+              className="mt-6 inline-block text-title font-semibold underline decoration-[var(--logo)] decoration-2 underline-offset-[6px]"
             >
               {BRAND.email}
             </a>
@@ -50,7 +50,7 @@ export default function Footer() {
           {/* the page list with the cat beside it, filling the space on its right */}
           <div className="flex items-center gap-6 sm:gap-10">
             <nav aria-label="Footer" className="shrink-0">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Pages</p>
+              <p className="font-mono text-sm font-semibold uppercase tracking-[0.1em] text-[var(--brand-text-secondary)]">Pages</p>
               <ul className="mt-4 list-none space-y-2 p-0">
                 {PAGES.map((p) => (
                   <li key={p.href}>

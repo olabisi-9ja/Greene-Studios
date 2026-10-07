@@ -10,10 +10,10 @@ export default function NextPage() {
           <div className="pointer-events-none w-[min(420px,80vw)] [--brand-bg:#111] [--brand-text:#fafaf7]">
             <BrandLottie name="next" className="aspect-square w-full" />
           </div>
-          <h2 className="mt-4 max-w-[15ch] text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
+          <h2 className="mt-4 max-w-[15ch] text-display font-semibold leading-[0.95] tracking-[-0.045em]">
             Got something to build?
           </h2>
-          <p className="mt-5 text-lg text-white/70">Tell us about it. Two minutes.</p>
+          <p className="mt-5 text-base text-white/70">Tell us about it. Two minutes.</p>
           <div className="mt-10">
             <PlateLink href="/contact">Start a project</PlateLink>
           </div>

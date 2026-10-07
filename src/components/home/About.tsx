@@ -17,13 +17,14 @@ const FACTS = [
   { pre: "", value: "30", usd: 0, label: "Days of support after launch" },
 ];
 
-/** Sizes and colours per card, in the order of FACTS: deliberately uneven. */
+/** Sizes per card, in the order of FACTS: deliberately uneven. All on the
+ *  one neutral surface (the 30%); only the price takes the accent (the 10%). */
 const CARD = [
-  "col-span-2 min-h-[220px] bg-[var(--logo)] text-[var(--brand-bg)] sm:col-span-4 sm:row-span-2 sm:min-h-[300px]",
-  "min-h-[150px] bg-[var(--brand-surface)] sm:col-span-2",
-  "min-h-[150px] bg-[var(--brand-surface)] sm:col-span-2",
-  "min-h-[170px] bg-[var(--brand-surface)] sm:col-span-2",
-  "col-span-2 min-h-[150px] bg-[var(--brand-text)] text-[var(--brand-bg)] sm:col-span-4",
+  "col-span-2 min-h-[224px] sm:col-span-4 sm:row-span-2 sm:min-h-[304px]",
+  "min-h-[152px] sm:col-span-2",
+  "min-h-[152px] sm:col-span-2",
+  "min-h-[168px] sm:col-span-2",
+  "col-span-2 min-h-[152px] sm:col-span-4",
 ];
 
 export default function About() {
@@ -31,7 +32,7 @@ export default function About() {
     <section className="px-5 py-24 sm:px-8 sm:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-20">
         <div>
-          <p className="max-w-[24ch] text-[clamp(1.9rem,4.4vw,3.6rem)] font-semibold leading-[1.04] tracking-[-0.035em]">Greene Studios designs and builds brands, websites and apps. One team from the first sketch to launch day, so nothing gets lost between design and code.</p>
+          <p className="max-w-[24ch] text-display font-semibold leading-[1.04] tracking-[-0.035em]">Greene Studios designs and builds brands, websites and apps. One team from the first sketch to launch day, so nothing gets lost between design and code.</p>
 
           {/* the facts as cards of different sizes: the price leads, the rest fall in around it */}
           <dl className="m-0 mt-16 grid grid-cols-2 gap-3 sm:grid-cols-6">
@@ -39,17 +40,17 @@ export default function About() {
               <div
                 key={f.label}
                 className={[
-                  "relative flex flex-col justify-between overflow-hidden rounded-[18px] p-6",
+                  "relative flex flex-col justify-between overflow-hidden rounded-[16px] border border-[var(--brand-border)] bg-[var(--brand-surface)] p-6",
                   CARD[i],
                 ].join(" ")}
               >
                 {f.usd > 0 && (
-                  <div aria-hidden="true" className="lottie-on-accent pointer-events-none absolute -right-2 bottom-2 w-[52%] max-w-[230px] sm:-right-4 sm:bottom-4">
+                  <div aria-hidden="true" className="pointer-events-none absolute -right-2 bottom-2 w-[52%] max-w-[230px] sm:-right-4 sm:bottom-4">
                     <BrandLottie name="hero-brands" className="aspect-[4/3] w-full" />
                   </div>
                 )}
-                <dt className="relative order-2 mt-8 max-w-[18ch] text-sm font-medium leading-snug opacity-80">{f.label}</dt>
-                <dd className="relative order-1 m-0 text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em]">
+                <dt className="relative order-2 mt-8 max-w-[18ch] text-sm font-semibold leading-snug opacity-80">{f.label}</dt>
+                <dd className={["relative order-1 m-0 text-display font-semibold leading-none tracking-[-0.045em]", f.usd ? "text-[var(--logo)]" : ""].join(" ")}>
                   {f.usd ? (
                     <Price usd={f.usd} />
                   ) : (

@@ -70,23 +70,19 @@ export const TYPEFACE = {
   name: "Montserrat",
   stack: '"Montserrat", system-ui, Arial, sans-serif',
   link: "https://fonts.google.com/specimen/Montserrat",
-  css: '@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");',
+  css: '@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");',
   weights: [
-    { name: "Light", value: 300 },
     { name: "Regular", value: 400 },
-    { name: "Medium", value: 500 },
     { name: "SemiBold", value: 600 },
-    { name: "Bold", value: 700 },
   ],
 };
 
-/** How the weights are used, as set on the site. */
+/** The type scale: four sizes and two weights, as set on the site. */
 export const HIERARCHY = [
-  { level: "Headings", weight: "SemiBold 600", use: "Hero statements, page titles, section dividers", css: "font-weight: 600; font-size: clamp(2.4rem, 6vw, 5rem); letter-spacing: -0.045em; line-height: 0.95;", sample: "Design that moves", size: "text-[2.4rem]", w: 600, track: "-0.045em" },
-  { level: "Subheadings", weight: "Medium 500", use: "Section titles, card titles, eyebrows", css: "font-weight: 500; font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: -0.03em; line-height: 1.1;", sample: "Brand identity", size: "text-[1.6rem]", w: 500, track: "-0.03em" },
-  { level: "Body", weight: "Regular 400", use: "Paragraphs, descriptions, documents", css: "font-weight: 400; font-size: 1.125rem; line-height: 1.6;", sample: "We design and build brands, websites and apps.", size: "text-lg", w: 400, track: "0" },
-  { level: "Label", weight: "SemiBold 600 / Medium 500", use: "Buttons, tags, navigation, captions on cards", css: "font-weight: 600; font-size: 0.875rem; letter-spacing: -0.01em; line-height: 1;", sample: "Start a project", size: "text-sm", w: 600, track: "-0.01em" },
-  { level: "Caption", weight: "Light 300", use: "Footnotes, image credits, fine print", css: "font-weight: 300; font-size: 0.75rem; line-height: 1.5;", sample: "© 2026 Greene Studios", size: "text-xs", w: 300, track: "0" },
+  { level: "Display", weight: "SemiBold 600", use: "Hero statements, page and section titles, big numbers", css: "font-weight: 600; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -0.045em; line-height: 1;", sample: "Design that moves", size: "text-[2.5rem]", w: 600, track: "-0.045em" },
+  { level: "Title", weight: "SemiBold 600", use: "Card titles, questions, sub-sections", css: "font-weight: 600; font-size: clamp(1.5rem, 2.6vw, 2rem); letter-spacing: -0.03em; line-height: 1.15;", sample: "Brand identity", size: "text-[1.5rem]", w: 600, track: "-0.03em" },
+  { level: "Body", weight: "Regular 400", use: "Paragraphs, descriptions, documents", css: "font-weight: 400; font-size: 1.125rem; line-height: 1.6;", sample: "We design and build brands, websites and apps.", size: "text-base", w: 400, track: "0" },
+  { level: "Small", weight: "SemiBold 600 / Regular 400", use: "Buttons, tags, navigation, captions, fine print", css: "font-weight: 600; font-size: 0.875rem; letter-spacing: -0.01em; line-height: 1.45;", sample: "Start a project", size: "text-sm", w: 600, track: "-0.01em" },
 ];
 
 const svg = (inner: string, viewBox: string) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">${inner}</svg>`;

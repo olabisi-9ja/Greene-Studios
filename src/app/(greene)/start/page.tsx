@@ -18,10 +18,10 @@ export default function StartPage() {
             <BrandLottie name="start" className="aspect-square w-full" />
           </div>
           <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Start here · about 2 minutes</p>
-          <h1 className="mt-4 text-[clamp(2.4rem,5.4vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
+          <h1 className="mt-4 text-display font-semibold leading-[0.98] tracking-[-0.045em]">
             Let&apos;s find the right place to start.
           </h1>
-          <p className="mt-5 max-w-[50ch] text-lg text-[var(--brand-text-secondary)]">
+          <p className="mt-5 max-w-[50ch] text-base text-[var(--brand-text-secondary)]">
             Six questions. Instant answer. No sign-up.
           </p>
         </div>

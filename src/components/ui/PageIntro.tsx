@@ -25,8 +25,8 @@ export default function PageIntro({
         </div>
       )}
       <p className="font-mono text-sm text-[var(--brand-text-secondary)]">{label}</p>
-      <h1 className="mt-4 max-w-[16ch] text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">{title}</h1>
-      {lead && <p className="mt-6 max-w-[52ch] text-lg text-[var(--brand-text-secondary)]">{lead}</p>}
+      <h1 className="mt-4 max-w-[16ch] text-display font-semibold leading-[0.95] tracking-[-0.045em]">{title}</h1>
+      {lead && <p className="mt-6 max-w-[52ch] text-base text-[var(--brand-text-secondary)]">{lead}</p>}
     </header>
   );
 }

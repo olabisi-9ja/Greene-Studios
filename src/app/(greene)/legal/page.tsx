@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 const UPDATED = "October 2026";
 
-const h2 = "scroll-mt-28 text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.04em]";
-const h3 = "mt-10 text-xl font-semibold tracking-[-0.02em]";
+const h2 = "scroll-mt-28 text-title font-semibold tracking-[-0.04em]";
+const h3 = "mt-10 text-title font-semibold tracking-[-0.02em]";
 const p = "mt-3 leading-relaxed text-[var(--brand-text-secondary)]";
 
 /** Privacy policy and terms, in plain language, describing what this site actually does. */
@@ -26,7 +26,7 @@ export default function LegalPage() {
     <>
       <PageIntro label="Legal" title="Privacy and terms." lead="What this website does with your information, and the terms for using it." />
 
-      <div className="mx-auto max-w-[68ch] px-5 pb-32 text-[1.05rem] sm:px-8">
+      <div className="mx-auto max-w-[68ch] px-5 pb-32 text-base sm:px-8">
         <nav aria-label="On this page" className="flex justify-center gap-8 border-y border-[var(--brand-border)] py-4 font-semibold">
           <Link href="#privacy" className="underline-offset-4 hover:underline">
             Privacy

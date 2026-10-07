@@ -16,7 +16,7 @@ export default function FAQSection() {
           <BrandLottie name="questions" className="aspect-square w-full" />
         </div>
         <div>
-          <h2 className="max-w-[16ch] text-[clamp(2.2rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.04em]">
+          <h2 className="max-w-[16ch] text-display font-semibold leading-[0.98] tracking-[-0.04em]">
             Asked before every project.
           </h2>
           <div className="mt-14 border-t border-[var(--brand-border)]">
@@ -30,7 +30,7 @@ export default function FAQSection() {
                     className="flex w-full items-center justify-between gap-6 py-6 text-left"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-[clamp(1.15rem,2vw,1.5rem)] font-semibold tracking-[-0.02em]">{faq.question}</span>
+                    <span className="text-title font-semibold tracking-[-0.02em]">{faq.question}</span>
                     <span
                       aria-hidden="true"
                       className={cn(
@@ -43,7 +43,7 @@ export default function FAQSection() {
                   </button>
                   <div className={cn("grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                     <div className="overflow-hidden">
-                      <p className="max-w-2xl pb-7 text-lg leading-relaxed text-[var(--brand-text-secondary)]">{faq.answer}</p>
+                      <p className="max-w-2xl pb-7 text-base leading-relaxed text-[var(--brand-text-secondary)]">{faq.answer}</p>
                     </div>
                   </div>
                 </div>

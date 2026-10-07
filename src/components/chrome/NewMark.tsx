@@ -15,7 +15,7 @@ export function NewMark({ path }: { path: string }) {
     }
   }, [path]);
   if (!fresh) return null;
-  return <span className="ml-2 align-middle text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-[var(--logo)]">New</span>;
+  return <span className="ml-2 align-middle text-sm font-semibold uppercase tracking-[0.08em] text-[var(--logo)]">New</span>;
 }
 
 /** Put on a page so its NewMark goes quiet once it's been seen. */

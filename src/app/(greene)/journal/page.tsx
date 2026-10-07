@@ -27,10 +27,10 @@ export default function JournalPage() {
             <p className={meta}>
               {lead.category} · {lead.readTime}
             </p>
-            <h2 className="mt-3 text-[clamp(1.9rem,3.6vw,3rem)] font-semibold leading-[1.02] tracking-[-0.04em] group-hover:text-[var(--logo)]">
+            <h2 className="mt-3 text-display font-semibold leading-[1.02] tracking-[-0.04em] group-hover:text-[var(--logo)]">
               {lead.title}
             </h2>
-            <p className="mt-4 max-w-[46ch] text-lg text-[var(--brand-text-secondary)]">{lead.excerpt}</p>
+            <p className="mt-4 max-w-[46ch] text-base text-[var(--brand-text-secondary)]">{lead.excerpt}</p>
           </div>
         </Link>
 
@@ -42,7 +42,7 @@ export default function JournalPage() {
                 <p className={`${meta} mt-5`}>
                   {a.category} · {a.readTime}
                 </p>
-                <h3 className="mt-2 text-xl font-semibold leading-snug tracking-[-0.02em] group-hover:text-[var(--logo)]">{a.title}</h3>
+                <h3 className="mt-2 text-title font-semibold leading-snug tracking-[-0.02em] group-hover:text-[var(--logo)]">{a.title}</h3>
               </Link>
             </li>
           ))}

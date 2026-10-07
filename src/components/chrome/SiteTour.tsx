@@ -145,13 +145,13 @@ export default function SiteTour() {
         style={cardStyle}
         key={step}
       >
-        <p className="text-xs font-semibold text-[var(--brand-text-secondary)]">
+        <p className="text-sm font-semibold text-[var(--brand-text-secondary)]">
           {step + 1} of {STEPS.length}
         </p>
-        <h2 id="tour-title" className="mt-1 text-lg font-semibold tracking-[-0.02em]">
+        <h2 id="tour-title" className="mt-1 text-base font-semibold tracking-[-0.02em]">
           {current.title}
         </h2>
-        <p className="mt-2 text-[0.95rem] leading-relaxed text-[var(--brand-text-secondary)]">{current.body}</p>
+        <p className="mt-2 text-base leading-relaxed text-[var(--brand-text-secondary)]">{current.body}</p>
         <div className="mt-5 flex items-center justify-between">
           <button type="button" onClick={finish} className="text-sm text-[var(--brand-text-secondary)] underline-offset-4 hover:underline">
             Skip

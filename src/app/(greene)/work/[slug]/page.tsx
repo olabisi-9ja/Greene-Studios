@@ -87,7 +87,7 @@ export default async function ProjectPage({ params }: Props) {
       <section className="bg-[var(--brand-surface-secondary)] px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-[1400px]">
           <div className="flex flex-wrap items-start justify-between gap-8">
-            <dl className="m-0 grid gap-1.5 text-sm">
+            <dl className="m-0 grid gap-2 text-sm">
               {[
                 ["Type", p.kind],
                 ["Client", p.name],
@@ -95,20 +95,20 @@ export default async function ProjectPage({ params }: Props) {
               ].map(([k, v]) => (
                 <div key={k} className="flex gap-2">
                   <dt className="text-[var(--brand-text-secondary)]">{k}:</dt>
-                  <dd className="m-0 font-medium">{v}</dd>
+                  <dd className="m-0 font-semibold">{v}</dd>
                 </div>
               ))}
             </dl>
             {p.url && (
-              <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-sm font-medium underline underline-offset-4 hover:text-[var(--logo)]">
+              <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold underline underline-offset-4 hover:text-[var(--logo)]">
                 Launch project
               </a>
             )}
           </div>
-          <h1 className="mt-14 max-w-[22ch] text-[clamp(2.2rem,5vw,4.2rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+          <h1 className="mt-14 max-w-[22ch] text-display font-semibold leading-[1.02] tracking-[-0.04em]">
             {p.name}: {p.line}
           </h1>
-          <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-[var(--brand-text-secondary)]">{p.about}</p>
+          <p className="mt-8 max-w-[60ch] text-base leading-relaxed text-[var(--brand-text-secondary)]">{p.about}</p>
         </div>
       </section>
 
@@ -120,8 +120,8 @@ export default async function ProjectPage({ params }: Props) {
               return (
                 <div key={k} className="grid py-6 sm:grid-cols-12 sm:py-12">
                   <div className="sm:col-span-6 sm:col-start-4">
-                    <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.03em]">{s.title}</h2>
-                    <p className="mt-4 text-lg leading-relaxed text-[var(--brand-text-secondary)]">{s.body}</p>
+                    <h2 className="text-title font-semibold tracking-[-0.03em]">{s.title}</h2>
+                    <p className="mt-4 text-base leading-relaxed text-[var(--brand-text-secondary)]">{s.body}</p>
                   </div>
                 </div>
               );
@@ -157,7 +157,7 @@ export default async function ProjectPage({ params }: Props) {
             {related.map((r) => (
               <Link key={r.slug} href={`/work/${r.slug}`} className="group block">
                 <Pic src={r.images[0]} alt="" sizes="(min-width: 640px) 50vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
-                <p className="mt-4 text-xl font-semibold tracking-[-0.02em] group-hover:text-[var(--logo)]">
+                <p className="mt-4 text-title font-semibold tracking-[-0.02em] group-hover:text-[var(--logo)]">
                   {r.name}: {r.line}
                 </p>
                 <p className="mt-1 text-sm text-[var(--brand-text-secondary)]">{r.kind}</p>

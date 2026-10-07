@@ -27,7 +27,7 @@ export default function Work({
     <section id="work" className="scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <Heading className="text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
+          <Heading className="text-display font-semibold leading-[0.95] tracking-[-0.045em]">
             {title}
           </Heading>
           {lottie && (
@@ -36,7 +36,7 @@ export default function Work({
             </div>
           )}
           {all && (
-            <Link href="/work" className="font-medium underline-offset-4 hover:underline">
+            <Link href="/work" className="font-semibold underline-offset-4 hover:underline">
               All projects
             </Link>
           )}
@@ -49,7 +49,7 @@ export default function Work({
             <article key={p.slug}>
               <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
                 <div>
-                  <Sub className="text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-none tracking-[-0.04em]">
+                  <Sub className="text-display font-semibold leading-none tracking-[-0.04em]">
                     {p.name}
                   </Sub>
                   <div className="mt-5 flex flex-wrap items-center justify-between gap-5">

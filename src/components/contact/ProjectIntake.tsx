@@ -38,7 +38,7 @@ const EMPTY: Answers = { type: "", budget: "", timeline: "", name: "", email: ""
 const STEPS = ["What", "Budget", "Timeline", "Details"];
 
 const field =
-  "w-full border-0 border-b-2 border-white/30 bg-transparent px-0 py-3 text-xl text-white placeholder:text-white/40 focus:border-[var(--logo)] focus:outline-none";
+  "w-full border-0 border-b-2 border-white/30 bg-transparent px-0 py-3 text-title text-white placeholder:text-white/40 focus:border-[var(--logo)] focus:outline-none";
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 
@@ -62,7 +62,7 @@ function Choices({
       {options.map((o) => {
         const on = value === o.id;
         return (
-          <label key={o.id} className="group flex cursor-pointer items-center gap-5 text-[clamp(1.15rem,2.2vw,1.5rem)] leading-snug">
+          <label key={o.id} className="group flex cursor-pointer items-center gap-5 text-title leading-snug">
             <input type="radio" name={name} checked={on} onChange={() => onPick(o.id)} className="peer sr-only" />
             <span
               aria-hidden="true"
@@ -136,10 +136,10 @@ export default function ProjectIntake() {
     return (
       <div aria-live="polite">
         <p className="font-mono text-sm text-white/70">Almost there</p>
-        <h2 className="mt-3 text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+        <h2 className="mt-3 text-display font-semibold leading-[1.02] tracking-[-0.04em] text-white">
           Your email app should be open.
         </h2>
-        <p className="mt-4 max-w-[52ch] text-lg text-white/70">
+        <p className="mt-4 max-w-[52ch] text-base text-white/70">
           Hit send there and we&apos;ll reply within hours, always within one working day. Nothing opened? Copy the brief and email it to{" "}
           <a href={`mailto:${BRAND.email}`} className="text-white underline underline-offset-4">
             {BRAND.email}
@@ -157,7 +157,7 @@ export default function ProjectIntake() {
           >
             {copied ? "Copied" : "Copy brief"}
           </button>
-          <a href={mailto} className="inline-flex h-12 items-center rounded-[4px] border border-white px-6 font-medium">
+          <a href={mailto} className="inline-flex h-12 items-center rounded-[4px] border border-white px-6 font-semibold">
             Open email again
           </a>
           <button
@@ -167,12 +167,12 @@ export default function ProjectIntake() {
               setStep(0);
               setSent(false);
             }}
-            className="inline-flex h-12 items-center px-2 font-medium text-white/70 underline-offset-4 hover:underline"
+            className="inline-flex h-12 items-center px-2 font-semibold text-white/70 underline-offset-4 hover:underline"
           >
             Start over
           </button>
         </div>
-        <a href="/gallery" className="mt-12 inline-flex items-center gap-2 text-lg font-semibold text-white underline-offset-4 hover:underline">
+        <a href="/gallery" className="mt-12 inline-flex items-center gap-2 text-base font-semibold text-white underline-offset-4 hover:underline">
           While you wait, see all our work <span aria-hidden="true">→</span>
         </a>
       </div>
@@ -211,7 +211,7 @@ export default function ProjectIntake() {
 
       {step === 0 && (
         <fieldset className="m-0 border-0 p-0">
-          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+          <legend className="text-display font-semibold leading-[1.02] tracking-[-0.04em] text-white">
             What do you need?
           </legend>
           <Choices name="type" options={TYPES} value={answers.type} onPick={(id) => set("type", id as TypeId)} />
@@ -220,7 +220,7 @@ export default function ProjectIntake() {
 
       {step === 1 && (
         <fieldset className="m-0 border-0 p-0">
-          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+          <legend className="text-display font-semibold leading-[1.02] tracking-[-0.04em] text-white">
             What budget are you working with?
           </legend>
           {preset && answers.type === preset && (
@@ -242,7 +242,7 @@ export default function ProjectIntake() {
 
       {step === 2 && (
         <fieldset className="m-0 border-0 p-0">
-          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+          <legend className="text-display font-semibold leading-[1.02] tracking-[-0.04em] text-white">
             When do you want to start?
           </legend>
           <Choices
@@ -256,7 +256,7 @@ export default function ProjectIntake() {
 
       {step === 3 && (
         <fieldset className="m-0 border-0 p-0">
-          <legend className="text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+          <legend className="text-display font-semibold leading-[1.02] tracking-[-0.04em] text-white">
             Tell us about it.
           </legend>
           <p className="mt-3 text-white/60">A few lines is enough.</p>
@@ -299,7 +299,7 @@ export default function ProjectIntake() {
       <button
         type="submit"
         disabled={!valid[step]}
-        className="mt-12 flex h-14 w-full items-center justify-center bg-[var(--logo)] text-lg font-semibold text-[#141414] transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
+        className="mt-12 flex h-14 w-full items-center justify-center bg-[var(--logo)] text-base font-semibold text-[#141414] transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
       >
         {step === last ? "Send" : "Next"}
       </button>
