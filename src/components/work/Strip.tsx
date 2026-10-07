@@ -150,7 +150,7 @@ export default function Strip({
                         if (w && h) setRatios((r) => (r[src] ? r : { ...r, [src]: w / h }));
                       }}
                       style={fit ? { width: box.w, height: "auto" } : undefined}
-                      className="h-[min(62vh,560px)] w-auto rounded-[8px] bg-[var(--brand-surface-secondary)] object-cover"
+                      className="h-[min(62vh,560px)] w-auto rounded-[8px] bg-[var(--brand-surface-secondary)] object-contain"
                     />
                   </div>
                 ),

@@ -57,11 +57,6 @@ export const metadata: Metadata = {
  index: true,
  follow: true,
  },
- icons: {
- icon: "/brand/gs-chip.svg",
- shortcut: "/brand/gs-chip.svg",
- apple: "/brand/gs-chip.png",
- },
 };
 
 

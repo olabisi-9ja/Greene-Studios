@@ -6,13 +6,12 @@ import { recolorLottie } from "@/lib/brand-lottie";
 import { useMotionOff } from "@/lib/motion-pref";
 
 // lottie-web's light build: the SVG renderer only, no expression engine (the
-// recolour strips expressions anyway), about half the full player. Fetching
-// starts as soon as this module runs (during hydration), not when the first
-// animation asks for it.
+// recolour strips expressions anyway), about half the full player. It's
+// fetched when the first animation on the page comes near the screen (or an
+// eager one mounts), so pages with nothing to animate never pay for it.
 type Player = typeof import("lottie-web/build/player/lottie_light").default;
 let player: Promise<Player> | null = null;
 const getPlayer = () => (player ??= import("lottie-web/build/player/lottie_light").then((m) => m.default));
-if (typeof window !== "undefined") getPlayer();
 
 /** Parsed and recoloured files, shared by every slot that uses them. */
 const cache = new Map<string, Promise<object>>();
@@ -83,6 +82,7 @@ export default function BrandLottie({
 
   useEffect(() => {
     if (!near) return;
+    getPlayer(); // start the player download alongside the data
     let live = true;
     load(name)
       .then((json) => live && setData(structuredClone(json)))

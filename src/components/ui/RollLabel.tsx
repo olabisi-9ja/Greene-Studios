@@ -21,7 +21,9 @@ export default function RollLabel({
   className?: string;
 }) {
   return (
-    <span className={["roll", className].filter(Boolean).join(" ")} aria-label={text}>
+    <span className={["roll", className].filter(Boolean).join(" ")}>
+      {/* read once, as words (aria-label isn't allowed on a plain span) */}
+      <span className="sr-only">{text}</span>
       {Array.from(text).map((char, i) => {
         const glyph = char === " " ? " " : char;
         return (

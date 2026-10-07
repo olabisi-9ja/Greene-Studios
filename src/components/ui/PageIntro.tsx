@@ -20,7 +20,7 @@ export default function PageIntro({
   return (
     <header className="mx-auto flex max-w-[1400px] flex-col items-center px-5 pb-16 pt-32 text-center sm:px-8 sm:pt-40">
       {lottie && (
-        <div className="pointer-events-none mb-6 w-[min(240px,60vw)]">
+        <div className="pointer-events-none mb-6 w-[min(320px,70vw)]">
           <BrandLottie name={lottie} className="aspect-square w-full" />
         </div>
       )}

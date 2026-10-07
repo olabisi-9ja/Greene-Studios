@@ -25,7 +25,7 @@ export default function GreeneLayout({ children }: { children: React.ReactNode }
             "@type": "Organization",
             name: "Greene Studios",
             url: process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app",
-            logo: "/brand/gs-chip.png",
+            logo: "/brand/greene-logo.png",
             email: "hello@greenestudios.com",
             description:
               "Greene Studios is a digital design studio. We design and build brands, websites and apps, one team from the first sketch to launch day.",

@@ -8,6 +8,8 @@
 - [Gallery](https://greene-studios.vercel.app/gallery): every picture from the work in one scroll
 - [Services](https://greene-studios.vercel.app/services): brand identity, web design, UI/UX, frontend development, motion, product design, web applications, AI integration, design systems, SEO
 - [Pricing](https://greene-studios.vercel.app/pricing): packages and smaller jobs
+- [Blueprint](https://greene-studios.vercel.app/blueprint): the brand guide: logo, type, colours (HEX, RGB, CMYK), imagery and patterns
+- [Map](https://greene-studios.vercel.app/map): every page on the site
 - [Studio](https://greene-studios.vercel.app/studio): who we are and how we work
 - [Team](https://greene-studios.vercel.app/team): the people at Greene
 - [Journal](https://greene-studios.vercel.app/journal): notes on design and building products

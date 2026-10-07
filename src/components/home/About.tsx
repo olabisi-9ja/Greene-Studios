@@ -69,10 +69,10 @@ export default function About() {
         </div>
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Pic
-            src="/images/real/greene/06.webp"
-            alt="A Greene Studios card held up to the light"
+            src="/images/real/aipal/08.webp"
+            alt="The AiPal app on a phone, held over a cup of coffee"
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="aspect-[4/5] w-full rounded-[12px] object-cover"
+            className="block h-auto w-full rounded-[12px]"
           />
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { BRAND } from "@/lib/data";
 import ProjectIntake from "@/components/contact/ProjectIntake";
 import BrandLottie from "@/components/brand/BrandLottie";
+import SocialIcons from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -10,17 +11,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const SOCIALS = [
-  { label: "Instagram", href: BRAND.instagram },
-  { label: "X", href: BRAND.twitter },
-  { label: "LinkedIn", href: BRAND.linkedin },
-];
-
 export default function ContactPage() {
   return (
     <div className="pt-32 sm:pt-40">
       <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 pb-16 text-center sm:px-8">
-        <div className="pointer-events-none mb-6 w-[min(200px,50vw)]">
+        <div className="pointer-events-none mb-6 w-[min(340px,72vw)]">
           <BrandLottie name="contact" className="aspect-square w-full" />
         </div>
         <h1 className="max-w-[12ch] text-[clamp(2.8rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
@@ -41,15 +36,7 @@ export default function ContactPage() {
         <a href={`mailto:${BRAND.email}`} className="text-xl font-semibold underline decoration-[var(--logo)] decoration-2 underline-offset-[6px]">
           {BRAND.email}
         </a>
-        <ul className="m-0 flex list-none gap-8 p-0">
-          {SOCIALS.map((s) => (
-            <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--logo)]">
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <SocialIcons />
       </div>
     </div>
   );

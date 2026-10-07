@@ -53,7 +53,8 @@ function run(p: Project): Slot[] {
   return out;
 }
 
-const pic = "block w-full bg-[var(--brand-surface)] object-cover";
+// every picture at its own shape: never cropped or zoomed
+const pic = "block h-auto w-full bg-[var(--brand-surface)]";
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
@@ -78,8 +79,8 @@ export default async function ProjectPage({ params }: Props) {
         }}
       />
       {/* opener */}
-      <div className="h-[86svh] min-h-[420px] w-full overflow-hidden bg-[var(--brand-surface-secondary)]">
-        <Pic src={p.images[0]} alt={`${p.name}, ${p.kind}`} sizes="100vw" priority className="h-full w-full object-cover" />
+      <div className="bg-[var(--brand-surface-secondary)] px-5 pb-10 pt-28 sm:px-8 sm:pt-32">
+        <Pic src={p.images[0]} alt={`${p.name}, ${p.kind}`} sizes="(min-width: 1400px) 1400px, 100vw" priority className="mx-auto block h-auto max-h-[80svh] w-auto max-w-full rounded-[8px]" />
       </div>
 
       {/* facts and story */}
@@ -128,7 +129,7 @@ export default async function ProjectPage({ params }: Props) {
               return (
                 <div key={k} className="grid gap-6 sm:grid-cols-2 sm:gap-10">
                   {s.src!.map((src) => (
-                    <Pic key={src} src={src} alt="" sizes="(min-width: 640px) 50vw, 100vw" className={`${pic} aspect-[4/5]`} />
+                    <Pic key={src} src={src} alt="" sizes="(min-width: 640px) 50vw, 100vw" className={pic} />
                   ))}
                 </div>
               );
@@ -139,11 +140,11 @@ export default async function ProjectPage({ params }: Props) {
                     src={s.src![0]}
                     alt=""
                     sizes="(min-width: 640px) 66vw, 100vw"
-                    className={`${pic} aspect-[4/3] sm:col-span-8 ${s.side === "right" ? "sm:col-start-5" : "sm:col-start-1"}`}
+                    className={`${pic} sm:col-span-8 ${s.side === "right" ? "sm:col-start-5" : "sm:col-start-1"}`}
                   />
                 </div>
               );
-            return <Pic key={k} src={s.src![0]} alt="" sizes="(min-width: 1400px) 1400px, 100vw" className={`${pic} aspect-[16/9]`} />;
+            return <Pic key={k} src={s.src![0]} alt="" sizes="(min-width: 1400px) 1400px, 100vw" className={pic} />;
           })}
         </div>
       </section>
@@ -155,9 +156,7 @@ export default async function ProjectPage({ params }: Props) {
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {related.map((r) => (
               <Link key={r.slug} href={`/work/${r.slug}`} className="group block">
-                <div className="aspect-[4/3] overflow-hidden bg-[var(--brand-surface-secondary)]">
-                  <Pic src={r.images[0]} alt="" sizes="(min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                </div>
+                <Pic src={r.images[0]} alt="" sizes="(min-width: 640px) 50vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
                 <p className="mt-4 text-xl font-semibold tracking-[-0.02em] group-hover:text-[var(--logo)]">
                   {r.name}: {r.line}
                 </p>

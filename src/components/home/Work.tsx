@@ -31,7 +31,7 @@ export default function Work({
             {title}
           </Heading>
           {lottie && (
-            <div className="pointer-events-none -mb-4 w-[min(170px,38vw)] shrink-0">
+            <div className="pointer-events-none -mb-4 w-[min(300px,42vw)] shrink-0">
               <BrandLottie name={lottie} className="aspect-[2/3] w-full" />
             </div>
           )}

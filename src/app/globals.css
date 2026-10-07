@@ -230,29 +230,6 @@
     color: var(--brand-on-accent);
   }
 
-  /* Any surface painted with --brand-text needs the accent to invert with it:
-     the light accent is a deep green, which lands at 1.68:1 on near-black.
-     `.on-ink` marks such a panel. */
-  .on-ink {
-    --brand-accent: #5fbf8a;
-    --brand-border: color-mix(in srgb, var(--brand-bg) 22%, transparent);
-    /* The panel is painted with --brand-text, so anything sitting ON the
-       inverted accent has to be that same colour — otherwise a light accent
-       keeps a light foreground and the button label disappears. */
-    --brand-on-accent: var(--brand-text);
-  }
-  .mode-dark .on-ink,
-  .mode-night .on-ink,
-  .mode-midnight .on-ink {
-    --brand-accent: #0f5132;
-  }
-  .mode-studio .on-ink {
-    --brand-accent: #0f5132;
-  }
-  .mode-raw .on-ink {
-    --brand-accent: #ff6a1a;
-  }
-
   /* Lottie ink and paper follow the theme. brand-lottie.ts snaps near-black
      to charcoal and near-white to off-white, and those exact values are
      swapped here for the surface's own text and background colours, so a
@@ -392,46 +369,6 @@
 
   /* ─── Rotating badge (circular text) ─────────────────────────────── */
 
-  /* ─── Hero line reveal ──────────────────────────────────────────── */
-
-  /* Scroll cue tick */
-
-  /* ─── Life & motion helpers ─────────────────────────────────────── */
-
-  @keyframes light-sweep {
-    0% {
-      transform: translateX(-120%);
-    }
-    55% {
-      transform: translateX(120%);
-    }
-    100% {
-      transform: translateX(120%);
-    }
-  }
-  .light-sweep {
-    position: relative;
-    overflow: hidden;
-  }
-  .light-sweep::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      100deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.35) 50%,
-      transparent 80%
-    );
-    animation: light-sweep 2.6s ease-in-out 0.4s both;
-    pointer-events: none;
-  }
-
-    /* ─── Marquee strip ──────────────────────────────────────────────── */
-
-  /* ─── Work rows ──────────────────────────────────────────────────── */
-
-  /* ─── Interactive icons ──────────────────────────────────────────── */
 }
 
 /* ═══ Studio mode: vibrant colour system ═════════════════════════════ */
@@ -1047,7 +984,14 @@ html:not(:active-view-transition) .theme-flap {
   background: var(--logo);
   color: transparent;
   transform: translateY(var(--liquid-from)) scale(0.3);
-  transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1);
+  /* invisible at rest: tucked in, it can still peek past the edge of a
+     button at the side of the screen (the label lines up with that edge).
+     It turns solid the moment it starts to pour, and hides again only once
+     it has been drawn back in */
+  opacity: 0;
+  transition:
+    transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1),
+    opacity 0s linear 0.55s;
 }
 .liquid-up { --liquid-from: calc(var(--liquid-gap) + 1.6rem); }
 .liquid-down { --liquid-from: calc(-1 * (var(--liquid-gap) + 1.6rem)); }
@@ -1065,10 +1009,10 @@ html:not(:active-view-transition) .theme-flap {
 
 @media (hover: hover) {
   .liquid-tip:hover { translate: 0 -3px; }
-  .liquid-tip:hover .liquid-drop { transform: none; }
+  .liquid-tip:hover .liquid-drop { transform: none; opacity: 1; transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1), opacity 0s; }
   .liquid-tip:hover .liquid-label { opacity: 1; transform: none; transition-delay: 0.18s; }
 }
-.liquid-tip:has(:focus-visible) .liquid-drop { transform: none; }
+.liquid-tip:has(:focus-visible) .liquid-drop { transform: none; opacity: 1; transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1), opacity 0s; }
 .liquid-tip:has(:focus-visible) .liquid-label { opacity: 1; transform: none; transition-delay: 0.18s; }
 
 /* no pouring: the label simply fades in, in place */
@@ -1089,3 +1033,80 @@ html:not(:active-view-transition) .theme-flap {
   content-visibility: auto;
   contain-intrinsic-size: auto 1200px;
 }
+
+/* Map links (app/(greene)/map): big type, the label rolls over, an arrow
+   slides in from the left and the line under it sweeps across */
+.map-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  transition: color 0.3s ease, padding-left 0.45s var(--ease-out-quart);
+}
+.map-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--logo);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-quart);
+}
+.map-arrow {
+  width: 0.9em;
+  height: 0.9em;
+  flex: none;
+  opacity: 0;
+  transform: translateX(-0.6em);
+  transition: opacity 0.25s ease, transform 0.45s var(--ease-out-quart);
+}
+.map-link:hover,
+.map-link:focus-visible { color: var(--logo); padding-left: 0.35rem; }
+.map-link:hover::after,
+.map-link:focus-visible::after { transform: scaleX(1); }
+.map-link:hover .map-arrow,
+.map-link:focus-visible .map-arrow { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .map-link, .map-link::after, .map-arrow { transition: none; }
+}
+
+/* Blueprint copy controls (components/blueprint/Copy): a value with a copy
+   mark. On a first visit (html.bp-new) each also says "Tap to copy". */
+.bp-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  max-width: 100%;
+  min-height: 2.25rem;
+  padding: 0.35em 0.7em;
+  border-radius: 8px;
+  border: 1px solid var(--brand-border);
+  /* solid, so its text never sits over a picture or a pattern */
+  background: var(--brand-bg);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: copy;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-out-quart);
+}
+a.bp-copy { cursor: pointer; }
+.bp-copy:hover { border-color: var(--logo); }
+.bp-copy:active { transform: scale(0.97); }
+.bp-copy:focus-visible { outline: 2px solid var(--logo); outline-offset: 2px; }
+.bp-copy-text { min-width: 0; overflow-wrap: anywhere; }
+.bp-copy-mark { display: inline-grid; flex: none; width: 1em; height: 1em; opacity: 0.7; }
+.bp-copy-mark svg { width: 100%; height: 100%; }
+.bp-copy-hint { display: none; font-size: 0.72em; font-weight: 600; white-space: nowrap; }
+.bp-new .bp-copy-hint { display: inline; }
+/* on a colour swatch the control takes the swatch's own text colour */
+.bp-copy-on { border-color: color-mix(in srgb, currentColor 35%, transparent); background: color-mix(in srgb, currentColor 8%, transparent); }
+.bp-copy-on:hover { border-color: currentColor; }
+.bp-tip { animation: tour-card-in 0.35s var(--ease-out-quart) both; }

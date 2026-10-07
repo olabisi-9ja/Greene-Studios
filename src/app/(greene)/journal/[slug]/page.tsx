@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { JOURNAL_ARTICLES } from "@/lib/data";
+import Pic from "@/components/ui/Pic";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://greene-studios.vercel.app";
 
@@ -59,9 +59,7 @@ export default async function JournalArticlePage({ params }: Props) {
       </header>
 
       <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-        <div className="relative aspect-[16/8] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
-          <Image src={article.image} alt="" fill priority sizes="(min-width: 1200px) 1200px, 100vw" className="object-cover" />
-        </div>
+        <Pic src={article.image} alt="" priority sizes="(min-width: 1200px) 1200px, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
       </div>
 
       <div className="mx-auto max-w-[68ch] px-5 py-20 text-[1.12rem] leading-[1.75] sm:px-8">
@@ -102,9 +100,7 @@ export default async function JournalArticlePage({ params }: Props) {
           {related.map((r) => (
             <li key={r.id}>
               <Link href={`/journal/${r.slug}`} className="group block">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
-                  <Image src={r.image} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                </div>
+                <Pic src={r.image} alt="" sizes="(min-width: 768px) 50vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
                 <p className="mt-5 text-sm text-[var(--brand-text-secondary)]">
                   {r.category} · {r.readTime}
                 </p>

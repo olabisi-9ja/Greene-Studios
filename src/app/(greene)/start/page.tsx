@@ -14,7 +14,7 @@ export default function StartPage() {
     <div className="px-5 pb-40 pt-32 sm:px-8 sm:pt-40">
       <div className="mx-auto max-w-3xl">
         <div className="flex flex-col items-center text-center">
-          <div className="pointer-events-none mb-6 w-[min(180px,45vw)]">
+          <div className="pointer-events-none mb-6 w-[min(340px,72vw)]">
             <BrandLottie name="start" className="aspect-square w-full" />
           </div>
           <p className="font-mono text-sm text-[var(--brand-text-secondary)]">Start here · about 2 minutes</p>

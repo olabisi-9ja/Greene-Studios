@@ -32,36 +32,15 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
     } catch {
       /* storage blocked */
     }
-    setCodeState(saved && CODES.includes(saved) ? (saved as CurrencyCode) : detectCurrency());
-
-    try {
-      const cached = JSON.parse(localStorage.getItem(STORE_RATES) ?? "null") as { at: number; rates: Record<string, number> } | null;
-      if (cached && Date.now() - cached.at < DAY) {
-        setRates({ ...FALLBACK_RATES, ...cached.rates });
-        return;
-      }
-    } catch {
-      /* no cache */
-    }
-    fetch("https://open.er-api.com/v6/latest/USD")
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((json: { rates?: Record<string, number> }) => {
-        if (!json.rates) return;
-        const picked = Object.fromEntries(CODES.filter((c) => json.rates![c]).map((c) => [c, json.rates![c]]));
-        setRates({ ...FALLBACK_RATES, ...picked });
-        try {
-          localStorage.setItem(STORE_RATES, JSON.stringify({ at: Date.now(), rates: picked }));
-        } catch {
-          /* fine without a cache */
-        }
-      })
-      .catch(() => {
-        /* the fallback table stands */
-      });
+    const initial = saved && CODES.includes(saved) ? (saved as CurrencyCode) : detectCurrency();
+    setCodeState(initial);
+    // dollars need no rate; any other currency gets today's rates once the page is idle
+    if (initial !== "USD") loadRates(setRates);
   }, []);
 
   const setCode = useCallback((next: CurrencyCode) => {
     setCodeState(next);
+    if (next !== "USD") loadRates(setRates);
     try {
       localStorage.setItem(STORE_CODE, next);
     } catch {
@@ -78,4 +57,38 @@ const fallback: Ctx = { code: "USD", setCode: () => {}, money: (usd) => formatMo
 
 export function useCurrency(): Ctx {
   return useContext(CurrencyContext) ?? fallback;
+}
+
+/** Today's rates: from the day's cache if there is one, else the feed, fetched when the browser is idle. */
+let loading = false;
+function loadRates(setRates: (r: Record<string, number>) => void) {
+  try {
+    const cached = JSON.parse(localStorage.getItem(STORE_RATES) ?? "null") as { at: number; rates: Record<string, number> } | null;
+    if (cached && Date.now() - cached.at < DAY) {
+      setRates({ ...FALLBACK_RATES, ...cached.rates });
+      return;
+    }
+  } catch {
+    /* no cache */
+  }
+  if (loading) return;
+  loading = true;
+  const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1500));
+  idle(() => {
+    fetch("https://open.er-api.com/v6/latest/USD")
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((json: { rates?: Record<string, number> }) => {
+        if (!json.rates) return;
+        const picked = Object.fromEntries(CODES.filter((c) => json.rates![c]).map((c) => [c, json.rates![c]]));
+        setRates({ ...FALLBACK_RATES, ...picked });
+        try {
+          localStorage.setItem(STORE_RATES, JSON.stringify({ at: Date.now(), rates: picked }));
+        } catch {
+          /* fine without a cache */
+        }
+      })
+      .catch(() => {
+        loading = false; // the fallback table stands; tried again on the next change
+      });
+  });
 }

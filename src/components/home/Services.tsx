@@ -36,7 +36,7 @@ export default function Services() {
                   src={PICTURE[g.id].src}
                   alt={PICTURE[g.id].alt}
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="aspect-[16/10] w-full object-cover object-top"
+                  className="block h-auto w-full"
                 />
                 <div className="flex flex-1 flex-col p-7 sm:p-9">
                   <h3 className="text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold leading-none tracking-[-0.035em]">{g.title}</h3>

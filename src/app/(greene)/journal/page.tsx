@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { JOURNAL_ARTICLES } from "@/lib/data";
 import PageIntro from "@/components/ui/PageIntro";
 import NextPage from "@/components/home/NextPage";
+import Pic from "@/components/ui/Pic";
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -22,9 +22,7 @@ export default function JournalPage() {
 
       <section className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8">
         <Link href={`/journal/${lead.slug}`} className="group grid items-center gap-8 md:grid-cols-[7fr_5fr] md:gap-14">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
-            <Image src={lead.image} alt="" fill priority sizes="(min-width: 768px) 58vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-          </div>
+          <Pic src={lead.image} alt="" priority sizes="(min-width: 768px) 58vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
           <div>
             <p className={meta}>
               {lead.category} · {lead.readTime}
@@ -40,9 +38,7 @@ export default function JournalPage() {
           {rest.map((a, i) => (
             <li key={a.id} className={i === 1 ? "md:mt-16" : ""}>
               <Link href={`/journal/${a.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
-                  <Image src={a.image} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                </div>
+                <Pic src={a.image} alt="" sizes="(min-width: 768px) 33vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />
                 <p className={`${meta} mt-5`}>
                   {a.category} · {a.readTime}
                 </p>

@@ -1,11 +1,12 @@
 import Link from "next/link";
-import type { IconType } from "react-icons";
 import { BRAND } from "@/lib/data";
 import DotGlobe from "@/components/home/DotGlobe";
 import BrandLottie from "@/components/brand/BrandLottie";
 import BackToTop from "@/components/chrome/BackToTop";
 import CurrencySelect from "@/components/chrome/CurrencySelect";
 import MotionToggle from "@/components/chrome/MotionToggle";
+import { NewMark } from "@/components/chrome/NewMark";
+import SocialIcons from "@/components/ui/SocialIcons";
 
 const PAGES = [
   { label: "Work", href: "/work" },
@@ -17,16 +18,9 @@ const PAGES = [
   { label: "Journal", href: "/journal" },
   { label: "Start here", href: "/start" },
   { label: "Contact", href: "/contact" },
+  { label: "Blueprint", href: "/blueprint", fresh: true },
+  { label: "Map", href: "/map", fresh: true },
 ];
-
-/**
- * Social accounts, shown as their official icons in the theme's colours.
- * None listed until the real ones are connected; add them here, e.g.
- *   { label: "Instagram", href: "https://instagram.com/…", Icon: SiInstagram }
- * (icons from "react-icons/si": SiInstagram, SiX, SiGithub, SiDribbble, SiBehance…
- * LinkedIn is FaLinkedin from "react-icons/fa").
- */
-const SOCIAL: { label: string; href: string; Icon: IconType }[] = [];
 
 /**
  * Footer: links, then the upper half of the dotted globe fading out, then
@@ -63,34 +57,18 @@ export default function Footer() {
                     <Link href={p.href} className="hover:text-[var(--logo)]">
                       {p.label}
                     </Link>
+                    {"fresh" in p && <NewMark path={p.href} />}
                   </li>
                 ))}
               </ul>
             </nav>
 
-            {/* the social icons sit under the cat once added */}
+            {/* the cat, with the official social icons under it */}
             <div className="flex min-w-0 flex-1 flex-col items-center">
               <div className="pointer-events-none w-full max-w-[520px]">
                 <BrandLottie name="footer" className="aspect-[1070/456] w-full" />
               </div>
-              {SOCIAL.length > 0 && (
-                <ul className="m-0 mt-8 flex list-none flex-wrap gap-3 p-0" aria-label="Elsewhere">
-                  {SOCIAL.map(({ label, href, Icon }) => (
-                    <li key={label}>
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={label}
-                        title={label}
-                        className="grid size-11 place-items-center rounded-full bg-[var(--logo)] text-[var(--brand-bg)] transition-transform hover:-translate-y-0.5"
-                      >
-                        <Icon className="size-5" aria-hidden="true" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <SocialIcons className="mt-8 justify-center" />
             </div>
           </div>
         </div>

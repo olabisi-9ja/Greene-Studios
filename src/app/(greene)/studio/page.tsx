@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import PageIntro from "@/components/ui/PageIntro";
 import BrandLottie from "@/components/brand/BrandLottie";
 import ToolMarquee from "@/components/home/ToolMarquee";
@@ -61,9 +60,7 @@ export default function StudioPage() {
       />
 
       <section className="mx-auto grid max-w-[1400px] items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-[5fr_6fr] md:gap-20">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[8px] bg-[var(--brand-surface-secondary)]">
-          {founder.image && <Image src={founder.image} alt={founder.name} fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover" />}
-        </div>
+        <div>{founder.image && <Pic src={founder.image} alt={founder.name} sizes="(min-width: 768px) 45vw, 100vw" className="block h-auto w-full rounded-[8px] bg-[var(--brand-surface-secondary)]" />}</div>
         <div>
           <p className="font-mono text-sm text-[var(--brand-text-secondary)]">{founder.role}</p>
           <h2 className="mt-3 text-[clamp(2.2rem,4.6vw,3.8rem)] font-semibold leading-[0.98] tracking-[-0.045em]">{founder.name}</h2>
