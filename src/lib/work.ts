@@ -1,3 +1,4 @@
+import { IMAGE_DIMS } from "@/lib/image-dims";
 /**
  * The studio's own work: real projects only. Images live in
  * public/images/real/<slug>/: NN.webp are the presentation pictures (01 is
@@ -20,7 +21,10 @@ export type Project = {
   url?: string;
 };
 
-const imgs = (slug: string, n: number) => Array.from({ length: n }, (_, i) => `/images/real/${slug}/${String(i + 1).padStart(2, "0")}.webp`);
+// only pictures that exist (lib/image-dims lists every file in /public/images), so a deleted
+// picture drops out of its project instead of showing as a broken image
+const imgs = (slug: string, n: number) =>
+  Array.from({ length: n }, (_, i) => `/images/real/${slug}/${String(i + 1).padStart(2, "0")}.webp`).filter((src) => src in IMAGE_DIMS);
 const shots = (slug: string) => ({ desktop: `/images/real/${slug}/live-desktop.webp`, mobile: `/images/real/${slug}/live-mobile.webp` });
 
 export const PROJECTS: Project[] = [
@@ -78,11 +82,11 @@ export const PROJECTS: Project[] = [
   {
     slug: "greene",
     name: "Greene Studios",
-    kind: "Brand identity · Print",
-    line: "Our own identity: the runner, posters and cards.",
-    about: "The studio's own brand: the running mark with the clover pen, and the posters, cards and tags that carry it.",
-    made: ["Logo and runner", "Posters", "Cards and tags"],
-    images: imgs("greene", 8),
+    kind: "Brand identity",
+    line: "Our own identity: the runner, the type and the posts.",
+    about: "The studio's own brand: the running mark with the clover pen, Montserrat, the greens and Clover Yellow, and the posts and guide that carry them.",
+    made: ["Logo and runner", "Social posts", "Brand guide"],
+    images: imgs("greene", 2),
   },
 ];
 

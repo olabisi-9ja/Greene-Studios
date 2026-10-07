@@ -65,7 +65,9 @@ export default function MapPage() {
             <ul className="m-0 mt-2 list-none p-0">
               {g.links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="map-link group">
+                  {/* no prefetch: a page of nothing but links would otherwise
+                      download most of the site the moment it opens */}
+                  <Link href={l.href} prefetch={false} className="map-link group">
                     <RollLabel text={l.label} stagger={12} />
                     <svg viewBox="0 0 24 24" className="map-arrow" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M5 12h14M13 6l6 6-6 6" />

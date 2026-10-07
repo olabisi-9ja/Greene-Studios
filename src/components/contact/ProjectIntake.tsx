@@ -197,6 +197,7 @@ export default function ProjectIntake() {
         <div
           className="h-[3px] w-full bg-white/15"
           role="progressbar"
+          aria-label="Brief progress"
           aria-valuemin={0}
           aria-valuemax={STEPS.length}
           aria-valuenow={step}
